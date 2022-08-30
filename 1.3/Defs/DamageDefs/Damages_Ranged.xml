@@ -2,7 +2,7 @@
 <Defs>
 
   <DamageDef>
-    <defName>VFEU_Fletcher</defName>
+    <defName>VFEE_Fletcher</defName>
     <label>fletcher dart</label>
     <workerClass>DamageWorker_AddInjury</workerClass>
     <externalViolence>true</externalViolence>

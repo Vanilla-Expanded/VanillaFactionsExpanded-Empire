@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="BaseGunWithQuality">
+    <defName>VEE_Gun_Fletcher</defName>
+    <label>fletcher</label>
+    <description>text.todo</description>
+    <techLevel>Spacer</techLevel>
+    <graphicData>
+      <texPath>Things/Equipment/Fletcher/Fletcher</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <soundInteract>Interact_ChargeLance</soundInteract>
+    <thingSetMakerTags><li>VFEE_RewardNone</li></thingSetMakerTags>
+    <statBases>
+      <Mass>12</Mass>
+      <AccuracyTouch>0.5</AccuracyTouch>
+      <AccuracyShort>0.7</AccuracyShort>
+      <AccuracyMedium>0.86</AccuracyMedium>
+      <AccuracyLong>0.88</AccuracyLong>
+      <RangedWeapon_Cooldown>2</RangedWeapon_Cooldown>
+      <MarketValue>2750</MarketValue>
+    </statBases>
+    <costList>
+      <Plasteel>60</Plasteel>
+      <ComponentSpacer>3</ComponentSpacer>
+    </costList>
+    <weaponTags>
+      <li>VFEE_Absolver</li>
+    </weaponTags>
+    <weaponClasses>
+      <li>RangedHeavy</li>
+    </weaponClasses>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <hasStandardCommand>true</hasStandardCommand>
+        <defaultProjectile>VFEE_Bullet_FletcherDart</defaultProjectile>
+        <warmupTime>5</warmupTime>
+        <range>500</range>
+        <soundCast>ChargeLance_Fire</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>9</muzzleFlashScale>
+      </li>
+    </verbs>
+    <tools>
+      <li>
+        <label>barrel</label>
+        <capacities>
+          <li>Blunt</li>
+          <li>Poke</li>
+        </capacities>
+        <power>9</power>
+        <cooldownTime>2</cooldownTime>
+      </li>
+    </tools>
+  </ThingDef>
+  
+  <ThingDef ParentName="BaseBullet">
+    <defName>VFEE_Bullet_FletcherDart</defName>
+    <label>fletcher dart</label>
+    <graphicData>
+      <texPath>Projectile/Bullet_Fletcher</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>1.5</drawSize>
+    </graphicData>
+    <projectile>
+      <damageDef>VFEE_Fletcher</damageDef>
+      <damageAmountBase>6</damageAmountBase>
+      <stoppingPower>1.5</stoppingPower>
+      <speed>90</speed>
+    </projectile>
+  </ThingDef>
+
+</Defs>
