@@ -7,7 +7,7 @@
     <description>text.todo</description>
     <techLevel>Spacer</techLevel>
     <graphicData>
-      <texPath>Things/Equipment/Fletcher/Fletcher</texPath>
+      <texPath>Equipment/Fletcher/Fletcher</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <soundInteract>Interact_ChargeLance</soundInteract>
