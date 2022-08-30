@@ -11,6 +11,13 @@
     <factionNameMaker>NamerFactionEmpire</factionNameMaker>
     <factionIconPath>UI/Deserters/</factionIconPath>
     <allowedCultures><li>Sophian</li></allowedCultures>
+    <backstoryFilters>
+      <li>
+        <categories>
+          <li>ImperialCommon</li>
+        </categories>
+      </li>
+    </backstoryFilters>
     <requiredMemes>
       <li MayRequire="Ludeon.RimWorld.Ideology">Collectivist</li>
       <li MayRequire="Ludeon.RimWorld.Ideology">Loyalist</li>
@@ -19,9 +26,6 @@
       <li MayRequire="Ludeon.RimWorld.Ideology">Collectivist</li>
       <li MayRequire="Ludeon.RimWorld.Ideology">Loyalist</li>
       <li MayRequire="Ludeon.RimWorld.Ideology">HumanPrimacy</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Slavery_Disapproved</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Slavery_Horrible</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">Slavery_Abhorrent</li>
     </allowedMemes>
     <raidCommonalityFromPointsCurve>
       <points>
