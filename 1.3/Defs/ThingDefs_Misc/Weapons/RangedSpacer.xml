@@ -31,6 +31,9 @@
     <weaponClasses>
       <li>RangedHeavy</li>
     </weaponClasses>
+    <equippedStatOffsets>
+      <MoveSpeed>-1</MoveSpeed>
+    </equippedStatOffsets>
     <verbs>
       <li>
         <verbClass>Verb_Shoot</verbClass>
