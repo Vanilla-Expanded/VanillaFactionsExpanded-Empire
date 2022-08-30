@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThoughtDef>
+    <defName>VFEE_TitleNoBallroom</defName>
+    <!-- <workerClass>ThoughtWorker_NoThroneroom</workerClass> we should have a custom one-->
+    <validWhileDespawned>true</validWhileDespawned>
+    <nullifyingTraits><li>Ascetic</li></nullifyingTraits>
+    <stages>
+      <li>
+        <label>no ballroom</label>
+        <description>What is a royal without a ballroom?</description>
+        <baseMoodEffect>-8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>VFEE_TitleNoGallery</defName>
+    <!-- <workerClass>ThoughtWorker_NoThroneroom</workerClass> we should have a custom one-->
+    <validWhileDespawned>true</validWhileDespawned>
+    <nullifyingTraits><li>Ascetic</li></nullifyingTraits>
+    <stages>
+      <li>
+        <label>no gallery</label>
+        <description>What is a royal without a royal gallery?</description>
+        <baseMoodEffect>-8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>VFEE_TitleBallroomRequirementsNotMet</defName>
+    <!-- <workerClass>ThoughtWorker_BedroomRequirementsNotMet</workerClass> we should have a custom one-->
+    <validWhileDespawned>true</validWhileDespawned>
+    <nullifyingTraits><li>Ascetic</li></nullifyingTraits>
+    <stages>
+      <li>
+        <label>undignified ballroom</label>
+        <description>I am {TITLE_indefinite} and I should have these items in my ballroom:\n\n{0}</description>
+        <baseMoodEffect>-8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>VFEE_TitleGalleryRequirementsNotMet</defName>
+    <!-- <workerClass>ThoughtWorker_BedroomRequirementsNotMet</workerClass> we should have a custom one-->
+    <validWhileDespawned>true</validWhileDespawned>
+    <nullifyingTraits><li>Ascetic</li></nullifyingTraits>
+    <stages>
+      <li>
+        <label>undignified gallery</label>
+        <description>I am {TITLE_indefinite} and I should have these items in my gallery:\n\n{0}</description>
+        <baseMoodEffect>-8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+ 
+  <ThoughtDef>
+    <defName>VFEE_LackingNobleCourt</defName>
+    <!-- <workerClass>ThoughtWorker_LackingNobleCourt</workerClass> we should have a custom one-->
+    <validWhileDespawned>true</validWhileDespawned>
+    <nullifyingTraits><li>Ascetic</li></nullifyingTraits>
+    <stages>
+      <li>
+        <label>lacking noble court</label>
+        <description>My noble court is lacking. My title’s formal requirements should always be respected. I demand to be surrounded by: \n\n{0}</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+</Defs>
