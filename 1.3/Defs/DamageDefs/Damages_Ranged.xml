@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <DamageDef>
+    <defName>VFEU_Fletcher</defName>
+    <label>fletcher dart</label>
+    <workerClass>DamageWorker_AddInjury</workerClass>
+    <externalViolence>true</externalViolence>
+    <deathMessage>{0} has been shot to death.</deathMessage>
+    <hediff>Gunshot</hediff>
+    <harmAllLayersUntilOutside>true</harmAllLayersUntilOutside>
+    <impactSoundType>Bullet</impactSoundType>
+    <armorCategory>Sharp</armorCategory>
+    <overkillPctToDestroyPart>0~0.7</overkillPctToDestroyPart>
+    <isRanged>true</isRanged>
+    <makesAnimalsFlee>true</makesAnimalsFlee>
+    <additionalHediffs>
+      <li>
+        <hediff>VFEE_AcidifierFletcher</hediff>
+		<severityPerDamageDealt>1</severityPerDamageDealt>
+      </li>
+    </additionalHediffs>
+  </DamageDef>
+
+</Defs>

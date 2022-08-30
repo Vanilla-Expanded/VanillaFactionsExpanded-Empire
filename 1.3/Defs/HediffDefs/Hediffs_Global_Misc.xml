@@ -2,7 +2,7 @@
 <Defs>
 
   <HediffDef>
-    <defName>VFEU_AcidifierFletcher</defName>
+    <defName>VFEE_AcidifierFletcher</defName>
     <label>acidifier</label>
     <description>Acidifier mixture injected into veins through a fletcher dart. Causes extreme pain and nearly instant death through internal acid burns.</description>
 	<hediffClass>HediffWithComps</hediffClass>
@@ -14,7 +14,7 @@
   </HediffDef>
   
   <HediffDef>
-    <defName>VFEU_AcidifierToxblade</defName>
+    <defName>VFEE_AcidifierToxblade</defName>
     <label>acidifier</label>
     <description>Acidifier mixture injected into veins through a fletcher dart. Causes extreme pain and nearly instant death through internal acid burns.</description>
 	<hediffClass>HediffWithComps</hediffClass>
