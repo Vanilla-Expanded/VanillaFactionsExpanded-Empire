@@ -9,8 +9,8 @@
     <pawnsPlural>deserters</pawnsPlural>
     <requiredCountAtGameStart>1</requiredCountAtGameStart>
     <factionNameMaker>NamerFactionEmpire</factionNameMaker>
-    <factionIconPath>UI/Deserters/</factionIconPath>
-    <allowedCultures><li>Sophian</li></allowedCultures>
+    <factionIconPath>UI/Deserters</factionIconPath>
+	<allowedCultures><li>Sophian</li></allowedCultures>
     <backstoryFilters>
       <li>
         <categories>
@@ -25,8 +25,10 @@
     <allowedMemes>
       <li MayRequire="Ludeon.RimWorld.Ideology">Collectivist</li>
       <li MayRequire="Ludeon.RimWorld.Ideology">Loyalist</li>
-      <li MayRequire="Ludeon.RimWorld.Ideology">HumanPrimacy</li>
     </allowedMemes>
+    <structureMemeWeights>
+      <Structure_Archist MayRequire="Ludeon.RimWorld.Ideology">1</Structure_Archist>
+    </structureMemeWeights>
     <raidCommonalityFromPointsCurve>
       <points>
         <li>(300,  0)</li>
