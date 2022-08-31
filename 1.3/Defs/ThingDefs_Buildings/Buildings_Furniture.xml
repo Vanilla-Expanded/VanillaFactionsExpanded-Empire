@@ -18,11 +18,11 @@
     </graphicData>
     <uiIconScale>0.9</uiIconScale>
     <statBases>
-      <MaxHitPoints>175</MaxHitPoints>
-      <WorkToBuild>3300</WorkToBuild>
-      <Mass>22</Mass>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>50000</WorkToBuild>
+      <Mass>25</Mass>
       <Flammability>1.0</Flammability>
-      <Beauty>2</Beauty>
+      <Beauty>100</Beauty>
     </statBases>
     <size>(3,6)</size>
     <costStuffCount>200</costStuffCount>
