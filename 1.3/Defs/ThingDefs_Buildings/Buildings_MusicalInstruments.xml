@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="UnfinishedBase">
+    <defName>VFEE_UnfinishedOrgan</defName>
+    <label>unfinished organ</label>
+    <description>An unfinished organ.</description>
+    <graphicData>
+      <texPath>Things/Item/Unfinished/UnfinishedMusicalInstrument</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stuffCategories Inherit="False"/>
+  </ThingDef>
+  
+  <ThingDef ParentName="MusicalInstrumentBase">
+    <defName>VFEE_PipeOrgan</defName>
+    <label>organ</label>
+    <description>text.todo</description>
+    <descriptionHyperlinks>
+      <ThingDef>Harp</ThingDef>
+      <ThingDef>Harpsichord</ThingDef>
+	  <ThingDef>Piano</ThingDef>
+    </descriptionHyperlinks>
+    <size>(3,5)</size>
+    <minTechLevelToBuild>Industrial</minTechLevelToBuild>
+    <interactionCellOffset>(0,0,2)</interactionCellOffset>
+    <soundPlayInstrument>Piano_Play</soundPlayInstrument>
+    <defaultPlacingRot>West</defaultPlacingRot>
+    <researchPrerequisites><li>VFEE_PipeOrgans</li></researchPrerequisites>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <statBases>
+      <MaxHitPoints>180</MaxHitPoints>
+      <WorkToMake>100000</WorkToMake>
+      <Mass>60</Mass>
+      <JoyGainFactor>1</JoyGainFactor>
+      <Beauty>18</Beauty>
+    </statBases>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>6</Crafting>
+      </skillRequirements>
+      <researchPrerequisite>Piano</researchPrerequisite>
+      <recipeUsers>
+        <li>FueledSmithy</li>
+        <li>ElectricSmithy</li>
+      </recipeUsers>
+      <unfinishedThingDef>VFEE_UnfinishedOrgan</unfinishedThingDef>
+    </recipeMaker>
+    <costList>
+      <WoodLog>460</WoodLog>
+      <Steel>140</Steel>
+	  <Gold>12</Gold>
+    </costList>
+    <building>
+      <instrumentRange>20</instrumentRange>
+    </building>
+    <uiIconScale>0.9</uiIconScale>
+    <graphicData>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <texPath>Things/Building/Joy/GrandPiano</texPath>
+      <drawSize>(4,6)</drawSize>
+      <drawOffsetNorth>(0,0,0.25)</drawOffsetNorth>
+      <shadowData>
+        <volume>(2.2, 0.4, 0.8)</volume>
+        <offset>(0, 0, 0.1)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.6,0.3,2,1.2)</rect>
+      </damageData>
+    </graphicData>
+  </ThingDef>
+</Defs>
