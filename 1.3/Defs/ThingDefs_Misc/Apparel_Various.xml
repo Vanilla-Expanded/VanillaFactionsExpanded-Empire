@@ -145,13 +145,13 @@
     <thingSetMakerTags>
       <li>VFEE_None</li>
     </thingSetMakerTags>
-		<modExtensions>
-			<li Class="VFECore.ApparelExtension">
-				<equippedStatFactors>
-					<MoveSpeed>1.1</MoveSpeed>
-				</equippedStatFactors>
-			</li>
-		</modExtensions>
+	<modExtensions>
+	    <li Class="VFECore.ApparelExtension">
+			<equippedStatFactors>
+				<MoveSpeed>1.1</MoveSpeed>
+			</equippedStatFactors>
+		</li>
+	</modExtensions>
   </ThingDef>
   
   <ThingDef ParentName="ArmorMachineableBase">
