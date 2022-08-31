@@ -103,7 +103,7 @@
     <generateCommonality>2</generateCommonality>
 	<tradeability>None</tradeability>
     <statBases>
-      <MaxHitPoints>400</MaxHitPoints>
+      <MaxHitPoints>280</MaxHitPoints>
 	  <MarketValue>3200</MarketValue>
       <Mass>12</Mass>
       <Flammability>0.4</Flammability>
