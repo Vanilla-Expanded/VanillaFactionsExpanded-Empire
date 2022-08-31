@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  
+  <ThingDef ParentName="ApparelBase">
+    <defName>VFEE_Apparel_ArmorDeserter</defName>
+    <label>deserter armor</label>
+    <description>text.todo</description>
+    <graphicData>
+      <texPath>DesertArmor/DeserterArmor</texPath>
+	  <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <equippedStatOffsets>
+      <PsychicSensitivity>0.18</PsychicSensitivity>
+      <PsychicEntropyRecoveryRate>0.066</PsychicEntropyRecoveryRate>
+    </equippedStatOffsets>
+    <techLevel>Spacer</techLevel>
+    <uiIconScale>1.25</uiIconScale>
+    <generateCommonality>2</generateCommonality>
+    <statBases>
+      <MaxHitPoints>400</MaxHitPoints>
+	  <MarketValue>4130</MarketValue>
+      <Mass>15</Mass>
+      <Flammability>0.4</Flammability>
+      <ArmorRating_Sharp>1.08</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.5</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.6</ArmorRating_Heat>
+      <Insulation_Cold>42</Insulation_Cold>
+      <Insulation_Heat>14</Insulation_Heat>
+      <EquipDelay>17</EquipDelay>
+    </statBases>
+    <thingCategories>
+      <li>ApparelArmor</li>
+    </thingCategories>
+    <tradeTags>
+      <li>HiTechArmor</li>
+    </tradeTags>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Neck</li>
+        <li>Shoulders</li>
+        <li>Arms</li>
+        <li>Legs</li>
+      </bodyPartGroups>
+      <wornGraphicPath>DesertArmor/DeserterArmor</wornGraphicPath>
+      <layers>
+        <li>Middle</li>
+        <li>Shell</li>
+      </layers>
+      <defaultOutfitTags>
+        <li>Soldier</li>
+      </defaultOutfitTags>
+      <useDeflectMetalEffect>true</useDeflectMetalEffect>
+	  <useWornGraphicMask>true</useWornGraphicMask>
+      <tags>
+        <li>VFEE_Deserter</li>
+      </tags>
+    </apparel>
+    <colorGenerator Class="ColorGenerator_Options">
+      <options>
+        <li>
+          <weight>10</weight>
+          <only>(0.9,0.9,0.9)</only>
+        </li>
+        <li>
+          <weight>10</weight>
+          <only>(0.33,0.33,0.33)</only>
+        </li>
+        <li>
+          <weight>10</weight>
+          <only>(0.65,0.65,0.65)</only>
+        </li>
+        <li>
+          <weight>6</weight>
+          <min>(0.3,0.3,0.3)</min>
+          <max>(0.5,0.5,0.5)</max>
+        </li>
+      </options>
+    </colorGenerator>
+    <comps>
+      <li Class="CompProperties_Biocodable"/>
+    </comps>
+    <thingSetMakerTags>
+      <li>VFEE_Deserter</li>
+    </thingSetMakerTags>
+  </ThingDef>
+
+</Defs>
