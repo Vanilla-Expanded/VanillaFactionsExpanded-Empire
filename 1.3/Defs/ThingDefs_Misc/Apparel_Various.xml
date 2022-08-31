@@ -148,7 +148,7 @@
 		<modExtensions>
 			<li Class="VFECore.ApparelExtension">
 				<equippedStatFactors>
-					<MoveSpeed>0.1</MoveSpeed>
+					<MoveSpeed>1.1</MoveSpeed>
 				</equippedStatFactors>
 			</li>
 		</modExtensions>
