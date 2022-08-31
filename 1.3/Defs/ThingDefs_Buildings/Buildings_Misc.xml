@@ -37,6 +37,9 @@
         </focusTypes>
       </li>
     </comps>
+    <researchPrerequisites>
+      <li>VFEE_NobleDecorations</li>
+    </researchPrerequisites>
   </ThingDef>
 
 </Defs>

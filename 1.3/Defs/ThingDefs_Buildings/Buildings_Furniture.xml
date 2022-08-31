@@ -32,6 +32,9 @@
     <building>
       <buildingSizeCategory>Medium</buildingSizeCategory>
     </building>
+    <researchPrerequisites>
+      <li>VFEE_NobleDecorations</li>
+    </researchPrerequisites>
   </ThingDef>
 
 </Defs>
