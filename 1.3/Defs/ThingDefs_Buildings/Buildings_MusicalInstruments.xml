@@ -29,17 +29,17 @@
     <researchPrerequisites><li>VFEE_PipeOrgans</li></researchPrerequisites>
     <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
     <statBases>
-      <MaxHitPoints>180</MaxHitPoints>
+      <MaxHitPoints>280</MaxHitPoints>
       <WorkToMake>100000</WorkToMake>
-      <Mass>60</Mass>
+      <Mass>160</Mass>
       <JoyGainFactor>1</JoyGainFactor>
-      <Beauty>18</Beauty>
+      <Beauty>28</Beauty>
     </statBases>
     <recipeMaker>
       <skillRequirements>
-        <Crafting>6</Crafting>
+        <Crafting>8</Crafting>
       </skillRequirements>
-      <researchPrerequisite>Piano</researchPrerequisite>
+      <researchPrerequisite>VFEE_PipeOrgans</researchPrerequisite>
       <recipeUsers>
         <li>FueledSmithy</li>
         <li>ElectricSmithy</li>
