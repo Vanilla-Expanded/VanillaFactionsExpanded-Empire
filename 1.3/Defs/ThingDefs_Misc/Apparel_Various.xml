@@ -6,7 +6,7 @@
     <label>deserter armor</label>
     <description>text.todo</description>
     <graphicData>
-      <texPath>DesertArmor/DeserterArmor</texPath>
+      <texPath>DesertArmor/VFE_DeserterArmor</texPath>
 	  <graphicClass>Graphic_Single</graphicClass>
       <shaderType>CutoutComplex</shaderType>
     </graphicData>
