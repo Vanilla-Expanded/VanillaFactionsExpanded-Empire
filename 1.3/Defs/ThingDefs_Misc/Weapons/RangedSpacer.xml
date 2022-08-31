@@ -125,7 +125,7 @@
         <hasStandardCommand>true</hasStandardCommand>
         <defaultProjectile>VFEE_Bullet_ChargeThumper</defaultProjectile>
         <ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
-        <forcedMissRadius>1.9</forcedMissRadius>
+        <forcedMissRadius>0.9</forcedMissRadius>
         <warmupTime>1</warmupTime>
         <range>19.9</range>
 		<burstShotCount>2</burstShotCount>
@@ -170,8 +170,8 @@
     <thingClass>Projectile_Explosive</thingClass>
     <projectile>
       <damageDef>Thump</damageDef>
-      <damageAmountBase>12</damageAmountBase>
-      <explosionRadius>1.9</explosionRadius>
+      <damageAmountBase>10</damageAmountBase>
+      <explosionRadius>0.9</explosionRadius>
       <stoppingPower>1.5</stoppingPower>
       <speed>62</speed>
       <soundExplode>ThumpCannon_Impact</soundExplode>
