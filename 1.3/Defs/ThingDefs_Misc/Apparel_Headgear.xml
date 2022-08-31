@@ -87,7 +87,6 @@
       <texPath>AbsolverArmor/AbsolverHelmet</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(0.9, 0.9)</drawSize>
-	  <shaderType>CutoutComplex</shaderType>
     </graphicData>
     <generateCommonality>2</generateCommonality>
 	<tradeability>None</tradeability>
@@ -121,29 +120,7 @@
         <li>VFEE_Absolver</li>
       </tags>
       <useDeflectMetalEffect>true</useDeflectMetalEffect>
-	  <useWornGraphicMask>true</useWornGraphicMask>
     </apparel>
-    <!-- <colorGenerator Class="ColorGenerator_Options">
-      <options>
-        <li>
-          <weight>10</weight>
-          <only>(0.9,0.9,0.9,1)</only>
-        </li>
-        <li>
-          <weight>10</weight>
-          <only>(0.33,0.33,0.33,1)</only>
-        </li>
-        <li>
-          <weight>10</weight>
-          <only>(0.65,0.65,0.65,1)</only>
-        </li>
-        <li>
-          <weight>6</weight>
-          <min>(0.3,0.3,0.3,1)</min>
-          <max>(0.5,0.5,0.5,1)</max>
-        </li>
-      </options>
-    </colorGenerator> -->
     <comps>
       <li Class="CompProperties_Biocodable"/>
     </comps>
