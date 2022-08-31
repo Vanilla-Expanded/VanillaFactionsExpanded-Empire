@@ -36,5 +36,51 @@
       <li>VFEE_NobleDecorations</li>
     </researchPrerequisites>
   </ThingDef>
+ 
+  <ThingDef ParentName="ArtableFurnitureBase">
+    <defName>VFEE_GrandChair</defName>
+    <label>grand chair</label>
+    <description>text.todo</description>
+    <graphicData>
+      <texPath>Things/Building/Furniture/DiningChair</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(3,3)</drawSize>
+      <damageData>
+        <rectN>(0.25,0.234375,0.5,0.28125)</rectN>
+        <rectS>(0.25,0.234375,0.5,0.28125)</rectS>
+        <rectE>(0.28125,0.25,0.453125,0.25)</rectE>
+        <rectW>(0.28125,0.25,0.453125,0.25)</rectW>
+      </damageData>
+      <shadowData>
+        <volume>(0.23, 0.26, 0.23)</volume>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>10000</WorkToBuild>
+      <Mass>8</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>80</Beauty>
+      <Comfort>0.70</Comfort>
+    </statBases>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+	  <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>100</costStuffCount>
+    <pathCost>30</pathCost>
+    <fillPercent>0.35</fillPercent>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <building>
+      <isSittable>true</isSittable>
+    </building>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <researchPrerequisites>
+      <li>VFEE_NobleDecorations</li>
+    </researchPrerequisites>
+  </ThingDef>
 
 </Defs>
