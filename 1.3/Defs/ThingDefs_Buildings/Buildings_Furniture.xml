@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="TableGatherSpotBase">
+    <defName>VFEE_GrandTable</defName>
+    <label>grand table</label>
+    <graphicData>
+      <texPath>Furniture/TableGrand3x6</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(5, 8)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+	  <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <uiIconScale>0.9</uiIconScale>
+    <statBases>
+      <MaxHitPoints>175</MaxHitPoints>
+      <WorkToBuild>3300</WorkToBuild>
+      <Mass>22</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>2</Beauty>
+    </statBases>
+    <size>(3,6)</size>
+    <costStuffCount>200</costStuffCount>
+	<costList>
+	    <Gold>10</Gold>
+	</costList>
+    <building>
+      <buildingSizeCategory>Medium</buildingSizeCategory>
+    </building>
+  </ThingDef>
+
+</Defs>
