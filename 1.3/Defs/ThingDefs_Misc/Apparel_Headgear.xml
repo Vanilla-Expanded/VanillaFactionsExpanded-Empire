@@ -5,11 +5,6 @@
     <defName>VFEE_Apparel_TechfriarCrown</defName>
     <label>techfriar crown</label>
     <description>text.todo</description>
-    <apparel>
-      <tags>
-        <li>VFEE_Techfriar</li>
-      </tags>
-    </apparel>
     <techLevel>Spacer</techLevel>
     <graphicData>
       <texPath>TechfriarCrown/TechfriarCrown</texPath>
@@ -48,6 +43,9 @@
       <defaultOutfitTags>
         <li>Worker</li>
       </defaultOutfitTags>
+      <tags>
+        <li>VFEE_Techfriar</li>
+      </tags>
       <useDeflectMetalEffect>true</useDeflectMetalEffect>
 	  <useWornGraphicMask>true</useWornGraphicMask>
     </apparel>
