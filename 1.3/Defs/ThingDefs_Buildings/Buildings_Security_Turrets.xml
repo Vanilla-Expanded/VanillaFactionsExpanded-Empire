@@ -25,6 +25,9 @@
     <altitudeLayer>Building</altitudeLayer>
     <stealable>false</stealable>
     <rotatable>false</rotatable>
+    <thingCategories>
+      <li>BuildingsSecurity</li>
+    </thingCategories>
     <statBases>
       <MaxHitPoints>300</MaxHitPoints>
       <Flammability>0.7</Flammability>
