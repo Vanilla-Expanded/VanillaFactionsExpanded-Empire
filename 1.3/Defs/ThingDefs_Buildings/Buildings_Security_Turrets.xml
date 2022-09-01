@@ -28,7 +28,7 @@
     <statBases>
       <MaxHitPoints>300</MaxHitPoints>
       <Flammability>0.7</Flammability>
-      <Mass>8</Mass>
+      <Mass>10</Mass>
       <Beauty>-20</Beauty>
       <ShootingAccuracyTurret>0.96</ShootingAccuracyTurret>
     </statBases>
