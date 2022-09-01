@@ -13,8 +13,8 @@
       <MeditationFocusStrength>0.1</MeditationFocusStrength>
     </statBases>
     <costStuffCount>75</costStuffCount>
-    <uiIconScale>0.8</uiIconScale>
-    <uiIconOffset>(0, 0.04)</uiIconOffset>
+    <uiIconScale>0.7</uiIconScale>
+    <uiIconOffset>(0, 0)</uiIconOffset>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
     <graphicData>
       <graphicClass>Graphic_Random</graphicClass>

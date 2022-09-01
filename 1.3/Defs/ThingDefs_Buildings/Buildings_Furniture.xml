@@ -42,7 +42,7 @@
     <label>grand chair</label>
     <description>text.todo</description>
     <graphicData>
-      <texPath>Things/Building/Furniture/DiningChair</texPath>
+      <texPath>Furniture/GrandChair</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(3,3)</drawSize>
       <damageData>
@@ -110,7 +110,8 @@
     <pathCost>14</pathCost>
     <rotatable>false</rotatable>
     <size>(1,1)</size>
-    <uiIconOffset>(0, 0.15)</uiIconOffset>
+    <uiIconOffset>(0, 0)</uiIconOffset>
+	<uiIconScale>0.8</uiIconScale>
     <filthLeaving>Filth_Trash</filthLeaving>
     <building>
       <destroySound>BuildingDestroyed_Soft_Medium</destroySound>
@@ -171,13 +172,12 @@
     </statBases>
     <socialPropernessMatters>true</socialPropernessMatters>
     <stuffCategories>
-      <li>Metallic</li>
-      <li>Woody</li>
-      <li>Stony</li>
+      <li>Leathery</li>
+      <li>Fabric</li>
     </stuffCategories>
     <costStuffCount>30</costStuffCount>
 	<costList>
-	    <Gold>2</Gold>
+	    <Gold>20</Gold>
 	</costList>
     <pathCost>30</pathCost>
     <fillPercent>0.20</fillPercent>
@@ -200,7 +200,7 @@
     <castEdgeShadows>True</castEdgeShadows>
     <altitudeLayer>Building</altitudeLayer>
     <category>Building</category>
-    <size>(3,5)</size>
+    <size>(5,5)</size>
     <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
     <interactionCellOffset>(0,0,1)</interactionCellOffset>
     <hasInteractionCell>true</hasInteractionCell>
@@ -264,7 +264,7 @@
       <li>VFEE_StellicThrone</li>
     </researchPrerequisites>
     <graphicData>
-      <drawSize>(5,7)</drawSize>
+      <drawSize>(7,5)</drawSize>
       <texPath>Furniture/ThroneStellic</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
       <shaderType>CutoutComplex</shaderType>
@@ -309,6 +309,7 @@
     <graphicData>
       <texPath>Furniture/Candelabra</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+	  <shaderType>CutoutComplex</shaderType>
       <shadowData>
         <volume>(0.3, 0.6, 0.3)</volume>
         <offset>(0,0,-0.1)</offset>
@@ -369,6 +370,7 @@
     <fillPercent>0.4</fillPercent>
     <castEdgeShadows>true</castEdgeShadows>
     <pathCost>42</pathCost>
+	<uiIconScale>0.4</uiIconScale>
     <stuffCategories>
       <li>Metallic</li>
       <li>Woody</li>
