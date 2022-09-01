@@ -82,5 +82,59 @@
       <li>VFEE_NobleDecorations</li>
     </researchPrerequisites>
   </ThingDef>
+  
+  <ThingDef ParentName="FurnitureBase">
+    <defName>VFEE_ImperialBanner</defName>
+    <label>imperial banner</label>
+    <description>text.todo</description>
+    <designationCategory>Misc</designationCategory>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.35</fillPercent>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>1000</WorkToBuild>
+      <Mass>15</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>5</Beauty>
+    </statBases>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+    <costStuffCount>75</costStuffCount>
+    <costList>
+      <WoodLog>25</WoodLog>
+    </costList>
+    <canOverlapZones>true</canOverlapZones>
+    <pathCost>14</pathCost>
+    <rotatable>false</rotatable>
+    <size>(1,1)</size>
+    <uiIconOffset>(0, 0.15)</uiIconOffset>
+    <filthLeaving>Filth_Trash</filthLeaving>
+    <building>
+      <destroySound>BuildingDestroyed_Soft_Medium</destroySound>
+      <destroyShakeAmount>0</destroyShakeAmount>
+    </building>
+    <researchPrerequisites>
+      <li>VFEE_NobleDecorations</li>
+    </researchPrerequisites>
+    <graphicData>
+      <drawSize>(2,2)</drawSize>
+      <texPath>Furniture/ImperialBanner</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <shadowData>
+        <volume>(1,0.5,0.3)</volume>
+        <offset>(0,0,-0.2</offset>
+      </shadowData>
+      <damageData>
+        <rectN>(0.1, 0.1, 0.8, 0.5)</rectN>
+        <rectS>(0.1, 0.1, 0.8, 0.5)</rectS>
+        <rectE>(0.25, 0.5, 0.5, 0.5)</rectE>
+        <rectW>(0.25, 0.5, 0.5, 0.5)</rectW>
+      </damageData>
+    </graphicData>
+  </ThingDef>
 
 </Defs>
