@@ -136,5 +136,58 @@
       </damageData>
     </graphicData>
   </ThingDef>
+  
+  <ThingDef ParentName="ArtableFurnitureBase">
+    <defName>VFEE_RoyalStool</defName>
+    <label>royal stool</label>
+    <description>text.todo</description>
+    <graphicData>
+      <texPath>Furniture/RoyalStool</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+	  <shaderType>CutoutComplex</shaderType>
+      <drawSize>(1,1)</drawSize>
+      <damageData>
+        <rectN>(0.125,0.296875,0.734375,0.421875)</rectN>
+        <rectS>(0.125,0.296875,0.734375,0.421875)</rectS>
+        <rectE>(0.234375,0.296875,0.5,0.546875)</rectE>
+        <rectW>(0.234375,0.296875,0.5,0.546875)</rectW>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+      <shadowData>
+        <volume>(0.18, 0.23, 0.18)</volume>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <statBases>
+      <MaxHitPoints>75</MaxHitPoints>
+      <WorkToBuild>550</WorkToBuild>
+      <Mass>3</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>3</Beauty>
+      <Comfort>0.7</Comfort>
+    </statBases>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>30</costStuffCount>
+	<costList>
+	    <Gold>2</Gold>
+	</costList>
+    <pathCost>30</pathCost>
+    <fillPercent>0.20</fillPercent>
+    <building>
+      <isSittable>true</isSittable>
+    </building>
+    <uiIconOffset>(0, -0.05)</uiIconOffset>
+    <researchPrerequisites>
+      <li>VFEE_NobleDecorations</li>
+    </researchPrerequisites>
+  </ThingDef>
 
 </Defs>
