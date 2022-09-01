@@ -373,7 +373,7 @@
     <castEdgeShadows>true</castEdgeShadows>
     <pathCost>42</pathCost>
 	<uiIconScale>0.55</uiIconScale>
-	<uiIconOffset>0,0.3</uiIconOffset>
+	<uiIconOffset>0,0.2</uiIconOffset>
     <stuffCategories>
       <li>Metallic</li>
       <li>Woody</li>
