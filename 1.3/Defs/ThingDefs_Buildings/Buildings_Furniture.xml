@@ -189,5 +189,100 @@
       <li>VFEE_NobleDecorations</li>
     </researchPrerequisites>
   </ThingDef>
+  
+  <ThingDef ParentName="FurnitureWithQualityBase">
+    <defName>VFEE_StellicThrone</defName>
+    <label>stellic meditation throne</label>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <drawGUIOverlayQuality>false</drawGUIOverlayQuality>
+    <description>text.todo</description>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <castEdgeShadows>True</castEdgeShadows>
+    <altitudeLayer>Building</altitudeLayer>
+    <category>Building</category>
+    <size>(3,5)</size>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <interactionCellOffset>(0,0,1)</interactionCellOffset>
+    <hasInteractionCell>true</hasInteractionCell>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <WorkToBuild>90000</WorkToBuild>
+      <Mass>150</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>24</Beauty>
+      <Comfort>0.9</Comfort>
+      <MeditationFocusStrength>0.3</MeditationFocusStrength>
+    </statBases>
+    <thingClass>Building_Throne</thingClass>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>600</costStuffCount>
+    <costList>
+      <Gold>18</Gold>
+    </costList>
+    <pathCost>30</pathCost>
+    <fillPercent>0.4</fillPercent>
+    <building>
+      <isSittable>true</isSittable>
+      <buildingSizeCategory>Medium</buildingSizeCategory>
+    </building>
+    <uiIconOffset>(0, 0.04)</uiIconOffset>
+    <uiIconScale>1</uiIconScale>
+    <comps>
+      <li Class="CompProperties_AssignableToPawn">
+        <drawAssignmentOverlay>true</drawAssignmentOverlay>
+        <compClass>CompAssignableToPawn_Throne</compClass>
+      </li>
+      <li Class="CompProperties_MeditationFocus">
+        <statDef>MeditationFocusStrength</statDef>
+        <focusTypes>
+          <li>Dignified</li>
+        </focusTypes>
+        <offsets>
+          <li Class="FocusStrengthOffset_ThroneSatisfiesRequirements">
+            <offset>0.08</offset>
+          </li>
+          <li Class="FocusStrengthOffset_RoomImpressiveness">
+            <curve>
+              <points>
+                <li>(0,   -0.05)</li>
+                <li>(30,   0.00)</li>
+                <li>(60,   0.04)</li>
+                <li>(100,  0.08)</li>
+                <li>(170,  0.10)</li>
+              </points>
+            </curve>
+          </li>
+        </offsets>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>VFEE_StellicThrone</li>
+    </researchPrerequisites>
+    <graphicData>
+      <drawSize>(5,7)</drawSize>
+      <texPath>Furniture/ThroneStellic</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <shadowData>
+        <volume>(2.1,0.5,3.5)</volume>
+      </shadowData>
+      <damageData>
+        <rect>(0.1,0.1,3.8,3.8)</rect>
+      </damageData>
+    </graphicData>
+    <ritualFocus>
+      <spectateDistance>2</spectateDistance>
+      <allowedSpectateSides>Up</allowedSpectateSides>
+    </ritualFocus>
+    <placeWorkers>
+      <li>PlaceWorker_RitualFocus</li>
+    </placeWorkers>
+    <drawPlaceWorkersWhileSelected>True</drawPlaceWorkersWhileSelected>
+  </ThingDef>
 
 </Defs>
