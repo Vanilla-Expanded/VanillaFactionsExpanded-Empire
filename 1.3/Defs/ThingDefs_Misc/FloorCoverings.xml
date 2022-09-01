@@ -85,7 +85,7 @@
   </ThingDef>
   
   <ThingDef ParentName="VFEE_BuildingFloorBroadBase">
-    <defName>VFEE_LargeRoyalRug</defName>
+    <defName>VFEE_GrandRoyalRug</defName>
     <label>grand royal rug</label>
     <description>text.todo</description>
     <statBases>
