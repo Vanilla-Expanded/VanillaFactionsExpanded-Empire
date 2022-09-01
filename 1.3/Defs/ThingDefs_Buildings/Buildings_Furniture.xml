@@ -284,5 +284,68 @@
     </placeWorkers>
     <drawPlaceWorkersWhileSelected>True</drawPlaceWorkersWhileSelected>
   </ThingDef>
+  
+  <ThingDef ParentName="BuildingBase">
+    <defName>VFEE_Candelabra</defName>
+    <label>candelabra</label>
+    <description>text.todo</description>
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <selectable>true</selectable>
+	<uiIconScale>0.8</uiIconScale>
+    <fillPercent>0.20</fillPercent>
+    <pathCost>14</pathCost>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <designationCategory>Furniture</designationCategory>
+    <rotatable>false</rotatable>
+    <uiIconOffset>(0, 0.03)</uiIconOffset>
+    <thingCategories>
+      <li>BuildingsFurniture</li>
+    </thingCategories>
+    <graphicData>
+      <texPath>Furniture/Candelabra</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shadowData>
+        <volume>(0.3, 0.6, 0.3)</volume>
+        <offset>(0,0,-0.1)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+	  <drawSize>1</drawSize>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>40</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>7.9</glowRadius>
+        <glowColor>(152,167,250,0)</glowColor>
+      </li>
+    </comps>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>1000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+	  <Mass>3</Mass>
+	  <Beauty>5</Beauty>
+    </statBases>
+	<costList>
+      <Steel>20</Steel>
+    </costList>
+    <stuffCategories>
+      <li>Woody</li>
+      <li>Metallic</li>
+    </stuffCategories>
+    <researchPrerequisites>
+      <li>VFEE_NobleDecorations</li>
+    </researchPrerequisites>
+  </ThingDef>
 
 </Defs>
