@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+   <DutyDef>
+    <defName>VFEE_SpectateClose</defName>
+    <hook>HighPriority</hook>
+    <socialModeMax>Off</socialModeMax>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- Goto Spot -->
+        <li Class="VFEEmpire.JobGiver_SpectateClose">
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+  
+</Defs>

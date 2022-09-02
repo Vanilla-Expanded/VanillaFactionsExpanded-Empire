@@ -36,6 +36,7 @@
 	  <li Class="VFEEmpire.RitualRoleTitled">
         <label>title holders</label>
         <id>royals</id>
+		<required>true</required>
         <colonistOnly>false</colonistOnly>
       </li>
     </roles>
