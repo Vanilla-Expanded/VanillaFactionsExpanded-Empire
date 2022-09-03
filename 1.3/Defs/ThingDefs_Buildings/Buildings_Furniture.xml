@@ -124,7 +124,7 @@
     </researchPrerequisites>
     <graphicData>
       <drawSize>(2,2)</drawSize>
-      <texPath>Furniture/ImperialBanner</texPath>
+      <texPath>Furniture/VFE_ImperialBanner</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>CutoutComplex</shaderType>
       <shadowData>
