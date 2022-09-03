@@ -12,7 +12,6 @@
     <selectable>true</selectable>
     <useHitPoints>true</useHitPoints>
     <defaultPlacingRot>South</defaultPlacingRot>
-    <canGenerateDefaultDesignator>false</canGenerateDefaultDesignator>
     <blocksAltitudes>
       <li>FloorCoverings</li>
     </blocksAltitudes>

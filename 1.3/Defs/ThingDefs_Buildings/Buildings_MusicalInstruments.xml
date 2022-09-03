@@ -21,7 +21,7 @@
       <ThingDef>Harpsichord</ThingDef>
 	  <ThingDef>Piano</ThingDef>
     </descriptionHyperlinks>
-    <size>(3,5)</size>
+    <size>(5,3)</size>
     <minTechLevelToBuild>Industrial</minTechLevelToBuild>
     <interactionCellOffset>(0,0,2)</interactionCellOffset>
     <soundPlayInstrument>Piano_Play</soundPlayInstrument>
@@ -57,8 +57,8 @@
     <uiIconScale>0.9</uiIconScale>
     <graphicData>
       <graphicClass>Graphic_Multi</graphicClass>
-      <texPath>Things/Building/Joy/GrandPiano</texPath>
-      <drawSize>(4,6)</drawSize>
+      <texPath>Furniture/PipeOrgans/PipeOrgans</texPath>
+      <drawSize>(6,4)</drawSize>
       <drawOffsetNorth>(0,0,0.25)</drawOffsetNorth>
       <shadowData>
         <volume>(2.2, 0.4, 0.8)</volume>
