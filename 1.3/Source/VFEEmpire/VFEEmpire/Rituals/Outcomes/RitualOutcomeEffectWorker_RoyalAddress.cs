@@ -64,7 +64,7 @@ namespace VFEEmpire
             }
             //Organizer honor
             int honor = jobRitual.assignments.AssignedPawns("royals").Count();
-            honor *= outcome.Positive ? 1 : -1;
+            honor *= outcome.positivityIndex; //Index is 2, 1, -1 ,-2 so dont need anything extra
             organizer.royalty.GainFavor(empire, honor);
    
             TaggedString text = "VFEEmpire.RoyalAddress.Finished".Translate(organizer.Named("ORGANIZER")).CapitalizeFirst() + " " + ("Letter" + memory.defName).Translate() + "\n\n" + OutcomeQualityBreakdownDesc(quality, progress, jobRitual);

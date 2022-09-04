@@ -40,11 +40,13 @@ namespace VFEEmpire
             }
             var throne = lordJob.selectedTarget.Thing;            
             IntVec3 target = lordJob.Spot;
-            if (CellFinder.TryFindRandomReachableCellNear(target, pawn.MapHeld, 3f, TraverseParms.For(pawn),
-                (IntVec3 c) => c.GetRoom(pawn.MapHeld) == target.GetRoom(pawn.MapHeld) && pawn.CanReserveSittableOrSpot(c, false) && c != throne.InteractionCell, null, out spot, 999999))
+            var pawnThrone = RoyalTitleUtility.FindBestUsableThrone(pawn);
+            if (pawnThrone != null && pawnThrone.GetRoom() == throne.GetRoom())
             {
+                spot = pawnThrone.InteractionCell;
                 return true;
             }
+
             if ((duty.spectateRectPreferredSide != SpectateRectSide.None && SpectatorCellFinder.TryFindSpectatorCellFor(pawn, duty.spectateRect, 
                 pawn.Map, out spot, duty.spectateRectPreferredSide, 1, null, ritual, 
                 new Func<IntVec3, Pawn, Map, bool>(RitualUtility.GoodSpectateCellForRitual))) 
@@ -53,7 +55,11 @@ namespace VFEEmpire
             {
                 return true;
             }
-
+            if (CellFinder.TryFindRandomReachableCellNear(target, pawn.MapHeld, 3f, TraverseParms.For(pawn),
+    (IntVec3 c) => c.GetRoom(pawn.MapHeld) == target.GetRoom(pawn.MapHeld) && pawn.CanReserveSittableOrSpot(c, false) && c != throne.InteractionCell, null, out spot, 999999))
+            {
+                return true;
+            }
             Log.Warning("Failed to find a spectator spot for " + pawn);
             return false;
         }

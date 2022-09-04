@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Defs>
+<!--<Defs>
 
   <RoomRoleDef>
     <defName>VFEE_Ballroom</defName>
     <label>ballroom</label>
-    <!-- <workerClass>RoomRoleWorker_ThroneRoom</workerClass> we need a custom one -->
+    <!-- <workerClass>RoomRoleWorker_ThroneRoom</workerClass> we need a custom one 
     <relatedStats>
       <li>Impressiveness</li>
     </relatedStats>
@@ -13,10 +13,10 @@
   <RoomRoleDef>
     <defName>VFEE_Gallery</defName>
     <label>ballroom</label>
-    <!-- <workerClass>RoomRoleWorker_ThroneRoom</workerClass> we need a custom one -->
+    <!-- <workerClass>RoomRoleWorker_ThroneRoom</workerClass> we need a custom one
     <relatedStats>
       <li>Impressiveness</li>
     </relatedStats>
   </RoomRoleDef>
 
-</Defs>
+</Defs> -->

@@ -38,6 +38,7 @@
         <id>royals</id>
 		<required>true</required>
         <colonistOnly>false</colonistOnly>
+		<maxCount>24</maxCount> <!--UI Demands a max count, highly doubt there will ever see a situation where this is hit-->
       </li>
     </roles>
     <stages>
