@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -31,6 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Core" />
@@ -45,6 +47,7 @@
     <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_RoyalAddress.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_RoyalAddress.cs" />
     <Compile Include="Rituals\RitualRole\RitualRoleTitled.cs" />
+    <Compile Include="RoomRoleWorkers.cs" />
     <Compile Include="VFEEmpireMod.cs" />
   </ItemGroup>
   <ItemGroup>
