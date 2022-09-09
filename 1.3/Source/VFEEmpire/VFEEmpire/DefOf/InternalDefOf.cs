@@ -1,20 +1,14 @@
-﻿using System;
-using RimWorld;
-using Verse;
+﻿using RimWorld;
 
+namespace VFEEmpire;
 
-namespace VFEEmpire
+[DefOf]
+public static class InternalDefOf
 {
-    [DefOf]
-    public static class InternalDefOf
+    public static AbilityDef VFEE_RoyalAddress;
+
+    static InternalDefOf()
     {
-        static InternalDefOf()
-        {
-            DefOfHelper.EnsureInitializedInCtor(typeof(InternalDefOf));
-        }
-
-        public static AbilityDef VFEE_RoyalAddress;
-        
-
+        DefOfHelper.EnsureInitializedInCtor(typeof(InternalDefOf));
     }
 }

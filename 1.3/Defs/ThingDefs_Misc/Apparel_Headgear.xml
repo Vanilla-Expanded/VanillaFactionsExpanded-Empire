@@ -14,6 +14,7 @@
     </graphicData>
     <generateCommonality>2</generateCommonality>
 	<tradeability>None</tradeability>
+  <tickerType>Normal</tickerType>
     <statBases>
       <MaxHitPoints>120</MaxHitPoints>
       <Mass>1</Mass>
@@ -72,6 +73,7 @@
     </colorGenerator>
     <comps>
       <li Class="CompProperties_Biocodable"/>
+      <li><compClass>VFEEmpire.CompResearchRefresh</compClass></li>
     </comps>
     <thingSetMakerTags>
       <li>VFEE_None</li>

@@ -42,14 +42,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AI\JobGiver\JobGiver_SpectateClose.cs" />
+    <Compile Include="Comps\CompResearchRefresh.cs" />
     <Compile Include="DefOf\InternalDefOf.cs" />
-    <Compile Include="HediffComps.cs" />
+    <Compile Include="Comps\HediffComp_RandomDamage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_RoyalAddress.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_RoyalAddress.cs" />
     <Compile Include="Rituals\RitualRole\RitualRoleTitled.cs" />
     <Compile Include="RoomRoleWorkers.cs" />
     <Compile Include="VFEEmpireMod.cs" />
+    <Compile Include="VFE_DefOf.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AI\JobDriver\" />
