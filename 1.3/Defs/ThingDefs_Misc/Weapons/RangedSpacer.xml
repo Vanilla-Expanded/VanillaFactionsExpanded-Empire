@@ -28,6 +28,7 @@
     <weaponTags>
       <li>VFEE_Absolver</li>
     </weaponTags>
+	<equippedAngleOffset>50</equippedAngleOffset>
     <weaponClasses>
       <li>RangedHeavy</li>
     </weaponClasses>
