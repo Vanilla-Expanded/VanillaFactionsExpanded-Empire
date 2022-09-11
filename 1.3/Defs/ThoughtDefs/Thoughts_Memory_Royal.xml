@@ -3,7 +3,7 @@
 
   <ThoughtDef>
     <defName>VFEE_TitleNoBallroom</defName>
-    <!-- <workerClass>ThoughtWorker_NoThroneroom</workerClass> we should have a custom one-->
+    <workerClass>VFEEmpire.ThoughtWorker_NoBallroom</workerClass>
     <validWhileDespawned>true</validWhileDespawned>
     <nullifyingTraits><li>Ascetic</li></nullifyingTraits>
     <stages>
@@ -17,7 +17,7 @@
 
   <ThoughtDef>
     <defName>VFEE_TitleNoGallery</defName>
-    <!-- <workerClass>ThoughtWorker_NoThroneroom</workerClass> we should have a custom one-->
+    <workerClass>VFEEmpire.ThoughtWorker_NoGallery</workerClass>
     <validWhileDespawned>true</validWhileDespawned>
     <nullifyingTraits><li>Ascetic</li></nullifyingTraits>
     <stages>
@@ -31,7 +31,7 @@
   
   <ThoughtDef>
     <defName>VFEE_TitleBallroomRequirementsNotMet</defName>
-    <!-- <workerClass>ThoughtWorker_BedroomRequirementsNotMet</workerClass> we should have a custom one-->
+    <workerClass>VFEEmpire.ThoughtWorker_BallroomRequirementsNotMet</workerClass> 
     <validWhileDespawned>true</validWhileDespawned>
     <nullifyingTraits><li>Ascetic</li></nullifyingTraits>
     <stages>
@@ -45,7 +45,7 @@
   
   <ThoughtDef>
     <defName>VFEE_TitleGalleryRequirementsNotMet</defName>
-    <!-- <workerClass>ThoughtWorker_BedroomRequirementsNotMet</workerClass> we should have a custom one-->
+    <workerClass>VFEEmpire.ThoughtWorker_GalleryRequirementsNotMet</workerClass>
     <validWhileDespawned>true</validWhileDespawned>
     <nullifyingTraits><li>Ascetic</li></nullifyingTraits>
     <stages>
@@ -59,7 +59,7 @@
  
   <ThoughtDef>
     <defName>VFEE_LackingNobleCourt</defName>
-    <!-- <workerClass>ThoughtWorker_LackingNobleCourt</workerClass> we should have a custom one-->
+    <workerClass>VFEEmpire.ThoughtWorker_LackingNobleCourt</workerClass>
     <validWhileDespawned>true</validWhileDespawned>
     <nullifyingTraits><li>Ascetic</li></nullifyingTraits>
     <stages>
