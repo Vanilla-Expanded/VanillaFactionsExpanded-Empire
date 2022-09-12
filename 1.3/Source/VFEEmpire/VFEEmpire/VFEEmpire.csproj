@@ -45,18 +45,22 @@
     <Compile Include="Comps\CompResearchRefresh.cs" />
     <Compile Include="DefOf\InternalDefOf.cs" />
     <Compile Include="Comps\HediffComp_RandomDamage.cs" />
+    <Compile Include="GameComponent_Empire.cs" />
+    <Compile Include="HarmonyPatches\Patch_Pawn_InteractionsTracker_TryInteractWith.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleDef_SpecialDisplayStats.cs" />
+    <Compile Include="PlayLogEntry_Interaction_RoyalGossip.cs" />
+    <Compile Include="Workers\InteractionWorker_RoyalGossip.cs" />
     <Compile Include="MapComponent_RoyaltyTracker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_RoyalAddress.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_RoyalAddress.cs" />
     <Compile Include="Rituals\RitualRole\RitualRoleTitled.cs" />
-    <Compile Include="RoomRoleWorkers.cs" />
+    <Compile Include="Workers\RoomRoleWorkers.cs" />
     <Compile Include="RoyalTitleDefExtension.cs" />
     <Compile Include="EmpireUtility.cs" />
-    <Compile Include="ThoughtWorkers.cs" />
+    <Compile Include="Workers\ThoughtWorkers.cs" />
     <Compile Include="VFEEmpireMod.cs" />
-    <Compile Include="VFE_DefOf.cs" />
+    <Compile Include="VFEE_DefOf.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AI\JobDriver\" />

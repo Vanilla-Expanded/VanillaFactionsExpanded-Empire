@@ -18,8 +18,8 @@ public class MapComponent_RoyaltyTracker : MapComponent
     {
         Ballrooms.Remove(room);
         Galleries.Remove(room);
-        if (role == VFE_DefOf.VFEE_Ballroom) Ballrooms.Add(room);
-        if (role == VFE_DefOf.VFEE_Gallery) Galleries.Add(room);
+        if (role == VFEE_DefOf.VFEE_Ballroom) Ballrooms.Add(room);
+        if (role == VFEE_DefOf.VFEE_Gallery) Galleries.Add(room);
     }
 
     [HarmonyPatch(typeof(Room), "UpdateRoomStatsAndRole")]

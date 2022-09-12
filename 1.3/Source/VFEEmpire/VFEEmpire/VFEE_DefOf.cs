@@ -4,14 +4,15 @@ using Verse;
 namespace VFEEmpire;
 
 [DefOf]
-public static class VFE_DefOf
+public static class VFEE_DefOf
 {
     public static JoyKindDef VFEE_Research;
     public static RoomRoleDef VFEE_Ballroom;
     public static RoomRoleDef VFEE_Gallery;
+    public static InteractionDef VFEE_RoyalGossip;
 
-    static VFE_DefOf()
+    static VFEE_DefOf()
     {
-        DefOfHelper.EnsureInitializedInCtor(typeof(VFE_DefOf));
+        DefOfHelper.EnsureInitializedInCtor(typeof(VFEE_DefOf));
     }
 }
