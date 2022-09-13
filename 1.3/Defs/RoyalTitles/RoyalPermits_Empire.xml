@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+<!-- No C# -->
+  
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_GoldDrop</defName>
+    <label>gold drop</label>
+    <description>Call for a drop of 50 gold.</description>
+    <minTitle>Acolyte</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(1,0)</uiPosition>
+    <royalAid>
+      <itemsToDrop>
+        <Gold>50</Gold>
+      </itemsToDrop>
+      <favorCost>4</favorCost>
+    </royalAid>
+  </RoyalTitlePermitDef>
+
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_PlasteelDrop</defName>
+    <label>plasteel drop</label>
+    <description>Call for a drop of 55 plasteel.</description>
+    <minTitle>Acolyte</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(2,0)</uiPosition>
+    <royalAid>
+      <itemsToDrop>
+        <Plasteel>55</Plasteel>
+      </itemsToDrop>
+      <favorCost>4</favorCost>
+    </royalAid>
+  </RoyalTitlePermitDef>
+
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_JadeDrop</defName>
+    <label>jade drop</label>
+    <description>Call for a drop of 100 jade.</description>
+    <minTitle>Acolyte</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(3,0)</uiPosition>
+    <royalAid>
+      <itemsToDrop>
+        <Jade>100</Jade>
+      </itemsToDrop>
+      <favorCost>4</favorCost>
+    </royalAid>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_UraniumDrop</defName>
+    <label>uranium drop</label>
+    <description>Call for a drop of 80 jade.</description>
+    <minTitle>Acolyte</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(4,0)</uiPosition>
+    <royalAid>
+      <itemsToDrop>
+        <Uranium>80</Uranium>
+      </itemsToDrop>
+      <favorCost>4</favorCost>
+    </royalAid>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_ClothDrop</defName>
+    <label>cloth drop</label>
+    <description>Call for a drop of 330 cloth.</description>
+    <minTitle>Acolyte</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(4,1)</uiPosition>
+    <royalAid>
+      <itemsToDrop>
+        <Cloth>330</Cloth>
+      </itemsToDrop>
+      <favorCost>4</favorCost>
+    </royalAid>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_WoodDrop</defName>
+    <label>wood drop</label>
+    <description>Call for a drop of 400 wood.</description>
+    <minTitle>Acolyte</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(2,1)</uiPosition>
+    <royalAid>
+      <itemsToDrop>
+        <WoodLog>400</WoodLog>
+      </itemsToDrop>
+      <favorCost>4</favorCost>
+    </royalAid>
+  </RoyalTitlePermitDef>
+
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_SynthreadDrop</defName>
+    <label>synthread drop</label>
+    <description>Call for a drop of 125 synthread.</description>
+    <minTitle>Acolyte</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(5,1)</uiPosition>
+    <royalAid>
+      <itemsToDrop>
+        <Synthread>125</Synthread>
+      </itemsToDrop>
+      <favorCost>4</favorCost>
+    </royalAid>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_HerbalMedDrop</defName>
+    <label>herbal med drop</label>
+    <description>Call for a drop of 40 herbal medicine.</description>
+    <minTitle>Knight</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(8,1)</uiPosition>
+    <royalAid>
+      <itemsToDrop>
+        <MedicineHerbal>40</MedicineHerbal>
+      </itemsToDrop>
+      <favorCost>4</favorCost>
+    </royalAid>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_MedDrop</defName>
+    <label>med drop</label>
+    <description>Call for a drop of 25 medicine.</description>
+    <minTitle>Praetor</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(8,2)</uiPosition>
+    <royalAid>
+      <itemsToDrop>
+        <MedicineIndustrial>25</MedicineIndustrial>
+      </itemsToDrop>
+      <favorCost>6</favorCost>
+    </royalAid>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_DevilstrandDrop</defName>
+    <label>devilstrand drop</label>
+    <description>Call for a drop of 90 devilstrand.</description>
+    <minTitle>Knight</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(6,1)</uiPosition>
+	<prerequisite>VFEI_SynthreadDrop</prerequisite>
+    <royalAid>
+      <itemsToDrop>
+        <DevilstrandCloth>90</DevilstrandCloth>
+      </itemsToDrop>
+      <favorCost>6</favorCost>
+    </royalAid>
+	<cooldownDays>60</cooldownDays>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_HyperweaveDrop</defName>
+    <label>hyperweave drop</label>
+    <description>Call for a drop of 55 hyperweave.</description>
+    <minTitle>Praetor</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(7,1)</uiPosition>
+	<prerequisite>VFEI_DevilstrandDrop</prerequisite>
+    <royalAid>
+      <itemsToDrop>
+        <Hyperweave>55</Hyperweave>
+      </itemsToDrop>
+      <favorCost>8</favorCost>
+    </royalAid>
+	<cooldownDays>60</cooldownDays>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_ChemfuelDrop</defName>
+    <label>chemfuel drop</label>
+    <description>Call for a drop of 220 chemfuel.</description>
+    <minTitle>Knight</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(3,1)</uiPosition>
+	<prerequisite>VFEI_WoodDrop</prerequisite>
+    <royalAid>
+      <itemsToDrop>
+        <Chemfuel>220</Chemfuel>
+      </itemsToDrop>
+      <favorCost>6</favorCost>
+    </royalAid>
+	<cooldownDays>60</cooldownDays>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_ComponentDrop</defName>
+    <label>component drop</label>
+    <description>Call for a drop of 15 components.</description>
+    <minTitle>Praetor</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(4,1)</uiPosition>
+    <royalAid>
+      <itemsToDrop>
+        <ComponentIndustrial>15</ComponentIndustrial>
+      </itemsToDrop>
+      <favorCost>6</favorCost>
+    </royalAid>
+	<cooldownDays>60</cooldownDays>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_ComponentSpacerDrop</defName>
+    <label>advanced component drop</label>
+    <description>Call for a drop of 3 advanced components.</description>
+    <minTitle>Baron</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(5,1)</uiPosition>
+	<prerequisite>VFEI_ComponentDrop</prerequisite>
+    <royalAid>
+      <itemsToDrop>
+        <ComponentSpacer>3</ComponentSpacer>
+      </itemsToDrop>
+      <favorCost>8</favorCost>
+    </royalAid>
+	<cooldownDays>60</cooldownDays>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_HEShellsDrop</defName>
+    <label>shells drop</label>
+    <description>Call for a drop of 10 high-explosive shells.</description>
+    <minTitle>Praetor</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(6,1)</uiPosition>
+    <royalAid>
+      <itemsToDrop>
+        <Shell_HighExplosive>10</Shell_HighExplosive>
+      </itemsToDrop>
+      <favorCost>8</favorCost>
+    </royalAid>
+	<cooldownDays>60</cooldownDays>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_NobleFoodDrop</defName>
+    <label>noble food drop</label>
+    <description>Call for a drop of 15 lavish meals.</description>
+    <minTitle>Praetor</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(1,1)</uiPosition>
+	<prerequisite>FoodDrop</prerequisite>
+    <royalAid>
+      <itemsToDrop>
+        <MealLavish>15</MealLavish>
+      </itemsToDrop>
+      <favorCost>8</favorCost>
+    </royalAid>
+	<cooldownDays>60</cooldownDays>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef>
+    <defName>VFEI_CallTrooperPlatoon</defName>
+    <label>call trooper platoon</label>
+    <description>Call a group of 8 light troopers to aid you in battle.</description>
+    <workerClass>RoyalTitlePermitWorker_CallAid</workerClass>
+    <minTitle>Count</minTitle> <!-- will be Archcount later -->
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <prerequisite>CallMilitaryAidGrand</prerequisite>
+    <uiPosition>(2,7)</uiPosition>
+    <royalAid>
+      <favorCost>8</favorCost>
+      <pawnKindDef>Empire_Fighter_Trooper</pawnKindDef>
+      <pawnCount>8</pawnCount>
+      <targetingRange>39.9</targetingRange>
+    </royalAid>
+    <cooldownDays>60</cooldownDays>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef>
+    <defName>VFEI_CallJanissaryPlatoon</defName>
+    <label>call janissary platoon</label>
+    <description>Call a group of 8 professional janissaries to aid you in battle.</description>
+    <workerClass>RoyalTitlePermitWorker_CallAid</workerClass>
+    <minTitle>Count</minTitle> <!-- will be Marquess later -->
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <prerequisite>VFEI_CallTrooperPlatoon</prerequisite>
+    <uiPosition>(3,7)</uiPosition>
+    <royalAid>
+      <favorCost>10</favorCost>
+      <pawnKindDef>Empire_Fighter_Janissary</pawnKindDef>
+      <pawnCount>8</pawnCount>
+      <targetingRange>39.9</targetingRange>
+    </royalAid>
+    <cooldownDays>70</cooldownDays>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef>
+    <defName>VFEI_CallCataphractPlatoon</defName>
+    <label>call cataphract platoon</label>
+    <description>Call a group of 8 heavy cataphracts to aid you in battle.</description>
+    <workerClass>RoyalTitlePermitWorker_CallAid</workerClass>
+    <minTitle>Count</minTitle> <!-- will be Duke later -->
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <prerequisite>VFEI_CallJanissaryPlatoon</prerequisite>
+    <uiPosition>(4,7)</uiPosition>
+    <royalAid>
+      <favorCost>12</favorCost>
+      <pawnKindDef>Empire_Fighter_Cataphract</pawnKindDef>
+      <pawnCount>8</pawnCount>
+      <targetingRange>39.9</targetingRange>
+    </royalAid>
+    <cooldownDays>80</cooldownDays>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef>
+    <defName>VFEI_CallTechfriar</defName>
+    <label>call techfriar</label>
+    <description>Call a techfriar to assist you for 4 days. This guildmember can only do research-related tasks. You can control him as though he is your own colonists. You are required to keep him safe.</description>
+    <workerClass>RoyalTitlePermitWorker_CallLaborers</workerClass>
+    <minTitle>Count</minTitle> <!-- will be Duke later -->
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(4,3)</uiPosition>
+    <royalAid>
+      <favorCost>14</favorCost>
+      <pawnKindDef>Empire_Common_Laborer</pawnKindDef> <!-- placeholder -->
+      <pawnCount>1</pawnCount>
+      <aidDurationDays>4</aidDurationDays>
+    </royalAid>
+    <cooldownDays>60</cooldownDays>
+  </RoyalTitlePermitDef>
+
+  <RoyalTitlePermitDef>
+    <defName>VFEI_CallLaborerUnion</defName>
+    <label>call laborer union</label>
+    <description>Call a group of 12 laborers to assist you for 4 days. These workers can only do general labor tasks. You can control them as though they were your own colonists. You are required to keep them safe.</description>
+    <workerClass>RoyalTitlePermitWorker_CallLaborers</workerClass>
+    <minTitle>Count</minTitle> <!-- will be Duke later -->
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <prerequisite>CallLaborerGang</prerequisite>
+    <uiPosition>(3,2)</uiPosition>
+    <royalAid>
+      <favorCost>8</favorCost>
+      <pawnKindDef>Empire_Common_Laborer</pawnKindDef>
+      <pawnCount>8</pawnCount>
+      <aidDurationDays>4</aidDurationDays>
+    </royalAid>
+    <cooldownDays>60</cooldownDays>
+  </RoyalTitlePermitDef>
+  
+  <!-- Will require C# -->
+  
+  <!-- <RoyalTitlePermitDef ParentName="DropResourcesBase"> will require C#
+    <defName>VFEI_StrikerTurretDrop</defName>
+    <label>striker drop</label>
+    <description>Call for a drop of three striker turrets to aid you in battle. After they fire all their ammo, striker turrets self-detonate.</description>
+	<workerClass>RoyalTitlePermitWorker_Name</workerClass>
+    <minTitle>Praetor</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(0,0)</uiPosition>
+    <royalAid>
+      <favorCost>8</favorCost>
+      <targetingRange>39.9</targetingRange>
+    </royalAid>
+	<cooldownDays>45</cooldownDays>
+  </RoyalTitlePermitDef> -->
+  
+  <!-- <RoyalTitlePermitDef ParentName="DropResourcesBase"> will require C#
+    <defName>VFEI_BurnoutShieldDrop</defName>
+    <label>burnout shield drop</label>
+    <description>Call for a drop of a burnout low shield to aid you in battle. It activates where it lands and will last 30 seconds before deactivating.</description>
+	<workerClass>RoyalTitlePermitWorker_Name</workerClass>
+    <minTitle>Praetor</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(0,0)</uiPosition>
+    <royalAid>
+      <favorCost>8</favorCost>
+      <targetingRange>39.9</targetingRange>
+    </royalAid>
+	<cooldownDays>45</cooldownDays>
+  </RoyalTitlePermitDef> -->
+  
+  <RoyalTitlePermitDef>
+    <defName>VFEI_CallEvacShuttle</defName>
+    <label>call evac shuttle</label>
+    <description>Call an armed shuttle for your own use. It will transport colonists, items, and animals anywhere you like within 40 world tiles. It will stay in the area only for a brief moment.</description>
+    <workerClass>RoyalTitlePermitWorker_CallShuttle</workerClass>
+    <minTitle>Baron</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <cooldownDays>30</cooldownDays>
+    <usableOnWorldMap>true</usableOnWorldMap>
+    <uiPosition>(1,6)</uiPosition>
+	<prerequisite>CallTransportShuttle</prerequisite>
+    <royalAid>
+      <favorCost>8</favorCost>
+      <targetingRange>44.9</targetingRange>
+      <targetingRequireLOS>false</targetingRequireLOS>
+    </royalAid>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef ParentName="DropResourcesBase">
+    <defName>VFEI_StoneDrop</defName>
+    <label>stone drop</label>
+    <description>Call for a drop of 500 random stone bricks.</description>
+    <minTitle>Acolyte</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(5,0)</uiPosition>
+    <royalAid>
+      <itemsToDrop>
+        <Uranium>80</Uranium>
+      </itemsToDrop>
+      <favorCost>4</favorCost>
+    </royalAid>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef> <!-- there should be both melee and ranged guards but I can't spawn both using xml -->
+    <defName>VFEI_CallStellicGuards</defName>
+    <label>call stellic guards</label>
+    <description>Call a group of 6 stellic guards, ranged and melee, to aid you in battle.</description>
+    <workerClass>RoyalTitlePermitWorker_CallAid</workerClass>
+    <minTitle>Count</minTitle> <!-- will be Consul later -->
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <prerequisite>VFEI_CallCataphractPlatoon</prerequisite>
+    <uiPosition>(5,7)</uiPosition>
+    <royalAid>
+      <favorCost>14</favorCost>
+      <pawnKindDef>Empire_Fighter_StellicGuardRanged</pawnKindDef>
+      <pawnCount>6</pawnCount>
+      <targetingRange>39.9</targetingRange>
+    </royalAid>
+    <cooldownDays>90</cooldownDays>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef> <!-- two different pawnKinds at a time plus an armed shuttle -->
+    <defName>VFEI_CallImperialRegiment</defName>
+    <label>call stellic guards</label>
+    <description>Call a group of 6 stellic guards, ranged and melee, to aid you in battle.</description>
+    <workerClass>RoyalTitlePermitWorker_CallAid</workerClass>
+    <minTitle>Count</minTitle> <!-- will be Magister later -->
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <prerequisite>VFEI_CallStellicGuards</prerequisite>
+    <uiPosition>(6,7)</uiPosition>
+    <royalAid>
+      <favorCost>20</favorCost>
+      <pawnKindDef>Empire_Fighter_Janissary</pawnKindDef>
+      <pawnCount>10</pawnCount>
+      <targetingRange>39.9</targetingRange>
+    </royalAid>
+    <cooldownDays>90</cooldownDays>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef>
+    <defName>VFEI_CallOrbitalSlicingBeam</defName>
+    <label>call orbital slicing beam</label>
+    <description>Call an orbital slicing beam from an imperial flagship in orbit. This beam will travel in a direction specified by you, burning everything it touches.</description>
+    <workerClass>RoyalTitlePermitWorker_OrbitalStrike</workerClass>
+    <minTitle>Count</minTitle>
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <prerequisite>CallOrbitalSalvo</prerequisite>
+    <cooldownDays>65</cooldownDays>
+    <uiPosition>(2,5)</uiPosition>
+    <royalAid>
+      <favorCost>12</favorCost>
+      <targetingRange>44.9</targetingRange>
+      <radius>7.9</radius>
+      <explosionRadiusRange>5.9</explosionRadiusRange>
+      <explosionCount>6</explosionCount>
+      <intervalTicks>60</intervalTicks>
+      <warmupTicks>120</warmupTicks>
+    </royalAid>
+  </RoyalTitlePermitDef>
+  
+  <RoyalTitlePermitDef> <!-- the pawn should be replaced every time it dies -->
+    <defName>VFEI_CallAbsolver</defName>
+    <label>call absolver</label>
+    <description>Call an absolver to assist you for 4 days. This guildmember is a master assassin and will not perform any tasks other than killing. You can control him as though he is your own colonists. If an absolver dies, a new one will replace them immediately, inheriting the remaining contract time.</description>
+    <workerClass>RoyalTitlePermitWorker_CallLaborers</workerClass>
+    <minTitle>Count</minTitle> <!-- will be Duke later -->
+    <faction>Empire</faction>
+    <permitPointCost>1</permitPointCost>
+    <uiPosition>(4,2)</uiPosition>
+    <royalAid>
+      <favorCost>14</favorCost>
+      <pawnKindDef>Empire_Common_Laborer</pawnKindDef> <!-- placeholder -->
+      <pawnCount>1</pawnCount>
+      <aidDurationDays>4</aidDurationDays>
+    </royalAid>
+    <cooldownDays>60</cooldownDays>
+  </RoyalTitlePermitDef>
+  
+</Defs>
