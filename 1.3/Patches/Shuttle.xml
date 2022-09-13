@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Shuttle"]/graphicData/texPath</xpath>
+		<value>
+			<texPath>Shuttle/ImperialShuttle/ImperialShuttle</texPath>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="ShuttleCrashed"]/graphicData/texPath</xpath>
+		<value>
+			<texPath>Shuttle/ImperialShuttle/CrashedImperialShuttle</texPath>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[@Name="ShuttleSkyfallerBase"]/graphicData/texPath</xpath>
+		<value>
+			<texPath>Shuttle/ImperialShuttle/ImperialShuttle</texPath>
+		</value>
+	</Operation>
+	
+</Patch>
+
