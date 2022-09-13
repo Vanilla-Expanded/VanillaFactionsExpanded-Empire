@@ -9,6 +9,13 @@
 	</Operation>
 	
 	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[defName="Shuttle"]/graphicData/drawSize</xpath>
+		<value>
+			<drawSize>(7, 5)</drawSize>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/ThingDef[defName="ShuttleCrashed"]/graphicData/texPath</xpath>
 		<value>
 			<texPath>Shuttle/ImperialShuttle/CrashedImperialShuttle</texPath>
