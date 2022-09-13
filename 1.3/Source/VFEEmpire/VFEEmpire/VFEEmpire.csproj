@@ -46,6 +46,7 @@
     <Compile Include="DefOf\InternalDefOf.cs" />
     <Compile Include="Comps\HediffComp_RandomDamage.cs" />
     <Compile Include="GameComponent_Empire.cs" />
+    <Compile Include="HarmonyPatches\Patch_CompRefuelable_ConsumeFuel.cs" />
     <Compile Include="HarmonyPatches\Patch_Pawn_InteractionsTracker_TryInteractWith.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleDef_SpecialDisplayStats.cs" />
     <Compile Include="PlayLogEntry_Interaction_RoyalGossip.cs" />

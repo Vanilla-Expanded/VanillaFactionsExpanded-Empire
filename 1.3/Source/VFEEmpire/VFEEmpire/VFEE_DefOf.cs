@@ -10,6 +10,7 @@ public static class VFEE_DefOf
     public static RoomRoleDef VFEE_Ballroom;
     public static RoomRoleDef VFEE_Gallery;
     public static InteractionDef VFEE_RoyalGossip;
+    public static ThingDef VFEE_Turret_StrikerTurret;
 
     static VFEE_DefOf()
     {

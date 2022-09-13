@@ -21,7 +21,6 @@
     </graphicData>
     <uiIconPath>Things/Building/Security/TurretMini_MenuIcon</uiIconPath>
     <uiIconScale>0.90</uiIconScale>
-    <minifiedDef>MinifiedThing</minifiedDef>
     <altitudeLayer>Building</altitudeLayer>
     <stealable>false</stealable>
     <rotatable>false</rotatable>
@@ -42,6 +41,7 @@
         <explosiveRadius>3.9</explosiveRadius>
         <explosiveDamageType>Bomb</explosiveDamageType>
         <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+        <explodeOnKilled>true</explodeOnKilled>
       </li>
       <li Class="CompProperties_Forbiddable"/>
       <li Class="CompProperties_Refuelable">
@@ -56,11 +56,16 @@
         <showFuelGizmo>true</showFuelGizmo>
         <minimumFueledThreshold>1</minimumFueledThreshold>
         <factorByDifficulty>false</factorByDifficulty>
-		<destroyOnNoFuel>true</destroyOnNoFuel>
-		<showAllowAutoRefuelToggle>false</showAllowAutoRefuelToggle>
-		<allowRefuelIfNotEmpty>false</allowRefuelIfNotEmpty>
+		    <destroyOnNoFuel>true</destroyOnNoFuel>
+		    <showAllowAutoRefuelToggle>false</showAllowAutoRefuelToggle>
+		    <allowRefuelIfNotEmpty>false</allowRefuelIfNotEmpty>
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+      <li Class="CompProperties_DestroyAfterDelay">
+        <delayTicks>7200</delayTicks>
+        <destroyMode>KillFinalize</destroyMode>
+        <countdownLabel>text.todo</countdownLabel>
       </li>
     </comps>
     <passability>PassThroughOnly</passability>
@@ -77,6 +82,7 @@
       <ai_combatDangerous>true</ai_combatDangerous>
       <turretGunDef>VFEE_Gun_StrikerTurret</turretGunDef>
       <turretBurstCooldownTime>4.8</turretBurstCooldownTime>
+      <deconstructible>false</deconstructible>
     </building>
     <placeWorkers>
       <li>PlaceWorker_TurretTop</li>
