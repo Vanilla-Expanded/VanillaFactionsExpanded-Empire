@@ -122,7 +122,7 @@
     <minTitle>Knight</minTitle>
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
-    <uiPosition>(8,1)</uiPosition>
+    <uiPosition>(1,8)</uiPosition>
     <royalAid>
       <itemsToDrop>
         <MedicineHerbal>40</MedicineHerbal>
@@ -138,7 +138,7 @@
     <minTitle>Praetor</minTitle>
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
-    <uiPosition>(8,2)</uiPosition>
+    <uiPosition>(2,8)</uiPosition>
     <royalAid>
       <itemsToDrop>
         <MedicineIndustrial>25</MedicineIndustrial>
@@ -243,7 +243,7 @@
     <minTitle>Praetor</minTitle>
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
-    <uiPosition>(6,1)</uiPosition>
+    <uiPosition>(2,6)</uiPosition>
     <royalAid>
       <itemsToDrop>
         <Shell_HighExplosive>10</Shell_HighExplosive>
@@ -355,7 +355,7 @@
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
     <prerequisite>CallLaborerGang</prerequisite>
-    <uiPosition>(3,2)</uiPosition>
+    <uiPosition>(2,2)</uiPosition>
     <royalAid>
       <favorCost>8</favorCost>
       <pawnKindDef>Empire_Common_Laborer</pawnKindDef>
