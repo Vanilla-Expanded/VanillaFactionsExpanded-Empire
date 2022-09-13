@@ -39,6 +39,10 @@
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
+    <Reference Include="VFECore">
+      <HintPath>..\..\..\..\..\VanillaExpandedFramework\1.3\Assemblies\VFECore.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AI\JobGiver\JobGiver_SpectateClose.cs" />
@@ -50,12 +54,15 @@
     <Compile Include="HarmonyPatches\Patch_Pawn_InteractionsTracker_TryInteractWith.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleDef_SpecialDisplayStats.cs" />
     <Compile Include="PlayLogEntry_Interaction_RoyalGossip.cs" />
+    <Compile Include="UI\RoyaltyTabDef.cs" />
     <Compile Include="Workers\InteractionWorker_RoyalGossip.cs" />
     <Compile Include="MapComponent_RoyaltyTracker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_RoyalAddress.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_RoyalAddress.cs" />
     <Compile Include="Rituals\RitualRole\RitualRoleTitled.cs" />
+    <Compile Include="UI\MainTabWindow_Royalty.cs" />
+    <Compile Include="Workers\MainButtonWorker_Royalty.cs" />
     <Compile Include="Workers\RoomRoleWorkers.cs" />
     <Compile Include="RoyalTitleDefExtension.cs" />
     <Compile Include="EmpireUtility.cs" />

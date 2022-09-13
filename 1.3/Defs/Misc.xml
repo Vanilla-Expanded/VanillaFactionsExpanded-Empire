@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-    <JoyKindDef>
-        <defName>VFEE_Research</defName>
-        <label>researching</label>
-      </JoyKindDef>
+  <JoyKindDef>
+    <defName>VFEE_Research</defName>
+    <label>researching</label>
+  </JoyKindDef>
+  <MainButtonDef>
+    <defName>VFEE_Royalty</defName>
+    <label>royalty</label>
+    <tabWindowClass>VFEEmpire.MainTabWindow_Royalty</tabWindowClass>
+    <workerClass>VFEEmpire.MainButtonWorker_Royalty</workerClass>
+    <iconPath>MenuButton/IconRoyalty</iconPath>
+    <order>67</order>
+  </MainButtonDef>
+  <VFEEmpire.RoyaltyTabDef>
+    <label>The Great Hierarchy</label>
+    <defName>VFEE_GreatHierarchy</defName>
+    <description>This screen allows you to view all members of the Empire faction. You can spend honor to invite them as visitors.</description>
+  </VFEEmpire.RoyaltyTabDef>
+  <VFEEmpire.RoyaltyTabDef>
+    <label>Permits</label>
+    <defName>VFEE_Permits</defName>
+    <description>This screen allows you to customize and select permits for each of your noble people.</description>
+    <needsCharacter>true</needsCharacter>
+  </VFEEmpire.RoyaltyTabDef>
+  <VFEEmpire.RoyaltyTabDef>
+    <label>Vassalage</label>
+    <defName>VFEE_Vassalage</defName>
+    <description>This screen allows you to vassalize nearby Imperial bases to gain regular tithes from them.</description>
+    <needsCharacter>true</needsCharacter>
+  </VFEEmpire.RoyaltyTabDef>
+  <VFEEmpire.RoyaltyTabDef>
+    <label>Honors</label>
+    <defName>VFEE_Honors</defName>
+    <description>This screen allows you to apply previously unlocked honorable titles to your colonists, providing them with unique but very specific perks.</description>
+    <needsCharacter>true</needsCharacter>
+  </VFEEmpire.RoyaltyTabDef>
 </Defs>

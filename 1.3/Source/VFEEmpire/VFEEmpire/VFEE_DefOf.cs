@@ -11,6 +11,7 @@ public static class VFEE_DefOf
     public static RoomRoleDef VFEE_Gallery;
     public static InteractionDef VFEE_RoyalGossip;
     public static ThingDef VFEE_Turret_StrikerTurret;
+    public static RoyaltyTabDef VFEE_GreatHierarchy;
 
     static VFEE_DefOf()
     {
