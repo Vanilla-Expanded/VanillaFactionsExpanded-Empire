@@ -22,6 +22,7 @@
     <defName>VFEE_Permits</defName>
     <description>This screen allows you to customize and select permits for each of your noble people.</description>
     <needsCharacter>true</needsCharacter>
+    <workerClass>VFEEmpire.RoyaltyTabWorker_Permits</workerClass>
   </VFEEmpire.RoyaltyTabDef>
   <VFEEmpire.RoyaltyTabDef>
     <label>Vassalage</label>

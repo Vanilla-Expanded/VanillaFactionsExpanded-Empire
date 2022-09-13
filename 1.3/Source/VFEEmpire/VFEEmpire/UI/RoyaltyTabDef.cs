@@ -17,7 +17,7 @@ public class RoyaltyTabDef : Def
 
 public class RoyaltyTabWorker
 {
-    public virtual void DoLeftBottom(Rect inRect)
+    public virtual void DoLeftBottom(Rect inRect, MainTabWindow_Royalty parent)
     {
     }
 

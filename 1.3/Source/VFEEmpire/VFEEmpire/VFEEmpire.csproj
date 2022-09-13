@@ -55,6 +55,7 @@
     <Compile Include="HarmonyPatches\Patch_RoyalTitleDef_SpecialDisplayStats.cs" />
     <Compile Include="PlayLogEntry_Interaction_RoyalGossip.cs" />
     <Compile Include="UI\RoyaltyTabDef.cs" />
+    <Compile Include="UI\RoyaltyTabWorker_Permits.cs" />
     <Compile Include="Workers\InteractionWorker_RoyalGossip.cs" />
     <Compile Include="MapComponent_RoyaltyTracker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

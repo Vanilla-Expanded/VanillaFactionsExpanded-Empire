@@ -31,6 +31,7 @@ public class MainTabWindow_Royalty : MainTabWindow
         var font = Text.Font;
         var anchor = Text.Anchor;
         var leftRect = inRect.TakeLeftPart(UI.screenWidth * 0.25f);
+        inRect.xMin += 3f;
         Widgets.DrawLineVertical(leftRect.xMax, inRect.y + 20f, inRect.height - 40f);
         Text.Font = GameFont.Medium;
         Text.Anchor = TextAnchor.MiddleCenter;
@@ -58,7 +59,7 @@ public class MainTabWindow_Royalty : MainTabWindow
         if (curTab.hasSearch) SearchWidget.OnGUI(leftRect.TakeBottomPart(30f), DoSearch);
 
         if (curTab.needsCharacter) DoCharacterSelection(ref leftRect);
-        curTab.Worker.DoLeftBottom(leftRect);
+        curTab.Worker.DoLeftBottom(leftRect, this);
         curTab.Worker.DoMainSection(inRect, this);
         Text.Font = font;
         Text.Anchor = anchor;
