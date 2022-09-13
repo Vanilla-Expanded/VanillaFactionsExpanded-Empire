@@ -5,6 +5,7 @@
 		<xpath>/Defs/RoyalTitleDef[defName="Count"]/grantedAbilities</xpath>
 		<value>
 			<li>VFEE_RoyalAddress</li>
+			<li>VFEE_BestowFreeholder</li>
 		</value>
 	</Operation>
 	

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <PreceptDef ParentName="SpeechPreceptBase">
+    <defName>VFEE_BestowTitle</defName>
+    <label>bestow title</label>
+    <description>Bestows a royal title to a worthy pawn</description>
+    <ritualPatternBase>VFEE_BestowTitle_Pattern</ritualPatternBase>
+    <iconPath>UI/BestowCount</iconPath>  <!--Fairly sure this is never used-->
+    <classic>true</classic>
+    <ignoreNameUniqueness>true</ignoreNameUniqueness>
+    <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
+  </PreceptDef>
+
+  <RitualPatternDef>
+	<defName>VFEE_BestowTitle_Pattern</defName>
+	<ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
+	<ritualBehavior>VFEE_BestowTitle_Behavior</ritualBehavior>
+	<ritualOutcomeEffect>VFEE_BestowTitle_Outcome</ritualOutcomeEffect>
+	<ritualTargetFilter>UsableThrone</ritualTargetFilter>
+	<playsIdeoMusic>false</playsIdeoMusic>
+  </RitualPatternDef>
+  
+  
+  <RitualBehaviorDef>
+    <defName>VFEE_BestowTitle_Behavior</defName>
+    <workerClass>VFEEmpire.RitualBehaviorWorker_BestowTitle</workerClass>
+    <durationTicks>5000</durationTicks>
+    <roles>
+      <li Class="RitualRoleOrganizer">
+        <label>organizer</label>
+        <id>speaker</id>
+        <maxCount>1</maxCount>
+      </li>
+	  <li Class="RitualRoleColonist">
+        <label>recipient</label>
+        <id>recipient</id>
+		<required>true</required>
+		<maxCount>1</maxCount>
+      </li>
+    </roles>
+    <stages>
+      <li Class="RitualStage_OnTheThrone">
+        <defaultDuty>Spectate</defaultDuty>
+        <spectatorsRequired>true</spectatorsRequired>
+		<allowedSpectateSidesOverride>Vertical</allowedSpectateSidesOverride>
+        <endTriggers>
+          <li Class="StageEndTrigger_DurationPercentage">
+            <percentage>0.5</percentage>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>speaker</roleId>
+            <dutyDef>GiveSpeech</dutyDef>
+          </li>
+          <li>
+            <roleId>recipient</roleId>
+            <dutyDef>BestowingCeremony_MoveInPlace</dutyDef>
+			<customPositions>					  
+				<li Class="VFEEmpire.RitualPosition_InFrontThrone">
+				</li>
+			</customPositions>
+          </li>
+        </roleBehaviors>
+        <visualEffectDef>Speech</visualEffectDef>
+      </li>
+      <li>
+        <defaultDuty>Spectate</defaultDuty>
+		<allowedSpectateSidesOverride>Vertical</allowedSpectateSidesOverride>
+        <spectatorsRequired>true</spectatorsRequired>
+        <endTriggers>
+          <li Class="StageEndTrigger_DurationPercentage">
+            <percentage>0.5</percentage>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>speaker</roleId>
+            <dutyDef>IdleNoInteraction</dutyDef>
+          </li>
+          <li>
+            <roleId>recipient</roleId>
+            <dutyDef>VFEE_AcceptTitle</dutyDef>
+          </li>
+        </roleBehaviors>        
+      </li>
+    </stages>
+  </RitualBehaviorDef>
+
+  <RitualOutcomeEffectDef>
+    <defName>VFEE_BestowTitle_Outcome</defName>
+    <description>Depending on ritual quality, participants will get between {MINMOOD} and {MAXMOOD} mood for {MOODDAYS} days.</description>
+    <workerClass>VFEEmpire.RitualOutcomeEffectWorker_BestowTitle</workerClass>
+    <comps>
+      <li Class="RitualOutcomeComp_PawnStatScaled">
+        <label>{PAWN_labelShort}'s social impact</label>
+        <labelAbstract>recipient's social impact</labelAbstract>
+        <roleId>recipient</roleId>
+        <statDef>SocialImpact</statDef>
+        <curve>
+          <points>
+            <li>(0.2, 0.0)</li>
+            <li>(0.6, 0.2)</li>
+            <li>(1.0, 0.3)</li>
+            <li>(1.5, 0.4)</li>
+          </points>
+        </curve>
+      </li>
+      <li Class="RitualOutcomeComp_ParticipantCount">
+        <label>participant count</label>
+        <curve>
+          <points>
+            <li>(1,  0.07)</li>
+            <li>(4,  0.22)</li>
+            <li>(7,  0.33)</li>
+            <li>(10, 0.4)</li>
+          </points>
+        </curve>
+      </li>
+      <li Class="VFEEmpire.RitualOutcomeComp_ThroneForRole">
+        <label>avaliable throne</label>
+		<qualityOffset>0.2</qualityOffset>
+		<roleId>recipient</roleId>
+      </li>
+    </comps>
+    <outcomeChances>
+      <li>
+        <label>Awkward</label>
+        <chance>0.20</chance>
+        <memory>UninspiringSpeech</memory>
+        <positivityIndex>-1</positivityIndex>
+      </li>
+      <li>
+        <label>Good</label>
+        <chance>0.6</chance>
+        <memory>EncouragingSpeech</memory>
+        <positivityIndex>1</positivityIndex>
+      </li>
+      <li>
+        <label>Amazing</label>
+        <chance>0.2</chance>
+        <memory>InspirationalSpeech</memory>
+        <positivityIndex>2</positivityIndex>
+      </li>
+    </outcomeChances>
+  </RitualOutcomeEffectDef>
+  
+</Defs>
