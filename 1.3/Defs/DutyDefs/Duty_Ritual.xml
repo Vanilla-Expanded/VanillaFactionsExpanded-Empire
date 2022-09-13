@@ -14,5 +14,29 @@
       </subNodes>
     </thinkNode>
   </DutyDef>
-  
+  <DutyDef>
+    <defName>VFEE_AcceptTitle</defName>
+    <hook>HighPriority</hook>
+    <socialModeMax>Off</socialModeMax>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- Goto my spot -->
+        <li Class="JobGiver_GotoTravelDestination">
+          <exactCell>true</exactCell>
+          <locomotionUrgency>Jog</locomotionUrgency>
+          <ritualTagOnArrival>Arrived</ritualTagOnArrival>
+        </li>
+
+        <!-- Arrived -->
+        <li Class="ThinkNode_ConditionalAtDutyLocation">
+          <subNodes>
+            <li Class="VFEEmpire.JobGiver_AcceptTitle">
+              <soundDefMale>Speech_Throne_Male</soundDefMale>
+              <soundDefFemale>Speech_Throne_Female</soundDefFemale>
+            </li>
+          </subNodes>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
 </Defs>
