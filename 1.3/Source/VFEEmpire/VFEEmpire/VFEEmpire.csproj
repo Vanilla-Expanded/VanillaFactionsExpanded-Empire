@@ -45,7 +45,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\JobGiver\JobGiver_AcceptTitle.cs" />
     <Compile Include="AI\JobGiver\JobGiver_SpectateClose.cs" />
+    <Compile Include="Comps\CompAbilityEffect_StartBestowing.cs" />
+    <Compile Include="Comps\CompProperties_AbilityStartBestower.cs" />
     <Compile Include="Comps\CompResearchRefresh.cs" />
     <Compile Include="DefOf\InternalDefOf.cs" />
     <Compile Include="Comps\HediffComp_RandomDamage.cs" />
@@ -54,6 +57,12 @@
     <Compile Include="HarmonyPatches\Patch_Pawn_InteractionsTracker_TryInteractWith.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleDef_SpecialDisplayStats.cs" />
     <Compile Include="PlayLogEntry_Interaction_RoyalGossip.cs" />
+    <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_BestowTitle.cs" />
+    <Compile Include="Rituals\LordJob\LordToil_BestowTitle.cs" />
+    <Compile Include="Rituals\LordJob\LordJob_BestowTitle.cs" />
+    <Compile Include="Rituals\Outcomes\OutcomeComp\RitualOutcomeComp_ThroneForRole.cs" />
+    <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_BestowTitle.cs" />
+    <Compile Include="Rituals\Positions\RItualPosition_InFrontThrone.cs" />
     <Compile Include="UI\RoyaltyTabDef.cs" />
     <Compile Include="UI\RoyaltyTabWorker_Permits.cs" />
     <Compile Include="Workers\InteractionWorker_RoyalGossip.cs" />
@@ -72,9 +81,9 @@
     <Compile Include="VFEE_DefOf.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Abilities\" />
     <Folder Include="AI\JobDriver\" />
-    <Folder Include="Rituals\LordJob\" />
-    <Folder Include="Rituals\TargetWorkers\" />
+    <Folder Include="Rituals\TargetFilters\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Krafs.Rimworld.Ref">
