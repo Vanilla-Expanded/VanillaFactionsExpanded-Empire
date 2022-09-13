@@ -21,7 +21,7 @@ public class ThoughtWorker_NoGallery : ThoughtWorker
     {
         if (p.royalty == null || p.MapHeld is not { IsPlayerHome: true } map ||
             (MoveColonyUtility.TitleAndRoleRequirementsGracePeriodActive && !p.IsQuestLodger()) || map.RoyaltyTracker().Galleries.Any()) return false;
-        return p.royalty.HighestTitleWithThroneRoomRequirements() != null;
+        return p.royalty.HighestTitleWithGalleryRequirements() != null;
     }
 }
 
