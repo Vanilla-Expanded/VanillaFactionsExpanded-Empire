@@ -15,6 +15,10 @@
 		</value>
 	</Operation>
 	
+	<Operation Class="PatchOperationRemove">
+		<xpath>/Defs/ThingDef[defName="Shuttle"]/graphicData/color</xpath>
+	</Operation>
+	
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/ThingDef[defName="ShuttleCrashed"]/graphicData/texPath</xpath>
 		<value>
@@ -26,6 +30,13 @@
 		<xpath>/Defs/ThingDef[@Name="ShuttleSkyfallerBase"]/graphicData/texPath</xpath>
 		<value>
 			<texPath>Shuttle/ImperialShuttle/ImperialShuttle</texPath>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationReplace">
+		<xpath>/Defs/ThingDef[@Name="ShuttleSkyfallerBase"]/graphicData/drawSize</xpath>
+		<value>
+			<drawSize>(7,5)</drawSize>
 		</value>
 	</Operation>
 	
