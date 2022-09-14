@@ -11,6 +11,7 @@ public class MainTabWindow_Royalty : MainTabWindow
     public Pawn CurCharacter;
     private RoyaltyTabDef curTab;
 
+    public bool DevMode;
     public QuickSearchWidget SearchWidget = new();
 
     public override Vector2 RequestedTabSize => new(UI.screenWidth, UI.screenHeight * 0.66f);
@@ -57,6 +58,8 @@ public class MainTabWindow_Royalty : MainTabWindow
         leftRect.yMin += 10f;
 
         if (curTab.hasSearch) SearchWidget.OnGUI(leftRect.TakeBottomPart(30f), DoSearch);
+
+        if (Prefs.DevMode) Widgets.CheckboxLabeled(leftRect.TakeBottomPart(30f), "VFEE.DevMode".Translate(), ref DevMode);
 
         if (curTab.needsCharacter) DoCharacterSelection(ref leftRect);
         curTab.Worker.DoLeftBottom(leftRect, this);

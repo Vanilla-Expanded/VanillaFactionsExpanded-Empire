@@ -12,6 +12,14 @@ public static class VFEE_DefOf
     public static InteractionDef VFEE_RoyalGossip;
     public static ThingDef VFEE_Turret_StrikerTurret;
     public static RoyaltyTabDef VFEE_GreatHierarchy;
+    public static ThingDef VFEI_ArmoredShuttle;
+    public static ThingDef VFEE_OrbitalSlicer;
+    public static ThingDef VFEE_DropPodIncoming_Building;
+    public static TransportShipDef VFEE_Ship_ArmoredShuttle;
+    public static PawnKindDef Empire_Fighter_StellicGuardRanged;
+    public static PawnKindDef Empire_Fighter_StellicGuardMelee;
+    public static PawnKindDef Empire_Fighter_Janissary;
+    public static PawnKindDef Empire_Fighter_Cataphract;
 
     static VFEE_DefOf()
     {

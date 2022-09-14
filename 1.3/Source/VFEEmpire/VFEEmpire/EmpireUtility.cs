@@ -55,4 +55,10 @@ public static class EmpireUtility
         if (!royalty.HasAnyTitleIn(faction)) return null;
         return royalty.AllTitlesInEffectForReading.OrderByDescending(title => title.def.seniority).FirstOrDefault(title => title.faction == faction);
     }
+
+    public static bool Unlocked(this RoyalTitlePermitDef permit, Pawn pawn)
+    {
+        return pawn.royalty.HasPermit(permit, Faction.OfEmpire) ||
+               pawn.royalty.AllFactionPermits.Any(t => t.Permit.prerequisite == permit && t.Faction == PermitsCardUtility.selectedFaction);
+    }
 }

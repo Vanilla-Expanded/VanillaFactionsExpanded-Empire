@@ -5,4 +5,5 @@
     <VFEE.CurrentTitle>Current title: {0}</VFEE.CurrentTitle>
     <VFEE.CurrentHonor>Honor: {0}</VFEE.CurrentHonor>
     <VFEE.PermitPoints>Unused permit points: {0}</VFEE.PermitPoints>
+    <VFEE.DevMode>Developer mode</VFEE.DevMode>
 </LanguageData>

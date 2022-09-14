@@ -36,4 +36,28 @@
     <description>This screen allows you to apply previously unlocked honorable titles to your colonists, providing them with unique but very specific perks.</description>
     <needsCharacter>true</needsCharacter>
   </VFEEmpire.RoyaltyTabDef>
+  <TransportShipDef>
+    <defName>VFEE_Ship_ArmoredShuttle</defName>
+    <label>armored shuttle</label>
+    <shipThing>VFEI_ArmoredShuttle</shipThing>
+    <arrivingSkyfaller>VFEI_ArmoredShuttleIncoming</arrivingSkyfaller>
+    <leavingSkyfaller>VFEI_ArmoredShuttleLeaving</leavingSkyfaller>
+    <worldObject>TravelingShuttle</worldObject>
+    <maxLaunchDistance>70</maxLaunchDistance>
+  </TransportShipDef>
+  <ThingDef ParentName="OrbitalStrikeBase">
+    <defName>VFEE_OrbitalSlicer</defName>
+    <label>orbital slicer</label>
+    <thingClass>VFEEmpire.OrbitalSlicer</thingClass>
+    <comps>
+      <li Class="CompProperties_OrbitalBeam">
+        <width>8</width>
+        <color>(255, 245, 214, 242)</color>
+        <sound>OrbitalBeam</sound>
+      </li>
+      <li Class="CompProperties_CameraShaker">
+        <mag>0.03</mag>
+      </li>
+    </comps>
+  </ThingDef>
 </Defs>

@@ -6,7 +6,7 @@
     <label>armored shuttle (incoming)</label>
     <thingClass>ShuttleIncoming</thingClass>
     <graphicData>
-      <texPath>Things/Building/Misc/Shuttle</texPath>
+      <texPath>Shuttle/ImperialArmoredShuttle/ImperialArmoredShuttle</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>CutoutFlying</shaderType>
       <drawSize>(7,5)</drawSize>
@@ -49,7 +49,7 @@
     <label>armored shuttle (leaving)</label>
     <thingClass>FlyShipLeaving</thingClass>
     <graphicData>
-      <texPath>Things/Building/Misc/Shuttle</texPath>
+      <texPath>Shuttle/ImperialArmoredShuttle/ImperialArmoredShuttle</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>CutoutFlying</shaderType>
       <drawSize>(7,5)</drawSize>
@@ -91,4 +91,23 @@
     </skyfaller>
   </ThingDef>
   
+  <ThingDef ParentName="SkyfallerBase">
+    <defName>VFEE_DropPodIncoming_Building</defName>
+    <label>drop pod (incoming)</label>
+    <thingClass>VFEEmpire.DropPodIncoming_Building</thingClass>
+    <graphicData>
+      <texPath>Things/Special/DropPod</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutFlying</shaderType>
+      <drawSize>1.9</drawSize>
+    </graphicData>
+    <skyfaller>
+      <movementType>Decelerate</movementType>
+      <shadow>Things/Skyfaller/SkyfallerShadowDropPod</shadow>
+      <shadowSize>(2, 2)</shadowSize>
+      <anticipationSound>DropPod_Fall</anticipationSound>
+      <anticipationSoundTicks>100</anticipationSoundTicks>
+      <motesPerCell>0</motesPerCell>
+    </skyfaller>
+  </ThingDef>
 </Defs>

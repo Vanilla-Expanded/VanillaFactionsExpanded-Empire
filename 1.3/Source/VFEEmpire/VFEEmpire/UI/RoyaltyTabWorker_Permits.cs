@@ -25,7 +25,9 @@ public class RoyaltyTabWorker_Permits : RoyaltyTabWorker
         var num = TotalReturnPermitsCost(pawn);
         if (Widgets.ButtonText(inRect.TakeBottomPart(60f).ContractedBy(7f, 0f), "ReturnAllPermits".Translate()))
         {
-            if (!pawn.royalty.PermitsFromFaction(Faction.OfEmpire).Any())
+            if (parent.DevMode)
+                pawn.royalty.RefundPermits(0, Faction.OfEmpire);
+            else if (!pawn.royalty.PermitsFromFaction(Faction.OfEmpire).Any())
                 Messages.Message("NoPermitsToReturn".Translate(pawn.Named("PAWN")), new LookTargets(pawn), MessageTypeDefOf.RejectInput, false);
             else if (pawn.royalty.GetFavor(Faction.OfEmpire) < num)
                 Messages.Message(
@@ -46,12 +48,11 @@ public class RoyaltyTabWorker_Permits : RoyaltyTabWorker
     public override void DoMainSection(Rect inRect, MainTabWindow_Royalty parent)
     {
         base.DoMainSection(inRect, parent);
-        var pawn = parent.CurCharacter;
-        DoLeftRect(inRect.TakeLeftPart(UI.screenHeight * 0.25f).ContractedBy(4f, 6f), pawn);
-        DoRightRect(inRect.ContractedBy(4f), pawn);
+        DoLeftRect(inRect.TakeLeftPart(UI.screenHeight * 0.25f).ContractedBy(4f, 6f), parent.CurCharacter, parent.DevMode);
+        DoRightRect(inRect.ContractedBy(4f), parent.CurCharacter);
     }
 
-    private void DoLeftRect(Rect rect, Pawn pawn)
+    private void DoLeftRect(Rect rect, Pawn pawn, bool devMode)
     {
         var num = 0f;
         var empire = Faction.OfEmpire;
@@ -86,12 +87,12 @@ public class RoyaltyTabWorker_Permits : RoyaltyTabWorker
                         : ColorLibrary.RedReadable);
             if (selectedPermit.prerequisite != null)
                 text = text + "\n" + "UpgradeFrom".Translate(selectedPermit.prerequisite.LabelCap).Resolve().Colorize(
-                    pawn.royalty.HasPermit(selectedPermit.prerequisite, empire) ? Color.white : ColorLibrary.RedReadable);
+                    selectedPermit.prerequisite.Unlocked(pawn) ? Color.white : ColorLibrary.RedReadable);
             Widgets.LabelCacheHeight(ref rect5, text);
             num += rect5.height + 4f;
             var rect6 = new Rect(0f, rect2.height - 50f, rect2.width, 50f);
-            if (selectedPermit.AvailableForPawn(pawn, empire) &&
-                !pawn.royalty.HasPermit(selectedPermit, empire) && Widgets.ButtonText(rect6, "AcceptPermit".Translate()))
+            if ((selectedPermit.AvailableForPawn(pawn, empire) || devMode) &&
+                !selectedPermit.prerequisite.Unlocked(pawn) && Widgets.ButtonText(rect6, "AcceptPermit".Translate()))
             {
                 SoundDefOf.Quest_Accepted.PlayOneShotOnCamera();
                 pawn.royalty.AddPermit(selectedPermit, empire);
@@ -160,7 +161,7 @@ public class RoyaltyTabWorker_Permits : RoyaltyTabWorker
                 var vector = DrawPosition(royalTitlePermitDef);
                 var rect3 = new Rect(vector.x, vector.y, 200f, 50f);
                 var color = Widgets.NormalOptionColor;
-                var color2 = pawn.royalty.HasPermit(royalTitlePermitDef, empire) ? TexUI.FinishedResearchColor : TexUI.AvailResearchColor;
+                var color2 = royalTitlePermitDef.Unlocked(pawn) ? TexUI.FinishedResearchColor : TexUI.AvailResearchColor;
                 Color borderColor;
                 if (selectedPermit == royalTitlePermitDef)
                 {
@@ -170,7 +171,7 @@ public class RoyaltyTabWorker_Permits : RoyaltyTabWorker
                 else
                     borderColor = TexUI.DefaultBorderResearchColor;
 
-                if (!royalTitlePermitDef.AvailableForPawn(pawn, empire) && !pawn.royalty.HasPermit(royalTitlePermitDef, empire)) color = Color.red;
+                if (!royalTitlePermitDef.AvailableForPawn(pawn, empire) && !royalTitlePermitDef.Unlocked(pawn)) color = Color.red;
                 if (Widgets.CustomButtonText(ref rect3, string.Empty, color2, color, borderColor))
                 {
                     SoundDefOf.Click.PlayOneShotOnCamera();
