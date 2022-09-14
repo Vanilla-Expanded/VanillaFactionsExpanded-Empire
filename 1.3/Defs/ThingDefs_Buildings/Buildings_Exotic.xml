@@ -50,7 +50,7 @@
       <turretGunDef>VFEI_TurretArmoredShuttle</turretGunDef>
       <turretBurstCooldownTime>5.6</turretBurstCooldownTime>
       <turretTopDrawSize>3.5</turretTopDrawSize>
-      <turretTopOffset>(-0.2, 1.1)</turretTopOffset>
+      <turretTopOffset>(-0.2, 0.9)</turretTopOffset>
     </building>
     <inspectorTabs>
       <li>ITab_ContentsTransporter</li>
