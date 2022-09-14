@@ -49,8 +49,8 @@
       <ai_combatDangerous>true</ai_combatDangerous>
       <turretGunDef>VFEI_TurretArmoredShuttle</turretGunDef>
       <turretBurstCooldownTime>5.6</turretBurstCooldownTime>
-      <turretTopDrawSize>3.3</turretTopDrawSize>
-      <turretTopOffset>(0, 1.2)</turretTopOffset>
+      <turretTopDrawSize>3.5</turretTopDrawSize>
+      <turretTopOffset>(-0.2, 1.1)</turretTopOffset>
     </building>
     <inspectorTabs>
       <li>ITab_ContentsTransporter</li>
