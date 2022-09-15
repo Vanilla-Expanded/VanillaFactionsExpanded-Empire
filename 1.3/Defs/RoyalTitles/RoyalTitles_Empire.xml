@@ -11,7 +11,7 @@
     <minExpectation>Royal</minExpectation>
     <requiredMinimumApparelQuality>Good</requiredMinimumApparelQuality>
     <changeHeirQuestPoints>3700</changeHeirQuestPoints>
-    <recruitmentResistanceOffset>75</recruitmentResistanceOffset>
+    <recruitmentResistanceOffset>90</recruitmentResistanceOffset>
     <commonality>1</commonality>
     <canBeInherited>True</canBeInherited>
     <suppressIdleAlert>true</suppressIdleAlert>
@@ -208,7 +208,7 @@
     <minExpectation>Royal</minExpectation>
     <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
     <changeHeirQuestPoints>3700</changeHeirQuestPoints>
-    <recruitmentResistanceOffset>75</recruitmentResistanceOffset>
+    <recruitmentResistanceOffset>100</recruitmentResistanceOffset>
     <commonality>1</commonality>
     <canBeInherited>True</canBeInherited>
     <suppressIdleAlert>true</suppressIdleAlert>
@@ -405,19 +405,29 @@
     <speechCooldown>360000</speechCooldown>
     <maxPsylinkLevel>6</maxPsylinkLevel>
   </RoyalTitleDef>
-
-  <!-- ============== Reference 
-
-
-  <RoyalTitleDef Abstract="True" Name="BaseEmpireTitleNPC" ParentName="BaseEmpireTitle" >
+  
+  <RoyalTitleDef Name="VFEE_DukeBase" ParentName="BaseEmpireTitle">
+    <favorCost>56</favorCost>
     <minExpectation>Royal</minExpectation>
-    <requiredMinimumApparelQuality>Normal</requiredMinimumApparelQuality>
+    <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
+    <changeHeirQuestPoints>3700</changeHeirQuestPoints>
+    <canBeInherited>True</canBeInherited>
     <suppressIdleAlert>true</suppressIdleAlert>
+    <decreeMtbDays>-1</decreeMtbDays> <!-- disabled -->
+    <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
+    <permitPointsAwarded>1</permitPointsAwarded>
+    <decreeTags>
+      <li>All</li>
+    </decreeTags>
     <disabledJoyKinds>
       <li>Gaming_Dexterity</li>
     </disabledJoyKinds>
     <disabledWorkTags>
-      <li>Commoner</li>
+      <li>ManualDumb</li>
+      <li>ManualSkilled</li>
+      <li>PlantWork</li>
+      <li>Mining</li>
+      <li>Animals</li>
     </disabledWorkTags>
     <permits>
       <li>TradeSettlement</li>
@@ -433,6 +443,7 @@
           <li>RoyalTier2</li>
         </requiredTags>
         <allowedTags>
+          <li>Cape</li>
           <li>PrestigeCombatGear</li>
           <li>Psychic</li>
         </allowedTags>
@@ -445,6 +456,7 @@
           <li>RoyalTier5</li>
         </requiredTags>
         <allowedTags>
+          <li>Cape</li>
           <li>PrestigeCombatGear</li>
           <li>Psychic</li>
         </allowedTags>
@@ -457,6 +469,7 @@
           <li>RoyalTier6</li>
         </requiredTags>
         <allowedTags>
+          <li>Cape</li>
           <li>PrestigeCombatGear</li>
           <li>Psychic</li>
         </allowedTags>
@@ -467,7 +480,7 @@
           <li>FullHead</li>
         </bodyPartGroupsMatchAny>
         <requiredTags>
-          <li>RoyalTier7</li>
+          <li>RoyalTier5</li>
         </requiredTags>
         <allowedTags>
           <li>PrestigeCombatGear</li>
@@ -480,10 +493,10 @@
         <things><li>GrandThrone</li></things>
       </li>
       <li Class="RoomRequirement_Area">
-        <area>80</area>
+        <area>140</area>
       </li>
       <li Class="RoomRequirement_Impressiveness">
-        <impressiveness>160</impressiveness>
+        <impressiveness>200</impressiveness>
       </li>
       <li Class="RoomRequirement_TerrainWithTags">
         <labelKey>RoomRequirementAllFineFloored</labelKey>
@@ -496,14 +509,30 @@
           <li>Brazier</li>
           <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
         </things>
-        <count>2</count>
+        <count>8</count>
       </li>
       <li Class="RoomRequirement_ThingCount">
         <thingDef>Column</thingDef>
+        <count>12</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
         <count>6</count>
       </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_SteleSmall</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_ImperialSlab</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_GrandChair</thingDef>
+        <count>1</count>
+      </li>
       <li Class="RoomRequirement_Thing">
-        <thingDef>Piano</thingDef>
+        <thingDef>VFEE_GrandTable</thingDef>
       </li>
       <li Class="RoomRequirement_AllThingsAnyOfAreGlowing">
         <labelKey>RoomRequirementAllBraziersMustBeLit</labelKey>
@@ -526,10 +555,10 @@
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
-        <area>30</area>
+        <area>50</area>
       </li>
       <li Class="RoomRequirement_Impressiveness">
-        <impressiveness>80</impressiveness>
+        <impressiveness>130</impressiveness>
       </li>
       <li Class="RoomRequirement_TerrainWithTags">
         <labelKey>RoomRequirementAllFineFloored</labelKey>
@@ -553,7 +582,14 @@
       </li>
       <li Class="RoomRequirement_ThingCount">
         <thingDef>Drape</thingDef>
-        <count>1</count>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>PlantPot</thingDef>
+        <count>6</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_RoyalMirror</thingDef>
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
@@ -570,10 +606,16 @@
         <li>InsectJelly</li>
       </allowedDefs>
     </foodRequirement>
-    <grantedAbilities><li>Speech</li></grantedAbilities>
-    <speechCooldown>600000</speechCooldown>
+    <grantedAbilities>
+	    <li>Speech</li>
+	    <li>VFEE_RoyalAddress</li>
+		<li>VFEE_BestowFreeholder</li>
+	</grantedAbilities>
+    <speechCooldown>360000</speechCooldown>
     <maxPsylinkLevel>6</maxPsylinkLevel>
   </RoyalTitleDef>
+
+  <!-- ============== Reference 
 
   <RoyalTitleDef ParentName="BaseEmpireTitleNPC">
     <defName>Duke</defName>
