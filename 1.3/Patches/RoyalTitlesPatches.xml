@@ -15,5 +15,11 @@
         <value>VFEE_DukeBase</value>
     </Operation>
 	
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/RoyalTitleDef[defName="Consul"]/RoyalTitleDef</xpath>
+        <attribute>ParentName</attribute>
+        <value>VFEE_ConsulBase</value>
+    </Operation>
+	
 </Patch>
 
