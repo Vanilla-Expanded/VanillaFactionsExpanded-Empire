@@ -406,7 +406,7 @@
     <maxPsylinkLevel>6</maxPsylinkLevel>
   </RoyalTitleDef>
   
-  <RoyalTitleDef Name="VFEE_DukeBase" ParentName="BaseEmpireTitle">
+  <RoyalTitleDef Name="VFEE_DukeBase" ParentName="BaseEmpireTitle" Abstract="True">
     <favorCost>56</favorCost>
     <minExpectation>Royal</minExpectation>
     <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
@@ -835,7 +835,7 @@
     <maxPsylinkLevel>6</maxPsylinkLevel>
   </RoyalTitleDef>
   
-  <RoyalTitleDef Name="VFEE_ConsulBase" ParentName="BaseEmpireTitle">
+  <RoyalTitleDef Name="VFEE_ConsulBase" ParentName="BaseEmpireTitle" Abstract="True">
     <favorCost>80</favorCost>
     <minExpectation>Royal</minExpectation>
     <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
