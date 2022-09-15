@@ -2,7 +2,7 @@
 <Defs>
 
   <ThingDef ParentName="BuildingBase">
-    <defName>VFEI_ArmoredShuttle</defName>
+    <defName>VFEE_ArmoredShuttle</defName>
     <label>armored shuttle</label>
     <description>A spacer-tech imperial gunship designed for transit between surface and orbit, or between moons of a planetary system. Equipped with a twin-linked autocannon for ground support, these armored shuttles often land in the middle of the battlefield to extract stranded troops.</description>
     <altitudeLayer>Building</altitudeLayer>
@@ -47,7 +47,7 @@
       <soundAmbient>ShuttleIdle_Ambience</soundAmbient>
       <destroySound>BuildingDestroyed_Metal_Big</destroySound>
       <ai_combatDangerous>true</ai_combatDangerous>
-      <turretGunDef>VFEI_TurretArmoredShuttle</turretGunDef>
+      <turretGunDef>VFEE_TurretArmoredShuttle</turretGunDef>
       <turretBurstCooldownTime>5.6</turretBurstCooldownTime>
       <turretTopDrawSize>3.3</turretTopDrawSize>
       <turretTopOffset>(-0.2, 0.9)</turretTopOffset>
@@ -73,7 +73,7 @@
   </ThingDef>
   
   <ThingDef ParentName="BaseWeaponTurret">
-    <defName>VFEI_TurretArmoredShuttle</defName>
+    <defName>VFEE_TurretArmoredShuttle</defName>
     <label>double autocannon</label>
     <description>A powerful, twin-linked autocannon.</description>
     <graphicData>
