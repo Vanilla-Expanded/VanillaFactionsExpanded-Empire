@@ -152,10 +152,10 @@
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
-        <area>30</area>
+        <area>40</area>
       </li>
       <li Class="RoomRequirement_Impressiveness">
-        <impressiveness>80</impressiveness>
+        <impressiveness>100</impressiveness>
       </li>
       <li Class="RoomRequirement_TerrainWithTags">
         <labelKey>RoomRequirementAllFineFloored</labelKey>
@@ -201,7 +201,7 @@
     <maxPsylinkLevel>6</maxPsylinkLevel>
   </RoyalTitleDef>
 
-  <!-- ============== Empire titles - NPC only psycaster ============================= -->
+  <!-- ============== Reference 
 
 
   <RoyalTitleDef Abstract="True" Name="BaseEmpireTitleNPC" ParentName="BaseEmpireTitle" >
@@ -399,7 +399,6 @@
     <replaceOnRecruited>Consul</replaceOnRecruited>
   </RoyalTitleDef>
 
-  <!-- Emperor should never appear in the game in any way, it's just here for completeness on UI lists etc. -->
   <RoyalTitleDef ParentName="BaseEmpireTitleNPC">
     <defName>Emperor</defName>
     <label>emperor</label>
@@ -407,6 +406,6 @@
     <description>The Imperial title of emperor indicates sovereign dominion over the entire Empire, all its peoples, planets, and fleets. All other lords swear fealty to a high lord, while the Emperor swears fealty to no one. However, even the Emperor depends on the support of lower nobles to remain in power.</description>
     <seniority>1000</seniority>
     <commonality>0</commonality>
-  </RoyalTitleDef>
+  </RoyalTitleDef> -->
 
 </Defs>
