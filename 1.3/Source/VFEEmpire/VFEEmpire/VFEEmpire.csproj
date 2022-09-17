@@ -52,6 +52,8 @@
     <Compile Include="Comps\CompResearchRefresh.cs" />
     <Compile Include="DefOf\InternalDefOf.cs" />
     <Compile Include="Comps\HediffComp_RandomDamage.cs" />
+    <Compile Include="HarmonyPatches\Patch_Conceit.cs" />
+    <Compile Include="HarmonyPatches\Patch_RoyalTitleIcons.cs" />
     <Compile Include="Things\DropPodIncoming_Building.cs" />
     <Compile Include="GameComponent_Empire.cs" />
     <Compile Include="HarmonyPatches\Patch_CompRefuelable_ConsumeFuel.cs" />
@@ -65,8 +67,10 @@
     <Compile Include="Rituals\Outcomes\OutcomeComp\RitualOutcomeComp_ThroneForRole.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_BestowTitle.cs" />
     <Compile Include="Rituals\Positions\RItualPosition_InFrontThrone.cs" />
+    <Compile Include="TitheTypeDef.cs" />
     <Compile Include="UI\RoyaltyTabDef.cs" />
     <Compile Include="UI\RoyaltyTabWorker_Permits.cs" />
+    <Compile Include="UI\RoyaltyTabWorker_Vassals.cs" />
     <Compile Include="Workers\InteractionWorker_RoyalGossip.cs" />
     <Compile Include="MapComponent_RoyaltyTracker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,6 +89,7 @@
     <Compile Include="Workers\ThoughtWorkers.cs" />
     <Compile Include="VFEEmpireMod.cs" />
     <Compile Include="VFEE_DefOf.cs" />
+    <Compile Include="WorldComponent_Vassals.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abilities\" />

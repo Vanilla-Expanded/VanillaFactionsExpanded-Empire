@@ -6,4 +6,19 @@
     <VFEE.CurrentHonor>Honor: {0}</VFEE.CurrentHonor>
     <VFEE.PermitPoints>Unused permit points: {0}</VFEE.PermitPoints>
     <VFEE.DevMode>Developer mode</VFEE.DevMode>
+    <VFEE.VassalPoints>Unused vassalage points: {0}</VFEE.VassalPoints>
+    <VFEE.ReleaseAllVassals>Release all vassals</VFEE.ReleaseAllVassals>
+    <VFEE.ReleaseAllVassals.Confirm>Releasing vassals will causes resources stored to be lost. Are you sure?</VFEE.ReleaseAllVassals.Confirm>
+    <VFEE.VassalsOf>Vassals of {0}, {1}</VFEE.VassalsOf>
+    <VFEE.TitheDesc>Tithes will be delivered via drop-pods after designated time has elapsed.</VFEE.TitheDesc>
+    <VFEE.Deliver>Deliver</VFEE.Deliver>
+    <VFEE.Deliver.EveryWeek>Every 7 days</VFEE.Deliver.EveryWeek>
+    <VFEE.Deliver.EveryQuadrum>Every 15 days</VFEE.Deliver.EveryQuadrum>
+    <VFEE.Deliver.EveryYear>Once a year</VFEE.Deliver.EveryYear>
+    <VFEE.Deliver.Never>Never (pause)</VFEE.Deliver.Never>
+    <VFEE.Created>{0} {1} created every day.</VFEE.Created>
+    <VFEE.InStockpile>{0} in stockpile: {1}</VFEE.InStockpile>
+    <VFEE.VassalDesc>You can only vassalize bases that are less than 100 tiles away from you or your vassals\nVassalize more towns to increase the reach and unlock more potential vassal subjects</VFEE.VassalDesc>
+    <VFEE.NoVassalize>Can't vassalize: Too far away</VFEE.NoVassalize>
+    <VFEE.Vassalize>Vassalize</VFEE.Vassalize>
 </LanguageData>

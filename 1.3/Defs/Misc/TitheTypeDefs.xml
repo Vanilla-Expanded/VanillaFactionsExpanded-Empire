@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    <VFEEmpire.TitheTypeDef>
+        <defName>VFEE_Steel</defName>
+        <label>steel mining</label>
+        <description>This settlement mines steel for their overlord.</description>
+        <resourceLabel>steel</resourceLabel>
+        <item>Steel</item>
+        <count>25</count>
+        <iconPath>UI/VassalageIcons/Vassalage_SteelMining</iconPath>
+    </VFEEmpire.TitheTypeDef>
+    <VFEEmpire.TitheTypeDef>
+        <defName>VFEE_Wood</defName>
+        <label>wood cutting</label>
+        <description>This settlement chops wood for their overlord.</description>
+        <resourceLabel>wood</resourceLabel>
+        <item>WoodLog</item>
+        <count>40</count>
+        <iconPath>UI/VassalageIcons/Vassalage_WoodCutting</iconPath>
+    </VFEEmpire.TitheTypeDef>
+    <VFEEmpire.TitheTypeDef>
+        <defName>VFEE_Gold</defName>
+        <label>gold tax</label>
+        <description>This settlement pays gold to their overlord.</description>
+        <resourceLabel>gold</resourceLabel>
+        <item>Gold</item>
+        <count>5</count>
+        <iconPath>UI/VassalageIcons/Vassalage_GoldTax</iconPath>
+    </VFEEmpire.TitheTypeDef>
+    <VFEEmpire.TitheTypeDef>
+        <defName>VFEE_Silver</defName>
+        <label>silver tax</label>
+        <description>This settlement pays silver to their overlord.</description>
+        <resourceLabel>silver</resourceLabel>
+        <item>Silver</item>
+        <count>50</count>
+        <iconPath>UI/VassalageIcons/Vassalage_SilverTax</iconPath>
+    </VFEEmpire.TitheTypeDef>
+    <VFEEmpire.TitheTypeDef>
+        <defName>VFEE_Farming</defName>
+        <label>farming</label>
+        <description>This settlement produces survival meals for their overlord.</description>
+        <resourceLabel>meal</resourceLabel>
+        <resourceLabelPlural>meals</resourceLabelPlural>
+        <item>MealSurvivalPack</item>
+        <count>2</count>
+        <iconPath>UI/VassalageIcons/Vassalage_Farming</iconPath>
+    </VFEEmpire.TitheTypeDef>
+    <VFEEmpire.TitheTypeDef>
+        <defName>VFEE_Honor</defName>
+        <label>honor tax</label>
+        <description>This settlement provides honor to their overlord.</description>
+        <resourceLabel>honor</resourceLabel>
+        <iconPath>UI/VassalageIcons/Vassalage_HonorTax</iconPath>
+    </VFEEmpire.TitheTypeDef>
+    <VFEEmpire.TitheTypeDef MayRequire="ludeon.rimworld.ideology">
+        <defName>VFEE_Slavery</defName>
+        <label>slavery</label>
+        <description>This settlement captures slaves for their overlord.</description>
+        <resourceLabel>slave</resourceLabel>
+        <resourceLabelPlural>slaves</resourceLabelPlural>
+        <iconPath>UI/VassalageIcons/Vassalage_Slavers</iconPath>
+    </VFEEmpire.TitheTypeDef>
+</Defs>

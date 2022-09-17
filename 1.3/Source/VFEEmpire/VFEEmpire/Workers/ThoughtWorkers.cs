@@ -33,7 +33,7 @@ public class ThoughtWorker_BallroomRequirementsNotMet : ThoughtWorker_RoomRequir
         if (title == null || MoveColonyUtility.TitleAndRoleRequirementsGracePeriodActive) return Enumerable.Empty<string>();
         return p.MapHeld.RoyaltyTracker().Ballrooms.Select(room => title.def.Ext()
             .ballroomRequirements.Where(requirement => !requirement.MetOrDisabled(room, p))
-            .Select(requirement => requirement.LabelCap(room)).ToList()).OrderBy(unmet => unmet.Count).FirstOrDefault();
+            .Select(requirement => requirement.LabelCap(room)).ToList()).OrderBy(unmet => unmet.Count).FirstOrFallback(Enumerable.Empty<string>());
     }
 
     public override string PostProcessDescription(Pawn p, string description) => description
@@ -48,7 +48,7 @@ public class ThoughtWorker_GalleryRequirementsNotMet : ThoughtWorker_RoomRequire
         if (title == null || MoveColonyUtility.TitleAndRoleRequirementsGracePeriodActive) return Enumerable.Empty<string>();
         return p.MapHeld.RoyaltyTracker().Galleries.Select(room => title.def.Ext()
             .galleryRequirements.Where(requirement => !requirement.MetOrDisabled(room, p))
-            .Select(requirement => requirement.LabelCap(room)).ToList()).OrderBy(unmet => unmet.Count).FirstOrDefault();
+            .Select(requirement => requirement.LabelCap(room)).ToList()).OrderBy(unmet => unmet.Count).FirstOrFallback(Enumerable.Empty<string>());
     }
 
     public override string PostProcessDescription(Pawn p, string description) => description

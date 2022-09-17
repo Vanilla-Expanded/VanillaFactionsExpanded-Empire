@@ -196,6 +196,45 @@
     <grantedAbilities><li>Speech</li></grantedAbilities>
     <speechCooldown>360000</speechCooldown>
     <maxPsylinkLevel>6</maxPsylinkLevel>
+    <modExtensions>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <ballroomRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>60</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>100</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+          <li Class="RoomRequirement_ThingAnyOf">
+            <things>
+              <li>Piano</li>
+              <li>Harp</li>
+            </things>
+          </li>
+        </ballroomRequirements>
+        <galleryRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>30</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>130</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+        </galleryRequirements>
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Archcount</iconPath>
+      </li>
+    </modExtensions>
   </RoyalTitleDef>
   
   <RoyalTitleDef ParentName="BaseEmpireTitle">
@@ -404,9 +443,49 @@
 	</grantedAbilities>
     <speechCooldown>360000</speechCooldown>
     <maxPsylinkLevel>6</maxPsylinkLevel>
+    <modExtensions>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <ballroomRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>80</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>120</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+          <li Class="RoomRequirement_ThingAnyOf">
+            <things>
+              <li>Piano</li>
+              <li>Harp</li>
+            </things>
+          </li>
+        </ballroomRequirements>
+        <galleryRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>50</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>140</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+        </galleryRequirements>
+        <vassalagePointsAwarded>1</vassalagePointsAwarded>
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Marquess</iconPath>
+      </li>
+    </modExtensions>
   </RoyalTitleDef>
   
-  <RoyalTitleDef Name="VFEE_DukeBase" ParentName="BaseEmpireTitle" Abstract="True">
+  <RoyalTitleDef ParentName="DukeBase">
     <favorCost>56</favorCost>
     <minExpectation>Royal</minExpectation>
     <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
@@ -613,6 +692,46 @@
 	</grantedAbilities>
     <speechCooldown>360000</speechCooldown>
     <maxPsylinkLevel>6</maxPsylinkLevel>
+    <modExtensions>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <ballroomRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>100</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>140</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Piano</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Harp</thingDef>
+          </li>
+        </ballroomRequirements>
+        <galleryRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>60</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>160</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+        </galleryRequirements>
+        <vassalagePointsAwarded>1</vassalagePointsAwarded>
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Duke</iconPath>
+      </li>
+    </modExtensions>
   </RoyalTitleDef>
   
   <RoyalTitleDef ParentName="BaseEmpireTitle">
@@ -833,9 +952,65 @@
 	</grantedAbilities>
     <speechCooldown>360000</speechCooldown>
     <maxPsylinkLevel>6</maxPsylinkLevel>
+    <modExtensions>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <ballroomRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>110</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>160</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Piano</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Harp</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>VFEE_PipeOrgan</thingDef>
+          </li>
+        </ballroomRequirements>
+        <galleryRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>80</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>180</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+        </galleryRequirements>
+        <courtRequirments>
+          <li>
+            <minTitle>Acolyte</minTitle>
+            <maxTitle>Acolyte</maxTitle>
+            <count>2</count>
+          </li>
+          <li>
+            <minTitle>Knight</minTitle>
+            <maxTitle>Duke</maxTitle>
+            <count>1</count>
+          </li>
+        </courtRequirments>
+        <vassalagePointsAwarded>1</vassalagePointsAwarded>
+        <expectationsAlways>true</expectationsAlways>
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Archduke</iconPath>
+      </li>
+    </modExtensions>
   </RoyalTitleDef>
   
-  <RoyalTitleDef Name="VFEE_ConsulBase" ParentName="BaseEmpireTitle" Abstract="True">
+  <RoyalTitleDef ParentName="ConsulBase">
     <favorCost>80</favorCost>
     <minExpectation>Royal</minExpectation>
     <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
@@ -1051,6 +1226,62 @@
 	</grantedAbilities>
     <speechCooldown>360000</speechCooldown>
     <maxPsylinkLevel>6</maxPsylinkLevel>
+    <modExtensions>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <ballroomRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>120</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>180</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Piano</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Harp</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>VFEE_PipeOrgan</thingDef>
+          </li>
+        </ballroomRequirements>
+        <galleryRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>100</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>200</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+        </galleryRequirements>
+        <courtRequirments>
+          <li>
+            <minTitle>Knight</minTitle>
+            <maxTitle>Knight</maxTitle>
+            <count>2</count>
+          </li>
+          <li>
+            <minTitle>Praetor</minTitle>
+            <maxTitle>VFEE_Archduke</maxTitle>
+            <count>1</count>
+          </li>
+        </courtRequirments>
+        <vassalagePointsAwarded>1</vassalagePointsAwarded>
+        <expectationsAlways>true</expectationsAlways>
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Consul</iconPath>
+      </li>
+    </modExtensions>
   </RoyalTitleDef>
 
   <!-- ============== Reference 
