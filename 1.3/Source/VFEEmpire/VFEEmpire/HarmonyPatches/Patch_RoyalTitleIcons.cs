@@ -14,7 +14,6 @@ public static class Patch_RoyalTitleIcons
     [HarmonyPrefix]
     public static bool Widgets_DefIcon_Prefix(Rect rect, Def def, float scale = 1f)
     {
-        Log.Message($"Def: {def}");
         if (def is RoyalTitleDef && def.GetModExtension<RoyalTitleDefExtension>() is { iconPath.Length: > 0, Icon: var icon })
         {
             Widgets.DrawTextureFitted(rect, icon, scale);
