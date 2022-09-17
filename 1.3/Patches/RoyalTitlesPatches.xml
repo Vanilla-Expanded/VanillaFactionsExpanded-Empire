@@ -39,6 +39,21 @@
         <attribute>Abstract</attribute>
         <value>True</value>
     </Operation>
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/RoyalTitleDef[defName="Stellarch"]</xpath>
+        <attribute>ParentName</attribute>
+        <value>BaseEmpireTitle</value>
+    </Operation>
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/RoyalTitleDef[defName="Stellarch"]</xpath>
+        <attribute>Name</attribute>
+        <value>StellarchBase</value>
+    </Operation>
+    <Operation Class="PatchOperationAttributeSet">
+        <xpath>/Defs/RoyalTitleDef[defName="Stellarch"]</xpath>
+        <attribute>Abstract</attribute>
+        <value>True</value>
+    </Operation>
 	
     <Operation Class="PatchOperationAddModExtension">
       <xpath>Defs/RoyalTitleDef[defName="Freeholder"]</xpath>
