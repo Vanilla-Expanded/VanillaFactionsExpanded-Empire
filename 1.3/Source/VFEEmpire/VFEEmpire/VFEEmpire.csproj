@@ -54,6 +54,8 @@
     <Compile Include="Comps\HediffComp_RandomDamage.cs" />
     <Compile Include="HarmonyPatches\Patch_Conceit.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleIcons.cs" />
+    <Compile Include="QuestNode\Questnode_Root_NobleVisit.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_LodgerLeave.cs" />
     <Compile Include="Things\DropPodIncoming_Building.cs" />
     <Compile Include="GameComponent_Empire.cs" />
     <Compile Include="HarmonyPatches\Patch_CompRefuelable_ConsumeFuel.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Rituals\Outcomes\OutcomeComp\RitualOutcomeComp_ThroneForRole.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_BestowTitle.cs" />
     <Compile Include="Rituals\Positions\RItualPosition_InFrontThrone.cs" />
+    <Compile Include="Thoughts\ThoughtWorker_BadVisit.cs" />
     <Compile Include="TitheTypeDef.cs" />
     <Compile Include="UI\RoyaltyTabDef.cs" />
     <Compile Include="UI\RoyaltyTabWorker_Permits.cs" />

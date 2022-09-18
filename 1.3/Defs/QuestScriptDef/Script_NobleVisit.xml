@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<QuestScriptDef>
+		<defName>VFEE_NobleVisit</defName>
+		<defaultChallengeRating>4</defaultChallengeRating>
+		<rootSelectionWeight>1.0</rootSelectionWeight>
+		<expireDaysRange>4~8</expireDaysRange>
+		<affectedByPopulation>true</affectedByPopulation>
+		<affectedByPoints>false</affectedByPoints>
+		<rootMinPoints>100</rootMinPoints>
+		<rootSelectionWeightFactorFromPointsCurve> 
+		  <points>
+			<li>(0,0)</li>
+			<li>(200,1)</li>
+			<li>(500,2)</li>
+		  </points>
+		</rootSelectionWeightFactorFromPointsCurve>
+		<questNameRules>
+		  <rulesStrings> <!--Placehold-->
+			<li>questName(sameQuestsCount==0)->[asker_nameDef]’s visit</li>
+		  </rulesStrings>
+		</questNameRules>
+		<questDescriptionAndNameRules>
+		  <rulesStrings>
+			<li>lodgersLabel->noble</li>
+			<li>lodgersLabelPlural->nobles</li>
+		  </rulesStrings>
+		</questDescriptionAndNameRules>
+		 <root Class="VFEEmpire.QuestNode_Root_NobleVisit">
+
+		 </root>
+	</QuestScriptDef>
+</Defs>
