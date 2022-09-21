@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using RimWorld.QuestGen;
+using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 
@@ -12,8 +13,9 @@ namespace VFEEmpire
     {
         protected override bool TestRunInt(Slate slate)
         {
-            //NOT DONE
-            return true;
+            Map map = QuestGen_Get.GetMap(false, null);
+            var leadTitle = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle).RandomElementByWeight(x => x?.def?.seniority ?? 0f).def;//Title of highest colony member            
+            return leadTitle != null && !Faction.OfPlayer.HostileTo(Faction.OfEmpire);
         }
         protected override void RunInt()
         {
@@ -25,13 +27,12 @@ namespace VFEEmpire
             Map map = QuestGen_Get.GetMap(false, null);
             var points = slate.Get<float>("points", 0f, false);
             int durationTicks = Mathf.RoundToInt(QuestDayDurationCurve.Evaluate(points) * 60000);
-            var empire = Find.FactionManager.OfEmpire;            
-            var leadTitle = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle).RandomElementByWeight(x => x?.def?.seniority?? 0f).def;//Title of highest colony member
-
-
-
+            var empire = Find.FactionManager.OfEmpire;
+            var colonyTitle = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle).RandomElementByWeight(x => x?.def?.seniority ?? 0f).def;//Title of highest colony member
+            var leadTitle = DefDatabase<RoyalTitleDef>.AllDefs.Where(x => x.seniority <= colonyTitle.seniority).RandomElementByWeight(x => x.seniority);//
+            
             //Generate Nobles
-            int nobleCount = (int)Math.Floor(QuestNoblesCurve.Evaluate(points)); //Round down            
+            int nobleCount = new IntRange(1,(int)Math.Floor(QuestNoblesCurve.Evaluate(points))).RandomInRange;  //Max # increased with difficulty but still random how many you can get
             var bestNoble = GenerateNoble(leadTitle);
             var nobles = new List<Pawn> { bestNoble };
             int tries = 0;
@@ -51,38 +52,50 @@ namespace VFEEmpire
                     break;
                 }
             }
+            slate.Set("shuttleDelayTicks", durationTicks);            
+            slate.Set("title", bestNoble.royalty.HighestTitleWith(empire));
             slate.Set("nobles", nobles);
-            
-            //Rewards
-            //Trying to decipher how the amount of honor given in the reward was giving me a headache and it looked like it was not modifiable directly. 
-            //So rather then reedo all the give rewards work I'm just setting it after
+            slate.Set("map", map, false);
+            slate.Set("asker", bestNoble, false);
+            slate.Set("faction", empire, false);
+
+            //Can Accept rules
+            var questPart_AcceptBedroom = new QuestPart_RequirementsToAcceptBedroom
+            {
+                targetPawns = nobles.Where(x=>x.royalty.HighestTitleWithBedroomRequirements() != null).ToList(),
+                mapParent= map.Parent,
+            };
+            quest.AddPart(questPart_AcceptBedroom);
+            //**Rewards
             string chosenPawnSignal = QuestGenUtility.HardcodedSignalWithQuestID("ChosenPawnSignal");
             string allLeftHealthy = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.LeftmapAllHealthy");
             //honor = range of 2 - 24 based on how long their stay is
-            int honor = Mathf.Min(2, Mathf.RoundToInt(24 * QuestDayDurationCurve.Evaluate(points) / 10));
-            var questPart_Choice = quest.GiveRewards(new RewardsGeneratorParams
+            int honor = Mathf.Max(2, Mathf.RoundToInt(24 * (QuestDayDurationCurve.Evaluate(points) / 10)));
+            var questpart_RoyalFavor = new QuestPart_GiveRoyalFavor 
+            { 
+                giveToAccepter = true,
+                faction = empire,
+                amount = honor,
+                inSignal = allLeftHealthy
+            };
+            quest.AddPart(questpart_RoyalFavor);
+            var questPart_Choice = quest.RewardChoice();
+            var choice = new QuestPart_Choice.Choice();
+            choice.questParts.Add(questpart_RoyalFavor);
+            var reward = new Reward_RoyalFavor
             {
-                allowRoyalFavor = true,
-                giverFaction = empire,
-                allowGoodwill = false,
-                thingRewardDisallowed = true,
-                chosenPawnSignal = chosenPawnSignal,
-                rewardValue = honor //99% sure this doesnt work because Reward_RoyalFavor has its own rules
-            }, allLeftHealthy, runIfChosenPawnSignalUsed: () =>
-            {
-                //Leaving as stub right now as not certain I need
-                //Use case would be send letter informing of honor gainsed
-            }, asker:bestNoble);
-            //This seems like so much more effort then I should need to do here. 
-            var choice = questPart_Choice.choices.FirstOrDefault(x => x.rewards.Any(y => y is Reward_RoyalFavor));
-            var favorPart = choice.questParts.FirstOrDefault(x => x is QuestPart_GiveRoyalFavor) as QuestPart_GiveRoyalFavor;
-            //I have no idea if this will work
-            favorPart.amount = honor;            
+                faction = empire,
+                amount = honor
+            };
+            choice.rewards.Add(reward);
+            questPart_Choice.choices.Add(choice);
             slate.Set("royalFavorReward_amount", honor);
-            //Generate guards
+
+
+            //**Generate guards
             var lodgers = new List<Pawn>();
             lodgers.AddRange(nobles);
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 2; i++)
             {
                 var mustBeOfKind = new PawnKindDef[]
                 {
@@ -105,7 +118,7 @@ namespace VFEEmpire
             }
             slate.Set("lodgers", lodgers);
 
-            //Apply restrictions
+            //**Apply restrictions
             quest.SetAllApparelLocked(lodgers);
             var workDisabled = new QuestPart_WorkDisabled();
             workDisabled.inSignalEnable = QuestGen.slate.Get<string>("inSignal", null, false);
@@ -113,7 +126,15 @@ namespace VFEEmpire
             workDisabled.disabledWorkTags = WorkTags.AllWork;
             quest.AddPart(workDisabled);
 
-            //lodger signals applies to all
+            //Extra Faction So they are still empire
+            var extraFaction = new QuestPart_ExtraFaction()
+            {
+                affectedPawns = lodgers,
+                extraFaction = new ExtraFaction(empire, ExtraFactionType.HomeFaction),
+                inSignalRemovePawn = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.RanWild")
+            };
+
+            //Bunch of signals here
             string lodgerArrestedSignal = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Arrested");
             string lodgerDestroyedSignal = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Destroyed");
             string lodgerKidnapped = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Kidnapped");
@@ -121,9 +142,9 @@ namespace VFEEmpire
             string lodgerLeftMap = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.LeftMap");
             string lodgerBanished = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Banished");
             string shuttleDestroyed = QuestGenUtility.HardcodedSignalWithQuestID("dropoffShipThing.Destroyed");
-            //Noble specific signals
             string nobleMoodTreshhold = QuestGenUtility.HardcodedSignalWithQuestID("nobles.BadMood");
-            //Failure Quest Parts
+            //**Failure Quest Parts
+
             //Mood
             var questPart_MoodBelow = new QuestPart_MoodBelow();
             questPart_MoodBelow.inSignalEnable = QuestGen.slate.Get<string>("inSignal");
@@ -132,11 +153,15 @@ namespace VFEEmpire
             questPart_MoodBelow.minTicksBelowThreshold = 40000;
             questPart_MoodBelow.outSignalsCompleted.Add(nobleMoodTreshhold);
             quest.AddPart(questPart_MoodBelow);
+            slate.Set("lodgersMoodThreshold", questPart_MoodBelow.threshold);
+            slate.Set("lodgers", lodgers);
 
             //All exit fail conditions
+            //These apply to all except dying which only applies to nobles
             var questPart_LodgerLeave = new QuestPart_LodgerLeave()
             {
                 pawns = lodgers,
+                pawnsCantDie = nobles,
                 inSignalEnable = QuestGen.slate.Get<string>("inSignal"),
                 inSignalArrested = lodgerArrestedSignal,
                 inSignalDestroyed = lodgerDestroyedSignal,
@@ -157,6 +182,14 @@ namespace VFEEmpire
                 mapParent = map.Parent,
                 signalListenMode = QuestPart.SignalListenMode.Always
             };
+            quest.AddPart(questPart_LodgerLeave);
+
+            //**Pawns Arrive
+            //Run the dropoff script
+            var dropOff = DefDatabase<QuestScriptDef>.GetNamed("Util_TransportShip_DropOff");
+            slate.Set("contents", lodgers);
+            slate.Set("owningFaction", empire);
+            dropOff.root.Run();
 
             //Lodgers join
             var joinPlayer = new QuestPart_JoinPlayer();
@@ -166,12 +199,8 @@ namespace VFEEmpire
             joinPlayer.mapParent = map.Parent;
             quest.AddPart(joinPlayer);
 
-            //Run the dropoff script
-            var dropOff = DefDatabase<QuestScriptDef>.GetNamed("Util_TransportShip_DropOff");
-            slate.Set("contents", lodgers);
-            slate.Set("owningFaction", empire);
-            dropOff.root.Run();
 
+            //**Pawns Leave
             string anyLeave = QuestGen.GenerateNewSignal("lodgerLeave", true);
             quest.AnySignal(new List<string>
             {
@@ -182,15 +211,15 @@ namespace VFEEmpire
                 questPart_LodgerLeave.outSignalShuttleDestroyed,
                 questPart_LodgerLeave.outSignalLast_Kidnapped,
             }, null, new List<string> { anyLeave });
-            //Guest Leave
+            
             quest.Delay(durationTicks, delegate
             {
-                Action outAction = () => quest.Letter(LetterDefOf.PositiveEvent, text: "[lodgersLeavingLetterText]", label: "[lodgersLeavingLetterLabel]");
+                Action outAction = () => quest.Letter(LetterDefOf.PositiveEvent, text: "[LetterLabelShuttleArrived]", label: "[LetterTextShuttleArrived]");
                 quest.SignalPassWithFaction(empire, null, outAction);
                 var utilPickup = DefDatabase<QuestScriptDef>.GetNamed("Util_TransportShip_Pickup");
                 slate.Set("requiredPawns", lodgers);
                 slate.Set("leaveDelayTicks", 60000*3);
-                slate.Set("sendAwayIfAllDespawned", true);
+                slate.Set("sendAwayIfAllDespawned", lodgers);
                 slate.Set("leaveImmediatelyWhenSatisfied", true);
                 utilPickup.root.Run();
                 //If failed and leave **this needs to move to its own signal pretty sure
@@ -214,47 +243,51 @@ namespace VFEEmpire
 
                         });*/
             //Fail signal recieveds
-            FailResults(quest, questPart_LodgerLeave.outSignalArrested_LeaveColony, "[lodgerArrestedLeaveMapLetterLabel]", "[lodgerArrestedLeaveMapLetterText]", nobles);
-            FailResults(quest, questPart_LodgerLeave.outSignalDestroyed_LeaveColony, "[lodgerDiedLeaveMapLetterLabel]", "[lodgerDiedLeaveMapLetterText]", nobles);
-            FailResults(quest, questPart_LodgerLeave.outSignalSurgeryViolation_LeaveColony, "[lodgerSurgeryVioLeaveMapLetterLabel]", "[lodgerSurgeryVioLeaveMapLetterText]", nobles);
-            FailResults(quest, questPart_LodgerLeave.outSignalLast_Banished, "[lodgerBanishedLeaveMapLetterLabel]", "[lodgerBanishedLeaveMapLetterText]", nobles);
-            FailResults(quest, questPart_LodgerLeave.outSignalLast_Kidnapped, "[lodgerKidnappedLeaveMapLetterLabel]", "[lodgerKidnappedLeaveMapLetterText]", nobles);
-            FailResults(quest, questPart_LodgerLeave.outSignalLast_LeftMapAllNotHealthy, "[lodgerLeftNotAllHealthyLeaveMapLetterLabel]", "[lodgerLeftNotAllHealthyLetterText]", nobles);
-            //Shuttle fail
+            FailResults(quest, questPart_LodgerLeave.outSignalArrested_LeaveColony, "[lodgerArrestedLeaveMapLetterLabel]", "[lodgerArrestedLeaveMapLetterText]", nobles,-honor);
+            FailResults(quest, questPart_LodgerLeave.outSignalDestroyed_LeaveColony, "[lodgerDiedLeaveMapLetterLabel]", "[lodgerDiedLeaveMapLetterText]", nobles, -honor);
+            FailResults(quest, questPart_LodgerLeave.outSignalSurgeryViolation_LeaveColony, "[lodgerSurgeryVioLeaveMapLetterLabel]", "[lodgerSurgeryVioLeaveMapLetterText]", nobles, -honor);
+            FailResults(quest, questPart_LodgerLeave.outSignalLast_Banished, "[lodgerBanishedLeaveMapLetterLabel]", "[lodgerBanishedLeaveMapLetterText]", nobles, -honor);
+            FailResults(quest, questPart_LodgerLeave.outSignalLast_Kidnapped, "[lodgerKidnappedLeaveMapLetterLabel]", "[lodgerKidnappedLeaveMapLetterText]", nobles, -honor);
+            FailResults(quest, questPart_LodgerLeave.outSignalLast_LeftMapAllNotHealthy, "[lodgerLeftNotAllHealthyLetterLabel]", "[lodgerLeftNotAllHealthyLetterText]", nobles, -honor);
+            FailResults(quest, nobleMoodTreshhold, "[nobleUnhappyLetterLabel]", "[nobleUnhappyLetterText]", nobles, -honor);
             quest.SignalPass(() =>
             {
                 quest.Letter(LetterDefOf.NegativeEvent, questPart_LodgerLeave.outSignalShuttleDestroyed, label: "[ShuttleDestroyedLabel]", text: "[ShuttleDestroyedText]");
                 //Good will loss to match royal ascent
-                quest.End(QuestEndOutcome.Fail, goodwillChangeAmount: 50, empire);
+                quest.End(QuestEndOutcome.Fail, goodwillChangeAmount: -50, empire);
             }, questPart_LodgerLeave.outSignalShuttleDestroyed);
-            //success
+            //**success
             quest.SignalPass(() =>
             {
                 //Dont need this as signal pass pretty sure as honor reward will be via quest reward
                 //However just in case leaving
-                quest.End(QuestEndOutcome.Success);
+                quest.Letter(LetterDefOf.PositiveEvent, questPart_LodgerLeave.outSignalLast_LeftMapAllHealthy, text: "[lodgersLeavingLetterText]", label: "[lodgersLeavingLetterLabel]");
+                quest.End(QuestEndOutcome.Success,inSignal: questPart_LodgerLeave.outSignalLast_LeftMapAllHealthy);
             }, questPart_LodgerLeave.outSignalLast_LeftMapAllHealthy);
             //Set slates for descriptions
             slate.Set<int>("nobleCount", nobleCount, false);
-            slate.Set<int>("lodgersCount", lodgers.Count, false);
-            slate.Set<Pawn>("asker", bestNoble, false);
-            slate.Set<Map>("map", map, false);
+            slate.Set<int>("nobleCountLessOne", nobleCount-1, false);
+            slate.Set<int>("lodgerCount", lodgers.Count, false);           
             slate.Set<int>("questDurationTicks", durationTicks, false);
-            slate.Set<Faction>("faction", empire, false);
+            
 
         }
-        private void FailResults(Quest quest, string onSignal, string letterLabel, string letterText, IEnumerable<Pawn> pawns)
+        private void FailResults(Quest quest, string onSignal, string letterLabel, string letterText, IEnumerable<Pawn> pawns, int honorLost)
         {
             quest.Letter(LetterDefOf.NegativeEvent, onSignal, text: letterText, label: letterLabel);
             quest.SignalPass(() =>
             {
-
-                var reward = quest.PartsListForReading.FirstOrDefault(x => x is QuestPart_GiveRoyalFavor) as QuestPart_GiveRoyalFavor;
-                if (reward == null) { return; }
                 var pawn = quest.AccepterPawn;
-                pawn.royalty.GainFavor(Faction.OfEmpire, -reward.amount);
-                //*Todo create social memory for -100 opinion
-                quest.AddMemoryThought(pawns, ThoughtDefOf.DebugBad, onSignal, pawn);
+
+                var loseHonor = new QuestPart_LoseHonor
+                {
+                    giveToAccepter = true,
+                    honor = honorLost,
+                    faction = Faction.OfEmpire,
+                    inSignal = onSignal
+                };
+                quest.AddPart(loseHonor);
+                quest.AddMemoryThought(pawns, InternalDefOf.VFEE_BadVisit, onSignal, pawn);
                 quest.End(QuestEndOutcome.Fail,-5,Faction.OfEmpire, inSignal: onSignal);
             },onSignal);
         }
@@ -281,7 +314,9 @@ namespace VFEEmpire
             }
             var forbidTrait = new List<TraitDef> { TraitDefOf.NaturalMood }; //No mood affecting trait its messy either way
             var genRequest = new PawnGenerationRequest(pawnKind, empire, canGeneratePawnRelations: false, fixedTitle: titleDef, prohibitedTraits: forbidTrait, allowAddictions:false);
-            return PawnGenerator.GeneratePawn(genRequest);
+            var pawn = PawnGenerator.GeneratePawn(genRequest);
+            Find.WorldPawns.PassToWorld(pawn, PawnDiscardDecideMode.Decide);
+            return pawn;
         }
         
 
@@ -295,7 +330,7 @@ namespace VFEEmpire
         {
             {new CurvePoint(0,1f) },
             {new CurvePoint(200,2f) },
-            {new CurvePoint(500,5f) }
+            {new CurvePoint(1000,5f) }
         };
     }
 }

@@ -69,6 +69,19 @@
         <baseMoodEffect>-10</baseMoodEffect>
       </li>
     </stages>
-  </ThoughtDef>
-  
+	</ThoughtDef>
+	<ThoughtDef>
+		<defName>VFEE_BadVisit</defName>
+		<thoughtClass>VFEEmpire.Thought_BadVisit</thoughtClass>
+		<durationDays>120</durationDays>
+		<stackLimit>300</stackLimit>
+		<stackLimitForSameOtherPawn>2</stackLimitForSameOtherPawn>
+		<stages>
+		  <li>
+			<label>terrible visit</label>
+			<description>I had a terrible time with that host.</description>
+			<baseOpinionOffset>-100</baseOpinionOffset>
+		  </li>
+		</stages>
+	</ThoughtDef>
 </Defs>

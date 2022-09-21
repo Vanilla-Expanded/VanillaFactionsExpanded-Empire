@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace VFEEmpire
 {
-    public class ThoughtWorker_BadVisit : Thought_MemorySocial
+    public class Thought_BadVisit : Thought_MemorySocial
     {
         public override bool ShouldDiscard => expireTick > Find.TickManager.TicksGame || base.ShouldDiscard;
         private float AgePct

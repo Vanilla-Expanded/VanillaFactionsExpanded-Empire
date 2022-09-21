@@ -10,10 +10,8 @@ namespace VFEEmpire
 {
     public class QuestPart_LodgerLeave : QuestPartActivable
     {
-        public override void Notify_QuestSignalReceived(Signal signal)
+        protected override void ProcessQuestSignal(Signal signal)
         {
-            base.Notify_QuestSignalReceived(signal);
-
             //Thing
             if (signal.tag == inSignalShuttleDestroyed)
             {
@@ -25,9 +23,9 @@ namespace VFEEmpire
                 return;
             }
 
-            if (signal.tag == inSignalDestroyed)
+            if (signal.tag == inSignalDestroyed && pawnsCantDie.Contains(pawn))
             {
-                pawns.Remove(pawn);
+                pawnsCantDie.Remove(pawn);
                 Find.SignalManager.SendSignal(new Signal(outSignalDestroyed_LeaveColony, signal.args));
             }
             if (signal.tag == inSignalArrested)
@@ -38,12 +36,12 @@ namespace VFEEmpire
             if (signal.tag == inSignalLeftMap)
             {
                 pawns.Remove(pawn);
-                if (pawn.Destroyed || pawn.InMentalState || pawn.health.hediffSet.BleedRateTotal > 0.001f)
+                if (pawn.Destroyed || pawn.InMentalState || pawn.health.hediffSet.BleedRateTotal > 0.001f && pawnsCantDie.Contains(pawn))
                 {
                     pawnsLeftUnhealthy++;
                 }
-                int downed = pawns.Count((Pawn p) => p.Downed);
-                if (pawns.Count - downed <= 0)
+                int downed = pawnsCantDie.Count((Pawn p) => p.Downed);
+                if (pawnsCantDie.Count - downed <= 0)
                 {
                     if (pawnsLeftUnhealthy > 0 || downed > 0)
                     {
@@ -73,8 +71,34 @@ namespace VFEEmpire
                 Find.SignalManager.SendSignal(new Signal(outSignalSurgeryViolation_LeaveColony, signal.args));
             }
         }
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Values.Look(ref inSignalDestroyed, "inSignalDestroyed");
+            Scribe_Values.Look(ref inSignalArrested, "inSignalArrested");
+            Scribe_Values.Look(ref inSignalSurgeryViolation, "inSignalSurgeryViolation");
+            Scribe_Values.Look(ref inSignalLeftMap, "inSignalLeftMap");
+            Scribe_Values.Look(ref inSignalKidnapped, "inSignalKidnapped");
+            Scribe_Values.Look(ref inSignalBanished, "inSignalBanished");
+            Scribe_Values.Look(ref inSignalShuttleDestroyed, "inSignalShuttleDestroyed");
 
+            Scribe_Values.Look(ref outSignalDestroyed_LeaveColony, "outSignalDestroyed_LeaveColony");
+            Scribe_Values.Look(ref outSignalArrested_LeaveColony, "outSignalArrested_LeaveColony");
+            Scribe_Values.Look(ref outSignalSurgeryViolation_LeaveColony, "outSignalSurgeryViolation_LeaveColony");
+            Scribe_Values.Look(ref outSignalLast_LeftMapAllNotHealthy, "outSignalLast_LeftMapAllNotHealthy");
+            Scribe_Values.Look(ref outSignalLast_Banished, "outSignalLast_Banished");
+            Scribe_Values.Look(ref outSignalLast_LeftMapAllHealthy, "outSignalLast_LeftMapAllHealthy");
+            Scribe_Values.Look(ref outSignalLast_Kidnapped, "outSignalLast_Kidnapped");
+            Scribe_Values.Look(ref outSignalShuttleDestroyed, "outSignalShuttleDestroyed");
+            Scribe_Values.Look(ref pawnsLeftUnhealthy, "pawnsLeftUnhealthy");
+
+            Scribe_References.Look(ref faction, "faction");
+            Scribe_References.Look(ref mapParent, "mapParent");
+            Scribe_Collections.Look(ref pawns, "pawns", LookMode.Reference);
+            Scribe_Collections.Look(ref pawnsCantDie, "pawns", LookMode.Reference);
+        }
         public List<Pawn> pawns;
+        public List<Pawn> pawnsCantDie;
         public string inSignalDestroyed;
         public string inSignalArrested;
         public string inSignalSurgeryViolation;
