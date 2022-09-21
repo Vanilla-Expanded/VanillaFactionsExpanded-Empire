@@ -55,6 +55,7 @@
     <Compile Include="HarmonyPatches\Patch_Conceit.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleIcons.cs" />
     <Compile Include="QuestNode\Questnode_Root_NobleVisit.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_ThoughtAccepterOther.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_LoseHonor.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_LodgerLeave.cs" />
     <Compile Include="Things\DropPodIncoming_Building.cs" />

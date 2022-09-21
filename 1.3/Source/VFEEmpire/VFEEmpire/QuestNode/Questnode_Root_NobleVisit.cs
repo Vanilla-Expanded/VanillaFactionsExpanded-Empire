@@ -141,7 +141,7 @@ namespace VFEEmpire
             string lodgerSurgeyViolation = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.SurgeryViolation");
             string lodgerLeftMap = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.LeftMap");
             string lodgerBanished = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Banished");
-            string shuttleDestroyed = QuestGenUtility.HardcodedSignalWithQuestID("dropoffShipThing.Destroyed");
+            string shuttleDestroyed = QuestGenUtility.HardcodedSignalWithQuestID("pickupShipThing.Destroyed");
             string nobleMoodTreshhold = QuestGenUtility.HardcodedSignalWithQuestID("nobles.BadMood");
             //**Failure Quest Parts
 
@@ -222,10 +222,11 @@ namespace VFEEmpire
                 slate.Set("sendAwayIfAllDespawned", lodgers);
                 slate.Set("leaveImmediatelyWhenSatisfied", true);
                 utilPickup.root.Run();
+                
                 //If failed and leave **this needs to move to its own signal pretty sure
                 quest.Leave(lodgers, anyLeave, wakeUp: true);
             }, null, null, null, false, null, null, false, "GuestsDepartsIn".Translate(), "GuestsDepartsOn".Translate(), "QuestDelay", false, QuestPart.SignalListenMode.OngoingOnly);
-
+            
             //leave fail
             //Remarking out right now because to make this work I'll need a new quest part to leave, then start a new lord to board the shuttle. Doable but a lot to test right now
             /*            quest.Delay(durationTicks, () =>
@@ -252,18 +253,27 @@ namespace VFEEmpire
             FailResults(quest, nobleMoodTreshhold, "[nobleUnhappyLetterLabel]", "[nobleUnhappyLetterText]", nobles, -honor);
             quest.SignalPass(() =>
             {
-                quest.Letter(LetterDefOf.NegativeEvent, questPart_LodgerLeave.outSignalShuttleDestroyed, label: "[ShuttleDestroyedLabel]", text: "[ShuttleDestroyedText]");
+                Action outAction = () => quest.Letter(LetterDefOf.NegativeEvent, questPart_LodgerLeave.outSignalShuttleDestroyed, label: "[ShuttleDestroyedLabel]", text: "[ShuttleDestroyedText]");
+                quest.SignalPassWithFaction(empire, null, outAction);                
                 //Good will loss to match royal ascent
                 quest.End(QuestEndOutcome.Fail, goodwillChangeAmount: -50, empire);
             }, questPart_LodgerLeave.outSignalShuttleDestroyed);
             //**success
+            string pickupSuccess = QuestGenUtility.HardcodedSignalWithQuestID("pickupShipThing.SentSatisfied");
+            string leftHealthy = QuestGenUtility.HardcodedSignalWithQuestID("leftHealthy");
+            quest.AnySignal(new List<string>
+            {
+                questPart_LodgerLeave.outSignalLast_LeftMapAllHealthy,
+                pickupSuccess
+            }, outSignals: new List<string> { leftHealthy });
             quest.SignalPass(() =>
             {
                 //Dont need this as signal pass pretty sure as honor reward will be via quest reward
                 //However just in case leaving
-                quest.Letter(LetterDefOf.PositiveEvent, questPart_LodgerLeave.outSignalLast_LeftMapAllHealthy, text: "[lodgersLeavingLetterText]", label: "[lodgersLeavingLetterLabel]");
-                quest.End(QuestEndOutcome.Success,inSignal: questPart_LodgerLeave.outSignalLast_LeftMapAllHealthy);
-            }, questPart_LodgerLeave.outSignalLast_LeftMapAllHealthy);
+                Action outAction = () => quest.Letter(LetterDefOf.PositiveEvent, leftHealthy, text: "[lodgersLeavingLetterText]", label: "[lodgersLeavingLetterLabel]");
+                quest.SignalPassWithFaction(empire, null, outAction);                
+                quest.End(QuestEndOutcome.Success,inSignal: leftHealthy);
+            }, leftHealthy);
             //Set slates for descriptions
             slate.Set<int>("nobleCount", nobleCount, false);
             slate.Set<int>("nobleCountLessOne", nobleCount-1, false);
@@ -287,7 +297,13 @@ namespace VFEEmpire
                     inSignal = onSignal
                 };
                 quest.AddPart(loseHonor);
-                quest.AddMemoryThought(pawns, InternalDefOf.VFEE_BadVisit, onSignal, pawn);
+                var addThought = new QuestPart_ThoughtAccepterOther
+                {
+                    pawns = pawns.ToList(),
+                    inSignal = onSignal,
+                    def = InternalDefOf.VFEE_BadVisit
+                };
+                quest.AddPart(addThought);
                 quest.End(QuestEndOutcome.Fail,-5,Faction.OfEmpire, inSignal: onSignal);
             },onSignal);
         }
