@@ -54,10 +54,17 @@
     <Compile Include="Comps\HediffComp_RandomDamage.cs" />
     <Compile Include="HarmonyPatches\Patch_Conceit.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleIcons.cs" />
+    <Compile Include="QuestNode\Questnode_Root_GrandBall.cs" />
     <Compile Include="QuestNode\Questnode_Root_NobleVisit.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_RequirementsToAcceptBallroom.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_ThoughtAccepterOther.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_LoseHonor.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_LodgerLeave.cs" />
+    <Compile Include="Rituals\Commands\Command_GrandBall.cs" />
+    <Compile Include="Rituals\LordJob\LordJob_GrandBall.cs" />
+    <Compile Include="Rituals\LordJob\LordToil\LordToil_GrandBall_Dance.cs" />
+    <Compile Include="Rituals\LordJob\LordToil\LordToil_GrandBall_Wait.cs" />
+    <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_GrandBall.cs" />
     <Compile Include="Things\DropPodIncoming_Building.cs" />
     <Compile Include="GameComponent_Empire.cs" />
     <Compile Include="HarmonyPatches\Patch_CompRefuelable_ConsumeFuel.cs" />

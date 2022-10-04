@@ -3,5 +3,6 @@
     <VFEE.OR>OR</VFEE.OR>
     <VFEE.GalleryRequirements>Gallery requirements</VFEE.GalleryRequirements>
     <VFEE.BallroomRequirements>Ballroom requirements</VFEE.BallroomRequirements>
+	<VFEE.BallroomRequirements.Unmet>Ballroom requirements unmet for: {0}</VFEE.BallroomRequirements.Unmet>
     <VFEE.CourtRequirements>Noble court requirements</VFEE.CourtRequirements>
 </LanguageData>

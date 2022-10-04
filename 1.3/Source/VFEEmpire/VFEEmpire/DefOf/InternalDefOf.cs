@@ -1,4 +1,6 @@
 ﻿using RimWorld;
+using Verse;
+using Verse.AI;
 
 namespace VFEEmpire;
 
@@ -9,6 +11,12 @@ public static class InternalDefOf
 
     public static ThoughtDef VFEE_BadVisit;
 
+    public static FactionDef VFEE_Deserters;
+
+    public static DutyDef VFEE_BallLead;
+    public static DutyDef VFEE_BallPartner;
+
+    public static RitualOutcomeEffectDef GrandBallOutcome;
     static InternalDefOf()
     {
         DefOfHelper.EnsureInitializedInCtor(typeof(InternalDefOf));

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RimWorld;
+using RimWorld.QuestGen;
 using RimWorld.Planet;
 using Verse;
 
@@ -101,4 +102,42 @@ public static class EmpireUtility
     };
 
     public static TitheInfo Tithe(this Settlement settlement) => WorldComponent_Vassals.Instance.GetTitheInfo(settlement);
+
+    public static Pawn GenerateNoble(RoyalTitleDef titleDef)
+    {
+        var empire = Faction.OfEmpire;
+        //See if theres an existing pawn to grab instead of creating new one
+        var existing = QuestGen_Pawns.ExistingUsablePawns(new QuestGen_Pawns.GetPawnParms
+        {
+            mustBeOfFaction = Faction.OfEmpire,
+            mustBeWorldPawn = true,
+            mustHaveRoyalTitleInCurrentFaction = true,
+            seniorityRange = new FloatRange(titleDef.seniority, titleDef.seniority)
+        });
+        if (!existing.EnumerableNullOrEmpty() && Rand.Bool)
+        {
+            return existing.RandomElement();
+        }
+        var pawnKind = DefDatabase<PawnKindDef>.AllDefsListForReading.FirstOrDefault(x => x.titleRequired == titleDef);
+        if (pawnKind == null)
+        {
+            pawnKind = PawnKindDefOf.Empire_Common_Lodger;
+        }
+        var forbidTrait = new List<TraitDef> { TraitDefOf.NaturalMood }; //No mood affecting trait its messy either way
+        var genRequest = new PawnGenerationRequest(pawnKind, empire, canGeneratePawnRelations: false, fixedTitle: titleDef, prohibitedTraits: forbidTrait, allowAddictions: false);
+        var pawn = PawnGenerator.GeneratePawn(genRequest);
+        Find.WorldPawns.PassToWorld(pawn, PawnDiscardDecideMode.Decide);
+        return pawn;
+    }
+    public static int TotalFavorCost(this RoyalTitle title)
+    {
+        int totalHonor = title.pawn.royalty.GetFavor(Faction.OfEmpire);
+        var previous = title.def.GetPreviousTitle(Faction.OfEmpire);
+        while (previous != null)
+        {
+            totalHonor += previous.favorCost;
+            previous = previous.GetPreviousTitle(Faction.OfEmpire);
+        }
+        return totalHonor;
+    }
 }
