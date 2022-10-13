@@ -38,11 +38,17 @@ namespace VFEEmpire
                 action(participants.Participants);
                 return true;
             };
+            int instruments = job.ballRoom.ContainedAndAdjacentThings.Count(x => x is Building_MusicalInstrument);
+            int nonNobles = 0;
             Func<Pawn, bool, bool, bool> filter = (Pawn pawn, bool voluntary, bool allowOtherIdeos) =>
             {
                 if (!pawn.royalty?.HasAnyTitleIn(Faction.OfEmpire) ?? true)
                 {
-                    return false;
+                    if (nonNobles >= instruments)
+                    {
+                        return false;
+                    }
+                    nonNobles++;
                 }
                 var lord = pawn.GetLord();
                 return (lord == null || !(lord.LordJob is LordJob_Ritual)) && !pawn.IsPrisonerOfColony && !pawn.RaceProps.Animal;

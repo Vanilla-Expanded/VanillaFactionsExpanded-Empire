@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <JobDef>
+    <defName>VFEE_WaltzGoTo</defName>
+    <driverClass>VFEEmpire.JobDriver_WaltzGoto</driverClass>
+    <reportString>dancing with TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+   <JobDef>
+    <defName>VFEE_WaltzDip</defName>
+    <driverClass>VFEEmpire.JobDriver_WaltzDip</driverClass>
+	<alwaysShowWeapon>true</alwaysShowWeapon>
+    <reportString>dancing with TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+
+
+</Defs>

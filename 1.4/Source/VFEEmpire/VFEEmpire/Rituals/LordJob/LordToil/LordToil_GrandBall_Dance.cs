@@ -10,9 +10,10 @@ namespace VFEEmpire
 {
     public class LordToil_GrandBall_Dance : LordToil_Wait
     {
-      
-        public LordToil_GrandBall_Dance() : base(true)
+        public IntVec3 spot;
+        public LordToil_GrandBall_Dance(IntVec3 spot) : base(true)
         {
+            this.spot = spot;
         }
         public LordToilData_Gathering Data
         {
@@ -25,6 +26,25 @@ namespace VFEEmpire
         {
             return ThinkTreeDutyHook.HighPriority;
         }
+        public override void LordToilTick()
+        {
+            var ownedPawns = lord.ownedPawns;
+            for (int i = 0; i < ownedPawns.Count; i++)
+            {
+                if (GatheringsUtility.InGatheringArea(ownedPawns[i].Position, spot, Map))
+                {
+                    if (!Data.presentForTicks.ContainsKey(ownedPawns[i]))
+                    {
+                        Data.presentForTicks.Add(ownedPawns[i], 0);
+                    }
+                    Dictionary<Pawn, int> presentForTicks = Data.presentForTicks;
+                    Pawn key = ownedPawns[i];
+                    int num = presentForTicks[key];
+                    presentForTicks[key] = num + 1;
+                }
+            }
+        }
+
         public override void UpdateAllDuties()
         {
             base.UpdateAllDuties();
@@ -36,22 +56,29 @@ namespace VFEEmpire
             }
             foreach (var pawn in lord.ownedPawns)
             {
-                if (ritual.leadPartner.ContainsKey(pawn))
+                if (ritual.nobles.Contains(pawn))
                 {
-                    pawn.mindState.duty = new PawnDuty(InternalDefOf.VFEE_BallLead, ritual.Spot, ritual.leadPartner.TryGetValue(pawn));
-                }
-                else if (ritual.leadPartner.Values.Any(x => x == pawn))
-                {
-                    pawn.mindState.duty = new PawnDuty(InternalDefOf.VFEE_BallPartner, ritual.Spot);
+                    if (ritual.leadPartner.ContainsKey(pawn))
+                    {
+                        pawn.mindState.duty = new PawnDuty(InternalDefOf.VFEE_BallLead, ritual.Spot, ritual.leadPartner.TryGetValue(pawn));
+                    }
+                    else if (ritual.leadPartner.Values.Any(x => x == pawn))
+                    {
+                        pawn.mindState.duty = new PawnDuty(InternalDefOf.VFEE_BallPartner, ritual.Spot);
+                    }
+                    else
+                    {
+                        var spectate = new PawnDuty(DutyDefOf.Spectate, ritual.Spot);
+                        spectate.spectateRectAllowedSides = SpectateRectSide.All;
+                        spectate.spectateDistance = new IntRange(5, 6);
+                        spectate.spectateRectPreferredSide = SpectateRectSide.Horizontal;
+                        spectate.spectateRect = CellRect.CenteredOn(ritual.Spot, 0);
+                        pawn.mindState.duty = spectate;
+                    }
                 }
                 else
                 {
-                    var spectate = new PawnDuty(DutyDefOf.Spectate, ritual.Spot);
-                    spectate.spectateRectAllowedSides = SpectateRectSide.All;
-                    spectate.spectateDistance = new IntRange(5, 6);
-                    spectate.spectateRectPreferredSide = SpectateRectSide.Horizontal;
-                    spectate.spectateRect = CellRect.CenteredOn(ritual.Spot, 0);
-                    pawn.mindState.duty = spectate;
+                    pawn.mindState.duty = new PawnDuty(InternalDefOf.VFEE_PlayInstrument, ritual.Spot);
                 }
                 pawn.jobs?.CheckForJobOverride();
             }

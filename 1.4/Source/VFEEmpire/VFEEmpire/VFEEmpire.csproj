@@ -298,8 +298,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\JobDriver\JobDriver_WaltzGoto.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_WaltzDip.cs" />
     <Compile Include="AI\JobGiver\JobGiver_AcceptTitle.cs" />
     <Compile Include="AI\JobGiver\JobGiver_SpectateClose.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_Waltz.cs" />
     <Compile Include="Comps\CompAbilityEffect_StartBestowing.cs" />
     <Compile Include="Comps\CompProperties_AbilityStartBestower.cs" />
     <Compile Include="Comps\CompResearchRefresh.cs" />
@@ -309,6 +312,7 @@
     <Compile Include="HarmonyPatches\Patch_RoyalTitleIcons.cs" />
     <Compile Include="QuestNode\Questnode_Root_GrandBall.cs" />
     <Compile Include="QuestNode\Questnode_Root_NobleVisit.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_RitualOutcomeEffects.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_RequirementsToAcceptBallroom.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_ThoughtAccepterOther.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_LoseHonor.cs" />
@@ -358,7 +362,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abilities\" />
-    <Folder Include="AI\JobDriver\" />
     <Folder Include="Rituals\TargetFilters\" />
   </ItemGroup>
   <ItemGroup>
