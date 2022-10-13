@@ -29,7 +29,7 @@ public class CompAbilityEffect_StartBestowing : CompAbilityEffect_StartRitualOnP
 				return true;
             }
         }
-		return AbilityUtility.ValidateNoMentalState(pawn, throwMessages) && AbilityUtility.ValidateCanWalk(pawn, throwMessages);        
+		return AbilityUtility.ValidateNoMentalState(pawn, throwMessages,null) && AbilityUtility.ValidateCanWalk(pawn, throwMessages,null);        
     }
     public override Window ConfirmationDialog(LocalTargetInfo target, Action confirmAction)
     {

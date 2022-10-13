@@ -7,7 +7,7 @@ namespace VFEEmpire
 {
     public class RitualRoleTitled : RitualRole
     {
-        public override bool AppliesToPawn(Pawn p, out string reason, LordJob_Ritual ritual = null, RitualRoleAssignments assignments = null, Precept_Ritual precept = null, bool skipReason = false)
+        public override bool AppliesToPawn(Pawn p, out string reason,TargetInfo target, LordJob_Ritual ritual = null, RitualRoleAssignments assignments = null, Precept_Ritual precept = null, bool skipReason = false)
         {
             reason = "";
             if (!p.royalty?.HasAnyTitleIn(Find.FactionManager.OfEmpire) ?? false)
