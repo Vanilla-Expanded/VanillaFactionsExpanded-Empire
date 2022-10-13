@@ -52,7 +52,7 @@ namespace VFEEmpire
                 int count = 0;
                 foreach (var noble in nobles)
                 {
-                    if (assignments.TryAssign(noble, assignments.GetRole("royals"), out var fail))
+                    if (assignments.TryAssign(noble, assignments.GetRole("royals"),null, out var fail))
                     {
                         assignments.AllPawns.Add(noble);
                         var lord = noble.GetLord();
@@ -87,7 +87,7 @@ namespace VFEEmpire
             {
                 foreach (var pawn in storedLords.Keys)
                 {
-                    var lord = storedLords.GetValueOrDefault(pawn);                    
+                    var lord = storedLords.TryGetValue(pawn);                    
                     //The reason for lord stuff is I found in testing that the order people get put in can sometimes create problems.
                     //Eg trade caravan no ones duties would get updated until the trader gets added. Creating thinknode errors
                     //So I want to add them back as a list all at once so it avoids that issue.
