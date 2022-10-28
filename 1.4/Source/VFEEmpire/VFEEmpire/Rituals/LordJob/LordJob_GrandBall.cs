@@ -8,7 +8,6 @@ using Verse.AI.Group;
 namespace VFEEmpire
 {
 	//Todo list
-	//QuestPart_RitualOutcomeEffects finish
 	//Starting Positions before start dance so pawn offset will work
 	// -Add to duty def most likely as seperate job rather then do a new transition. New transition if thats easier which it might be
 	//No support for FX or music right now as not using LordJob_ritual ticking. Add if wanted.
@@ -67,6 +66,7 @@ namespace VFEEmpire
 					if (!PawnTagSet(pawn, "Arrived"))
                     {
 						all = false;
+						break;
 					}
                 }
 				return all;
@@ -82,7 +82,7 @@ namespace VFEEmpire
 		public override StateGraph CreateGraph()
 		{
 			var graph = new StateGraph();
-			outcome = (RitualOutcomeEffectWorker_GrandBall)InternalDefOf.GrandBallOutcome.GetInstance();
+			outcome = (RitualOutcomeEffectWorker_GrandBall)InternalDefOf.VFEE_GrandBall_Outcome.GetInstance();
 
 			var wait_ForSpawned = new LordToil_Wait();
 			graph.AddToil(wait_ForSpawned);

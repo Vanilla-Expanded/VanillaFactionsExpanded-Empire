@@ -84,6 +84,7 @@
     <defName>VFEE_Apparel_AbsolverHelmet</defName>
     <label>absolver helmet</label>
     <description>text.todo</description>
+	<smeltable>false</smeltable>
     <techLevel>Spacer</techLevel>
     <graphicData>
       <texPath>AbsolverArmor/AbsolverHelmet</texPath>
@@ -135,6 +136,7 @@
     <defName>VFEE_Apparel_DeserterHelmet</defName>
     <label>deserter helmet</label>
     <description>text.todo</description>
+	<smeltable>false</smeltable>
     <graphicData>
       <texPath>DesertArmor/DeserterHelmet</texPath>
       <graphicClass>Graphic_Single</graphicClass>

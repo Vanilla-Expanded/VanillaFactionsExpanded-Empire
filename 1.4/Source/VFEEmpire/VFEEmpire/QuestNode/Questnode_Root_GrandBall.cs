@@ -82,7 +82,6 @@ namespace VFEEmpire
                 //raid arrives half way through ritual
                 quest.Delay(10000, () => 
                 {
-                    
                     var raiders = PawnGroupMakerUtility.GeneratePawns(new PawnGroupMakerParms
                     {
                         faction = deserters,
@@ -109,10 +108,10 @@ namespace VFEEmpire
                     quest.AssaultThings(map.Parent, raiders, deserters, nobles);
                     quest.Letter(LetterDefOf.ThreatBig, relatedFaction: deserters, lookTargets: raiders, label: "[raidArrivedLetterLabel]", text: "[raidArrivedLetterText]");
                 },ritualStarted);
-
             }
-            slate.Set("shuttleDelayTicks", durationTicks);            
-            slate.Set("title", bestNoble.royalty.HighestTitleWith(empire));
+            slate.Set("shuttleDelayTicks", durationTicks);
+            var bestTitle = bestNoble.royalty.HighestTitleWith(empire);
+            slate.Set("title", bestTitle);
             slate.Set("nobles", nobles);
             slate.Set("map", map, false);
             slate.Set("asker", bestNoble, false);
@@ -142,7 +141,16 @@ namespace VFEEmpire
             lodgers.AddRange(nobles);
             slate.Set("lodgers", lodgers);
 
-
+            //Delayed Reward Part
+            string outComeSignal = QuestGenUtility.HardcodedSignalWithQuestID("OUTCOME");
+            float initMarketValue = bestTitle.def.seniority * (raid ? 2 : 1) * Find.Storyteller.difficulty.EffectiveQuestRewardValueFactor * Rand.Range(0.85f,1.25f);
+            var questPart_DelayedRitualReward = new QuestPart_RitualOutcomeEffects
+            {
+                leadNoble = bestNoble,
+                inSignal = outComeSignal,
+                initMarkValue = initMarketValue,
+            };
+            quest.AddPart(questPart_DelayedRitualReward);
 
             //Bunch of signals here
             string lodgerArrestedSignal = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Arrested");

@@ -57,4 +57,13 @@
       </subNodes>
     </thinkNode>
   </DutyDef>
+   <DutyDef>
+    <defName>VFEE_PlayInstrument</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>     
+        <li Class="VFEEmpire.JobGiver_PlayInstrument"/>
+		<li Class="JobGiver_Idle"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
 </Defs>

@@ -5,6 +5,7 @@
     <defName>VFEE_Apparel_ArmorDeserter</defName>
     <label>deserter armor</label>
     <description>text.todo</description>
+	<smeltable>false</smeltable>
     <graphicData>
       <texPath>DesertArmor/VFE_DeserterArmor</texPath>
 	  <graphicClass>Graphic_Single</graphicClass>
@@ -90,6 +91,7 @@
     <defName>VFEE_Apparel_ArmorAbsolver</defName>
     <label>absolver armor</label>
     <description>text.todo</description>
+	<smeltable>false</smeltable>
     <graphicData>
       <texPath>AbsolverArmor/AbsolverArmor</texPath>
 	  <graphicClass>Graphic_Single</graphicClass>

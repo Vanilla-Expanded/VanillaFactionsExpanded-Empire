@@ -18,7 +18,7 @@
       </li>
       <li Class="CompProperties_Biocodable"/>
     </comps>
-    <smeltable>true</smeltable>
+    <smeltable>false</smeltable>
     <burnableByRecipe>true</burnableByRecipe>
     <thingCategories>
       <li>WeaponsMelee</li>

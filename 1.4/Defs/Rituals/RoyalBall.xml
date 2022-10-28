@@ -3,7 +3,7 @@
  
 
   <RitualOutcomeEffectDef>
-    <defName>VFEE_RoyalAddres_Outcome</defName>
+    <defName>VFEE_GrandBall_Outcome</defName>
     <description>Depending on ritual quality, participants will get between {MINMOOD} and {MAXMOOD} mood for {MOODDAYS} days.</description>
     <workerClass>VFEEmpire.RitualOutcomeEffectWorker_GrandBall</workerClass>
     <comps>

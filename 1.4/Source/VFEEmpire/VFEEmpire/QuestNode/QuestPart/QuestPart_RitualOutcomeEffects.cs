@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using RimWorld;
 using Verse;
+using UnityEngine;
 using RimWorld.Planet;
 using RimWorld.QuestGen;
 
@@ -15,14 +16,36 @@ namespace VFEEmpire
     {
         public override Slate GetSlate()
         {
-            throw new NotImplementedException();
+            Slate slate = new();
+            slate.Set("rewardGiver", leadNoble);
+            slate.Set("marketValueRange", MarketValueRange, false);
+            slate.Set("outcome", outcomeIndex);
+            return slate;
         }
-        public override QuestScriptDef QuestDef => throw new NotImplementedException();
-
+        public override QuestScriptDef QuestDef => InternalDefOf.VFEE_DelayedGrandBallOutcome;
+        public override bool CanAdd => outcomeIndex != -2;
+        private FloatRange MarketValueRange
+        {
+            get
+            {
+                FloatRange floatRange = new();
+                if (outcomeIndex > 0)
+                {
+                    floatRange.min = initMarkValue;
+                    floatRange.max = initMarkValue * outcomeIndex * 1.5f;
+                }
+                else
+                {
+                    floatRange.min = 0;
+                    floatRange.max = initMarkValue/2;
+                }
+                return floatRange;
+            }
+        }
         public override void Notify_QuestSignalReceived(Signal signal)
         {
-            base.Notify_QuestSignalReceived(signal);
-            if (signal.tag == outcomeSignal)
+            
+            if (signal.tag == inSignal)
             {
                 if (!signal.args.TryGetArg<int>("OUTCOME", out var outcome) )
                 {
@@ -30,6 +53,7 @@ namespace VFEEmpire
                 }
                 outcomeIndex = outcome;
             }
+            base.Notify_QuestSignalReceived(signal);
         }
         public override void Notify_PreCleanup()
         {
@@ -39,14 +63,15 @@ namespace VFEEmpire
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look(ref inSignal, "inSignal");
+            Scribe_Values.Look(ref initMarkValue, "initMarkValue");
             Scribe_Values.Look(ref outcomeIndex, "outcomeIndex");
             Scribe_Defs.Look(ref outcomeDef, "outcomeDef");
-
+            Scribe_References.Look(ref leadNoble, "leadNoble");
         }
         //Ritual outcome themselves are not exposable so storing index
 
-        public string outcomeSignal;
+        public float initMarkValue;
+        public Pawn leadNoble;
         public RitualOutcomeEffectDef outcomeDef;
         public int outcomeIndex;
 

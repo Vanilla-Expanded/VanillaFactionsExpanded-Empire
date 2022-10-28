@@ -54,7 +54,7 @@ namespace VFEEmpire
                 return (lord == null || !(lord.LordJob is LordJob_Ritual)) && !pawn.IsPrisonerOfColony && !pawn.RaceProps.Animal;
             };
             string okButtonText = "Begin".Translate();
-            var outcomeDef = InternalDefOf.GrandBallOutcome;
+            var outcomeDef = InternalDefOf.VFEE_GrandBall_Outcome;
             Find.WindowStack.Add(new Dialog_BeginRitual(header, label, null, job.target.ToTargetInfo(job.Map), job.Map, callBack, bestNoble, null, filter, okButtonText, outcome: outcomeDef, ritualName: label));
         }
     }

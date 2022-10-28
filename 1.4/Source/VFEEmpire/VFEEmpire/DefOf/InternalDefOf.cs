@@ -19,7 +19,8 @@ public static class InternalDefOf
     public static JobDef VFEE_WaltzGoTo;
     public static JobDef VFEE_WaltzDip;
 
-    public static RitualOutcomeEffectDef GrandBallOutcome;
+    public static RitualOutcomeEffectDef VFEE_GrandBall_Outcome;
+    public static QuestScriptDef VFEE_DelayedGrandBallOutcome;
     static InternalDefOf()
     {
         DefOfHelper.EnsureInitializedInCtor(typeof(InternalDefOf));

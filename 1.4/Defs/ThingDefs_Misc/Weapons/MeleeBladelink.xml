@@ -5,6 +5,7 @@
     <defName>VFEE_MeleeWeapon_ToxbladeBladelink</defName>
     <label>persona toxblade</label>
     <description>text.todo</description>
+	<smeltable>false</smeltable>
     <statBases>
       <MarketValue>2000</MarketValue>
       <Mass>2</Mass>

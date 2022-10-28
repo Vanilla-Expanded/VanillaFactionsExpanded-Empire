@@ -23,7 +23,7 @@ namespace VFEEmpire
             float quality = GetQuality(dance, progress);
             LookTargets lookTargets = jobRitual.selectedTarget;
             OutcomeChance outcome = GetOutcome(quality, dance);
-            QuestUtility.SendQuestTargetSignals(dance.lord.questTags, "RitualOutcome", outcome.positivityIndex.Named("OUTCOME"));
+            QuestUtility.SendQuestTargetSignals(dance.lord.questTags, "OUTCOME", outcome.positivityIndex.Named("OUTCOME"));            
             string letterText = outcome.description.Formatted("VFEE.GrandBall.Label".Translate()).CapitalizeFirst();
             string moodText = def.OutcomeMoodBreakdown(outcome);
             if (!moodText.NullOrEmpty())
