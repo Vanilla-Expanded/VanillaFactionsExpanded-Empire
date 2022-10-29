@@ -394,4 +394,133 @@
     </xenotypeSet>
   </PawnKindDef>
 
+<!-- Absolver -->
+
+  <PawnKindDef ParentName="ImperialFighterBase">
+    <defName>VFEE_Empire_Fighter_Absolver</defName>
+    <label>absolver</label>
+    <royalTitleChance>0.1</royalTitleChance>
+    <titleSelectOne>
+      <li>Freeholder</li>
+      <li>Yeoman</li>
+    </titleSelectOne>
+    <combatPower>300</combatPower>
+    <weaponTags>
+      <li>VFEE_Absolver</li>
+    </weaponTags>
+    <apparelColor>(250,250,250)</apparelColor>
+    <apparelRequired>
+      <li>VFEE_Apparel_AbsolverHelmet</li>
+      <li>VFEE_Apparel_ArmorAbsolver</li>
+    </apparelRequired>
+    <specificApparelRequirements Inherit="False">
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>Synthread</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>Synthread</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Shell</apparelLayer>
+        <requiredTag>Cape</requiredTag>
+        <color>(10, 10, 10)</color>
+      </li>
+    </specificApparelRequirements>
+    <techHediffsTags>
+      <li>Advanced</li>
+      <li>ImplantEmpireCommon</li>
+    </techHediffsTags>
+    <techHediffsRequired>
+      <li>ArchotechEye</li>
+    </techHediffsRequired>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>8~12</range>
+      </li>
+    </skills>
+    <disallowedTraits>
+      <li>Brawler</li>
+	  <li>Nudist</li>
+	  <li>BodyPurist</li>
+    </disallowedTraits>
+    <initialWillRange>4~6</initialWillRange>
+    <initialResistanceRange>36~46</initialResistanceRange>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <maxGenerationAge>40</maxGenerationAge>
+    <apparelMoney>7000~10000</apparelMoney>
+    <techHediffsMoney>2000~6000</techHediffsMoney>
+    <techHediffsMaxAmount>6</techHediffsMaxAmount>
+    <allowRoyalRoomRequirements>False</allowRoyalRoomRequirements>
+	<biocodeWeaponChance>1.0</biocodeWeaponChance>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.03</Neanderthal>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.6</Hussar>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0.03</Genie>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef>
+  
+  <PawnKindDef ParentName="RoyalBase">
+    <defName>VFEE_Empire_Royal_Techfriar</defName>
+    <label>techriar</label>
+    <combatPower>50</combatPower>
+    <weaponMoney>0</weaponMoney>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <requiredTag>RoyalRobe</requiredTag>
+		<stuff>Hyperweave</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <requiredTag>VFEE_Techfriar</requiredTag>
+        <stuff>Plasteel</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <requiredTag>RoyalTier2</requiredTag>
+		<color>(255, 229, 0)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Middle</apparelLayer>
+        <requiredTag>Psychic</requiredTag>
+		<color>(57, 87, 93)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <stuff>Hyperweave</stuff>
+      </li>
+    </specificApparelRequirements>
+    <techHediffsMoney>1000~4000</techHediffsMoney>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Baseliner MayRequire="Ludeon.RimWorld.Biotech">1</Baseliner>
+      </xenotypeChances>
+    </xenotypeSet>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <weaponTags Inherit="False">
+      <li>None</li>
+    </weaponTags>
+    <requiredWorkTags>
+      <li>Intellectual</li>
+    </requiredWorkTags>
+    <techHediffsRequired>
+      <li>DeathAcidifier</li>
+    </techHediffsRequired>
+    <minGenerationAge>50</minGenerationAge>
+    <techHediffsMaxAmount>3</techHediffsMaxAmount>
+    <initialWillRange>6~8</initialWillRange>
+    <initialResistanceRange>30~46</initialResistanceRange>
+    <humanPregnancyChance>0</humanPregnancyChance>
+  </PawnKindDef>
+  
 </Defs>
