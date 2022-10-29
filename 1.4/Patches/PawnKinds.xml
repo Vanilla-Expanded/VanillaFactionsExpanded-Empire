@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/PawnKindDef[@Name="JanissaryBase"]/apparelRequired</xpath>
+            <value>
+                <apparelRequired>
+                   <li>VFEE_Apparel_JanissaryHelmet</li>
+                   <li>VFEE_Apparel_JanissaryCuirass</li>
+				   <li>Apparel_FlakPants</li>
+				   <li>Apparel_ShirtRuffle</li>
+				   <li>Apparel_VestRoyal</li>
+                </apparelRequired>
+            </value>
+    </Operation>
+	
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/PawnKindDef[@Name="JanissaryBase"]/weaponTags</xpath>
+            <value>
+                <weaponTags>
+                   <li>SpacerGun</li>
+                   <li>VFEE_SpacerGunBreach</li>
+                </weaponTags>
+            </value>
+    </Operation>
+
+</Patch>
