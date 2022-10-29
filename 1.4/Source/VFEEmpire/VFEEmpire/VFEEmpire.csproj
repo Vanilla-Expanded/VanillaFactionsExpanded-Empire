@@ -303,6 +303,8 @@
     <Compile Include="AI\JobGiver\JobGiver_AcceptTitle.cs" />
     <Compile Include="AI\JobGiver\JobGiver_SpectateClose.cs" />
     <Compile Include="AI\JobGiver\JobGiver_PlayInstrument.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_GoToStartPositions.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_DanceSpectate.cs" />
     <Compile Include="AI\JobGiver\JobGiver_Waltz.cs" />
     <Compile Include="Comps\CompAbilityEffect_StartBestowing.cs" />
     <Compile Include="Comps\CompProperties_AbilityStartBestower.cs" />
@@ -314,6 +316,7 @@
     <Compile Include="QuestNode\QuestNode_DelayedRitualReward.cs" />
     <Compile Include="QuestNode\Questnode_Root_GrandBall.cs" />
     <Compile Include="QuestNode\Questnode_Root_NobleVisit.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_GrandBall.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_RitualOutcomeEffects.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_RequirementsToAcceptBallroom.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_ThoughtAccepterOther.cs" />

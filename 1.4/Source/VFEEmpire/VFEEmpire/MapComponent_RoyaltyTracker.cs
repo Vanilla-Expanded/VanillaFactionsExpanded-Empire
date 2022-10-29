@@ -21,6 +21,18 @@ public class MapComponent_RoyaltyTracker : MapComponent
         if (role == VFEE_DefOf.VFEE_Ballroom) Ballrooms.Add(room);
         if (role == VFEE_DefOf.VFEE_Gallery) Galleries.Add(room);
     }
+    //Adding this as post load ballrooms and galleries is empty until something is changed in that room or you force it with opening roomstats.
+    //Pretty minor but annoying me in testing
+    public override void FinalizeInit()
+    {
+        base.FinalizeInit();
+        foreach(var room in map.regionGrid.allRooms)
+        {
+            var role = room.Role;
+            if (role == VFEE_DefOf.VFEE_Ballroom && !Ballrooms.Contains(room)) Ballrooms.Add(room);
+            if (role == VFEE_DefOf.VFEE_Gallery && !Galleries.Contains(room)) Galleries.Add(room);
+        }
+    }
 
     [HarmonyPatch(typeof(Room), "UpdateRoomStatsAndRole")]
     [HarmonyPostfix]

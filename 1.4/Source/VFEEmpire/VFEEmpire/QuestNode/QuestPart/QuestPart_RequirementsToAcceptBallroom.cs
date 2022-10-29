@@ -13,10 +13,15 @@ namespace VFEEmpire
     {
         public override AcceptanceReport CanAccept()
         {
-            var cantAccept = CantAccept();
+            var cantAccept = CantAccept().ToList();
+            if (missingCells > 0)
+            {
+                return "VFEE.BallroomRequirements.DanceFloorToSmall".Translate(requiredCells);
+            }
             if (!cantAccept.NullOrEmpty())
             {
-                return "VFEE.BallroomRequirements.Unmet".Translate(string.Join(", ", cantAccept.Select(x => x.royalty.MainTitle().GetLabelCapFor(x).CapitalizeFirst()) + " " + cantAccept.Select(x => x.LabelCap)));
+                var title = cantAccept.First().royalty.AllTitlesInEffectForReading.Where(x => x.def.Ext() != null && !x.def.Ext().ballroomRequirements.NullOrEmpty()).FirstOrDefault();
+                return "VFEE.BallroomRequirements.Unmet".Translate();
             }
             return true;
         }
@@ -24,16 +29,25 @@ namespace VFEEmpire
         {
             culprits.Clear();
             foreach (var pawn in pawns)
-            {                
-                var title = pawn.royalty.HighestTitleWithBallroomRequirements();
+            {
+                var title = pawn.royalty.AllTitlesInEffectForReading.Where(x => x.def.Ext() != null && !x.def.Ext().ballroomRequirements.NullOrEmpty()).FirstOrDefault();
                 if (title != null)
                 {
                     culprits.Add(pawn);                    
-                    foreach (var ballroom in pawn.MapHeld.RoyaltyTracker().Ballrooms)
+                    foreach (var ballroom in mapParent.Map.RoyaltyTracker().Ballrooms)
                     {
-
+                        if(!QuestPart_GrandBall.TryGetGrandBallSpot(ballroom,mapParent.Map,out var spot, out var absSpot, out var dancefloor,out var rect))
+                        {
+                            continue;
+                        }
+                        if(dancefloor.Count < requiredCells)
+                        {
+                            missingCells = requiredCells - dancefloor.Count;
+                            continue;
+                        }
                         if (title.def.Ext().ballroomRequirements.All(x => x.Met(ballroom, pawn)))
                         {
+                            missingCells = 0;
                             culprits.Remove(pawn);
                             break;
                         }
@@ -49,8 +63,11 @@ namespace VFEEmpire
             {
                 foreach(var p in CantAccept())
                 {
-                    var title = p.royalty.HighestTitleWithBallroomRequirements();
-                    yield return new Dialog_InfoCard.Hyperlink(title.def, title.faction, -1);
+                    var title = p.royalty.AllTitlesInEffectForReading.Where(x => x.def.Ext() != null && !x.def.Ext().ballroomRequirements.NullOrEmpty()).FirstOrDefault(); 
+                    if(title != null)
+                    {
+                        yield return new Dialog_InfoCard.Hyperlink(title.def, title.faction, -1);
+                    }                    
                 }
             }
         }
@@ -63,8 +80,9 @@ namespace VFEEmpire
 
 
         public MapParent mapParent;
+        public int requiredCells;
         public List<Pawn> pawns = new List<Pawn>();
-
+        private int missingCells;
         private List<Pawn> culprits = new List<Pawn>();
 
     }

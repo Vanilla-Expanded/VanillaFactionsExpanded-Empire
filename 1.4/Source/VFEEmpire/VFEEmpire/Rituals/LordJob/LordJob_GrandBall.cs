@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
+using UnityEngine;
 using Verse;
+using Verse.Sound;
 using Verse.AI.Group;
 
 namespace VFEEmpire
 {
-	//Todo list
-	//Starting Positions before start dance so pawn offset will work
-	// -Add to duty def most likely as seperate job rather then do a new transition. New transition if thats easier which it might be
-	//No support for FX or music right now as not using LordJob_ritual ticking. Add if wanted.
-	//Quest Part to actually arrive pawns and add to lord
-	//Make sure leave ritual gizmo works, but only for colonists
-	//Play Music Jobs
-	//Need a check on open space for ball
-	//I need to have a behavior even if I'm not using a precept I need roles which is impossible without
-	
+    //Todo list		
+    //No support for FX or music right now as not using LordJob_ritual ticking. Add if wanted.	
+	//Continue tracing issue with transition to lordtoil ball wail.
+	//Test
 
+
+    [StaticConstructorOnStartup]
 	public class LordJob_GrandBall : LordJob_Ritual
 	{
 		public Pawn leadNoble;
@@ -34,26 +32,32 @@ namespace VFEEmpire
 		public static readonly int duration = 9000;
 		public Room ballRoom;
 		public List<Pawn> nobles;
+		public CellRect danceArea;
+		public List<IntVec3> danceFloor;
 
 		private int ticksThisRotation;
 		public List<Pawn> dancers = new();
 		public Dictionary<Pawn, Pawn> leadPartner = new();
 		private Dictionary<Pawn, List<Pawn>> dancedWith = new();
+		private static Texture2D icon = ContentFinder<Texture2D>.Get("UI/Icons/Rituals/BestowCeremony", true);
 		private int stage = 0;
 		private List<Pawn> tmpHasPartner = new();
+		public Dictionary<Pawn, IntVec3> startPoses = new();
 		private Dictionary<Pawn, int> totalPresenceTmp = new();
 		public static readonly string MemoCeremonyStarted = "CeremonyStarted";
 		public LordJob_GrandBall()
 		{
 		}
 
-		public LordJob_GrandBall(Pawn leadNoble, LocalTargetInfo targetinfo, Thing shuttle, string questEnded, Room ballRoom)
+		public LordJob_GrandBall(Pawn leadNoble, LocalTargetInfo targetinfo, Thing shuttle, string questEnded, Room ballRoom, List<IntVec3> danceFloor,CellRect rect)
         {
             this.leadNoble = leadNoble;
             this.target = targetinfo;
             this.shuttle = shuttle;
             this.questEndedSignal = questEnded;
             this.ballRoom = ballRoom;
+            this.danceFloor = danceFloor;
+			danceArea = rect;
         }
 
         public bool AllArrived
@@ -61,7 +65,7 @@ namespace VFEEmpire
             get
             {
 				var all = true;
-				foreach (var pawn in nobles)
+				foreach (var pawn in startPoses.Keys)
                 {
 					if (!PawnTagSet(pawn, "Arrived"))
                     {
@@ -72,7 +76,24 @@ namespace VFEEmpire
 				return all;
             }
         }
-        public override bool AllowStartNewGatherings => !danceStarted || danceFinished;
+
+		public bool AllAtStart
+		{
+			get
+			{
+				var all = true;
+				foreach (var pawn in startPoses.Keys)
+				{
+					if (!PawnTagSet(pawn, "AtStart"))
+					{
+						all = false;
+						break;
+					}
+				}
+				return all;
+			}
+		}
+		public override bool AllowStartNewGatherings => !danceStarted || danceFinished;
 
 		public virtual DanceStages Stage => danceStages[stage];
 		public override IntVec3 Spot => target.Cell;
@@ -127,7 +148,7 @@ namespace VFEEmpire
 			transition_BallInterupted.AddPreAction(removeColonists);
 			transition_BallInterupted.AddPreAction(new TransitionAction_Custom(() =>
             {
-				StopDance();
+				StopDance("CeremonyFailed");
 			}));
 			transition_BallInterupted.AddTrigger(new Trigger_TickCondition(() =>
 			{
@@ -161,15 +182,38 @@ namespace VFEEmpire
 			transition_QuestEnd.AddSource(wait_StartBall);
 			transition_QuestEnd.AddSource(wait_ForSpawned);
 			transition_QuestEnd.AddTrigger(new Trigger_Signal(questEndedSignal));
-			graph.transitions.Add(transition_QuestEnd);
-
-			
+			graph.transitions.Add(transition_QuestEnd);			
 			
 			return graph;
-
 		}
 
-		
+		public IntVec3 StartPosition(Pawn pawn)
+        {
+			var partner = Partner(pawn);
+			if (startPoses.TryGetValue(pawn, out IntVec3 spot))
+			{
+				return spot;
+			}
+			if (startPoses.TryGetValue(partner, out IntVec3 pos))
+            {
+				pos += IntVec3.North;
+				startPoses.Add(pawn, pos);
+				return pos;
+            }
+			if (CellFinder.TryFindRandomCellInsideWith(danceArea, (c) =>
+			{
+				var pCell = c + IntVec3.North;
+				int radius = danceFloor.Count >= 72 ? 5 : 3;
+				CellRect personalRect = CellRect.CenteredOn(c, radius);
+				return !startPoses.Values.Contains(c) && !startPoses.Values.Contains(pCell) && danceArea.Contains(pCell) && personalRect.FullyContainedWithin(danceArea);
+			}, out var cell))
+            {
+				startPoses.Add(pawn, cell);
+				return cell;
+            }
+			return IntVec3.Invalid;
+        }
+
         public override void LordJobTick()
         {
 			if (danceStarted && !danceFinished)
@@ -220,6 +264,7 @@ namespace VFEEmpire
             }
 
 		}
+		
 		private void DancedWith(Pawn pawn, Pawn partner)
         {
 			if (dancedWith.TryGetValue(pawn, out var partners))
@@ -237,10 +282,22 @@ namespace VFEEmpire
 			danceStarted = true;
 			InterruptDancers();
 		}
-		public void StopDance()
+		public List<DanceStages> danceStages
+        {
+            get
+            {
+				if(danceFloor.Count >= 72)
+                {
+					return danceStages5Rect;
+                }
+				return danceStages3Rect;
+            }
+        }
+		public void StopDance(string signal)
 		{
 			danceFinished = true;
 			lord.ReceiveMemo("CeremonyFinished");
+			QuestUtility.SendQuestTargetSignals(lord.questTags, signal, lord.Named("SUBJECT"));
 			foreach (KeyValuePair<Pawn, int> keyValuePair in ballToil.Data.presentForTicks)
 			{
 				if (keyValuePair.Key != null && !keyValuePair.Key.Dead)
@@ -261,19 +318,32 @@ namespace VFEEmpire
 			outcome.Apply(ticksPassed / duration, totalPresenceTmp, this);
 			InterruptDancers();
 		}
+		public void RemoveTags(string tag)
+        {
+			foreach(var kvp in perPawnTags.ToList())
+            {
+                if (kvp.Value.tags.Contains(tag))
+                {
+					kvp.Value.tags.Remove(tag);
+                }
+            }
+        }
 		public void StageSwap()
 		{
-			stage++;			
+			stage++;
+			RemoveTags("Arrived");
 			if (stage > danceStages.Count)
 			{
 				if (ticksPassed > duration)
                 {
-					StopDance();
+					StopDance("CeremonySucess");
 					return;
 				}
 				stage = 0;
 				flip = !flip;
 				SetPartners();
+				startPoses.Clear();
+				RemoveTags("AtStart");
 			}
 			InterruptDancers();
 		}
@@ -346,8 +416,46 @@ namespace VFEEmpire
 			}
 			return partner;
 		}
-
-		private static readonly List<DanceStages> danceStages = new List<DanceStages>() { DanceStages.Up, DanceStages.Up, DanceStages.Rotate, DanceStages.Left, DanceStages.Left, DanceStages.Down, DanceStages.Rotate, DanceStages.Down, DanceStages.Right, DanceStages.Down, DanceStages.Right, DanceStages.Dip, DanceStages.Rotate };
+        public override IEnumerable<Gizmo> GetPawnGizmos(Pawn p)
+        {
+            if(!danceStarted || danceFinished)
+            {
+				yield break;
+            }
+            else if(p.Faction == Faction.OfPlayer)
+            {
+				Command_Action leave = new();
+				leave.defaultLabel = "CommandLeaveRitual".Translate(RitualLabel);
+				leave.defaultDesc = "CommandLeaveRitualDesc".Translate(RitualLabel);
+				leave.icon = icon;
+				leave.action = () =>
+				{
+					lord.Notify_PawnLost(p, PawnLostCondition.ForcedByPlayerAction);
+					SoundDefOf.Tick_Low.PlayOneShotOnCamera(null);
+				};
+				leave.hotKey = KeyBindingDefOf.Misc5;
+				yield return leave;
+				yield return new Command_Action
+				{
+					defaultLabel = "CommandCancelRitual".Translate(RitualLabel),
+					defaultDesc = "CommandCancelRitualDesc".Translate(RitualLabel),
+					icon = icon,
+					action = () =>
+                    {
+						Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("CommandCancelRitualConfirm".Translate(RitualLabel), () =>
+						{
+							StopDance("CeremonyFailed");
+						}));
+                    },
+					hotKey = KeyBindingDefOf.Misc6
+				};
+			}
+        }
+        //So the issue with dance steps is each on requires an open area per pawn they can go these steps would need a 5 rect which puts bare minimum attendees of 49 cells for 6 pawns. Using ths only if
+        private static readonly List<DanceStages> danceStages5Rect = new List<DanceStages>() { DanceStages.Up, DanceStages.Up, DanceStages.Rotate, DanceStages.Left, DanceStages.Left, DanceStages.Down, DanceStages.Rotate, DanceStages.Down, DanceStages.Right, DanceStages.Down, DanceStages.Right, DanceStages.Dip, DanceStages.Rotate };
+		//This tighter dance pattern could fit 12 in 49. 
+		private static readonly List<DanceStages> danceStages3Rect = new List<DanceStages>() { DanceStages.Up, DanceStages.Rotate, DanceStages.Left,DanceStages.Down, DanceStages.Rotate,  DanceStages.Right, DanceStages.Dip, DanceStages.Rotate,
+		DanceStages.Right,DanceStages.Rotate,DanceStages.Down,DanceStages.Left, DanceStages.Up};
 
 	}
 	public enum DanceStages

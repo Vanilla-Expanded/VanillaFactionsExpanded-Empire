@@ -43,8 +43,9 @@
     <defName>VFEE_BallLead</defName>
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>     
+		<li Class="VFEEmpire.JobGiver_GoToStartPositions"/>
         <li Class="VFEEmpire.JobGiver_Waltz"/>
-		<li Class="JobGiver_Idle"/>
+		<li Class="VFEEmpire.JobGiver_DanceSpectate"/>
       </subNodes>
     </thinkNode>
   </DutyDef>
@@ -52,8 +53,9 @@
     <defName>VFEE_BallPartner</defName>
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>     
+		<li Class="VFEEmpire.JobGiver_GoToStartPositions"/>
         <li Class="VFEEmpire.JobGiver_Waltz"/>
-		<li Class="JobGiver_Idle"/>
+		<li Class="VFEEmpire.JobGiver_DanceSpectate"/>
       </subNodes>
     </thinkNode>
   </DutyDef>

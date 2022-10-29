@@ -204,23 +204,7 @@ namespace VFEEmpire
                 quest.Leave(lodgers, anyLeave, wakeUp: true);
             }, null, null, null, false, null, null, false, "GuestsDepartsIn".Translate(), "GuestsDepartsOn".Translate(), "QuestDelay", false, QuestPart.SignalListenMode.OngoingOnly);
 
-            //leave fail
-            //Remarking out right now because to make this work I'll need a new quest part to leave, then start a new lord to board the shuttle. Doable but a lot to test right now
-            /*            quest.Delay(durationTicks, () =>
-                        {
 
-                            var pickupShuttle = QuestGen_Shuttle.GenerateShuttle(empire, lodgers);
-                            var transportShuttle = quest.GenerateTransportShip(TransportShipDefOf.Ship_Shuttle, null, pickupShuttle).transportShip;
-                            quest.ExitOnShuttle(map.Parent, lodgers, empire, pickupShuttle);
-                            quest.RemoveFromRequiredPawnsOnRescue(pickupShuttle, lodgers, QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Rescured"));
-                            quest.SendTransportShipAwayOnCleanup(transportShuttle, false, TransportShipDropMode.NonRequired);
-
-                            DropCellFinder.TryFindDropSpotNear(map.Center, map, out var arriveCell, false, false, false, new IntVec2?(ThingDefOf.Shuttle.Size + new IntVec2(2, 2)), false);
-                            quest.AddShipJob_Arrive(transportShuttle, map.Parent, null, new IntVec3?(arriveCell), ShipJobStartMode.Instant, Faction.OfEmpire, null);
-                            quest.AddShipJob_WaitTime(transportShuttle, 20000, true, lodgers.Cast<Thing>().ToList(), null);
-
-                        });*/
-            //Fail signal recieveds
             //honor = range of 2 - 24 based on how long their stay is
             int honor = Mathf.Max(2, Mathf.RoundToInt(24 * (QuestDayDurationCurve.Evaluate(points) / 10)));
             FailResults(quest, questPart_LodgerLeave.outSignalArrested_LeaveColony, "[lodgerArrestedLeaveMapLetterLabel]", "[lodgerArrestedLeaveMapLetterText]", nobles,-honor);

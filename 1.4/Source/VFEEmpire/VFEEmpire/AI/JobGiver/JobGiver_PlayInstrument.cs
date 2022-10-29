@@ -1,5 +1,7 @@
 ﻿using System;
 using RimWorld;
+using System.Linq;
+using System.Collections.Generic;
 using Verse;
 using Verse.AI;
 using Verse.AI.Group;
@@ -14,25 +16,16 @@ namespace VFEEmpire
 		{
 			var dance = pawn.GetLord()?.LordJob as LordJob_GrandBall;
 			if (dance == null) { return null; }
-			Pawn partner = dance.Partner(pawn);
-			if (partner == null) { return null; }
-			var cell = pawn.Position;
-			var stage = dance.Stage;
-			Job job;
-			cell += dance.PawnOffset(pawn);
-			if (stage == DanceStages.Dip)
+			var instruments = dance.ballRoom.ContainedAndAdjacentThings.Where(x => x is Building_MusicalInstrument);
+            if (!instruments.Any()) { return null; }
+			var insturment = instruments.FirstOrDefault(x => GatheringWorker_Concert.InstrumentAccessible(x as Building_MusicalInstrument, pawn)) as Building_MusicalInstrument;
+			if (insturment == null)
 			{
-				if (dance.LeadPawn(pawn))
-				{
-					job = JobMaker.MakeJob(InternalDefOf.VFEE_WaltzDip, partner, cell);
-					job.count = 1;
-					return job;
-				}
-				job = JobMaker.MakeJob(JobDefOf.Wait);
-				return job;
+				return null;
 			}
-			job = JobMaker.MakeJob(InternalDefOf.VFEE_WaltzGoTo, partner, cell);
-			job.locomotionUrgency = LocomotionUrgency.Amble;
+			Job job = JobMaker.MakeJob(JobDefOf.Play_MusicalInstrument, insturment, insturment.InteractionCell);
+			job.doUntilGatheringEnded = true;
+			job.expiryInterval = LordJob_GrandBall.duration;
 			return job;
 		}
 

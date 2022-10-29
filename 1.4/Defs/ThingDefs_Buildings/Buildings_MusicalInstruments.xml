@@ -53,6 +53,8 @@
     </costList>
     <building>
       <instrumentRange>20</instrumentRange>
+	  <watchBuildingStandDistanceRange>1~11</watchBuildingStandDistanceRange>
+	  <watchBuildingStandRectWidth>11</watchBuildingStandRectWidth>
     </building>
     <uiIconScale>0.9</uiIconScale>
     <graphicData>

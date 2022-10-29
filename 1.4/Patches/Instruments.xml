@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[@Name="MusicalInstrumentBase"]/placeWorkers</xpath>
+		<value>
+			<li>VFEEmpire.Placeworker_DanceFloorArea</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[@Name="MusicalInstrumentBase"]/building</xpath>
+		<value>
+			<watchBuildingStandDistanceRange>1~7</watchBuildingStandDistanceRange>
+			<watchBuildingStandRectWidth>7</watchBuildingStandRectWidth>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="Piano"]/building</xpath>
+		<value>
+			<watchBuildingStandDistanceRange>1~9</watchBuildingStandDistanceRange>
+			<watchBuildingStandRectWidth>9</watchBuildingStandRectWidth>
+		</value>
+	</Operation>
+
+	
+</Patch>
+
