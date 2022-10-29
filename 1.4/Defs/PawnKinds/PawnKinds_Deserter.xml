@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <PawnKindDef Name="VFEE_DeserterBase" Abstract="True">
+    <race>Human</race>
+    <defaultFactionType>VFEE_Deserters</defaultFactionType>
+    <backstoryCryptosleepCommonality>0.08</backstoryCryptosleepCommonality>
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>ImperialFighter</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
+    <styleItemTags>
+      <li>
+        <tag>Soldier</tag>
+        <baseWeight>1</baseWeight>
+        <weightFactor>1</weightFactor>
+      </li>
+    </styleItemTags>
+    <chemicalAddictionChance>0.1</chemicalAddictionChance>
+    <combatEnhancingDrugsChance>0.15</combatEnhancingDrugsChance>
+    <combatEnhancingDrugsCount>0~2</combatEnhancingDrugsCount>
+    <invNutrition>2.55</invNutrition>
+    <itemQuality>Normal</itemQuality>
+    <weaponMoney>1100~2500</weaponMoney>
+    <apparelAllowHeadgearChance>0.5</apparelAllowHeadgearChance>
+    <apparelTags>
+      <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
+      <li>IndustrialMilitaryBasic</li>
+      <li>IndustrialMilitaryAdvanced</li>
+    </apparelTags>
+    <apparelDisallowTags>
+      <li>Western</li>
+    </apparelDisallowTags>
+    <techHediffsChance>0.8</techHediffsChance>
+    <techHediffsRequired>
+      <li>DeathAcidifier</li>
+    </techHediffsRequired>
+    <biocodeWeaponChance>0.35</biocodeWeaponChance>
+    <maxGenerationAge>40</maxGenerationAge>
+    <apparelMoney>7000~10000</apparelMoney>
+    <techHediffsMoney>1000~4000</techHediffsMoney>
+    <techHediffsMaxAmount>4</techHediffsMaxAmount>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="VFEE_DeserterBase">
+    <defName>VFEE_Deserter</defName>
+    <label>deserter</label>
+    <combatPower>180</combatPower>
+    <weaponTags>
+      <li>AssaultRifle</li>
+      <li>SpacerGun</li>
+	  <li>VFEE_SpacerGunBreach</li>
+    </weaponTags>
+    <apparelRequired>
+      <li>Apparel_ArmorHelmetCataphract</li>
+      <li>Apparel_ArmorCataphract</li>
+    </apparelRequired>
+    <specificApparelRequirements Inherit="False">
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>Synthread</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <stuff>Synthread</stuff>
+      </li>
+    </specificApparelRequirements>
+    <techHediffsTags>
+      <li>Advanced</li>
+      <li>ImplantEmpireCommon</li>
+      <li>ImplantEmpireRoyal</li>
+    </techHediffsTags>
+    <techHediffsDisallowTags>
+      <li>PainCauser</li>
+    </techHediffsDisallowTags>
+    <disallowedTraits>
+      <li>Wimp</li>
+      <li>Nudist</li>
+      <li>BodyPurist</li>
+    </disallowedTraits>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>8~12</range>
+      </li>
+    </skills>
+    <initialWillRange>4~6</initialWillRange>
+    <initialResistanceRange>17~26</initialResistanceRange>
+  </PawnKindDef>
+
+</Defs>
