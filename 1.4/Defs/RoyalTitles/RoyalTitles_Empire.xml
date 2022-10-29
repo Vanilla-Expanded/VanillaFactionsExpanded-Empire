@@ -1557,7 +1557,7 @@
           </li>
           <li>
             <minTitle>Praetor</minTitle>
-            <maxTitle>Archduke</maxTitle>
+            <maxTitle>VFEE_Archduke</maxTitle>
             <count>1</count>
           </li>
         </courtRequirments>
@@ -1861,7 +1861,7 @@
           </li>
           <li>
             <minTitle>Count</minTitle>
-            <maxTitle>Magister</maxTitle>
+            <maxTitle>VFEE_Magister</maxTitle>
             <count>2</count>
           </li>
         </courtRequirments>
