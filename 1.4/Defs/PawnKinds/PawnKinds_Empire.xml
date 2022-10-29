@@ -448,6 +448,7 @@
       <li>Brawler</li>
 	  <li>Nudist</li>
 	  <li>BodyPurist</li>
+	  <li>Wimp</li>
     </disallowedTraits>
     <initialWillRange>4~6</initialWillRange>
     <initialResistanceRange>36~46</initialResistanceRange>
