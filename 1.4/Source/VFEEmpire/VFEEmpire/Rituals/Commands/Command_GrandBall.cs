@@ -29,8 +29,7 @@ namespace VFEEmpire
 		}
         public override void ProcessInput(Event ev)
         {
-            base.ProcessInput(ev);
-            
+            base.ProcessInput(ev);            
             string header = "VFEE.GrandBall.ChooseParticipants".Translate();
             string label = job.RitualLabel;
             Dialog_BeginRitual.ActionCallback callBack = (RitualRoleAssignments participants) =>
@@ -42,6 +41,9 @@ namespace VFEEmpire
             int nonNobles = 0;
             Func<Pawn, bool, bool, bool> filter = (Pawn pawn, bool voluntary, bool allowOtherIdeos) =>
             {
+                Lord lord = pawn.GetLord();
+                bool result = (lord == null || !(lord.LordJob is LordJob_Ritual)) && !pawn.IsPrisonerOfColony && !pawn.RaceProps.Animal;
+                if (!result) { return false; }
                 if (!pawn.royalty?.HasAnyTitleIn(Faction.OfEmpire) ?? true)
                 {
                     if (nonNobles >= instruments)
@@ -50,8 +52,7 @@ namespace VFEEmpire
                     }
                     nonNobles++;
                 }
-                var lord = pawn.GetLord();
-                return (lord == null || !(lord.LordJob is LordJob_Ritual)) && !pawn.IsPrisonerOfColony && !pawn.RaceProps.Animal;
+                return true;
             };
             string okButtonText = "Begin".Translate();
             var outcomeDef = InternalDefOf.VFEE_GrandBall_Outcome;

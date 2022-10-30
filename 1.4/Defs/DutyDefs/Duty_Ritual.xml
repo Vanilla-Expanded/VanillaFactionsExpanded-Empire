@@ -40,6 +40,17 @@
     </thinkNode>
   </DutyDef>
    <DutyDef>
+    <defName>VFEE_GrandBallWait</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>     
+		<li Class="JobGiver_WanderNearDutyLocation">
+		  <wanderRadius>5</wanderRadius>
+          <locomotionUrgencyOutsideRadius>Sprint</locomotionUrgencyOutsideRadius>		  
+		</li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+   <DutyDef>
     <defName>VFEE_BallLead</defName>
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>     

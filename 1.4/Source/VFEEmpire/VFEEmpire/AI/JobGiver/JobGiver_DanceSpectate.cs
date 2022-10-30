@@ -22,10 +22,9 @@ namespace VFEEmpire
 				job.expiryInterval = 120;
 				return job;
             }
-			//else spectate
 			if(TryFindSpot(pawn,out var cell))
             {
-				Building edifice = cell.GetEdifice(pawn.Map);
+				Building edifice = cell.GetEdifice(pawn.Map);				
 				if(edifice != null)
                 {
 					return JobMaker.MakeJob(JobDefOf.SpectateCeremony, cell, dance.Spot,edifice);

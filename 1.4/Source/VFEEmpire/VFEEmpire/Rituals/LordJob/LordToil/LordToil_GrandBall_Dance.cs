@@ -14,6 +14,7 @@ namespace VFEEmpire
         public LordToil_GrandBall_Dance(IntVec3 spot) : base(true)
         {
             this.spot = spot;
+            this.data = new LordToilData_Gathering();
         }
         public LordToilData_Gathering Data
         {
@@ -47,12 +48,11 @@ namespace VFEEmpire
 
         public override void UpdateAllDuties()
         {
-            base.UpdateAllDuties();
             var ritual = lord.LordJob as LordJob_GrandBall;
             if (!ritual.danceStarted)
             {
-                ritual.danceStarted = true;
-                ritual.SetPartners();
+                ritual.StartDance();
+                ritual.SetPartners();       
             }
             foreach (var pawn in lord.ownedPawns)
             {
@@ -68,12 +68,7 @@ namespace VFEEmpire
                     }
                     else
                     {
-                        var spectate = new PawnDuty(DutyDefOf.Spectate, ritual.Spot);
-                        spectate.spectateRectAllowedSides = SpectateRectSide.All;
-                        spectate.spectateDistance = new IntRange(5, 6);
-                        spectate.spectateRectPreferredSide = SpectateRectSide.Horizontal;
-                        spectate.spectateRect = CellRect.CenteredOn(ritual.Spot, 0);
-                        pawn.mindState.duty = spectate;
+                        pawn.mindState.duty = new PawnDuty(InternalDefOf.VFEE_BallPartner, ritual.Spot);
                     }
                 }
                 else

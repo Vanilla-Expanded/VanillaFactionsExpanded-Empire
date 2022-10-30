@@ -32,11 +32,12 @@ namespace VFEEmpire
 		public static readonly int duration = 9000;
 		public Room ballRoom;
 		public List<Pawn> nobles;
+		public List<Pawn> dancers = new();
 		public CellRect danceArea;
 		public List<IntVec3> danceFloor;
 
 		private int ticksThisRotation;
-		public List<Pawn> dancers = new();
+
 		public Dictionary<Pawn, Pawn> leadPartner = new();
 		private Dictionary<Pawn, List<Pawn>> dancedWith = new();
 		private static Texture2D icon = ContentFinder<Texture2D>.Get("UI/Icons/Rituals/BestowCeremony", true);
@@ -44,6 +45,7 @@ namespace VFEEmpire
 		private List<Pawn> tmpHasPartner = new();
 		public Dictionary<Pawn, IntVec3> startPoses = new();
 		private Dictionary<Pawn, int> totalPresenceTmp = new();
+		protected Dictionary<IntVec3, Mote> highlightedPositions = new Dictionary<IntVec3, Mote>();
 		public static readonly string MemoCeremonyStarted = "CeremonyStarted";
 		public LordJob_GrandBall()
 		{
@@ -65,7 +67,7 @@ namespace VFEEmpire
             get
             {
 				var all = true;
-				foreach (var pawn in startPoses.Keys)
+				foreach (var pawn in dancers)
                 {
 					if (!PawnTagSet(pawn, "Arrived"))
                     {
@@ -82,7 +84,7 @@ namespace VFEEmpire
 			get
 			{
 				var all = true;
-				foreach (var pawn in startPoses.Keys)
+				foreach (var pawn in dancers)
 				{
 					if (!PawnTagSet(pawn, "AtStart"))
 					{
@@ -125,15 +127,14 @@ namespace VFEEmpire
 			graph.transitions.Add(transition_Spawned);
 
 			var transition_Arrived = new Transition(moveToPlace, wait_StartBall);
-			transition_Arrived.AddTrigger(new Trigger_Custom((TriggerSignal signal) => signal.type == TriggerSignalType.Tick && leadNoble.Position == spot));
+			transition_Arrived.AddTrigger(new Trigger_Custom((TriggerSignal signal) => signal.type == TriggerSignalType.Tick && leadNoble.Position == Spot));
 			graph.transitions.Add(transition_Arrived);
 
 			var transition_StartBall = new Transition(wait_StartBall, ballToil);
 			transition_StartBall.AddTrigger(new Trigger_Memo(MemoCeremonyStarted));
 			transition_StartBall.AddPostAction(new TransitionAction_Custom(() =>
 			{
-				QuestUtility.SendQuestTargetSignals(lord.questTags, "ritualStarted", lord.Named("SUBJECT"));
-				StartDance();
+				QuestUtility.SendQuestTargetSignals(lord.questTags, "ritualStarted", lord.Named("SUBJECT"));				
 			}
 			));
 			graph.transitions.Add(transition_StartBall);
@@ -203,13 +204,24 @@ namespace VFEEmpire
 			if (CellFinder.TryFindRandomCellInsideWith(danceArea, (c) =>
 			{
 				var pCell = c + IntVec3.North;
-				int radius = danceFloor.Count >= 72 ? 5 : 3;
+				int radius = danceFloor.Count >= 72 ? 2 : 1;
 				CellRect personalRect = CellRect.CenteredOn(c, radius);
-				return !startPoses.Values.Contains(c) && !startPoses.Values.Contains(pCell) && danceArea.Contains(pCell) && personalRect.FullyContainedWithin(danceArea);
+				CellRect partRect = CellRect.CenteredOn(pCell, radius);
+				return !startPoses.Values.Contains(c) && !startPoses.Values.Contains(pCell) && personalRect.FullyContainedWithin(danceArea) && partRect.FullyContainedWithin(danceArea);
 			}, out var cell))
             {
+				var pCell = cell + IntVec3.North;
+				startPoses.Add(partner, pCell);
 				startPoses.Add(pawn, cell);
+				Mote mote = MoteMaker.MakeStaticMote(cell.ToVector3Shifted(), this.Map, ThingDefOf.Mote_RolePositionHighlight);
+				highlightedPositions.Add(cell, mote);
+				Mote mote2 = MoteMaker.MakeStaticMote(pCell.ToVector3Shifted(), this.Map, ThingDefOf.Mote_RolePositionHighlight);
+				highlightedPositions.Add(pCell, mote2);
 				return cell;
+            }
+            if (dancers.Contains(pawn))
+            {
+				dancers.Remove(pawn);
             }
 			return IntVec3.Invalid;
         }
@@ -220,15 +232,15 @@ namespace VFEEmpire
             {
 				outcome.Tick(this, 1f);
 				ticksThisRotation++;
-				if (AllArrived || ticksThisRotation > 1000)
+				if (ticksThisRotation > 300)
 				{
 					StageSwap();					
-					perPawnTags.Clear();
 				}
 				ticksPassed++;
 			}
-			
-        }
+			foreach (KeyValuePair<IntVec3, Mote> highlightedPosition in highlightedPositions)
+				highlightedPosition.Value.Maintain();
+		}
 		public void SetPartners()
 		{
 			var pawns = nobles;
@@ -236,7 +248,6 @@ namespace VFEEmpire
 			tmpHasPartner.Clear();
 			foreach (var pawn in nobles)
 			{
-				bool flag = false;
 				List<Pawn> pastPartners = null;
 				if (dancedWith.ContainsKey(pawn))
 				{
@@ -253,15 +264,13 @@ namespace VFEEmpire
 						leadPartner.Add(pawn, partner);
 						DancedWith(pawn, partner);
 						DancedWith(partner, pawn);
-						flag = true;
+						tmpHasPartner.Add(pawn);
+						tmpHasPartner.Add(partner);
 						break;
 					}
                 }
-				if (flag)
-                {
-					tmpHasPartner.Add(pawn);
-				}
             }
+			dancers = tmpHasPartner;
 
 		}
 		
@@ -279,6 +288,7 @@ namespace VFEEmpire
 		public void StartDance()
 		{
 			nobles = lord.ownedPawns.Where(x => x.royalty?.HasAnyTitleIn(Faction.OfEmpire) ?? false).ToList();
+			SetPartners();
 			danceStarted = true;
 			InterruptDancers();
 		}
@@ -331,8 +341,9 @@ namespace VFEEmpire
 		public void StageSwap()
 		{
 			stage++;
+			ticksThisRotation = 0;
 			RemoveTags("Arrived");
-			if (stage > danceStages.Count)
+			if (stage >= danceStages.Count)
 			{
 				if (ticksPassed > duration)
                 {
@@ -347,9 +358,13 @@ namespace VFEEmpire
 			}
 			InterruptDancers();
 		}
-		public void InterruptDancers()
+        public override string GetReport(Pawn pawn)
+        {
+            return "LordReportAttending".Translate("VIER.GrandBall.Label".Translate());
+		}
+        public void InterruptDancers()
 		{
-			foreach (var pawn in nobles)
+			foreach (var pawn in dancers)
 			{
 				pawn.jobs.CheckForJobOverride();
 			}
@@ -425,8 +440,8 @@ namespace VFEEmpire
             else if(p.Faction == Faction.OfPlayer)
             {
 				Command_Action leave = new();
-				leave.defaultLabel = "CommandLeaveRitual".Translate(RitualLabel);
-				leave.defaultDesc = "CommandLeaveRitualDesc".Translate(RitualLabel);
+				leave.defaultLabel = "CommandLeaveRitual".Translate("VIER.GrandBall.Label".Translate());
+				leave.defaultDesc = "CommandLeaveRitualDesc".Translate("VIER.GrandBall.Label".Translate());
 				leave.icon = icon;
 				leave.action = () =>
 				{
@@ -437,8 +452,8 @@ namespace VFEEmpire
 				yield return leave;
 				yield return new Command_Action
 				{
-					defaultLabel = "CommandCancelRitual".Translate(RitualLabel),
-					defaultDesc = "CommandCancelRitualDesc".Translate(RitualLabel),
+					defaultLabel = "CommandCancelRitual".Translate("VIER.GrandBall.Label".Translate()),
+					defaultDesc = "CommandCancelRitualDesc".Translate("VIER.GrandBall.Label".Translate()),
 					icon = icon,
 					action = () =>
                     {

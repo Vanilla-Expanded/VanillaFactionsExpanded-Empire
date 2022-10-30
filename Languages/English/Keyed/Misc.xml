@@ -6,5 +6,9 @@
 	<VFEE.BallroomRequirements.Unmet>Ballroom requirements unmet for: {0}</VFEE.BallroomRequirements.Unmet>
 	<VFEE.BallroomRequirements.DanceFloorToSmall>Ballroom does not have a big enough dance floor for the guests! They would like an open floor space of {0} infront of an instrument </VFEE.BallroomRequirements.DanceFloorToSmall>
     <VFEE.CourtRequirements>Noble court requirements</VFEE.CourtRequirements>
+	<VIER.GrandBall.Label>Host Grandball</VIER.GrandBall.Label>
+	<VIER.GrandBall.Waiting>Your guests are waiting for you to start the grand ball. They wont wait long however</VIER.GrandBall.Waiting>
+	<VIER.GrandBall.Description>An exclusive ball to only be attended by those with a royal title, and a few who can play instruments</VIER.GrandBall.Description>
+	<VIER.GrandBall.ChooseParticipants>Participants</VIER.GrandBall.ChooseParticipants>
 	
 </LanguageData>

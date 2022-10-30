@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RimWorld;
 using Verse;
+using Verse.AI;
 using Verse.AI.Group;
 
 namespace VFEEmpire
@@ -19,7 +20,10 @@ namespace VFEEmpire
 
         public override void DrawPawnGUIOverlay(Pawn pawn)
         {
-            pawn.Map.overlayDrawer.DrawOverlay(pawn, OverlayTypes.QuestionMark);
+            if (pawn == bestNoble)
+            {
+                pawn.Map.overlayDrawer.DrawOverlay(pawn, OverlayTypes.QuestionMark);
+            }
         }
 
         public override void Init()
@@ -42,7 +46,7 @@ namespace VFEEmpire
         {
             if (target == bestNoble)
             {
-                yield return new FloatMenuOption("BeginRitual".Translate("VFEE.GrandBall.Description".Translate()), () =>
+                yield return new FloatMenuOption("BeginRitual".Translate("VFEE.GrandBall.Label".Translate()), () =>
                 {
                     var lordJob = (LordJob_GrandBall)lord.LordJob;
                     string header = "VFEE.GrandBall.ChooseParticipants".Translate();
@@ -52,14 +56,22 @@ namespace VFEEmpire
                         StartRitual(participants.Participants);
                         return true;
                     };
+                    int instruments = lordJob.ballRoom.ContainedAndAdjacentThings.Count(x => x is Building_MusicalInstrument);
+                    int nonNobles = 0;
                     Func<Pawn, bool, bool, bool> filter = (Pawn pawn, bool voluntary, bool allowOtherIdeos) =>
                     {
+                        Lord lord = pawn.GetLord();
+                        bool result = (lord == null || !(lord.LordJob is LordJob_Ritual)) && !pawn.IsPrisonerOfColony && !pawn.RaceProps.Animal;
+                        if (!result) { return false; }
                         if (!pawn.royalty?.HasAnyTitleIn(Faction.OfEmpire) ?? true)
                         {
-                            return false;
+                            if (nonNobles >= instruments)
+                            {
+                                return false;
+                            }
+                            nonNobles++;                         
                         }
-                        var lord = pawn.GetLord();
-                        return (lord == null || !(lord.LordJob is LordJob_Ritual)) && !pawn.IsPrisonerOfColony && !pawn.RaceProps.Animal;
+                        return true;
                     };
                     string okButtonText = "Begin".Translate();
                     var outcomeDef = InternalDefOf.VFEE_GrandBall_Outcome;
@@ -68,10 +80,29 @@ namespace VFEEmpire
 
             }
         }
+        public override void UpdateAllDuties()
+        {
+            var lordJob = (LordJob_GrandBall)lord.LordJob;
+            foreach(var pawn in lord.ownedPawns)
+            {
+                if(pawn != bestNoble)
+                {
+                    var duty = new PawnDuty(InternalDefOf.VFEE_GrandBallWait);
+                    duty.focus = lordJob.Spot;
+                    pawn.mindState.duty = duty;
+                }
+                else
+                {
+                    pawn.mindState.duty = new PawnDuty(DutyDefOf.Idle);
+                }
+            }
+
+        }
         private void StartRitual(List<Pawn> pawns)
         {
-            this.lord.AddPawns(pawns);
+            lord.AddPawns(pawns);
             ((LordJob_GrandBall)lord.LordJob).colonistParticipants.AddRange(pawns);
+            lord.ReceiveMemo(LordJob_GrandBall.MemoCeremonyStarted);
             foreach (Pawn pawn in pawns)
             {
                 if (pawn.drafter != null)

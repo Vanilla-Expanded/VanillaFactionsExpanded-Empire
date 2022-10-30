@@ -16,6 +16,7 @@ public static class InternalDefOf
     public static DutyDef VFEE_BallLead;
     public static DutyDef VFEE_BallPartner;
     public static DutyDef VFEE_PlayInstrument;
+    public static DutyDef VFEE_GrandBallWait;
     public static JobDef VFEE_WaltzGoTo;
     public static JobDef VFEE_WaltzDip;
 

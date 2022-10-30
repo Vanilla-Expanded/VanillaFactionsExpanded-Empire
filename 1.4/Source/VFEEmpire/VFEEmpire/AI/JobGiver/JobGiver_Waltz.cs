@@ -17,7 +17,8 @@ namespace VFEEmpire
 			Pawn partner = dance.Partner(pawn);
 			if (partner == null) { return null; }
             if (!dance.startPoses.ContainsKey(pawn)) { return null; }
-			if(!dance.AllArrived) { return null; }
+            if (!dance.AllAtStart) { return null; }
+			if(dance.PawnTagSet(pawn, "Arrived")) { return null; }	
 			var cell = pawn.Position;
 			var stage = dance.Stage;
 			Job job;
