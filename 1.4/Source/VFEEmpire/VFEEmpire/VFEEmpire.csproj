@@ -314,7 +314,7 @@
     <Compile Include="Comps\CompResearchRefresh.cs" />
     <Compile Include="DefOf\InternalDefOf.cs" />
     <Compile Include="Comps\HediffComp_RandomDamage.cs" />
-    <Compile Include="HarmonyPatches\PawnRenderer_DrawCarriedThing.cs" />
+    <Compile Include="HarmonyPatches\PawnRenderer_BodyAngle.cs" />
     <Compile Include="HarmonyPatches\Patch_Conceit.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleIcons.cs" />
     <Compile Include="QuestNode\QuestNode_DelayedRitualReward.cs" />
