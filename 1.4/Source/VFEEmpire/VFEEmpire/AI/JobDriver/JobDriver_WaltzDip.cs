@@ -43,7 +43,7 @@ namespace VFEEmpire
 		{
 
 			this.FailOnDowned(TargetIndex.A);
-			Toil toilGoto = Toils_Goto.GotoCell(TargetIndex.B, PathEndMode.OnCell);
+			Toil toilGoto = Toils_Goto.GotoCell(TargetIndex.C, PathEndMode.OnCell);
 			yield return toilGoto;
 			Toil startCarry = Toils_Haul.StartCarryThing(TargetIndex.A);
 			yield return startCarry;

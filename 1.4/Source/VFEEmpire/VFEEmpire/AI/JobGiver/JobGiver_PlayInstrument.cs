@@ -16,7 +16,7 @@ namespace VFEEmpire
 		{
 			var dance = pawn.GetLord()?.LordJob as LordJob_GrandBall;
 			if (dance == null) { return null; }
-			var instruments = dance.ballRoom.ContainedAndAdjacentThings.Where(x => x is Building_MusicalInstrument);
+			var instruments = dance.BallRoom.ContainedAndAdjacentThings.Where(x => x is Building_MusicalInstrument);
             if (!instruments.Any()) { return null; }
 			var insturment = instruments.FirstOrDefault(x => GatheringWorker_Concert.InstrumentAccessible(x as Building_MusicalInstrument, pawn)) as Building_MusicalInstrument;
 			if (insturment == null)

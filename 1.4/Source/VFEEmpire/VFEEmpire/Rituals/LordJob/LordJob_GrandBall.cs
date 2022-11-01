@@ -18,40 +18,75 @@ namespace VFEEmpire
     [StaticConstructorOnStartup]
 	public class LordJob_GrandBall : LordJob_Ritual
 	{
+		//Exposed
 		public Pawn leadNoble;
 		public LocalTargetInfo target;
 		public Thing shuttle;
 		public string questEndedSignal;
 		public bool danceStarted;
-		public bool danceFinished;
-		public RitualOutcomeEffectWorker_GrandBall outcome;
+		public bool danceFinished;		
 		public List<Pawn> colonistParticipants = new();
-		public LordToil exitToil;
-		public LordToil_GrandBall_Dance ballToil;
-		public bool flip;
-		public static readonly int duration = 9000;
+		public bool flip;		
 		public Room ballRoom;
 		public List<Pawn> nobles;
 		public List<Pawn> dancers = new();
 		public CellRect danceArea;
+		private int daMinX;
+		private int daMaxX;
+		private int daMinZ;
+		private int daMaxZ;
 		public List<IntVec3> danceFloor;
-
-		private int ticksThisRotation;
-
-		public Dictionary<Pawn, Pawn> leadPartner = new();
-		private Dictionary<Pawn, List<Pawn>> dancedWith = new();
-		private static Texture2D icon = ContentFinder<Texture2D>.Get("UI/Icons/Rituals/BestowCeremony", true);
 		private int stage = 0;
-		private List<Pawn> tmpHasPartner = new();
-		public Dictionary<Pawn, IntVec3> startPoses = new();
+		private int ticksThisRotation;
+		public Dictionary<Pawn, Pawn> leadPartner = new();
+		private List<Pawn> tmpLeadPawn = new();
+		private List<Pawn> tmpPartPawn = new();
+
+		//Not Exposed
+		private Dictionary<Pawn, List<Pawn>> dancedWith = new(); //not exposed, kind of a hassle and not worth it for effort
+		public Dictionary<Pawn, IntVec3> startPoses = new(); //Not exposed will regenerate if loaded at brief period where its needed
+		public static readonly int duration = 9000;
+		public LordToil exitToil;
+		public LordToil_GrandBall_Dance ballToil;
+		public RitualOutcomeEffectWorker_GrandBall outcome;
+		private List<Pawn> tmpHasPartner = new();		
 		private Dictionary<Pawn, int> totalPresenceTmp = new();
 		protected Dictionary<IntVec3, Mote> highlightedPositions = new Dictionary<IntVec3, Mote>();
 		public static readonly string MemoCeremonyStarted = "CeremonyStarted";
+		private static Texture2D icon = ContentFinder<Texture2D>.Get("UI/Icons/Rituals/BestowCeremony", true);
 		public LordJob_GrandBall()
 		{
 		}
 
-		public LordJob_GrandBall(Pawn leadNoble, LocalTargetInfo targetinfo, Thing shuttle, string questEnded, Room ballRoom, List<IntVec3> danceFloor,CellRect rect)
+        public override void ExposeData()
+        {
+            base.ExposeData();
+			Scribe_References.Look(ref leadNoble, "leadNoble");
+			Scribe_References.Look(ref shuttle, "shuttle");
+			Scribe_TargetInfo.Look(ref target, "target");
+
+			Scribe_Values.Look(ref danceStarted, "danceStarted");
+			Scribe_Values.Look(ref danceFinished, "danceFinished");
+			Scribe_Values.Look(ref stage, "stage");
+			Scribe_Values.Look(ref ticksThisRotation, "ticksThisRotation");
+			Scribe_Values.Look(ref questEndedSignal, "questEndedSignal");
+			Scribe_Values.Look(ref flip, "flip");
+			Scribe_Values.Look(ref daMinX, "daMinX");
+			Scribe_Values.Look(ref daMaxX, "daMaxX");
+			Scribe_Values.Look(ref daMinZ, "daMinZ");
+			Scribe_Values.Look(ref daMaxZ, "daMaxZ");
+
+			Scribe_Collections.Look(ref danceFloor, "danceFloor", LookMode.Value);
+			Scribe_Collections.Look(ref nobles, "nobles", LookMode.Reference);			
+			Scribe_Collections.Look(ref dancers, "dancers", LookMode.Reference);
+			Scribe_Collections.Look(ref colonistParticipants, "colonistParticipants", LookMode.Reference);
+			Scribe_Collections.Look(ref leadPartner, "leadPartner", LookMode.Reference,LookMode.Reference,ref tmpLeadPawn,ref tmpPartPawn);
+			if(Scribe.mode == LoadSaveMode.PostLoadInit)
+            {				
+				danceArea = CellRect.FromLimits(daMinX, daMinZ,daMaxX,daMaxZ);				
+			}
+		}
+        public LordJob_GrandBall(Pawn leadNoble, LocalTargetInfo targetinfo, Thing shuttle, string questEnded, Room ballRoom, List<IntVec3> danceFloor,CellRect rect)
         {
             this.leadNoble = leadNoble;
             this.target = targetinfo;
@@ -60,7 +95,11 @@ namespace VFEEmpire
             this.ballRoom = ballRoom;
             this.danceFloor = danceFloor;
 			danceArea = rect;
-        }
+			daMinX = rect.minX;
+			daMaxX = rect.maxX;
+			daMinZ = rect.minZ;
+			daMaxZ = rect.maxZ;
+		}
 
         public bool AllArrived
         {
@@ -95,12 +134,24 @@ namespace VFEEmpire
 				return all;
 			}
 		}
+		//I'm too mad to explain how this got here it. WHY IS POSTLOADINIT NOT ACTUALLY POST LOAD
+		public Room BallRoom
+        {
+            get
+            {
+				if(ballRoom == null)
+                {
+					return ballRoom = Spot.GetRoom(lord.lordManager.map);
+				}
+				return ballRoom;
+			}
+        }
 		public override bool AllowStartNewGatherings => !danceStarted || danceFinished;
 
 		public virtual DanceStages Stage => danceStages[stage];
 		public override IntVec3 Spot => target.Cell;
 
-		public override string RitualLabel => "VIER.GrandBall.Label".Translate();
+		public override string RitualLabel => "VFEE.GrandBall.Label".Translate();
 
 		public override StateGraph CreateGraph()
 		{
@@ -153,7 +204,7 @@ namespace VFEEmpire
 			}));
 			transition_BallInterupted.AddTrigger(new Trigger_TickCondition(() =>
 			{
-				return ballRoom.PsychologicallyOutdoors || shuttle.Destroyed;
+				return BallRoom.PsychologicallyOutdoors || shuttle.Destroyed;
 			}, 60));
 			transition_BallInterupted.AddTrigger(new Trigger_PawnHarmed());
 			transition_BallInterupted.AddTrigger(new Trigger_PawnLostViolently());
@@ -171,6 +222,11 @@ namespace VFEEmpire
 			transition_LeaveHostile.AddTrigger(new Trigger_BecamePlayerEnemy());
 			graph.transitions.Add(transition_LeaveHostile);
 
+			var transition_DurationTimeOut = new Transition(wait_StartBall, exitToil);
+			transition_DurationTimeOut.AddPreAction(removeColonists);
+			transition_DurationTimeOut.AddTrigger(new Trigger_TicksPassed(60000));
+			transition_DurationTimeOut.AddPostAction(new TransitionAction_Custom(() => QuestUtility.SendQuestTargetSignals(lord.questTags, "CeremonyTimeout", lord.Named("SUBJECT"))));
+			graph.transitions.Add(transition_DurationTimeOut);
 			var transition_Hurt = new Transition(moveToPlace, exitToil);
 			transition_Hurt.AddPreAction(removeColonists);
 			transition_Hurt.AddSource(wait_StartBall);
@@ -207,15 +263,17 @@ namespace VFEEmpire
 				int radius = danceFloor.Count >= 72 ? 2 : 1;
 				CellRect personalRect = CellRect.CenteredOn(c, radius);
 				CellRect partRect = CellRect.CenteredOn(pCell, radius);
-				return !startPoses.Values.Contains(c) && !startPoses.Values.Contains(pCell) && personalRect.FullyContainedWithin(danceArea) && partRect.FullyContainedWithin(danceArea);
+				return !startPoses.Values.Any(x=>x.AdjacentToCardinal(c)) && !startPoses.Values.Any(x => x.AdjacentToCardinal(c)) && personalRect.FullyContainedWithin(danceArea) && partRect.FullyContainedWithin(danceArea);
 			}, out var cell))
             {
 				var pCell = cell + IntVec3.North;
 				startPoses.Add(partner, pCell);
 				startPoses.Add(pawn, cell);
 				Mote mote = MoteMaker.MakeStaticMote(cell.ToVector3Shifted(), this.Map, ThingDefOf.Mote_RolePositionHighlight);
+				mote.Maintain();
 				highlightedPositions.Add(cell, mote);
 				Mote mote2 = MoteMaker.MakeStaticMote(pCell.ToVector3Shifted(), this.Map, ThingDefOf.Mote_RolePositionHighlight);
+				mote2.Maintain();
 				highlightedPositions.Add(pCell, mote2);
 				return cell;
             }
@@ -232,7 +290,7 @@ namespace VFEEmpire
             {
 				outcome.Tick(this, 1f);
 				ticksThisRotation++;
-				if (ticksThisRotation > 300)
+				if (ticksThisRotation > 300 || AllArrived)
 				{
 					StageSwap();					
 				}
@@ -249,6 +307,7 @@ namespace VFEEmpire
 			foreach (var pawn in nobles)
 			{
 				List<Pawn> pastPartners = null;
+                if (tmpHasPartner.Contains(pawn)) { continue; }
 				if (dancedWith.ContainsKey(pawn))
 				{
 					pastPartners = dancedWith[pawn];
@@ -360,11 +419,11 @@ namespace VFEEmpire
 		}
         public override string GetReport(Pawn pawn)
         {
-            return "LordReportAttending".Translate("VIER.GrandBall.Label".Translate());
+            return "LordReportAttending".Translate("VFEE.GrandBall.Label".Translate());
 		}
         public void InterruptDancers()
 		{
-			foreach (var pawn in dancers)
+			foreach (var pawn in nobles)
 			{
 				pawn.jobs.CheckForJobOverride();
 			}
@@ -440,8 +499,8 @@ namespace VFEEmpire
             else if(p.Faction == Faction.OfPlayer)
             {
 				Command_Action leave = new();
-				leave.defaultLabel = "CommandLeaveRitual".Translate("VIER.GrandBall.Label".Translate());
-				leave.defaultDesc = "CommandLeaveRitualDesc".Translate("VIER.GrandBall.Label".Translate());
+				leave.defaultLabel = "VFEE.GrandBall.Leave.label".Translate();
+				leave.defaultDesc = "VFEE.GrandBall.Leave.Desc".Translate();
 				leave.icon = icon;
 				leave.action = () =>
 				{
@@ -452,12 +511,12 @@ namespace VFEEmpire
 				yield return leave;
 				yield return new Command_Action
 				{
-					defaultLabel = "CommandCancelRitual".Translate("VIER.GrandBall.Label".Translate()),
-					defaultDesc = "CommandCancelRitualDesc".Translate("VIER.GrandBall.Label".Translate()),
+					defaultLabel = "VFEE.GrandBall.Cancel.Label".Translate(),
+					defaultDesc = "VFEE.GrandBall.Cancel.Desc".Translate(),
 					icon = icon,
 					action = () =>
                     {
-						Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("CommandCancelRitualConfirm".Translate(RitualLabel), () =>
+						Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("VFEE.GrandBall.Cancel.Confirm".Translate(), () =>
 						{
 							StopDance("CeremonyFailed");
 						}));

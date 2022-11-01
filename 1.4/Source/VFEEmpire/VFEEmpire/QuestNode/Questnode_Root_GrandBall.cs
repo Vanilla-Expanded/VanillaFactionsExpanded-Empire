@@ -16,8 +16,6 @@ namespace VFEEmpire
             Map map = QuestGen_Get.GetMap(false, null);
 
             bool title = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle).Any(x => x?.def.Ext() != null && !x.def.Ext().ballroomRequirements.NullOrEmpty());
-            var faction = !Faction.OfPlayer.HostileTo(Faction.OfEmpire);
-            var ballroom = map.RoyaltyTracker().Ballrooms.Any(); 
             return title && !Faction.OfEmpire.HostileTo(Faction.OfPlayer) && map.RoyaltyTracker().Ballrooms.Any(); 
         }
         
@@ -80,7 +78,7 @@ namespace VFEEmpire
                     }
                     return totalHonor;
                 });
-            float threatChance = Mathf.Clamp(guestWeight + colonistWeight / 1000f, 0.25f, 1f);//25% minimum chance
+            float threatChance = Mathf.Clamp((guestWeight + colonistWeight) / 1000f, 0.25f, 1f);//25% minimum chance
             Faction deserters = Find.FactionManager.FirstFactionOfDef(InternalDefOf.VFEE_Deserters);
             IntVec3 arriveCell = IntVec3.Invalid;
             
@@ -92,7 +90,7 @@ namespace VFEEmpire
             if (raid)
             {
                 //raid arrives half way through ritual
-                quest.Delay(10000, () => 
+                quest.Delay(LordJob_GrandBall.duration/2, () => 
                 {
                     var raiders = PawnGroupMakerUtility.GeneratePawns(new PawnGroupMakerParms
                     {
@@ -101,6 +99,11 @@ namespace VFEEmpire
                         points = points,
                         tile = map.Tile
                     }).ToList();
+                    foreach(var raider in raiders)
+                    {
+                        Find.WorldPawns.PassToWorld(raider);
+                        QuestGen.AddToGeneratedPawns(raider);
+                    }
                     var raidArrives = new QuestPart_PawnsArrive
                     {
                         pawns = raiders,
@@ -128,7 +131,7 @@ namespace VFEEmpire
             slate.Set("map", map, false);
             slate.Set("asker", bestNoble, false);
             slate.Set("faction", empire, false);
-
+            slate.Set("shuttle", shuttle);
 
             //Success signals are more then this due to the ritual complete part.
             //SingalSequenceAll i think is that i need for this. Will by leftHealthy + ritual complate to be success
@@ -227,8 +230,10 @@ namespace VFEEmpire
             var questPart_RequirementsToAcceptPawnOnColonyMap = new QuestPart_RequirementsToAcceptPawnOnColonyMap();
             questPart_RequirementsToAcceptPawnOnColonyMap.pawn = colonyHost;
             quest.AddPart(questPart_RequirementsToAcceptPawnOnColonyMap);
-            
+
             //Fail signal recieveds
+            FailResults(quest, QuestGenUtility.HardcodedSignalWithQuestID("CeremonyFailed"), "[CeremonyFailedLetterLabel]", "[CeremonyFailedLetterText]", nobles);
+            FailResults(quest, QuestGenUtility.HardcodedSignalWithQuestID("CeremonyTimeout"), "[CeremonyTimeoutLetterLabel]", "[CeremonyTimeoutLetterText]", nobles);
             FailResults(quest, questPart_LodgerLeave.outSignalArrested_LeaveColony, "[lodgerArrestedLeaveMapLetterLabel]", "[lodgerArrestedLeaveMapLetterText]", nobles);
             FailResults(quest, questPart_LodgerLeave.outSignalDestroyed_LeaveColony, "[lodgerDiedLeaveMapLetterLabel]", "[lodgerDiedLeaveMapLetterText]", nobles);
             FailResults(quest, questPart_LodgerLeave.outSignalSurgeryViolation_LeaveColony, "[lodgerSurgeryVioLeaveMapLetterLabel]", "[lodgerSurgeryVioLeaveMapLetterText]", nobles);

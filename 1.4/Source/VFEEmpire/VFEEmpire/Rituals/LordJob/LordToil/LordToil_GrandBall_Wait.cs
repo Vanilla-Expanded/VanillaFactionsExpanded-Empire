@@ -46,7 +46,7 @@ namespace VFEEmpire
         {
             if (target == bestNoble)
             {
-                yield return new FloatMenuOption("BeginRitual".Translate("VFEE.GrandBall.Label".Translate()), () =>
+                yield return new FloatMenuOption("VFEE.GrandBall.Label".Translate().ToString(), () =>
                 {
                     var lordJob = (LordJob_GrandBall)lord.LordJob;
                     string header = "VFEE.GrandBall.ChooseParticipants".Translate();
@@ -56,7 +56,7 @@ namespace VFEEmpire
                         StartRitual(participants.Participants);
                         return true;
                     };
-                    int instruments = lordJob.ballRoom.ContainedAndAdjacentThings.Count(x => x is Building_MusicalInstrument);
+                    int instruments = lordJob.BallRoom.ContainedAndAdjacentThings.Count(x => x is Building_MusicalInstrument);
                     int nonNobles = 0;
                     Func<Pawn, bool, bool, bool> filter = (Pawn pawn, bool voluntary, bool allowOtherIdeos) =>
                     {

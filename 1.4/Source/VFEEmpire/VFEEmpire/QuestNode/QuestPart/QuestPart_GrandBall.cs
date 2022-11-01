@@ -16,13 +16,7 @@ namespace VFEEmpire
         {
             return pawns.Contains(p);
         }
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_References.Look(ref leadPawn, "leadPawn");
-            Scribe_References.Look(ref shuttle, "shuttle");
-            Scribe_Values.Look(ref questTag, "questTag");
-        }
+
         protected override Lord MakeLord()
         {
             Room ballroom = null;
@@ -80,6 +74,14 @@ namespace VFEEmpire
             spot = LocalTargetInfo.Invalid;
             absoluteSpot = IntVec3.Invalid;
             return false;
+        }
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_References.Look(ref leadPawn, "leadPawn");
+            Scribe_References.Look(ref shuttle, "shuttle");
+            Scribe_Values.Look(ref questTag, "questTag");
+            Scribe_Values.Look(ref requiredDanceFloor, "requiredDanceFloor");
         }
         public Pawn leadPawn;
         public string questTag;

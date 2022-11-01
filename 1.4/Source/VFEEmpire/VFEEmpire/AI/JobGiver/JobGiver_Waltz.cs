@@ -27,7 +27,7 @@ namespace VFEEmpire
 			{
 				if (dance.LeadPawn(pawn))
 				{
-					job = JobMaker.MakeJob(InternalDefOf.VFEE_WaltzDip, partner, cell);
+					job = JobMaker.MakeJob(InternalDefOf.VFEE_WaltzDip, partner, partner.Position, cell);
 					job.count = 1;
 					return job;
 				}

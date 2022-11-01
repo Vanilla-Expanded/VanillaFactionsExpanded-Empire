@@ -14,10 +14,11 @@ namespace VFEEmpire
         {
             Map currentMap = Find.CurrentMap;
             if (center.GetRoom(currentMap)?.PsychologicallyOutdoors ?? true) { return; }
-            //Okay hacky logic for how this works. Offset is always south, I need offset -1 so that the center is still inside the occupied rect so for 1x1 center is still true center 3x3s its 1 off center on opposite side of interact
-            var offset = def.interactionCellOffset + IntVec3.North;            
-            center += offset.RotatedBy(rot.Opposite);
-            var danceFloor = CalculateDanceCells(def, center, rot, currentMap, out bool allStand,out CellRect rect);
+
+            var offset = def.interactionCellOffset.RotatedBy(rot.Opposite); //Always opposite of interaction cell
+            var gridRot = def.interactionCellOffset.z > 0 ? rot.Opposite : rot; //which way the grid should extend depends on which direction interaction cell is going
+            center += offset;
+            var danceFloor = CalculateDanceCells(def, center, gridRot, currentMap, out bool allStand,out CellRect rect);
             if (allStand)
             {
                 GenDraw.DrawFieldEdges(danceFloor);

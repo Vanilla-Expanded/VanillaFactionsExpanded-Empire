@@ -10,6 +10,10 @@ namespace VFEEmpire
 {
     public class QuestPart_LodgerLeave : QuestPartActivable
     {
+        public override bool QuestPartReserves(Pawn p)
+        {
+            return pawns.Contains(p);
+        }
         protected override void ProcessQuestSignal(Signal signal)
         {
             //Thing
@@ -94,8 +98,8 @@ namespace VFEEmpire
 
             Scribe_References.Look(ref faction, "faction");
             Scribe_References.Look(ref mapParent, "mapParent");
-            Scribe_Collections.Look(ref pawns, "pawns", LookMode.Reference);
-            Scribe_Collections.Look(ref pawnsCantDie, "pawns", LookMode.Reference);
+            Scribe_Collections.Look(ref pawns, "pawns", LookMode.Reference);            
+            Scribe_Collections.Look(ref pawnsCantDie, "pawnsCantDie", LookMode.Reference);
         }
         public List<Pawn> pawns;
         public List<Pawn> pawnsCantDie;

@@ -19,9 +19,9 @@ namespace VFEEmpire
             if (dance.AllAtStart) { return null; }
 			var cell = dance.StartPosition(pawn);
 			if(cell == IntVec3.Invalid) { return null; }
-			if(pawn.Position == cell) { return null; }
+			if(pawn.Position == cell) { return null; }			
 			var job = JobMaker.MakeJob(JobDefOf.Goto, cell);
-			job.locomotionUrgency = LocomotionUrgency.Jog;
+			job.locomotionUrgency = pawn.Position.DistanceTo(cell) > 11f ? LocomotionUrgency.Jog : LocomotionUrgency.Amble; //So when its a partner swap everyone doesnt just sprint around, but still hussles if for first start
 			job.ritualTag = "AtStart";
 			return job;
 		}

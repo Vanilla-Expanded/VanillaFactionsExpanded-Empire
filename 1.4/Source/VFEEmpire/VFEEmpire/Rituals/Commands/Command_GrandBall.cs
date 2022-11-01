@@ -37,7 +37,7 @@ namespace VFEEmpire
                 action(participants.Participants);
                 return true;
             };
-            int instruments = job.ballRoom.ContainedAndAdjacentThings.Count(x => x is Building_MusicalInstrument);
+            int instruments = job.BallRoom.ContainedAndAdjacentThings.Count(x => x is Building_MusicalInstrument);
             int nonNobles = 0;
             Func<Pawn, bool, bool, bool> filter = (Pawn pawn, bool voluntary, bool allowOtherIdeos) =>
             {

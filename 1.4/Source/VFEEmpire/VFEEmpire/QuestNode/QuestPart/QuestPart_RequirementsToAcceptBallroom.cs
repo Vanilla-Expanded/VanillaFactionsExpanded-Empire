@@ -76,6 +76,7 @@ namespace VFEEmpire
             base.ExposeData();
             Scribe_References.Look(ref mapParent, "mapParent");
             Scribe_Collections.Look(ref pawns, "pawns", LookMode.Reference);
+            Scribe_Values.Look(ref missingCells, "missingCells");
         }
 
 

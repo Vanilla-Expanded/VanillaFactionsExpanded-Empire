@@ -43,7 +43,7 @@ namespace VFEEmpire
 			var dance = pawn.GetLord()?.LordJob as LordJob_GrandBall;
 			if(CellFinder.TryFindRandomReachableCellNear(dance.Spot, dance.Map, 13f, TraverseParms.For(pawn), (IntVec3 c) =>
 			{
-				return !dance.danceArea.Contains(c) && c.GetRoom(dance.Map) == dance.ballRoom && pawn.CanReserveSittableOrSpot(c);
+				return !dance.danceArea.Contains(c) && c.GetRoom(dance.Map) == dance.BallRoom && pawn.CanReserveSittableOrSpot(c);
 			},null,out spot))
             {
 				return true;
