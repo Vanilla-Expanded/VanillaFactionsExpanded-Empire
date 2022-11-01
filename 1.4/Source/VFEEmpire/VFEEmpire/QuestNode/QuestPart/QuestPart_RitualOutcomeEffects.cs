@@ -19,7 +19,8 @@ namespace VFEEmpire
             Slate slate = new();
             slate.Set("rewardGiver", leadNoble);
             slate.Set("marketValueRange", MarketValueRange, false);
-            slate.Set("outcome", outcomeIndex);
+            var outcomeString = outcomeDef.outcomeChances[outcomeIndex].label;
+            slate.Set("outcome", outcomeString);
             return slate;
         }
         public override QuestScriptDef QuestDef => InternalDefOf.VFEE_DelayedGrandBallOutcome;
@@ -29,7 +30,7 @@ namespace VFEEmpire
             get
             {
                 FloatRange floatRange = new();
-                if (outcomeIndex > 0)
+                if (outcomeIndex > 2)
                 {
                     floatRange.min = initMarkValue;
                     floatRange.max = initMarkValue * outcomeIndex * 1.5f;
@@ -52,6 +53,10 @@ namespace VFEEmpire
                     return;
                 }
                 outcomeIndex = outcome;
+                if(outcomeIndex < -1)
+                {
+                    return;
+                }
             }
             base.Notify_QuestSignalReceived(signal);
         }

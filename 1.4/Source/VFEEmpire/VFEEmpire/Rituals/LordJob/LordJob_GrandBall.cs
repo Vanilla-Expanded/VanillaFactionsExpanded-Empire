@@ -166,6 +166,7 @@ namespace VFEEmpire
 			var wait_StartBall = new LordToil_GrandBall_Wait(leadNoble);
 			graph.AddToil(wait_StartBall);
 			var wait_PostBall = new LordToil_Wait();
+			graph.AddToil(wait_PostBall);
 
 			exitToil = new LordToil_EnterShuttleOrLeave(shuttle, Verse.AI.LocomotionUrgency.Walk, true, true);
 			graph.AddToil(exitToil);
@@ -193,7 +194,7 @@ namespace VFEEmpire
 			
 			var transition_BallEnd = new Transition(ballToil, wait_PostBall);
 			transition_BallEnd.AddPreAction(removeColonists);
-			transition_BallEnd.AddTrigger(new Trigger_Memo("CeremonyDone"));
+			transition_BallEnd.AddTrigger(new Trigger_Memo("CeremonyFinished"));
 			transition_BallEnd.AddPostAction(new TransitionAction_Custom(() => QuestUtility.SendQuestTargetSignals(lord.questTags, "CeremonyDone", lord.Named("SUBJECT"))));
 			graph.transitions.Add(transition_BallEnd);
 
@@ -212,9 +213,16 @@ namespace VFEEmpire
 			transition_BallInterupted.AddTrigger(new Trigger_Signal(questEndedSignal));
 			graph.transitions.Add(transition_BallInterupted);
 
-			var transition_Leave = new Transition(wait_PostBall, exitToil);
+			var transition_Leave = new Transition(wait_PostBall, exitToil); //Wont leave if theres still an active threat
 			transition_Leave.AddPreAction(removeColonists);
-			transition_Leave.AddTrigger(new Trigger_TicksPassed(600));
+			transition_Leave.AddTrigger(new Trigger_TickCondition(() =>
+			{
+				return !GenHostility.AnyHostileActiveThreatTo(Map,Faction.OfEmpire) || BallRoom.PsychologicallyOutdoors || shuttle.Destroyed;
+			}, 60));
+			transition_Leave.AddTrigger(new Trigger_PawnHarmed());
+			transition_Leave.AddTrigger(new Trigger_PawnLostViolently());
+			transition_Leave.AddTrigger(new Trigger_Signal(questEndedSignal));
+			transition_Leave.AddTrigger(new Trigger_TicksPassed(30000));
 			graph.transitions.Add(transition_Leave);
 
 			var transition_LeaveHostile = new Transition(moveToPlace, exitToil);
@@ -350,7 +358,22 @@ namespace VFEEmpire
 				dancedWith.Add(pawn, new List<Pawn> { partner });
             }
         }
-		public void StartDance()
+        public override void Notify_PawnLost(Pawn p, PawnLostCondition condition)
+        {
+            base.Notify_PawnLost(p, condition);			
+            if (nobles.Contains(p) && ticksPassed < duration)
+            {
+				nobles.Remove(p);
+                if (dancers.Contains(p))
+                {
+					dancers.Remove(p);
+					ToTopOfDance();
+					InterruptDancers();
+				}
+            }
+			p.jobs?.CheckForJobOverride();
+		}
+        public void StartDance()
 		{
 			nobles = lord.ownedPawns.Where(x => x.royalty?.HasAnyTitleIn(Faction.OfEmpire) ?? false).ToList();
 			SetPartners();
@@ -371,8 +394,7 @@ namespace VFEEmpire
 		public void StopDance(string signal)
 		{
 			danceFinished = true;
-			lord.ReceiveMemo("CeremonyFinished");
-			QuestUtility.SendQuestTargetSignals(lord.questTags, signal, lord.Named("SUBJECT"));
+
 			foreach (KeyValuePair<Pawn, int> keyValuePair in ballToil.Data.presentForTicks)
 			{
 				if (keyValuePair.Key != null && !keyValuePair.Key.Dead)
@@ -391,7 +413,11 @@ namespace VFEEmpire
 			}
 			totalPresenceTmp.RemoveAll((tp) => tp.Value < 2500);
 			outcome.Apply(ticksPassed / duration, totalPresenceTmp, this);
-			InterruptDancers();
+			outcome.ResetCompDatas();
+			lord.ReceiveMemo("CeremonyFinished");
+			QuestUtility.SendQuestTargetSignals(lord.questTags, signal, lord.Named("SUBJECT"));
+			foreach (var pawn in lord.ownedPawns)
+				pawn.jobs.CheckForJobOverride();
 		}
 		public void RemoveTags(string tag)
         {
@@ -403,6 +429,20 @@ namespace VFEEmpire
                 }
             }
         }
+		public void ToTopOfDance()
+        {
+			if (ticksPassed > duration)
+			{
+				StopDance("CeremonySuccess");
+				return;
+			}
+			stage = 0;
+			flip = !flip;
+			SetPartners();
+			startPoses.Clear();
+			highlightedPositions.Clear();
+			RemoveTags("AtStart");
+		}
 		public void StageSwap()
 		{
 			stage++;
@@ -410,17 +450,7 @@ namespace VFEEmpire
 			RemoveTags("Arrived");
 			if (stage >= danceStages.Count)
 			{
-				if (ticksPassed > duration)
-                {
-					StopDance("CeremonySucess");
-					return;
-				}
-				stage = 0;
-				flip = !flip;
-				SetPartners();
-				startPoses.Clear();
-				highlightedPositions.Clear();
-				RemoveTags("AtStart");
+				ToTopOfDance();
 			}
 			InterruptDancers();
 		}

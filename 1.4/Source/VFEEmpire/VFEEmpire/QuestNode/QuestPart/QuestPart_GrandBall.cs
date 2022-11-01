@@ -46,6 +46,10 @@ namespace VFEEmpire
         {
             base.Cleanup();
             Find.SignalManager.SendSignal(new Signal(questTag + ".QuestEnded", quest.Named("SUBJECT")));
+            if (Map.lordManager.lords.Contains(lord))//The lord never gets removed due to Lord:CanExistWithoutPawns
+            {
+                Map.lordManager.RemoveLord(lord);
+            }
         }
         public static bool TryGetGrandBallSpot(Room ballroom, Map map,out LocalTargetInfo spot, out IntVec3 absoluteSpot, out List<IntVec3> danceFloor, out CellRect rect)
         {            
@@ -83,10 +87,12 @@ namespace VFEEmpire
         {
             base.ExposeData();
             Scribe_References.Look(ref leadPawn, "leadPawn");
+            Scribe_References.Look(ref lord, "lord");
             Scribe_References.Look(ref shuttle, "shuttle");
             Scribe_Values.Look(ref questTag, "questTag");
             Scribe_Values.Look(ref requiredDanceFloor, "requiredDanceFloor");
         }
+        public Lord lord; //Because lords wont ever expire without this
         public Pawn leadPawn;
         public string questTag;
         public Thing shuttle;

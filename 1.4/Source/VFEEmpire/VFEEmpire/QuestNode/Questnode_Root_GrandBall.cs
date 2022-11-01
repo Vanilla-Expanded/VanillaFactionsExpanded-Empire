@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
@@ -39,9 +40,12 @@ namespace VFEEmpire
             int nobleCount = new IntRange(4,(int)Math.Floor(QuestNoblesCurve.Evaluate(points))).RandomInRange;  //Max # increased with difficulty but still random how many you can get
             int danceFloorSize = Mathf.Max(49, nobleCount * 9);
             var bestNoble = EmpireUtility.GenerateNoble(leadTitle);
+            string questTag = QuestGenUtility.HardcodedTargetQuestTagWithQuestID("GrandBall");
+            QuestUtility.AddQuestTag(ref bestNoble.questTags, questTag);
+            QuestGen.AddToGeneratedPawns(bestNoble);
             var nobles = new List<Pawn> { bestNoble };
             int tries = 0;
-            string questTag = QuestGenUtility.HardcodedTargetQuestTagWithQuestID("GrandBall");
+            StringBuilder sb = new();
             while (nobles.Count < nobleCount)
             {
                 var title = DefDatabase<RoyalTitleDef>.AllDefs.Where(x => x.seniority < leadTitle.seniority).RandomElementByWeight(x => x.commonality);
@@ -49,7 +53,9 @@ namespace VFEEmpire
                 if (pawn != null)
                 {
                     nobles.Add(pawn);
+                    sb.AppendInNewLine(pawn.NameFullColored + ", " + pawn.royalty.HighestTitleWith(empire).Label + " of the " + empire.Name);
                     QuestUtility.AddQuestTag(ref pawn.questTags, questTag);
+                    QuestGen.AddToGeneratedPawns(pawn);
                     tries = 0;
                 }
                 tries++;
@@ -59,7 +65,7 @@ namespace VFEEmpire
                     break;
                 }
             }
-            
+            slate.Set("noblesDetailList", sb.ToString());
             var shuttle = QuestGen_Shuttle.GenerateShuttle(empire, nobles);
             QuestUtility.AddQuestTag(ref shuttle.questTags, questTag);
             QuestUtility.AddQuestTag(ref bestNoble.questTags, questTag);
@@ -81,12 +87,10 @@ namespace VFEEmpire
             float threatChance = Mathf.Clamp((guestWeight + colonistWeight) / 1000f, 0.25f, 1f);//25% minimum chance
             Faction deserters = Find.FactionManager.FirstFactionOfDef(InternalDefOf.VFEE_Deserters);
             IntVec3 arriveCell = IntVec3.Invalid;
-            
-            bool raid = Rand.Chance(threatChance) && deserters != null && RCellFinder.TryFindRandomPawnEntryCell(out arriveCell,map,CellFinder.EdgeRoadChance_Hostile);
-            //Debug
-            Log.Message(threatChance.ToStringPercent() + " raid chance, Raid:" + raid);
+
+            bool raid = Rand.Chance(threatChance) && deserters != null && deserters.HostileTo(Faction.OfPlayer) && RCellFinder.TryFindRandomPawnEntryCell(out arriveCell,map,CellFinder.EdgeRoadChance_Hostile);
             //**Raid
-            string ritualStarted = QuestGenUtility.HardcodedSignalWithQuestID("ritualStarted");
+            string ritualStarted = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.ritualStarted");
             if (raid)
             {
                 //raid arrives half way through ritual
@@ -96,7 +100,7 @@ namespace VFEEmpire
                     {
                         faction = deserters,
                         groupKind = PawnGroupKindDefOf.Combat,
-                        points = points,
+                        points = points * 0.5f, //Making it a half point raid as a full point raid with no warning and during a situation where certain pawns are tied up is brutal
                         tile = map.Tile
                     }).ToList();
                     foreach(var raider in raiders)
@@ -135,8 +139,8 @@ namespace VFEEmpire
 
             //Success signals are more then this due to the ritual complete part.
             //SingalSequenceAll i think is that i need for this. Will by leftHealthy + ritual complate to be success
-            string allLeftHealthy = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.LeftmapAllHealthy");
-            string pickupSuccess = QuestGenUtility.HardcodedSignalWithQuestID("pickupShipThing.SentSatisfied");
+            string allLeftHealthy = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.LeftmapAllHealthy");
+            string pickupSuccess = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.SentSatisfied");
             string leftHealthy = QuestGenUtility.HardcodedSignalWithQuestID("leftHealthy");
             quest.AnySignal(new List<string>
             {
@@ -151,24 +155,25 @@ namespace VFEEmpire
             slate.Set("lodgers", lodgers);
 
             //Delayed Reward Part
-            string outComeSignal = QuestGenUtility.HardcodedSignalWithQuestID("OUTCOME");
+            string outComeSignal = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.OUTCOME");
             float initMarketValue = bestTitle.def.seniority * (raid ? 2 : 1) * Find.Storyteller.difficulty.EffectiveQuestRewardValueFactor * Rand.Range(0.85f,1.25f);
             var questPart_DelayedRitualReward = new QuestPart_RitualOutcomeEffects
             {
                 leadNoble = bestNoble,
                 inSignal = outComeSignal,
                 initMarkValue = initMarketValue,
+                outcomeDef = InternalDefOf.VFEE_GrandBall_Outcome
             };
             quest.AddPart(questPart_DelayedRitualReward);
 
             //Bunch of signals here
-            string lodgerArrestedSignal = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Arrested");
-            string lodgerDestroyedSignal = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Destroyed");
-            string lodgerKidnapped = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Kidnapped");
-            string lodgerSurgeyViolation = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.SurgeryViolation");
-            string lodgerLeftMap = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.LeftMap");
-            string lodgerBanished = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Banished");
-            string shuttleDestroyed = QuestGenUtility.HardcodedSignalWithQuestID("pickupShipThing.Destroyed");
+            string lodgerArrestedSignal = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.Arrested");
+            string lodgerDestroyedSignal = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.Destroyed");
+            string lodgerKidnapped = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.Kidnapped");
+            string lodgerSurgeyViolation = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.SurgeryViolation");
+            string lodgerLeftMap = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.LeftMap");
+            string lodgerBanished = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.Banished");
+            string shuttleDestroyed = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.Destroyed");
             //All exit fail conditions
             //These apply to all except dying which only applies to nobles
             var questPart_LodgerLeave = new QuestPart_LodgerLeave()
@@ -183,13 +188,13 @@ namespace VFEEmpire
                 inSignalLeftMap = lodgerLeftMap,
                 inSignalShuttleDestroyed = shuttleDestroyed,
                 inSignalSurgeryViolation = lodgerSurgeyViolation,
-                outSignalArrested_LeaveColony = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Arrested_LeaveColony"),
-                outSignalDestroyed_LeaveColony = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Destroyed_LeaveColony"),
-                outSignalSurgeryViolation_LeaveColony = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.SurgeryViolation_LeaveColony"),
+                outSignalArrested_LeaveColony = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.Arrested_LeaveColony"),
+                outSignalDestroyed_LeaveColony = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.Destroyed_LeaveColony"),
+                outSignalSurgeryViolation_LeaveColony = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.SurgeryViolation_LeaveColony"),
                 outSignalLast_LeftMapAllNotHealthy = allLeftHealthy,
-                outSignalLast_Banished = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Banished_LeaveColony"),
-                outSignalLast_LeftMapAllHealthy = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.LeftmapAllHealthy"),
-                outSignalLast_Kidnapped = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Kidnapped_LeaveColony"),
+                outSignalLast_Banished = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.Banished_LeaveColony"),
+                outSignalLast_LeftMapAllHealthy = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.LeftmapAllHealthy"),
+                outSignalLast_Kidnapped = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.Kidnapped_LeaveColony"),
                 outSignalShuttleDestroyed = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.Destroyed"),
                 faction = empire,
                 mapParent = map.Parent,
@@ -232,14 +237,13 @@ namespace VFEEmpire
             quest.AddPart(questPart_RequirementsToAcceptPawnOnColonyMap);
 
             //Fail signal recieveds
-            FailResults(quest, QuestGenUtility.HardcodedSignalWithQuestID("CeremonyFailed"), "[CeremonyFailedLetterLabel]", "[CeremonyFailedLetterText]", nobles);
-            FailResults(quest, QuestGenUtility.HardcodedSignalWithQuestID("CeremonyTimeout"), "[CeremonyTimeoutLetterLabel]", "[CeremonyTimeoutLetterText]", nobles);
+            FailResults(quest, QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.CeremonyFailed"), "[CeremonyFailedLetterLabel]", "[CeremonyFailedLetterText]", nobles);
+            FailResults(quest, QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.CeremonyTimeout"), "[CeremonyTimeoutLetterLabel]", "[CeremonyTimeoutLetterText]", nobles);
             FailResults(quest, questPart_LodgerLeave.outSignalArrested_LeaveColony, "[lodgerArrestedLeaveMapLetterLabel]", "[lodgerArrestedLeaveMapLetterText]", nobles);
             FailResults(quest, questPart_LodgerLeave.outSignalDestroyed_LeaveColony, "[lodgerDiedLeaveMapLetterLabel]", "[lodgerDiedLeaveMapLetterText]", nobles);
             FailResults(quest, questPart_LodgerLeave.outSignalSurgeryViolation_LeaveColony, "[lodgerSurgeryVioLeaveMapLetterLabel]", "[lodgerSurgeryVioLeaveMapLetterText]", nobles);
             FailResults(quest, questPart_LodgerLeave.outSignalLast_Banished, "[lodgerBanishedLeaveMapLetterLabel]", "[lodgerBanishedLeaveMapLetterText]", nobles);
             FailResults(quest, questPart_LodgerLeave.outSignalLast_Kidnapped, "[lodgerKidnappedLeaveMapLetterLabel]", "[lodgerKidnappedLeaveMapLetterText]", nobles);
-            FailResults(quest, questPart_LodgerLeave.outSignalLast_LeftMapAllNotHealthy, "[lodgerLeftNotAllHealthyLetterLabel]", "[lodgerLeftNotAllHealthyLetterText]", nobles);
             quest.SignalPass(() =>
             {
                 Action outAction = () => quest.Letter(LetterDefOf.NegativeEvent, questPart_LodgerLeave.outSignalShuttleDestroyed, label: "[ShuttleDestroyedLabel]", text: "[ShuttleDestroyedText]");
@@ -258,9 +262,11 @@ namespace VFEEmpire
                     allowRoyalFavor = true,
                     allowDevelopmentPoints = true
                 };
-                quest.GiveRewards(parms, asker:bestNoble);
-                quest.End(QuestEndOutcome.Success,inSignal: leftHealthy);
-            }, leftHealthy);
+                quest.GiveRewards(parms, inSignal: pickupSuccess, asker:bestNoble);
+                Action outAction = () => quest.Letter(LetterDefOf.PositiveEvent, pickupSuccess, text: "[BallSuccessLetterText]", label: "[BallSuccessLetterLetterLabel]");
+                quest.SignalPassWithFaction(empire, null, outAction);
+                quest.End(QuestEndOutcome.Success,inSignal: pickupSuccess);
+            }, pickupSuccess);
             //Set slates for descriptions
             slate.Set<int>("nobleCount", nobleCount, false);
             slate.Set<int>("nobleCountLessOne", nobleCount-1, false);
