@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using System.Collections.Generic;
 using RimWorld;
 using Verse;
@@ -13,7 +14,7 @@ namespace VFEEmpire
     {
         public override AcceptanceReport CanAccept()
         {
-            var cantAccept = CantAccept().ToList();
+            var cantAccept = CantAccept(out var unmet).ToList();
             if (missingCells > 0)
             {
                 return "VFEE.BallroomRequirements.DanceFloorToSmall".Translate(requiredCells);
@@ -21,13 +22,14 @@ namespace VFEEmpire
             if (!cantAccept.NullOrEmpty())
             {
                 var title = cantAccept.First().royalty.AllTitlesInEffectForReading.Where(x => x.def.Ext() != null && !x.def.Ext().ballroomRequirements.NullOrEmpty()).FirstOrDefault();
-                return "VFEE.BallroomRequirements.Unmet".Translate();
+                return "VFEE.BallroomRequirements.Unmet".Translate(unmet);
             }
             return true;
         }
-        private List<Pawn> CantAccept()
+        private List<Pawn> CantAccept(out string unmet)
         {
             culprits.Clear();
+            StringBuilder sb = new();
             foreach (var pawn in pawns)
             {
                 var title = pawn.royalty.AllTitlesInEffectForReading.Where(x => x.def.Ext() != null && !x.def.Ext().ballroomRequirements.NullOrEmpty()).FirstOrDefault();
@@ -38,14 +40,17 @@ namespace VFEEmpire
                     {
                         if(!QuestPart_GrandBall.TryGetGrandBallSpot(ballroom,mapParent.Map,out var spot, out var absSpot, out var dancefloor,out var rect))
                         {
+                            missingCells = dancefloor.NullOrEmpty()? requiredCells : requiredCells - dancefloor.Count;
                             continue;
                         }
-                        if(dancefloor.Count < requiredCells)
+                        foreach (var req in title.def.Ext().ballroomRequirements)
                         {
-                            missingCells = requiredCells - dancefloor.Count;
-                            continue;
-                        }
-                        if (title.def.Ext().ballroomRequirements.All(x => x.Met(ballroom, pawn)))
+                            if (!req.Met(ballroom, pawn))
+                            {
+                                sb.AppendLine(req.LabelCap());
+                            }
+                         }
+                        if (sb.Length == 0)
                         {
                             missingCells = 0;
                             culprits.Remove(pawn);
@@ -54,6 +59,7 @@ namespace VFEEmpire
                     }
                 }
             }
+            unmet = sb.ToString();
             return culprits;
         }
 
@@ -61,7 +67,7 @@ namespace VFEEmpire
         {
             get
             {
-                foreach(var p in CantAccept())
+                foreach(var p in CantAccept(out var unmet))
                 {
                     var title = p.royalty.AllTitlesInEffectForReading.Where(x => x.def.Ext() != null && !x.def.Ext().ballroomRequirements.NullOrEmpty()).FirstOrDefault(); 
                     if(title != null)

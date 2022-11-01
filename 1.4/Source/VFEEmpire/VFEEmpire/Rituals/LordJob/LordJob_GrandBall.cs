@@ -146,6 +146,7 @@ namespace VFEEmpire
 				return ballRoom;
 			}
         }
+
 		public override bool AllowStartNewGatherings => !danceStarted || danceFinished;
 
 		public virtual DanceStages Stage => danceStages[stage];
@@ -243,38 +244,42 @@ namespace VFEEmpire
 			
 			return graph;
 		}
-
+		//Moved add tag to method to handle interrupt so everyone starts at the same time
+		public void AtStart(Pawn pawn)
+        {
+			AddTagForPawn(pawn, "AtStart");
+            if (AllAtStart)
+            {
+				InterruptDancers();
+            }
+        }
 		public IntVec3 StartPosition(Pawn pawn)
         {
 			var partner = Partner(pawn);
+			bool lead = LeadPawn(pawn);
 			if (startPoses.TryGetValue(pawn, out IntVec3 spot))
 			{
 				return spot;
 			}
-			if (startPoses.TryGetValue(partner, out IntVec3 pos))
-            {
-				pos += IntVec3.North;
-				startPoses.Add(pawn, pos);
-				return pos;
-            }
 			if (CellFinder.TryFindRandomCellInsideWith(danceArea, (c) =>
 			{
-				var pCell = c + IntVec3.North;
+				var pCell = lead? IntVec3.North : IntVec3.South;
+				pCell += c;
 				int radius = danceFloor.Count >= 72 ? 2 : 1;
 				CellRect personalRect = CellRect.CenteredOn(c, radius);
 				CellRect partRect = CellRect.CenteredOn(pCell, radius);
 				return !startPoses.Values.Any(x=>x.AdjacentToCardinal(c)) && !startPoses.Values.Any(x => x.AdjacentToCardinal(c)) && personalRect.FullyContainedWithin(danceArea) && partRect.FullyContainedWithin(danceArea);
 			}, out var cell))
             {
-				var pCell = cell + IntVec3.North;
+				IntVec3 pCell = lead ? cell + IntVec3.North : cell + IntVec3.South;
 				startPoses.Add(partner, pCell);
 				startPoses.Add(pawn, cell);
-				Mote mote = MoteMaker.MakeStaticMote(cell.ToVector3Shifted(), this.Map, ThingDefOf.Mote_RolePositionHighlight);
+/*				Mote mote = MoteMaker.MakeStaticMote(cell.ToVector3Shifted(), this.Map, ThingDefOf.Mote_RolePositionHighlight);
 				mote.Maintain();
 				highlightedPositions.Add(cell, mote);
 				Mote mote2 = MoteMaker.MakeStaticMote(pCell.ToVector3Shifted(), this.Map, ThingDefOf.Mote_RolePositionHighlight);
 				mote2.Maintain();
-				highlightedPositions.Add(pCell, mote2);
+				highlightedPositions.Add(pCell, mote2);*/
 				return cell;
             }
             if (dancers.Contains(pawn))
@@ -289,7 +294,8 @@ namespace VFEEmpire
 			if (danceStarted && !danceFinished)
             {
 				outcome.Tick(this, 1f);
-				ticksThisRotation++;
+				if(AllAtStart)
+					ticksThisRotation++;
 				if (ticksThisRotation > 300 || AllArrived)
 				{
 					StageSwap();					
@@ -301,10 +307,10 @@ namespace VFEEmpire
 		}
 		public void SetPartners()
 		{
-			var pawns = nobles;
+			var pawns = nobles.InRandomOrder().ToList();
 			leadPartner.Clear();
 			tmpHasPartner.Clear();
-			foreach (var pawn in nobles)
+			foreach (var pawn in nobles.InRandomOrder())
 			{
 				List<Pawn> pastPartners = null;
                 if (tmpHasPartner.Contains(pawn)) { continue; }
@@ -413,6 +419,7 @@ namespace VFEEmpire
 				flip = !flip;
 				SetPartners();
 				startPoses.Clear();
+				highlightedPositions.Clear();
 				RemoveTags("AtStart");
 			}
 			InterruptDancers();
@@ -526,10 +533,10 @@ namespace VFEEmpire
 			}
         }
         //So the issue with dance steps is each on requires an open area per pawn they can go these steps would need a 5 rect which puts bare minimum attendees of 49 cells for 6 pawns. Using ths only if
-        private static readonly List<DanceStages> danceStages5Rect = new List<DanceStages>() { DanceStages.Up, DanceStages.Up, DanceStages.Rotate, DanceStages.Left, DanceStages.Left, DanceStages.Down, DanceStages.Rotate, DanceStages.Down, DanceStages.Right, DanceStages.Down, DanceStages.Right, DanceStages.Dip, DanceStages.Rotate };
+        private static readonly List<DanceStages> danceStages5Rect = new List<DanceStages>() { DanceStages.Up, DanceStages.Up, DanceStages.Rotate, DanceStages.Left, DanceStages.Left, DanceStages.Down, DanceStages.Rotate, DanceStages.Down, DanceStages.Right, DanceStages.Down, DanceStages.Right, DanceStages.Dip, DanceStages.Rotate, DanceStages.Wait };
 		//This tighter dance pattern could fit 12 in 49. 
 		private static readonly List<DanceStages> danceStages3Rect = new List<DanceStages>() { DanceStages.Up, DanceStages.Rotate, DanceStages.Left,DanceStages.Down, DanceStages.Rotate,  DanceStages.Right, DanceStages.Dip, DanceStages.Rotate,
-		DanceStages.Right,DanceStages.Rotate,DanceStages.Down,DanceStages.Left, DanceStages.Up};
+		DanceStages.Right,DanceStages.Rotate,DanceStages.Down,DanceStages.Left, DanceStages.Up,DanceStages.Wait};
 
 	}
 	public enum DanceStages
@@ -539,7 +546,8 @@ namespace VFEEmpire
 		Down,
 		Right,
 		Rotate,
-		Dip
+		Dip,
+		Wait
 	}
 }
 

@@ -9,11 +9,29 @@
    <JobDef>
     <defName>VFEE_WaltzDip</defName>
     <driverClass>VFEEmpire.JobDriver_WaltzDip</driverClass>
-	<alwaysShowWeapon>true</alwaysShowWeapon>
+	<alwaysShowWeapon>false</alwaysShowWeapon>
+    <reportString>dancing with TargetB.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+   <JobDef>
+    <defName>VFEE_WaltzGoToStart</defName>
+    <driverClass>VFEEmpire.JobDriver_WaltzGotoStart</driverClass>
+	<alwaysShowWeapon>false</alwaysShowWeapon>
+    <reportString>going to my position.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+   <JobDef>
+    <defName>VFEE_WaltzWait</defName>
+    <driverClass>VFEEmpire.JobDriver_WaltzWait</driverClass>
+	<alwaysShowWeapon>false</alwaysShowWeapon>
     <reportString>dancing with TargetA.</reportString>
     <casualInterruptible>false</casualInterruptible>
   </JobDef>
-
-
-
+   <JobDef>
+    <defName>VFEE_WaltzDipped</defName>
+    <driverClass>VFEEmpire.JobDriver_WaltzDipped</driverClass>
+	<alwaysShowWeapon>false</alwaysShowWeapon>
+    <reportString>dancing with TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
 </Defs>

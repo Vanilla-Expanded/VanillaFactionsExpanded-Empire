@@ -19,8 +19,6 @@ namespace VFEEmpire
 				return (Pawn)this.job.GetTarget(TargetIndex.A).Thing;
 			}
 		}
-
-
 		public override bool TryMakePreToilReservations(bool errorOnFailed)
 		{
 			return true;
@@ -30,11 +28,16 @@ namespace VFEEmpire
 			base.Notify_Starting();
 			pawn.rotationTracker.FaceTarget(Partner);
 		}
+		[TweakValue("0", 0, 360)] public static float rotation = 60f;
+		[TweakValue("00", -1f, 1f)] public static float xValue = 0.28f;
+		[TweakValue("00", -1f, 1f)] public static float zValue = -0.06f;
 		public override bool ModifyCarriedThingDrawPos(ref Vector3 drawPos, ref bool behind, ref bool flip)
 		{
 			behind = true;
 			flip = true;
-			drawPos += new Vector3(0.44f, 0f, 0f);
+			//var vect2 = new Vector2(xOffset, zOffset).RotatedBy(rotation * -1f); //This doesnt do what I want but I could do an amazing twirl with it. VIER verison.
+			//I want the dip to actually change partners angle. I dont want to talk about how long this took me T_T
+			drawPos += new Vector3(xValue, 0, zValue);
 			return true;
 
 		}
@@ -46,14 +49,17 @@ namespace VFEEmpire
 			Toil toilGoto = Toils_Goto.GotoCell(TargetIndex.C, PathEndMode.OnCell);
 			yield return toilGoto;
 			Toil startCarry = Toils_Haul.StartCarryThing(TargetIndex.A);
+			startCarry.tickAction = () =>
+			{
+				pawn.Rotation = Rot4.East;
+			};
+			startCarry.handlingFacing = true;
 			yield return startCarry;
 			Toil toil = new Toil();
 			toil.tickAction = delegate ()
 			{
-				if (this.AgeTicks % 50 == 0)
-				{
-					this.pawn.Rotation = Rot4.Random;
-				}
+				this.pawn.Rotation = Rot4.East;
+				Partner.jobs.posture = PawnPosture.LayingOnGroundFaceUp;
 			};
 			toil.defaultCompleteMode = ToilCompleteMode.Delay; //Interupt will handle htis
 			toil.defaultDuration = 100;

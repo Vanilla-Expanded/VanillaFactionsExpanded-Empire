@@ -9,7 +9,7 @@ using Verse.AI.Group;
 namespace VFEEmpire
 {
 
-	public class JobDriver_WaltzGoto : JobDriver
+	public class JobDriver_WaltzWait : JobDriver
 	{
 		protected Pawn Partner
 		{
@@ -19,7 +19,7 @@ namespace VFEEmpire
 			}
 		}
 
-
+		
 		public override bool TryMakePreToilReservations(bool errorOnFailed)
 		{
 			return true;
@@ -33,22 +33,6 @@ namespace VFEEmpire
 		{
 
 			this.FailOnDowned(TargetIndex.A);
-			Toil toilGoto = Toils_Goto.GotoCell(TargetIndex.B, PathEndMode.OnCell);
-			toilGoto.tickAction = delegate ()
-			{
-				this.pawn.rotationTracker.FaceTarget(Partner);
-			};
-			toilGoto.handlingFacing = true;
-			toilGoto.socialMode = RandomSocialMode.Quiet;
-			yield return toilGoto;
-			yield return Toils_General.Do(() =>
-            {
-				var dance = pawn.GetLord()?.LordJob as LordJob_GrandBall;
-				if (dance != null)
-				{
-					dance.AddTagForPawn(pawn, "Arrived");
-				}
-			});
 			Toil toil = new Toil();
 			toil.tickAction = delegate ()
 			{
@@ -60,9 +44,6 @@ namespace VFEEmpire
 			yield return toil;
 			yield break;
 		}
-		public override bool IsContinuation(Job j)
-		{
-			return this.job.GetTarget(TargetIndex.B) == j.GetTarget(TargetIndex.B);
-		}
+
 	}
 }

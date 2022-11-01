@@ -56,7 +56,11 @@ namespace VFEEmpire
             Thing startInstrument = null;
             foreach( var insturment in insturments)
             {
-                var floorTmp = Placeworker_DanceFloorArea.CalculateDanceCells(insturment.def, insturment.Position, insturment.Rotation, map, out bool allstand,out CellRect rectTmp);
+                var rot = insturment.Rotation;
+                var offset = insturment.def.interactionCellOffset.RotatedBy(rot.Opposite); //Always opposite of interaction cell
+                var gridRot = insturment.def.interactionCellOffset.z > 0 ? rot.Opposite : rot; //which way the grid should extend depends on which direction interaction cell is going
+                var cell = insturment.Position + offset;
+                var floorTmp = Placeworker_DanceFloorArea.CalculateDanceCells(insturment.def, cell, gridRot, map, out bool allstand,out CellRect rectTmp);
                 if(floorTmp.Count> openCells && allstand)
                 {
                     rect = rectTmp;

@@ -19,6 +19,9 @@ public static class InternalDefOf
     public static DutyDef VFEE_GrandBallWait;
     public static JobDef VFEE_WaltzGoTo;
     public static JobDef VFEE_WaltzDip;
+    public static JobDef VFEE_WaltzDipped;
+    public static JobDef VFEE_WaltzGoToStart;
+    public static JobDef VFEE_WaltzWait;
 
     public static RitualOutcomeEffectDef VFEE_GrandBall_Outcome;
     public static QuestScriptDef VFEE_DelayedGrandBallOutcome;

@@ -31,11 +31,20 @@ namespace VFEEmpire
 					job.count = 1;
 					return job;
 				}
-				job = JobMaker.MakeJob(JobDefOf.Wait);
+				job = JobMaker.MakeJob(InternalDefOf.VFEE_WaltzDipped, partner);
+				return job;
+			}
+			if(stage== DanceStages.Wait)
+            {
+				job = JobMaker.MakeJob(InternalDefOf.VFEE_WaltzWait, partner);
 				return job;
 			}
 			job = JobMaker.MakeJob(InternalDefOf.VFEE_WaltzGoTo, partner, cell);
 			job.locomotionUrgency = LocomotionUrgency.Amble;
+			if(pawn.Position == cell && !dance.PawnTagSet(pawn, "Arrived")) //Maybe not 
+            {
+				dance.AddTagForPawn(pawn, "Arrived");
+			}
 			return job;
 		}
 
