@@ -20,6 +20,10 @@ For obvious reasons this mod requires Royalty DLC.</description>
       <displayName>Vanilla Expanded Framework</displayName>
       <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2023507013</steamWorkshopUrl>
     </li>
+	<li>
+		<packageId>Ludeon.RimWorld.Royalty</packageId>
+		<displayName>Royalty</displayName>
+	</li>
   </modDependencies>
   <loadAfter>
     <li>Ludeon.RimWorld</li>
