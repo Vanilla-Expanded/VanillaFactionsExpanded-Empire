@@ -9,10 +9,6 @@ using Verse.AI.Group;
 
 namespace VFEEmpire
 {
-    //Todo list		
-    //No support for FX or music right now as not using LordJob_ritual ticking. Add if wanted.	
-	//Continue tracing issue with transition to lordtoil ball wail.
-	//Test
 
 
     [StaticConstructorOnStartup]

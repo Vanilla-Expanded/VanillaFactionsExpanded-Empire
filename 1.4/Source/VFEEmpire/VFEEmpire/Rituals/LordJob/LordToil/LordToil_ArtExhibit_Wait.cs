@@ -10,12 +10,14 @@ using Verse.AI.Group;
 
 namespace VFEEmpire
 {
-    public class LordToil_GrandBall_Wait : LordToil_Wait
+    public class LordToil_ArtExhibit_Wait : LordToil_Wait
     {
         public Pawn bestNoble;
-        public LordToil_GrandBall_Wait(Pawn bestNoble) : base(true)
+        public Pawn host;
+        public LordToil_ArtExhibit_Wait(Pawn bestNoble, Pawn host) : base(true)
         {
             this.bestNoble = bestNoble;
+            this.host = host;
         }
 
         public override void DrawPawnGUIOverlay(Pawn pawn)
@@ -28,7 +30,7 @@ namespace VFEEmpire
 
         public override void Init()
         {
-            Messages.Message("VFEE.GrandBall.Waiting".Translate(bestNoble.Named("Noble")), new LookTargets(new Pawn[]
+            Messages.Message("VFEE.ArtExhibit.Waiting".Translate(bestNoble.Named("Noble")), new LookTargets(new Pawn[]
             {
                 bestNoble
             }), MessageTypeDefOf.NeutralEvent, true);
@@ -37,8 +39,8 @@ namespace VFEEmpire
         {
             if (p == bestNoble)
             {
-                LordJob_GrandBall job = (LordJob_GrandBall)lord.LordJob;
-                yield return new Command_GrandBall(job, bestNoble, new Action<List<Pawn>>(StartRitual));
+                var job = (LordJob_ArtExhibit)lord.LordJob;
+                yield return new Command_ArtExhibit(job, host, StartRitual);
             }
             yield break;
         }
@@ -46,18 +48,28 @@ namespace VFEEmpire
         {
             if (target == bestNoble)
             {
-                yield return new FloatMenuOption("VFEE.GrandBall.Label".Translate().ToString(), () =>
+                yield return new FloatMenuOption("VFEE.ArtExhibit.Label".Translate().ToString(), () =>
                 {
-                    var lordJob = (LordJob_GrandBall)lord.LordJob;
+                    var lordJob = (LordJob_ArtExhibit)lord.LordJob;
                     string header = "VFEE.GrandBall.ChooseParticipants".Translate();
                     string label = lordJob.RitualLabel;
+                    var artPieces = lordJob.gallery.ContainedAndAdjacentThings.Where(x => x is ThingWithComps comps && comps.GetComp<CompArt>() != null).ToList();
+                    var colonists = lordJob.Map.mapPawns.FreeColonistsSpawned;
+                    List<Pawn> pOptions = new();
+                    foreach (var art in artPieces)
+                    {
+                        var madeBy = GameComponent_Empire.Instance.artCreator.TryGetValue(art as ThingWithComps);
+                        if (madeBy != null && colonists.Contains(madeBy))
+                        {
+                            pOptions.Add(madeBy);
+                        }
+                    }
                     Dialog_BeginRitual.ActionCallback callBack = (RitualRoleAssignments participants) =>
                     {
-                        StartRitual(participants.Participants);
+                        StartRitual(participants.Participants, pOptions);
                         return true;
                     };
-                    int instruments = lordJob.BallRoom.ContainedAndAdjacentThings.Count(x => x is Building_MusicalInstrument);
-                    int nonNobles = 0;
+
                     Func<Pawn, bool, bool, bool> filter = (Pawn pawn, bool voluntary, bool allowOtherIdeos) =>
                     {
                         Lord lord = pawn.GetLord();
@@ -65,29 +77,29 @@ namespace VFEEmpire
                         if (!result) { return false; }
                         if (!pawn.royalty?.HasAnyTitleIn(Faction.OfEmpire) ?? true)
                         {
-                            if (nonNobles >= instruments)
+                            if (pOptions.Contains(pawn))
                             {
-                                return false;
+                                return true;
                             }
-                            nonNobles++;                         
+                            return false;
                         }
                         return true;
                     };
                     string okButtonText = "Begin".Translate();
-                    var outcomeDef = InternalDefOf.VFEE_GrandBall_Outcome;
-                    Find.WindowStack.Add(new Dialog_BeginRitual(header, label, null, lordJob.target.ToTargetInfo(lordJob.Map), lordJob.Map, callBack, bestNoble, null, filter, okButtonText, outcome: outcomeDef, ritualName: label));
+                    var outcomeDef = InternalDefOf.VFEE_ArtExhibit_Outcome;
+                    Find.WindowStack.Add(new Dialog_BeginRitual(header, label, null, lordJob.target.ToTargetInfo(lordJob.Map), lordJob.Map, callBack, host, null, filter, okButtonText, outcome: outcomeDef, ritualName: label));
                 });
 
             }
         }
         public override void UpdateAllDuties()
         {
-            var lordJob = (LordJob_GrandBall)lord.LordJob;
+            var lordJob = (LordJob_ArtExhibit)lord.LordJob;
             foreach(var pawn in lord.ownedPawns)
             {
                 if(pawn != bestNoble)
                 {
-                    var duty = new PawnDuty(InternalDefOf.VFEE_GrandBallWait);
+                    var duty = new PawnDuty(InternalDefOf.VFEE_GrandBallWait); //Grandball wait still works here so same dutydef
                     duty.focus = lordJob.Spot;
                     pawn.mindState.duty = duty;
                 }
@@ -99,11 +111,13 @@ namespace VFEEmpire
             }
 
         }
-        private void StartRitual(List<Pawn> pawns)
+        private void StartRitual(List<Pawn> pawns, List<Pawn> preseneters)
         {
             lord.AddPawns(pawns);
-            ((LordJob_GrandBall)lord.LordJob).colonistParticipants.AddRange(pawns);
-            lord.ReceiveMemo(LordJob_GrandBall.MemoCeremonyStarted);
+            var exhibit = lord.LordJob as LordJob_ArtExhibit;
+            exhibit.colonistParticipants.AddRange(pawns);
+            exhibit.presenters.AddRange(preseneters.Where(x=>pawns.Contains(x)));
+            lord.ReceiveMemo(LordJob_ArtExhibit.MemoCeremonyStarted);
             foreach (Pawn pawn in pawns)
             {
                 if (pawn.drafter != null)

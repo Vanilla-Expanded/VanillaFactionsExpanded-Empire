@@ -79,4 +79,24 @@
       </subNodes>
     </thinkNode>
   </DutyDef>
+   <DutyDef>
+    <defName>VFEE_ArtExhibitRoyal</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>     
+        <li Class="VFEEmpire.JobGiver_ArtExhibitPresent"/>
+		<li Class="VFEEmpire.JobGiver_ArtExhibitSpectate"/>
+		<li Class="JobGiver_Idle"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+    <DutyDef>
+    <defName>VFEE_ArtExhibitPresent</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>     
+        <li Class="VFEEmpire.JobGiver_ArtExhibitPresent"/>
+		<li Class="VFEEmpire.JobGiver_ArtExhibitStandBy"/>
+		<li Class="JobGiver_Idle"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
 </Defs>

@@ -30,8 +30,25 @@
    <JobDef>
     <defName>VFEE_WaltzDipped</defName>
     <driverClass>VFEEmpire.JobDriver_WaltzDipped</driverClass>
-	<alwaysShowWeapon>false</alwaysShowWeapon>
     <reportString>dancing with TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+   <JobDef>
+    <defName>VFEE_ArtPresent</defName>
+    <driverClass>VFEEmpire.JobDriver_ArtPresent</driverClass>
+    <reportString>Presenting TargetB.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+   <JobDef>
+    <defName>VFEE_ArtStandBy</defName>
+    <driverClass>VFEEmpire.JobDriver_ArtPresenterStandBy</driverClass>
+    <reportString>waiting.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+   <JobDef>
+    <defName>VFEE_ArtPresent</defName>
+    <driverClass>VFEEmpire.JobDriver_ArtSpectate</driverClass>
+    <reportString>Spectating TargetB.</reportString>
     <casualInterruptible>false</casualInterruptible>
   </JobDef>
 </Defs>
