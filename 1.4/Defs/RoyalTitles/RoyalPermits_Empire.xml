@@ -498,14 +498,14 @@
     <defName>VFEI_CallAbsolver</defName>
     <label>call absolver</label>
     <description>Call an absolver to assist you for 4 days. This guildmember is a master assassin and will not perform any tasks other than killing. You can control him as though he is your own colonists. If an absolver dies, a new one will replace them immediately, inheriting the remaining contract time.</description>
-    <workerClass>RoyalTitlePermitWorker_CallLaborers</workerClass>
+    <workerClass>VFEEmpire.RoyalTitlePermitWorker_CallAbsolver</workerClass>
     <minTitle>Count</minTitle>    <!-- will be Duke later -->
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
     <uiPosition>(4,2)</uiPosition>
     <royalAid>
       <favorCost>14</favorCost>
-      <pawnKindDef>Empire_Common_Laborer</pawnKindDef>      <!-- placeholder -->
+      <pawnKindDef>VFEE_Empire_Fighter_Absolver</pawnKindDef>
       <pawnCount>1</pawnCount>
       <aidDurationDays>4</aidDurationDays>
     </royalAid>

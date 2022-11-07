@@ -27,14 +27,17 @@ namespace VFEEmpire
 		public List<Pawn> nobles;
 		public List<Pawn> presenters = new();
 		public List<Thing> artPieces = new();
+		public Dictionary<Pawn, List<Pawn>> gossipedWith = new();
+	
 		public int ticksThisRotation;
 		public int stage;
 		//Not Exposed
 		public static readonly int duration = 25000;
 		public LordToil exitToil;
-		public LordToil_ArtExhibit_Show ballToil;
+		public LordToil_ArtExhibit_Show artToil;
 		private Dictionary<Pawn, int> totalPresenceTmp = new();
-		public RitualOutcomeEffectWorker_GrandBall outcome;
+
+		public RitualOutcomeEffectWorker_ArtExhibit outcome;
 		public static readonly string MemoCeremonyStarted = "CeremonyStarted";
 		private static Texture2D icon = ContentFinder<Texture2D>.Get("UI/Icons/Rituals/BestowCeremony", true);
 		public LordJob_ArtExhibit()
@@ -59,7 +62,7 @@ namespace VFEEmpire
 			Scribe_Collections.Look(ref artPieces, "artPieces", LookMode.Reference);
 			Scribe_Collections.Look(ref presenters, "presenters", LookMode.Reference);
 			Scribe_Collections.Look(ref colonistParticipants, "colonistParticipants", LookMode.Reference);
-
+	
 
 		}
 		public LordJob_ArtExhibit(Pawn leadNoble, LocalTargetInfo targetinfo, Thing shuttle, string questEnded, Room gallery, List<Thing> artPieces)
@@ -114,7 +117,7 @@ namespace VFEEmpire
 		public override StateGraph CreateGraph()
 		{
 			var graph = new StateGraph();
-			outcome = (RitualOutcomeEffectWorker_GrandBall)InternalDefOf.VFEE_GrandBall_Outcome.GetInstance();
+			outcome = (RitualOutcomeEffectWorker_ArtExhibit)InternalDefOf.VFEE_ArtExhibit_Outcome.GetInstance();
 
 			var wait_ForSpawned = new LordToil_Wait();
 			graph.AddToil(wait_ForSpawned);
@@ -127,8 +130,8 @@ namespace VFEEmpire
 
 			exitToil = new LordToil_EnterShuttleOrLeave(shuttle, Verse.AI.LocomotionUrgency.Walk, true, true);
 			graph.AddToil(exitToil);
-			ballToil = new LordToil_ArtExhibit_Show(target.Cell);
-			graph.AddToil(ballToil);
+			artToil = new LordToil_ArtExhibit_Show(target.Cell);
+			graph.AddToil(artToil);
 			//Transitions
 			var removeColonists = new TransitionAction_Custom(() => lord.RemovePawns(colonistParticipants));
 
@@ -140,7 +143,7 @@ namespace VFEEmpire
 			transition_Arrived.AddTrigger(new Trigger_Custom((TriggerSignal signal) => signal.type == TriggerSignalType.Tick && leadNoble.Position == Spot));
 			graph.transitions.Add(transition_Arrived);
 
-			var transition_StartBall = new Transition(wait_StartBall, ballToil);
+			var transition_StartBall = new Transition(wait_StartBall, artToil);
 			transition_StartBall.AddTrigger(new Trigger_Memo(MemoCeremonyStarted));
 			transition_StartBall.AddPostAction(new TransitionAction_Custom(() =>
 			{
@@ -149,13 +152,13 @@ namespace VFEEmpire
 			));
 			graph.transitions.Add(transition_StartBall);
 
-			var transition_BallEnd = new Transition(ballToil, wait_PostBall);
+			var transition_BallEnd = new Transition(artToil, wait_PostBall);
 			transition_BallEnd.AddPreAction(removeColonists);
 			transition_BallEnd.AddTrigger(new Trigger_Memo("CeremonyFinished"));
 			transition_BallEnd.AddPostAction(new TransitionAction_Custom(() => QuestUtility.SendQuestTargetSignals(lord.questTags, "CeremonyDone", lord.Named("SUBJECT"))));
 			graph.transitions.Add(transition_BallEnd);
 
-			var transition_BallInterupted = new Transition(ballToil, exitToil);
+			var transition_BallInterupted = new Transition(artToil, exitToil);
 			transition_BallInterupted.AddPreAction(removeColonists);
 			transition_BallInterupted.AddPreAction(new TransitionAction_Custom(() =>
 			{
@@ -214,7 +217,7 @@ namespace VFEEmpire
 		public void StopExhibit(string signal)
 		{
 			exhibitFinished = true;
-			foreach (KeyValuePair<Pawn, int> keyValuePair in ballToil.Data.presentForTicks)
+			foreach (KeyValuePair<Pawn, int> keyValuePair in artToil.Data.presentForTicks)
 			{
 				if (keyValuePair.Key != null && !keyValuePair.Key.Dead)
 				{

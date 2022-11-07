@@ -65,7 +65,7 @@ namespace VFEEmpire
                 return true;
             };
             string okButtonText = "Begin".Translate();
-            var outcomeDef = InternalDefOf.VFEE_GrandBall_Outcome;
+            var outcomeDef = InternalDefOf.VFEE_ArtExhibit_Outcome;
             Find.WindowStack.Add(new Dialog_BeginRitual(header, label, null, job.target.ToTargetInfo(job.Map), job.Map, callBack, bestNoble, null, filter, okButtonText, outcome: outcomeDef, ritualName: label));
         }
     }

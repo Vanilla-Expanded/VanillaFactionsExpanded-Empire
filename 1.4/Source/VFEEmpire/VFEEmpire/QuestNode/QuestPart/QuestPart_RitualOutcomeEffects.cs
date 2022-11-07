@@ -9,9 +9,7 @@ using RimWorld.QuestGen;
 
 namespace VFEEmpire
 {
-    //TODO
-    //Using this to add additional rewards/outcome effects based on the ritual outcome but effects that I dont want to apply until after they left
-    
+   
     public class QuestPart_RitualOutcomeEffects : QuestPart_AddQuest
     {
         public override Slate GetSlate()

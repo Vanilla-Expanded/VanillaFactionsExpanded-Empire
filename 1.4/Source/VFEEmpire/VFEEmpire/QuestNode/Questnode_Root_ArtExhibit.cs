@@ -16,8 +16,8 @@ namespace VFEEmpire
         {
             Map map = QuestGen_Get.GetMap(false, null);
 
-            bool title = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle).Any(x => x?.def.Ext() != null && !x.def.Ext().ballroomRequirements.NullOrEmpty());
-            return title && !Faction.OfEmpire.HostileTo(Faction.OfPlayer) && map.RoyaltyTracker().Ballrooms.Any(); 
+            bool title = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle).Any(x => x?.def.Ext() != null && !x.def.Ext().galleryRequirements.NullOrEmpty());
+            return title && !Faction.OfEmpire.HostileTo(Faction.OfPlayer) && map.RoyaltyTracker().Galleries.Any(); 
         }
         
         protected override void RunInt()
@@ -29,16 +29,14 @@ namespace VFEEmpire
             //Getting Initial requirement
             Map map = QuestGen_Get.GetMap(false, null);
             var points = slate.Get("points", 0f, false);
-            //shuttle stays for 2 days max but ball will need to be started within 24 hours of accept
             int durationTicks = 2 * 60000;             
             var empire = Find.FactionManager.OfEmpire;
             var colonyHost = map.mapPawns.FreeColonistsSpawned.OrderByDescending(x => x.royalty.MostSeniorTitle?.def.seniority ?? 0)
-                .Where(x=>x.royalty.MostSeniorTitle.def.Ext()!=null && !x.royalty.MostSeniorTitle.def.Ext().ballroomRequirements.NullOrEmpty()).First();
+                .Where(x=>x.royalty.MostSeniorTitle.def.Ext()!=null && !x.royalty.MostSeniorTitle.def.Ext().galleryRequirements.NullOrEmpty()).First();
             var colonyTitle = colonyHost.royalty.MostSeniorTitle.def;//Title of highest colony member
-            var leadTitle = DefDatabase<RoyalTitleDef>.AllDefs.Where(x => x.Ext() != null && !x.Ext().ballroomRequirements.NullOrEmpty() && x.seniority <= colonyTitle.seniority).RandomElement();
+            var leadTitle = DefDatabase<RoyalTitleDef>.AllDefs.Where(x => x.Ext() != null && !x.Ext().galleryRequirements.NullOrEmpty() && x.seniority <= colonyTitle.seniority).RandomElement();
             //Generate Nobles
             int nobleCount = new IntRange(4,(int)Math.Floor(QuestNoblesCurve.Evaluate(points))).RandomInRange;  //Max # increased with difficulty but still random how many you can get
-            int danceFloorSize = Mathf.Max(49, nobleCount * 9);
             var bestNoble = EmpireUtility.GenerateNoble(leadTitle);
             string questTag = QuestGenUtility.HardcodedTargetQuestTagWithQuestID("ArtExhibit");
             QuestUtility.AddQuestTag(ref bestNoble.questTags, questTag);
@@ -61,7 +59,7 @@ namespace VFEEmpire
                 tries++;
                 if (tries > 120) // Dont think this is possible but being safe
                 {
-                    Log.Warning("Empire Expanded Noble Ball Quest gen failed to generate pawn after 120 tries");
+                    Log.Warning("Empire Expanded Art Exhibit Quest gen failed to generate pawn after 120 tries");
                     break;
                 }
             }
@@ -118,11 +116,10 @@ namespace VFEEmpire
                         inSignal = QuestGen.slate.Get<string>("inSignal", null, false),
                         sendStandardLetter = false
                     };
-                    //Targets are nobles, shuttle, and ballrooms
                     var assualtTargets = new List<Thing>();
                     assualtTargets.AddRange(nobles);
                     assualtTargets.Add(shuttle);
-                    map.RoyaltyTracker().Ballrooms.ForEach(x=>assualtTargets.AddRange(x.ContainedAndAdjacentThings));
+                    map.RoyaltyTracker().Galleries.ForEach(x=>assualtTargets.AddRange(x.ContainedAndAdjacentThings));
                     quest.AddPart(raidArrives);
                     quest.AssaultThings(map.Parent, raiders, deserters, nobles);
                     quest.Letter(LetterDefOf.ThreatBig, relatedFaction: deserters, lookTargets: raiders, label: "[raidArrivedLetterLabel]", text: "[raidArrivedLetterText]");
@@ -211,23 +208,21 @@ namespace VFEEmpire
             quest.AddShipJob_WaitForever(transport, true, false, lodgers.Cast<Thing>().ToList());
             QuestUtility.AddQuestTag(ref transport.questTags, questTag);
             //Start lord
-            QuestPart_GrandBall questPart_GrandBall = new();
-            questPart_GrandBall.inSignal = QuestGen.slate.Get<string>("inSignal");
-            questPart_GrandBall.pawns.AddRange(nobles);
-            questPart_GrandBall.leadPawn = bestNoble;
-            questPart_GrandBall.mapOfPawn = colonyHost;
-            questPart_GrandBall.faction = Faction.OfEmpire;
-            questPart_GrandBall.shuttle = shuttle;
-            questPart_GrandBall.requiredDanceFloor = danceFloorSize;
-            questPart_GrandBall.questTag = questTag;
-            quest.AddPart(questPart_GrandBall);
+            QuestPart_ArtExhibit questPart_ArtExhibit = new();
+            questPart_ArtExhibit.inSignal = QuestGen.slate.Get<string>("inSignal");
+            questPart_ArtExhibit.pawns.AddRange(nobles);
+            questPart_ArtExhibit.leadPawn = bestNoble;
+            questPart_ArtExhibit.mapOfPawn = colonyHost;
+            questPart_ArtExhibit.faction = Faction.OfEmpire;
+            questPart_ArtExhibit.shuttle = shuttle;
+            questPart_ArtExhibit.questTag = questTag;
+            quest.AddPart(questPart_ArtExhibit);
 
 
-            var questPart_requirementBallroom = new QuestPart_RequirementsToAcceptBallroom();
-            questPart_requirementBallroom.pawns.AddRange(nobles);
-            questPart_requirementBallroom.mapParent = map.Parent;
-            questPart_requirementBallroom.requiredCells = danceFloorSize;//roughly 9x9 dance floor max needed
-            quest.AddPart(questPart_requirementBallroom);
+            var questPart_requirementGallery = new QuestPart_RequirementsToAcceptGallery();
+            questPart_requirementGallery.pawns.AddRange(nobles);
+            questPart_requirementGallery.mapParent = map.Parent;
+            quest.AddPart(questPart_requirementGallery);
             var questPart_requirementNoDanger = new QuestPart_RequirementsToAcceptNoDanger();
             questPart_requirementNoDanger.dangerTo = Faction.OfEmpire;
             questPart_requirementNoDanger.mapParent = map.Parent;
@@ -263,7 +258,7 @@ namespace VFEEmpire
                     allowDevelopmentPoints = true
                 };
                 quest.GiveRewards(parms, inSignal: pickupSuccess, asker:bestNoble);
-                Action outAction = () => quest.Letter(LetterDefOf.PositiveEvent, pickupSuccess, text: "[BallSuccessLetterText]", label: "[BallSuccessLetterLetterLabel]");
+                Action outAction = () => quest.Letter(LetterDefOf.PositiveEvent, pickupSuccess, text: "[ArtExhibitSuccessLetterText]", label: "[ArtExhibitSuccessLetterLabel]");
                 quest.SignalPassWithFaction(empire, null, outAction);
                 quest.End(QuestEndOutcome.Success,inSignal: pickupSuccess);
             }, pickupSuccess);

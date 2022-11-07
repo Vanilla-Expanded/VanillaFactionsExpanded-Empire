@@ -324,11 +324,15 @@
     <Compile Include="HarmonyPatches\PawnRenderer_BodyAngle.cs" />
     <Compile Include="HarmonyPatches\Patch_Conceit.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleIcons.cs" />
+    <Compile Include="QuestNode\QuestNode_AbsolverRespawn.cs" />
     <Compile Include="QuestNode\QuestNode_DelayedRitualReward.cs" />
     <Compile Include="QuestNode\Questnode_Root_ArtExhibit.cs" />
     <Compile Include="QuestNode\Questnode_Root_GrandBall.cs" />
     <Compile Include="QuestNode\Questnode_Root_NobleVisit.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_ArtExhibit.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_GrandBall.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_RequirementsToAcceptGallery.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_Absolver.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_RitualOutcomeEffects.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_RequirementsToAcceptBallroom.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_ThoughtAccepterOther.cs" />
@@ -376,6 +380,7 @@
     <Compile Include="RoyalTitleDefExtension.cs" />
     <Compile Include="EmpireUtility.cs" />
     <Compile Include="Workers\RoyalTitlePermitWorker_Call.cs" />
+    <Compile Include="Workers\RoyalTitlePermitWorker_CallAbsolver.cs" />
     <Compile Include="Workers\RoyalTitlePermitWorker_CallArmoredShuttle.cs" />
     <Compile Include="Workers\RoyalTitlePermitWorker_Slicing.cs" />
     <Compile Include="Workers\ThoughtWorkers.cs" />
