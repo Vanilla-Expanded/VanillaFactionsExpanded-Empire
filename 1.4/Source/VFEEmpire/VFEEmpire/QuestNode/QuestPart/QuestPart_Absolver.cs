@@ -13,7 +13,7 @@ namespace VFEEmpire
         {            
             if(signal.tag == inSignal && recursion < 5 && !Faction.OfEmpire.HostileTo(Faction.OfEmpire)) //To prevent weird abuses max 4 absolvers
             {
-                float durationDays = InternalDefOf.VFEI_CallAbsolver.royalAid.aidDurationDays - ((parent.TicksSinceAccepted + existingDuration )/ 60000);
+                float durationDays = InternalDefOf.VFEI_CallAbsolver.royalAid.aidDurationDays - ((parent.TicksSinceAccepted + existingDuration )/ 60000f);
                 RoyalTitlePermitWorker_CallAbsolver.CallAbsolver(acceptee, acceptee.Map, Faction.OfEmpire, durationDays, recursion);
             }
         }

@@ -79,7 +79,7 @@
 
         <!-- Departure shuttle -->
         <li Class="QuestNode_ShuttleDelay">
-          <delayTicks>$($absolverDurationDays * 60000)</delayTicks>
+          <delayTicks>$absolverDurationTicks</delayTicks>
           <lodgers>$absolver</lodgers>
           <node Class="QuestNode_Sequence">
             <nodes>
@@ -132,8 +132,8 @@
           <inSignal>pickupShipThing.SentUnsatisfied</inSignal>
           <pawns>$absolver</pawns>
           <faction>$permitFaction</faction>
-          <goodwillChange>$goodwillPenaltyPawn</goodwillChange> <!-- Per missing laborer -->
-          <reason>absolverMissedShuttle</reason>
+          <goodwillChange>$goodwillPenaltyPawn</goodwillChange>
+          <reason>LaborersMissedShuttle</reason>
         </li>
 
         <!-- - - - - - - -  -->

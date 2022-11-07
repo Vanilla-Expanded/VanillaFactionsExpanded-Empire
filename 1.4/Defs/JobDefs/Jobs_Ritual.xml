@@ -46,7 +46,7 @@
     <casualInterruptible>false</casualInterruptible>
   </JobDef>
    <JobDef>
-    <defName>VFEE_ArtPresent</defName>
+    <defName>VFEE_ArtSpectate</defName>
     <driverClass>VFEEmpire.JobDriver_ArtSpectate</driverClass>
     <reportString>Spectating TargetB.</reportString>
     <casualInterruptible>false</casualInterruptible>

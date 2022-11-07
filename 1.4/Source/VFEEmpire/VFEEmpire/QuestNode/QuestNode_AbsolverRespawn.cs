@@ -17,7 +17,7 @@ namespace VFEEmpire
                 recursion = recursion,
                 parent = quest,
                 acceptee = caller,
-                inSignal = inSignal.GetValue(slate),
+                inSignal = QuestGenUtility.HardcodedSignalWithQuestID(inSignal.GetValue(slate)),
                 existingDuration = duration,
             };
             quest.AddPart(questPart_Absolver);

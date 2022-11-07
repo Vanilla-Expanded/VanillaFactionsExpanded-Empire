@@ -45,6 +45,7 @@ namespace VFEEmpire
 			slate.Set("map", map);
 			slate.Set("permitFaction", faction);
 			slate.Set("absolverDurationDays", durationDays);
+			slate.Set("absolverDurationTicks", Mathf.RoundToInt(durationDays*60000));
 			slate.Set("recursion", recursion);
 			slate.Set("existingDuration", existingDuration);
 			QuestUtility.GenerateQuestAndMakeAvailable(absovler, slate);
