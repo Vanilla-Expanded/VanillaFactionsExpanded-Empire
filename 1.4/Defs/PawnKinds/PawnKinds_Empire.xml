@@ -455,6 +455,7 @@
     <useFactionXenotypes>false</useFactionXenotypes>
     <maxGenerationAge>40</maxGenerationAge>
     <apparelMoney>7000~10000</apparelMoney>
+	<weaponMoney>2700~8000</weaponMoney>
     <techHediffsMoney>2000~6000</techHediffsMoney>
     <techHediffsMaxAmount>6</techHediffsMaxAmount>
     <allowRoyalRoomRequirements>False</allowRoyalRoomRequirements>
