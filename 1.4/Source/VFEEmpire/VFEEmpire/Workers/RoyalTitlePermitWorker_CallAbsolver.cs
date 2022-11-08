@@ -19,7 +19,7 @@ namespace VFEEmpire
 				yield break;
 			}
 			Action action = null;
-			string label = def.LabelCap;
+			string label = def.LabelCap + " "; //adding this as fill aid option adds "free" with no space
 			bool free;
 			if (base.FillAidOption(pawn, faction, ref label, out free))
 			{

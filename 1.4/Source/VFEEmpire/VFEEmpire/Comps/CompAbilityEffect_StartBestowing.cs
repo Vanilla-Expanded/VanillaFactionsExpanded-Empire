@@ -2,6 +2,7 @@
 using System;
 using Verse;
 using System.Collections.Generic;
+using System.Linq;
 namespace VFEEmpire;
 
 public class CompAbilityEffect_StartBestowing : CompAbilityEffect_StartRitualOnPawn
@@ -13,10 +14,36 @@ public class CompAbilityEffect_StartBestowing : CompAbilityEffect_StartRitualOnP
 		{
 			reason = "VFEE.StartBestower.DisabledExistingRitual".Translate();
 			return true;
-		}		
+		}
+		var pawn = parent.pawn;
+        if (pawn.royalty.GetUnmetThroneroomRequirements(true).Any())
+        {
+			reason = "VFEE.StartBestower.NoThrone".Translate(pawn.NameFullColored);
+			return true;
+		}
 		reason = null;
 		return false;
 	}
+    public override bool CanApplyOn(LocalTargetInfo target, LocalTargetInfo dest)
+    {
+		var pawn = target.Pawn;
+		if(pawn == null) { return false; }
+		if(pawn.royalty?.MostSeniorTitle?.def?.seniority > Props.titleDef.seniority)
+        {
+			return false;
+        }
+		Precept_Ritual ritual = RitualForTarget(pawn);
+		TargetInfo targetInfo = TargetInfo.Invalid;
+		if (ritual.targetFilter != null)
+		{
+			targetInfo = ritual.targetFilter.BestTarget(parent.pawn, target.ToTargetInfo(parent.pawn.MapHeld));
+		}
+		if (!targetInfo.IsValid)
+		{
+			return false;
+		}
+		return base.CanApplyOn(target, dest);
+    }
     public override bool Valid(LocalTargetInfo target, bool throwMessages = false)
     {
 		var pawn = target.Pawn;

@@ -27,6 +27,8 @@ namespace VFEEmpire
 		public List<Pawn> nobles;
 		public List<Pawn> dancers = new();
 		public CellRect danceArea;
+		public Sustainer music;
+		private static List<SoundDef> tracks = new() { InternalDefOf.GrandBall_Sustainer_01, InternalDefOf.GrandBall_Sustainer_02 , InternalDefOf.GrandBall_Sustainer_03 };
 		private int daMinX;
 		private int daMaxX;
 		private int daMinZ;
@@ -49,7 +51,7 @@ namespace VFEEmpire
 		private Dictionary<Pawn, int> totalPresenceTmp = new();
 		protected Dictionary<IntVec3, Mote> highlightedPositions = new Dictionary<IntVec3, Mote>();
 		public static readonly string MemoCeremonyStarted = "CeremonyStarted";
-		private static Texture2D icon = ContentFinder<Texture2D>.Get("UI/Icons/Rituals/BestowCeremony", true);
+		private static Texture2D icon = ContentFinder<Texture2D>.Get("UI/Rituals/Ritual_GrandBall", true);
 		public LordJob_GrandBall()
 		{
 		}
@@ -297,6 +299,7 @@ namespace VFEEmpire
         {
 			if (danceStarted && !danceFinished)
             {
+				music?.Maintain();
 				outcome.Tick(this, 1f);
 				if(AllAtStart)
 					ticksThisRotation++;
@@ -375,6 +378,8 @@ namespace VFEEmpire
 			SetPartners();
 			danceStarted = true;
 			InterruptDancers();
+			music = tracks.RandomElement().TrySpawnSustainer(SoundInfo.InMap(target.ToTargetInfo(Map), MaintenanceType.PerTick));
+			music.Maintain();
 		}
 		public List<DanceStages> danceStages
         {
@@ -449,6 +454,13 @@ namespace VFEEmpire
 				ToTopOfDance();
 			}
 			InterruptDancers();
+            if (Rand.Bool)
+            {
+				var newTrack = tracks.Except(music.def).RandomElement();
+				music.End();
+				music = newTrack.TrySpawnSustainer(SoundInfo.InMap(target.ToTargetInfo(Map)));
+				music.Maintain();
+            }
 		}
         public override string GetReport(Pawn pawn)
         {

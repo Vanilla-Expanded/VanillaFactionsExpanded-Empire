@@ -104,7 +104,7 @@
     <Compile Include="Things\OrbitalSlicer.cs" />
     <Compile Include="PlayLogEntry_Interaction_RoyalGossip.cs" />
     <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_BestowTitle.cs" />
-    <Compile Include="Rituals\LordJob\LordToil_BestowTitle.cs" />
+    <Compile Include="Rituals\LordJob\LordToil\LordToil_BestowTitle.cs" />
     <Compile Include="Rituals\LordJob\LordJob_BestowTitle.cs" />
     <Compile Include="Rituals\Outcomes\OutcomeComp\RitualOutcomeComp_ThroneForRole.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_BestowTitle.cs" />

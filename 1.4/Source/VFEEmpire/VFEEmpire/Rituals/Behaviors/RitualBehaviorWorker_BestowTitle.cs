@@ -18,6 +18,14 @@ namespace VFEEmpire
         public RitualBehaviorWorker_BestowTitle(RitualBehaviorDef def) : base(def)
         {
         }
+        public override string CanStartRitualNow(TargetInfo target, Precept_Ritual ritual, Pawn selectedPawn = null, Dictionary<string, Pawn> forcedForRole = null)
+        {
+            if(target == null)
+            {
+                return "VFEE.StartBestower.NoTarget".Translate();
+            }
+            return base.CanStartRitualNow(target, ritual, selectedPawn, forcedForRole);
+        }
         public override void TryExecuteOn(TargetInfo target, Pawn organizer, Precept_Ritual ritual, RitualObligation obligation, RitualRoleAssignments assignments, bool playerForced = false)
         {
             base.TryExecuteOn(target, organizer, ritual, obligation, assignments, playerForced);

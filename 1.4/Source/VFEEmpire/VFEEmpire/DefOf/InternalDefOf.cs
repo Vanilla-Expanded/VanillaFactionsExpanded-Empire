@@ -22,6 +22,9 @@ public static class InternalDefOf
     public static JobDef VFEE_WaltzDipped;
     public static JobDef VFEE_WaltzGoToStart;
     public static JobDef VFEE_WaltzWait;
+    public static SoundDef GrandBall_Sustainer_01;
+    public static SoundDef GrandBall_Sustainer_02;
+    public static SoundDef GrandBall_Sustainer_03;
 
     public static DutyDef VFEE_ArtExhibitRoyal;
     public static DutyDef VFEE_ArtExhibitPresent;
