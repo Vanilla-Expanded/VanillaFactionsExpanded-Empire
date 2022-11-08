@@ -21,4 +21,5 @@
     <VFEE.VassalDesc>You can only vassalize bases that are less than 100 tiles away from you or your vassals\nVassalize more towns to increase the reach and unlock more potential vassal subjects</VFEE.VassalDesc>
     <VFEE.NoVassalize>Can't vassalize: Too far away</VFEE.NoVassalize>
     <VFEE.Vassalize>Vassalize</VFEE.Vassalize>
+    <VFEE.RoomRequirementInstrumentSpace>dance space for all instruments</VFEE.RoomRequirementInstrumentSpace>
 </LanguageData>

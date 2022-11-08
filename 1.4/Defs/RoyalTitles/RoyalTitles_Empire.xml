@@ -217,6 +217,9 @@
               <li>Harp</li>
             </things>
           </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
+          </li>
         </ballroomRequirements>
         <galleryRequirements>
           <li Class="RoomRequirement_Area">
@@ -463,6 +466,9 @@
               <li>Piano</li>
               <li>Harp</li>
             </things>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
           </li>
         </ballroomRequirements>
         <galleryRequirements>
@@ -712,6 +718,9 @@
           </li>
           <li Class="RoomRequirement_Thing">
             <thingDef>Harp</thingDef>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
           </li>
         </ballroomRequirements>
         <galleryRequirements>
@@ -975,6 +984,9 @@
           </li>
           <li Class="RoomRequirement_Thing">
             <thingDef>VFEE_PipeOrgan</thingDef>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
           </li>
         </ballroomRequirements>
         <galleryRequirements>
@@ -1249,6 +1261,9 @@
           </li>
           <li Class="RoomRequirement_Thing">
             <thingDef>VFEE_PipeOrgan</thingDef>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
           </li>
         </ballroomRequirements>
         <galleryRequirements>
@@ -1533,6 +1548,9 @@
           </li>
           <li Class="RoomRequirement_Thing">
             <thingDef>VFEE_PipeOrgan</thingDef>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
           </li>
         </ballroomRequirements>
         <galleryRequirements>
@@ -1837,6 +1855,9 @@
           </li>
           <li Class="RoomRequirement_Thing">
             <thingDef>VFEE_PipeOrgan</thingDef>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
           </li>
         </ballroomRequirements>
         <galleryRequirements>
@@ -2146,6 +2167,9 @@
           </li>
           <li Class="RoomRequirement_Thing">
             <thingDef>VFEE_PipeOrgan</thingDef>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
           </li>
         </ballroomRequirements>
         <galleryRequirements>
@@ -2468,6 +2492,9 @@
           </li>
           <li Class="RoomRequirement_Thing">
             <thingDef>VFEE_PipeOrgan</thingDef>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
           </li>
         </ballroomRequirements>
         <galleryRequirements>
