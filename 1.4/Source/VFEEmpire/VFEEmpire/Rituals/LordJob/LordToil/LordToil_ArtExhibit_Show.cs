@@ -52,6 +52,7 @@ namespace VFEEmpire
             if (!ritual.exhibitStarted)
             {
                 ritual.exhibitStarted = true;
+                ritual.nobles = lord.ownedPawns.Where(x => x.royalty?.HasAnyTitleIn(Faction.OfEmpire) ?? false).ToList();
             }
             foreach (var pawn in lord.ownedPawns)
             {

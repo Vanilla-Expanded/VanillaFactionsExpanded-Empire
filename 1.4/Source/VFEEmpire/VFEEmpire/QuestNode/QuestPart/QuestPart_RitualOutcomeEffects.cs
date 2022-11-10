@@ -21,7 +21,7 @@ namespace VFEEmpire
             slate.Set("outcome", outcomeString);
             return slate;
         }
-        public override QuestScriptDef QuestDef => InternalDefOf.VFEE_DelayedGrandBallOutcome;
+        public override QuestScriptDef QuestDef => questScript;
         public override bool CanAdd => outcomeIndex != -2;
         private FloatRange MarketValueRange
         {
@@ -69,10 +69,12 @@ namespace VFEEmpire
             Scribe_Values.Look(ref initMarkValue, "initMarkValue");
             Scribe_Values.Look(ref outcomeIndex, "outcomeIndex");
             Scribe_Defs.Look(ref outcomeDef, "outcomeDef");
+            Scribe_Defs.Look(ref questScript, "questScript");
             Scribe_References.Look(ref leadNoble, "leadNoble");
         }
         //Ritual outcome themselves are not exposable so storing index
 
+        public QuestScriptDef questScript;
         public float initMarkValue;
         public Pawn leadNoble;
         public RitualOutcomeEffectDef outcomeDef;

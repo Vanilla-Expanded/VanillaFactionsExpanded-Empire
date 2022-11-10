@@ -129,6 +129,7 @@ namespace VFEEmpire
             var bestTitle = bestNoble.royalty.HighestTitleWith(empire);
             slate.Set("title", bestTitle);
             slate.Set("nobles", nobles);
+            slate.Set("colonyHost", colonyHost);
             slate.Set("map", map, false);
             slate.Set("asker", bestNoble, false);
             slate.Set("faction", empire, false);
@@ -159,6 +160,7 @@ namespace VFEEmpire
                 leadNoble = bestNoble,
                 inSignal = outComeSignal,
                 initMarkValue = initMarketValue,
+                questScript = InternalDefOf.VFEE_DelayedArtExhibitOutcome,
                 outcomeDef = InternalDefOf.VFEE_ArtExhibit_Outcome
             };
             quest.AddPart(questPart_DelayedRitualReward);

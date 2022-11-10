@@ -32,7 +32,7 @@ namespace VFEEmpire
 				if(ticksTillSocial <= 0)
                 {
 					MoteMaker.MakeSpeechBubble(pawn, JobDriver_GiveSpeech.moteIcon);
-					ticksTillSocial = 60;
+					ticksTillSocial = 360;
 				}
 				ticksTillSocial--;
 			};
@@ -53,6 +53,11 @@ namespace VFEEmpire
 			yield return toil;
 			yield break;
 		}
-		private int ticksTillSocial = 0;
+
+        public override bool IsContinuation(Job j)
+        {
+            return job.GetTarget(TargetIndex.A) == j.GetTarget(TargetIndex.A);
+		}
+        private int ticksTillSocial = 0;
 	}
 }

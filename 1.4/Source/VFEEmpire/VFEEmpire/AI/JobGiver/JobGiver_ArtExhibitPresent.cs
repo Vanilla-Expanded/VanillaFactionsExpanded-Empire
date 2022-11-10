@@ -16,12 +16,12 @@ public class JobGiver_ArtExhibitPresent : ThinkNode_JobGiver
         if(exhibit.Presenter != pawn) { return null; }
         var art = exhibit.ArtPiece;
         var centerCell = exhibit.ArtSpectateRect(art).CenterCell;
-        IntVec3 standCell = art.InteractionCell + IntVec3.West.RotatedBy(art.Rotation);
-        if (!pawn.CanReserveSittableOrSpot(standCell))
+        IntVec3 standCell = art.InteractionCell;
+        if (!pawn.CanReserve(standCell))
         {
-            CellFinder.RandomClosewalkCellNear(art.Position, art.Map, 1 * art.def.Size.x, (IntVec3 c) =>
+            standCell = CellFinder.RandomClosewalkCellNear(art.Position, art.Map, 1 * art.def.Size.x, (IntVec3 c) =>
             {
-                return GenSight.LineOfSight(c, centerCell, art.Map) && pawn.CanReserveSittableOrSpot(c);
+                return GenSight.LineOfSight(c, centerCell, art.Map) && pawn.CanReserve(c) && c != art.Position;
             });
         }
         Job job = JobMaker.MakeJob(InternalDefOf.VFEE_ArtPresent, standCell, art, centerCell);

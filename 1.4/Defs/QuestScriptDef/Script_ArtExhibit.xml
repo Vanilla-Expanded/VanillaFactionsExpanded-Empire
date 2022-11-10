@@ -42,7 +42,7 @@
 			<li>appreciateAppreciates(nobleCount==1)->appreciates</li>
 			<li>appreciateAppreciates(nobleCount>=2)->appreciate</li>
 			
-			<li>questDescription->[asker_nameFull], a [asker_royalTitleInCurrentFaction] of the [asker_faction_name] wwould like to come over with a few other noble people and gaze upon the works of art in your gallery. This is a great opportunity for noble gossip and to build relations with other members of the imperial nobility.\nYou are required to have a gallery present in your colony. If at any point the gallery is destroyed, the art exhibition will be called off.\n[asker_nameFull] has forwarded you a list of nobility that was invited to the ball and will arrive in the shuttle:\n[noblesDetailList]\n\nYou will need to make sure the guests are safe and comfortable during the exhibition. If anything happens to any of the guests, the art exhibition will be cancelled.\nDeserters might use this opportunity to launch an assassination attempt.
+			<li>questDescription->[asker_nameFull], a [asker_royalTitleInCurrentFaction] of the [asker_faction_name] would like to come over with a few other noble people and gaze upon the works of art in your gallery. [asker_pronoun] requests [colonyHost_nameFull] hosts the occasion. This is a great opportunity for noble gossip and to build relations with other members of the imperial nobility.\nYou are required to have a gallery present in your colony. If at any point the gallery is destroyed, the art exhibition will be called off.\n[asker_nameFull] has forwarded you a list of nobility that was invited to the ball and will arrive in the shuttle:\n[noblesDetailList]\n\nYou will need to make sure the guests are safe and comfortable during the exhibition. If anything happens to any of the guests, the art exhibition will be cancelled.\nDeserters might use this opportunity to launch an assassination attempt.
 
 
 			</li>
@@ -91,7 +91,7 @@
 				<li>raidArrivedLetterText->A group of deserters have arrived to attempt to disrupt the art exhibit and assasinate the royals\n\n[asker_nameFull] does not care for the threat and demands the exhibit continues!  [asker_possessive] wants you too keep them safe and deal with the "peasants".</li>	
 				
 				<!-- Quest completed -->				
-				<li>ArtExhibitSuccessLetterLabel->GrandBall Success</li>
+				<li>ArtExhibitSuccessLetterLabel->Exhibit Success</li>
 				<li>ArtExhibitSuccessLetterText->The shuttle has departed with [asker_nameFull] and [asker_possessive] guests. Overall the event was a success and everyone made it back safe.</li>			
 				
 			</rulesStrings>

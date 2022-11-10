@@ -162,6 +162,7 @@ namespace VFEEmpire
                 leadNoble = bestNoble,
                 inSignal = outComeSignal,
                 initMarkValue = initMarketValue,
+                questScript = InternalDefOf.VFEE_DelayedGrandBallOutcome,
                 outcomeDef = InternalDefOf.VFEE_GrandBall_Outcome
             };
             quest.AddPart(questPart_DelayedRitualReward);

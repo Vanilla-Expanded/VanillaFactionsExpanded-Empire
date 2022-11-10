@@ -20,8 +20,8 @@ namespace VFEEmpire
 			this.bestNoble = bestNoble;
 			this.action = action;
 			this.job = job;
-			this.defaultLabel = "BeginCeremony".Translate();
-			this.icon = ContentFinder<Texture2D>.Get("UI/Icons/Rituals/BestowCeremony", true);
+			this.defaultLabel = "VFEE.GrandBall.Begin".Translate();
+			this.icon = ContentFinder<Texture2D>.Get("UI/Rituals/Ritual_GrandBall", true);
 		}
 		public override GizmoResult GizmoOnGUI(Vector2 topLeft, float maxWidth, GizmoRenderParms parms)
 		{			

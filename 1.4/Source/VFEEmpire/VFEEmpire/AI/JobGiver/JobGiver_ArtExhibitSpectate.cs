@@ -26,7 +26,7 @@ public class JobGiver_ArtExhibitSpectate : ThinkNode_JobGiver
         spot = IntVec3.Invalid;
         foreach(var c in rect.Cells)
         {
-            if(!pawn.CanReserveSittableOrSpot(c) || c.GetRoom(map) != art.GetRoom())
+            if(!pawn.CanReserve(c) || c.GetRoom(map) != art.GetRoom())
             {
                 continue;
             }
@@ -35,6 +35,10 @@ public class JobGiver_ArtExhibitSpectate : ThinkNode_JobGiver
             if(seat != null && seat.def.building.isSittable && pawn.CanReserve(seat))
             {
                 value *= 5f;
+            }
+            else if(seat != null)
+            {
+                value *= 0.5f;//Lower value of non sittable cells
             }
             if (!GenSight.LineOfSightToThing(c, art, map))
             {
@@ -52,7 +56,7 @@ public class JobGiver_ArtExhibitSpectate : ThinkNode_JobGiver
         }
         return CellFinder.TryFindRandomCellNear(art.Position, map, 7, (IntVec3 c) =>
         {
-            return pawn.CanReserveSittableOrSpot(c) && c.GetRoom(map) == art.GetRoom();
+            return pawn.CanReserve(c) && c.GetRoom(map) == art.GetRoom();
         }, out spot);
 
 

@@ -65,12 +65,13 @@ namespace VFEEmpire
 	
 
 		}
-		public LordJob_ArtExhibit(Pawn leadNoble, LocalTargetInfo targetinfo, Thing shuttle, string questEnded, Room gallery, List<Thing> artPieces)
+		public LordJob_ArtExhibit(Pawn leadNoble,Pawn host, LocalTargetInfo targetinfo, Thing shuttle, string questEnded, Room gallery, List<Thing> artPieces)
 		{
 			this.leadNoble = leadNoble;
 			this.target = targetinfo;
 			this.shuttle = shuttle;
 			this.questEndedSignal = questEnded;
+			this.host = host;
 			this.gallery = gallery;
 			this.artPieces = artPieces;
 		}
@@ -99,15 +100,39 @@ namespace VFEEmpire
             {
 				return rect;
             }
-			IntVec3 center = artPiece.Position + new IntVec3(0, 0, 3).RotatedBy(artPiece.Rotation);
-			if(!center.Standable(Map) || center.GetRoom(Map) != gallery)
-            {
-				RCellFinder.TryFindRandomCellNearWith(center, (IntVec3 c) =>
+			float standable = 0f;
+			foreach(var cardinal in GenAdj.CardinalDirections) //goal is to find the most open area to spectate from
+			{
+				IntVec3 center = artPiece.Position + (cardinal * 3);
+				if (!center.Standable(Map) || center.GetRoom(Map) != Gallery)
 				{
-					return c.Standable(Map) && c.GetRoom(Map) == gallery;
-				}, Map, out center, 1, 13);
-            }
-			rect = CellRect.CenteredOn(center, 2);
+					center = CellFinder.RandomClosewalkCellNear(artPiece.Position + cardinal, Map, 2, (IntVec3 c) =>
+					{
+						return c.Standable(Map) && c.GetRoom(Map) == Gallery;
+					});
+				}
+				float tmpStand = 0f;
+				var tmpRect = CellRect.CenteredOn(center, 3);
+				foreach(var cell in tmpRect.Cells)
+                {
+					if(cell.Standable(Map) && cell.GetRoom(Map) == Gallery)
+                    {
+						if(cell.GetEdifice(Map) != null && !cell.GetEdifice(Map).def.building?.isSittable == true)
+                        {
+							tmpStand += 0.5f; //Half value if there is an art piece there
+						}
+                        else
+                        {
+							tmpStand += 1f;
+						}
+                    }
+                }
+				if(tmpStand > standable)
+                {
+					standable = tmpStand;
+					rect = tmpRect;
+				}
+			}
 			cachedSpectate.Add(artPiece, rect);
 			return rect;
         }
@@ -234,11 +259,13 @@ namespace VFEEmpire
 				}
 			}
 			totalPresenceTmp.RemoveAll((tp) => tp.Value < 2500);
-			outcome.Apply(ticksPassed / duration, totalPresenceTmp, this);
+			outcome.Apply((float)ticksPassed / (float)duration, totalPresenceTmp, this);
 			outcome.ResetCompDatas();
 			lord.ReceiveMemo("CeremonyFinished");
 			QuestUtility.SendQuestTargetSignals(lord.questTags, signal, lord.Named("SUBJECT"));
 			foreach (var pawn in lord.ownedPawns)
+				pawn.jobs.CheckForJobOverride();
+			foreach (var pawn in colonistParticipants)
 				pawn.jobs.CheckForJobOverride();
 		}
 
@@ -252,11 +279,12 @@ namespace VFEEmpire
 				if (ticksThisRotation % (duration / artPieces.Count) == 0)
 				{
 					PresenterSwap();
+					ticksThisRotation = 0;
 				}
 			}
 
 		}
-		private Dictionary<Pawn, Thing> cachePresenters = new();
+		private Dictionary<Thing, Pawn> cachePresenters = new();
 		public void SetPresenters()
         {
 			foreach(var art in artPieces)
@@ -264,17 +292,17 @@ namespace VFEEmpire
 				var madeBy = GameComponent_Empire.Instance.artCreator.TryGetValue(art as ThingWithComps);
 				if(madeBy != null && presenters.Contains(madeBy))
                 {
-					cachePresenters.Add(madeBy, art);
+					cachePresenters.Add(art,madeBy);
 				}
                 else
                 {
-					cachePresenters.Add(host, art);
+					cachePresenters.Add(art,host);
 				}
 			}
         }
 		public Thing ArtFor(Pawn pawn)
         {
-			return cachePresenters.TryGetValue(pawn);
+			return cachePresenters.FirstOrDefault(x=>x.Value == pawn).Key;
 
 		}
 		public Pawn Presenter
@@ -285,7 +313,7 @@ namespace VFEEmpire
                 {
 					SetPresenters();
 				}
-				var pawn = cachePresenters.First(x => x.Value == ArtPiece).Key; //Doing this because they can leave if needed for raid
+				var pawn = cachePresenters.TryGetValue(ArtPiece); //Doing this because they can leave if needed for raid
 				if(!lord.ownedPawns.Contains(pawn))
                 {
 					return host;
@@ -298,6 +326,11 @@ namespace VFEEmpire
 		public void PresenterSwap()
 		{
 			stage++;
+			if (stage >= artPieces.Count)
+			{
+				StopExhibit("CeremonySuccess");
+				return;
+			}
 			foreach (var p in lord.ownedPawns)
 				p.jobs.CheckForJobOverride();
 		}

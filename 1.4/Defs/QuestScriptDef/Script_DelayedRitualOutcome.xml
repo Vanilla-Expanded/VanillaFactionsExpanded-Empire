@@ -35,4 +35,39 @@
 
 		 </root>
 	</QuestScriptDef>
+	<QuestScriptDef>
+		<defName>VFEE_DelayedArtExhibitOutcome</defName>
+		<defaultChallengeRating>1</defaultChallengeRating>
+		<rootSelectionWeight>1.0</rootSelectionWeight>
+		<expireDaysRange>4~8</expireDaysRange>
+		<affectedByPopulation>true</affectedByPopulation>
+		<affectedByPoints>true</affectedByPoints>
+		<rootMinPoints>100</rootMinPoints>
+		<rootSelectionWeightFactorFromPointsCurve> 
+		  <points>
+			<li>(0,0)</li>
+			<li>(200,1)</li>
+			<li>(500,2)</li>
+		  </points>
+		</rootSelectionWeightFactorFromPointsCurve>
+		<questNameRules>
+		  <rulesStrings>
+			<li>questName->Art Exhibit delayed reward</li>
+		  </rulesStrings>
+		</questNameRules>
+		<questDescriptionAndNameRules>
+		  <rulesStrings> 
+			<li>questDescription->a delayed reward for art exhibit quest</li>
+		  </rulesStrings>
+		</questDescriptionAndNameRules>
+		<questContentRules> 
+			<rulesStrings>
+				<li>rewardLetterLabel->Noble's Gift</li>
+				<li>rewardLetterText->[rewardGiver_nameDef] has contacted you. [rewardDelayTicks_duration] ago, you hosted a [outcome] art exhibit for [rewardGiver_possessive] \n\nSince then, [rewardGiver_pronoun] has gotten back home safe, and was so appreciative [rewardGiver_pronoun] wants to give you a personal gift. [rewardGiver_pronoun] is sending you the following via drop pod:\n\n[listOfRewards]</li>
+			</rulesStrings>
+		</questContentRules>
+		 <root Class="VFEEmpire.QuestNode_DelayedRitualReward">
+
+		 </root>
+	</QuestScriptDef>
 </Defs>

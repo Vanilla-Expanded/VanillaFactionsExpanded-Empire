@@ -53,7 +53,7 @@ namespace VFEEmpire
                     var lordJob = (LordJob_ArtExhibit)lord.LordJob;
                     string header = "VFEE.GrandBall.ChooseParticipants".Translate();
                     string label = lordJob.RitualLabel;
-                    var artPieces = lordJob.gallery.ContainedAndAdjacentThings.Where(x => x is ThingWithComps comps && comps.GetComp<CompArt>() != null).ToList();
+                    var artPieces = lordJob.Gallery.ContainedAndAdjacentThings.Where(x => x is ThingWithComps comps && comps.GetComp<CompArt>() != null).ToList();
                     var colonists = lordJob.Map.mapPawns.FreeColonistsSpawned;
                     List<Pawn> pOptions = new();
                     foreach (var art in artPieces)

@@ -5,11 +5,13 @@
 	<VFEE.StartBestower.NoTarget>Unable to start due to no valid throne rooms for the bestowing of the title.</VFEE.StartBestower.NoTarget>
 	<VFEE.StartBestower.DisabledExistingRitual>Unable to start while an existing ritual is ongoing.</VFEE.StartBestower.DisabledExistingRitual>
     <VFEE.GalleryRequirements>Gallery requirements</VFEE.GalleryRequirements>
+	<VFEE.GalleryRequirements.Unmet>Ballroom requirements unmet: {0}</VFEE.GalleryRequirements.Unmet>
     <VFEE.BallroomRequirements>Ballroom requirements</VFEE.BallroomRequirements>
 	<VFEE.BallroomRequirements.Unmet>Ballroom requirements unmet for: {0}</VFEE.BallroomRequirements.Unmet>
 	<VFEE.BallroomRequirements.DanceFloorToSmall>Ballroom does not have a big enough dance floor for the guests! They would like an open floor space of {0} infront of an instrument </VFEE.BallroomRequirements.DanceFloorToSmall>
     <VFEE.CourtRequirements>Noble court requirements</VFEE.CourtRequirements>
-	<VFEE.GrandBall.Label>Host Grandball</VFEE.GrandBall.Label>
+	<VFEE.GrandBall.Begin>Host Grandball</VFEE.GrandBall.Begin>
+	<VFEE.GrandBall.Label>Grandball</VFEE.GrandBall.Label>
 	<VFEE.GrandBall.Leave.label>Leave Grandball</VFEE.GrandBall.Leave.label>
 	<VFEE.GrandBall.Leave.Desc>This pawn will leave the grandball, they will not be able to rejoin the festivities later</VFEE.GrandBall.Leave.Desc>
 	<VFEE.GrandBall.Cancel.Label>Cancel Grandball</VFEE.GrandBall.Cancel.Label>
@@ -18,5 +20,14 @@
 	<VFEE.GrandBall.Waiting>Your guests are waiting for you to start the grand ball. They wont wait long however</VFEE.GrandBall.Waiting>
 	<VFEE.GrandBall.Description>An exclusive ball to only be attended by those with a royal title, and a few who can play instruments</VFEE.GrandBall.Description>
 	<VFEE.GrandBall.ChooseParticipants>Participants</VFEE.GrandBall.ChooseParticipants>
-	
+	<VFEE.ArtExhibit.Begin>Host Art Exhibit</VFEE.ArtExhibit.Begin>
+	<VFEE.ArtExhibit.Label>Art Exhibit</VFEE.ArtExhibit.Label>
+	<VFEE.ArtExhibit.Leave.label>Leave exhibit</VFEE.ArtExhibit.Leave.label>
+	<VFEE.ArtExhibit.Leave.Desc>This pawn will leave the exhibit, they will not be able to rejoin the festivities later</VFEE.ArtExhibit.Leave.Desc>
+	<VFEE.ArtExhibit.Cancel.Label>Cancel Exhibit</VFEE.ArtExhibit.Cancel.Label>
+	<VFEE.ArtExhibit.Cancel.Desc>Cancel the grand ball sending everyone home and failing the quest</VFEE.ArtExhibit.Cancel.Desc>
+	<VFEE.ArtExhibit.Cancel.Confirm>There will be no opportunity to restart this ritual, your guests will go home unappy and the quest will be failed.</VFEE.ArtExhibit.Cancel.Confirm>
+	<VFEE.ArtExhibit.Waiting>Your guests are waiting for you to start the art exhibit. They wont wait long however</VFEE.ArtExhibit.Waiting>
+	<VFEE.ArtExhibit.Description>An art expedition to only be attended by those with a royal title, to view your galley and gossip with eachother.</VFEE.ArtExhibit.Description>
+	<VFEE.ArtExhibit.ChooseParticipants>Participants</VFEE.ArtExhibit.ChooseParticipants>
 </LanguageData>

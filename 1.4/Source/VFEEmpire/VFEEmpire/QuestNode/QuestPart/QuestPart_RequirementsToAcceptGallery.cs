@@ -17,7 +17,7 @@ namespace VFEEmpire
             var cantAccept = CantAccept(out var unmet).ToList();
             if (!cantAccept.NullOrEmpty())
             {
-                return "VFEE.BallroomRequirements.Unmet".Translate(unmet);
+                return "VFEE.GalleryRequirements.Unmet".Translate(unmet);
             }
             return true;
         }
@@ -33,7 +33,7 @@ namespace VFEEmpire
                     culprits.Add(pawn);                    
                     foreach (var gallery in mapParent.Map.RoyaltyTracker().Galleries)
                     {
-                        foreach (var req in title.def.Ext().ballroomRequirements)
+                        foreach (var req in title.def.Ext().galleryRequirements)
                         {
                             if (!req.Met(gallery, pawn))
                             {

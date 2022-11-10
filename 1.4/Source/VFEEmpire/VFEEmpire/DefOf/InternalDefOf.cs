@@ -37,6 +37,7 @@ public static class InternalDefOf
     public static RitualOutcomeEffectDef VFEE_GrandBall_Outcome;
     public static RitualOutcomeEffectDef VFEE_ArtExhibit_Outcome;
     public static QuestScriptDef VFEE_DelayedGrandBallOutcome;
+    public static QuestScriptDef VFEE_DelayedArtExhibitOutcome;
     public static QuestScriptDef VFEE_Permit_CallAbsolver;
     public static RoyalTitlePermitDef VFEI_CallAbsolver;
 

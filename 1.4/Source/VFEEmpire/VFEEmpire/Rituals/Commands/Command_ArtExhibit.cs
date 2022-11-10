@@ -20,7 +20,7 @@ namespace VFEEmpire
 			this.bestNoble = bestNoble;
 			this.action = action;
 			this.job = job;
-			this.defaultLabel = "BeginCeremony".Translate();
+			this.defaultLabel = "VFEE.ArtExhibit.Begin".Translate();
 			this.icon = ContentFinder<Texture2D>.Get("UI/Icons/Rituals/BestowCeremony", true);
 		}
 		public override GizmoResult GizmoOnGUI(Vector2 topLeft, float maxWidth, GizmoRenderParms parms)
@@ -33,7 +33,7 @@ namespace VFEEmpire
             string header = "VFEE.GrandBall.ChooseParticipants".Translate();
             string label = job.RitualLabel;
 
-            var artPieces = job.gallery.ContainedAndAdjacentThings.Where(x => x is ThingWithComps comps && comps.GetComp<CompArt>() != null).ToList();
+            var artPieces = job.Gallery.ContainedAndAdjacentThings.Where(x => x is ThingWithComps comps && comps.GetComp<CompArt>() != null).ToList();
             var colonists = job.Map.mapPawns.FreeColonistsSpawned;
             List<Pawn> pOptions = new();
             foreach(var art in artPieces)
