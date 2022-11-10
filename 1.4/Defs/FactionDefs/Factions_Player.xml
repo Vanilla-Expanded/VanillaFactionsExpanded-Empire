@@ -6,7 +6,7 @@
     <label>New Family</label>
     <description>A colony of a royal family.</description>
     <isPlayer>true</isPlayer>
-    <basicMemberKind>Colonist</basicMemberKind>
+    <basicMemberKind>Empire_Royal_Baron</basicMemberKind>
     <pawnSingular>imperial</pawnSingular>
     <pawnsPlural>imperials</pawnsPlural>
     <techLevel>Industrial</techLevel>
