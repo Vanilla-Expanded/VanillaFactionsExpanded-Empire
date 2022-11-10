@@ -83,7 +83,7 @@
     <description>text.todo</description>
     <techLevel>Spacer</techLevel>
     <graphicData>
-      <texPath>Things/Item/Equipment/WeaponRanged/ChargeRifle</texPath>
+      <texPath>Equipment/ChargeThumper/ChargeThumper</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <soundInteract>Interact_ChargeRifle</soundInteract>
