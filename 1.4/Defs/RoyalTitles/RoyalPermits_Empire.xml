@@ -276,7 +276,7 @@
     <label>call trooper platoon</label>
     <description>Call a group of 8 light troopers to aid you in battle.</description>
     <workerClass>RoyalTitlePermitWorker_CallAid</workerClass>
-    <minTitle>Count</minTitle>    <!-- will be Archcount later -->
+    <minTitle>VFEE_Archcount</minTitle>
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
     <prerequisite>CallMilitaryAidGrand</prerequisite>
@@ -295,7 +295,7 @@
     <label>call janissary platoon</label>
     <description>Call a group of 8 professional janissaries to aid you in battle.</description>
     <workerClass>RoyalTitlePermitWorker_CallAid</workerClass>
-    <minTitle>Count</minTitle>    <!-- will be Marquess later -->
+    <minTitle>VFEE_Marquess</minTitle>
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
     <prerequisite>VFEI_CallTrooperPlatoon</prerequisite>
@@ -314,7 +314,7 @@
     <label>call cataphract platoon</label>
     <description>Call a group of 8 heavy cataphracts to aid you in battle.</description>
     <workerClass>RoyalTitlePermitWorker_CallAid</workerClass>
-    <minTitle>Count</minTitle>    <!-- will be Duke later -->
+    <minTitle>Duke</minTitle>
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
     <prerequisite>VFEI_CallJanissaryPlatoon</prerequisite>
@@ -333,13 +333,13 @@
     <label>call techfriar</label>
     <description>Call a techfriar to assist you for 4 days. This guildmember can only do research-related tasks. You can control him as though he is your own colonists. You are required to keep him safe.</description>
     <workerClass>RoyalTitlePermitWorker_CallLaborers</workerClass>
-    <minTitle>Count</minTitle>    <!-- will be Duke later -->
+    <minTitle>Duke</minTitle>
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
     <uiPosition>(4,3)</uiPosition>
     <royalAid>
       <favorCost>14</favorCost>
-      <pawnKindDef>Empire_Common_Laborer</pawnKindDef>      <!-- placeholder -->
+      <pawnKindDef>VFEE_Empire_Royal_Techfriar</pawnKindDef>
       <pawnCount>1</pawnCount>
       <aidDurationDays>4</aidDurationDays>
     </royalAid>
@@ -351,7 +351,7 @@
     <label>call laborer union</label>
     <description>Call a group of 12 laborers to assist you for 4 days. These workers can only do general labor tasks. You can control them as though they were your own colonists. You are required to keep them safe.</description>
     <workerClass>RoyalTitlePermitWorker_CallLaborers</workerClass>
-    <minTitle>Count</minTitle>    <!-- will be Duke later -->
+    <minTitle>Duke</minTitle>
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
     <prerequisite>CallLaborerGang</prerequisite>
@@ -443,7 +443,7 @@
     <label>call stellic guards</label>
     <description>Call a group of 6 stellic guards, ranged and melee, to aid you in battle.</description>
     <workerClass>VFEEmpire.RoyalTitlePermitWorker_CallStellic</workerClass>
-    <minTitle>Count</minTitle>    <!-- will be Consul later -->
+    <minTitle>Consul</minTitle>
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
     <prerequisite>VFEI_CallCataphractPlatoon</prerequisite>
@@ -460,7 +460,7 @@
     <label>call imperial regiment</label>
     <description>Call a group of 10 janissaries and 6 heavy cataphracts that will arrive in an armed shuttle, to aid you in battle. You cannot control them, but they will help you eliminate any threats in the area. They will leave after all threats are eliminated.</description>
     <workerClass>VFEEmpire.RoyalTitlePermitWorker_CallRegiment</workerClass>
-    <minTitle>Count</minTitle>    <!-- will be Magister later -->
+    <minTitle>VFEE_Magister</minTitle>
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
     <prerequisite>VFEI_CallStellicGuards</prerequisite>
@@ -494,12 +494,12 @@
     </royalAid>
   </RoyalTitlePermitDef>
 
-  <RoyalTitlePermitDef>    <!-- the pawn should be replaced every time it dies -->
+  <RoyalTitlePermitDef>
     <defName>VFEI_CallAbsolver</defName>
     <label>call absolver</label>
     <description>Call an absolver to assist you for 4 days. This guildmember is a master assassin and will not perform any tasks other than killing. You can control him as though he is your own colonists. If an absolver dies, a new one will replace them immediately, inheriting the remaining contract time.</description>
     <workerClass>VFEEmpire.RoyalTitlePermitWorker_CallAbsolver</workerClass>
-    <minTitle>Count</minTitle>    <!-- will be Duke later -->
+    <minTitle>Duke</minTitle>
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
     <uiPosition>(4,2)</uiPosition>
