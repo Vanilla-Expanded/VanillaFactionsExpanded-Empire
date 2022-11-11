@@ -96,6 +96,8 @@
     <Compile Include="Rituals\LordJob\LordToil\LordToil_GrandBall_Wait.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_ArtExhibit.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_GrandBall.cs" />
+    <Compile Include="ScenPart\ScenPart_SpawnFamilyMembers.cs" />
+    <Compile Include="ScenPart\ScenPart_SpawnRaid.cs" />
     <Compile Include="Things\DropPodIncoming_Building.cs" />
     <Compile Include="GameComponent_Empire.cs" />
     <Compile Include="HarmonyPatches\Patch_CompRefuelable_ConsumeFuel.cs" />
