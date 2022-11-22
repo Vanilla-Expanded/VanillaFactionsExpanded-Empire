@@ -73,6 +73,8 @@
     <Compile Include="HarmonyPatches\Patch_Conceit.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleIcons.cs" />
     <Compile Include="QuestNode\QuestNode_AbsolverRespawn.cs" />
+    <Compile Include="QuestNode\QuestNode_DeserterGoodWill.cs" />
+    <Compile Include="QuestNode\QuestNode_DeserterHideout.cs" />
     <Compile Include="QuestNode\QuestNode_DelayedRitualReward.cs" />
     <Compile Include="QuestNode\Questnode_Root_ArtExhibit.cs" />
     <Compile Include="QuestNode\Questnode_Root_GrandBall.cs" />
