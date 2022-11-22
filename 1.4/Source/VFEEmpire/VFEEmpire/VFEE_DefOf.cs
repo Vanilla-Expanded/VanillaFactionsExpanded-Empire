@@ -20,6 +20,12 @@ public static class VFEE_DefOf
     public static PawnKindDef Empire_Fighter_StellicGuardMelee;
     public static PawnKindDef Empire_Fighter_Janissary;
     public static PawnKindDef Empire_Fighter_Cataphract;
+    public static PawnKindDef Empire_Royal_Duke;
+    public static PawnKindDef Empire_Royal_Baron;
+    public static PawnKindDef VFEE_Deserter;
+    public static FactionDef VFEE_Deserters;
+    public static RoyalTitleDef Duke;
+    public static RoyalTitleDef Baron;
 
     static VFEE_DefOf()
     {

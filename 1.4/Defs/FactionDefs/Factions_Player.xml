@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  
+
   <FactionDef ParentName="PlayerFactionBase">
     <defName>VFEE_NewFamily</defName>
     <label>New Family</label>
@@ -12,7 +12,9 @@
     <techLevel>Industrial</techLevel>
     <factionNameMaker>NamerFactionOutlander</factionNameMaker>
     <settlementNameMaker>NamerSettlementOutlander</settlementNameMaker>
-    <allowedCultures><li>Sophian</li></allowedCultures>
+    <allowedCultures>
+      <li>Sophian</li>
+    </allowedCultures>
     <backstoryFilters>
       <li>
         <categories>
@@ -37,6 +39,13 @@
         <li>DevilstrandCloth</li>
       </disallowedThingDefs>
     </apparelStuffFilter>
+    <modExtensions>
+      <li Class="VFECore.FactionDefExtension">
+        <startingGoodwillByFactionDefs>
+          <VFEE_Deserters>-100~-100</VFEE_Deserters>
+        </startingGoodwillByFactionDefs>
+      </li>
+    </modExtensions>
   </FactionDef>
 
 </Defs>

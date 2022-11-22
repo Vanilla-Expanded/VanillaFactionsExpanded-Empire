@@ -1,5 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
+  <ScenPartDef>
+    <defName>VFEE_SpawnFamilyMembers</defName>
+    <label>spawn dead family members on map</label>
+    <category>Misc</category>
+    <scenPartClass>VFEEmpire.ScenPart_SpawnFamilyMembers</scenPartClass>
+    <maxUses>1</maxUses>
+  </ScenPartDef>
+
+  <ScenPartDef>
+    <defName>VFEE_SpawnRaid</defName>
+    <label>spawn raid on map</label>
+    <category>Misc</category>
+    <scenPartClass>VFEEmpire.ScenPart_SpawnRaid</scenPartClass>
+    <maxUses>1</maxUses>
+  </ScenPartDef>
 
   <ScenarioDef Name="Crashlanded">
     <defName>VFEE_NewFamily</defName>
@@ -23,91 +38,91 @@ Note: Since you start during a raid in progress, this is a difficult scenario.
           <pawnChoiceCount>6</pawnChoiceCount>
         </li>
 
-        <!-- Player starting stuff spawn method-->
-        <li Class="ScenPart_PlayerPawnsArriveMethod">
-          <def>PlayerPawnsArriveMethod</def>
-          <method>Standing</method>
-        </li>
-        
-        <!-- Player starting things -->
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
+        <!-- Scatter anywhere -->
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
           <thingDef>Silver</thingDef>
           <count>1200</count>
         </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
           <thingDef>Gold</thingDef>
           <count>200</count>
         </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
           <thingDef>MealSurvivalPack</thingDef>
           <count>24</count>
         </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
           <thingDef>MedicineIndustrial</thingDef>
           <count>12</count>
         </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
           <thingDef>MedicineUltratech</thingDef>
           <count>6</count>
         </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
           <thingDef>ComponentIndustrial</thingDef>
           <count>30</count>
         </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
           <thingDef>ComponentSpacer</thingDef>
           <count>20</count>
         </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
           <thingDef>Gun_AssaultRifle</thingDef>
         </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
           <thingDef>MeleeWeapon_MonoSword</thingDef>
         </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
           <thingDef>VFEE_MeleeWeapon_Toxblade</thingDef>
         </li>
-        <li Class="ScenPart_StartingThing_Defined">
-          <def>StartingThing_Defined</def>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
           <thingDef>VFEE_Gun_ChargeThumper</thingDef>
         </li>
-
-        <!-- Scatter some things near player start -->
-        <li Class="ScenPart_ScatterThingsNearPlayerStart">
-          <def>ScatterThingsNearPlayerStart</def>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
           <thingDef>Steel</thingDef>
           <count>400</count>
         </li>
-        <li Class="ScenPart_ScatterThingsNearPlayerStart">
-          <def>ScatterThingsNearPlayerStart</def>
+        <li Class="ScenPart_ScatterThingsAnywhere">
+          <def>ScatterThingsAnywhere</def>
           <thingDef>WoodLog</thingDef>
           <count>400</count>
-        </li>      
-        
+        </li>
+
         <!-- Game start dialog -->
         <li Class="ScenPart_GameStartDialog">
           <def>GameStartDialog</def>
           <textKey>GameStartDialog</textKey>
           <closeSound>GameStartSting</closeSound>
         </li>
-		
+
         <li Class="KCSG.ScenPart_AddStartingStructure">
           <def>VFEC_AddStartingStructure</def>
           <structureLabel>A royal villa</structureLabel>
+          <spawnTheStartingPawn>true</spawnTheStartingPawn>
           <nearMapCenter>True</nearMapCenter>
           <chooseFrom>
             <li>VFEE_RoyalVilla1</li>
           </chooseFrom>
+        </li>
+
+        <li Class="VFEEmpire.ScenPart_SpawnFamilyMembers">
+          <def>VFEE_SpawnFamilyMembers</def>
+        </li>
+        <li Class="VFEEmpire.ScenPart_SpawnRaid">
+          <def>VFEE_SpawnRaid</def>
         </li>
       </parts>
     </scenario>
