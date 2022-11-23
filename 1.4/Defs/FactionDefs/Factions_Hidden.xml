@@ -62,6 +62,13 @@
     <earliestRaidDays>45</earliestRaidDays>
     <pawnGroupMakers>
       <li>
+        <kindDef>Settlement</kindDef>
+        <commonality>100</commonality>
+        <options>
+          <VFEE_Deserter>10</VFEE_Deserter>
+        </options>
+      </li>
+      <li>
         <kindDef>Combat</kindDef>
         <commonality>100</commonality>
         <options>
