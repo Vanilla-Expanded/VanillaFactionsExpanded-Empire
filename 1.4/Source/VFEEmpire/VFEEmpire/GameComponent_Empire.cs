@@ -31,8 +31,8 @@ public class GameComponent_Empire : GameComponent
             checkTick = Find.TickManager.TicksGame + 6000;//0 reason to check it often
             bool hostileEmpire = Faction.OfEmpire.HostileTo(Faction.OfPlayer);
             bool hostileDeserter = Deserter.HostileTo(Faction.OfPlayer);
-            bool hasTitle = false;
-            foreach (var map in Find.Maps.Where(x => x.ParentFaction == Faction.OfPlayer))
+            bool hasTitle = false;            
+            foreach (var map in Find.Maps)
             {
                 if (map.mapPawns.FreeColonists.Any(x => x.royalty?.HasAnyTitleIn(Faction.OfEmpire) == true))
                 {

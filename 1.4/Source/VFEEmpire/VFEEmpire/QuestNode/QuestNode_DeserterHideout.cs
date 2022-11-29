@@ -27,6 +27,7 @@ namespace VFEEmpire
             randomizePoints.root.Run();
 
             //instead of adjust for distant which will be way too easy for the catapracts doing slighty different mod
+            int alliesCount = Mathf.RoundToInt(catapract.Evaluate(quest.points));
             quest.points = pointAdjust.Evaluate(quest.points);
             var points = quest.points;
             var deserters = Find.FactionManager.FirstFactionOfDef(InternalDefOf.VFEE_Deserters);
@@ -35,9 +36,8 @@ namespace VFEEmpire
                 factions = new List<Faction>() { Faction.OfEmpire, deserters },
             };
             quest.AddPart(part_involved);
-
-            //Allies
-            int alliesCount = Mathf.RoundToInt(catapract.Evaluate(quest.points));
+            slate.Set("siteFaction", deserters);
+            //Allies            
             List<Pawn> cataphracts = new();
             for(int i = 0; i < alliesCount; i++)
             {
@@ -67,12 +67,13 @@ namespace VFEEmpire
             {
                 new SitePartDefWithParams(SitePartDefOf.BanditCamp,new SitePartParams
                 {
-                    threatPoints = GetSiteThreatPoints(quest.points,requiredPawns,population)
+                    threatPoints = GetSiteThreatPoints(quest.points,population,requiredPawns + alliesCount)
                 })
             },tile, deserters);
             site.factionMustRemainHostile = true;
             site.desiredThreatPoints = site.ActualThreatPoints;
             slate.Set("site", site);
+            quest.SpawnWorldObject(site, null, null);
             //Signals
             string questTag = QuestGenUtility.HardcodedTargetQuestTagWithQuestID("DeserterCamp");
             string empireHostile = QuestGenUtility.HardcodedSignalWithQuestID("askerFaction.BecameHostileToPlayer");
@@ -103,10 +104,10 @@ namespace VFEEmpire
 
             //shutte parts
             //this part on is basically unchanged from Root Mision besides adding cataprachts to transpot ship
-            var shuttle = QuestGen_Shuttle.GenerateShuttle(requireColonistCount: requiredPawns, missionShuttleTarget: site, missionShuttleHome: map.Parent, maxColonistCount: requiredPawns);
+            var shuttle = QuestGen_Shuttle.GenerateShuttle(requireColonistCount: requiredPawns + alliesCount, missionShuttleTarget: site, missionShuttleHome: map.Parent, maxColonistCount: requiredPawns + alliesCount,acceptColonists: true);
             slate.Set("shuttle", shuttle);
             QuestUtility.AddQuestTag(ref shuttle.questTags, questTag);
-            var transportShip = quest.GenerateTransportShip(TransportShipDefOf.Ship_Shuttle,cataphracts,shuttle).transportShip;
+            var transportShip = quest.GenerateTransportShip(TransportShipDefOf.Ship_Shuttle, cataphracts, shuttle).transportShip;
             slate.Set("transportShip", transportShip);
             quest.SendTransportShipAwayOnCleanup(transportShip, true, TransportShipDropMode.None);
             quest.AddShipJob_Arrive(transportShip, map.Parent, null, null, ShipJobStartMode.Instant, Faction.OfEmpire);
@@ -120,8 +121,10 @@ namespace VFEEmpire
                 pawns = cataphracts,
                 mapParent = site
             };
+            quest.AddPart(joinPlayer);
             quest.AddShipJob(transportShip, ShipJobDefOf.Unload, ShipJobStartMode.Queue, null);
             quest.AddShipJob_FlyAway(transportShip, -1, null, TransportShipDropMode.None, null);
+            quest.Leave(cataphracts, enemiesDefeated, false);
             quest.TendPawns(null, shuttle, signalSentSatisfied);
             quest.RequiredShuttleThings(shuttle, site, QuestGenUtility.HardcodedSignalWithQuestID("transportShip.FlewAway"), true, -1);
             quest.ShuttleLeaveDelay(shuttle, 60000, null, Gen.YieldSingle<string>(signalSentSatisfied), null, delegate
@@ -151,7 +154,14 @@ namespace VFEEmpire
                 enemiesDefeated,
                 mapRemoved
             }, null);
-            quest.SignalPassActivable(() => quest.End(QuestEndOutcome.Fail), null, mapRemoved, null, null, enemiesDefeated, false);
+            Action action = delegate ()
+            {
+                quest.End(QuestEndOutcome.Fail, 0, null, null, QuestPart.SignalListenMode.OngoingOnly, true);
+            };
+            string inSignalEnable = null;
+            string inSignalDisable = enemiesDefeated;
+            quest.SignalPassActivable(action, inSignalEnable, mapRemoved, null, null, inSignalDisable, false);
+            //quest.SignalPassActivable(() => quest.End(QuestEndOutcome.Fail), null, mapRemoved, null, null, enemiesDefeated, false);
             int timeoutTime = (int)(timeLimitDays.RandomInRange * 60000f);
             slate.Set("timeoutTime", timeoutTime);
             quest.WorldObjectTimeout(site, timeoutTime);
@@ -194,13 +204,13 @@ namespace VFEEmpire
         //Based on Util_AdjustPointsForDistantFight but adjusted to account for the catapracts
         private static readonly SimpleCurve pointAdjust = new()
         {
-            {new CurvePoint(35f,350f) },
-            {new CurvePoint(400f,400f) },
-            {new CurvePoint(1000f,500f) },
-            {new CurvePoint(2000f,700f) },
-            {new CurvePoint(3000f,800f) },
-            {new CurvePoint(5000f,1000f) },
-            {new CurvePoint(10000f,1500f) },
+            {new CurvePoint(35f,850f) },
+            {new CurvePoint(400f,1000f) },
+            {new CurvePoint(1000f,1000f) },
+            {new CurvePoint(2000f,1200f) },
+            {new CurvePoint(3000f,1400f) },
+            {new CurvePoint(5000f,1800f) },
+            {new CurvePoint(10000f,2000f) },
         };
         private static readonly SimpleCurve catapract = new()
         {
