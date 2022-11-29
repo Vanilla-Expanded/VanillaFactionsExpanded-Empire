@@ -147,8 +147,8 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
         }
         else
         {
-            Text.Anchor = TextAnchor.MiddleLeft;
-            Widgets.Label(bottomRect, "VFEE.NoVassalize".Translate());
+            Text.Anchor = TextAnchor.MiddleCenter;
+            Widgets.Label(bottomRect, "VFEE.NoVassalize".Translate().Colorize(color));
             Text.Anchor = TextAnchor.UpperLeft;
         }
     }

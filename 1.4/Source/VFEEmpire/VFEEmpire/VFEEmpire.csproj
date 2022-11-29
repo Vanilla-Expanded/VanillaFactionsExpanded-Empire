@@ -101,7 +101,7 @@
     <Compile Include="ScenPart\ScenPart_SpawnFamilyMembers.cs" />
     <Compile Include="ScenPart\ScenPart_SpawnRaid.cs" />
     <Compile Include="Things\DropPodIncoming_Building.cs" />
-    <Compile Include="GameComponent_Empire.cs" />
+    <Compile Include="Comps\GameComponent_Empire.cs" />
     <Compile Include="HarmonyPatches\Patch_CompRefuelable_ConsumeFuel.cs" />
     <Compile Include="HarmonyPatches\Patch_Pawn_InteractionsTracker_TryInteractWith.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleDef_SpecialDisplayStats.cs" />
@@ -119,7 +119,7 @@
     <Compile Include="UI\RoyaltyTabWorker_Permits.cs" />
     <Compile Include="UI\RoyaltyTabWorker_Vassals.cs" />
     <Compile Include="Workers\InteractionWorker_RoyalGossip.cs" />
-    <Compile Include="MapComponent_RoyaltyTracker.cs" />
+    <Compile Include="Comps\MapComponent_RoyaltyTracker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_RoyalAddress.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_RoyalAddress.cs" />
@@ -139,7 +139,7 @@
     <Compile Include="Workers\ThoughtWorkers.cs" />
     <Compile Include="VFEEmpireMod.cs" />
     <Compile Include="VFEE_DefOf.cs" />
-    <Compile Include="WorldComponent_Vassals.cs" />
+    <Compile Include="Comps\WorldComponent_Vassals.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abilities\" />

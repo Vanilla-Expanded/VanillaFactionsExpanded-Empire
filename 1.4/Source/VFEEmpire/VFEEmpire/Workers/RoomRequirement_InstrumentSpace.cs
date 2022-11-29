@@ -15,8 +15,6 @@ public class RoomRequirement_InstrumentSpace : RoomRequirement
         Instruments.AddRange(DefDatabase<ThingDef>.AllDefs.Where(def => def.placeWorkers.Contains(typeof(Placeworker_DanceFloorArea))));
     }
 
-    public override string Label(Room r = null) => base.Label(r);
-
     public override bool Met(Room r, Pawn p = null)
     {
         return r.ContainedThingsList(Instruments)
