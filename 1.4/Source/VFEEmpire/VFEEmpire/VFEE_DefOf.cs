@@ -26,6 +26,10 @@ public static class VFEE_DefOf
     public static FactionDef VFEE_Deserters;
     public static RoyalTitleDef Duke;
     public static RoyalTitleDef Baron;
+    public static RoyalTitleDef Freeholder;
+    public static RoyalTitleDef VFEE_HighStellarch;
+    public static RoyalTitleDef Emperor;
+    public static QuestScriptDef VFEE_NobleVisit;
 
     static VFEE_DefOf()
     {

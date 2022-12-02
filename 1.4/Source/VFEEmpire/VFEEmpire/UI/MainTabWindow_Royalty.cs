@@ -19,7 +19,7 @@ public class MainTabWindow_Royalty : MainTabWindow
     public override void PreOpen()
     {
         base.PreOpen();
-        curTab = VFEE_DefOf.VFEE_GreatHierarchy;
+        curTab ??= VFEE_DefOf.VFEE_GreatHierarchy;
         CurCharacter = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists.First(p =>
             p.royalty != null && p.royalty.HasAnyTitleIn(Faction.OfEmpire));
         curTab.Worker.Notify_Open();
@@ -33,7 +33,8 @@ public class MainTabWindow_Royalty : MainTabWindow
         var anchor = Text.Anchor;
         var leftRect = inRect.TakeLeftPart(UI.screenWidth * 0.25f);
         inRect.xMin += 3f;
-        Widgets.DrawLineVertical(leftRect.xMax, inRect.y + 20f, inRect.height - 40f);
+        if (curTab.doDividerLine)
+            Widgets.DrawLineVertical(leftRect.xMax, inRect.y + 20f, inRect.height - 40f);
         Text.Font = GameFont.Medium;
         Text.Anchor = TextAnchor.MiddleCenter;
         Widgets.Label(leftRect.TakeTopPart(50f), curTab.label);
@@ -74,17 +75,18 @@ public class MainTabWindow_Royalty : MainTabWindow
         GUI.DrawTexture(top.TakeLeftPart(50f), PortraitsCache.Get(CurCharacter, new Vector2(50f, 50f), Rot4.South));
         top.xMax -= 10f;
         if (Widgets.ButtonText(top.TakeRightPart(100f), "VFEE.ChangeCharacter".Translate()))
-            Find.WindowStack.Add(new FloatMenu(PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists.Where(p =>
-                    p.royalty != null && p.royalty.HasAnyTitleIn(Faction.OfEmpire)).Select(p => new FloatMenuOption(p.LabelShort, () => CurCharacter = p))
-                .ToList()));
-        Text.Font = GameFont.Medium;
-        Text.Anchor = TextAnchor.MiddleLeft;
-        Widgets.Label(top, $"{CurCharacter.LabelShort}, {CurCharacter.royalty.MostSeniorTitle.Label.CapitalizeFirst()}");
-        Text.Anchor = TextAnchor.UpperLeft;
-        Text.Font = GameFont.Tiny;
-        Widgets.Label(inRect.TakeTopPart(20f), "VFEE.CurrentTitle".Translate(CurCharacter.royalty.MostSeniorTitle.Label.CapitalizeFirst()));
-        Widgets.Label(inRect.TakeTopPart(20f), "VFEE.CurrentHonor".Translate(CurCharacter.royalty.GetFavor(Faction.OfEmpire)));
-        Text.Font = GameFont.Small;
+            Find.WindowStack.Add(new FloatMenu(EmpireUtility.AllColonistsWithTitle()
+               .Select(p => new FloatMenuOption(p.LabelShort, () => CurCharacter = p))
+               .ToList()));
+
+        using (new TextBlock(GameFont.Medium, TextAnchor.MiddleLeft, null))
+            Widgets.Label(top, $"{CurCharacter.LabelShort}, {CurCharacter.royalty.MostSeniorTitle.Label.CapitalizeFirst()}");
+
+        using (new TextBlock(GameFont.Tiny, TextAnchor.UpperLeft, null))
+        {
+            Widgets.Label(inRect.TakeTopPart(20f), "VFEE.CurrentTitle".Translate(CurCharacter.royalty.MostSeniorTitle.Label.CapitalizeFirst()));
+            Widgets.Label(inRect.TakeTopPart(20f), "VFEE.CurrentHonor".Translate(CurCharacter.royalty.GetFavor(Faction.OfEmpire)));
+        }
     }
 
     public override void OnCancelKeyPressed()

@@ -4,6 +4,8 @@
     <label>The Great Hierarchy</label>
     <defName>VFEE_GreatHierarchy</defName>
     <description>This screen allows you to view all members of the Empire faction. You can spend honor to invite them as visitors.</description>
+    <doDividerLine>false</doDividerLine>
+    <workerClass>VFEEmpire.RoyaltyTabWorker_Hierarchy</workerClass>
   </VFEEmpire.RoyaltyTabDef>
   <VFEEmpire.RoyaltyTabDef>
     <label>Permits</label>
