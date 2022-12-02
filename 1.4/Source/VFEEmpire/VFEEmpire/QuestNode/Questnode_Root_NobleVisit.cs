@@ -49,10 +49,12 @@ public class QuestNode_Root_NobleVisit : QuestNode
         var leadTitle = DefDatabase<RoyalTitleDef>.AllDefs.Where(x => x.seniority <= colonyTitle.seniority).RandomElementByWeight(x => x.seniority); //
 
         //Generate Nobles
-        var nobleCount =
-            new IntRange(1, (int)Math.Floor(QuestNoblesCurve.Evaluate(points)))
+        var givenNoble = slate.Get<Pawn>("noble");
+        var nobleCount = givenNoble is null
+            ? 1
+            : new IntRange(1, (int)Math.Floor(QuestNoblesCurve.Evaluate(points)))
                .RandomInRange; //Max # increased with difficulty but still random how many you can get
-        var bestNoble = slate.Get<Pawn>("noble") ?? EmpireUtility.GenerateNoble(leadTitle);
+        var bestNoble = givenNoble ?? EmpireUtility.GenerateNoble(leadTitle);
         var nobles = new List<Pawn> { bestNoble };
         var tries = 0;
         while (nobles.Count < nobleCount)
