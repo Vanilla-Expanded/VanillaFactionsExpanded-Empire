@@ -22,4 +22,11 @@
     <VFEE.NoVassalize>Can't vassalize: Too far away</VFEE.NoVassalize>
     <VFEE.Vassalize>Vassalize</VFEE.Vassalize>
     <VFEE.RoomRequirementInstrumentSpace>dance space for all instruments</VFEE.RoomRequirementInstrumentSpace>
+    <VFEE.OfThe>{0} of the {1}</VFEE.OfThe>
+    <VFEE.Invite>Invite as visitor</VFEE.Invite>
+    <VFEE.InviteAs>Invite as {0} (Cost: {1} honor)</VFEE.InviteAs>
+    <VFEE.Skip.Title.Previous>Skip to previous title</VFEE.Skip.Title.Previous>
+    <VFEE.Skip.Title.Next>Skip to next title</VFEE.Skip.Title.Next>
+    <VFEE.Skip.Colonist.Previous>Skip to previous Colonist</VFEE.Skip.Colonist.Previous>
+    <VFEE.Skip.Colonist.Next>Skip to next Colonist</VFEE.Skip.Colonist.Next>
 </LanguageData>

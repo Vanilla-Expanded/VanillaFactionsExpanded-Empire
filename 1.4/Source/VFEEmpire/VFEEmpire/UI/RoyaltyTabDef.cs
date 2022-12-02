@@ -7,6 +7,7 @@ namespace VFEEmpire;
 
 public class RoyaltyTabDef : Def
 {
+    public bool doDividerLine = true;
     public bool hasSearch = true;
     public bool needsCharacter;
 

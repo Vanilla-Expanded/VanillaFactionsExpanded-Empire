@@ -15,7 +15,7 @@
     <commonality>1</commonality>
     <canBeInherited>True</canBeInherited>
     <suppressIdleAlert>true</suppressIdleAlert>
-    <decreeMtbDays>-1</decreeMtbDays> <!-- disabled -->
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
     <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
     <permitPointsAwarded>1</permitPointsAwarded>
     <decreeTags>
@@ -92,7 +92,9 @@
     </requiredApparel>
     <throneRoomRequirements>
       <li Class="RoomRequirement_HasAssignedThroneAnyOf">
-        <things><li>GrandThrone</li></things>
+        <things>
+          <li>GrandThrone</li>
+        </things>
       </li>
       <li Class="RoomRequirement_Area">
         <area>100</area>
@@ -137,11 +139,15 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoBeds</labelKey>
-        <buildingTags><li>Bed</li></buildingTags>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
       </li>
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
@@ -180,7 +186,9 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -193,7 +201,9 @@
         <li>InsectJelly</li>
       </allowedDefs>
     </foodRequirement>
-    <grantedAbilities><li>Speech</li></grantedAbilities>
+    <grantedAbilities>
+      <li>Speech</li>
+    </grantedAbilities>
     <speechCooldown>360000</speechCooldown>
     <maxPsylinkLevel>6</maxPsylinkLevel>
     <modExtensions>
@@ -236,10 +246,12 @@
           </li>
         </galleryRequirements>
         <iconPath>UI/NobleRanks/RoyalTitleIcon_Archcount</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Archcount</greyIconPath>
+        <kindForHierarchy>VFEE_Empire_Royal_Archcount</kindForHierarchy>
       </li>
     </modExtensions>
   </RoyalTitleDef>
-  
+
   <RoyalTitleDef ParentName="BaseEmpireTitle">
     <defName>VFEE_Marquess</defName>
     <label>marquess</label>
@@ -254,7 +266,7 @@
     <commonality>1</commonality>
     <canBeInherited>True</canBeInherited>
     <suppressIdleAlert>true</suppressIdleAlert>
-    <decreeMtbDays>-1</decreeMtbDays> <!-- disabled -->
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
     <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
     <permitPointsAwarded>1</permitPointsAwarded>
     <decreeTags>
@@ -331,7 +343,9 @@
     </requiredApparel>
     <throneRoomRequirements>
       <li Class="RoomRequirement_HasAssignedThroneAnyOf">
-        <things><li>GrandThrone</li></things>
+        <things>
+          <li>GrandThrone</li>
+        </things>
       </li>
       <li Class="RoomRequirement_Area">
         <area>120</area>
@@ -380,11 +394,15 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoBeds</labelKey>
-        <buildingTags><li>Bed</li></buildingTags>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
       </li>
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
@@ -426,7 +444,9 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -440,10 +460,10 @@
       </allowedDefs>
     </foodRequirement>
     <grantedAbilities>
-	    <li>Speech</li>
-	    <li>VFEE_RoyalAddress</li>
-		<li>VFEE_BestowFreeholder</li>
-	</grantedAbilities>
+      <li>Speech</li>
+      <li>VFEE_RoyalAddress</li>
+      <li>VFEE_BestowFreeholder</li>
+    </grantedAbilities>
     <speechCooldown>360000</speechCooldown>
     <maxPsylinkLevel>6</maxPsylinkLevel>
     <modExtensions>
@@ -487,10 +507,12 @@
         </galleryRequirements>
         <vassalagePointsAwarded>1</vassalagePointsAwarded>
         <iconPath>UI/NobleRanks/RoyalTitleIcon_Marquess</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Marquess</greyIconPath>
+        <kindForHierarchy>VFEE_Empire_Royal_Marquess</kindForHierarchy>
       </li>
     </modExtensions>
   </RoyalTitleDef>
-  
+
   <RoyalTitleDef ParentName="DukeBase">
     <favorCost>56</favorCost>
     <minExpectation>Royal</minExpectation>
@@ -498,7 +520,7 @@
     <changeHeirQuestPoints>4000</changeHeirQuestPoints>
     <canBeInherited>True</canBeInherited>
     <suppressIdleAlert>true</suppressIdleAlert>
-    <decreeMtbDays>-1</decreeMtbDays> <!-- disabled -->
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
     <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
     <permitPointsAwarded>1</permitPointsAwarded>
     <decreeTags>
@@ -575,7 +597,9 @@
     </requiredApparel>
     <throneRoomRequirements>
       <li Class="RoomRequirement_HasAssignedThroneAnyOf">
-        <things><li>GrandThrone</li></things>
+        <things>
+          <li>GrandThrone</li>
+        </things>
       </li>
       <li Class="RoomRequirement_Area">
         <area>140</area>
@@ -628,11 +652,15 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoBeds</labelKey>
-        <buildingTags><li>Bed</li></buildingTags>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
       </li>
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
@@ -678,7 +706,9 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -692,10 +722,10 @@
       </allowedDefs>
     </foodRequirement>
     <grantedAbilities>
-	    <li>Speech</li>
-	    <li>VFEE_RoyalAddress</li>
-		<li>VFEE_BestowYeoman</li>
-	</grantedAbilities>
+      <li>Speech</li>
+      <li>VFEE_RoyalAddress</li>
+      <li>VFEE_BestowYeoman</li>
+    </grantedAbilities>
     <speechCooldown>360000</speechCooldown>
     <maxPsylinkLevel>6</maxPsylinkLevel>
     <modExtensions>
@@ -739,10 +769,12 @@
         </galleryRequirements>
         <vassalagePointsAwarded>1</vassalagePointsAwarded>
         <iconPath>UI/NobleRanks/RoyalTitleIcon_Duke</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Duke</greyIconPath>
+        <kindForHierarchy>Empire_Royal_Duke</kindForHierarchy>
       </li>
     </modExtensions>
   </RoyalTitleDef>
-  
+
   <RoyalTitleDef ParentName="BaseEmpireTitle">
     <defName>VFEE_Archduke</defName>
     <label>archduke</label>
@@ -757,7 +789,7 @@
     <commonality>1</commonality>
     <canBeInherited>True</canBeInherited>
     <suppressIdleAlert>true</suppressIdleAlert>
-    <decreeMtbDays>-1</decreeMtbDays> <!-- disabled -->
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
     <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
     <permitPointsAwarded>1</permitPointsAwarded>
     <decreeTags>
@@ -834,7 +866,9 @@
     </requiredApparel>
     <throneRoomRequirements>
       <li Class="RoomRequirement_HasAssignedThroneAnyOf">
-        <things><li>GrandThrone</li></things>
+        <things>
+          <li>GrandThrone</li>
+        </things>
       </li>
       <li Class="RoomRequirement_Area">
         <area>150</area>
@@ -887,11 +921,15 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoBeds</labelKey>
-        <buildingTags><li>Bed</li></buildingTags>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
       </li>
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
@@ -941,7 +979,9 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -955,10 +995,10 @@
       </allowedDefs>
     </foodRequirement>
     <grantedAbilities>
-	    <li>Speech</li>
-	    <li>VFEE_RoyalAddress</li>
-		<li>VFEE_BestowAcolyte</li>
-	</grantedAbilities>
+      <li>Speech</li>
+      <li>VFEE_RoyalAddress</li>
+      <li>VFEE_BestowAcolyte</li>
+    </grantedAbilities>
     <speechCooldown>360000</speechCooldown>
     <maxPsylinkLevel>6</maxPsylinkLevel>
     <modExtensions>
@@ -1018,10 +1058,12 @@
         <vassalagePointsAwarded>1</vassalagePointsAwarded>
         <expectationsAlways>true</expectationsAlways>
         <iconPath>UI/NobleRanks/RoyalTitleIcon_Archduke</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Archduke</greyIconPath>
+        <kindForHierarchy>VFEE_Empire_Royal_Archduke</kindForHierarchy>
       </li>
     </modExtensions>
   </RoyalTitleDef>
-  
+
   <RoyalTitleDef ParentName="ConsulBase">
     <favorCost>112</favorCost>
     <minExpectation>Royal</minExpectation>
@@ -1030,7 +1072,7 @@
     <commonality>1</commonality>
     <canBeInherited>True</canBeInherited>
     <suppressIdleAlert>true</suppressIdleAlert>
-    <decreeMtbDays>-1</decreeMtbDays> <!-- disabled -->
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
     <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
     <permitPointsAwarded>1</permitPointsAwarded>
     <decreeTags>
@@ -1107,7 +1149,9 @@
     </requiredApparel>
     <throneRoomRequirements>
       <li Class="RoomRequirement_HasAssignedThroneAnyOf">
-        <things><li>GrandThrone</li></things>
+        <things>
+          <li>GrandThrone</li>
+        </things>
       </li>
       <li Class="RoomRequirement_Area">
         <area>180</area>
@@ -1160,11 +1204,15 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoBeds</labelKey>
-        <buildingTags><li>Bed</li></buildingTags>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
       </li>
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
@@ -1218,7 +1266,9 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -1232,10 +1282,10 @@
       </allowedDefs>
     </foodRequirement>
     <grantedAbilities>
-	    <li>Speech</li>
-	    <li>VFEE_RoyalAddress</li>
-		<li>VFEE_BestowKnight</li>
-	</grantedAbilities>
+      <li>Speech</li>
+      <li>VFEE_RoyalAddress</li>
+      <li>VFEE_BestowKnight</li>
+    </grantedAbilities>
     <speechCooldown>360000</speechCooldown>
     <maxPsylinkLevel>6</maxPsylinkLevel>
     <modExtensions>
@@ -1295,10 +1345,12 @@
         <vassalagePointsAwarded>1</vassalagePointsAwarded>
         <expectationsAlways>true</expectationsAlways>
         <iconPath>UI/NobleRanks/RoyalTitleIcon_Consul</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Consul</greyIconPath>
+        <kindForHierarchy>Empire_Royal_Consul</kindForHierarchy>
       </li>
     </modExtensions>
   </RoyalTitleDef>
-  
+
   <RoyalTitleDef ParentName="BaseEmpireTitle">
     <defName>VFEE_Magister</defName>
     <label>magister</label>
@@ -1313,7 +1365,7 @@
     <commonality>1</commonality>
     <canBeInherited>True</canBeInherited>
     <suppressIdleAlert>true</suppressIdleAlert>
-    <decreeMtbDays>-1</decreeMtbDays> <!-- disabled -->
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
     <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
     <permitPointsAwarded>1</permitPointsAwarded>
     <decreeTags>
@@ -1390,7 +1442,9 @@
     </requiredApparel>
     <throneRoomRequirements>
       <li Class="RoomRequirement_HasAssignedThroneAnyOf">
-        <things><li>VFEE_StellicThrone</li></things>
+        <things>
+          <li>VFEE_StellicThrone</li>
+        </things>
       </li>
       <li Class="RoomRequirement_Area">
         <area>220</area>
@@ -1447,11 +1501,15 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoBeds</labelKey>
-        <buildingTags><li>Bed</li></buildingTags>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
       </li>
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
@@ -1505,7 +1563,9 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -1519,10 +1579,10 @@
       </allowedDefs>
     </foodRequirement>
     <grantedAbilities>
-	    <li>Speech</li>
-	    <li>VFEE_RoyalAddress</li>
-		<li>VFEE_BestowPraetor</li>
-	</grantedAbilities>
+      <li>Speech</li>
+      <li>VFEE_RoyalAddress</li>
+      <li>VFEE_BestowPraetor</li>
+    </grantedAbilities>
     <speechCooldown>360000</speechCooldown>
     <maxPsylinkLevel>6</maxPsylinkLevel>
     <modExtensions>
@@ -1582,10 +1642,12 @@
         <vassalagePointsAwarded>1</vassalagePointsAwarded>
         <expectationsAlways>true</expectationsAlways>
         <iconPath>UI/NobleRanks/RoyalTitleIcon_Magister</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Magister</greyIconPath>
+        <kindForHierarchy>VFEE_Empire_Royal_Magister</kindForHierarchy>
       </li>
     </modExtensions>
   </RoyalTitleDef>
-  
+
   <RoyalTitleDef ParentName="BaseEmpireTitle">
     <defName>VFEE_Despot</defName>
     <label>despot</label>
@@ -1600,7 +1662,7 @@
     <commonality>1</commonality>
     <canBeInherited>True</canBeInherited>
     <suppressIdleAlert>true</suppressIdleAlert>
-    <decreeMtbDays>-1</decreeMtbDays> <!-- disabled -->
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
     <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
     <permitPointsAwarded>1</permitPointsAwarded>
     <decreeTags>
@@ -1677,7 +1739,9 @@
     </requiredApparel>
     <throneRoomRequirements>
       <li Class="RoomRequirement_HasAssignedThroneAnyOf">
-        <things><li>VFEE_StellicThrone</li></things>
+        <things>
+          <li>VFEE_StellicThrone</li>
+        </things>
       </li>
       <li Class="RoomRequirement_Area">
         <area>280</area>
@@ -1742,11 +1806,15 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoBeds</labelKey>
-        <buildingTags><li>Bed</li></buildingTags>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
       </li>
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
@@ -1812,7 +1880,9 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -1826,10 +1896,10 @@
       </allowedDefs>
     </foodRequirement>
     <grantedAbilities>
-	    <li>Speech</li>
-	    <li>VFEE_RoyalAddress</li>
-		<li>VFEE_BestowBaron</li>
-	</grantedAbilities>
+      <li>Speech</li>
+      <li>VFEE_RoyalAddress</li>
+      <li>VFEE_BestowBaron</li>
+    </grantedAbilities>
     <speechCooldown>360000</speechCooldown>
     <maxPsylinkLevel>6</maxPsylinkLevel>
     <modExtensions>
@@ -1889,10 +1959,12 @@
         <vassalagePointsAwarded>1</vassalagePointsAwarded>
         <expectationsAlways>true</expectationsAlways>
         <iconPath>UI/NobleRanks/RoyalTitleIcon_Despot</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Despot</greyIconPath>
+        <kindForHierarchy>VFEE_Empire_Royal_Despot</kindForHierarchy>
       </li>
     </modExtensions>
   </RoyalTitleDef>
-  
+
   <RoyalTitleDef ParentName="StellarchBase">
     <favorCost>308</favorCost>
     <minExpectation>Royal</minExpectation>
@@ -1900,7 +1972,7 @@
     <changeHeirQuestPoints>5000</changeHeirQuestPoints>
     <canBeInherited>True</canBeInherited>
     <suppressIdleAlert>true</suppressIdleAlert>
-    <decreeMtbDays>-1</decreeMtbDays> <!-- disabled -->
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
     <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
     <permitPointsAwarded>1</permitPointsAwarded>
     <decreeTags>
@@ -1977,7 +2049,9 @@
     </requiredApparel>
     <throneRoomRequirements>
       <li Class="RoomRequirement_HasAssignedThroneAnyOf">
-        <things><li>VFEE_StellicThrone</li></things>
+        <things>
+          <li>VFEE_StellicThrone</li>
+        </things>
       </li>
       <li Class="RoomRequirement_ThingCount">
         <thingDef>Throne</thingDef>
@@ -2054,11 +2128,15 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoBeds</labelKey>
-        <buildingTags><li>Bed</li></buildingTags>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
       </li>
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
@@ -2124,7 +2202,9 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -2138,10 +2218,10 @@
       </allowedDefs>
     </foodRequirement>
     <grantedAbilities>
-	    <li>Speech</li>
-	    <li>VFEE_RoyalAddress</li>
-		<li>VFEE_BestowCount</li>
-	</grantedAbilities>
+      <li>Speech</li>
+      <li>VFEE_RoyalAddress</li>
+      <li>VFEE_BestowCount</li>
+    </grantedAbilities>
     <speechCooldown>360000</speechCooldown>
     <maxPsylinkLevel>6</maxPsylinkLevel>
     <modExtensions>
@@ -2201,10 +2281,12 @@
         <vassalagePointsAwarded>1</vassalagePointsAwarded>
         <expectationsAlways>true</expectationsAlways>
         <iconPath>UI/NobleRanks/RoyalTitleIcon_Stellarch</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Stellarch</greyIconPath>
+        <kindForHierarchy>Empire_Royal_Stellarch</kindForHierarchy>
       </li>
     </modExtensions>
   </RoyalTitleDef>
-  
+
   <RoyalTitleDef ParentName="StellarchBase">
     <defName>VFEE_HighStellarch</defName>
     <label>high stellarch</label>
@@ -2218,7 +2300,7 @@
     <changeHeirQuestPoints>5000</changeHeirQuestPoints>
     <canBeInherited>True</canBeInherited>
     <suppressIdleAlert>true</suppressIdleAlert>
-    <decreeMtbDays>-1</decreeMtbDays> <!-- disabled -->
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
     <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
     <permitPointsAwarded>0</permitPointsAwarded>
     <decreeTags>
@@ -2295,7 +2377,9 @@
     </requiredApparel>
     <throneRoomRequirements>
       <li Class="RoomRequirement_HasAssignedThroneAnyOf">
-        <things><li>VFEE_StellicThrone</li></things>
+        <things>
+          <li>VFEE_StellicThrone</li>
+        </things>
       </li>
       <li Class="RoomRequirement_ThingCount">
         <thingDef>Throne</thingDef>
@@ -2379,11 +2463,15 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoBeds</labelKey>
-        <buildingTags><li>Bed</li></buildingTags>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
       </li>
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
@@ -2449,7 +2537,9 @@
       </li>
       <li Class="RoomRequirement_ForbiddenBuildings">
         <labelKey>RoomRequirementNoProductionFacilities</labelKey>
-        <buildingTags><li>Production</li></buildingTags>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -2463,10 +2553,10 @@
       </allowedDefs>
     </foodRequirement>
     <grantedAbilities>
-	    <li>Speech</li>
-	    <li>VFEE_RoyalAddress</li>
-		<li>VFEE_BestowCount</li>
-	</grantedAbilities>
+      <li>Speech</li>
+      <li>VFEE_RoyalAddress</li>
+      <li>VFEE_BestowCount</li>
+    </grantedAbilities>
     <speechCooldown>360000</speechCooldown>
     <maxPsylinkLevel>6</maxPsylinkLevel>
     <modExtensions>
@@ -2526,6 +2616,8 @@
         <vassalagePointsAwarded>0</vassalagePointsAwarded>
         <expectationsAlways>true</expectationsAlways>
         <iconPath>UI/NobleRanks/RoyalTitleIcon_HighStellarch</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_HighStellarch</greyIconPath>
+        <kindForHierarchy>VFEE_Empire_Royal_HighStellarch</kindForHierarchy>
       </li>
     </modExtensions>
   </RoyalTitleDef>

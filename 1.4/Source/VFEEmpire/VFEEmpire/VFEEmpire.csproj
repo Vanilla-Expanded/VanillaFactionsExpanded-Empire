@@ -66,6 +66,7 @@
     <Compile Include="Comps\CompAbilityEffect_StartBestowing.cs" />
     <Compile Include="Comps\CompProperties_AbilityStartBestower.cs" />
     <Compile Include="Comps\CompResearchRefresh.cs" />
+    <Compile Include="Comps\WorldComponent_Hierarchy.cs" />
     <Compile Include="DefOf\InternalDefOf.cs" />
     <Compile Include="Comps\HediffComp_RandomDamage.cs" />
     <Compile Include="HarmonyPatches\CompArt_JustCreatedBy.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Thoughts\ThoughtWorker_BadVisit.cs" />
     <Compile Include="TitheTypeDef.cs" />
     <Compile Include="UI\RoyaltyTabDef.cs" />
+    <Compile Include="UI\RoyaltyTabWorker_Hierarchy.cs" />
     <Compile Include="UI\RoyaltyTabWorker_Permits.cs" />
     <Compile Include="UI\RoyaltyTabWorker_Vassals.cs" />
     <Compile Include="Workers\InteractionWorker_RoyalGossip.cs" />
