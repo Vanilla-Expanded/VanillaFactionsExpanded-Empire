@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="AI\JobDriver\JobDriver_ArtPresent.cs" />
     <Compile Include="AI\JobDriver\JobDriver_ArtSpectate.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_DefuseBomb.cs" />
     <Compile Include="AI\JobDriver\JobDriver_WaltzDipped.cs" />
     <Compile Include="AI\JobDriver\JobDriver_ArtPresenterStandBy.cs" />
     <Compile Include="AI\JobDriver\JobDriver_WaltzWait.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_GrandBall.cs" />
     <Compile Include="ScenPart\ScenPart_SpawnFamilyMembers.cs" />
     <Compile Include="ScenPart\ScenPart_SpawnRaid.cs" />
+    <Compile Include="Things\Building_Bomb.cs" />
     <Compile Include="Things\DropPodIncoming_Building.cs" />
     <Compile Include="Comps\GameComponent_Empire.cs" />
     <Compile Include="HarmonyPatches\Patch_CompRefuelable_ConsumeFuel.cs" />

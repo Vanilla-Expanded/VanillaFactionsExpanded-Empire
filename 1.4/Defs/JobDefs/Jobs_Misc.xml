@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    <JobDef>
+        <defName>VFEE_DefuseBomb</defName>
+        <driverClass>VFEEmpire.JobDriver_DefuseBomb</driverClass>
+        <reportString>defusing TargetA.</reportString>
+        <casualInterruptible>false</casualInterruptible>
+    </JobDef>
+</Defs>

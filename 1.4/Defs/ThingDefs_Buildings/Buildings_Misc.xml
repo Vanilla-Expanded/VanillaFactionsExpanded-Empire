@@ -42,4 +42,26 @@
     </researchPrerequisites>
   </ThingDef>
 
+  <ThingDef ParentName="BuildingBase">
+    <defName>VFEE_Bomb</defName>
+    <label>bomb</label>
+    <description>A small, makeshift bomb. Can be easily defused if found on time.</description>
+    <thingClass>VFEEmpire.Building_Bomb</thingClass>
+    <size>(1, 1)</size>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Beauty>-2</Beauty>
+    </statBases>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Bomb/DeserterBomb</texPath>
+    </graphicData>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <killedLeavings>
+      <ComponentIndustrial>1</ComponentIndustrial>
+      <Shell_AntigrainWarhead>1</Shell_AntigrainWarhead>
+    </killedLeavings>
+  </ThingDef>
+
 </Defs>
