@@ -6,4 +6,10 @@
         <reportString>defusing TargetA.</reportString>
         <casualInterruptible>false</casualInterruptible>
     </JobDef>
+    <JobDef>
+        <defName>VFEE_PlaceBomb</defName>
+        <driverClass>VFEEmpire.JobDriver_PlaceBomb</driverClass>
+        <reportString>placing bomb</reportString>
+        <casualInterruptible>false</casualInterruptible>
+    </JobDef>
 </Defs>

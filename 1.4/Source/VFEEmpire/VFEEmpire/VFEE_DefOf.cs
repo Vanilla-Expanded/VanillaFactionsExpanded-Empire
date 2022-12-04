@@ -34,6 +34,8 @@ public static class VFEE_DefOf
     public static QuestScriptDef VFEE_NobleVisit;
     public static SoundDef VFEE_BombBeep;
     public static JobDef VFEE_DefuseBomb;
+    public static JobDef VFEE_PlaceBomb;
+    public static ThingDef VFEE_Bomb;
 
     static VFEE_DefOf()
     {

@@ -49,15 +49,15 @@
   <PawnKindDef ParentName="VFEE_DeserterBase">
     <defName>VFEE_Deserter</defName>
     <label>deserter</label>
-    <combatPower>180</combatPower>
+    <combatPower>80</combatPower>
     <weaponTags>
       <li>AssaultRifle</li>
       <li>SpacerGun</li>
-	  <li>VFEE_SpacerGunBreach</li>
+	    <li>VFEE_SpacerGunBreach</li>
     </weaponTags>
     <apparelRequired>
-      <li>Apparel_ArmorHelmetCataphract</li>
-      <li>Apparel_ArmorCataphract</li>
+      <li>VFEE_Apparel_DeserterHelmet</li>
+      <li>VFEE_Apparel_ArmorDeserter</li>
     </apparelRequired>
     <specificApparelRequirements Inherit="False">
       <li>

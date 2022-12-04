@@ -49,6 +49,7 @@
     <Compile Include="AI\JobDriver\JobDriver_ArtPresent.cs" />
     <Compile Include="AI\JobDriver\JobDriver_ArtSpectate.cs" />
     <Compile Include="AI\JobDriver\JobDriver_DefuseBomb.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_PlaceBomb.cs" />
     <Compile Include="AI\JobDriver\JobDriver_WaltzDipped.cs" />
     <Compile Include="AI\JobDriver\JobDriver_ArtPresenterStandBy.cs" />
     <Compile Include="AI\JobDriver\JobDriver_WaltzWait.cs" />
@@ -64,13 +65,16 @@
     <Compile Include="AI\JobGiver\JobGiver_GoToStartPositions.cs" />
     <Compile Include="AI\JobGiver\JobGiver_DanceSpectate.cs" />
     <Compile Include="AI\JobGiver\JobGiver_Waltz.cs" />
+    <Compile Include="AI\TerrorismLords.cs" />
     <Compile Include="Comps\CompAbilityEffect_StartBestowing.cs" />
     <Compile Include="Comps\CompProperties_AbilityStartBestower.cs" />
     <Compile Include="Comps\CompResearchRefresh.cs" />
+    <Compile Include="Comps\MapComponent_Terrorism.cs" />
     <Compile Include="Comps\WorldComponent_Hierarchy.cs" />
     <Compile Include="DefOf\InternalDefOf.cs" />
     <Compile Include="Comps\HediffComp_RandomDamage.cs" />
     <Compile Include="HarmonyPatches\CompArt_JustCreatedBy.cs" />
+    <Compile Include="HarmonyPatches\Patch_Lords.cs" />
     <Compile Include="HarmonyPatches\PawnRenderer_BodyAngle.cs" />
     <Compile Include="HarmonyPatches\Patch_Conceit.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleIcons.cs" />

@@ -6,12 +6,15 @@ using RimWorld;
 using RimWorld.Planet;
 using RimWorld.QuestGen;
 using Verse;
+using Verse.AI.Group;
 
 namespace VFEEmpire;
 
 public static class EmpireUtility
 {
     private static readonly Dictionary<(RoyalTitleDef, Faction), int> FavorCache = new();
+
+    public static Faction Deserters => Find.FactionManager.FirstFactionOfDef(VFEE_DefOf.VFEE_Deserters);
     public static RoyalTitleDefExtension Ext(this RoyalTitleDef def) => def.GetModExtension<RoyalTitleDefExtension>();
 
     public static MapComponent_RoyaltyTracker RoyaltyTracker(this Map map) => map.GetComponent<MapComponent_RoyaltyTracker>();
@@ -160,4 +163,6 @@ public static class EmpireUtility
             p.royalty != null && p.royalty.HasAnyTitleIn(faction ?? Faction.OfEmpire));
 
     public static int TitleIndex(this RoyalTitleDef title) => WorldComponent_Hierarchy.Titles.IndexOf(title);
+
+    public static TerrorismLord Terrorism(this Lord lord) => lord.lordManager.map.GetComponent<MapComponent_Terrorism>().GetTerrorismFor(lord);
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -49,6 +50,9 @@ public class Building_Bomb : Building
         base.GetFloatMenuOptions(selPawn)
            .Append(new FloatMenuOption("VFEE.DefuseBomb".Translate(),
                 () => selPawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(VFEE_DefOf.VFEE_DefuseBomb, this), JobTag.DraftedOrder)));
+
+    public override bool ClaimableBy(Faction by, StringBuilder reason = null) => false;
+    public override bool DeconstructibleBy(Faction faction) => false;
 
     public override void ExposeData()
     {
