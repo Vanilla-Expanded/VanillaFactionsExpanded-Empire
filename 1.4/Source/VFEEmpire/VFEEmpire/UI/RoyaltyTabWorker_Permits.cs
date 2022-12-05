@@ -54,26 +54,25 @@ public class RoyaltyTabWorker_Permits : RoyaltyTabWorker
 
     private void DoLeftRect(Rect rect, Pawn pawn, bool devMode)
     {
-        var num = 0f;
         var empire = Faction.OfEmpire;
         var currentTitle = pawn.royalty.GetCurrentTitle(empire);
-        var rect2 = new Rect(rect);
-        Widgets.BeginGroup(rect2);
+        Widgets.BeginGroup(rect);
         if (selectedPermit != null)
         {
+            var num = 0f;
             Text.Font = GameFont.Medium;
-            var rect3 = new Rect(0f, num, rect2.width, 0f);
+            var rect3 = new Rect(0f, num, rect.width, 0f);
             Widgets.LabelCacheHeight(ref rect3, selectedPermit.LabelCap);
             Text.Font = GameFont.Small;
             num += rect3.height;
             if (!selectedPermit.description.NullOrEmpty())
             {
-                var rect4 = new Rect(0f, num, rect2.width, 0f);
+                var rect4 = new Rect(0f, num, rect.width, 0f);
                 Widgets.LabelCacheHeight(ref rect4, selectedPermit.description);
                 num += rect4.height + 16f;
             }
 
-            var rect5 = new Rect(0f, num, rect2.width, 0f);
+            var rect5 = new Rect(0f, num, rect.width, 0f);
             string text = "Cooldown".Translate() + ": " + "PeriodDays".Translate(selectedPermit.cooldownDays);
             if (selectedPermit.royalAid is { favorCost: > 0 } &&
                 !empire.def.royalFavorLabel.NullOrEmpty())
@@ -81,18 +80,21 @@ public class RoyaltyTabWorker_Permits : RoyaltyTabWorker
                                "CooldownUseFavorCost".Translate(empire.def.royalFavorLabel.Named("HONOR")).CapitalizeFirst() +
                                ": ") + selectedPermit.royalAid.favorCost;
             if (selectedPermit.minTitle != null)
-                text = text + "\n" + "RequiresTitle".Translate(selectedPermit.minTitle.GetLabelForBothGenders()).Resolve()
-                    .Colorize(currentTitle != null && currentTitle.seniority >= selectedPermit.minTitle.seniority
+                text = text + "\n" + "RequiresTitle".Translate(selectedPermit.minTitle.GetLabelForBothGenders())
+                   .Resolve()
+                   .Colorize(currentTitle != null && currentTitle.seniority >= selectedPermit.minTitle.seniority
                         ? Color.white
                         : ColorLibrary.RedReadable);
             if (selectedPermit.prerequisite != null)
-                text = text + "\n" + "UpgradeFrom".Translate(selectedPermit.prerequisite.LabelCap).Resolve().Colorize(
-                    selectedPermit.prerequisite.Unlocked(pawn) ? Color.white : ColorLibrary.RedReadable);
+                text = text + "\n" + "UpgradeFrom".Translate(selectedPermit.prerequisite.LabelCap)
+                   .Resolve()
+                   .Colorize(
+                        selectedPermit.prerequisite.Unlocked(pawn) ? Color.white : ColorLibrary.RedReadable);
             Widgets.LabelCacheHeight(ref rect5, text);
-            num += rect5.height + 4f;
-            var rect6 = new Rect(0f, rect2.height - 50f, rect2.width, 50f);
+            var rect6 = new Rect(0f, rect.height - 50f, rect.width, 50f);
             if ((selectedPermit.AvailableForPawn(pawn, empire) || devMode) &&
-                !selectedPermit.prerequisite.Unlocked(pawn) && Widgets.ButtonText(rect6, "AcceptPermit".Translate()))
+                !selectedPermit.Unlocked(pawn) &&
+                Widgets.ButtonText(rect6, "AcceptPermit".Translate()))
             {
                 SoundDefOf.Quest_Accepted.PlayOneShotOnCamera();
                 pawn.royalty.AddPermit(selectedPermit, empire);
@@ -115,11 +117,7 @@ public class RoyaltyTabWorker_Permits : RoyaltyTabWorker
     {
         var start = default(Vector2);
         var end = default(Vector2);
-        var allDefsListForReading = DefDatabase<RoyalTitlePermitDef>.AllDefsListForReading;
-        for (var i = 0; i < 2; i++)
-        for (var j = 0; j < allDefsListForReading.Count; j++)
-        {
-            var royalTitlePermitDef = allDefsListForReading[j];
+        foreach (var royalTitlePermitDef in DefDatabase<RoyalTitlePermitDef>.AllDefsListForReading)
             if (CanDrawPermit(royalTitlePermitDef))
             {
                 var vector = DrawPosition(royalTitlePermitDef);
@@ -131,22 +129,21 @@ public class RoyaltyTabWorker_Permits : RoyaltyTabWorker
                     var vector2 = DrawPosition(prerequisite);
                     end.x = vector2.x + 200f;
                     end.y = vector2.y + 25f;
-                    if ((i == 1 && selectedPermit == royalTitlePermitDef) || PermitsCardUtility.selectedPermit == prerequisite)
-                        Widgets.DrawLine(start, end, TexUI.HighlightLineResearchColor, 4f);
-                    else if (i == 0) Widgets.DrawLine(start, end, TexUI.DefaultLineResearchColor, 2f);
+                    Widgets.DrawLine(start, end, selectedPermit == royalTitlePermitDef || selectedPermit == prerequisite
+                        ? TexUI.HighlightLineResearchColor
+                        : TexUI.DefaultLineResearchColor, 2f);
                 }
             }
-        }
     }
 
     private void DoRightRect(Rect rect, Pawn pawn)
     {
         Widgets.DrawMenuSection(rect);
         var empire = Faction.OfEmpire;
-        var allDefsListForReading = DefDatabase<RoyalTitlePermitDef>.AllDefsListForReading;
+        var toDraw = DefDatabase<RoyalTitlePermitDef>.AllDefs.Where(CanDrawPermit).ToList();
         var outRect = rect.ContractedBy(10f);
         var rect2 = default(Rect);
-        foreach (var permit in allDefsListForReading.Where(CanDrawPermit))
+        foreach (var permit in toDraw)
         {
             rect2.width = Mathf.Max(rect2.width, DrawPosition(permit).x + 200f + 26f);
             rect2.height = Mathf.Max(rect2.height, DrawPosition(permit).y + 50f + 26f);
@@ -155,7 +152,7 @@ public class RoyaltyTabWorker_Permits : RoyaltyTabWorker
         Widgets.BeginScrollView(outRect, ref rightScrollPosition, rect2);
         Widgets.BeginGroup(rect2.ContractedBy(10f));
         DrawLines();
-        foreach (var royalTitlePermitDef in allDefsListForReading)
+        foreach (var royalTitlePermitDef in toDraw)
             if (CanDrawPermit(royalTitlePermitDef))
             {
                 var vector = DrawPosition(royalTitlePermitDef);

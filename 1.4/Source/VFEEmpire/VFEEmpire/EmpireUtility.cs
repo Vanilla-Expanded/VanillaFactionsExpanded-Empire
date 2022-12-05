@@ -66,10 +66,11 @@ public static class EmpireUtility
         return royalty.AllTitlesInEffectForReading.OrderByDescending(title => title.def.seniority).FirstOrDefault(title => title.faction == faction);
     }
 
-    public static bool Unlocked(this RoyalTitlePermitDef permit, Pawn pawn)
+    public static bool Unlocked(this RoyalTitlePermitDef permit, Pawn pawn, Faction faction = null)
     {
-        return pawn.royalty.HasPermit(permit, Faction.OfEmpire) ||
-               pawn.royalty.AllFactionPermits.Any(t => t.Permit.prerequisite == permit && t.Faction == PermitsCardUtility.selectedFaction);
+        faction ??= Faction.OfEmpire;
+        return pawn.royalty.HasPermit(permit, faction) ||
+               pawn.royalty.AllFactionPermits.Any(t => t.Permit.prerequisite == permit && t.Faction == faction);
     }
 
     public static int VassalagePointsAvailable(this Pawn_RoyaltyTracker royalty)

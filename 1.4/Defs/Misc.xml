@@ -10,7 +10,8 @@
     <tabWindowClass>VFEEmpire.MainTabWindow_Royalty</tabWindowClass>
     <workerClass>VFEEmpire.MainButtonWorker_Royalty</workerClass>
     <iconPath>MenuButton/IconRoyalty</iconPath>
-    <order>67</order>
+    <minimized>true</minimized>
+    <order>77</order>
   </MainButtonDef>
   <TransportShipDef>
     <defName>VFEE_Ship_ArmoredShuttle</defName>

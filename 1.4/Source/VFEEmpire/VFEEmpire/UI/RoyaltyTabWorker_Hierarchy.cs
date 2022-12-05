@@ -14,8 +14,6 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
     private readonly Dictionary<Pawn, float> pawnPos = new();
     private readonly Dictionary<RoyalTitleDef, float> titlePos = new();
     private Vector2 scrollPos;
-    private float totalWidth;
-    private float viewWidth;
 
     public override void DoLeftBottom(Rect inRect, MainTabWindow_Royalty parent)
     {
@@ -53,8 +51,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
         pawnPos.Clear();
         titlePos.Clear();
         var pawns = WorldComponent_Hierarchy.Instance.TitleHolders;
-        var viewRect = new Rect(0, 0, totalWidth = pawns.Count * 200f + 50f, inRect.height - 30f);
-        viewWidth = inRect.width;
+        var viewRect = new Rect(0, 0, pawns.Count * 200f + 50f, inRect.height - 30f);
         var x = 5f;
         var curTitle = VFEE_DefOf.Freeholder;
         Widgets.DrawMenuSection(inRect);
@@ -93,10 +90,14 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
             pawnPos[pawn] = x;
 
             var rect = new Rect(x, 0f, 150f, 250f).CenteredOnYIn(viewRect);
-            var buttonRect = new Rect(rect.x, rect.yMax, rect.width, 25f);
+            var buttonRect = new Rect(rect.x, rect.yMax + 3f, rect.width, 25f);
             var honorRect = rect.TakeTopPart(20f);
-            GUI.DrawTexture(honorRect.TakeLeftPart(20f), Faction.OfEmpire.def.RoyalFavorIcon);
-            Widgets.Label(honorRect, pawn.TotalFavor().ToString());
+            if (curTitle != VFEE_DefOf.Emperor)
+            {
+                GUI.DrawTexture(honorRect.TakeLeftPart(20f), Faction.OfEmpire.def.RoyalFavorIcon);
+                Widgets.Label(honorRect, pawn.TotalFavor().ToString());
+            }
+
             var titleRect = new Rect(0f, rect.yMax - 20f, Text.CalcSize(title.LabelCap).x + 20f, 20f).CenteredOnXIn(rect.TakeBottomPart(20f));
             GUI.DrawTexture(titleRect.TakeLeftPart(20f), titleExt.Icon);
             Widgets.Label(titleRect, title.LabelCap);

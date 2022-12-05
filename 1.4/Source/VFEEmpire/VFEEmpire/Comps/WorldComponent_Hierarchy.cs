@@ -11,8 +11,8 @@ public class WorldComponent_Hierarchy : WorldComponent
 {
     public static WorldComponent_Hierarchy Instance;
     public static List<RoyalTitleDef> Titles;
-    private bool initialized;
     public List<Pawn> TitleHolders = new();
+    private bool initialized;
 
     static WorldComponent_Hierarchy()
     {
@@ -33,7 +33,7 @@ public class WorldComponent_Hierarchy : WorldComponent
             count += 2;
         }
 
-        TitleHolders.SortBy(p => p.royalty.GetCurrentTitle(Faction.OfEmpire).seniority, p => p.Name.ToStringFull);
+        SortPawns();
     }
 
 
@@ -50,15 +50,16 @@ public class WorldComponent_Hierarchy : WorldComponent
     private void FillTitles()
     {
         var count = 1;
+        var empire = Faction.OfEmpire;
         for (var i = Titles.Count - 1; i >= 0; i--)
         {
             var title = Titles[i];
-            while (TitleHolders.Count(p => p.royalty.GetCurrentTitle(Faction.OfEmpire) == title) < count)
+            while (TitleHolders.Count(p => p.royalty.GetCurrentTitle(empire) == title) < count)
                 if (i > 0 && Titles[i - 1] is { } lowerTitle &&
-                    TitleHolders.Find(p => p.royalty.GetCurrentTitle(Faction.OfEmpire) == lowerTitle && p.Faction == Faction.OfEmpire) is { } lower)
+                    TitleHolders.Find(p => p.royalty.GetCurrentTitle(empire) == lowerTitle && p.Faction == empire) is { } lower)
                 {
-                    lower.royalty.GainFavor(Faction.OfEmpire, lowerTitle.favorCost);
-                    lower.royalty.TryUpdateTitle(Faction.OfEmpire, false, title);
+                    lower.royalty.GainFavor(empire, lowerTitle.favorCost);
+                    lower.royalty.TryUpdateTitle(empire, false, title);
                 }
                 else
                     MakePawnFor(title);
@@ -66,18 +67,25 @@ public class WorldComponent_Hierarchy : WorldComponent
             count += 2;
         }
 
-        TitleHolders.SortBy(p => p.royalty.GetCurrentTitle(Faction.OfEmpire).seniority, p => p.Name.ToStringFull);
+        SortPawns();
+    }
+
+    private void SortPawns()
+    {
+        var empire = Faction.OfEmpire;
+        TitleHolders.SortBy(p => p.royalty.GetCurrentTitle(empire).seniority, p => p.royalty.GetFavor(empire), p => p.Name.ToStringFull);
     }
 
     private void MakePawnFor(RoyalTitleDef title)
     {
+        var empire = Faction.OfEmpire;
         var kind = title.GetModExtension<RoyalTitleDefExtension>().kindForHierarchy;
-        var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(kind, Faction.OfEmpire, forceGenerateNewPawn: true, fixedTitle: title));
+        var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(kind, empire, forceGenerateNewPawn: true, fixedTitle: title));
         Find.WorldPawns.PassToWorld(pawn, PawnDiscardDecideMode.KeepForever);
-        if (pawn.royalty.GetCurrentTitle(Faction.OfEmpire) != title)
+        if (pawn.royalty.GetCurrentTitle(empire) != title)
         {
-            Log.Warning($"[VFEE] Created {pawn} from title {title} but has title {pawn.royalty.GetCurrentTitle(Faction.OfEmpire)}");
-            pawn.royalty.SetTitle(Faction.OfEmpire, title, false, false, false);
+            Log.Warning($"[VFEE] Created {pawn} from title {title} but has title {pawn.royalty.GetCurrentTitle(empire)}");
+            pawn.royalty.SetTitle(empire, title, false, false, false);
         }
 
         TitleHolders.Add(pawn);

@@ -61,18 +61,20 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
         Rect curRect = default;
         foreach (var vassal in vassals)
         {
-            var canVassalize = Find.Maps
-                                   .Where(map => map.IsPlayerHome)
-                                   .Any(map => Find.WorldGrid.ApproxDistanceInTiles(map.Parent.Tile, vassal.Settlement.Tile) <= 100) ||
-                               vassals
-                                   .Where(v => v.Lord?.Faction is { IsPlayer: true })
-                                   .Any(v => Find.WorldGrid.ApproxDistanceInTiles(v.Settlement.Tile, vassal.Settlement.Tile) <= 100);
+            var inRange = Find.Maps
+                             .Where(map => map.IsPlayerHome)
+                             .Any(map => Find.WorldGrid.ApproxDistanceInTiles(map.Parent.Tile, vassal.Settlement.Tile) <= 100) ||
+                          WorldComponent_Vassals.Instance.AllPossibleVassals
+                             .Where(v => v.Lord?.Faction is { IsPlayer: true })
+                             .Any(v => Find.WorldGrid.ApproxDistanceInTiles(v.Settlement.Tile, vassal.Settlement.Tile) <= 100);
+            var canVassalize = parent.CurCharacter.royalty.VassalagePointsAvailable() > 1 && inRange;
+            string reason = inRange ? "" : "VFEE.NoVassalize".Translate();
             if (left)
             {
                 curRect = viewRect.TakeTopPart(100f);
-                DoPotentialVassal(curRect.LeftHalf().ContractedBy(5f), vassal, parent.CurCharacter, canVassalize);
+                DoPotentialVassal(curRect.LeftHalf().ContractedBy(5f), vassal, parent.CurCharacter, canVassalize, reason);
             }
-            else DoPotentialVassal(curRect.RightHalf().ContractedBy(5f), vassal, parent.CurCharacter, canVassalize);
+            else DoPotentialVassal(curRect.RightHalf().ContractedBy(5f), vassal, parent.CurCharacter, canVassalize, reason);
 
             left = !left;
         }
@@ -107,11 +109,14 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
         Text.Font = GameFont.Small;
         Widgets.FillableBar(deliveryRect.LeftHalf().ContractedBy(3f), (float)vassal.DaysSinceDelivery / vassal.Setting.DeliveryDays());
         if (Widgets.ButtonText(deliveryRect.RightHalf(), "VFEE.Deliver".Translate() + ": " + $"VFEE.Deliver.{vassal.Setting}".Translate()))
-            Find.WindowStack.Add(new FloatMenu(Enum.GetValues(typeof(TitheSetting)).Cast<TitheSetting>().Select(setting => new FloatMenuOption(
-                $"VFEE.Deliver.{setting}".Translate(), () => vassal.Setting = setting)).ToList()));
+            Find.WindowStack.Add(new FloatMenu(Enum.GetValues(typeof(TitheSetting))
+               .Cast<TitheSetting>()
+               .Select(setting => new FloatMenuOption(
+                    $"VFEE.Deliver.{setting}".Translate(), () => vassal.Setting = setting))
+               .ToList()));
     }
 
-    private void DoPotentialVassal(Rect rect, TitheInfo vassal, Pawn pawn, bool canVassalize)
+    private void DoPotentialVassal(Rect rect, TitheInfo vassal, Pawn pawn, bool canVassalize = true, string reason = null)
     {
         Widgets.DrawAltRect(rect);
         Widgets.DrawBox(rect);
@@ -145,11 +150,8 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
                 vassal.Setting = TitheSetting.EveryWeek;
             }
         }
-        else
-        {
-            Text.Anchor = TextAnchor.MiddleCenter;
-            Widgets.Label(bottomRect, "VFEE.NoVassalize".Translate().Colorize(color));
-            Text.Anchor = TextAnchor.UpperLeft;
-        }
+        else if (!reason.NullOrEmpty())
+            using (new TextBlock(TextAnchor.MiddleCenter))
+                Widgets.Label(bottomRect, reason.Colorize(color));
     }
 }
