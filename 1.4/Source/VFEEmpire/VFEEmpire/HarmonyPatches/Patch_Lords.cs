@@ -7,12 +7,17 @@ namespace VFEEmpire.HarmonyPatches;
 [HarmonyPatch]
 public static class Patch_Lords
 {
+    private static bool doCheck = true;
+    public static void IgnoreNext() => doCheck = false;
+
     [HarmonyPatch(typeof(LordMaker))]
     [HarmonyPatch(nameof(LordMaker.MakeNewLord))]
     [HarmonyPostfix]
     public static void MakeNewLord_Postfix(Map map, Lord __result)
     {
-        map.GetComponent<MapComponent_Terrorism>().Notify_LordCreated(__result);
+        Log.Message($"Doing check: {doCheck}");
+        if (doCheck) map.GetComponent<MapComponent_Terrorism>().Notify_LordCreated(__result);
+        else doCheck = true;
     }
 
     [HarmonyPatch(typeof(LordManager))]
@@ -28,7 +33,9 @@ public static class Patch_Lords
     [HarmonyPostfix]
     public static void CheckTransitionOnSignal_Postfix(Lord __instance, TriggerSignal signal)
     {
+        doCheck = false;
         __instance.Terrorism()?.Notify_TriggerSignal(signal);
+        doCheck = true;
     }
 
     [HarmonyPatch(typeof(Lord))]
@@ -36,6 +43,8 @@ public static class Patch_Lords
     [HarmonyPostfix]
     public static void GotoToil_Postfix(Lord __instance, LordToil newLordToil)
     {
+        doCheck = false;
         __instance.Terrorism()?.Notify_LordToilStarted(newLordToil);
+        doCheck = true;
     }
 }

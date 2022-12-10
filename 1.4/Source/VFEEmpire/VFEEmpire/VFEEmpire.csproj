@@ -56,6 +56,7 @@
     <Compile Include="AI\JobDriver\JobDriver_WaltzGotoStart.cs" />
     <Compile Include="AI\JobDriver\JobDriver_WaltzGoto.cs" />
     <Compile Include="AI\JobDriver\JobDriver_WaltzDip.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_AIFightEnemySpecific.cs" />
     <Compile Include="AI\JobGiver\JobGiver_ArtExhibitStandBy.cs" />
     <Compile Include="AI\JobGiver\JobGiver_ArtExhibitSpectate.cs" />
     <Compile Include="AI\JobGiver\JobGiver_ArtExhibitPresent.cs" />
@@ -65,6 +66,9 @@
     <Compile Include="AI\JobGiver\JobGiver_GoToStartPositions.cs" />
     <Compile Include="AI\JobGiver\JobGiver_DanceSpectate.cs" />
     <Compile Include="AI\JobGiver\JobGiver_Waltz.cs" />
+    <Compile Include="AI\LordJob\LordJob_Assassinate.cs" />
+    <Compile Include="AI\LordToil\LordToil_AttackSpecific.cs" />
+    <Compile Include="AI\LordToil\LordToil_TravelTo.cs" />
     <Compile Include="AI\TerrorismLords.cs" />
     <Compile Include="Comps\CompAbilityEffect_StartBestowing.cs" />
     <Compile Include="Comps\CompProperties_AbilityStartBestower.cs" />

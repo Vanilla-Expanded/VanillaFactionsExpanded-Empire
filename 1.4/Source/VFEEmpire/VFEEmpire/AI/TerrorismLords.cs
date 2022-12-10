@@ -3,6 +3,7 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 using Verse.AI.Group;
+using VFEEmpire.HarmonyPatches;
 
 namespace VFEEmpire;
 
@@ -12,9 +13,7 @@ public class TerrorismLord_Bomb : TerrorismLord
     {
         base.Notify_LordToilStarted(toil);
         if (toil is LordToil_ExitMap or LordToil_ExitMapTraderFighting or LordToil_ExitMapAndEscortCarriers)
-        {
-            var deserters = Parent.ownedPawns.Where(p => p.kindDef == VFEE_DefOf.VFEE_Deserter).ToList();
-            foreach (var pawn in deserters)
+            foreach (var pawn in Deserters)
             {
                 pawn.SetFaction(EmpireUtility.Deserters);
 
@@ -26,9 +25,25 @@ public class TerrorismLord_Bomb : TerrorismLord
                         WanderUtility.GetColonyWanderRoot(pawn), Validator, Parent.Map, out cell, 25) || RCellFinder.TryFindRandomCellNearTheCenterOfTheMapWith(
                         Validator, Parent.Map, out cell)))
                     cell = CellFinder.RandomNotEdgeCell(25, Parent.Map);
-                Log.Message($"Found cell: {cell}");
                 pawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(VFEE_DefOf.VFEE_PlaceBomb, cell), JobTag.UnspecifiedLordDuty);
             }
+    }
+}
+
+public class TerrorismLord_Assassination : TerrorismLord
+{
+    public override void Notify_TriggerSignal(TriggerSignal signal)
+    {
+        base.Notify_TriggerSignal(signal);
+        if (signal.type == TriggerSignalType.Memo && signal.memo == "TravelArrived")
+        {
+            var deserters = Deserters;
+            Parent.RemovePawns(deserters);
+            Patch_Lords.IgnoreNext();
+            LordMaker.MakeNewLord(Parent.faction,
+                new LordJob_Assassinate(Parent.Map.mapPawns.FreeColonistsSpawned
+                   .OrderByDescending(pawn => pawn?.royalty?.GetCurrentTitle(Faction.OfEmpire)?.seniority ?? 0)
+                   .First(), EmpireUtility.Deserters), Parent.Map, deserters);
         }
     }
 }

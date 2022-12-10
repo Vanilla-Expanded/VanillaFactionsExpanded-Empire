@@ -9,11 +9,10 @@
     <Operation Class="PatchOperationAdd">
         <xpath>Defs/FactionDef[@Name="OutlanderFactionBase"]/pawnGroupMakers/li[kindDef="Trader"]/guards</xpath>
         <value>
-            <VFEE_Deserter>1</VFEE_Deserter>
+            <VFEE_Deserter>8</VFEE_Deserter> <!-- For testing -->
         </value>
     </Operation>
 
-    
     <Operation Class="PatchOperationAdd">
         <xpath>Defs/FactionDef[@Name="PirateBandBase"]/pawnGroupMakers/li[kindDef="Combat"]/options</xpath>
         <value>

@@ -22,9 +22,11 @@ public class MapComponent_Terrorism : MapComponent
 
     public void Notify_LordCreated(Lord lord)
     {
+        Log.Message($"Checking {lord}:");
+        foreach (var group in lord.ownedPawns.GroupBy(p => p.kindDef)) Log.Message($"    {group.Key}: {group.Count()}");
         if (DefDatabase<TerrorismTypeDef>.AllDefs.Where(def => def.Worker.AppliesTo(lord)).TryRandomElement(out var type))
         {
-            Log.Message($"Creating terrorism lord for {lord}");
+            Log.Message($"Creating terrorism lord for {lord}: {type}");
             terrorism.Add(lord, type.MakeLord(lord));
         }
     }
@@ -79,17 +81,22 @@ public class TerrorismWorker
 {
     public virtual bool AppliesTo(Lord parent)
     {
-        Log.Message($"Checking {parent}:");
-        foreach (var group in parent.ownedPawns.GroupBy(p => p.kindDef)) Log.Message($"    {group.Key}: {group.Count()}");
-        return !parent.faction.HostileTo(Faction.OfPlayer) && parent.ownedPawns.Any(p => p.kindDef == VFEE_DefOf.VFEE_Deserter)
-                                                           && parent.lordManager.map.mapPawns.FreeColonistsSpawned.Any(p =>
-                                                                  p.royalty.HasAnyTitleIn(Faction.OfEmpire));
+        if (parent.faction.HostileTo(Faction.OfPlayer)) return false;
+        if (!parent.lordManager.map.mapPawns.FreeColonistsSpawned.Any(p => p.royalty.HasAnyTitleIn(Faction.OfEmpire))) return false;
+        // Lord must have at least one deserter, but also must not be entirely deserters
+        var flag1 = false;
+        var flag2 = false;
+        foreach (var pawn in parent.ownedPawns)
+            if (pawn.kindDef == VFEE_DefOf.VFEE_Deserter) flag1 = true;
+            else flag2 = true;
+        return flag1 && flag2;
     }
 }
 
 public abstract class TerrorismLord : IExposable
 {
     public Lord Parent;
+    public List<Pawn> Deserters => Parent.ownedPawns.Where(p => p.kindDef == VFEE_DefOf.VFEE_Deserter).ToList();
 
     public virtual void ExposeData()
     {
