@@ -12,4 +12,16 @@
         <reportString>placing bomb</reportString>
         <casualInterruptible>false</casualInterruptible>
     </JobDef>
+    <JobDef>
+        <defName>VFEE_PoisonMeal</defName>
+        <driverClass>VFEEmpire.JobDriver_PoisonMeal</driverClass>
+        <reportString>poisoning TargetA</reportString>
+        <casualInterruptible>false</casualInterruptible>
+    </JobDef>
+    <JobDef>
+        <defName>VFEE_DiscardMeal</defName>
+        <driverClass>VFEEmpire.JobDriver_DiscardMeal</driverClass>
+        <reportString>discarding TargetA</reportString>
+        <casualInterruptible>false</casualInterruptible>
+    </JobDef>
 </Defs>

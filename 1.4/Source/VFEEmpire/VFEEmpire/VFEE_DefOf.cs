@@ -39,6 +39,9 @@ public static class VFEE_DefOf
     public static ThingDef VFEE_Bomb;
     public static DutyDef VFEE_MoveTo;
     public static DutyDef VFEE_AttackEnemySpecifc;
+    public static ThingDef VFEE_Poison;
+    public static JobDef VFEE_PoisonMeal;
+    public static JobDef VFEE_DiscardMeal;
 
     static VFEE_DefOf()
     {

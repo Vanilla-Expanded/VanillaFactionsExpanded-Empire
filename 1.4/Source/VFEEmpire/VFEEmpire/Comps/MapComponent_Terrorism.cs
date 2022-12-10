@@ -42,14 +42,14 @@ public class MapComponent_Terrorism : MapComponent
 public class TerrorismTypeDef : Def
 {
     // ReSharper disable once InconsistentNaming
-    public Type lordType;
+    public Type lordClass;
 
     // ReSharper disable once InconsistentNaming
-    public Type workerType = typeof(TerrorismWorker);
+    public Type workerClass = typeof(TerrorismWorker);
 
     private TerrorismWorker worker;
 
-    public TerrorismWorker Worker => worker ??= (TerrorismWorker)Activator.CreateInstance(workerType);
+    public TerrorismWorker Worker => worker ??= (TerrorismWorker)Activator.CreateInstance(workerClass);
 
     public override void ResolveReferences()
     {
@@ -62,16 +62,16 @@ public class TerrorismTypeDef : Def
     {
         foreach (var error in base.ConfigErrors()) yield return error;
 
-        if (workerType == null) yield return "workerType is required";
-        else if (!typeof(TerrorismWorker).IsAssignableFrom(workerType)) yield return "workerType must be assignable to TerrorismWorker";
+        if (workerClass == null) yield return "workerClass is required";
+        else if (!typeof(TerrorismWorker).IsAssignableFrom(workerClass)) yield return "workerClass must be assignable to TerrorismWorker";
 
-        if (lordType == null) yield return "lordType is required";
-        else if (!typeof(TerrorismLord).IsAssignableFrom(lordType)) yield return "lordType must be assignable to TerrorismLord";
+        if (lordClass == null) yield return "lordClass is required";
+        else if (!typeof(TerrorismLord).IsAssignableFrom(lordClass)) yield return "lordClass must be assignable to TerrorismLord";
     }
 
     public TerrorismLord MakeLord(Lord parent)
     {
-        var lord = (TerrorismLord)Activator.CreateInstance(lordType);
+        var lord = (TerrorismLord)Activator.CreateInstance(lordClass);
         lord.Parent = parent;
         return lord;
     }

@@ -49,7 +49,9 @@
     <Compile Include="AI\JobDriver\JobDriver_ArtPresent.cs" />
     <Compile Include="AI\JobDriver\JobDriver_ArtSpectate.cs" />
     <Compile Include="AI\JobDriver\JobDriver_DefuseBomb.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_DiscardMeal.cs" />
     <Compile Include="AI\JobDriver\JobDriver_PlaceBomb.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_PoisonMeal.cs" />
     <Compile Include="AI\JobDriver\JobDriver_WaltzDipped.cs" />
     <Compile Include="AI\JobDriver\JobDriver_ArtPresenterStandBy.cs" />
     <Compile Include="AI\JobDriver\JobDriver_WaltzWait.cs" />
@@ -78,7 +80,9 @@
     <Compile Include="DefOf\InternalDefOf.cs" />
     <Compile Include="Comps\HediffComp_RandomDamage.cs" />
     <Compile Include="HarmonyPatches\CompArt_JustCreatedBy.cs" />
+    <Compile Include="HarmonyPatches\Patch_AddHumanlikeOrders.cs" />
     <Compile Include="HarmonyPatches\Patch_Lords.cs" />
+    <Compile Include="HarmonyPatches\Patch_Thing_Ingested.cs" />
     <Compile Include="HarmonyPatches\PawnRenderer_BodyAngle.cs" />
     <Compile Include="HarmonyPatches\Patch_Conceit.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleIcons.cs" />
@@ -148,6 +152,7 @@
     <Compile Include="Workers\RoyalTitlePermitWorker_CallAbsolver.cs" />
     <Compile Include="Workers\RoyalTitlePermitWorker_CallArmoredShuttle.cs" />
     <Compile Include="Workers\RoyalTitlePermitWorker_Slicing.cs" />
+    <Compile Include="Workers\TerrorismWorker_Poisoning.cs" />
     <Compile Include="Workers\ThoughtWorkers.cs" />
     <Compile Include="VFEEmpireMod.cs" />
     <Compile Include="VFEE_DefOf.cs" />

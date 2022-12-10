@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-    <!-- <VFEEmpire.TerrorismTypeDef>
+    <VFEEmpire.TerrorismTypeDef>
         <defName>VFEE_Bomb</defName>
-        <lordType>VFEEmpire.TerrorismLord_Bomb</lordType>
+        <lordClass>VFEEmpire.TerrorismLord_Bomb</lordClass>
     </VFEEmpire.TerrorismTypeDef> -->
     <VFEEmpire.TerrorismTypeDef>
         <defName>VFEE_Assassination</defName>
-        <lordType>VFEEmpire.TerrorismLord_Assassination</lordType>
+        <lordClass>VFEEmpire.TerrorismLord_Assassination</lordClass>
+    </VFEEmpire.TerrorismTypeDef>
+    <VFEEmpire.TerrorismTypeDef>
+        <defName>VFEE_Poisoning</defName>
+        <workerClass>VFEEmpire.TerrorismWorker_Poisoning</workerClass>
+        <lordClass>VFEEmpire.TerrorismLord_Poisoning</lordClass>
     </VFEEmpire.TerrorismTypeDef>
 </Defs>

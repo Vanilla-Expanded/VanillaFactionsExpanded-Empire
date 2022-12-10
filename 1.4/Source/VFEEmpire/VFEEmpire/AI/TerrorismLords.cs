@@ -47,3 +47,26 @@ public class TerrorismLord_Assassination : TerrorismLord
         }
     }
 }
+
+public class TerrorismLord_Poisoning : TerrorismLord
+{
+    public override void Notify_LordToilStarted(LordToil toil)
+    {
+        base.Notify_LordToilStarted(toil);
+        if (toil is LordToil_ExitMap or LordToil_ExitMapTraderFighting or LordToil_ExitMapAndEscortCarriers)
+        {
+            var meals = TerrorismWorker_Poisoning.GetMeals(Parent.Map).ToList();
+            foreach (var pawn in Deserters)
+            {
+                pawn.SetFaction(EmpireUtility.Deserters);
+                if (meals.Where(t => pawn.CanReach(t, PathEndMode.Touch, Danger.Some)).TryRandomElement(out var meal))
+                {
+                    meals.Remove(meal);
+                    pawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(VFEE_DefOf.VFEE_PoisonMeal, meal), JobTag.UnspecifiedLordDuty);
+                }
+                else
+                    pawn.mindState.duty = new PawnDuty(DutyDefOf.ExitMapBest);
+            }
+        }
+    }
+}
