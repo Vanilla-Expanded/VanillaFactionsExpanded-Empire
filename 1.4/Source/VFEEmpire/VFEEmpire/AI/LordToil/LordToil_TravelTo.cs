@@ -27,12 +27,8 @@ public class LordToil_TravelTo : LordToil
         base.LordToilTick();
         if (Find.TickManager.TicksGame % 205 == 10)
             if (lord.ownedPawns.All(pawn =>
-                {
-                    var dist = pawn.Position.DistanceTo(Data.Target.PositionHeld);
-                    var canReach = pawn.CanReach(Data.Target.PositionHeld, PathEndMode.ClosestTouch, Danger.Deadly);
-                    Log.Message($"Checking {pawn}: dist: {dist} vs {RADIUS * 1.4f} ({dist < RADIUS * 1.4f}), canReach: {canReach}");
-                    return dist < RADIUS * 1.4f || !canReach;
-                }))
+                    pawn.Position.InHorDistOf(Data.Target.PositionHeld, RADIUS * 1.4f)
+                 || !pawn.CanReach(Data.Target.PositionHeld, PathEndMode.ClosestTouch, Danger.Deadly)))
                 lord.ReceiveMemo("TravelArrived");
     }
 }

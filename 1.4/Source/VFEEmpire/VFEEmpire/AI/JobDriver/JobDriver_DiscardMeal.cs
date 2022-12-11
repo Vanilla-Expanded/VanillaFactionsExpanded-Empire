@@ -5,7 +5,7 @@ namespace VFEEmpire;
 
 public class JobDriver_DiscardMeal : JobDriver
 {
-    public override bool TryMakePreToilReservations(bool errorOnFailed) => pawn.Reserve(job.targetA, job);
+    public override bool TryMakePreToilReservations(bool errorOnFailed) => pawn.Reserve(job.targetA, job, errorOnFailed: errorOnFailed);
 
     protected override IEnumerable<Toil> MakeNewToils()
     {

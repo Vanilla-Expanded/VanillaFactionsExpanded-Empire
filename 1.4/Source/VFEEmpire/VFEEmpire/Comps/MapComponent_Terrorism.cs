@@ -22,13 +22,9 @@ public class MapComponent_Terrorism : MapComponent
 
     public void Notify_LordCreated(Lord lord)
     {
-        Log.Message($"Checking {lord}:");
-        foreach (var group in lord.ownedPawns.GroupBy(p => p.kindDef)) Log.Message($"    {group.Key}: {group.Count()}");
+//        foreach (var group in lord.ownedPawns.GroupBy(p => p.kindDef)) Log.Message($"    {group.Key}: {group.Count()}");
         if (DefDatabase<TerrorismTypeDef>.AllDefs.Where(def => def.Worker.AppliesTo(lord)).TryRandomElement(out var type))
-        {
-            Log.Message($"Creating terrorism lord for {lord}: {type}");
             terrorism.Add(lord, type.MakeLord(lord));
-        }
     }
 
     public void Notify_LordDestroyed(Lord lord)

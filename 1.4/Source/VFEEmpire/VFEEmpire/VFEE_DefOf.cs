@@ -42,6 +42,10 @@ public static class VFEE_DefOf
     public static ThingDef VFEE_Poison;
     public static JobDef VFEE_PoisonMeal;
     public static JobDef VFEE_DiscardMeal;
+    public static JobDef VFEE_Execute;
+    public static DutyDef VFEE_KillRoyalty;
+
+    [DefAlias("VFEE_Deserters")] public static RaidStrategyDef DesertersStrat;
 
     static VFEE_DefOf()
     {

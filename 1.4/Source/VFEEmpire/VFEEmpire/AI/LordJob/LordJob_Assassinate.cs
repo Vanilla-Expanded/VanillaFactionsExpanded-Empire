@@ -6,15 +6,15 @@ namespace VFEEmpire;
 
 public class LordJob_Assassinate : LordJob
 {
-    public Faction Faction;
     public Pawn Target;
+    public Faction ToFaction;
 
     public LordJob_Assassinate() { }
 
-    public LordJob_Assassinate(Pawn target, Faction faction)
+    public LordJob_Assassinate(Pawn target, Faction toFaction)
     {
         Target = target;
-        Faction = faction;
+        ToFaction = toFaction;
     }
 
     public override bool AddFleeToil => true;
@@ -33,10 +33,9 @@ public class LordJob_Assassinate : LordJob
         arrived.AddTrigger(new Trigger_Memo("TravelArrived"));
         arrived.AddPostAction(new TransitionAction_Custom(() =>
         {
-            Log.Message("Assassins Arrived!");
             var pawns = lord.ownedPawns.ListFullCopy();
-            foreach (var pawn in pawns) pawn.SetFaction(Faction);
-            lord.faction = Faction;
+            foreach (var pawn in pawns) pawn.SetFaction(ToFaction);
+            lord.faction = ToFaction;
             attackSpecific.UpdateAllDuties();
         }));
         var leave = new Transition(attackSpecific, exit);
@@ -58,6 +57,6 @@ public class LordJob_Assassinate : LordJob
     {
         base.ExposeData();
         Scribe_References.Look(ref Target, "target");
-        Scribe_References.Look(ref Faction, "faction");
+        Scribe_References.Look(ref ToFaction, "toFaction");
     }
 }

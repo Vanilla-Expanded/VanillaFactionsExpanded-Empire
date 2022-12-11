@@ -15,7 +15,6 @@ public static class Patch_Lords
     [HarmonyPostfix]
     public static void MakeNewLord_Postfix(Map map, Lord __result)
     {
-        Log.Message($"Doing check: {doCheck}");
         if (doCheck) map.GetComponent<MapComponent_Terrorism>().Notify_LordCreated(__result);
         else doCheck = true;
     }

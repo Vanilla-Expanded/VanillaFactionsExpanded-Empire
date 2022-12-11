@@ -21,7 +21,6 @@ public class Building_Bomb : Building
     public override void DrawAt(Vector3 drawLoc, bool flip = false)
     {
         base.DrawAt(drawLoc, flip);
-        Log.Message($"Lit? {ticksLit > 0}");
         if (ticksLit > 0)
             Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(drawLoc + Vector3.one * 0.125f, Quaternion.AngleAxis(0f, Vector3.up), Vector3.one), LightMat, 0);
     }

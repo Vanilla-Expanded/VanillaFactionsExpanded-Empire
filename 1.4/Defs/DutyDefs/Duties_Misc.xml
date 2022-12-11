@@ -21,4 +21,21 @@
             </subNodes>
         </thinkNode>
     </DutyDef>
+    <DutyDef>
+        <defName>VFEE_KillRoyalty</defName>
+        <alwaysShowWeapon>true</alwaysShowWeapon>
+        <thinkNode Class="ThinkNode_Priority">
+            <subNodes>
+                <li Class="JobGiver_TakeCombatEnhancingDrug" />
+                <li Class="VFEEmpire.JobGiver_AIFightRoyalty" />
+                <li Class="VFEEmpire.JobGiver_ExecuteRoyalty" />
+            </subNodes>
+        </thinkNode>
+        <constantThinkNode Class="ThinkNode_ConditionalCanPickupOpportunisticWeapon">
+            <subNodes>
+                <!-- Try to pick up nearby weapons -->
+                <li Class="JobGiver_PickUpOpportunisticWeapon" />
+            </subNodes>
+        </constantThinkNode>
+    </DutyDef>
 </Defs>
