@@ -34,4 +34,5 @@
 	<VFEE.AssassinationSuccess>Deserters are leaving as they have eliminated their target.</VFEE.AssassinationSuccess>
 	<VFEE.Discard>Discard</VFEE.Discard>
 	<VFEE.RoyaltyDead>Deserters are leaving as they have eliminated every imperial title holder in the area.</VFEE.RoyaltyDead>
+	<VFEE.GotDrug>{0} has sent you a celebration package of aperitif!</VFEE.GotDrug>
 </LanguageData>

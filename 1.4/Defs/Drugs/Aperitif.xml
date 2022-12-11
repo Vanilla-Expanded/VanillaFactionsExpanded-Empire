@@ -45,6 +45,7 @@
           <need>Food</need>
           <offset>-1.0</offset>
         </li>
+        <li Class="VFEEmpire.IngestionOutcomeDoer_Vomit" />
       </outcomeDoers>
     </ingestible>
     <comps>
@@ -54,14 +55,14 @@
       </li>
     </comps>
   </ThingDef>
-  
+
   <HediffDef>
     <defName>VFEE_IngestedAperitif</defName>
     <label>ingested aperitif</label>
     <labelNoun>an aperitif ingestion</labelNoun>
     <description>Infection and poison protection in the stomach, as well as an ability to consume additional meals for a higher mood buff.</description>
     <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
-	<hediffClass>Hediff_High</hediffClass>
+    <hediffClass>Hediff_High</hediffClass>
     <scenarioCanAdd>true</scenarioCanAdd>
     <maxSeverity>1.0</maxSeverity>
     <isBad>false</isBad>
@@ -70,12 +71,58 @@
         <severityPerDay>-2.6</severityPerDay>
         <showHoursToRecover>true</showHoursToRecover>
       </li>
+      <li Class="VFEEmpire.HediffCompProperties_RemoveOnAdd">
+        <toRemove>
+          <li>GutWorms</li>
+          <li>FoodPoisoning</li>
+        </toRemove>
+      </li>
+      <li Class="VFEEmpire.HediffCompProperties_MakeThoughtsStackeable">
+        <makeStackable>
+          <li>AteLavishMeal</li>
+          <li>AteFineMeal</li>
+          <li>AteRawFood</li>
+          <li>AteKibble</li>
+          <li>AteCorpse</li>
+          <li>AteHumanlikeMeatDirect</li>
+          <li>AteHumanlikeMeatDirectCannibal</li>
+          <li>AteHumanlikeMeatAsIngredient</li>
+          <li>AteHumanlikeMeatAsIngredientCannibal</li>
+          <li>AteInsectMeatDirect</li>
+          <li>AteInsectMeatAsIngredient</li>
+          <li>AteRottenFood</li>
+          <li MayRequire="vanillaexpanded.vcooke">VCE_AteGourmetMeal</li>
+          <li MayRequire="vanillaexpanded.vcooke">VCE_AteSimpleDessert</li>
+          <li MayRequire="vanillaexpanded.vcooke">VCE_AteFineDessert</li>
+          <li MayRequire="vanillaexpanded.vcooke">VCE_AteLavishDessert</li>
+          <li MayRequire="vanillaexpanded.vcooke">VCE_AteGourmetDessert</li>
+          <li MayRequire="vanillaexpanded.vcooke">VCE_AteFineGrill</li>
+          <li MayRequire="vanillaexpanded.vcooke">VCE_AteLavishGrill</li>
+          <li MayRequire="vanillaexpanded.vcooke">VCE_AteGourmetGrill</li>
+          <li MayRequire="vanillaexpanded.vcooke">VCE_AteFriedGoods</li>
+          <li MayRequire="vanillaexpanded.vcooke">VCE_AteCheese</li>
+          <li MayRequire="vanillaexpanded.vcookesushi">VCE_AteSimpleSushi</li>
+          <li MayRequire="vanillaexpanded.vcookesushi">VCE_AteFineSushi</li>
+          <li MayRequire="vanillaexpanded.vcookesushi">VCE_AteLavishSushi</li>
+          <li MayRequire="vanillaexpanded.vcookesushi">VCE_AteGourmetSushi</li>
+          <li MayRequire="vanillaexpanded.vcookesushi">VCE_AteFriedSushi</li>
+        </makeStackable>
+      </li>
     </comps>
-      <stages>
-        <li>
-		  <vomitMtbDays>0.125</vomitMtbDays>
-        </li>
-      </stages>
+    <stages>
+      <li>
+        <vomitMtbDays>0.125</vomitMtbDays>
+        <hungerRateFactorOffset>2</hungerRateFactorOffset>
+        <makeImmuneTo>
+          <li>GutWorms</li>
+          <li>FoodPoisoning</li>
+          <li>WoundInfection</li>
+          <li>Carcinoma</li>
+          <li>ChemicalDamageModerate</li>
+          <li>ChemicalDamageSevere</li>
+        </makeImmuneTo>
+      </li>
+    </stages>
   </HediffDef>
 
 </Defs>

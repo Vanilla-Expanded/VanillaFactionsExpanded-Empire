@@ -14,6 +14,7 @@ public static class VFEE_DefOf
     public static RoomRoleDef VFEE_Gallery;
     public static InteractionDef VFEE_RoyalGossip;
     public static ThingDef VFEE_Turret_StrikerTurret;
+    public static ThingDef VFEE_Aperitif;
     public static RoyaltyTabDef VFEE_GreatHierarchy;
     public static ThingDef VFEI_ArmoredShuttle;
     public static ThingDef VFEE_OrbitalSlicer;

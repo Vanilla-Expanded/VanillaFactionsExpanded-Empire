@@ -80,12 +80,16 @@
     <Compile Include="Comps\CompAbilityEffect_StartBestowing.cs" />
     <Compile Include="Comps\CompProperties_AbilityStartBestower.cs" />
     <Compile Include="Comps\CompResearchRefresh.cs" />
+    <Compile Include="Comps\HediffComp_MakeThoughtsStackable.cs" />
+    <Compile Include="Comps\HediffComp_RemoveOnAdd.cs" />
     <Compile Include="Comps\MapComponent_Terrorism.cs" />
+    <Compile Include="HarmonyPatches\Patch_ThoughtStacking.cs" />
     <Compile Include="Comps\WorldComponent_Hierarchy.cs" />
     <Compile Include="DefOf\InternalDefOf.cs" />
     <Compile Include="Comps\HediffComp_RandomDamage.cs" />
     <Compile Include="HarmonyPatches\CompArt_JustCreatedBy.cs" />
     <Compile Include="HarmonyPatches\Patch_AddHumanlikeOrders.cs" />
+    <Compile Include="HarmonyPatches\Patch_Bestowing.cs" />
     <Compile Include="HarmonyPatches\Patch_GetLetterText.cs" />
     <Compile Include="HarmonyPatches\Patch_Lords.cs" />
     <Compile Include="HarmonyPatches\Patch_Notify_PawnKilled.cs" />
@@ -128,7 +132,9 @@
     <Compile Include="HarmonyPatches\Patch_Pawn_InteractionsTracker_TryInteractWith.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleDef_SpecialDisplayStats.cs" />
     <Compile Include="Things\OrbitalSlicer.cs" />
-    <Compile Include="PlayLogEntry_Interaction_RoyalGossip.cs" />
+    <Compile Include="Workers\IngestionOutcomeDoer_Vomit.cs" />
+    <Compile Include="HarmonyPatches\Patch_Quest_End.cs" />
+    <Compile Include="Workers\PlayLogEntry_Interaction_RoyalGossip.cs" />
     <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_BestowTitle.cs" />
     <Compile Include="Rituals\LordJob\LordToil\LordToil_BestowTitle.cs" />
     <Compile Include="Rituals\LordJob\LordJob_BestowTitle.cs" />

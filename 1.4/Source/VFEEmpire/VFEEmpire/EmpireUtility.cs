@@ -166,4 +166,14 @@ public static class EmpireUtility
     public static int TitleIndex(this RoyalTitleDef title) => WorldComponent_Hierarchy.Titles.IndexOf(title);
 
     public static TerrorismLord Terrorism(this Lord lord) => lord.lordManager.map.GetComponent<MapComponent_Terrorism>().GetTerrorismFor(lord);
+
+    public static void SendApertif(this Map map)
+    {
+        map ??= Find.Maps.FirstOrDefault(m => m.IsPlayerHome);
+        if (map == null) return;
+        var stack = ThingMaker.MakeThing(VFEE_DefOf.VFEE_Aperitif);
+        stack.stackCount = Rand.Range(3, 12);
+        DropPodUtility.DropThingsNear(DropCellFinder.TradeDropSpot(map), map, new[] { stack }, forbid: false, faction: Faction.OfEmpire);
+        Messages.Message("VFEE.GotDrug".Translate(Faction.OfEmpire.Name), MessageTypeDefOf.PositiveEvent);
+    }
 }
