@@ -2,6 +2,7 @@
 using Verse;
 using Verse.AI;
 using Verse.AI.Group;
+using VFEEmpire.HarmonyPatches;
 
 namespace VFEEmpire;
 
@@ -23,7 +24,7 @@ public class LordJob_KillRoyalty : LordJob
         var satisfied = new Transition(kill, leave);
         satisfied.AddSources(assault.lordToils);
         satisfied.AddTrigger(new Trigger_BecameNonHostileToPlayer());
-        satisfied.AddTrigger(new Trigger_RoyaltyDead());
+        satisfied.AddTrigger(new Trigger_RoyaltyDeadOrDowned());
         satisfied.AddPostAction(new TransitionAction_Message("VFEE.RoyaltyDead".Translate()));
         graph.AddTransition(killToAssault);
         graph.AddTransition(satisfied);
@@ -31,14 +32,12 @@ public class LordJob_KillRoyalty : LordJob
     }
 }
 
-public class Trigger_RoyaltyDead : Trigger
+public class Trigger_RoyaltyDeadOrDowned : Trigger
 {
-    public const string TAG = "VFEE_RoyaltyDied";
-
     public override bool ActivateOn(Lord lord, TriggerSignal signal)
     {
-        if (signal.type == TriggerSignalType.Signal && signal.signal.tag == TAG)
-            return !lord.Map.mapPawns.AllPawnsSpawned.Any(p => p.royalty != null && p.royalty.HasAnyTitleIn(Faction.OfEmpire));
+        if (signal.type == TriggerSignalType.Signal && signal.signal.tag == Patch_StateChange.TAG)
+            return !lord.Map.mapPawns.AllPawnsSpawned.Any(p => p.royalty != null && !p.Downed && !p.Dead && p.royalty.HasAnyTitleIn(Faction.OfEmpire));
 
         return false;
     }

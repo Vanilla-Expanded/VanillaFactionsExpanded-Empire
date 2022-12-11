@@ -24,10 +24,4 @@
         <reportString>discarding TargetA</reportString>
         <casualInterruptible>false</casualInterruptible>
     </JobDef>
-    <JobDef>
-        <defName>VFEE_Execute</defName>
-        <driverClass>VFEEmpire.JobDriver_Execute</driverClass>
-        <reportString>executing TargetA</reportString>
-        <casualInterruptible>false</casualInterruptible>
-    </JobDef>
 </Defs>

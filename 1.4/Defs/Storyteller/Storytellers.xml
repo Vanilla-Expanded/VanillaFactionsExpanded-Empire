@@ -22,14 +22,13 @@
       <!-- Intro -->
       <li Class="StorytellerCompProperties_ClassicIntro"/>
       <!-- Home threats -->
-      <li Class="StorytellerCompProperties_OnOffCycle">
-        <category>ThreatBig</category>
-        <minDaysPassed>11.0</minDaysPassed>
-        <onDays>4.6</onDays>
-        <offDays>6.0</offDays>
-        <minSpacingDays>1.9</minSpacingDays>
-        <numIncidentsRange>1~2</numIncidentsRange>
-        <forceRaidEnemyBeforeDaysPassed>20</forceRaidEnemyBeforeDaysPassed>
+      <li Class="VFEEmpire.StorytellerCompProperties_WealthSteps">
+        <categories>
+          <li>ThreatBig</li>
+          <li>ThreatSmall</li>
+        </categories>
+        <wealthIncrease>5000</wealthIncrease>
+        <delayHours>1</delayHours> <!-- For testing -->
         <disallowedTargetTags>
           <li>Map_RaidBeacon</li>
         </disallowedTargetTags>
@@ -46,19 +45,6 @@
           <numIncidentsRange>1~2</numIncidentsRange>
           <minThreatPoints>500</minThreatPoints>
         </parms>
-      </li>
-      <li Class="StorytellerCompProperties_OnOffCycle">
-        <category>ThreatSmall</category>
-        <minDaysPassed>11.0</minDaysPassed>
-        <onDays>4.6</onDays>
-        <offDays>6.0</offDays>
-        <numIncidentsRange>0.2~1</numIncidentsRange>
-        <acceptPercentFactorPerThreatPointsCurve>
-          <points>
-            <li>(800, 1)</li>
-            <li>(2800, 0)</li>
-          </points>
-        </acceptPercentFactorPerThreatPointsCurve>
       </li>
       <!-- Home misc incidents-->
       <li Class="StorytellerCompProperties_CategoryMTB">

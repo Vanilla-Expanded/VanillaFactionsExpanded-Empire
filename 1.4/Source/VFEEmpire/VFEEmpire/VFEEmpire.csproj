@@ -50,7 +50,6 @@
     <Compile Include="AI\JobDriver\JobDriver_ArtSpectate.cs" />
     <Compile Include="AI\JobDriver\JobDriver_DefuseBomb.cs" />
     <Compile Include="AI\JobDriver\JobDriver_DiscardMeal.cs" />
-    <Compile Include="AI\JobDriver\JobDriver_Execute.cs" />
     <Compile Include="AI\JobDriver\JobDriver_PlaceBomb.cs" />
     <Compile Include="AI\JobDriver\JobDriver_PoisonMeal.cs" />
     <Compile Include="AI\JobDriver\JobDriver_WaltzDipped.cs" />
@@ -65,7 +64,6 @@
     <Compile Include="AI\JobGiver\JobGiver_ArtExhibitSpectate.cs" />
     <Compile Include="AI\JobGiver\JobGiver_ArtExhibitPresent.cs" />
     <Compile Include="AI\JobGiver\JobGiver_AcceptTitle.cs" />
-    <Compile Include="AI\JobGiver\JobGiver_ExecuteRoyalty.cs" />
     <Compile Include="AI\JobGiver\JobGiver_SpectateClose.cs" />
     <Compile Include="AI\JobGiver\JobGiver_PlayInstrument.cs" />
     <Compile Include="AI\JobGiver\JobGiver_GoToStartPositions.cs" />
@@ -80,9 +78,12 @@
     <Compile Include="Comps\CompAbilityEffect_StartBestowing.cs" />
     <Compile Include="Comps\CompProperties_AbilityStartBestower.cs" />
     <Compile Include="Comps\CompResearchRefresh.cs" />
+    <Compile Include="Comps\GameComponent_WealthIncreaseTracker.cs" />
     <Compile Include="Comps\HediffComp_MakeThoughtsStackable.cs" />
     <Compile Include="Comps\HediffComp_RemoveOnAdd.cs" />
     <Compile Include="Comps\MapComponent_Terrorism.cs" />
+    <Compile Include="Comps\StorytellerComp_WealthSteps.cs" />
+    <Compile Include="HarmonyPatches\Patch_StateChange.cs" />
     <Compile Include="HarmonyPatches\Patch_ThoughtStacking.cs" />
     <Compile Include="Comps\WorldComponent_Hierarchy.cs" />
     <Compile Include="DefOf\InternalDefOf.cs" />
@@ -92,7 +93,6 @@
     <Compile Include="HarmonyPatches\Patch_Bestowing.cs" />
     <Compile Include="HarmonyPatches\Patch_GetLetterText.cs" />
     <Compile Include="HarmonyPatches\Patch_Lords.cs" />
-    <Compile Include="HarmonyPatches\Patch_Notify_PawnKilled.cs" />
     <Compile Include="HarmonyPatches\Patch_Thing_Ingested.cs" />
     <Compile Include="HarmonyPatches\PawnRenderer_BodyAngle.cs" />
     <Compile Include="HarmonyPatches\Patch_Conceit.cs" />
