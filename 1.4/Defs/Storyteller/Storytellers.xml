@@ -28,7 +28,7 @@
           <li>ThreatSmall</li>
         </categories>
         <wealthIncrease>5000</wealthIncrease>
-        <delayHours>1</delayHours> <!-- For testing -->
+        <delayHours>3~12</delayHours>
         <disallowedTargetTags>
           <li>Map_RaidBeacon</li>
         </disallowedTargetTags>
