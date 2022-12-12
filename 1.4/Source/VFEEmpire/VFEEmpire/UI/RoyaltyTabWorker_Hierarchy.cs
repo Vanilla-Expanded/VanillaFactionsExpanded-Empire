@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using RimWorld.QuestGen;
+using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 using VFECore.UItils;
@@ -104,7 +105,9 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
             using (new TextBlock(TextAnchor.MiddleCenter)) Widgets.Label(rect.TakeBottomPart(20f), pawn.NameFullColored);
             Widgets.DrawWindowBackground(rect);
             GUI.DrawTexture(rect, PortraitsCache.Get(pawn, rect.size, Rot4.South));
-            if (!pawn.Faction.IsPlayerSafe() && title.CanInvite() && Widgets.ButtonText(buttonRect, "VFEE.Invite".Translate()))
+            if (!pawn.Faction.IsPlayerSafe() && title.CanInvite() && 
+                pawn.IsWorldPawn() && Find.WorldPawns.GetSituation(pawn) != WorldPawnSituation.ReservedByQuest &&
+                Widgets.ButtonText(buttonRect, "VFEE.Invite".Translate()))
                 Find.WindowStack.Add(new FloatMenu(EmpireUtility.AllColonistsWithTitle()
                    .Select(p =>
                     {
@@ -120,7 +123,8 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
                             {
                                 var slate = new Slate();
                                 slate.Set("noble", pawn);
-                                QuestUtility.GenerateQuestAndMakeAvailable(VFEE_DefOf.VFEE_NobleVisit, slate);
+                                var quest = QuestUtility.GenerateQuestAndMakeAvailable(VFEE_DefOf.VFEE_NobleVisit, slate);
+                                QuestUtility.SendLetterQuestAvailable(quest);
                             }
                             else
                                 Messages.Message("CommandCallRoyalAidNotEnoughFavor".Translate(), MessageTypeDefOf.RejectInput, false);

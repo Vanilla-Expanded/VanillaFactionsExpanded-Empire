@@ -38,7 +38,7 @@ namespace VFEEmpire
                     culprits.Add(pawn);                    
                     foreach (var ballroom in mapParent.Map.RoyaltyTracker().Ballrooms)
                     {
-                        if(!QuestPart_GrandBall.TryGetGrandBallSpot(ballroom,mapParent.Map,out var spot, out var absSpot, out var dancefloor,out var rect))
+                        if(!QuestPart_GrandBall.TryGetGrandBallSpot(ballroom,mapParent.Map,out var spot, out var absSpot, out var dancefloor,out var rect) || dancefloor.Count < requiredCells )
                         {
                             missingCells = dancefloor.NullOrEmpty()? requiredCells : requiredCells - dancefloor.Count;
                             continue;
