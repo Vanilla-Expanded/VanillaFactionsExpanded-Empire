@@ -7,7 +7,7 @@
     <description>Ariadne got tired of the unpredictability of the nobility, and whilst she will create a story of increasing tension, she will force dangerous events on you as your wealth increases. After all, it’s not fun to kick someone while they’re down.</description>
     <portraitLarge>HeroArt/AriadneArchduchess</portraitLarge>
     <portraitTiny>HeroArt/AriadneArchduchessTiny</portraitTiny>
-    <listOrder>21</listOrder>
+    <listOrder>41</listOrder>
     <populationIntentFactorFromPopCurve>
       <points>
         <li>0,  8.0</li>
