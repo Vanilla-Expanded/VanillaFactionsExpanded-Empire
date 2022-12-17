@@ -412,6 +412,7 @@
     <apparelRequired>
       <li>VFEE_Apparel_AbsolverHelmet</li>
       <li>VFEE_Apparel_ArmorAbsolver</li>
+	  <li>Apparel_Cape</li>
     </apparelRequired>
     <specificApparelRequirements Inherit="False">
       <li>
@@ -427,7 +428,6 @@
       <li>
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>Shell</apparelLayer>
-        <requiredTag>Cape</requiredTag>
         <color>(10, 10, 10)</color>
       </li>
     </specificApparelRequirements>
@@ -444,6 +444,10 @@
         <range>8~12</range>
       </li>
     </skills>
+    <apparelTags Inherit="False">
+      <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
+    </apparelTags>
     <disallowedTraits>
       <li>Brawler</li>
 	  <li>Nudist</li>
@@ -481,7 +485,7 @@
 		<stuff>Hyperweave</stuff>
       </li>
       <li>
-        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <bodyPartGroup>FullHead</bodyPartGroup>
         <requiredTag>VFEE_Techfriar</requiredTag>
         <stuff>Plasteel</stuff>
       </li>
@@ -502,6 +506,9 @@
         <stuff>Hyperweave</stuff>
       </li>
     </specificApparelRequirements>
+    <apparelRequired>
+      <li>VFEE_Apparel_TechfriarCrown</li>
+    </apparelRequired>
     <techHediffsMoney>1000~4000</techHediffsMoney>
     <xenotypeSet>
       <xenotypeChances>
