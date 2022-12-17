@@ -130,7 +130,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
             extraFaction = new ExtraFaction(empire, ExtraFactionType.HomeFaction),
             inSignalRemovePawn = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.RanWild")
         };
-
+        quest.AddPart(extraFaction);
         //Bunch of signals here
         var lodgerArrestedSignal = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Arrested");
         var lodgerDestroyedSignal = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Destroyed");
