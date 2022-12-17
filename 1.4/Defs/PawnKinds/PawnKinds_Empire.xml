@@ -417,17 +417,8 @@
     <specificApparelRequirements Inherit="False">
       <li>
         <bodyPartGroup>Torso</bodyPartGroup>
-        <apparelLayer>OnSkin</apparelLayer>
-        <stuff>Synthread</stuff>
-      </li>
-      <li>
-        <bodyPartGroup>Legs</bodyPartGroup>
-        <apparelLayer>OnSkin</apparelLayer>
-        <stuff>Synthread</stuff>
-      </li>
-      <li>
-        <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>Shell</apparelLayer>
+		<stuff>Synthread</stuff>
         <color>(10, 10, 10)</color>
       </li>
     </specificApparelRequirements>
@@ -447,6 +438,7 @@
     <apparelTags Inherit="False">
       <li>IndustrialBasic</li>
       <li>IndustrialAdvanced</li>
+	  <li>VFEE_Absolver</li>
     </apparelTags>
     <disallowedTraits>
       <li>Brawler</li>
@@ -509,6 +501,9 @@
     <apparelRequired>
       <li>VFEE_Apparel_TechfriarCrown</li>
     </apparelRequired>
+    <apparelTags>
+      <li>VFEE_Techfriar</li>
+    </apparelTags>
     <techHediffsMoney>1000~4000</techHediffsMoney>
     <xenotypeSet>
       <xenotypeChances>
