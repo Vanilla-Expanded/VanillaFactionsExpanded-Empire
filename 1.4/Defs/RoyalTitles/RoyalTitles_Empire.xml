@@ -94,6 +94,7 @@
       <li Class="RoomRequirement_HasAssignedThroneAnyOf">
         <things>
           <li>GrandThrone</li>
+		  <li>VFEE_StellicThrone</li>
         </things>
       </li>
       <li Class="RoomRequirement_Area">
@@ -345,6 +346,7 @@
       <li Class="RoomRequirement_HasAssignedThroneAnyOf">
         <things>
           <li>GrandThrone</li>
+		  <li>VFEE_StellicThrone</li>
         </things>
       </li>
       <li Class="RoomRequirement_Area">
@@ -599,6 +601,7 @@
       <li Class="RoomRequirement_HasAssignedThroneAnyOf">
         <things>
           <li>GrandThrone</li>
+		  <li>VFEE_StellicThrone</li>
         </things>
       </li>
       <li Class="RoomRequirement_Area">
@@ -868,6 +871,7 @@
       <li Class="RoomRequirement_HasAssignedThroneAnyOf">
         <things>
           <li>GrandThrone</li>
+		  <li>VFEE_StellicThrone</li>
         </things>
       </li>
       <li Class="RoomRequirement_Area">
@@ -1151,6 +1155,7 @@
       <li Class="RoomRequirement_HasAssignedThroneAnyOf">
         <things>
           <li>GrandThrone</li>
+		  <li>VFEE_StellicThrone</li>
         </things>
       </li>
       <li Class="RoomRequirement_Area">
