@@ -135,4 +135,11 @@
       </li>
     </value>
   </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RoyalTitleDef[defName="Acolyte" or defName="Knight" or defName="Praetor" or defName="Baron" or defName="Count"]/throneRoomRequirements/li[@Class="RoomRequirement_HasAssignedThroneAnyOf"]/things</xpath>
+    <value>
+      <li>VFEE_StellicThrone</li>
+    </value>
+  </Operation>
 </Patch>
