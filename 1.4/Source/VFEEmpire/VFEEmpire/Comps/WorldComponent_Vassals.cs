@@ -27,7 +27,7 @@ public class WorldComponent_Vassals : WorldComponent
             Lord = null,
             DaysSinceDelivery = 0,
             Setting = TitheSetting.Never,
-            Speed = Enum.GetValues(typeof(TitheSpeed)).Cast<TitheSpeed>().RandomElementByWeight(EmpireUtility.Commonality),
+            Speed = Enum.GetValues(typeof(TitheSpeed)).Cast<TitheSpeed>().RandomElementByWeight(VassalUtility.Commonality),
             Type = DefDatabase<TitheTypeDef>.AllDefs.RandomElement(),
             Settlement = settlement
         };

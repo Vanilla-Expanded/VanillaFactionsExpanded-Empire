@@ -78,11 +78,20 @@
     <Compile Include="Comps\CompAbilityEffect_StartBestowing.cs" />
     <Compile Include="Comps\CompProperties_AbilityStartBestower.cs" />
     <Compile Include="Comps\CompResearchRefresh.cs" />
+    <Compile Include="Comps\GameComponent_Honors.cs" />
     <Compile Include="Comps\GameComponent_WealthIncreaseTracker.cs" />
     <Compile Include="Comps\HediffComp_MakeThoughtsStackable.cs" />
     <Compile Include="Comps\HediffComp_RemoveOnAdd.cs" />
     <Compile Include="Comps\MapComponent_Terrorism.cs" />
     <Compile Include="Comps\StorytellerComp_WealthSteps.cs" />
+    <Compile Include="DefOf\HonorDefOf.cs" />
+    <Compile Include="HarmonyPatches\Patch_HonorsMisc.cs" />
+    <Compile Include="HarmonyPatches\Patch_StripTitles.cs" />
+    <Compile Include="HarmonyPatches\Patch_TradeablePrice.cs" />
+    <Compile Include="HarmonyPatches\Patch_DoLeftSection.cs" />
+    <Compile Include="HarmonyPatches\Patch_GenerateRewards.cs" />
+    <Compile Include="HarmonyPatches\Patch_Pawn_Discard.cs" />
+    <Compile Include="HarmonyPatches\Patch_Set_Name.cs" />
     <Compile Include="HarmonyPatches\Patch_StateChange.cs" />
     <Compile Include="HarmonyPatches\Patch_ThoughtStacking.cs" />
     <Compile Include="Comps\WorldComponent_Hierarchy.cs" />
@@ -97,6 +106,7 @@
     <Compile Include="HarmonyPatches\PawnRenderer_BodyAngle.cs" />
     <Compile Include="HarmonyPatches\Patch_Conceit.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleIcons.cs" />
+    <Compile Include="HonorDef.cs" />
     <Compile Include="QuestNode\QuestNode_AbsolverRespawn.cs" />
     <Compile Include="QuestNode\QuestNode_DeserterGoodWill.cs" />
     <Compile Include="QuestNode\QuestNode_DeserterHideout.cs" />
@@ -132,6 +142,14 @@
     <Compile Include="HarmonyPatches\Patch_Pawn_InteractionsTracker_TryInteractWith.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleDef_SpecialDisplayStats.cs" />
     <Compile Include="Things\OrbitalSlicer.cs" />
+    <Compile Include="UI\RoyaltyTabWorker_Honors.cs" />
+    <Compile Include="Utilities\EmpireTitleUtility.cs" />
+    <Compile Include="Utilities\HonorUtility.cs" />
+    <Compile Include="Utilities\VassalUtility.cs" />
+    <Compile Include="Workers\HonorWorkers.cs" />
+    <Compile Include="Workers\HonorWorker_Weapon.cs" />
+    <Compile Include="Workers\HonorWorker_Faction.cs" />
+    <Compile Include="Workers\HonorWorker_Settlement.cs" />
     <Compile Include="Workers\IngestionOutcomeDoer_Vomit.cs" />
     <Compile Include="HarmonyPatches\Patch_Quest_End.cs" />
     <Compile Include="Workers\PlayLogEntry_Interaction_RoyalGossip.cs" />
@@ -141,7 +159,7 @@
     <Compile Include="Rituals\Outcomes\OutcomeComp\RitualOutcomeComp_ThroneForRole.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_BestowTitle.cs" />
     <Compile Include="Rituals\Positions\RItualPosition_InFrontThrone.cs" />
-    <Compile Include="Thoughts\ThoughtWorker_BadVisit.cs" />
+    <Compile Include="Workers\ThoughtWorker_BadVisit.cs" />
     <Compile Include="TitheTypeDef.cs" />
     <Compile Include="UI\RoyaltyTabDef.cs" />
     <Compile Include="UI\RoyaltyTabWorker_Hierarchy.cs" />
@@ -161,7 +179,7 @@
     <Compile Include="Workers\RoomRequirement_InstrumentSpace.cs" />
     <Compile Include="Workers\RoomRoleWorkers.cs" />
     <Compile Include="RoyalTitleDefExtension.cs" />
-    <Compile Include="EmpireUtility.cs" />
+    <Compile Include="Utilities\EmpireUtility.cs" />
     <Compile Include="Workers\RoyalTitlePermitWorker_Call.cs" />
     <Compile Include="Workers\RoyalTitlePermitWorker_CallAbsolver.cs" />
     <Compile Include="Workers\RoyalTitlePermitWorker_CallArmoredShuttle.cs" />
@@ -171,6 +189,7 @@
     <Compile Include="VFEEmpireMod.cs" />
     <Compile Include="VFEE_DefOf.cs" />
     <Compile Include="Comps\WorldComponent_Vassals.cs" />
+    <Compile Include="Workers\ThoughtWorker_Honor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abilities\" />

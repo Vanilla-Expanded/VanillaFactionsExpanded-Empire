@@ -1,8 +1,5 @@
-﻿// TitheTypeDef.cs by Joshua Bennett
-// 
-// Created 2022-09-15
-
-using System;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 using Verse;
 
@@ -31,7 +28,11 @@ public class TitheTypeDef : Def
 
 public class TitheWorker
 {
-    public virtual int AmountPerDay(TitheInfo info) => Mathf.RoundToInt(info.Type.count * info.Speed.Mult());
+    public virtual int AmountPerDay(TitheInfo info) =>
+        Mathf.RoundToInt(info.Type.count * info.Speed.Mult() * (info.Lord?.Honors()
+           .OfType<Honor_Settlement>()
+           .Where(h => h.settlement == info.Settlement)
+           .Aggregate(1f, (f, h) => f * h.def.titheSpeedFactor) ?? 1f));
 
     public virtual Thing Create(TitheInfo info)
     {

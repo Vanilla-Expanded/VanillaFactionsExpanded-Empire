@@ -37,7 +37,7 @@ public class JobGiver_SpectateClose : ThinkNode_JobGiver
         if ((duty.spectateRectPreferredSide != SpectateRectSide.None && SpectatorCellFinder.TryFindSpectatorCellFor(pawn, duty.spectateRect,
                 pawn.Map, out spot, duty.spectateRectPreferredSide, 1, null, ritual,
                 RitualUtility.GoodSpectateCellForRitual))
-            || SpectatorCellFinder.TryFindSpectatorCellFor(pawn, duty.spectateRect, pawn.Map, out spot, duty.spectateRectAllowedSides, 1, null, ritual,
+         || SpectatorCellFinder.TryFindSpectatorCellFor(pawn, duty.spectateRect, pawn.Map, out spot, duty.spectateRectAllowedSides, 1, null, ritual,
                 RitualUtility.GoodSpectateCellForRitual))
             return true;
         if (CellFinder.TryFindRandomReachableCellNear(target, pawn.MapHeld, 3f, TraverseParms.For(pawn),

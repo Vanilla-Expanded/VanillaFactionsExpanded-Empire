@@ -26,5 +26,6 @@
     <defName>VFEE_Honors</defName>
     <description>This screen allows you to apply previously unlocked honorable titles to your colonists, providing them with unique but very specific perks.</description>
     <needsCharacter>true</needsCharacter>
+    <workerClass>VFEEmpire.RoyaltyTabWorker_Honors</workerClass>
   </VFEEmpire.RoyaltyTabDef>
 </Defs>

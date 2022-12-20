@@ -5,17 +5,19 @@ using Verse.AI.Group;
 
 namespace VFEEmpire;
 
-public class JobGiver_AcceptTitle: ThinkNode_JobGiver
+public class JobGiver_AcceptTitle : ThinkNode_JobGiver
 {
     public SoundDef soundDefFemale;
     public SoundDef soundDefMale;
+
     public override ThinkNode DeepCopy(bool resolve = true)
     {
-        JobGiver_AcceptTitle JobGiver_AcceptTitle = (JobGiver_AcceptTitle)base.DeepCopy(resolve);
-        JobGiver_AcceptTitle.soundDefMale = this.soundDefMale;
-        JobGiver_AcceptTitle.soundDefFemale = this.soundDefFemale;
+        var JobGiver_AcceptTitle = (JobGiver_AcceptTitle)base.DeepCopy(resolve);
+        JobGiver_AcceptTitle.soundDefMale = soundDefMale;
+        JobGiver_AcceptTitle.soundDefFemale = soundDefFemale;
         return JobGiver_AcceptTitle;
     }
+
     protected override Job TryGiveJob(Pawn pawn)
     {
         var duty = pawn.mindState.duty;
@@ -26,12 +28,11 @@ public class JobGiver_AcceptTitle: ThinkNode_JobGiver
         var edifice = spot.GetEdifice(pawn.Map);
         Job job;
         if (edifice != null && pawn.CanReserveSittableOrSpot(spot))
-        {
-            job= JobMaker.MakeJob(JobDefOf.GiveSpeech, edifice, centerCell);
-        }
-        else { job = JobMaker.MakeJob(JobDefOf.GiveSpeech, spot, centerCell); }
-        job.speechSoundMale = (this.soundDefMale ?? SoundDefOf.Speech_Leader_Male);
-        job.speechSoundFemale = (this.soundDefFemale ?? SoundDefOf.Speech_Leader_Female);
+            job = JobMaker.MakeJob(JobDefOf.GiveSpeech, edifice, centerCell);
+        else
+            job = JobMaker.MakeJob(JobDefOf.GiveSpeech, spot, centerCell);
+        job.speechSoundMale = soundDefMale ?? SoundDefOf.Speech_Leader_Male;
+        job.speechSoundFemale = soundDefFemale ?? SoundDefOf.Speech_Leader_Female;
 
         return job;
     }
@@ -49,11 +50,9 @@ public class JobGiver_AcceptTitle: ThinkNode_JobGiver
             spot = pawnThrone.InteractionCell;
             return true;
         }
+
         spot = throne.InteractionCell + throne.Rotation.FacingCell;
-        if (pawn.CanReserveSittableOrSpot(spot))
-        {
-            return true;
-        }
+        if (pawn.CanReserveSittableOrSpot(spot)) return true;
         if (CellFinder.TryFindRandomReachableCellNear(target, pawn.MapHeld, 3f, TraverseParms.For(pawn),
                 c => c.GetRoom(pawn.MapHeld) == target.GetRoom(pawn.MapHeld) && pawn.CanReserveSittableOrSpot(c) && c != throne.InteractionCell, null,
                 out spot))

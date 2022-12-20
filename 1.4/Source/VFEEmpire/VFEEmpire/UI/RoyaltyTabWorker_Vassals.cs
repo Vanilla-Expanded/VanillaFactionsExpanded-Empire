@@ -30,29 +30,21 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
     {
         base.DoMainSection(inRect, parent);
         var listRect = inRect.TakeLeftPart(UI.screenWidth * 0.25f);
-        Text.Font = GameFont.Medium;
-        Text.Anchor = TextAnchor.UpperCenter;
-        Widgets.Label(listRect.TakeTopPart(30f),
-            "VFEE.VassalsOf".Translate(parent.CurCharacter.LabelShort, parent.CurCharacter.royalty.HighestTitleWith(Faction.OfEmpire).Label.CapitalizeFirst()));
-        Text.Font = GameFont.Tiny;
-        Text.Anchor = TextAnchor.LowerCenter;
-        Widgets.Label(listRect.TakeBottomPart(20f), "VFEE.TitheDesc".Translate().Colorize(ColoredText.SubtleGrayColor));
-        Text.Font = GameFont.Small;
-        Text.Anchor = TextAnchor.UpperLeft;
+        using (new TextBlock(GameFont.Medium, TextAnchor.UpperCenter, null))
+            Widgets.Label(listRect.TakeTopPart(30f),
+                "VFEE.VassalsOf".Translate(parent.CurCharacter.LabelShort,
+                    parent.CurCharacter.royalty.HighestTitleWith(Faction.OfEmpire).Label.CapitalizeFirst()));
+        using (new TextBlock(GameFont.Tiny, TextAnchor.LowerCenter, null))
+            Widgets.Label(listRect.TakeBottomPart(20f), "VFEE.TitheDesc".Translate().Colorize(ColoredText.SubtleGrayColor));
         var vassals = WorldComponent_Vassals.Instance.AllVassalsOf(parent.CurCharacter).ToList();
         var viewRect = new Rect(0, 0, listRect.width - 20f, vassals.Count * 120f);
         Widgets.BeginScrollView(listRect, ref leftScrollPos, viewRect);
         foreach (var vassal in vassals) DoVassal(viewRect.TakeTopPart(120f).ContractedBy(5f), vassal);
-
         Widgets.EndScrollView();
-
         Widgets.DrawMenuSection(inRect);
         inRect = inRect.ContractedBy(7f);
-        Text.Font = GameFont.Tiny;
-        Text.Anchor = TextAnchor.LowerCenter;
-        Widgets.Label(inRect.TakeBottomPart(40f), "VFEE.VassalDesc".Translate().Colorize(ColoredText.SubtleGrayColor));
-        Text.Font = GameFont.Small;
-        Text.Anchor = TextAnchor.UpperLeft;
+        using (new TextBlock(GameFont.Tiny, TextAnchor.LowerCenter, null))
+            Widgets.Label(inRect.TakeBottomPart(40f), "VFEE.VassalDesc".Translate().Colorize(ColoredText.SubtleGrayColor));
 
         vassals = WorldComponent_Vassals.Instance.AllPossibleVassals.Where(vassal => vassal.Lord == null).ToList();
         viewRect = new Rect(0, 0, inRect.width - 20f, Mathf.CeilToInt(vassals.Count / 2f) * 100f);
@@ -67,7 +59,7 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
                           WorldComponent_Vassals.Instance.AllPossibleVassals
                              .Where(v => v.Lord?.Faction is { IsPlayer: true })
                              .Any(v => Find.WorldGrid.ApproxDistanceInTiles(v.Settlement.Tile, vassal.Settlement.Tile) <= 100);
-            var canVassalize = parent.CurCharacter.royalty.VassalagePointsAvailable() > 1 && inRange;
+            var canVassalize = parent.CurCharacter.royalty.VassalagePointsAvailable() >= 1 && inRange;
             string reason = inRange ? "" : "VFEE.NoVassalize".Translate();
             if (left)
             {
@@ -126,21 +118,17 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
         GUI.DrawTexture(rect.TakeLeftPart(50f).TopPartPixels(50f), vassal.Type.Icon);
         var headingRect = rect.TakeTopPart(30f);
         GUI.DrawTexture(headingRect.TakeLeftPart(30f), vassal.Settlement.Faction.def.FactionIcon);
-        Text.Anchor = TextAnchor.MiddleLeft;
-        Text.Font = GameFont.Medium;
-        Widgets.Label(headingRect, vassal.Settlement.Name.Colorize(color));
-        Text.Font = GameFont.Small;
-        Text.Anchor = TextAnchor.UpperLeft;
+        using (new TextBlock(GameFont.Medium, TextAnchor.MiddleCenter, null))
+            Widgets.Label(headingRect, vassal.Settlement.Name.Colorize(color));
         string text = "JumpToLocation".Translate();
-        if (Widgets.ButtonText(headingRect.TakeRightPart(Text.CalcSize(text).x + 5f), text, false, true, Widgets.NormalOptionColor))
-            CameraJumper.TryJump(vassal.Settlement);
-        Text.Font = GameFont.Tiny;
-        Text.Font = GameFont.Tiny;
+        using (new TextBlock(GameFont.Small, TextAnchor.UpperLeft, null))
+            if (Widgets.ButtonText(headingRect.TakeRightPart(Text.CalcSize(text).x + 5f), text, false, true, Widgets.NormalOptionColor))
+                CameraJumper.TryJump(vassal.Settlement);
         text = vassal.Type.description;
         var amount = vassal.Type.Worker.AmountPerDay(vassal);
         text += "\n" + "VFEE.Created".Translate(amount, vassal.Type.ResourceLabelCap(amount));
-        Widgets.Label(rect, text.Colorize(color));
-        Text.Font = GameFont.Small;
+        using (new TextBlock(GameFont.Tiny))
+            Widgets.Label(rect, text.Colorize(color));
         if (canVassalize)
         {
             if (Widgets.ButtonText(bottomRect.RightHalf(), "VFEE.Vassalize".Translate()))
@@ -151,7 +139,7 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
             }
         }
         else if (!reason.NullOrEmpty())
-            using (new TextBlock(TextAnchor.MiddleCenter))
+            using (new TextBlock(GameFont.Small, TextAnchor.MiddleCenter, null))
                 Widgets.Label(bottomRect, reason.Colorize(color));
     }
 }
