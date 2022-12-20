@@ -191,6 +191,7 @@
     <Compile Include="VFEE_DefOf.cs" />
     <Compile Include="Comps\WorldComponent_Vassals.cs" />
     <Compile Include="Workers\ThoughtWorker_Honor.cs" />
+    <Compile Include="Workers\TitheWorkers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abilities\" />

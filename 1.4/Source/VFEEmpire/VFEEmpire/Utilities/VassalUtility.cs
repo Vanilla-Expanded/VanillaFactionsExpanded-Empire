@@ -44,12 +44,13 @@ public static class VassalUtility
             _ => throw new ArgumentOutOfRangeException(nameof(speed), speed, null)
         };
 
-    public static int DeliveryDays(this TitheSetting setting) =>
+    public static int DeliveryDays(this TitheSetting setting, TitheInfo info = null) =>
         setting switch
         {
             TitheSetting.EveryWeek => 7,
             TitheSetting.EveryQuadrum => 15,
             TitheSetting.EveryYear => 60,
+            TitheSetting.Special => info?.Type?.deliveryDays ?? 0,
             TitheSetting.Never => 0,
             _ => throw new ArgumentOutOfRangeException(nameof(setting), setting, null)
         };

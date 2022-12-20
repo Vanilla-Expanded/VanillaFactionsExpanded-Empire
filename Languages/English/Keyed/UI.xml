@@ -17,6 +17,7 @@
     <VFEE.Deliver.EveryYear>Once a year</VFEE.Deliver.EveryYear>
     <VFEE.Deliver.Never>Never (pause)</VFEE.Deliver.Never>
     <VFEE.Created>{0} {1} created every day.</VFEE.Created>
+    <VFEE.CreatedSpecial>{0} {1} created every {2} days.</VFEE.CreatedSpecial>
     <VFEE.InStockpile>{0} in stockpile: {1}</VFEE.InStockpile>
     <VFEE.VassalDesc>You can only vassalize bases that are less than 100 tiles away from you or your vassals\nVassalize more towns to increase the reach and unlock more potential vassal subjects</VFEE.VassalDesc>
     <VFEE.NoVassalize>Can't vassalize: Too far away</VFEE.NoVassalize>

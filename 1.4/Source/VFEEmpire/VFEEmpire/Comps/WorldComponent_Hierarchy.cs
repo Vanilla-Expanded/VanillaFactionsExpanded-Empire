@@ -16,7 +16,9 @@ public class WorldComponent_Hierarchy : WorldComponent
 
     static WorldComponent_Hierarchy()
     {
-        Titles = DefDatabase<RoyalTitleDef>.AllDefs.Where(def => def.seniority > 0).OrderBy(def => def.seniority).ToList();
+        Titles = DefDatabase<RoyalTitleDef>.AllDefs.Where(def => def.seniority > 0 && def.tags.SharesElementWith(FactionDefOf.Empire.royalTitleTags))
+           .OrderBy(def => def.seniority)
+           .ToList();
     }
 
     public WorldComponent_Hierarchy(World world) : base(world) => Instance = this;

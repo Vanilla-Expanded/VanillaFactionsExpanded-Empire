@@ -13,7 +13,7 @@ public class HonorDef : Def
     public Type honorClass = typeof(Honor);
     public bool hostileFactions;
     public SkillDef removeLoss;
-    public float titheSpeedFactor;
+    public float titheSpeedFactor = 1f;
     public float value;
     public Type workerClass = typeof(HonorWorker);
     private HonorWorker worker;

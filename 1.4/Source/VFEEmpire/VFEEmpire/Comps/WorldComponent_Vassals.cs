@@ -22,13 +22,14 @@ public class WorldComponent_Vassals : WorldComponent
     public TitheInfo GetTitheInfo(Settlement settlement)
     {
         if (titheInfo.TryGetValue(settlement, out var info)) return info;
+        var type = DefDatabase<TitheTypeDef>.AllDefs.RandomElement();
         info = new TitheInfo
         {
             Lord = null,
             DaysSinceDelivery = 0,
-            Setting = TitheSetting.Never,
+            Setting = type.deliveryDays == null ? TitheSetting.Never : TitheSetting.Special,
             Speed = Enum.GetValues(typeof(TitheSpeed)).Cast<TitheSpeed>().RandomElementByWeight(VassalUtility.Commonality),
-            Type = DefDatabase<TitheTypeDef>.AllDefs.RandomElement(),
+            Type = type,
             Settlement = settlement
         };
         titheInfo.Add(settlement, info);
@@ -44,7 +45,8 @@ public class WorldComponent_Vassals : WorldComponent
             {
                 info.Lord = null;
                 info.DaysSinceDelivery = 0;
-                info.Setting = TitheSetting.Never;
+                if (info.Setting != TitheSetting.Special)
+                    info.Setting = TitheSetting.Never;
             }
     }
 
@@ -57,25 +59,34 @@ public class WorldComponent_Vassals : WorldComponent
     public override void WorldComponentTick()
     {
         base.WorldComponentTick();
-        if (Find.TickManager.TicksGame % 60000 == 0)
-            foreach (var (_, info) in titheInfo)
+        if (Find.TickManager.TicksGame % 60000 == 0) DoDay();
+    }
+
+    private void DoDay()
+    {
+        foreach (var (_, info) in titheInfo)
+        {
+            if (info.Lord == null) continue;
+            info.DaysSinceDelivery++;
+            if (info.Setting == TitheSetting.Never) continue;
+            if (info.DaysSinceDelivery >= info.Setting.DeliveryDays(info))
             {
-                if (info.Lord == null) continue;
-                info.DaysSinceDelivery++;
-                if (info.Setting == TitheSetting.Never) continue;
-                if (info.DaysSinceDelivery >= info.Setting.DeliveryDays() && info.Lord.MapHeld is { IsPlayerHome: true } map)
-                {
-                    var things = new List<Thing>();
-                    for (var i = 0; i < info.DaysSinceDelivery; i++) things.Add(info.Type.Worker.Create(info));
-                    DropPodUtility.DropThingsNear(info.Lord.PositionHeld, map, things, canRoofPunch: false, forbid: false);
-                }
+                info.Type.Worker.Deliver(info);
+                info.DaysSinceDelivery = 0;
             }
+        }
     }
 
     [DebugAction("General", "Regenerate Vassals", allowedGameStates = AllowedGameStates.Playing, actionType = DebugActionType.Action)]
     public static void RegenerateVassals()
     {
         Instance.titheInfo.Clear();
+    }
+
+    [DebugAction("General", "Vassals: Increment 1 day")]
+    public static void DoDayNow()
+    {
+        Instance.DoDay();
     }
 }
 

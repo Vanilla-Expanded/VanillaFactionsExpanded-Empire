@@ -4,6 +4,7 @@ using System.Linq;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using VFECore;
 using VFECore.UItils;
 
 namespace VFEEmpire;
@@ -115,17 +116,26 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
         Text.Font = GameFont.Tiny;
         GUI.color = lowlight ? Command.LowLightLabelColor : Color.white;
         text = vassal.Type.description;
-        var amount = vassal.Type.Worker.AmountPerDay(vassal);
-        text += "\n" + "VFEE.Created".Translate(amount, vassal.Type.ResourceLabelCap(amount));
-        amount *= vassal.DaysSinceDelivery;
-        text += "\n" + "VFEE.InStockpile".Translate(vassal.Type.ResourceLabelCap(amount), amount);
+        var amount = vassal.Type.Worker.AmountProduced(vassal);
+        text += "\n";
+        if (vassal.Setting == TitheSetting.Special)
+            text += "VFEE.CreatedSpecial".Translate(amount, vassal.Type.ResourceLabelCap(amount), vassal.Type.deliveryDays ?? -1);
+        else
+        {
+            text += "VFEE.Created".Translate(amount, vassal.Type.ResourceLabelCap(amount));
+            amount *= vassal.DaysSinceDelivery;
+            text += "\n" + "VFEE.InStockpile".Translate(vassal.Type.ResourceLabelCap(amount), amount);
+        }
+
         Widgets.Label(rect, text);
         Text.Font = GameFont.Small;
         GUI.color = Color.white;
-        Widgets.FillableBar(deliveryRect.LeftHalf().ContractedBy(3f), (float)vassal.DaysSinceDelivery / vassal.Setting.DeliveryDays());
-        if (Widgets.ButtonText(deliveryRect.RightHalf(), "VFEE.Deliver".Translate() + ": " + $"VFEE.Deliver.{vassal.Setting}".Translate()))
+        Widgets.FillableBar(deliveryRect.LeftHalf().ContractedBy(3f), (float)vassal.DaysSinceDelivery / vassal.Setting.DeliveryDays(vassal));
+        if (vassal.Setting != TitheSetting.Special
+         && Widgets.ButtonText(deliveryRect.RightHalf(), "VFEE.Deliver".Translate() + ": " + $"VFEE.Deliver.{vassal.Setting}".Translate()))
             Find.WindowStack.Add(new FloatMenu(Enum.GetValues(typeof(TitheSetting))
                .Cast<TitheSetting>()
+               .Exclude(new HashSet<TitheSetting> { TitheSetting.Special })
                .Select(setting => new FloatMenuOption(
                     $"VFEE.Deliver.{setting}".Translate(), () => vassal.Setting = setting))
                .ToList()));
@@ -153,8 +163,12 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
             if (Widgets.ButtonText(headingRect.TakeRightPart(Text.CalcSize(text).x + 5f), text, false, true, Widgets.NormalOptionColor))
                 CameraJumper.TryJump(vassal.Settlement);
         text = vassal.Type.description;
-        var amount = vassal.Type.Worker.AmountPerDay(vassal);
-        text += "\n" + "VFEE.Created".Translate(amount, vassal.Type.ResourceLabelCap(amount));
+        var amount = vassal.Type.Worker.AmountProduced(vassal);
+        text += "\n";
+        if (vassal.Setting == TitheSetting.Special)
+            text += "VFEE.CreatedSpecial".Translate(amount, vassal.Type.ResourceLabelCap(amount), vassal.Type.deliveryDays ?? -1);
+        else text += "VFEE.Created".Translate(amount, vassal.Type.ResourceLabelCap(amount));
+
         using (new TextBlock(GameFont.Tiny))
             Widgets.Label(rect, text.Colorize(color));
         if (canVassalize)
@@ -164,7 +178,8 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
             {
                 vassal.Lord = pawn;
                 vassal.DaysSinceDelivery = 0;
-                vassal.Setting = TitheSetting.EveryWeek;
+                if (vassal.Setting != TitheSetting.Special)
+                    vassal.Setting = TitheSetting.EveryWeek;
             }
 
             GUI.color = Color.white;
