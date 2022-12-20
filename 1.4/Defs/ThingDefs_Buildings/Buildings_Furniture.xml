@@ -342,6 +342,7 @@
 	<costList>
       <Steel>20</Steel>
     </costList>
+	<costStuffCount>30</costStuffCount>
     <stuffCategories>
       <li>Woody</li>
       <li>Metallic</li>
