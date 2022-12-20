@@ -145,6 +145,7 @@
     <Compile Include="UI\RoyaltyTabWorker_Honors.cs" />
     <Compile Include="Utilities\EmpireTitleUtility.cs" />
     <Compile Include="Utilities\HonorUtility.cs" />
+    <Compile Include="Utilities\MiscUtilities.cs" />
     <Compile Include="Utilities\VassalUtility.cs" />
     <Compile Include="Workers\HonorWorkers.cs" />
     <Compile Include="Workers\HonorWorker_Weapon.cs" />

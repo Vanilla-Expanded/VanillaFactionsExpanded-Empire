@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -12,11 +13,15 @@ public class RoyaltyTabWorker_Permits : RoyaltyTabWorker
     private static Vector2 rightScrollPosition;
 
     private static readonly Vector2 PermitOptionSpacing = new(0.25f, 0.35f);
+
+    private static readonly Vector2 PERMIT_SIZE = new(200f, 50f);
+    private readonly HashSet<RoyalTitlePermitDef> highlight = new();
+    private Rect outRect;
     private RoyalTitlePermitDef selectedPermit;
 
-    public override void DoLeftBottom(Rect inRect, MainTabWindow_Royalty parent)
+    public override void DoLeftBottom(Rect inRect)
     {
-        base.DoLeftBottom(inRect, parent);
+        base.DoLeftBottom(inRect);
         var pawn = parent.CurCharacter;
         Text.Font = GameFont.Medium;
         Widgets.Label(inRect.TakeTopPart(40f), "VFEE.PermitPoints".Translate(pawn.royalty.GetPermitPoints(Faction.OfEmpire)));
@@ -45,9 +50,9 @@ public class RoyaltyTabWorker_Permits : RoyaltyTabWorker
                 Faction.OfEmpire.def.royalFavorLabel.Named("FAVOR")));
     }
 
-    public override void DoMainSection(Rect inRect, MainTabWindow_Royalty parent)
+    public override void DoMainSection(Rect inRect)
     {
-        base.DoMainSection(inRect, parent);
+        base.DoMainSection(inRect);
         DoLeftRect(inRect.TakeLeftPart(UI.screenHeight * 0.25f).ContractedBy(4f, 6f), parent.CurCharacter, parent.DevMode);
         DoRightRect(inRect.ContractedBy(4f), parent.CurCharacter);
     }
@@ -141,48 +146,53 @@ public class RoyaltyTabWorker_Permits : RoyaltyTabWorker
         Widgets.DrawMenuSection(rect);
         var empire = Faction.OfEmpire;
         var toDraw = DefDatabase<RoyalTitlePermitDef>.AllDefs.Where(CanDrawPermit).ToList();
-        var outRect = rect.ContractedBy(10f);
-        var rect2 = default(Rect);
+        outRect = rect.ContractedBy(10f);
+        var viewRect = default(Rect);
         foreach (var permit in toDraw)
         {
-            rect2.width = Mathf.Max(rect2.width, DrawPosition(permit).x + 200f + 26f);
-            rect2.height = Mathf.Max(rect2.height, DrawPosition(permit).y + 50f + 26f);
+            viewRect.width = Mathf.Max(viewRect.width, DrawPosition(permit).x + 200f + 26f);
+            viewRect.height = Mathf.Max(viewRect.height, DrawPosition(permit).y + 50f + 26f);
         }
 
-        Widgets.BeginScrollView(outRect, ref rightScrollPosition, rect2);
-        Widgets.BeginGroup(rect2.ContractedBy(10f));
+        Widgets.BeginScrollView(outRect, ref rightScrollPosition, viewRect);
+        Widgets.BeginGroup(viewRect.ContractedBy(10f));
         DrawLines();
         foreach (var royalTitlePermitDef in toDraw)
-            if (CanDrawPermit(royalTitlePermitDef))
+        {
+            var rect3 = new Rect(DrawPosition(royalTitlePermitDef), PERMIT_SIZE);
+            var color = Widgets.NormalOptionColor;
+            var color2 = royalTitlePermitDef.Unlocked(pawn) ? TexUI.FinishedResearchColor : TexUI.AvailResearchColor;
+            Color borderColor;
+            if (selectedPermit == royalTitlePermitDef)
             {
-                var vector = DrawPosition(royalTitlePermitDef);
-                var rect3 = new Rect(vector.x, vector.y, 200f, 50f);
-                var color = Widgets.NormalOptionColor;
-                var color2 = royalTitlePermitDef.Unlocked(pawn) ? TexUI.FinishedResearchColor : TexUI.AvailResearchColor;
-                Color borderColor;
-                if (selectedPermit == royalTitlePermitDef)
-                {
-                    borderColor = TexUI.HighlightBorderResearchColor;
-                    color2 += TexUI.HighlightBgResearchColor;
-                }
-                else
-                    borderColor = TexUI.DefaultBorderResearchColor;
-
-                if (!royalTitlePermitDef.AvailableForPawn(pawn, empire) && !royalTitlePermitDef.Unlocked(pawn)) color = Color.red;
-                if (Widgets.CustomButtonText(ref rect3, string.Empty, color2, color, borderColor))
-                {
-                    SoundDefOf.Click.PlayOneShotOnCamera();
-                    selectedPermit = royalTitlePermitDef;
-                }
-
-                var anchor = Text.Anchor;
-                var color3 = GUI.color;
-                GUI.color = color;
-                Text.Anchor = TextAnchor.MiddleCenter;
-                Widgets.Label(rect3, royalTitlePermitDef.LabelCap);
-                GUI.color = color3;
-                Text.Anchor = anchor;
+                borderColor = TexUI.HighlightBorderResearchColor;
+                color2 += TexUI.HighlightBgResearchColor;
             }
+            else
+                borderColor = TexUI.DefaultBorderResearchColor;
+
+            if (highlight.Any() && !highlight.Contains(royalTitlePermitDef))
+            {
+                color = NoMatchTint(color);
+                color2 = NoMatchTint(color2);
+                borderColor = NoMatchTint(borderColor);
+            }
+
+            if (!royalTitlePermitDef.AvailableForPawn(pawn, empire) && !royalTitlePermitDef.Unlocked(pawn)) color = Color.red;
+            if (Widgets.CustomButtonText(ref rect3, string.Empty, color2, color, borderColor))
+            {
+                SoundDefOf.Click.PlayOneShotOnCamera();
+                selectedPermit = royalTitlePermitDef;
+            }
+
+            var anchor = Text.Anchor;
+            var color3 = GUI.color;
+            GUI.color = color;
+            Text.Anchor = TextAnchor.MiddleCenter;
+            Widgets.Label(rect3, royalTitlePermitDef.LabelCap);
+            GUI.color = color3;
+            Text.Anchor = anchor;
+        }
 
         Widgets.EndGroup();
         Widgets.EndScrollView();
@@ -190,4 +200,18 @@ public class RoyaltyTabWorker_Permits : RoyaltyTabWorker
 
     private static int TotalReturnPermitsCost(Pawn pawn) =>
         8 + pawn.royalty.AllFactionPermits.Where(t => t.OnCooldown && t.Permit.royalAid != null).Sum(t => t.Permit.royalAid.favorCost);
+
+    public override bool CheckSearch(QuickSearchFilter filter)
+    {
+        highlight.Clear();
+        if (!filter.Active) return true;
+        highlight.AddRange(DefDatabase<RoyalTitlePermitDef>.AllDefs.Where(CanDrawPermit).Where(permit => filter.Matches(permit.label)));
+        var viewable = outRect;
+        viewable.position = rightScrollPosition;
+        if (highlight.All(permit => !viewable.Overlaps(new Rect(DrawPosition(permit), PERMIT_SIZE))) && highlight.Any())
+            rightScrollPosition = highlight.Select(DrawPosition).OrderBy(v => v.DistanceToRect(viewable)).First();
+        return highlight.Any();
+    }
+
+    private static Color NoMatchTint(Color color) => Color.Lerp(color, Widgets.MenuSectionBGFillColor, 0.4f);
 }

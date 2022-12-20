@@ -9,10 +9,10 @@ namespace VFEEmpire;
 public class MainTabWindow_Royalty : MainTabWindow
 {
     public Pawn CurCharacter;
-    private RoyaltyTabDef curTab;
 
     public bool DevMode;
     public QuickSearchWidget SearchWidget = new();
+    private RoyaltyTabDef curTab;
 
     public override Vector2 RequestedTabSize => new(UI.screenWidth, UI.screenHeight * 0.66f);
 
@@ -23,6 +23,12 @@ public class MainTabWindow_Royalty : MainTabWindow
         CurCharacter = PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists.First(p =>
             p.royalty != null && p.royalty.HasAnyTitleIn(Faction.OfEmpire));
         curTab.Worker.Notify_Open();
+        ResetAndUnfocusSearch();
+    }
+
+    public override void PostClose()
+    {
+        base.PostClose();
         ResetAndUnfocusSearch();
     }
 
@@ -47,6 +53,7 @@ public class MainTabWindow_Royalty : MainTabWindow
         leftRect.yMin += 10f;
         foreach (var def in DefDatabase<RoyaltyTabDef>.AllDefs)
         {
+            def.Worker.parent = this;
             if (Widgets.ButtonText(leftRect.TakeTopPart(40f).LeftPartPixels(230f), def.label))
             {
                 curTab = def;
@@ -63,8 +70,8 @@ public class MainTabWindow_Royalty : MainTabWindow
         if (Prefs.DevMode) Widgets.CheckboxLabeled(leftRect.TakeBottomPart(30f), "VFEE.DevMode".Translate(), ref DevMode);
 
         if (curTab.needsCharacter) DoCharacterSelection(ref leftRect);
-        curTab.Worker.DoLeftBottom(leftRect, this);
-        curTab.Worker.DoMainSection(inRect, this);
+        curTab.Worker.DoLeftBottom(leftRect);
+        curTab.Worker.DoMainSection(inRect);
         Text.Font = font;
         Text.Anchor = anchor;
     }
@@ -93,6 +100,14 @@ public class MainTabWindow_Royalty : MainTabWindow
     {
         if (SearchWidget.CurrentlyFocused())
             ResetAndUnfocusSearch();
+        else
+            base.OnCancelKeyPressed();
+    }
+
+    public override void OnAcceptKeyPressed()
+    {
+        if (SearchWidget.CurrentlyFocused())
+            SearchWidget.Unfocus();
         else
             base.OnCancelKeyPressed();
     }

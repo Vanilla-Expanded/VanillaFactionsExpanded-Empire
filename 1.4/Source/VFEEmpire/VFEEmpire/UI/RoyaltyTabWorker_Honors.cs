@@ -11,6 +11,7 @@ namespace VFEEmpire;
 public class RoyaltyTabWorker_Honors : RoyaltyTabWorker
 {
     private readonly List<Action> delayedCalls = new();
+    private readonly HashSet<Honor> matches = new();
 
     public override void Notify_Open()
     {
@@ -18,9 +19,9 @@ public class RoyaltyTabWorker_Honors : RoyaltyTabWorker
         Honors = GameComponent_Honors.Instance;
     }
 
-    public override void DoMainSection(Rect inRect, MainTabWindow_Royalty parent)
+    public override void DoMainSection(Rect inRect)
     {
-        base.DoMainSection(inRect, parent);
+        base.DoMainSection(inRect);
         var listRect = inRect.TakeLeftPart(UI.screenWidth * 0.25f);
         Widgets.DrawMenuSection(inRect);
 
@@ -56,10 +57,11 @@ public class RoyaltyTabWorker_Honors : RoyaltyTabWorker
         delayedCalls.Clear();
     }
 
-    public override void DoLeftBottom(Rect inRect, MainTabWindow_Royalty parent)
+    public override void DoLeftBottom(Rect inRect)
     {
-        base.DoLeftBottom(inRect, parent);
-        if (Widgets.ButtonText(inRect.TakeBottomPart(30f), "VFEE.Honors.RemoveAll".Translate())) parent.CurCharacter.RemoveAllHonors();
+        base.DoLeftBottom(inRect);
+        inRect.yMax -= 25f;
+        if (Widgets.ButtonText(inRect.TakeBottomPart(60f).ContractedBy(7f, 0f), "VFEE.Honors.RemoveAll".Translate())) parent.CurCharacter.RemoveAllHonors();
     }
 
     private void DrawHonors(Rect rect, List<Honor> honors)
@@ -74,7 +76,7 @@ public class RoyaltyTabWorker_Honors : RoyaltyTabWorker
             rect.position = Event.current.mousePosition;
             delayedCalls.Add(() =>
             {
-                DrawHonor(rect, honor, false);
+                DrawHonor(rect, honor, false, false);
                 if (DragAndDropWidget.HoveringDropArea(groupID) is Pawn pawn)
                     if (!honor.CanAssignTo(pawn, out var reason))
                     {
@@ -84,26 +86,29 @@ public class RoyaltyTabWorker_Honors : RoyaltyTabWorker
                     }
             });
         }
-        else if (Event.current.type == EventType.Repaint) DrawHonor(rect, honor);
+        else if (Event.current.type == EventType.Repaint) DrawHonor(rect, honor, true, matches.Any() && !matches.Contains(honor));
     }
 
-    private static void DrawHonorNonDraggable(Rect rect, Honor honor)
+    public static void DrawHonor(Rect rect, Honor honor)
     {
-        DrawHonor(rect, honor);
+        DrawHonor(rect, honor, true, false);
     }
 
-    public static void DrawHonor(Rect rect, Honor honor, bool doTooltip = true)
+    public static void DrawHonor(Rect rect, Honor honor, bool doTooltip, bool lowlight)
     {
         DrawHonor(rect, honor.Label, honor.Description, doTooltip);
     }
 
-    public static void DrawHonor(Rect rect, string label, string description, bool doTooltip = true)
+    public static void DrawHonor(Rect rect, string label, string description, bool doTooltip = true, bool lowlight = false)
     {
         GUI.color = CharacterCardUtility.StackElementBackground;
+        if (lowlight) GUI.color = Command.LowLightBgColor;
         GUI.DrawTexture(rect, BaseContent.WhiteTex);
         GUI.color = Color.white;
         Widgets.DrawHighlightIfMouseover(rect);
+        if (lowlight) GUI.color = Command.LowLightLabelColor;
         Widgets.Label(rect.ContractedBy(5f, 0f), label);
+        GUI.color = Color.white;
         if (doTooltip) TooltipHandler.TipRegion(rect, description);
     }
 
@@ -119,9 +124,16 @@ public class RoyaltyTabWorker_Honors : RoyaltyTabWorker
         drawer = sectionRect =>
         {
             Widgets.Label(new Rect(sectionRect.x, sectionRect.y, 200f, 30f), "VFEE.Honors".Translate().AsTipTitle());
-            GenUI.DrawElementStack(new Rect(sectionRect.x, sectionRect.y + 32f, inRect.width - 5f, stackHeight), HonorHeight, honors, DrawHonorNonDraggable,
-                GetHonorWidth);
+            GenUI.DrawElementStack(new Rect(sectionRect.x, sectionRect.y + 32f, inRect.width - 5f, stackHeight), HonorHeight, honors, DrawHonor, GetHonorWidth);
         };
+    }
+
+    public override bool CheckSearch(QuickSearchFilter filter)
+    {
+        matches.Clear();
+        if (!filter.Active) return true;
+        matches.AddRange(HonorUtility.Available().Concat(parent.CurCharacter.Honors()).Where(h => filter.Matches(h.Label)));
+        return matches.Any();
     }
 
     // ReSharper disable InconsistentNaming

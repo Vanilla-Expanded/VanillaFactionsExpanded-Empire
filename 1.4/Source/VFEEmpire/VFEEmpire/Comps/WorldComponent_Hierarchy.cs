@@ -67,11 +67,14 @@ public class WorldComponent_Hierarchy : WorldComponent
             count += 2;
         }
 
+
         SortPawns();
     }
 
-    private void SortPawns()
+    public void SortPawns()
     {
+        TitleHolders.RemoveAll(pawn => pawn.IsColonist);
+        TitleHolders.AddRange(EmpireUtility.AllColonistsWithTitle());
         var empire = Faction.OfEmpire;
         TitleHolders.SortBy(p => p.royalty.GetCurrentTitle(empire).seniority, p => p.royalty.GetFavor(empire), p => p.Name.ToStringFull);
     }
