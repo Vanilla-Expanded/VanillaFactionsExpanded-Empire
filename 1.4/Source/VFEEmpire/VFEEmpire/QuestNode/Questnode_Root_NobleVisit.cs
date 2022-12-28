@@ -27,9 +27,8 @@ public class QuestNode_Root_NobleVisit : QuestNode
     protected override bool TestRunInt(Slate slate)
     {
         var map = QuestGen_Get.GetMap();
-        var leadTitle = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle)
-           .RandomElementByWeight(x => x?.def?.seniority ?? 0f)
-           .def; //Title of highest colony member            
+        map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle)
+           .TryRandomElementByWeight(x => x?.def?.seniority ?? 0f,out var leadTitle); //Title of highest colony member            
         return leadTitle != null && !Faction.OfPlayer.HostileTo(Faction.OfEmpire);
     }
 
@@ -212,16 +211,18 @@ public class QuestNode_Root_NobleVisit : QuestNode
 
         quest.Delay(durationTicks, delegate
         {
-            Action outAction = () => quest.Letter(LetterDefOf.PositiveEvent, text: "[LetterLabelShuttleArrived]", label: "[LetterTextShuttleArrived]");
-            quest.SignalPassWithFaction(empire, null, outAction);
+
             var utilPickup = DefDatabase<QuestScriptDef>.GetNamed("Util_TransportShip_Pickup");
+            slate.Remove("owningFaction");//if theres an owning faction for the pickup shuttle you dont get gizmos
             slate.Set("requiredPawns", lodgers);
             slate.Set("leaveDelayTicks", 60000 * 3);
             slate.Set("sendAwayIfAllDespawned", lodgers);
             slate.Set("leaveImmediatelyWhenSatisfied", true);
             utilPickup.root.Run();
-
-            //If failed and leave **this needs to move to its own signal pretty sure
+            var pickupThing = slate.Get<Thing>("pickupShipThing");
+            Action outAction = () => quest.Letter(LetterDefOf.PositiveEvent, text: "[LetterLabelShuttleArrived]", label: "[LetterTextShuttleArrived]", lookTargets: Gen.YieldSingle(pickupThing));
+            quest.SignalPassWithFaction(empire, null, outAction);
+            //If failed and leave
             quest.Leave(lodgers, anyLeave, wakeUp: true);
         }, null, null, null, false, null, null, false, "GuestsDepartsIn".Translate(), "GuestsDepartsOn".Translate(), "QuestDelay");
 
