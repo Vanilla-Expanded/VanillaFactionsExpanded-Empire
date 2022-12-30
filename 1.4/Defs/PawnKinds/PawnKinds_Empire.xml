@@ -467,7 +467,7 @@
   
   <PawnKindDef ParentName="RoyalBase">
     <defName>VFEE_Empire_Royal_Techfriar</defName>
-    <label>techriar</label>
+    <label>techfriar</label>
     <combatPower>50</combatPower>
     <weaponMoney>0</weaponMoney>
     <specificApparelRequirements>
