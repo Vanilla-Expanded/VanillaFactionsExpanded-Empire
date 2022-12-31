@@ -208,7 +208,7 @@
     <minTitle>Praetor</minTitle>
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
-    <uiPosition>(4,1)</uiPosition>
+    <uiPosition>(5,2)</uiPosition>
     <royalAid>
       <itemsToDrop>
         <ComponentIndustrial>15</ComponentIndustrial>
@@ -225,7 +225,7 @@
     <minTitle>Baron</minTitle>
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
-    <uiPosition>(5,1)</uiPosition>
+    <uiPosition>(6,2)</uiPosition>
     <prerequisite>VFEI_ComponentDrop</prerequisite>
     <royalAid>
       <itemsToDrop>

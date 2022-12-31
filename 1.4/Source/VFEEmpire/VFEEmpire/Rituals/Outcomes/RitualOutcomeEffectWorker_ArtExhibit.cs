@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using RimWorld;
 using Verse;
@@ -37,6 +38,12 @@ namespace VFEEmpire
                 if (outcome.memory != null)
                 {
                     GiveMemoryToPawn(pawn, outcome.memory, jobRitual);
+                }
+
+                // Apply bonus from the Patron of Arts Honor
+                if (outcome.Positive && pawn.Honors().Any(h => h.def == HonorDefOf.VFEE_PatronOfArts))
+                {
+                    pawn.royalty.GainFavor(Faction.OfEmpire, 3);
                 }
             }
         }

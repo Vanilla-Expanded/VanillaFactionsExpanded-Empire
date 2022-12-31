@@ -107,7 +107,7 @@
 				<li>LetterLabelShuttleArrived->Shuttle arrived</li>
 				<li>LetterTextShuttleArrived->The shuttle has arrived to collect [asker_nameFull] and their court</li>			
 				<li>lodgersLeavingLetterLabel->[lodgersLabelSingularOrPlural] left healthy</li>
-				<li>lodgersLeavingLetterText->{asker_nameFull} thanks you for inviting them to stay at [map_definite] for these [questDurationTicks_duration].</li>
+				<li>lodgersLeavingLetterText->[asker_nameFull] thanks you for inviting them to stay at [map_definite] for these [questDurationTicks_duration].</li>
 				
 			</rulesStrings>
 		</questContentRules>

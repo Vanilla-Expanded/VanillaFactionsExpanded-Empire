@@ -16,7 +16,7 @@
     <maxUses>1</maxUses>
   </ScenPartDef>
 
-  <ScenarioDef Name="Crashlanded">
+  <ScenarioDef>
     <defName>VFEE_NewFamily</defName>
     <label>New Family</label>
     <description>It was a long and quiet night when your entire life turned on its head. You are not sure if it was a deliberate sabotage by one of the family servants, a simple system malfunction or a well executed deserter strategy, but the mansion defense systems turned off as the clock struck midnight. When the gates swung wide, there was no time to call for aid - best you could do was hide.

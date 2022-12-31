@@ -10,7 +10,7 @@
     <stages>
       <li>
         <label>terrible ball</label>
-        <description>I'm embarrased to be a part of that train wreck. I just hope no one gossips about this.</description>
+        <description>I'm embarrassed to be a part of that train wreck. I just hope no one gossips about this.</description>
         <baseMoodEffect>-6</baseMoodEffect>
       </li>
     </stages>
@@ -63,7 +63,7 @@
     <stages>
       <li>
         <label>terrible exhibit</label>
-        <description>I'm embarrased that we hosted such a terrible art exhibit. Our art will never be resepected in the empire now!</description>
+        <description>I'm embarrassed that we hosted such a terrible art exhibit. Our art will never be resepected in the empire now!</description>
         <baseMoodEffect>-6</baseMoodEffect>
       </li>
     </stages>

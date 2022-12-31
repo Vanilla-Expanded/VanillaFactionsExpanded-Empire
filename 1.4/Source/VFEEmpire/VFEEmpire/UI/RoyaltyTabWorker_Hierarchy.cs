@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
+using RimWorld.Planet;
 using RimWorld.QuestGen;
 using UnityEngine;
 using Verse;
@@ -11,13 +12,21 @@ namespace VFEEmpire;
 
 public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
 {
+    private readonly HashSet<Pawn> highlight = new();
     private readonly Dictionary<Pawn, float> pawnPos = new();
     private readonly Dictionary<RoyalTitleDef, float> titlePos = new();
     private Vector2 scrollPos;
+    private float viewWidth;
 
-    public override void DoLeftBottom(Rect inRect, MainTabWindow_Royalty parent)
+    public override void Notify_Open()
     {
-        base.DoLeftBottom(inRect, parent);
+        base.Notify_Open();
+        WorldComponent_Hierarchy.Instance.SortPawns();
+    }
+
+    public override void DoLeftBottom(Rect inRect)
+    {
+        base.DoLeftBottom(inRect);
         var listing = new Listing_Standard();
         listing.Begin(inRect.TakeBottomPart(32f * 4));
         if (listing.ButtonText("VFEE.Skip.Title.Previous".Translate())) ScrollTo(ScrollMode.Title, ScrollDirection.Previous);
@@ -29,12 +38,13 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
 
     private void ScrollTo(ScrollMode mode, ScrollDirection direction)
     {
-        var xs = mode switch
-        {
-            ScrollMode.Colonist => pawnPos.Where(kv => kv.Key.Faction.IsPlayer).Select(kv => kv.Value).OrderBy(x => x).ToList(),
-            ScrollMode.Title => titlePos.Select(kv => kv.Value).OrderBy(x => x).ToList(),
-            _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
-        };
+        var xs = (mode switch
+            {
+                ScrollMode.Colonist => pawnPos.Where(kv => kv.Key.Faction.IsPlayer).Select(kv => kv.Value),
+                ScrollMode.Title => titlePos.Select(kv => kv.Value),
+                _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
+            }).OrderBy(x => x)
+           .ToList();
         var i = direction switch
         {
             ScrollDirection.Next => xs.FindIndex(x => x > scrollPos.x + 10f),
@@ -45,9 +55,9 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
             scrollPos.x = xs[i];
     }
 
-    public override void DoMainSection(Rect inRect, MainTabWindow_Royalty parent)
+    public override void DoMainSection(Rect inRect)
     {
-        base.DoMainSection(inRect, parent);
+        base.DoMainSection(inRect);
         pawnPos.Clear();
         titlePos.Clear();
         var pawns = WorldComponent_Hierarchy.Instance.TitleHolders;
@@ -56,6 +66,8 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
         var curTitle = VFEE_DefOf.Freeholder;
         Widgets.DrawMenuSection(inRect);
         inRect = inRect.ContractedBy(3f);
+        viewWidth = inRect.width;
+        Widgets.ScrollHorizontal(inRect, ref scrollPos, viewRect);
         Widgets.BeginScrollView(inRect, ref scrollPos, viewRect);
         foreach (var pawn in pawns)
         {
@@ -89,6 +101,8 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
             x += 25f;
             pawnPos[pawn] = x;
 
+            if (highlight.Any() && !highlight.Contains(pawn)) GUI.color = Command.LowLightLabelColor;
+
             var rect = new Rect(x, 0f, 150f, 250f).CenteredOnYIn(viewRect);
             var buttonRect = new Rect(rect.x, rect.yMax + 3f, rect.width, 25f);
             var honorRect = rect.TakeTopPart(20f);
@@ -104,7 +118,9 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
             using (new TextBlock(TextAnchor.MiddleCenter)) Widgets.Label(rect.TakeBottomPart(20f), pawn.NameFullColored);
             Widgets.DrawWindowBackground(rect);
             GUI.DrawTexture(rect, PortraitsCache.Get(pawn, rect.size, Rot4.South));
-            if (!pawn.Faction.IsPlayerSafe() && title.CanInvite() && Widgets.ButtonText(buttonRect, "VFEE.Invite".Translate()))
+            if (!pawn.Faction.IsPlayerSafe() && title.CanInvite() &&
+                pawn.IsWorldPawn() && Find.WorldPawns.GetSituation(pawn) != WorldPawnSituation.ReservedByQuest &&
+                Widgets.ButtonText(buttonRect, "VFEE.Invite".Translate()))
                 Find.WindowStack.Add(new FloatMenu(EmpireUtility.AllColonistsWithTitle()
                    .Select(p =>
                     {
@@ -120,7 +136,8 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
                             {
                                 var slate = new Slate();
                                 slate.Set("noble", pawn);
-                                QuestUtility.GenerateQuestAndMakeAvailable(VFEE_DefOf.VFEE_NobleVisit, slate);
+                                var quest = QuestUtility.GenerateQuestAndMakeAvailable(VFEE_DefOf.VFEE_NobleVisit, slate);
+                                QuestUtility.SendLetterQuestAvailable(quest);
                             }
                             else
                                 Messages.Message("CommandCallRoyalAidNotEnoughFavor".Translate(), MessageTypeDefOf.RejectInput, false);
@@ -128,10 +145,22 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
                     })
                    .ToList()));
 
+            GUI.color = Color.white;
+
             x += 175f;
         }
 
         Widgets.EndScrollView();
+    }
+
+    public override bool CheckSearch(QuickSearchFilter filter)
+    {
+        highlight.Clear();
+        if (!filter.Active) return true;
+        highlight.AddRange(WorldComponent_Hierarchy.Instance.TitleHolders.Where(p => filter.Matches(p.Name.ToStringFull)));
+        if (highlight.All(p => pawnPos[p] + 150f < scrollPos.x || pawnPos[p] > scrollPos.x + viewWidth) && highlight.Any())
+            scrollPos.x = highlight.Select(p => pawnPos[p]).OrderBy(x => x > scrollPos.x ? x - scrollPos.x : scrollPos.x - x + 10000f).First();
+        return highlight.Any();
     }
 
     private enum ScrollMode

@@ -1,21 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using VFECore;
 using VFECore.UItils;
 
 namespace VFEEmpire;
 
 public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
 {
+    private readonly HashSet<TitheInfo> highlight = new();
+    private readonly ScrollPositioner leftScrollPositioner = new();
+    private readonly ScrollPositioner rightScrollPositioner = new();
     private Vector2 leftScrollPos;
-
     private Vector2 rightScrollPos;
 
-    public override void DoLeftBottom(Rect inRect, MainTabWindow_Royalty parent)
+    public override void Notify_Open()
     {
-        base.DoLeftBottom(inRect, parent);
+        base.Notify_Open();
+        leftScrollPositioner.Arm();
+        rightScrollPositioner.Arm();
+    }
+
+    public override void DoLeftBottom(Rect inRect)
+    {
+        base.DoLeftBottom(inRect);
         var pawn = parent.CurCharacter;
         Text.Font = GameFont.Medium;
         Widgets.Label(inRect.TakeTopPart(40f), "VFEE.VassalPoints".Translate(pawn.royalty.VassalagePointsAvailable()));
@@ -26,33 +37,29 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
                 delegate { WorldComponent_Vassals.Instance.ReleaseAllVassalsOf(pawn); }, true));
     }
 
-    public override void DoMainSection(Rect inRect, MainTabWindow_Royalty parent)
+    public override void DoMainSection(Rect inRect)
     {
-        base.DoMainSection(inRect, parent);
+        base.DoMainSection(inRect);
+        leftScrollPositioner.ClearInterestRects();
+        rightScrollPositioner.ClearInterestRects();
         var listRect = inRect.TakeLeftPart(UI.screenWidth * 0.25f);
-        Text.Font = GameFont.Medium;
-        Text.Anchor = TextAnchor.UpperCenter;
-        Widgets.Label(listRect.TakeTopPart(30f),
-            "VFEE.VassalsOf".Translate(parent.CurCharacter.LabelShort, parent.CurCharacter.royalty.HighestTitleWith(Faction.OfEmpire).Label.CapitalizeFirst()));
-        Text.Font = GameFont.Tiny;
-        Text.Anchor = TextAnchor.LowerCenter;
-        Widgets.Label(listRect.TakeBottomPart(20f), "VFEE.TitheDesc".Translate().Colorize(ColoredText.SubtleGrayColor));
-        Text.Font = GameFont.Small;
-        Text.Anchor = TextAnchor.UpperLeft;
+        using (new TextBlock(GameFont.Medium, TextAnchor.UpperCenter, null))
+            Widgets.Label(listRect.TakeTopPart(30f),
+                "VFEE.VassalsOf".Translate(parent.CurCharacter.LabelShort,
+                    parent.CurCharacter.royalty.HighestTitleWith(Faction.OfEmpire).Label.CapitalizeFirst()));
+        using (new TextBlock(GameFont.Tiny, TextAnchor.LowerCenter, null))
+            Widgets.Label(listRect.TakeBottomPart(20f), "VFEE.TitheDesc".Translate().Colorize(ColoredText.SubtleGrayColor));
         var vassals = WorldComponent_Vassals.Instance.AllVassalsOf(parent.CurCharacter).ToList();
         var viewRect = new Rect(0, 0, listRect.width - 20f, vassals.Count * 120f);
         Widgets.BeginScrollView(listRect, ref leftScrollPos, viewRect);
         foreach (var vassal in vassals) DoVassal(viewRect.TakeTopPart(120f).ContractedBy(5f), vassal);
-
         Widgets.EndScrollView();
+        leftScrollPositioner.Scroll(ref leftScrollPos, listRect.size);
 
         Widgets.DrawMenuSection(inRect);
         inRect = inRect.ContractedBy(7f);
-        Text.Font = GameFont.Tiny;
-        Text.Anchor = TextAnchor.LowerCenter;
-        Widgets.Label(inRect.TakeBottomPart(40f), "VFEE.VassalDesc".Translate().Colorize(ColoredText.SubtleGrayColor));
-        Text.Font = GameFont.Small;
-        Text.Anchor = TextAnchor.UpperLeft;
+        using (new TextBlock(GameFont.Tiny, TextAnchor.LowerCenter, null))
+            Widgets.Label(inRect.TakeBottomPart(40f), "VFEE.VassalDesc".Translate().Colorize(ColoredText.SubtleGrayColor));
 
         vassals = WorldComponent_Vassals.Instance.AllPossibleVassals.Where(vassal => vassal.Lord == null).ToList();
         viewRect = new Rect(0, 0, inRect.width - 20f, Mathf.CeilToInt(vassals.Count / 2f) * 100f);
@@ -67,7 +74,7 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
                           WorldComponent_Vassals.Instance.AllPossibleVassals
                              .Where(v => v.Lord?.Faction is { IsPlayer: true })
                              .Any(v => Find.WorldGrid.ApproxDistanceInTiles(v.Settlement.Tile, vassal.Settlement.Tile) <= 100);
-            var canVassalize = parent.CurCharacter.royalty.VassalagePointsAvailable() > 1 && inRange;
+            var canVassalize = parent.CurCharacter.royalty.VassalagePointsAvailable() >= 1 && inRange;
             string reason = inRange ? "" : "VFEE.NoVassalize".Translate();
             if (left)
             {
@@ -80,37 +87,55 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
         }
 
         Widgets.EndScrollView();
+        rightScrollPositioner.Scroll(ref rightScrollPos, inRect.size);
     }
 
     private void DoVassal(Rect rect, TitheInfo vassal)
     {
+        var lowlight = highlight.Any() && !highlight.Contains(vassal);
+        if (highlight.Any() && highlight.Contains(vassal)) rightScrollPositioner.RegisterInterestRect(rect);
+        GUI.color = lowlight ? Command.LowLightBgColor : Color.white;
         Widgets.DrawAltRect(rect);
         Widgets.DrawBox(rect);
         rect = rect.ContractedBy(3f);
         var deliveryRect = rect.TakeBottomPart(20f);
+        GUI.color = lowlight ? Command.LowLightIconColor : Color.white;
         GUI.DrawTexture(rect.TakeLeftPart(50f).TopPartPixels(50f), vassal.Type.Icon);
         var headingRect = rect.TakeTopPart(30f);
         GUI.DrawTexture(headingRect.TakeLeftPart(30f), vassal.Settlement.Faction.def.FactionIcon);
+        GUI.color = lowlight ? Command.LowLightLabelColor : Color.white;
         Text.Anchor = TextAnchor.MiddleLeft;
         Text.Font = GameFont.Medium;
         Widgets.Label(headingRect, vassal.Settlement.Name);
         Text.Font = GameFont.Small;
         Text.Anchor = TextAnchor.UpperLeft;
+        GUI.color = Color.white;
         string text = "JumpToLocation".Translate();
         if (Widgets.ButtonText(headingRect.TakeRightPart(Text.CalcSize(text).x + 5f), text, false, true, Widgets.NormalOptionColor))
             CameraJumper.TryJump(vassal.Settlement);
         Text.Font = GameFont.Tiny;
+        GUI.color = lowlight ? Command.LowLightLabelColor : Color.white;
         text = vassal.Type.description;
-        var amount = vassal.Type.Worker.AmountPerDay(vassal);
-        text += "\n" + "VFEE.Created".Translate(amount, vassal.Type.ResourceLabelCap(amount));
-        amount *= vassal.DaysSinceDelivery;
-        text += "\n" + "VFEE.InStockpile".Translate(vassal.Type.ResourceLabelCap(amount), amount);
+        var amount = vassal.Type.Worker.AmountProduced(vassal);
+        text += "\n";
+        if (vassal.Setting == TitheSetting.Special)
+            text += "VFEE.CreatedSpecial".Translate(amount, vassal.Type.ResourceLabelCap(amount), vassal.Type.deliveryDays ?? -1);
+        else
+        {
+            text += "VFEE.Created".Translate(amount, vassal.Type.ResourceLabelCap(amount));
+            amount *= vassal.DaysSinceDelivery;
+            text += "\n" + "VFEE.InStockpile".Translate(vassal.Type.ResourceLabelCap(amount), amount);
+        }
+
         Widgets.Label(rect, text);
         Text.Font = GameFont.Small;
-        Widgets.FillableBar(deliveryRect.LeftHalf().ContractedBy(3f), (float)vassal.DaysSinceDelivery / vassal.Setting.DeliveryDays());
-        if (Widgets.ButtonText(deliveryRect.RightHalf(), "VFEE.Deliver".Translate() + ": " + $"VFEE.Deliver.{vassal.Setting}".Translate()))
+        GUI.color = Color.white;
+        Widgets.FillableBar(deliveryRect.LeftHalf().ContractedBy(3f), (float)vassal.DaysSinceDelivery / vassal.Setting.DeliveryDays(vassal));
+        if (vassal.Setting != TitheSetting.Special
+         && Widgets.ButtonText(deliveryRect.RightHalf(), "VFEE.Deliver".Translate() + ": " + $"VFEE.Deliver.{vassal.Setting}".Translate()))
             Find.WindowStack.Add(new FloatMenu(Enum.GetValues(typeof(TitheSetting))
                .Cast<TitheSetting>()
+               .Exclude(new HashSet<TitheSetting> { TitheSetting.Special })
                .Select(setting => new FloatMenuOption(
                     $"VFEE.Deliver.{setting}".Translate(), () => vassal.Setting = setting))
                .ToList()));
@@ -118,40 +143,60 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
 
     private void DoPotentialVassal(Rect rect, TitheInfo vassal, Pawn pawn, bool canVassalize = true, string reason = null)
     {
+        var lowlight = highlight.Any() && !highlight.Contains(vassal);
+        if (highlight.Any() && highlight.Contains(vassal)) leftScrollPositioner.RegisterInterestRect(rect);
+        GUI.color = lowlight ? Command.LowLightBgColor : Color.white;
         Widgets.DrawAltRect(rect);
         Widgets.DrawBox(rect);
         rect = rect.ContractedBy(3f);
-        var color = canVassalize ? Color.white : ColorLibrary.RedReadable;
+        var color = lowlight ? Command.LowLightLabelColor : canVassalize ? Color.white : ColorLibrary.RedReadable;
         var bottomRect = rect.TakeBottomPart(20f);
+        GUI.color = lowlight ? Command.LowLightIconColor : Color.white;
         GUI.DrawTexture(rect.TakeLeftPart(50f).TopPartPixels(50f), vassal.Type.Icon);
         var headingRect = rect.TakeTopPart(30f);
         GUI.DrawTexture(headingRect.TakeLeftPart(30f), vassal.Settlement.Faction.def.FactionIcon);
-        Text.Anchor = TextAnchor.MiddleLeft;
-        Text.Font = GameFont.Medium;
-        Widgets.Label(headingRect, vassal.Settlement.Name.Colorize(color));
-        Text.Font = GameFont.Small;
-        Text.Anchor = TextAnchor.UpperLeft;
+        GUI.color = Color.white;
+        using (new TextBlock(GameFont.Medium, TextAnchor.MiddleLeft, null))
+            Widgets.Label(headingRect, vassal.Settlement.Name.Colorize(color));
         string text = "JumpToLocation".Translate();
-        if (Widgets.ButtonText(headingRect.TakeRightPart(Text.CalcSize(text).x + 5f), text, false, true, Widgets.NormalOptionColor))
-            CameraJumper.TryJump(vassal.Settlement);
-        Text.Font = GameFont.Tiny;
-        Text.Font = GameFont.Tiny;
+        using (new TextBlock(GameFont.Small, TextAnchor.UpperLeft, null))
+            if (Widgets.ButtonText(headingRect.TakeRightPart(Text.CalcSize(text).x + 5f), text, false, true, Widgets.NormalOptionColor))
+                CameraJumper.TryJump(vassal.Settlement);
         text = vassal.Type.description;
-        var amount = vassal.Type.Worker.AmountPerDay(vassal);
-        text += "\n" + "VFEE.Created".Translate(amount, vassal.Type.ResourceLabelCap(amount));
-        Widgets.Label(rect, text.Colorize(color));
-        Text.Font = GameFont.Small;
+        var amount = vassal.Type.Worker.AmountProduced(vassal);
+        text += "\n";
+        if (vassal.Setting == TitheSetting.Special)
+            text += "VFEE.CreatedSpecial".Translate(amount, vassal.Type.ResourceLabelCap(amount), vassal.Type.deliveryDays ?? -1);
+        else text += "VFEE.Created".Translate(amount, vassal.Type.ResourceLabelCap(amount));
+
+        using (new TextBlock(GameFont.Tiny))
+            Widgets.Label(rect, text.Colorize(color));
         if (canVassalize)
         {
+            GUI.color = lowlight ? Command.LowLightLabelColor : Color.white;
             if (Widgets.ButtonText(bottomRect.RightHalf(), "VFEE.Vassalize".Translate()))
             {
                 vassal.Lord = pawn;
                 vassal.DaysSinceDelivery = 0;
-                vassal.Setting = TitheSetting.EveryWeek;
+                if (vassal.Setting != TitheSetting.Special)
+                    vassal.Setting = TitheSetting.EveryWeek;
             }
+
+            GUI.color = Color.white;
         }
         else if (!reason.NullOrEmpty())
-            using (new TextBlock(TextAnchor.MiddleCenter))
-                Widgets.Label(bottomRect, reason.Colorize(color));
+            using (new TextBlock(GameFont.Small, TextAnchor.MiddleCenter, null))
+                Widgets.Label(bottomRect, reason.Colorize(ColorLibrary.RedReadable));
+    }
+
+    public override bool CheckSearch(QuickSearchFilter filter)
+    {
+        highlight.Clear();
+        if (!filter.Active) return true;
+        highlight.AddRange(WorldComponent_Vassals.Instance.AllPossibleVassals.Where(vassal =>
+            filter.Matches(vassal.Settlement.Name) || filter.Matches(vassal.Type.resourceLabel)));
+        leftScrollPositioner.Arm();
+        rightScrollPositioner.Arm();
+        return highlight.Any();
     }
 }
