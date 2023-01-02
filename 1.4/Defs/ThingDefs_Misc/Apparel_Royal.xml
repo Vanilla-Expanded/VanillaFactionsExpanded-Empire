@@ -43,14 +43,14 @@
         <li>Arms</li>
         <li>Legs</li>
       </bodyPartGroups>
-      <wornGraphicPath>Things/Pawn/Humanlike/Apparel/RoyalRobe/RoyalRobe</wornGraphicPath>
+      <wornGraphicPath>StellicRobe/StellicRobe</wornGraphicPath>
       <layers>
         <li>Shell</li>
       </layers>
       <tags>
         <li>Royal</li>
         <li>RoyalTier6</li>
-        <li>RoyalRobe</li>
+        <li>StellicRobe</li>
       </tags>
       <canBeDesiredForIdeo>false</canBeDesiredForIdeo>
       <canBeGeneratedToSatisfyWarmth>false</canBeGeneratedToSatisfyWarmth>
