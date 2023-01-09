@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection.Emit;
 using HarmonyLib;
 using RimWorld;
@@ -25,10 +24,7 @@ public static class Patch_DoLeftSection
                 var section = generator.DeclareLocal(inner);
                 var label = generator.DefineLabel();
                 yield return new CodeInstruction(OpCodes.Ldarg_2);
-                yield return CodeInstruction.Call(typeof(HonorUtility), nameof(HonorUtility.Honors));
-                yield return new CodeInstruction(OpCodes.Call,
-                    AccessTools.FirstMethod(typeof(Enumerable), info => info.Name == "Any" && info.GetParameters().Length == 1)
-                       .MakeGenericMethod(typeof(Honor)));
+                yield return CodeInstruction.Call(typeof(HonorUtility), nameof(HonorUtility.HasHonors));
                 yield return new CodeInstruction(OpCodes.Brfalse, label);
                 yield return new CodeInstruction(OpCodes.Ldloca, section);
                 yield return new CodeInstruction(OpCodes.Initobj, inner);

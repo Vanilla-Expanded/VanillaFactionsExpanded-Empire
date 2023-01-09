@@ -90,8 +90,6 @@
     <Compile Include="HarmonyPatches\Patch_TradeablePrice.cs" />
     <Compile Include="HarmonyPatches\Patch_DoLeftSection.cs" />
     <Compile Include="HarmonyPatches\Patch_GenerateRewards.cs" />
-    <Compile Include="HarmonyPatches\Patch_Pawn_Discard.cs" />
-    <Compile Include="HarmonyPatches\Patch_Set_Name.cs" />
     <Compile Include="HarmonyPatches\Patch_StateChange.cs" />
     <Compile Include="HarmonyPatches\Patch_ThoughtStacking.cs" />
     <Compile Include="Comps\WorldComponent_Hierarchy.cs" />
@@ -107,6 +105,7 @@
     <Compile Include="HarmonyPatches\Patch_Conceit.cs" />
     <Compile Include="HarmonyPatches\Patch_RoyalTitleIcons.cs" />
     <Compile Include="HonorDef.cs" />
+    <Compile Include="HonorsTracker.cs" />
     <Compile Include="QuestNode\QuestNode_AbsolverRespawn.cs" />
     <Compile Include="QuestNode\QuestNode_DeserterGoodWill.cs" />
     <Compile Include="QuestNode\QuestNode_DeserterHideout.cs" />
@@ -123,6 +122,7 @@
     <Compile Include="QuestNode\QuestPart\QuestPart_ThoughtAccepterOther.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_LoseHonor.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_LodgerLeave.cs" />
+    <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_BestowHonor.cs" />
     <Compile Include="Rituals\Commands\Command_ArtExhibit.cs" />
     <Compile Include="Rituals\Commands\Command_GrandBall.cs" />
     <Compile Include="Rituals\LordJob\LordJob_ArtExhibit.cs" />
@@ -132,7 +132,9 @@
     <Compile Include="Rituals\LordJob\LordToil\LordToil_ArtExhibit_Wait.cs" />
     <Compile Include="Rituals\LordJob\LordToil\LordToil_GrandBall_Wait.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_ArtExhibit.cs" />
+    <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_BestowHonor.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_GrandBall.cs" />
+    <Compile Include="Rituals\RitualRole\RitualRoleHonored.cs" />
     <Compile Include="ScenPart\ScenPart_SpawnFamilyMembers.cs" />
     <Compile Include="ScenPart\ScenPart_SpawnRaid.cs" />
     <Compile Include="Things\Building_Bomb.cs" />

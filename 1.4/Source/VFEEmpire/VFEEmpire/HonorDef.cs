@@ -57,8 +57,9 @@ public class HonorWorker
 public class Honor : IExposable, ILoadReferenceable
 {
     public HonorDef def;
-    public int idNumber;
     public Pawn pawn;
+    public bool Pending;
+    private int idNumber;
 
     public virtual Pawn ExamplePawn =>
         EmpireUtility.AllColonistsWithTitle().FirstOrDefault(CanAssignTo)
@@ -69,13 +70,16 @@ public class Honor : IExposable, ILoadReferenceable
     public virtual Pawn Pawn => pawn ?? ExamplePawn;
 
     public virtual TaggedString Label => def.label.Formatted(GetArguments()).CapitalizeFirst();
-    public virtual TaggedString Description => def.description.Formatted(GetArguments()).CapitalizeFirst();
+
+    public virtual TaggedString Description =>
+        def.description.Formatted(GetArguments()).CapitalizeFirst() + (Pending ? (TaggedString)"\n\n" + "VFEE.Honor.Pending".Translate() : TaggedString.Empty);
 
     public virtual void ExposeData()
     {
         Scribe_Defs.Look(ref def, nameof(def));
         Scribe_References.Look(ref pawn, nameof(pawn));
         Scribe_Values.Look(ref idNumber, nameof(idNumber));
+        Scribe_Values.Look(ref Pending, "pending");
     }
 
     public string GetUniqueLoadID() => $"Honor_{def.defName}_{idNumber}";
@@ -89,17 +93,24 @@ public class Honor : IExposable, ILoadReferenceable
 
     public virtual void PostMake()
     {
-        this.GiveID();
+        idNumber = GameComponent_Honors.Instance.GetNextHonorID();
     }
 
     public virtual void PostAdded(Pawn pawn)
     {
         this.pawn = pawn;
+        Pending = true;
+    }
+
+    public virtual void PostBestowed()
+    {
+        Pending = false;
     }
 
     public virtual void PostRemoved()
     {
         pawn = null;
+        Pending = false;
     }
 
     public virtual bool CanAssignTo(Pawn p, out string reason)
@@ -126,7 +137,7 @@ public class StatPart_Honor : StatPart
     }
 
     protected virtual bool AppliesToPawn(Pawn pawn) => GetHonor(pawn) != null;
-    protected virtual Honor GetHonor(Pawn pawn) => pawn.Honors().FirstOrDefault(h => h.def == honor);
+    protected virtual Honor GetHonor(Pawn pawn) => pawn.Honors().Honors.FirstOrDefault(h => h.def == honor);
 
     public override void TransformValue(StatRequest req, ref float val)
     {

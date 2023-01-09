@@ -15,16 +15,48 @@ public static class Patch_HonorsMisc
     [HarmonyPrefix]
     public static bool Prefix_Interval(SkillRecord __instance)
     {
-        return __instance.Pawn.Honors().All(h => h.def.removeLoss != __instance.def);
+        return __instance.Pawn.Honors().Honors.All(h => h.def.removeLoss != __instance.def);
     }
 
     [HarmonyPatch(typeof(CompBladelinkWeapon), nameof(CompBladelinkWeapon.Notify_KilledPawn))]
     [HarmonyPostfix]
     public static void Postfix_KilledPawn(CompBladelinkWeapon __instance)
     {
-        if (__instance.CodedPawn.Honors().OfType<Honor_Weapon>().Any(h => h.def == HonorDefOf.VFEE_WieldOfWeapon && h.weapon == __instance.parent))
+        if (__instance.CodedPawn.Honors().Honors.OfType<Honor_Weapon>().Any(h => h.def == HonorDefOf.VFEE_WieldOfWeapon && h.weapon == __instance.parent))
             if (Rand.Chance(0.5f))
                 __instance.CodedPawn.royalty.GainFavor(Faction.OfEmpire, 1);
+    }
+
+    [HarmonyPatch(typeof(Pawn), nameof(Pawn.Discard))]
+    [HarmonyPostfix]
+    public static void Discard_Postfix(Pawn __instance)
+    {
+        __instance.RemoveAllHonors();
+    }
+
+    [HarmonyPatch(typeof(Pawn), nameof(Pawn.ExposeData))]
+    [HarmonyPostfix]
+    public static void ExposeData_Postfix(Pawn __instance)
+    {
+        __instance.SaveHonors();
+    }
+
+    [HarmonyPatch(typeof(Pawn), nameof(Pawn.Name), MethodType.Setter)]
+    [HarmonyPrefix]
+    public static void Set_Name_Prefix(Pawn __instance, ref Name __0)
+    {
+        if (__instance.Honors().Honors.Any()) __0 = __0.WithTitles(__instance.Honors().Honors.Select(h => h.Label.Resolve()));
+    }
+
+    [HarmonyPatch(typeof(Pawn), nameof(Pawn.GetGizmos))]
+    [HarmonyPostfix]
+    public static IEnumerable<Gizmo> GetGizmos_Postfix(IEnumerable<Gizmo> gizmos, Pawn __instance)
+    {
+        foreach (var gizmo in gizmos) yield return gizmo;
+
+        if (__instance.Honors() is { } honors)
+            foreach (var gizmo in honors.GetGizmos())
+                yield return gizmo;
     }
 
     [HarmonyPatch]
@@ -62,7 +94,7 @@ public static class Patch_HonorsMisc
 
         public static bool EitherHasRight(Pawn one, Pawn two)
         {
-            return one.Honors().Any(h => h.def == HonorDefOf.VFEE_ChildOf) || two.Honors().Any(h => h.def == HonorDefOf.VFEE_ChildOf);
+            return one.Honors().Honors.Any(h => h.def == HonorDefOf.VFEE_ChildOf) || two.Honors().Honors.Any(h => h.def == HonorDefOf.VFEE_ChildOf);
         }
     }
 }

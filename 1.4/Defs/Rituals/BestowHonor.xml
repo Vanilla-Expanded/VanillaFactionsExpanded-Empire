@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <PreceptDef ParentName="SpeechPreceptBase">
+    <defName>VFEE_BestowHonor</defName>
+    <label>bestow honor</label>
+    <description>Bestows honors upon a worthy pawn</description>
+    <ritualPatternBase>VFEE_BestowHonor_Pattern</ritualPatternBase>
+    <iconPath>UI/BestowHonor</iconPath>  <!--Fairly sure this is never used-->
+    <classic>true</classic>
+    <ignoreNameUniqueness>true</ignoreNameUniqueness>
+    <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
+  </PreceptDef>
+
+  <RitualPatternDef>
+	<defName>VFEE_BestowHonor_Pattern</defName>
+	<ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
+	<ritualBehavior>VFEE_BestowHonor_Behavior</ritualBehavior>
+	<ritualOutcomeEffect>VFEE_BestowHonor_Outcome</ritualOutcomeEffect>
+	<ritualTargetFilter>UsableThrone</ritualTargetFilter>
+	<playsIdeoMusic>false</playsIdeoMusic>
+  </RitualPatternDef>
+
+  <RitualBehaviorDef>
+    <defName>VFEE_BestowHonor_Behavior</defName>
+    <workerClass>VFEEmpire.RitualBehaviorWorker_BestowHonor</workerClass>
+    <durationTicks>1000</durationTicks>
+    <roles>
+      <li Class="RitualRoleColonist">
+        <label>bestower</label>
+        <id>bestower</id>
+        <required>true</required>
+        <maxCount>1</maxCount>
+      </li>
+	  <li Class="VFEEmpire.RitualRoleHonored">
+        <label>recipient</label>
+        <id>recipient</id>
+		<required>true</required>
+		<maxCount>1</maxCount>
+      </li>
+    </roles>
+    <stages>
+      <li Class="RitualStage_OnTheThrone">
+        <defaultDuty>Spectate</defaultDuty>
+        <spectatorsRequired>true</spectatorsRequired>
+		<allowedSpectateSidesOverride>Vertical</allowedSpectateSidesOverride>
+        <endTriggers>
+          <li Class="StageEndTrigger_DurationPercentage">
+            <percentage>1</percentage>
+          </li>
+        </endTriggers>
+        <roleBehaviors>
+          <li>
+            <roleId>bestower</roleId>
+            <dutyDef>GiveSpeech</dutyDef>
+          </li>
+          <li>
+            <roleId>recipient</roleId>
+            <dutyDef>BestowingCeremony_MoveInPlace</dutyDef>
+			<customPositions>					  
+				<li Class="VFEEmpire.RitualPosition_InFrontThrone">
+				</li>
+			</customPositions>
+          </li>
+        </roleBehaviors>
+        <visualEffectDef>Speech</visualEffectDef>
+      </li>
+    </stages>
+  </RitualBehaviorDef>
+
+  <RitualOutcomeEffectDef>
+    <defName>VFEE_BestowHonor_Outcome</defName>
+    <description>{ORGANIZER} will gain {HONORS}.</description>
+    <workerClass>VFEEmpire.RitualOutcomeEffectWorker_BestowHonor</workerClass>
+    <comps>
+      <li Class="RitualOutcomeComp_DestroyConsumableBuilding">
+        <label>test</label>
+      </li>
+    </comps>
+  </RitualOutcomeEffectDef>
+  
+</Defs>

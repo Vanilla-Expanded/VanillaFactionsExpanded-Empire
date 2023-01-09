@@ -45,11 +45,11 @@ public class RoyaltyTabWorker_Honors : RoyaltyTabWorker
 
         listRect = listRect.ContractedBy(4f);
         inRect = inRect.ContractedBy(4f);
-        var active = parent.CurCharacter.Honors().ToList();
+        var active = parent.CurCharacter.Honors().AllHonors.ToList();
         var available = HonorUtility.Available().ToList();
         DrawHonors(listRect, active);
         DrawHonors(inRect, available);
-        if (DragAndDropWidget.CurrentlyDraggedDraggable() is Honor honor)
+        if (DragAndDropWidget.CurrentlyDraggedDraggable() is Honor)
             if (DragAndDropWidget.HoveringDropAreaRect(groupID) is { } rect)
                 Widgets.DrawHighlight(rect);
 
@@ -76,7 +76,7 @@ public class RoyaltyTabWorker_Honors : RoyaltyTabWorker
             rect.position = Event.current.mousePosition;
             delayedCalls.Add(() =>
             {
-                DrawHonor(rect, honor, false, false);
+                DrawHonor(rect, honor, false, false, honor.Pending);
                 if (DragAndDropWidget.HoveringDropArea(groupID) is Pawn pawn)
                     if (!honor.CanAssignTo(pawn, out var reason))
                     {
@@ -86,27 +86,28 @@ public class RoyaltyTabWorker_Honors : RoyaltyTabWorker
                     }
             });
         }
-        else if (Event.current.type == EventType.Repaint) DrawHonor(rect, honor, true, matches.Any() && !matches.Contains(honor));
+        else if (Event.current.type == EventType.Repaint) DrawHonor(rect, honor, true, matches.Any() && !matches.Contains(honor), honor.Pending);
     }
 
     public static void DrawHonor(Rect rect, Honor honor)
     {
-        DrawHonor(rect, honor, true, false);
+        DrawHonor(rect, honor, true, false, honor.Pending);
     }
 
-    public static void DrawHonor(Rect rect, Honor honor, bool doTooltip, bool lowlight)
+    public static void DrawHonor(Rect rect, Honor honor, bool doTooltip, bool lowlight, bool transparent)
     {
-        DrawHonor(rect, honor.Label, honor.Description, doTooltip);
+        DrawHonor(rect, honor.Label, honor.Description, doTooltip, lowlight, transparent);
     }
 
-    public static void DrawHonor(Rect rect, string label, string description, bool doTooltip = true, bool lowlight = false)
+    public static void DrawHonor(Rect rect, string label, string description, bool doTooltip = true, bool lowlight = false, bool transparent = false)
     {
-        GUI.color = CharacterCardUtility.StackElementBackground;
-        if (lowlight) GUI.color = Command.LowLightBgColor;
+        var extra = transparent ? new Color(1f, 1f, 0.5f) : Color.white;
+        GUI.color = CharacterCardUtility.StackElementBackground * extra;
+        if (lowlight) GUI.color = Command.LowLightBgColor * extra;
         GUI.DrawTexture(rect, BaseContent.WhiteTex);
-        GUI.color = Color.white;
+        GUI.color = extra;
         Widgets.DrawHighlightIfMouseover(rect);
-        if (lowlight) GUI.color = Command.LowLightLabelColor;
+        if (lowlight) GUI.color = Command.LowLightLabelColor * extra;
         Widgets.Label(rect.ContractedBy(5f, 0f), label);
         GUI.color = Color.white;
         if (doTooltip) TooltipHandler.TipRegion(rect, description);
@@ -116,7 +117,7 @@ public class RoyaltyTabWorker_Honors : RoyaltyTabWorker
 
     public static void GetDrawerAndRect(Pawn pawn, Rect inRect, out Rect rect, out Action<Rect> drawer)
     {
-        var honors = pawn.Honors().ToList();
+        var honors = pawn.Honors().AllHonors.ToList();
         rect = new Rect(0, 0, inRect.width, 30f);
         float stackHeight;
         rect.height += stackHeight = GenUI.DrawElementStack(new Rect(0, 0, inRect.width - 5f, inRect.height), HonorHeight, honors, delegate { }, GetHonorWidth)
@@ -132,7 +133,7 @@ public class RoyaltyTabWorker_Honors : RoyaltyTabWorker
     {
         matches.Clear();
         if (!filter.Active) return true;
-        matches.AddRange(HonorUtility.Available().Concat(parent.CurCharacter.Honors()).Where(h => filter.Matches(h.Label)));
+        matches.AddRange(HonorUtility.Available().Concat(parent.CurCharacter.Honors().AllHonors).Where(h => filter.Matches(h.Label)));
         return matches.Any();
     }
 

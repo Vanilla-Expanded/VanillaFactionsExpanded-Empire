@@ -121,7 +121,9 @@ public class QuestPart_GiveHonor : QuestPart
         base.Notify_QuestSignalReceived(signal);
         if (signal.tag == inSignal)
         {
-            honor?.GiveToPlayer();
+            var tempQualifier = honor;
+            if (tempQualifier != null) GameComponent_Honors.Instance.AddHonor(tempQualifier);
+
             honor = null;
         }
     }

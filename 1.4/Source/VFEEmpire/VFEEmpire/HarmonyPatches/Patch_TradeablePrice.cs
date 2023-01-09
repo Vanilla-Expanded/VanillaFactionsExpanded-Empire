@@ -35,6 +35,7 @@ public static class DestroyerPatches
         var finalBit = __result.Split('\n').Last();
         __result = __result.Replace("\n" + finalBit, "");
         __result += TradeSession.playerNegotiator.Honors()
+           .Honors
            .First(h =>
                 h.def == HonorDefOf.VFEE_Destroyer && h is Honor_Faction honor && honor.faction.HostileTo(TradeSession.trader.Faction))
            .Label + ": " + action switch
@@ -50,5 +51,6 @@ public static class DestroyerPatches
 
     private static bool ShouldApply() =>
         TradeSession.trader.Faction is { } faction && TradeSession.playerNegotiator.Honors()
+           .Honors
            .Any(h => h.def == HonorDefOf.VFEE_Destroyer && h is Honor_Faction honor && honor.faction.HostileTo(faction));
 }

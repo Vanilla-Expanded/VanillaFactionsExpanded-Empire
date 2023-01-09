@@ -8,11 +8,45 @@ namespace VFEEmpire;
 
 public static class HonorUtility
 {
-    public static IEnumerable<Honor> Honors(this Pawn pawn) => GameComponent_Honors.Instance.GetHonorsForPawn(pawn);
-    public static void AddHonor(this Pawn pawn, Honor honor) => GameComponent_Honors.Instance.AddHonor(pawn, honor);
-    public static void RemoveHonor(this Pawn pawn, Honor honor) => GameComponent_Honors.Instance.RemoveHonor(pawn, honor);
-    public static void RemoveAllHonors(this Pawn pawn) => GameComponent_Honors.Instance.RemoveAllHonors(pawn);
+    private static readonly Dictionary<Pawn, HonorsTracker> honorsTrackers = new();
+
+    public static HonorsTracker Honors(this Pawn pawn)
+    {
+        if (honorsTrackers.TryGetValue(pawn, out var tracker)) return tracker;
+        tracker = new HonorsTracker(pawn);
+        honorsTrackers.Add(pawn, tracker);
+        return tracker;
+    }
+
+    public static bool HasHonors(this Pawn pawn) => honorsTrackers.TryGetValue(pawn, out var honors) && honors.AllHonors.Any();
+
+    public static void AddHonor(this Pawn pawn, Honor honor)
+    {
+        pawn.Honors().AddHonor(honor);
+        GameComponent_Honors.Instance.RemoveHonor(honor);
+    }
+
+    public static void RemoveHonor(this Pawn pawn, Honor honor)
+    {
+        pawn.Honors()?.RemoveHonor(honor);
+        GameComponent_Honors.Instance.AddHonor(honor);
+    }
+
+    public static void RemoveAllHonors(this Pawn pawn)
+    {
+        pawn.Honors().RemoveAllHonors();
+        honorsTrackers.Remove(pawn);
+    }
+
+    public static void SaveHonors(this Pawn pawn)
+    {
+        var honors = pawn.Honors();
+        Scribe_Deep.Look(ref honors, "vfee_honors", pawn);
+        if (honors != null) honorsTrackers[pawn] = honors;
+    }
+
     public static IEnumerable<Honor> Available() => GameComponent_Honors.Instance.GetAvailableHonors();
+
 
     public static Honor Generate(ref float points)
     {
@@ -27,9 +61,6 @@ public static class HonorUtility
 
         return null;
     }
-
-    public static void GiveToPlayer(this Honor honor) => GameComponent_Honors.Instance.AddHonor(honor);
-    public static void GiveID(this Honor honor) => honor.idNumber = GameComponent_Honors.Instance.GetNextHonorID();
 
     public static NameTripleTitle WithTitles(this Name name, IEnumerable<string> titles)
     {
@@ -48,7 +79,8 @@ public static class HonorUtility
         name is NameTripleTitle { First: var first, Nick: var nick, Last: var last } ? new NameTriple(first, nick, last) : name;
 
     public static IEnumerable<Honor> All() =>
-        GameComponent_Honors.Instance.AllHonors()
+        Available()
+           .Concat(EmpireUtility.AllColonistsWithTitle().SelectMany(p => p.Honors()?.Honors ?? Enumerable.Empty<Honor>()))
            .Concat(Find.QuestManager.questsInDisplayOrder
                .Where(q => q.State is QuestState.NotYetAccepted or QuestState.Ongoing)
                .SelectMany(q => q.PartsListForReading)

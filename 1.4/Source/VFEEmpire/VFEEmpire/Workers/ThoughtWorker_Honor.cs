@@ -13,7 +13,7 @@ public class ThoughtWorker_Honor : ThoughtWorker
     {
         if (Props.colonistsOnly && !p.IsColonist) return false;
         if (Props.noblesOnly && (p.royalty == null || !p.royalty.HasAnyTitleIn(Faction.OfEmpire))) return false;
-        return p.Honors().Where(HonorMatches).FirstOrDefault() is { Label: var label } ? ThoughtState.ActiveWithReason(label) : ThoughtState.Inactive;
+        return p.Honors().Honors.Where(HonorMatches).FirstOrDefault() is { Label: var label } ? ThoughtState.ActiveWithReason(label) : ThoughtState.Inactive;
     }
 
     protected virtual bool HonorMatches(Honor honor) => honor.def == Props.honor;
@@ -22,7 +22,7 @@ public class ThoughtWorker_Honor : ThoughtWorker
     {
         if (Props.colonistsOnly && !p.IsColonist) return false;
         if (Props.noblesOnly && (p.royalty == null || !p.royalty.HasAnyTitleIn(Faction.OfEmpire))) return false;
-        return (Props.onOther ? otherPawn : p).Honors().Where(HonorMatches).FirstOrDefault() is { Label: var label }
+        return (Props.onOther ? otherPawn : p).Honors().Honors.Where(HonorMatches).FirstOrDefault() is { Label: var label }
             ? ThoughtState.ActiveWithReason(label)
             : ThoughtState.Inactive;
     }
@@ -32,8 +32,8 @@ public class ThoughtWorker_Honor_Chosen : ThoughtWorker_Honor
 {
     protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn otherPawn)
     {
-        return p.Honors().Where(HonorMatches).OfType<Honor_Faction>().Any(h => h.faction == otherPawn.Faction) ||
-               otherPawn.Honors().Where(HonorMatches).OfType<Honor_Faction>().Any(h => h.faction == p.Faction);
+        return p.Honors().Honors.Where(HonorMatches).OfType<Honor_Faction>().Any(h => h.faction == otherPawn.Faction) ||
+               otherPawn.Honors().Honors.Where(HonorMatches).OfType<Honor_Faction>().Any(h => h.faction == p.Faction);
     }
 }
 

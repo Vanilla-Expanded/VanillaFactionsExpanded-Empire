@@ -33,6 +33,7 @@ public class TitheWorker
 {
     public virtual int AmountProduced(TitheInfo info) =>
         Mathf.RoundToInt(info.Type.count * info.Speed.Mult() * (info.Lord?.Honors()
+           .Honors
            .OfType<Honor_Settlement>()
            .Where(h => h.settlement == info.Settlement)
            .Aggregate(1f, (f, h) => f * h.def.titheSpeedFactor) ?? 1f));
