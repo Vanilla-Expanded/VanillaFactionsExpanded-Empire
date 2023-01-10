@@ -32,6 +32,8 @@ public static class InternalDefOf
     public static JobDef VFEE_ArtStandBy;
     public static JobDef VFEE_ArtSpectate;
 
+    public static JobDef VFEE_GiveHonor;
+
     public static InteractionDef VFEE_RoyalGossip;
 
     public static RitualOutcomeEffectDef VFEE_GrandBall_Outcome;

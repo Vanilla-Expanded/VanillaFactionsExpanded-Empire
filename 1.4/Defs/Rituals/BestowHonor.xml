@@ -51,15 +51,15 @@
         <roleBehaviors>
           <li>
             <roleId>bestower</roleId>
-            <dutyDef>GiveSpeech</dutyDef>
-          </li>
-          <li>
-            <roleId>recipient</roleId>
-            <dutyDef>BestowingCeremony_MoveInPlace</dutyDef>
+            <dutyDef>VFEE_GiveHonor</dutyDef>
 			<customPositions>					  
 				<li Class="VFEEmpire.RitualPosition_InFrontThrone">
 				</li>
 			</customPositions>
+          </li>
+          <li>
+            <roleId>recipient</roleId>
+            <dutyDef>VFEE_AcceptHonor</dutyDef>
           </li>
         </roleBehaviors>
         <visualEffectDef>Speech</visualEffectDef>

@@ -51,4 +51,10 @@
     <reportString>Spectating TargetB.</reportString>
     <casualInterruptible>false</casualInterruptible>
   </JobDef>
+   <JobDef>
+    <defName>VFEE_GiveHonor</defName>
+    <driverClass>VFEEmpire.JobDriver_GiveHonor</driverClass>
+    <reportString>Honoring TargetB.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
 </Defs>

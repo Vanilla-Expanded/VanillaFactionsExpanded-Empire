@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\JobDriver\JobDriver_GiveHonor.cs" />
     <Compile Include="AI\JobDriver\JobDriver_ArtPresent.cs" />
     <Compile Include="AI\JobDriver\JobDriver_ArtSpectate.cs" />
     <Compile Include="AI\JobDriver\JobDriver_DefuseBomb.cs" />
@@ -58,6 +59,8 @@
     <Compile Include="AI\JobDriver\JobDriver_WaltzGotoStart.cs" />
     <Compile Include="AI\JobDriver\JobDriver_WaltzGoto.cs" />
     <Compile Include="AI\JobDriver\JobDriver_WaltzDip.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_AcceptHonor.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_GiveHonor.cs" />
     <Compile Include="AI\JobGiver\JobGiver_AIFightEnemySpecific.cs" />
     <Compile Include="AI\JobGiver\JobGiver_AIFightRoyalty.cs" />
     <Compile Include="AI\JobGiver\JobGiver_ArtExhibitStandBy.cs" />

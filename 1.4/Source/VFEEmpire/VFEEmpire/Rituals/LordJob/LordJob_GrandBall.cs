@@ -280,12 +280,6 @@ namespace VFEEmpire
 				IntVec3 pCell = lead ? cell + IntVec3.North : cell + IntVec3.South;
 				startPoses.Add(partner, pCell);
 				startPoses.Add(pawn, cell);
-/*				Mote mote = MoteMaker.MakeStaticMote(cell.ToVector3Shifted(), this.Map, ThingDefOf.Mote_RolePositionHighlight);
-				mote.Maintain();
-				highlightedPositions.Add(cell, mote);
-				Mote mote2 = MoteMaker.MakeStaticMote(pCell.ToVector3Shifted(), this.Map, ThingDefOf.Mote_RolePositionHighlight);
-				mote2.Maintain();
-				highlightedPositions.Add(pCell, mote2);*/
 				return cell;
             }
             if (dancers.Contains(pawn))

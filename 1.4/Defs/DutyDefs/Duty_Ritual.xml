@@ -39,6 +39,40 @@
       </subNodes>
     </thinkNode>
   </DutyDef>
+  <DutyDef>
+  <defName>VFEE_AcceptHonor</defName>
+    <hook>HighPriority</hook>
+    <socialModeMax>Off</socialModeMax>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- Goto my spot -->
+        <li Class="JobGiver_GotoTravelDestination">
+          <exactCell>true</exactCell>
+          <locomotionUrgency>Jog</locomotionUrgency>
+          <ritualTagOnArrival>Arrived</ritualTagOnArrival>
+        </li>
+        <!-- Arrived -->
+        <li Class="ThinkNode_ConditionalAtDutyLocation">
+          <subNodes>
+            <li Class="VFEEmpire.JobGiver_AcceptHonor">
+            </li>
+          </subNodes>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+  <DutyDef>
+  <defName>VFEE_GiveHonor</defName>
+    <hook>HighPriority</hook>
+    <socialModeMax>Off</socialModeMax>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="VFEEmpire.JobGiver_GiveHonor">
+        </li>
+	  </subNodes>
+    </thinkNode>
+	
+  </DutyDef>
    <DutyDef>
     <defName>VFEE_GrandBallWait</defName>
     <thinkNode Class="ThinkNode_Priority">
