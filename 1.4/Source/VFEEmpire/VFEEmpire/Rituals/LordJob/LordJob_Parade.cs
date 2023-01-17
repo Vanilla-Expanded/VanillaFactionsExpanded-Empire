@@ -12,35 +12,32 @@ namespace VFEEmpire
 
 
 	[StaticConstructorOnStartup]
-	public class LordJob_ArtExhibit : LordJob_Ritual
+	public class LordJob_Parade : LordJob_Ritual
 	{
 		//Exposed
 		public Pawn leadNoble;
-		public Pawn host;
+		
 		public LocalTargetInfo target;
 		public Thing shuttle;
 		public string questEndedSignal;
-		public bool exhibitStarted;
-		public bool exhibitFinished;
+		public bool paradeStarted;
+		public bool paradeFinished;
 		public List<Pawn> colonistParticipants = new();
-		public Room gallery;
 		public List<Pawn> nobles;
-		public List<Pawn> presenters = new();
-		public List<Thing> artPieces = new();
-		public Dictionary<Pawn, List<Pawn>> gossipedWith = new();
+		public List<IntVec3> stops = new();
 	
 		public int ticksThisRotation;
 		public int stage;
 		//Not Exposed
-		public static readonly int duration = 25000;
+		public static readonly int duration = 30000;
 		public LordToil exitToil;
-		public LordToil_ArtExhibit_Show artToil;
+		public LordToil_Parade_Start paradeToil;
 		private Dictionary<Pawn, int> totalPresenceTmp = new();
-
-		public RitualOutcomeEffectWorker_ArtExhibit outcome;
+		public List<Room> visitedRooms = new();
+		public RitualOutcomeEffectWorker_Parade outcome;
 		public static readonly string MemoCeremonyStarted = "CeremonyStarted";
 		private static Texture2D icon = ContentFinder<Texture2D>.Get("UI/Icons/Rituals/BestowCeremony", true);
-		public LordJob_ArtExhibit()
+		public LordJob_Parade()
 		{
 		}
 
@@ -48,115 +45,86 @@ namespace VFEEmpire
 		{
 			base.ExposeData();
 			Scribe_References.Look(ref leadNoble, "leadNoble");
-			Scribe_References.Look(ref host, "host");
 			Scribe_References.Look(ref shuttle, "shuttle");
 			Scribe_TargetInfo.Look(ref target, "target");
 
-			Scribe_Values.Look(ref exhibitStarted, "exhibitStarted");
-			Scribe_Values.Look(ref exhibitFinished, "exhibitFinished");
+			Scribe_Values.Look(ref paradeStarted, "paradeStarted");
+			Scribe_Values.Look(ref paradeFinished, "paradeFinished");
 			Scribe_Values.Look(ref questEndedSignal, "questEndedSignal");
 			Scribe_Values.Look(ref ticksThisRotation, "ticksThisRotation");
 			Scribe_Values.Look(ref stage, "stage");
 
 			Scribe_Collections.Look(ref nobles, "nobles", LookMode.Reference);
-			Scribe_Collections.Look(ref artPieces, "artPieces", LookMode.Reference);
-			Scribe_Collections.Look(ref presenters, "presenters", LookMode.Reference);
 			Scribe_Collections.Look(ref colonistParticipants, "colonistParticipants", LookMode.Reference);
 	
 
 		}
-		public LordJob_ArtExhibit(Pawn leadNoble,Pawn host, LocalTargetInfo targetinfo, Thing shuttle, string questEnded, Room gallery, List<Thing> artPieces)
+		public LordJob_Parade(Pawn leadNoble, LocalTargetInfo targetinfo, Thing shuttle, string questEnded)
 		{
 			this.leadNoble = leadNoble;
 			this.target = targetinfo;
 			this.shuttle = shuttle;
 			this.questEndedSignal = questEnded;
-			this.host = host;
-			this.gallery = gallery;
-			this.artPieces = artPieces;
-		}
-
-
-		public Room Gallery
-		{
-			get
-			{
-				if (gallery == null)
-				{
-					return gallery = Spot.GetRoom(lord.lordManager.map);
-				}
-				return gallery;
-			}
-		}
-
-		public override bool AllowStartNewGatherings => !exhibitStarted || exhibitFinished;
-
-
-		public override IntVec3 Spot => target.Cell;
-		private Dictionary<Thing, CellRect> cachedSpectate = new();//caching these as constant checking might be a bit much
-		public CellRect ArtSpectateRect(Thing artPiece)
-        {
-			if(cachedSpectate.TryGetValue(artPiece, out CellRect rect))
+			//Find all stops
+			var roomRoles = new List<RoomRoleDef>() { VFEE_DefOf.VFEE_Ballroom, VFEE_DefOf.VFEE_Gallery, RoomRoleDefOf.DiningRoom, RoomRoleDefOf.RecRoom, RoomRoleDefOf.ThroneRoom };
+			foreach(var room in Map.regionGrid.allRooms)
             {
-				return rect;
-            }
-			float standable = 0f;
-			foreach(var cardinal in GenAdj.CardinalDirections) //goal is to find the most open area to spectate from
-			{
-				IntVec3 center = artPiece.Position + (cardinal * 3);
-				if (!center.Standable(Map) || center.GetRoom(Map) != Gallery)
-				{
-					center = CellFinder.RandomClosewalkCellNear(artPiece.Position + cardinal, Map, 2, (IntVec3 c) =>
-					{
-						return c.Standable(Map) && c.GetRoom(Map) == Gallery;
-					});
-				}
-				float tmpStand = 0f;
-				var tmpRect = CellRect.CenteredOn(center, 3);
-				foreach(var cell in tmpRect.Cells)
+                if (roomRoles.Contains(room.Role) && room.GetStat(RoomStatDefOf.Impressiveness) >= 100f)
                 {
-					if(cell.Standable(Map) && cell.GetRoom(Map) == Gallery)
+					bool found = false;
+					foreach(var thing in room.ContainedAndAdjacentThings)
                     {
-						if(cell.GetEdifice(Map) != null && !cell.GetEdifice(Map).def.building?.isSittable == true)
+						var gather = thing.TryGetComp<CompGatherSpot>();
+						if (gather != null && gather.Active)
                         {
-							tmpStand += 0.5f; //Half value if there is an art piece there
-						}
-                        else
-                        {
-							tmpStand += 1f;
-						}
+							stops.Add(thing.Position);
+							found = true;
+							break;
+                        }
+                    }
+                    if (!found) //Fall back in case all gather spots are not active or like a gallery that might not have a gather spot
+                    {
+						stops.Add(room.Cells.RandomElement());
                     }
                 }
-				if(tmpStand > standable)
-                {
-					standable = tmpStand;
-					rect = tmpRect;
-				}
-			}
-			cachedSpectate.Add(artPiece, rect);
-			return rect;
-        }
+            }
+		}
 
-		public override string RitualLabel => "VFEE.ArtExhibit.Label".Translate();
+
+		
+		public override bool AllowStartNewGatherings => !paradeStarted || paradeFinished;
+
+		public IntVec3 Destination => stops[stage];
+		public bool AtDestination => CurrentRoom.Cells.Contains(leadNoble.Position);
+		public override IntVec3 Spot => target.Cell;
+
+		public Room CurrentRoom
+        {
+            get
+            {
+				return Destination.GetRoom(Map);
+            }
+        }
+		public override string RitualLabel => "VFEE.Parade.Label".Translate();
 
 		public override StateGraph CreateGraph()
 		{
 			var graph = new StateGraph();
-			outcome = (RitualOutcomeEffectWorker_ArtExhibit)InternalDefOf.VFEE_ArtExhibit_Outcome.GetInstance();
+			outcome = (RitualOutcomeEffectWorker_Parade)InternalDefOf.VFEE_Parade_Outcome.GetInstance();
 
 			var wait_ForSpawned = new LordToil_Wait();
 			graph.AddToil(wait_ForSpawned);
 			var moveToPlace = new LordToil_BestowingCeremony_MoveInPlace(Spot, leadNoble);
 			graph.AddToil(moveToPlace);
-			var wait_StartBall = new LordToil_ArtExhibit_Wait(leadNoble,host);
+			var wait_StartBall = new LordToil_Parade_Wait(leadNoble);
 			graph.AddToil(wait_StartBall);
 			var wait_PostBall = new LordToil_Wait();
 			graph.AddToil(wait_PostBall);
 
 			exitToil = new LordToil_EnterShuttleOrLeave(shuttle, Verse.AI.LocomotionUrgency.Walk, true, true);
 			graph.AddToil(exitToil);
-			artToil = new LordToil_ArtExhibit_Show(target.Cell);
-			graph.AddToil(artToil);
+			paradeToil = new LordToil_Parade_Start(target.Cell);
+			graph.AddToil(paradeToil);
 			//Transitions
 			var removeColonists = new TransitionAction_Custom(() => lord.RemovePawns(colonistParticipants));
 
@@ -168,7 +136,7 @@ namespace VFEEmpire
 			transition_Arrived.AddTrigger(new Trigger_Custom((TriggerSignal signal) => signal.type == TriggerSignalType.Tick && leadNoble.Position == Spot));
 			graph.transitions.Add(transition_Arrived);
 
-			var transition_StartBall = new Transition(wait_StartBall, artToil);
+			var transition_StartBall = new Transition(wait_StartBall, paradeToil);
 			transition_StartBall.AddTrigger(new Trigger_Memo(MemoCeremonyStarted));
 			transition_StartBall.AddPostAction(new TransitionAction_Custom(() =>
 			{
@@ -177,21 +145,21 @@ namespace VFEEmpire
 			));
 			graph.transitions.Add(transition_StartBall);
 
-			var transition_BallEnd = new Transition(artToil, wait_PostBall);
+			var transition_BallEnd = new Transition(paradeToil, wait_PostBall);
 			transition_BallEnd.AddPreAction(removeColonists);
 			transition_BallEnd.AddTrigger(new Trigger_Memo("CeremonyFinished"));
 			transition_BallEnd.AddPostAction(new TransitionAction_Custom(() => QuestUtility.SendQuestTargetSignals(lord.questTags, "CeremonyDone", lord.Named("SUBJECT"))));
 			graph.transitions.Add(transition_BallEnd);
 
-			var transition_BallInterupted = new Transition(artToil, exitToil);
+			var transition_BallInterupted = new Transition(paradeToil, exitToil);
 			transition_BallInterupted.AddPreAction(removeColonists);
 			transition_BallInterupted.AddPreAction(new TransitionAction_Custom(() =>
 			{
-				StopExhibit("CeremonyFailed");
+				StopParade("CeremonyFailed");
 			}));
 			transition_BallInterupted.AddTrigger(new Trigger_TickCondition(() =>
 			{
-				return Gallery.PsychologicallyOutdoors || shuttle.Destroyed;
+				return CurrentRoom.PsychologicallyOutdoors || shuttle.Destroyed;
 			}, 60));
 			transition_BallInterupted.AddTrigger(new Trigger_PawnHarmed());
 			transition_BallInterupted.AddTrigger(new Trigger_PawnLostViolently());
@@ -202,7 +170,7 @@ namespace VFEEmpire
 			transition_Leave.AddPreAction(removeColonists);
 			transition_Leave.AddTrigger(new Trigger_TickCondition(() =>
 			{
-				return !GenHostility.AnyHostileActiveThreatTo(Map, Faction.OfEmpire) || Gallery.PsychologicallyOutdoors || shuttle.Destroyed;
+				return !GenHostility.AnyHostileActiveThreatTo(Map, Faction.OfEmpire) || CurrentRoom.PsychologicallyOutdoors || shuttle.Destroyed;
 			}, 60));
 			transition_Leave.AddTrigger(new Trigger_PawnHarmed());
 			transition_Leave.AddTrigger(new Trigger_PawnLostViolently());
@@ -239,10 +207,10 @@ namespace VFEEmpire
 		}
 
 
-		public void StopExhibit(string signal)
+		public void StopParade(string signal)
 		{
-			exhibitFinished = true;
-			foreach (KeyValuePair<Pawn, int> keyValuePair in artToil.Data.presentForTicks)
+			paradeFinished = true;
+			foreach (KeyValuePair<Pawn, int> keyValuePair in paradeToil.Data.presentForTicks)
 			{
 				if (keyValuePair.Key != null && !keyValuePair.Key.Dead)
 				{
@@ -271,64 +239,33 @@ namespace VFEEmpire
 
 		public override void LordJobTick()
 		{
-			if (exhibitStarted && !exhibitFinished)
+			if (paradeStarted && !paradeFinished)
 			{
 				outcome.Tick(this, 1f);
 				ticksPassed++;
 				ticksThisRotation++;
-				if (ticksThisRotation % (duration / artPieces.Count) == 0)
+				if (ticksThisRotation % (duration / stops.Count) == 0 && AtDestination)
 				{
-					PresenterSwap();
+					RoomSwap();
 					ticksThisRotation = 0;
 				}
+
 			}
 
 		}
-		private Dictionary<Thing, Pawn> cachePresenters = new();
-		public void SetPresenters()
+		private int ticksSinceFirework;
+		private int ticksSinceMusicMove;
+		public void CheckForEffect()
         {
-			foreach(var art in artPieces)
-            {
-				var madeBy = GameComponent_Empire.Instance.artCreator.TryGetValue(art as ThingWithComps);
-				if(madeBy != null && presenters.Contains(madeBy))
-                {
-					cachePresenters.Add(art,madeBy);
-				}
-                else
-                {
-					cachePresenters.Add(art,host);
-				}
-			}
+
         }
-		public Thing ArtFor(Pawn pawn)
-        {
-			return cachePresenters.FirstOrDefault(x=>x.Value == pawn).Key;
 
-		}
-		public Pawn Presenter
-		{
-			get
-			{
-				if(cachePresenters.Count == 0)
-                {
-					SetPresenters();
-				}
-				var pawn = cachePresenters.TryGetValue(ArtPiece); //Doing this because they can leave if needed for raid
-				if(!lord.ownedPawns.Contains(pawn))
-                {
-					return host;
-                }
-				return pawn;
-
-			}
-		}
-		public Thing ArtPiece => artPieces[stage];
-		public void PresenterSwap()
+		public void RoomSwap()
 		{
 			stage++;
-			if (stage >= artPieces.Count)
+			if (stage >= stops.Count)
 			{
-				StopExhibit("CeremonySuccess");
+				StopParade("CeremonySuccess");
 				return;
 			}
 			foreach (var p in lord.ownedPawns)
@@ -350,23 +287,23 @@ namespace VFEEmpire
 
 		public override string GetReport(Pawn pawn)
 		{
-			return "LordReportAttending".Translate("VFEE.ArtExhibit.Label".Translate());
+			return "LordReportAttending".Translate("VFEE.Parade.Label".Translate());
 		}
 
 
 		public override IEnumerable<Gizmo> GetPawnGizmos(Pawn p)
 		{
-			if (!exhibitStarted || exhibitFinished)
+			if (!paradeStarted || paradeFinished)
 			{
 				yield break;
 			}
 			else if (p.Faction == Faction.OfPlayer)
 			{
 				Command_Action leave = new();
-				leave.defaultLabel = "VFEE.ArtExhibit.Leave.label".Translate();
-				leave.defaultDesc = "VFEE.ArtExhibit.Leave.Desc".Translate();
-				leave.disabled = p == host;
-				leave.disabledReason = "VFEE.ArtExhibit.Leave.Disabled".Translate(p.NameFullColored);
+				leave.defaultLabel = "VFEE.Parade.Leave.label".Translate();
+				leave.defaultDesc = "VFEE.Parade.Leave.Desc".Translate();
+				leave.disabled = p == leadNoble;
+				leave.disabledReason = "VFEE.Parade.Leave.Disabled".Translate(p.NameFullColored);
 				leave.icon = icon;
 				leave.action = () =>
 				{
@@ -377,14 +314,14 @@ namespace VFEEmpire
 				yield return leave;
 				yield return new Command_Action
 				{
-					defaultLabel = "VFEE.ArtExhibit.Cancel.Label".Translate(),
-					defaultDesc = "VFEE.ArtExhibit.Cancel.Desc".Translate(),
+					defaultLabel = "VFEE.Parade.Cancel.Label".Translate(),
+					defaultDesc = "VFEE.Parade.Cancel.Desc".Translate(),
 					icon = icon,
 					action = () =>
 					{
-						Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("VFEE.ArtExhibit.Cancel.Confirm".Translate(), () =>
+						Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("VFEE.Parade.Cancel.Confirm".Translate(), () =>
 						{
-							StopExhibit("CeremonyFailed");
+							StopParade("CeremonyFailed");
 						}));
 					},
 					hotKey = KeyBindingDefOf.Misc6

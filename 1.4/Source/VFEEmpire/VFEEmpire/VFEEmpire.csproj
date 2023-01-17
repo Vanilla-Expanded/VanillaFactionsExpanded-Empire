@@ -116,6 +116,8 @@
     <Compile Include="QuestNode\Questnode_Root_ArtExhibit.cs" />
     <Compile Include="QuestNode\Questnode_Root_GrandBall.cs" />
     <Compile Include="QuestNode\Questnode_Root_NobleVisit.cs" />
+    <Compile Include="QuestNode\Questnode_Root_RoyalParade.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_Parade.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_ArtExhibit.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_GrandBall.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_RequirementsToAcceptGallery.cs" />
@@ -127,13 +129,18 @@
     <Compile Include="QuestNode\QuestPart\QuestPart_LodgerLeave.cs" />
     <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_BestowHonor.cs" />
     <Compile Include="Rituals\Commands\Command_ArtExhibit.cs" />
+    <Compile Include="Rituals\Commands\Command_Parade.cs" />
     <Compile Include="Rituals\Commands\Command_GrandBall.cs" />
+    <Compile Include="Rituals\LordJob\LordJob_Parade.cs" />
     <Compile Include="Rituals\LordJob\LordJob_ArtExhibit.cs" />
     <Compile Include="Rituals\LordJob\LordJob_GrandBall.cs" />
+    <Compile Include="Rituals\LordJob\LordToil\LordToil_Parade_Wait.cs" />
+    <Compile Include="Rituals\LordJob\LordToil\LordToil_Parade_Start.cs" />
     <Compile Include="Rituals\LordJob\LordToil\LordToil_ArtExhibit_Show.cs" />
     <Compile Include="Rituals\LordJob\LordToil\LordToil_GrandBall_Dance.cs" />
     <Compile Include="Rituals\LordJob\LordToil\LordToil_ArtExhibit_Wait.cs" />
     <Compile Include="Rituals\LordJob\LordToil\LordToil_GrandBall_Wait.cs" />
+    <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_Parade.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_ArtExhibit.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_BestowHonor.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_GrandBall.cs" />
