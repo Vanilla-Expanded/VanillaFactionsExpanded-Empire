@@ -38,7 +38,7 @@
   <ThingDef ParentName="MeleeWeaponUltratech">
     <defName>VFEE_MeleeWeapon_Toxblade</defName>
     <label>toxblade</label>
-    <description>text.todo</description>
+    <description>A defensive melee persona weapon usually assigned to every Imperial noble of rank Yeoman or above. While armor penetration is comparable to plasteel blades, the primary function is to dispense acidifer fluids and toxic vapors upon inflicted cuts. The effect only lasts a few seconds and is inflicted roughly half of the time due to the limited size of the weapon.</description>
     <soundInteract>Interact_MonoSword</soundInteract>
     <meleeHitSound>MeleeHit_MonoSword</meleeHitSound>
     <equippedAngleOffset>-65</equippedAngleOffset>

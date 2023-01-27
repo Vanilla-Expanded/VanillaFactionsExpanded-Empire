@@ -54,7 +54,7 @@
   <RoyalTitlePermitDef ParentName="DropResourcesBase">
     <defName>VFEI_UraniumDrop</defName>
     <label>uranium drop</label>
-    <description>Call for a drop of 80 jade.</description>
+    <description>Call for a drop of 80 uranium.</description>
     <minTitle>Acolyte</minTitle>
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
