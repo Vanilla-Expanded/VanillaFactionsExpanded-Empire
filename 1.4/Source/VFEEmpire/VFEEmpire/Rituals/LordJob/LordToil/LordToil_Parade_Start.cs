@@ -48,21 +48,25 @@ namespace VFEEmpire
 
         public override void UpdateAllDuties()
         {
-            var ritual = lord.LordJob as LordJob_ArtExhibit;
-            if (!ritual.exhibitStarted)
+            var ritual = lord.LordJob as LordJob_Parade;
+            if (!ritual.paradeStarted)
             {
-                ritual.exhibitStarted = true;
+                ritual.paradeStarted = true;
                 ritual.nobles = lord.ownedPawns.Where(x => x.royalty?.HasAnyTitleIn(Faction.OfEmpire) ?? false).ToList();
             }
             foreach (var pawn in lord.ownedPawns)
             {
-                if (ritual.nobles.Contains(pawn))
+                if(pawn == ritual.stellarch)
                 {
-                    pawn.mindState.duty = new PawnDuty(InternalDefOf.VFEE_ArtExhibitRoyal, ritual.Spot);
+                    pawn.mindState.duty = new PawnDuty(InternalDefOf.VFEE_ParadeLead, ritual.Spot);
+                }
+                else if (ritual.guards.Contains(pawn))
+                {
+                    pawn.mindState.duty = new PawnDuty(InternalDefOf.VFEE_ParadeGuard, ritual.Spot);
                 }
                 else
                 {
-                    pawn.mindState.duty = new PawnDuty(InternalDefOf.VFEE_ArtExhibitPresent, ritual.Spot);
+                    pawn.mindState.duty = new PawnDuty(InternalDefOf.VFEE_ParadeNoble, ritual.Spot);
                 }
                 pawn.jobs?.CheckForJobOverride();
             }

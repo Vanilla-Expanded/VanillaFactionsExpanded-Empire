@@ -42,15 +42,13 @@ namespace VFEEmpire
                 Lord lord = pawn.GetLord();
                 bool result = (lord == null || !(lord.LordJob is LordJob_Ritual)) && !pawn.IsPrisonerOfColony && !pawn.RaceProps.Animal;
                 if (!result) { return false; }
-                if (!pawn.royalty?.HasAnyTitleIn(Faction.OfEmpire) ?? true)
-                {
-                    return false;
-                }
-                return true;
+                return pawn.Faction == Faction.OfEmpire || pawn.Faction == Faction.OfPlayer;
             };
+            var forced = new Dictionary<string, Pawn>();
+            forced.Add("stellarch", job.stellarch);
             string okButtonText = "Begin".Translate();
             var outcomeDef = InternalDefOf.VFEE_Parade_Outcome;
-            Find.WindowStack.Add(new Dialog_BeginRitual(header, label, null, job.target.ToTargetInfo(job.Map), job.Map, callBack, bestNoble, null, filter, okButtonText, outcome: outcomeDef, ritualName: label));
+            Find.WindowStack.Add(new Dialog_BeginRitual(header, label, job.Ritual, job.target.ToTargetInfo(job.Map), job.Map, callBack, bestNoble, null, filter, okButtonText, outcome: outcomeDef, ritualName: label, forcedForRole: forced, showQuality: false));
         }
     }
 }

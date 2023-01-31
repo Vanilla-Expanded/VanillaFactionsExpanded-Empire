@@ -28,13 +28,7 @@ public class RitualOutcomeEffectWorker_Parade : RitualOutcomeEffectWorker_FromQu
         letterText = letterText + "\n\n" + OutcomeQualityBreakdownDesc(quality, progress, jobRitual);
         Find.LetterStack.ReceiveLetter("OutcomeLetterLabel".Translate(outcome.label.Named("OUTCOMELABEL"), dance.RitualLabel.Named("RITUALLABEL")), letterText,
             outcome.Positive ? LetterDefOf.RitualOutcomePositive : LetterDefOf.RitualOutcomeNegative, lookTargets);
-        foreach (var pawn in dance.lord.ownedPawns)
-        {
-            if (outcome.memory != null) GiveMemoryToPawn(pawn, outcome.memory, jobRitual);
 
-            // Apply bonus from the Patron of Arts Honor
-            if (outcome.Positive && pawn.Honors().Honors.Any(h => h.def == HonorDefOf.VFEE_PatronOfArts)) pawn.royalty.GainFavor(Faction.OfEmpire, 3);
-        }
     }
 
     //Copied from DNSpy modifying just parts that NRE when Ritual == null

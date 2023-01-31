@@ -67,6 +67,9 @@
     <Compile Include="AI\JobGiver\JobGiver_ArtExhibitSpectate.cs" />
     <Compile Include="AI\JobGiver\JobGiver_ArtExhibitPresent.cs" />
     <Compile Include="AI\JobGiver\JobGiver_AcceptTitle.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_ParadeGuard.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_ParadeFollow.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_ParadeLead.cs" />
     <Compile Include="AI\JobGiver\JobGiver_SpectateClose.cs" />
     <Compile Include="AI\JobGiver\JobGiver_PlayInstrument.cs" />
     <Compile Include="AI\JobGiver\JobGiver_GoToStartPositions.cs" />
@@ -117,6 +120,8 @@
     <Compile Include="QuestNode\Questnode_Root_GrandBall.cs" />
     <Compile Include="QuestNode\Questnode_Root_NobleVisit.cs" />
     <Compile Include="QuestNode\Questnode_Root_RoyalParade.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_RequirementsToShuttleLandingArea.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_StellarchFails.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_Parade.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_ArtExhibit.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_GrandBall.cs" />
@@ -127,6 +132,8 @@
     <Compile Include="QuestNode\QuestPart\QuestPart_ThoughtAccepterOther.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_LoseHonor.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_LodgerLeave.cs" />
+    <Compile Include="QuestNode\Reward\Reward_ParadeEndGame.cs" />
+    <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_Parade.cs" />
     <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_BestowHonor.cs" />
     <Compile Include="Rituals\Commands\Command_ArtExhibit.cs" />
     <Compile Include="Rituals\Commands\Command_Parade.cs" />
@@ -144,6 +151,7 @@
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_ArtExhibit.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_BestowHonor.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_GrandBall.cs" />
+    <Compile Include="Rituals\RitualRole\RitualRoleParadeGuard.cs" />
     <Compile Include="Rituals\RitualRole\RitualRoleHonored.cs" />
     <Compile Include="ScenPart\ScenPart_SpawnFamilyMembers.cs" />
     <Compile Include="ScenPart\ScenPart_SpawnRaid.cs" />

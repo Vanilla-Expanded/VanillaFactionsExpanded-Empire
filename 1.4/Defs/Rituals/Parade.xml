@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+   <PreceptDef>
+    <defName>VFEE_ParadePrecept</defName>
+    <label>Parade</label>
+	<preceptClass>Precept_Ritual</preceptClass>
+    <description>Parade</description>
+	<issue>Ritual</issue>
+    <ritualPatternBase>VFEE_Parade_Pattern</ritualPatternBase> 
+    <classic>false</classic><!--Not classic as dont want auto add, added as needed with quest-->
+	<canGenerateAsSpecialPrecept>false</canGenerateAsSpecialPrecept>
+	<visible>false</visible>
+	<countsTowardsPreceptLimit>false</countsTowardsPreceptLimit>
+	<selectionWeight>0</selectionWeight>
+    <ignoreNameUniqueness>true</ignoreNameUniqueness>
+    <usesIdeoVisualEffects>false</usesIdeoVisualEffects>
+  </PreceptDef>
+
+  <RitualPatternDef>
+	<defName>VFEE_Parade_Pattern</defName>
+	<ritualOnlyForIdeoMembers>false</ritualOnlyForIdeoMembers>
+	<ritualBehavior>VFEE_Parade_Behavior</ritualBehavior>
+	<ritualOutcomeEffect>VFEE_Parade_Outcome</ritualOutcomeEffect>
+	<playsIdeoMusic>false</playsIdeoMusic>
+  </RitualPatternDef>
+  <RitualBehaviorDef> <!--used only for role selection nothing else-->
+    <defName>VFEE_Parade_Behavior</defName>
+    <workerClass>VFEEmpire.RitualBehaviorWorker_Parade</workerClass>
+    <durationTicks>5000</durationTicks>
+    <roles>
+      <li Class="RitualRoleColonist">
+        <label>stellarch</label>
+        <id>stellarch</id>
+		<required>true</required>
+        <maxCount>1</maxCount>
+      </li>
+	  <li Class="VFEEmpire.RitualRoleParadeGuard">
+        <label>guard</label>
+        <id>guard</id>		
+		<maxCount>4</maxCount>
+      </li>
+	  <li Class="VFEEmpire.RitualRoleTitled">
+        <label>noble</label>
+        <id>noble</id>		
+		<colonistOnly>false</colonistOnly>
+      </li>
+    </roles>
+    <stages>
+    </stages>
+  </RitualBehaviorDef>
+  <RitualOutcomeEffectDef>
+    <defName>VFEE_Parade_Outcome</defName>
+    <description>Upon completetion of the Parade the Stellarch and their chosen companions will ascend to serve the empire!</description>
+    <workerClass>VFEEmpire.RitualOutcomeEffectWorker_Parade</workerClass>
+	<startingQuality>1</startingQuality>
+    <outcomeChances>
+      <li>
+        <label>Amazing</label>
+        <chance>1</chance>
+        <positivityIndex>2</positivityIndex>
+      </li>
+    </outcomeChances>
+	<comps>
+	</comps>
+  </RitualOutcomeEffectDef>
+  
+</Defs>

@@ -19,11 +19,8 @@ namespace VFEEmpire
 
         protected override Lord MakeLord()
         {
-
-            LocalTargetInfo spot = LocalTargetInfo.Invalid;
-
-            var throne = mapOfPawn.ownership.AssignedThrone;
-            var job = new LordJob_ArtExhibit(leadPawn,mapOfPawn, spot, shuttle, questTag+".QuestEnded", throne.GetRoom());
+            var cell = DropCellFinder.GetBestShuttleLandingSpot(Map, faction);
+            var job = new LordJob_Parade(stellarch,leadPawn, cell, shuttle, questTag+".QuestEnded");
             var lord = LordMaker.MakeNewLord(faction,job,Map);
             QuestUtility.AddQuestTag(ref lord.questTags,questTag);
             return lord;
@@ -32,7 +29,7 @@ namespace VFEEmpire
         {
             base.Cleanup();
             Find.SignalManager.SendSignal(new Signal(questTag + ".QuestEnded", quest.Named("SUBJECT")));
-            if (Map.lordManager.lords.Contains(lord))//The lord never gets removed due to Lord:CanExistWithoutPawns
+            if (Map.lordManager.lords?.Contains(lord) == true)//The lord never gets removed due to Lord:CanExistWithoutPawns
             {
                 Map.lordManager.RemoveLord(lord);
             }
@@ -41,14 +38,18 @@ namespace VFEEmpire
         public override void ExposeData()
         {
             base.ExposeData();
+            Scribe_References.Look(ref stellarch, "stellarch");
             Scribe_References.Look(ref leadPawn, "leadPawn");
             Scribe_References.Look(ref lord, "lord");
             Scribe_References.Look(ref shuttle, "shuttle");
             Scribe_Values.Look(ref questTag, "questTag");
+            Scribe_Values.Look(ref raidTag, "raidTag");
         }
         public Lord lord; //Because lords wont ever expire without this
-        public Pawn leadPawn;
+        public Pawn stellarch;
+        public Pawn leadPawn; //lead pawn is the top noble from empire used as essentially lead of delegation
         public string questTag;
+        public string raidTag;
         public Thing shuttle;
     }
 }
