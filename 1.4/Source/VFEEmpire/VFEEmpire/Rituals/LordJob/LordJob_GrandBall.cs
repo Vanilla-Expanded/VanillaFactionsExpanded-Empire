@@ -366,7 +366,11 @@ namespace VFEEmpire
             }
 			p.jobs?.CheckForJobOverride();
 		}
-        public void StartDance()
+		public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason)
+		{
+			return p.Faction.IsPlayer;
+		}
+		public void StartDance()
 		{
 			nobles = lord.ownedPawns.Where(x => x.royalty?.HasAnyTitleIn(Faction.OfEmpire) ?? false).ToList();
 			SetPartners();

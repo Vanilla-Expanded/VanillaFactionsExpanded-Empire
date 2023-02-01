@@ -14,7 +14,7 @@ namespace VFEEmpire;
 public class Building_Bomb : Building
 {
     private static readonly Material LightMat = MaterialPool.MatFrom("Bomb/BombFlare", ShaderDatabase.MoteGlow);
-    private int ticksLeft = 12 * GenDate.TicksPerHour;
+    public int ticksLeft = 12 * GenDate.TicksPerHour;
     private int ticksLit;
     private int ticksTillBeep = 1;
 

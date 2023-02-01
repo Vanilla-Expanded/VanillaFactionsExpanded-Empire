@@ -52,8 +52,8 @@ namespace VFEEmpire
 			Scribe_References.Look(ref shuttle, "shuttle");
 			Scribe_TargetInfo.Look(ref target, "target");
 
-			Scribe_Values.Look(ref exhibitStarted, "danceStarted");
-			Scribe_Values.Look(ref exhibitFinished, "danceFinished");
+			Scribe_Values.Look(ref exhibitStarted, "exhibitStarted");
+			Scribe_Values.Look(ref exhibitFinished, "exhibitFinished");
 			Scribe_Values.Look(ref questEndedSignal, "questEndedSignal");
 			Scribe_Values.Look(ref ticksThisRotation, "ticksThisRotation");
 			Scribe_Values.Look(ref stage, "stage");
@@ -345,7 +345,10 @@ namespace VFEEmpire
 			}
 			p.jobs?.CheckForJobOverride();
 		}
-
+		public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason)
+		{
+			return p.Faction.IsPlayer;
+		}
 
 
 		public override string GetReport(Pawn pawn)

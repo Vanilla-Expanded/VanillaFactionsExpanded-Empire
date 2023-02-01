@@ -38,7 +38,7 @@ namespace VFEEmpire
                 return null;
             }
             var job = new LordJob_GrandBall(leadPawn,spot,shuttle, questTag+".QuestEnded",absoluteSpot.GetRoom(Map), danceFloor, cellrect);
-            var lord = LordMaker.MakeNewLord(faction,job,Map);
+            lord = LordMaker.MakeNewLord(faction,job,Map);
             QuestUtility.AddQuestTag(ref lord.questTags,questTag);
             return lord;
         }

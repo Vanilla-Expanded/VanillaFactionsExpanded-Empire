@@ -44,7 +44,7 @@ namespace VFEEmpire
             }
             
             var job = new LordJob_ArtExhibit(leadPawn,mapOfPawn, spot, shuttle, questTag+".QuestEnded", gallery, artPieces);
-            var lord = LordMaker.MakeNewLord(faction,job,Map);
+            lord = LordMaker.MakeNewLord(faction,job,Map);
             QuestUtility.AddQuestTag(ref lord.questTags,questTag);
             return lord;
         }

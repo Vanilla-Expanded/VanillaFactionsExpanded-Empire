@@ -34,9 +34,18 @@ public static class InternalDefOf
 
     public static JobDef VFEE_GiveHonor;
 
+    public static PreceptDef VFEE_ParadePrecept;
+    public static DutyDef VFEE_ParadeLead;
+    public static DutyDef VFEE_ParadeNoble;
+    public static DutyDef VFEE_ParadeGuard;
+    public static JobDef VFEE_ParadeGuardGoto;
+    public static EffecterDef VFEE_ParadeConfetti;
+    public static SoundDef VFEE_Parade_Sustainer_01;
+
     public static InteractionDef VFEE_RoyalGossip;
 
     public static RitualOutcomeEffectDef VFEE_GrandBall_Outcome;
+    public static RitualOutcomeEffectDef VFEE_Parade_Outcome;
     public static RitualOutcomeEffectDef VFEE_ArtExhibit_Outcome;
     public static QuestScriptDef VFEE_DelayedGrandBallOutcome;
     public static QuestScriptDef VFEE_DelayedArtExhibitOutcome;

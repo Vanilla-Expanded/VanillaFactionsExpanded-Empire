@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\JobDriver\JobDriver_ParadeGuardGotoWait.cs" />
     <Compile Include="AI\JobDriver\JobDriver_GiveHonor.cs" />
     <Compile Include="AI\JobDriver\JobDriver_ArtPresent.cs" />
     <Compile Include="AI\JobDriver\JobDriver_ArtSpectate.cs" />
@@ -67,6 +68,10 @@
     <Compile Include="AI\JobGiver\JobGiver_ArtExhibitSpectate.cs" />
     <Compile Include="AI\JobGiver\JobGiver_ArtExhibitPresent.cs" />
     <Compile Include="AI\JobGiver\JobGiver_AcceptTitle.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_ParadeGuard.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_ParadeFollow.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_ParadeLeadStartPos.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_ParadeLead.cs" />
     <Compile Include="AI\JobGiver\JobGiver_SpectateClose.cs" />
     <Compile Include="AI\JobGiver\JobGiver_PlayInstrument.cs" />
     <Compile Include="AI\JobGiver\JobGiver_GoToStartPositions.cs" />
@@ -116,6 +121,10 @@
     <Compile Include="QuestNode\Questnode_Root_ArtExhibit.cs" />
     <Compile Include="QuestNode\Questnode_Root_GrandBall.cs" />
     <Compile Include="QuestNode\Questnode_Root_NobleVisit.cs" />
+    <Compile Include="QuestNode\Questnode_Root_RoyalParade.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_RequirementsToShuttleLandingArea.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_StellarchFails.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_Parade.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_ArtExhibit.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_GrandBall.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_RequirementsToAcceptGallery.cs" />
@@ -125,19 +134,28 @@
     <Compile Include="QuestNode\QuestPart\QuestPart_ThoughtAccepterOther.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_LoseHonor.cs" />
     <Compile Include="QuestNode\QuestPart\QuestPart_LodgerLeave.cs" />
+    <Compile Include="QuestNode\Reward\Reward_ParadeEndGame.cs" />
+    <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_Parade.cs" />
     <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_BestowHonor.cs" />
     <Compile Include="Rituals\Commands\Command_ArtExhibit.cs" />
+    <Compile Include="Rituals\Commands\Command_Parade.cs" />
     <Compile Include="Rituals\Commands\Command_GrandBall.cs" />
+    <Compile Include="Rituals\LordJob\LordJob_Parade.cs" />
     <Compile Include="Rituals\LordJob\LordJob_ArtExhibit.cs" />
     <Compile Include="Rituals\LordJob\LordJob_GrandBall.cs" />
+    <Compile Include="Rituals\LordJob\LordToil\LordToil_Parade_Wait.cs" />
+    <Compile Include="Rituals\LordJob\LordToil\LordToil_Parade_Start.cs" />
     <Compile Include="Rituals\LordJob\LordToil\LordToil_ArtExhibit_Show.cs" />
     <Compile Include="Rituals\LordJob\LordToil\LordToil_GrandBall_Dance.cs" />
     <Compile Include="Rituals\LordJob\LordToil\LordToil_ArtExhibit_Wait.cs" />
     <Compile Include="Rituals\LordJob\LordToil\LordToil_GrandBall_Wait.cs" />
+    <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_Parade.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_ArtExhibit.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_BestowHonor.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_GrandBall.cs" />
+    <Compile Include="Rituals\RitualRole\RitualRoleParadeGuard.cs" />
     <Compile Include="Rituals\RitualRole\RitualRoleHonored.cs" />
+    <Compile Include="Rituals\RitualRole\RitualSpectatorFilter_Titled.cs" />
     <Compile Include="ScenPart\ScenPart_SpawnFamilyMembers.cs" />
     <Compile Include="ScenPart\ScenPart_SpawnRaid.cs" />
     <Compile Include="Things\Building_Bomb.cs" />

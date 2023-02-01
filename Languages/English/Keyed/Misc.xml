@@ -30,6 +30,21 @@
 	<VFEE.ArtExhibit.Waiting>Your guests are waiting for you to start the art exhibit. They wont wait long however</VFEE.ArtExhibit.Waiting>
 	<VFEE.ArtExhibit.Description>An art expedition to only be attended by those with a royal title, to view your galley and gossip with eachother.</VFEE.ArtExhibit.Description>
 	<VFEE.ArtExhibit.ChooseParticipants>Participants</VFEE.ArtExhibit.ChooseParticipants>
+	<VFEE.Parade.Begin>Host Parade</VFEE.Parade.Begin>
+	<VFEE.Parade.Murder>Driven by jealousy {0} is attempting to murder the stellarch!</VFEE.Parade.Murder>
+	<VFEE.Parade.Label>Parade</VFEE.Parade.Label>
+	<VFEE.Parade.Leave.label>Leave Parade</VFEE.Parade.Leave.label>
+	<VFEE.Parade.Leave.Desc>This pawn will leave the Parade, they will not be able to rejoin the festivities later</VFEE.Parade.Leave.Desc>
+	<VFEE.Parade.Cancel.Label>Cancel Parade</VFEE.Parade.Cancel.Label>
+	<VFEE.Parade.Cancel.Desc>Cancel the parade sending everyone home and failing the quest</VFEE.Parade.Cancel.Desc>
+	<VFEE.Parade.Cancel.Confirm>There will be no opportunity to restart this ritual, your guests will go home unhappy and the quest will be failed.</VFEE.Parade.Cancel.Confirm>
+	<VFEE.Parade.Waiting>Your guests are waiting for you to start the Parade. They wont wait long however</VFEE.Parade.Waiting>
+	<VFEE.Parade.Description>A traditional ascension parade to send off the stellarch!</VFEE.Parade.Description>
+	<VFEE.Parade.InvalidGuard>The stellarch does not trust {0} enough.</VFEE.Parade.InvalidGuard>
+	<VFEE.Parade.ChooseParticipants>Participants</VFEE.Parade.ChooseParticipants>
+	<VFEE.Parade.LandingAreaUnmet>Unable to find a suitable drop beacon for the guests to land their shuttle at</VFEE.Parade.LandingAreaUnmet>
+	<VFEE.Parade.Reward.Label>Stellarch Ascension</VFEE.Parade.Reward.Label>
+	<VFEE.Parade.Reward.Description>Your Stellarch will achieve ascension with passage off world to progress further in the grand hierachy, serving directly with the emperor</VFEE.Parade.Reward.Description>
 	<VFEE.DefuseBomb>Defuse bomb</VFEE.DefuseBomb>
 	<VFEE.AssassinationSuccess>Deserters are leaving as they have eliminated their target.</VFEE.AssassinationSuccess>
 	<VFEE.Discard>Discard</VFEE.Discard>
