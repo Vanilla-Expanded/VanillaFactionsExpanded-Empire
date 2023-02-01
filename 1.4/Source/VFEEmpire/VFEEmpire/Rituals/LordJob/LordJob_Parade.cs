@@ -310,7 +310,7 @@ namespace VFEEmpire
 				ticksSinceConfetti++;
 				if(music == null)
                 {
-					InternalDefOf.VFEE_Parade_Sustainer_01.TrySpawnSustainer(SoundInfo.InMap(stellarch, MaintenanceType.PerTick));
+					music = InternalDefOf.VFEE_Parade_Sustainer_01.TrySpawnSustainer(SoundInfo.InMap(stellarch, MaintenanceType.PerTick));
                 }
 				music?.Maintain();
 				CheckForEffect();
@@ -414,7 +414,7 @@ namespace VFEEmpire
 				bombsToPlace--;
 				var bomb = ThingMaker.MakeThing(VFEE_DefOf.VFEE_Bomb) as Building_Bomb;
 				bomb.SetFaction(deserter);
-				bomb.ticksLeft = duration - ticksPassed - 100;//Explode just before parade ends
+				bomb.ticksLeft = duration - ticksPassed - 500;//Explode just before parade ends
 				GenSpawn.Spawn(bomb, shuttleCell, Map);
 			}
 		}
@@ -474,8 +474,7 @@ namespace VFEEmpire
             {
 				p.mindState.duty.focus = Destination;
 				p.jobs.CheckForJobOverride();				
-			}
-				
+			}			
 
 		}
 

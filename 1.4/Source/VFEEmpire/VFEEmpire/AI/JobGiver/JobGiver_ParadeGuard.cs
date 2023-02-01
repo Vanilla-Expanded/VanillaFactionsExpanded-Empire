@@ -48,8 +48,9 @@ namespace VFEEmpire
 
 				return CellFinder.TryFindRandomCellNear(stell,parade.Map, 5,(IntVec3 c) =>
 				{
-					bool distStell = stell.DistanceTo(c) >= 3;
-					return distStell && pawn.CanReserveAndReach(c, PathEndMode.OnCell, Danger.Deadly) && c.GetRoom(pawn.Map) == parade.stellarch.GetRoom();
+					bool distStell = stell.DistanceTo(c) > 3;
+					bool closer = c.DistanceTo(destination) < stell.DistanceTo(destination); //So guards dont get in way of parade always be closer
+					return distStell && closer&& pawn.CanReserveAndReach(c, PathEndMode.OnCell, Danger.Deadly) && c.GetRoom(pawn.Map) == parade.stellarch.GetRoom();
 				}, out cell);
             }
 			bool Destspot(Room dest, out IntVec3 cell)

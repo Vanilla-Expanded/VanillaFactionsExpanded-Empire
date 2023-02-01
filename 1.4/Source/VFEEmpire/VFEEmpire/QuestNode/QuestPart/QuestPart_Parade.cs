@@ -27,7 +27,7 @@ namespace VFEEmpire
                 cell = ThingUtility.InteractionCellsWhenAt(shuttle.def, shipJob.cell, Rot4.North, Map, true).First(x=>x.Standable(Map));
             }
             var job = new LordJob_Parade(stellarch,leadPawn, cell, shuttle, questTag+".QuestEnded");
-            var lord = LordMaker.MakeNewLord(faction,job,Map);
+            lord = LordMaker.MakeNewLord(faction,job,Map);
             QuestUtility.AddQuestTag(ref lord.questTags,questTag);
             return lord;
         }
@@ -35,7 +35,7 @@ namespace VFEEmpire
         {
             base.Cleanup();
             Find.SignalManager.SendSignal(new Signal(questTag + ".QuestEnded", quest.Named("SUBJECT")));
-            if (Map.lordManager.lords?.Contains(lord) == true)//The lord never gets removed due to Lord:CanExistWithoutPawns
+            if (lord != null && Map.lordManager?.lords?.Contains(lord) == true)//The lord never gets removed due to Lord:CanExistWithoutPawns
             {
                 Map.lordManager.RemoveLord(lord);
             }
