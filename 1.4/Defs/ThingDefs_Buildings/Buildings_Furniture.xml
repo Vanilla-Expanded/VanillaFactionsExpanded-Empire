@@ -4,6 +4,7 @@
   <ThingDef ParentName="TableGatherSpotBase">
     <defName>VFEE_GrandTable</defName>
     <label>grand table</label>
+	<description>A luxurious, beautiful gold-inlaid table fit for the highborn, it is a work of art in itself. People eat off tables when chairs are placed facing them.</description>
     <graphicData>
       <texPath>Furniture/TableGrand3x6</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -40,7 +41,7 @@
   <ThingDef ParentName="ArtableFurnitureBase">
     <defName>VFEE_GrandChair</defName>
     <label>grand chair</label>
-    <description>text.todo</description>
+    <description>A comfortable and elegant chair, it is a work of art in itself. Can be used at tables, work stations, and elsewhere.</description>
     <graphicData>
       <texPath>Furniture/GrandChair</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -88,7 +89,7 @@
   <ThingDef ParentName="FurnitureBase">
     <defName>VFEE_ImperialBanner</defName>
     <label>imperial banner</label>
-    <description>text.todo</description>
+    <description>A decorative strip of cloth hanging from a vertical wooden frame. Appropriate for royal rooms.</description>
     <designationCategory>Misc</designationCategory>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <passability>PassThroughOnly</passability>
@@ -143,7 +144,7 @@
   <ThingDef ParentName="ArtableFurnitureBase">
     <defName>VFEE_RoyalStool</defName>
     <label>royal stool</label>
-    <description>text.todo</description>
+    <description>A luxurious gold-inlaid stool fit for the nobility. Can be used at tables, work stations, and elsewhere.</description>
     <graphicData>
       <texPath>Furniture/RoyalStool</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -195,9 +196,9 @@
   <ThingDef ParentName="FurnitureWithQualityBase">
     <defName>VFEE_StellicThrone</defName>
     <label>stellic meditation throne</label>
+	<description>A titanic, ornate chair, designed for a dignity-focused psycaster to sit and meditate. Reigning on a throne is a form of meditation that builds up psyfocus. For dignity psycasters, more impressive meditation thrones and thronerooms increase the rate of psyfocus gain.</description>
     <drawGUIOverlay>true</drawGUIOverlay>
     <drawGUIOverlayQuality>false</drawGUIOverlayQuality>
-    <description>text.todo</description>
     <defaultPlacingRot>South</defaultPlacingRot>
     <castEdgeShadows>True</castEdgeShadows>
     <altitudeLayer>Building</altitudeLayer>
@@ -290,7 +291,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VFEE_Candelabra</defName>
     <label>candelabra</label>
-    <description>text.todo</description>
+    <description>An elaborate, artistic electrical standing lamp that lights an area. People need light to move and work at full speed.</description>
     <thingClass>Building</thingClass>
     <category>Building</category>
     <minifiedDef>MinifiedThing</minifiedDef>
@@ -355,7 +356,7 @@
   <ThingDef ParentName="ArtableFurnitureBase">
     <defName>VFEE_RoyalMirror</defName>
     <label>royal mirror</label>
-    <description>text.todo</description>
+    <description>A beautiful and elegant mirror. Gives a small comfort bonus to all nearby beds. Placing more than one mirror near the same bed has no effect.</description>
     <graphicData>
       <texPath>Furniture/RoyalMirror</texPath>
       <graphicClass>Graphic_Multi</graphicClass>

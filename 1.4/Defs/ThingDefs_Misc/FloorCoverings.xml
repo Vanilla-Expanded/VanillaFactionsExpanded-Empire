@@ -41,7 +41,7 @@
   <ThingDef ParentName="VFEE_BuildingFloorMediumBase">
     <defName>VFEE_ImperialSlab</defName>
     <label>imperial slab</label>
-    <description>text.todo</description>
+    <description>A stoney bas relief of imperial imagery for decorating a floor.</description>
     <graphicData>
       <graphicClass>Graphic_Random</graphicClass>
       <texPath>Furniture/SlabImperialMedium</texPath>
@@ -60,7 +60,7 @@
   <ThingDef ParentName="VFEE_BuildingFloorMediumBase">
     <defName>VFEE_LargeRoyalRug</defName>
     <label>large royal rug</label>
-    <description>text.todo</description>
+    <description>An intricate rug with an imperial-style pattern, for decorating a floor.</description>
     <statBases>
       <Flammability>0.32</Flammability>
 	  <Beauty>18</Beauty>
@@ -86,7 +86,7 @@
   <ThingDef ParentName="VFEE_BuildingFloorBroadBase">
     <defName>VFEE_GrandRoyalRug</defName>
     <label>grand royal rug</label>
-    <description>text.todo</description>
+    <description>A majestic rug with an imperial-style pattern, for decorating a floor.</description>
     <statBases>
       <Flammability>0.32</Flammability>
     </statBases>

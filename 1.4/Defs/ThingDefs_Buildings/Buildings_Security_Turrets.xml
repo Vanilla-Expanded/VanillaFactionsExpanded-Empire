@@ -4,7 +4,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VFEE_Turret_StrikerTurret</defName>
     <label>striker turret</label>
-    <description>text.todo</description>
+    <description>A redesigned cargo pod designed to bury stabilizing legs upon impact and deploy a powerful turret. Has a limited battery and ammunition pool, and will self-destruct if either run out or it is sufficiently damaged.</description>
     <thingClass>Building_TurretGun</thingClass>
     <drawerType>MapMeshAndRealTime</drawerType>
     <graphicData>
@@ -62,7 +62,7 @@
       <li Class="CompProperties_DestroyAfterDelay">
         <delayTicks>7200</delayTicks>
         <destroyMode>KillFinalize</destroyMode>
-        <countdownLabel>text.todo</countdownLabel>
+        <countdownLabel>deactivates after:</countdownLabel>
       </li>
     </comps>
     <passability>PassThroughOnly</passability>
@@ -90,7 +90,7 @@
   <ThingDef ParentName="BaseWeaponTurret">
     <defName>VFEE_Gun_StrikerTurret</defName>
     <label>striker gun</label>
-    <description>text.todo</description>
+    <description>A powerful turret mounted on the striker drop pod.</description>
     <graphicData>
       <texPath>StrikerTurret/StrikerTurret_Top</texPath>
       <graphicClass>Graphic_Single</graphicClass>

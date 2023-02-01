@@ -4,7 +4,7 @@
   <ThingDef ParentName="BaseGunWithQuality">
     <defName>VEE_Gun_Fletcher</defName>
     <label>fletcher</label>
-    <description>text.todo</description>
+    <description>An ultra-long range sniper rifle which fires fin-stabilized flechettes with acidifier injectors. Due to their lethality and danger of falling into enemy hands, they are always biocoded and will self-destruct if their owner either dies or is disarmed. Lethal to organics and almost useless against non-organics, such as mechanoids.\n\nTargets hit by these flechettes will be inflicted with an unstable variant of acidifier fluids, designed to dissolve the target from the inside rather than destroy their equipment. The acid will rampage through the target’s body and usually results in vital organs being dissolved, however lethality isn’t guaranteed.</description>
     <techLevel>Spacer</techLevel>
     <graphicData>
       <texPath>Equipment/Fletcher/Fletcher</texPath>
@@ -80,7 +80,7 @@
   <ThingDef ParentName="BaseHumanMakeableGun">
     <defName>VFEE_Gun_ChargeThumper</defName>
     <label>charge thumper</label>
-    <description>text.todo</description>
+    <description>A modified charged-shot assault shotgun that incorporates mechanoid technology. Recovered thump cannons have been reversed engineered to produce a portable ranged weapon capable of firing blunt projectiles. Quite powerful but short ranged, with high performance against structures and heavily armored targets.</description>
     <techLevel>Spacer</techLevel>
     <graphicData>
       <texPath>Equipment/ChargeThumper/ChargeThumper</texPath>

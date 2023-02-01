@@ -4,7 +4,7 @@
   <ThingDef ParentName="ApparelBase">
     <defName>VFEE_Apparel_ArmorDeserter</defName>
     <label>deserter armor</label>
-    <description>text.todo</description>
+    <description>A suit of heavy powered armor, built for maximum protection at the cost of mobility. Heavy layered plasteel-weave plates with solid ablative coatings stop all but the most well-aimed or powerful attacks. Neuro-memetic assistors prevent the suit's massive weight from immobilizing the wearer entirely, but the suit is still quite cumbersome.\n\nOriginally an elaborate suit of prestige armor, this has been modified to make greater use of eltex weave in order to improve the performance of psycasters. This comes at a cost of removing interfering armor plating, but enhances psychic sensitivity and neural heat dissipation.</description>
 	<smeltable>false</smeltable>
     <graphicData>
       <texPath>DesertArmor/VFE_DeserterArmor</texPath>
@@ -90,7 +90,7 @@
   <ThingDef ParentName="ApparelBase">
     <defName>VFEE_Apparel_ArmorAbsolver</defName>
     <label>absolver armor</label>
-    <description>text.todo</description>
+    <description>A high-tech suit of powered armor with layered plasteel-weave plates and multi-spectrum sensors, which both feed telemetry data to the user and exterior shell. While it provides excellent protection, its primary purpose is to hide the user by using an intricate optical camouflage system while adjusting and assisting their movement. Armor like this is only available to the Sophian Empire’s elite assassins due to limited production.</description>
 	<smeltable>false</smeltable>
     <graphicData>
       <texPath>AbsolverArmor/AbsolverArmor</texPath>
@@ -159,7 +159,7 @@
   <ThingDef ParentName="ArmorMachineableBase">
     <defName>VFEE_Apparel_JanissaryCuirass</defName>
     <label>janissary cuirass</label>
-    <description>text.todo</description>
+    <description>A set of pauldrons and neck guard that extends down the wearer’s chest made from layered plasteel-weave plates. While it offers high protection for those areas, it is more of a status symbol and is intended to be worn over clothing and under armor without affecting mobility.</description>
     <techLevel>Spacer</techLevel>
     <recipeMaker>
       <unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
