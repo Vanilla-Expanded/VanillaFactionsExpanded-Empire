@@ -13,7 +13,7 @@
         <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
         <fleckDef>VFEE_ParadeConfettiFleck</fleckDef>
         <chancePerTick>0.05</chancePerTick>
-        <scale>0.9~1.3</scale>
+        <scale>0.5~1</scale>
         <rotationRate>-30~30</rotationRate>
         <speed>0.6~1.8</speed>
       </li>
@@ -21,13 +21,13 @@
         <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
         <fleckDef>VFEE_ParadeConfettiFleckSecondary</fleckDef>
         <chancePerTick>0.1</chancePerTick>
-        <scale>2.5~3.5</scale>
+        <scale>1.1~1.8</scale>
       </li>
       <li>
         <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
         <moteDef>Mote_SparkThrownFastBright</moteDef>
         <chancePerTick>0.7</chancePerTick>
-        <scale>0.24~0.34</scale>
+        <scale>0.12~0.24</scale>
         <airTime>0.08~0.16</airTime>
         <rotationRate>-240~240</rotationRate>
         <speed>7.2~12</speed>

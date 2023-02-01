@@ -68,8 +68,8 @@ public class QuestNode_Root_RoyalParade : QuestNode
             var transport = quest.GenerateTransportShip(TransportShipDefOf.Ship_Shuttle, lodgers, shuttle).transportShip;
             quest.AddShipJob_Arrive(transport, map.Parent, factionForArrival: Faction.OfEmpire, startMode: ShipJobStartMode.Instant);
             quest.AddShipJob_Unload(transport);
-            quest.AddShipJob_WaitForever(transport, false, true);
-            QuestUtility.AddQuestTag(ref transport.questTags, questTag);
+            quest.AddShipJob_WaitForever(transport, true, true, nobles.Cast<Thing>().ToList());
+        QuestUtility.AddQuestTag(ref transport.questTags, questTag);
             //lord
             var questPart_Parade = new QuestPart_Parade()
             {

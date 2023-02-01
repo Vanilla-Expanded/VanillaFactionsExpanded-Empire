@@ -232,10 +232,25 @@ namespace VFEEmpire
 			return graph;
 		}
 
-
-		public void StopParade(string signal)
+        public override void Notify_InMentalState(Pawn pawn, MentalStateDef stateDef)
+        {
+            base.Notify_InMentalState(pawn, stateDef);
+        }
+        public void StopParade(string signal)
 		{
 			paradeFinished = true;
+			if(signal == "CeremonyDone") //Swap shuttle and shipjob to one where player can utilise
+            {
+				shuttle.SetFactionDirect(Faction.OfPlayer);//Swap faction to player at this point so players can load what they want
+				var compShuttle = shuttle.TryGetComp<CompShuttle>();
+				compShuttle.requiredPawns = nobles.Where(x => x.Faction == Faction.OfEmpire || x == stellarch).ToList();
+				compShuttle.acceptColonists = true;
+				compShuttle.acceptChildren = true;
+				var transport = compShuttle.shipParent;
+				var shipJob_Wait = (ShipJob_WaitForever)ShipJobMaker.MakeShipJob(ShipJobDefOf.WaitForever);
+				shipJob_Wait.showGizmos = true;
+				transport.ForceJob(shipJob_Wait);
+			}
 			foreach (KeyValuePair<Pawn, int> keyValuePair in paradeToil.Data.presentForTicks)
 			{
 				if (keyValuePair.Key != null && !keyValuePair.Key.Dead)
@@ -254,7 +269,6 @@ namespace VFEEmpire
 			}
 			totalPresenceTmp.RemoveAll((tp) => tp.Value < 2500);
 			outcome.Apply((float)ticksPassed / (float)duration, totalPresenceTmp, this);
-			outcome.ResetCompDatas();
 			lord.ReceiveMemo("CeremonyFinished");
 			QuestUtility.SendQuestTargetSignals(lord.questTags, signal, lord.Named("SUBJECT"));
 			foreach (var pawn in lord.ownedPawns)
@@ -336,7 +350,7 @@ namespace VFEEmpire
         {
             if (AtDestination)
             {
-				if (ticksSinceConfetti > 120 || Rand.Chance(0.05f))
+				if (ticksSinceConfetti > 240 || Rand.Chance(0.025f))
                 {
 					ticksSinceConfetti = 0;
 					CreateConfetti();
@@ -344,7 +358,7 @@ namespace VFEEmpire
 			}
             else
             {
-				if (ticksSinceConfetti > 460 || Rand.Chance(0.01f))
+				if (ticksSinceConfetti > 460 || Rand.Chance(0.005f))
 				{
 					ticksSinceConfetti = 0;
 					CreateConfetti();
@@ -444,6 +458,8 @@ namespace VFEEmpire
 					murderer.jobs.CheckForJobOverride();
 				}
             }
+			foreach (var pawn in guards)
+				pawn.jobs.CheckForJobOverride();
 		}
 		public void RoomSwap()
 		{
@@ -479,7 +495,7 @@ namespace VFEEmpire
 
         public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason)
         {
-			return p.Faction.IsPlayer;
+			return true;
         }
 
         public override string GetReport(Pawn pawn)

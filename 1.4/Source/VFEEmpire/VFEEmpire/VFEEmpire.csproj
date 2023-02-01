@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\JobDriver\JobDriver_ParadeGuardGotoWait.cs" />
     <Compile Include="AI\JobDriver\JobDriver_GiveHonor.cs" />
     <Compile Include="AI\JobDriver\JobDriver_ArtPresent.cs" />
     <Compile Include="AI\JobDriver\JobDriver_ArtSpectate.cs" />
