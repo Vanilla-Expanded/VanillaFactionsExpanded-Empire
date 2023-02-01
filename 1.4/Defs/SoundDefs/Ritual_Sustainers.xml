@@ -61,5 +61,24 @@
     </subSounds>
     <sustainFadeoutTime>2.5</sustainFadeoutTime>
   </SoundDef>
-  
+   <SoundDef>
+	<defName>VFEE_Parade_Sustainer_01</defName>
+    <sustain>True</sustain>
+    <context>MapOnly</context>
+    <priorityMode>PrioritizeNearest</priorityMode>
+	<subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Parade/Music_Parade_Sustainer_01a</clipPath>
+          </li>
+        </grains>
+        <volumeRange>21</volumeRange>
+        <distRange>30~120</distRange>
+        <sustainAttack>3</sustainAttack>
+        <sustainSkipFirstAttack>False</sustainSkipFirstAttack>
+      </li>
+    </subSounds>
+    <sustainFadeoutTime>2.5</sustainFadeoutTime>
+  </SoundDef>
 </Defs>

@@ -38,11 +38,7 @@ namespace VFEEmpire
 				return null;
 			}
 					
-			if(pawn.Position.DistanceTo(destination) < 6) //So they chill more
-            {
-				return null;
-            }
-			var job = JobMaker.MakeJob(JobDefOf.Goto, destination);
+			var job = JobMaker.MakeJob(InternalDefOf.VFEE_ParadeGuardGoto, destination);
 			job.locomotionUrgency = pawn.Position.DistanceTo(destination) > 5f ? LocomotionUrgency.Jog : LocomotionUrgency.Amble;
 			job.expiryInterval = 450;
 			job.checkOverrideOnExpire = true;

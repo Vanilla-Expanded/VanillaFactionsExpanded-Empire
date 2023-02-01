@@ -21,7 +21,7 @@ namespace VFEEmpire
 			this.action = action;
 			this.job = job;
 			this.defaultLabel = "VFEE.Parade.Begin".Translate();
-			this.icon = ContentFinder<Texture2D>.Get("UI/Rituals/Ritual_GrandBall", true);
+			this.icon = ContentFinder<Texture2D>.Get("UI/Rituals/BestowingParade", true);
 		}
 		public override GizmoResult GizmoOnGUI(Vector2 topLeft, float maxWidth, GizmoRenderParms parms)
 		{			

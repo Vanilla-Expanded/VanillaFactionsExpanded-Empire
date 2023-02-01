@@ -35,12 +35,12 @@ namespace VFEEmpire
 
 
 		//Not Exposed
+		public Sustainer music;
 		public static readonly int duration = 30000;
 		private static readonly int raidSpawn = 7500;
 		private static readonly int bombSpawn = 12500;
 		private static readonly int murders = 22500;
 		private int ticksSinceConfetti;
-		private int ticksSinceMusicMove;
 		private List<ParadeEffecter> effecters = new();
 		public LordToil exitToil;
 		public LordToil_Parade_Start paradeToil;
@@ -48,7 +48,7 @@ namespace VFEEmpire
 		public List<Room> visitedRooms = new();
 		public RitualOutcomeEffectWorker_Parade outcome;
 		public static readonly string MemoCeremonyStarted = "CeremonyStarted";
-		private static Texture2D icon = ContentFinder<Texture2D>.Get("UI/Icons/Rituals/BestowCeremony", true);
+		private static Texture2D icon = ContentFinder<Texture2D>.Get("UI/Rituals/BestowingParade", true);
 		public LordJob_Parade()
 		{
 		}
@@ -154,10 +154,6 @@ namespace VFEEmpire
 			var removeColonists = new TransitionAction_Custom(() =>
 			{
 				lord.RemovePawns(colonistParticipants.Except(stellarch).ToList());
-				if (ticksPassed < duration)
-				{
-					lord.RemovePawn(stellarch);
-				}
 			});
 
 			var transition_Spawned = new Transition(wait_ForSpawned, moveToPlace);
@@ -232,14 +228,11 @@ namespace VFEEmpire
 			return graph;
 		}
 
-        public override void Notify_InMentalState(Pawn pawn, MentalStateDef stateDef)
-        {
-            base.Notify_InMentalState(pawn, stateDef);
-        }
+
         public void StopParade(string signal)
 		{
 			paradeFinished = true;
-			if(signal == "CeremonyDone") //Swap shuttle and shipjob to one where player can utilise
+			if(signal == "CeremonySuccess") //Swap shuttle and shipjob to one where player can utilise
             {
 				shuttle.SetFactionDirect(Faction.OfPlayer);//Swap faction to player at this point so players can load what they want
 				var compShuttle = shuttle.TryGetComp<CompShuttle>();
@@ -251,6 +244,10 @@ namespace VFEEmpire
 				shipJob_Wait.showGizmos = true;
 				transport.ForceJob(shipJob_Wait);
 			}
+            else
+            {
+				lord.RemovePawn(stellarch);
+            }
 			foreach (KeyValuePair<Pawn, int> keyValuePair in paradeToil.Data.presentForTicks)
 			{
 				if (keyValuePair.Key != null && !keyValuePair.Key.Dead)
@@ -311,7 +308,11 @@ namespace VFEEmpire
 				ticksPassed++;				
 				ticksThisRotation++;
 				ticksSinceConfetti++;
-				ticksSinceMusicMove++;
+				if(music == null)
+                {
+					InternalDefOf.VFEE_Parade_Sustainer_01.TrySpawnSustainer(SoundInfo.InMap(stellarch, MaintenanceType.PerTick));
+                }
+				music?.Maintain();
 				CheckForEffect();
 				foreach(var effecter in effecters.ToList())
                 {
@@ -486,14 +487,28 @@ namespace VFEEmpire
 			{
 				nobles.Remove(p);
 			}
-            if (guards.Contains(p))
-            {
+			if (guards.Contains(p))
+			{
 				guards.Remove(p);
+			}
+			var compShuttle = shuttle.TryGetComp<CompShuttle>();
+			if (compShuttle.requiredPawns.Contains(p))
+            {
+				compShuttle.requiredPawns.Remove(p);	
             }
 			p.jobs?.CheckForJobOverride();
 		}
-
-        public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason)
+		public override void Notify_InMentalState(Pawn pawn, MentalStateDef stateDef)
+		{
+			base.Notify_InMentalState(pawn, stateDef);
+			//twice in a row during test two nobles managed to kill eachother in a random social fight failing the quest. Just no...High frequency social interactions can lead to stupid things with 12 hours
+			if (stateDef == MentalStateDefOf.SocialFighting && pawn.Faction == Faction.OfEmpire) 
+            {
+				pawn.MentalState.RecoverFromState();
+				pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
+            }
+		}
+		public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason)
         {
 			return true;
         }
@@ -502,7 +517,6 @@ namespace VFEEmpire
 		{
 			return "LordReportAttending".Translate("VFEE.Parade.Label".Translate());
 		}
-
 		protected override bool ShouldCallOffBecausePawnNoLongerOwned(Pawn p)
 		{
 			return base.ShouldCallOffBecausePawnNoLongerOwned(p) && !this.guards.Contains(p);

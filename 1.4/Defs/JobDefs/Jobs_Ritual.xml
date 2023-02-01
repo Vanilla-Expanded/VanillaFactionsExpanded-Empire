@@ -57,4 +57,11 @@
     <reportString>Honoring TargetB.</reportString>
     <casualInterruptible>false</casualInterruptible>
   </JobDef>
+   <JobDef>
+    <defName>VFEE_ParadeGuardGoto</defName>
+    <driverClass>VFEEmpire.JobDriver_ParadeGuardGotoWait</driverClass>
+	<alwaysShowWeapon>True</alwaysShowWeapon>
+    <reportString>Guarding.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
 </Defs>

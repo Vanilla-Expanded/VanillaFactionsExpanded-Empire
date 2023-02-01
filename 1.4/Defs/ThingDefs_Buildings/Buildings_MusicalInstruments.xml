@@ -24,7 +24,7 @@
     <size>(5,3)</size>
     <minTechLevelToBuild>Industrial</minTechLevelToBuild>
     <interactionCellOffset>(0,0,2)</interactionCellOffset>
-    <soundPlayInstrument>Piano_Play</soundPlayInstrument>
+    <soundPlayInstrument>VFEE_Organ_Play</soundPlayInstrument>
     <defaultPlacingRot>West</defaultPlacingRot>
     <researchPrerequisites><li>VFEE_PipeOrgans</li></researchPrerequisites>
     <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
@@ -70,4 +70,23 @@
       </damageData>
     </graphicData>
   </ThingDef>
+   <SoundDef>
+    <defName>VFEE_Organ_Play</defName>
+    <context>MapOnly</context>
+    <sustain>True</sustain>
+    <sustainFadeoutTime>0.25</sustainFadeoutTime>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Organs/Music_Organs_Sustainer_01a</clipPath>
+          </li>
+        </grains>
+        <volumeRange>25</volumeRange>
+        <distRange>5~25</distRange>
+        <muteWhenPaused>True</muteWhenPaused>
+      </li>
+    </subSounds>
+  </SoundDef>
 </Defs>

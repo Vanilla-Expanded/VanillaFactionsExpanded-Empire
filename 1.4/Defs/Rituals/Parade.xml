@@ -5,6 +5,7 @@
     <label>Parade</label>
 	<preceptClass>Precept_Ritual</preceptClass>
     <description>Parade</description>
+	<iconPath>UI/Rituals/BestowingParade</iconPath>
 	<issue>Ritual</issue>
     <ritualPatternBase>VFEE_Parade_Pattern</ritualPatternBase> 
     <classic>false</classic><!--Not classic as dont want auto add, added as needed with quest-->

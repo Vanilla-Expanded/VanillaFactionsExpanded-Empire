@@ -56,10 +56,14 @@ public class QuestNode_Root_RoyalParade : QuestNode
         QuestUtility.AddQuestTag(ref shuttle.questTags, questTag);
         slate.Set("shuttle", shuttle);
         string pickupSuccess = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.SentSatisfied");
-
-        //nobles arrive after 5 days
-/*        quest.Delay(prepareTicks, () =>
-        {*/
+        //Because if this annoyed me in testing, in actual endgame it'd be infurating
+        var questPart_DisableBreaks = new QuestPart_DisableRandomMoodCausedMentalBreaks();
+        questPart_DisableBreaks.pawns = nobles;
+        questPart_DisableBreaks.inSignalEnable = QuestGen.slate.Get<string>("inSignal", null, false);
+        quest.AddPart(questPart_DisableBreaks);
+            //nobles arrive after 5 days
+            /*        quest.Delay(prepareTicks, () =>
+                    {*/
             //shuttle
             var lodgers = new List<Pawn>();
             lodgers.AddRange(nobles);

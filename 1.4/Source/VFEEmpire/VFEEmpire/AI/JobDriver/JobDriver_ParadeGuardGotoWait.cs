@@ -20,17 +20,27 @@ namespace VFEEmpire
 		{
 
 			yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.OnCell);
-			Toil toil = new Toil();
-			toil.defaultCompleteMode = ToilCompleteMode.Instant; //Interupt will handle htis
-			toil.socialMode = RandomSocialMode.Off;
-			toil.handlingFacing = true;
-			yield return toil;
 			Toil wait = new Toil();
+			wait.tickAction = delegate ()
+			{
+				ticksToRotate++;
+				if(ticksToRotate % 180 == 0)
+                {
+					var rot = Rot4.Random;
+					pawn.rotationTracker.FaceCell(pawn.Position + rot.FacingCell);
+				}
+			};
 			wait.defaultCompleteMode = ToilCompleteMode.Delay;
 			wait.defaultDuration = 360;
+			wait.handlingFacing = true;
 			wait.socialMode = RandomSocialMode.Off;
+			yield return wait;
 			yield break;
 		}
-
-	}
+		private int ticksToRotate;
+        public override bool IsContinuation(Job j)
+        {
+            return job.GetTarget(TargetIndex.A) == j.GetTarget(TargetIndex.A);
+		}
+    }
 }
