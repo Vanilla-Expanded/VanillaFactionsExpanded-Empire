@@ -38,7 +38,7 @@ namespace VFEEmpire
             if (p == bestNoble)
             {
                 LordJob_Parade job = (LordJob_Parade)lord.LordJob;
-                yield return new Command_Parade(job, bestNoble, new Action<List<Pawn>>(StartRitual));
+                yield return new Command_Parade(job, bestNoble, new Action<RitualRoleAssignments>(StartRitual));
             }
             yield break;
         }
@@ -53,7 +53,7 @@ namespace VFEEmpire
                     string label = lordJob.RitualLabel;
                     Dialog_BeginRitual.ActionCallback callBack = (RitualRoleAssignments participants) =>
                     {
-                        StartRitual(participants.Participants);
+                        StartRitual(participants);
                         return true;
                     };
                     Func<Pawn, bool, bool, bool> filter = (Pawn pawn, bool voluntary, bool allowOtherIdeos) =>
@@ -91,15 +91,15 @@ namespace VFEEmpire
             }
 
         }
-        private void StartRitual(List<Pawn> pawns)
+        private void StartRitual(RitualRoleAssignments participants)
         {
+            List<Pawn> pawns = participants.Participants;
             lord.AddPawns(pawns);
             var parade = lord.LordJob as LordJob_Parade;
             parade.colonistParticipants.AddRange(pawns);
-            lord.ReceiveMemo(LordJob_Parade.MemoCeremonyStarted);
             foreach (Pawn pawn in pawns)
             {
-                if(parade.RoleFor(pawn).id == "Guard")
+                if(participants.RoleForPawn(pawn)?.id == "guard")
                 {
                     parade.guards.Add(pawn);
                 }
@@ -117,6 +117,7 @@ namespace VFEEmpire
                 }
             }
             parade.nobles.OrderByDescending(x => x.royalty.MostSeniorTitle.def.seniority);
+            lord.ReceiveMemo(LordJob_Parade.MemoCeremonyStarted);
         }
     }
 }

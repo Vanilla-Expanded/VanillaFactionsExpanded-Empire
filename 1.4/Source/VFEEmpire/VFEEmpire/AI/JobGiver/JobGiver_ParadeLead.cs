@@ -19,7 +19,7 @@ namespace VFEEmpire
             }
 			var destination = parade.Destination;
 			var job = JobMaker.MakeJob(JobDefOf.Goto, destination);
-			job.locomotionUrgency = LocomotionUrgency.Walk;
+			job.locomotionUrgency = LocomotionUrgency.Amble;
 			return job;
 		}
 

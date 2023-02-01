@@ -38,7 +38,7 @@ public static class InternalDefOf
     public static DutyDef VFEE_ParadeLead;
     public static DutyDef VFEE_ParadeNoble;
     public static DutyDef VFEE_ParadeGuard;
-
+    public static EffecterDef VFEE_ParadeConfetti;
 
     public static InteractionDef VFEE_RoyalGossip;
 

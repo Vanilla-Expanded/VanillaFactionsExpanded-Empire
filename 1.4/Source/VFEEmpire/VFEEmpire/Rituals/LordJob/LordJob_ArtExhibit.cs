@@ -345,7 +345,10 @@ namespace VFEEmpire
 			}
 			p.jobs?.CheckForJobOverride();
 		}
-
+		public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason)
+		{
+			return p.Faction.IsPlayer;
+		}
 
 
 		public override string GetReport(Pawn pawn)

@@ -12,25 +12,44 @@ namespace VFEEmpire
 
 		protected override Job TryGiveJob(Pawn pawn)
 		{
-			var parade = pawn.GetLord()?.LordJob as LordJob_Parade;			
-			if(parade.AtDestination)
+			var parade = pawn.GetLord()?.LordJob as LordJob_Parade;
+
+			if(parade.AtDestination && parade.allAtStart)
             {
-				if(pawn.GetRoom() != parade.GetRoom)
+				if(pawn.GetRoom() != parade.CurrentRoom)
                 {
-					return JobMaker.MakeJob(JobDefOf.Goto, parade.Destination); 
+					if(CellFinder.TryFindRandomCellNear(parade.Destination, pawn.Map, 10, (IntVec3 c) => c.GetRoom(pawn.Map) == parade.CurrentRoom 
+					&& pawn.CanReserveAndReach(c,PathEndMode.OnCell,Danger.Deadly),
+						out var roomSpot))
+                    {
+						return JobMaker.MakeJob(JobDefOf.Goto, roomSpot);
+					}
+					return null;
                 }
 				return null;
             }
 			if(!Orderspot(out var destination))
             {
+                if (!parade.allAtStart) //inelegant solution for weird bug at start sometimes
+                {
+					parade.AddTagForPawn(pawn, "Arrived");
+                }
 				return null;//Go to idle a spot should open as they move
             }
 			if((pawn.Position == destination))
             {
 				return null;
             }
+			if (!parade.allAtStart)
+			{
+                if (!parade.stellAtStart) //This is so everyone doesn't chase after the stellarch while moving towards shuttle at start
+                {
+					return null;
+                }
+			}
 			var job = JobMaker.MakeJob(JobDefOf.Goto, destination);
-			job.locomotionUrgency = pawn.Position.DistanceTo(destination) > 5f ? LocomotionUrgency.Jog : LocomotionUrgency.Amble;
+			job.ritualTag = parade.allAtStart ? "" : "Arrived";
+			job.locomotionUrgency = pawn.Position.DistanceTo(destination) > 5f ? LocomotionUrgency.Jog : LocomotionUrgency.Walk;
 			return job;
 			//offset based on index which is ordered by seniority
 			//Based on north rotation then flipped so its behind

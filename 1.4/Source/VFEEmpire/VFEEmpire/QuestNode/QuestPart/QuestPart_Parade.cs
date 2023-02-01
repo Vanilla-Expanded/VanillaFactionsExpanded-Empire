@@ -19,7 +19,13 @@ namespace VFEEmpire
 
         protected override Lord MakeLord()
         {
-            var cell = DropCellFinder.GetBestShuttleLandingSpot(Map, faction);
+            IntVec3 cell = DropCellFinder.GetBestShuttleLandingSpot(Map, faction);
+            var compShuttle = shuttle.TryGetComp<CompShuttle>();
+            var shipJob = compShuttle.shipParent.curJob as ShipJob_Arrive;
+            if (shipJob != null)
+            {
+                cell = ThingUtility.InteractionCellsWhenAt(shuttle.def, shipJob.cell, Rot4.North, Map, true).First(x=>x.Standable(Map));
+            }
             var job = new LordJob_Parade(stellarch,leadPawn, cell, shuttle, questTag+".QuestEnded");
             var lord = LordMaker.MakeNewLord(faction,job,Map);
             QuestUtility.AddQuestTag(ref lord.questTags,questTag);

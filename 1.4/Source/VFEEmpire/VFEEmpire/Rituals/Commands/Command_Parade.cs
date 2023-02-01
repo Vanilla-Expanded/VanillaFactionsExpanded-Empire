@@ -13,9 +13,9 @@ namespace VFEEmpire
     {
 		private Pawn bestNoble;
 		private LordJob_Parade job;
-		private Action<List<Pawn>> action;
+		private Action<RitualRoleAssignments> action;
 
-		public Command_Parade(LordJob_Parade job, Pawn bestNoble, Action<List<Pawn>> action)
+		public Command_Parade(LordJob_Parade job, Pawn bestNoble, Action<RitualRoleAssignments> action)
 		{
 			this.bestNoble = bestNoble;
 			this.action = action;
@@ -34,7 +34,7 @@ namespace VFEEmpire
             string label = job.RitualLabel;
             Dialog_BeginRitual.ActionCallback callBack = (RitualRoleAssignments participants) =>
             {
-                action(participants.Participants);
+                action(participants);
                 return true;
             };
             Func<Pawn, bool, bool, bool> filter = (Pawn pawn, bool voluntary, bool allowOtherIdeos) =>

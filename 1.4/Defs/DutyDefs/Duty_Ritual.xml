@@ -136,7 +136,8 @@
   <DutyDef>
     <defName>VFEE_ParadeLead</defName>
     <thinkNode Class="ThinkNode_Priority">
-      <subNodes>     
+      <subNodes>  
+	  <li Class="VFEEmpire.JobGiver_ParadeLeadStartPos"/>	  
       <li Class="VFEEmpire.JobGiver_ParadeLead"/>
       <li Class="ThinkNode_ConditionalInGatheringArea">
         <subNodes>
@@ -223,7 +224,7 @@
     <defName>VFEE_ParadeGuard</defName>
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>     
-        <li Class="VFEEmpire.JobGiver_ParadeFollow"/>
+        <li Class="VFEEmpire.JobGiver_ParadeGuard"/>
         <li Class="JobGiver_Idle"/>
       </subNodes>
     </thinkNode>

@@ -14,8 +14,8 @@ public class QuestNode_Root_RoyalParade : QuestNode
     protected override bool TestRunInt(Slate slate)
     {
         var map = QuestGen_Get.GetMap();
-        map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle)
-           .TryRandomElementByWeight(x => x?.def?.seniority ?? 0f,out var leadTitle); //Title of highest colony member            
+        var leadTitle = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle)
+           .OrderByDescending(x => x?.def?.seniority ?? 0f).FirstOrDefault(); //Title of highest colony member            
         return leadTitle != null && leadTitle.def.defName == "Stellarch" && !Faction.OfPlayer.HostileTo(Faction.OfEmpire);
     }
 

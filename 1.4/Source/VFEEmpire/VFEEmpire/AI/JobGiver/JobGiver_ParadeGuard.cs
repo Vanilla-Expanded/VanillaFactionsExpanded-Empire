@@ -38,11 +38,12 @@ namespace VFEEmpire
 				return null;
 			}
 					
-			if(pawn.Position == destination)
+			if(pawn.Position.DistanceTo(destination) < 6) //So they chill more
             {
 				return null;
             }
 			var job = JobMaker.MakeJob(JobDefOf.Goto, destination);
+			job.locomotionUrgency = pawn.Position.DistanceTo(destination) > 5f ? LocomotionUrgency.Jog : LocomotionUrgency.Amble;
 			job.expiryInterval = 450;
 			job.checkOverrideOnExpire = true;
 			return job;
@@ -52,16 +53,7 @@ namespace VFEEmpire
 				return CellFinder.TryFindRandomCellNear(stell,parade.Map, 5,(IntVec3 c) =>
 				{
 					bool distStell = stell.DistanceTo(c) >= 3;
-					bool distGuard = true;
-					foreach(var p in guard)
-                    {
-                        if (p.Position.DistanceTo(c) < 2)
-                        {
-							distGuard = false;
-							break;
-						}
-                    }
-					return distStell && distGuard && pawn.CanReserveAndReach(c, PathEndMode.OnCell, Danger.Deadly) && c.GetRoom(pawn.Map) == parade.stellarch.GetRoom();
+					return distStell && pawn.CanReserveAndReach(c, PathEndMode.OnCell, Danger.Deadly) && c.GetRoom(pawn.Map) == parade.stellarch.GetRoom();
 				}, out cell);
             }
 			bool Destspot(Room dest, out IntVec3 cell)

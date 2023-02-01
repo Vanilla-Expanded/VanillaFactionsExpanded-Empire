@@ -26,7 +26,12 @@
   <RitualBehaviorDef> <!--used only for role selection nothing else-->
     <defName>VFEE_Parade_Behavior</defName>
     <workerClass>VFEEmpire.RitualBehaviorWorker_Parade</workerClass>
-    <durationTicks>5000</durationTicks>
+    <durationTicks>30000</durationTicks>
+	<spectatorsLabel>Nobles</spectatorsLabel>
+	<spectatorGerund>Nobles</spectatorGerund>
+	<spectatorFilter Class="VFEEmpire.RitualSpectatorFilter_Titled">
+		<description>Titled Nobles</description>
+	</spectatorFilter>
     <roles>
       <li Class="RitualRoleColonist">
         <label>stellarch</label>
@@ -38,11 +43,6 @@
         <label>guard</label>
         <id>guard</id>		
 		<maxCount>4</maxCount>
-      </li>
-	  <li Class="VFEEmpire.RitualRoleTitled">
-        <label>noble</label>
-        <id>noble</id>		
-		<colonistOnly>false</colonistOnly>
       </li>
     </roles>
     <stages>
