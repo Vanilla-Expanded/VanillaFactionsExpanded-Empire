@@ -96,6 +96,7 @@
     <statBases>
       <MaxHitPoints>120</MaxHitPoints>
       <Mass>2</Mass>
+	  <MarketValue>1200</MarketValue>
       <Flammability>0.4</Flammability>
       <ArmorRating_Sharp>1.06</ArmorRating_Sharp>
       <ArmorRating_Blunt>0.45</ArmorRating_Blunt>
