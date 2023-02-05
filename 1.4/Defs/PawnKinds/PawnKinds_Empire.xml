@@ -78,13 +78,13 @@
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>OnSkin</apparelLayer>
         <requiredTag>RoyalTier2</requiredTag>
-        <color>(104, 85, 227)</color>
+        <color>(157, 145, 237)</color>
       </li>
       <li>
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>Shell</apparelLayer>
         <requiredTag>RoyalTier6</requiredTag>
-        <color>(104, 85, 227)</color>
+        <color>(157, 145, 237)</color>
         <alternateTagChoices>
           <li>
             <tag>Cape</tag>
@@ -127,19 +127,19 @@
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>Middle</apparelLayer>
         <requiredTag>RoyalTier5</requiredTag>
-        <color>(55,55,55)</color>
+        <color>(82,82,82)</color>
       </li>
       <li>
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>OnSkin</apparelLayer>
         <requiredTag>RoyalTier2</requiredTag>
-        <color>(104, 85, 227)</color>
+        <color>(161, 154, 204)</color>
       </li>
       <li>
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>Shell</apparelLayer>
         <requiredTag>RoyalTier6</requiredTag>
-        <color>(104, 85, 227)</color>
+        <color>(161, 154, 204)</color>
         <alternateTagChoices>
           <li>
             <tag>Cape</tag>
@@ -181,19 +181,19 @@
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>Middle</apparelLayer>
         <requiredTag>RoyalTier5</requiredTag>
-        <color>(27, 78, 171)</color>
+        <color>(250, 250, 250)</color>
       </li>
       <li>
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>OnSkin</apparelLayer>
         <requiredTag>RoyalTier2</requiredTag>
-        <color>(27, 78, 171)</color>
+        <color>(250, 250, 250)</color>
       </li>
       <li>
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>Shell</apparelLayer>
         <requiredTag>RoyalTier6</requiredTag>
-        <color>(250, 250, 250)</color>
+        <color>(212, 157, 157)</color>
         <alternateTagChoices>
           <li>
             <tag>Cape</tag>
@@ -243,19 +243,19 @@
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>Middle</apparelLayer>
         <requiredTag>RoyalTier5</requiredTag>
-        <color>(27, 78, 171)</color>
+        <color>(212, 157, 157)</color>
       </li>
       <li>
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>OnSkin</apparelLayer>
         <requiredTag>RoyalTier2</requiredTag>
-        <color>(27, 78, 171)</color>
+        <color>(212, 157, 157)</color>
       </li>
       <li>
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>Shell</apparelLayer>
         <requiredTag>StellicRobe</requiredTag>
-        <color>(250, 250, 250)</color>
+        <color>(210, 49, 49)</color>
         <alternateTagChoices>
           <li>
             <tag>Cape</tag>
@@ -362,19 +362,19 @@
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>Shell</apparelLayer>
         <requiredTag>StellicRobe</requiredTag>
-        <color>(128, 0, 32)</color>
+        <color>(104, 3, 28)</color>
       </li>
       <li>
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>Middle</apparelLayer>
         <requiredTag>RoyalTier5</requiredTag>
-        <color>(95, 20, 133)</color>
+        <color>(93, 0, 140)</color>
       </li>
       <li>
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>OnSkin</apparelLayer>
         <requiredTag>RoyalTier2</requiredTag>
-        <color>(95, 20, 133)</color>
+        <color>(93, 0, 140)</color>
       </li>
       <li>
         <bodyPartGroup>Torso</bodyPartGroup>
