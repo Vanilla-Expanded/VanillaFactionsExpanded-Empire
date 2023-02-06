@@ -7,5 +7,12 @@
                 <prerequisite>VFEI_MedDrop</prerequisite> 
             </value>
     </Operation>
+	
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/RoyalTitlePermitDef[defName="GlitterMedDrop"]/uiPosition</xpath>
+            <value>
+                <uiPosition>(2,8)</uiPosition> 
+            </value>
+    </Operation>
 
 </Patch>
