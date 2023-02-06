@@ -28,4 +28,11 @@
       </value>
    </Operation>
    
+   <Operation Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="Apparel_CrownStellic"]/statBases</xpath>
+      <value>
+        <WorkToMake>14000</WorkToMake>
+      </value>
+   </Operation>
+   
 </Patch>
