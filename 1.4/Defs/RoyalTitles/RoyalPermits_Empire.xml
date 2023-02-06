@@ -139,6 +139,7 @@
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
     <uiPosition>(2,8)</uiPosition>
+	<prerequisite>VFEI_HerbalMedDrop</prerequisite>
     <royalAid>
       <itemsToDrop>
         <MedicineIndustrial>25</MedicineIndustrial>

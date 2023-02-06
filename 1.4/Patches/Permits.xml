@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/RoyalTitlePermitDef[defName="GlitterMedDrop"]</xpath>
+            <value>
+                <prerequisite>VFEI_MedDrop</prerequisite> 
+            </value>
+    </Operation>
+
+</Patch>
