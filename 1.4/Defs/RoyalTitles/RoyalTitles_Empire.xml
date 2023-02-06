@@ -878,7 +878,7 @@
         <area>150</area>
       </li>
       <li Class="RoomRequirement_Impressiveness">
-        <impressiveness>240</impressiveness>
+        <impressiveness>200</impressiveness>
       </li>
       <li Class="RoomRequirement_TerrainWithTags">
         <labelKey>RoomRequirementAllFineFloored</labelKey>
@@ -1162,7 +1162,7 @@
         <area>180</area>
       </li>
       <li Class="RoomRequirement_Impressiveness">
-        <impressiveness>260</impressiveness>
+        <impressiveness>210</impressiveness>
       </li>
       <li Class="RoomRequirement_TerrainWithTags">
         <labelKey>RoomRequirementAllFineFloored</labelKey>
@@ -1455,7 +1455,7 @@
         <area>220</area>
       </li>
       <li Class="RoomRequirement_Impressiveness">
-        <impressiveness>260</impressiveness>
+        <impressiveness>210</impressiveness>
       </li>
       <li Class="RoomRequirement_TerrainWithTags">
         <labelKey>RoomRequirementAllFineFloored</labelKey>
@@ -1522,10 +1522,10 @@
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
-        <area>80</area>
+        <area>100</area>
       </li>
       <li Class="RoomRequirement_Impressiveness">
-        <impressiveness>150</impressiveness>
+        <impressiveness>160</impressiveness>
       </li>
       <li Class="RoomRequirement_TerrainWithTags">
         <labelKey>RoomRequirementAllFineFloored</labelKey>
@@ -1594,10 +1594,10 @@
       <li Class="VFEEmpire.RoyalTitleDefExtension">
         <ballroomRequirements>
           <li Class="RoomRequirement_Area">
-            <area>120</area>
+            <area>130</area>
           </li>
           <li Class="RoomRequirement_Impressiveness">
-            <impressiveness>180</impressiveness>
+            <impressiveness>200</impressiveness>
           </li>
           <li Class="RoomRequirement_TerrainWithTags">
             <labelKey>RoomRequirementAllFineFloored</labelKey>
@@ -1620,10 +1620,10 @@
         </ballroomRequirements>
         <galleryRequirements>
           <li Class="RoomRequirement_Area">
-            <area>100</area>
+            <area>120</area>
           </li>
           <li Class="RoomRequirement_Impressiveness">
-            <impressiveness>200</impressiveness>
+            <impressiveness>220</impressiveness>
           </li>
           <li Class="RoomRequirement_TerrainWithTags">
             <labelKey>RoomRequirementAllFineFloored</labelKey>
@@ -1752,7 +1752,7 @@
         <area>280</area>
       </li>
       <li Class="RoomRequirement_Impressiveness">
-        <impressiveness>300</impressiveness>
+        <impressiveness>220</impressiveness>
       </li>
       <li Class="RoomRequirement_TerrainWithTags">
         <labelKey>RoomRequirementAllFineFloored</labelKey>
@@ -2066,7 +2066,7 @@
         <area>340</area>
       </li>
       <li Class="RoomRequirement_Impressiveness">
-        <impressiveness>300</impressiveness>
+        <impressiveness>220</impressiveness>
       </li>
       <li Class="RoomRequirement_TerrainWithTags">
         <labelKey>RoomRequirementAllFineFloored</labelKey>
