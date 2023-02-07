@@ -106,7 +106,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
                 mustBeOfFaction = Faction.OfEmpire,
                 mustBeOfKind = mustBeOfKind,
                 mustBeWorldPawn = true,
-                mustBeCapableOfViolence = true,
+                mustBeCapableOfViolence = true,                
                 canGeneratePawn = true
             });
             if (solider != null) lodgers.Add(solider);
@@ -115,7 +115,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
         slate.Set("lodgers", lodgers);
 
         //**Apply restrictions
-        quest.SetAllApparelLocked(lodgers);
+        
         var workDisabled = new QuestPart_WorkDisabled();
         workDisabled.inSignalEnable = QuestGen.slate.Get<string>("inSignal");
         workDisabled.pawns.AddRange(lodgers);
@@ -195,8 +195,8 @@ public class QuestNode_Root_NobleVisit : QuestNode
         joinPlayer.pawns = lodgers;
         joinPlayer.mapParent = map.Parent;
         quest.AddPart(joinPlayer);
-
-
+        quest.SetAllApparelLocked(lodgers, QuestGen.slate.Get<string>("inSignal"));
+        quest.BiocodeWeapons(lodgers, QuestGen.slate.Get<string>("inSignal"));
         //**Pawns Leave
         var anyLeave = QuestGen.GenerateNewSignal("lodgerLeave");
         quest.AnySignal(new List<string>
