@@ -3,6 +3,7 @@ using System.Linq;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using Verse.AI.Group;
 
 namespace VFEEmpire;
 
@@ -89,7 +90,74 @@ public class RoyalTitlePermitWorker_CallRegiment : RoyalTitlePermitWorker_Call
         arrive.cell = cell;
         arrive.mapParent = map.Parent;
         ship.AddJob(arrive);
+        ship.AddJob(new ShipJob_Unload_WithLord(ship, new LordJob_AssistColony(Faction.OfEmpire, cell)));
         ship.AddJobs(ShipJobDefOf.Unload, ShipJobDefOf.FlyAway);
         ship.Start();
+    }
+
+    public class ShipJob_Unload_WithLord : ShipJob
+    {
+        private Lord lord;
+        private LordJob lordJob;
+
+        public ShipJob_Unload_WithLord() { }
+
+        public ShipJob_Unload_WithLord(TransportShip ship, LordJob lordJob) : base(ship) => this.lordJob = lordJob;
+
+        protected override bool ShouldEnd => false;
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            if (Scribe.mode != LoadSaveMode.Saving || lord == null) Scribe_Deep.Look(ref lordJob, "lordJob");
+            Scribe_References.Look(ref lord, "lord");
+        }
+
+        public override bool TryStart()
+        {
+            if (!transportShip.ShipExistsAndIsSpawned) return false;
+            if (!base.TryStart()) return false;
+            lord = LordMaker.MakeNewLord(transportShip.shipThing.Faction, lordJob, transportShip.shipThing.Map);
+            return true;
+        }
+
+        public override void Tick()
+        {
+            base.Tick();
+            if (transportShip.shipThing.IsHashIntervalTick(60)) Drop();
+        }
+
+        private void Drop()
+        {
+            var thingToDrop = transportShip.TransporterComp.innerContainer.FirstOrDefault();
+            var map = transportShip.shipThing.Map;
+
+            if (thingToDrop != null)
+            {
+                var dropLoc = transportShip.shipThing.Position + ShipJob_Unload.DropoffSpotOffset;
+                if (transportShip.TransporterComp.innerContainer.TryDrop(thingToDrop, dropLoc, map, ThingPlaceMode.Near, out _, null,
+                        delegate(IntVec3 c)
+                        {
+                            Pawn pawn2;
+                            return !c.Fogged(map) && ((pawn2 = thingToDrop as Pawn) == null || !pawn2.Downed || c.GetFirstPawn(map) == null);
+                        }, thingToDrop is not Pawn))
+                {
+                    transportShip.TransporterComp.Notify_ThingRemoved(thingToDrop);
+                    if (thingToDrop is Pawn pawn)
+                    {
+                        if (pawn.IsColonist && pawn.Spawned && !map.IsPlayerHome) pawn.drafter.Drafted = true;
+
+                        if (pawn.guest is { IsPrisoner: true }) pawn.guest.WaitInsteadOfEscapingForDefaultTicks();
+
+                        lord.AddPawn(pawn);
+                    }
+                }
+            }
+            else
+            {
+                transportShip.TransporterComp.TryRemoveLord(map);
+                End();
+            }
+        }
     }
 }

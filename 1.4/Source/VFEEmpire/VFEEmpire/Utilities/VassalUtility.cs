@@ -2,25 +2,16 @@
 using System.Linq;
 using RimWorld;
 using RimWorld.Planet;
-using Verse;
 
 namespace VFEEmpire;
 
 public static class VassalUtility
 {
-    public static bool Unlocked(this RoyalTitlePermitDef permit, Pawn pawn, Faction faction = null)
-    {
-        faction ??= Faction.OfEmpire;
-        return pawn.royalty.HasPermit(permit, faction) ||
-               pawn.royalty.AllFactionPermits.Any(t => t.Permit.prerequisite == permit && t.Faction == faction);
-    }
-
     public static int VassalagePointsAvailable(this Pawn_RoyaltyTracker royalty)
     {
-        return royalty.AllTitlesInEffectForReading.Where(title => title.faction == Faction.OfEmpire)
+        return royalty.AllTitlesForReading.Where(title => title.faction == Faction.OfEmpire)
            .Sum(title => title.def.Ext()?.vassalagePointsAwarded ?? 0) - WorldComponent_Vassals.Instance.AllVassalsOf(royalty.pawn).Count();
     }
-
 
     public static float Commonality(this TitheSpeed speed) =>
         speed switch

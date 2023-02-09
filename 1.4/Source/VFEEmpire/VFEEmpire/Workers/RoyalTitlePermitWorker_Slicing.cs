@@ -27,6 +27,16 @@ public class RoyalTitlePermitWorker_Slicing : RoyalTitlePermitWorker_Targeted
         }
     }
 
+    public override void DrawHighlight(LocalTargetInfo target)
+    {
+        base.DrawHighlight(target);
+        if (origin.IsValid)
+        {
+            GenDraw.DrawTargetHighlight(origin);
+            GenDraw.DrawLineBetween(origin.CenterVector3, target.CenterVector3, SimpleColor.Red);
+        }
+    }
+
     public override IEnumerable<FloatMenuOption> GetRoyalAidOptions(Map map, Pawn pawn, Faction faction)
     {
         string label = def.LabelCap + ": ";

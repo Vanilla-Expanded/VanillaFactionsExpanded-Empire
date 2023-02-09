@@ -81,4 +81,11 @@ public static class EmpireTitleUtility
     public static bool CanInvite(this RoyalTitleDef title) => title != VFEE_DefOf.VFEE_HighStellarch && title != VFEE_DefOf.Emperor;
 
     public static int TitleIndex(this RoyalTitleDef title) => WorldComponent_Hierarchy.Titles.IndexOf(title);
+
+    public static bool Unlocked(this RoyalTitlePermitDef permit, Pawn pawn, Faction faction = null)
+    {
+        faction ??= Faction.OfEmpire;
+        return pawn.royalty.HasPermit(permit, faction) ||
+               pawn.royalty.AllFactionPermits.Any(t => t.Permit.prerequisite == permit && t.Faction == faction);
+    }
 }
