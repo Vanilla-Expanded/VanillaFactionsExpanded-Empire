@@ -28,14 +28,18 @@ public class WorldComponent_Hierarchy : WorldComponent
         base.FinalizeInit();
         if (initialized) return;
         initialized = true;
+        InitializeTitles();
+        RefreshPawns();
+    }
+
+    private void InitializeTitles()
+    {
         var count = 1;
         foreach (var title in Enumerable.Reverse(Titles))
         {
             for (var i = 0; i < count; i++) MakePawnFor(title);
             count += 2;
         }
-
-        RefreshPawns();
     }
 
     public override void WorldComponentTick()
@@ -99,5 +103,29 @@ public class WorldComponent_Hierarchy : WorldComponent
         base.ExposeData();
         Scribe_Collections.Look(ref TitleHolders, "titleHolders", LookMode.Reference);
         Scribe_Values.Look(ref initialized, nameof(initialized));
+    }
+
+    [DebugAction("General", "Regenerate Hierarchy", allowedGameStates = AllowedGameStates.Playing)]
+    public static void Regen()
+    {
+        foreach (var pawn in Instance.TitleHolders) Find.WorldPawns.RemoveAndDiscardPawnViaGC(pawn);
+        Instance.TitleHolders.Clear();
+        Instance.InitializeTitles();
+        Instance.RefreshPawns();
+    }
+
+    [DebugAction("General", "Log Hierarchy", allowedGameStates = AllowedGameStates.Playing)]
+    public static void DebugLog()
+    {
+        var empire = Faction.OfEmpire;
+        Log.Message("-------- Hierarchy --------");
+        foreach (var title in Enumerable.Reverse(Titles))
+        {
+            var pawns = Instance.TitleHolders.Where(p => p.royalty.GetCurrentTitle(empire) == title).ToList();
+            Log.Message($"---- {title.GetLabelCapForBothGenders()} ({pawns.Count}):");
+            foreach (var pawn in pawns) Log.Message($"  {pawn.Name.ToStringFull} ({pawn.Faction.Name}): {pawn.royalty.GetFavor(empire)} honor");
+        }
+
+        Log.Message($"Total: {Instance.TitleHolders.Count}");
     }
 }
