@@ -21,7 +21,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
     public override void Notify_Open()
     {
         base.Notify_Open();
-        WorldComponent_Hierarchy.Instance.SortPawns();
+        WorldComponent_Hierarchy.Instance.RefreshPawns();
     }
 
     public override void DoLeftBottom(Rect inRect)

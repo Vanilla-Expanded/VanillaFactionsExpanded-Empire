@@ -35,18 +35,13 @@ public class WorldComponent_Hierarchy : WorldComponent
             count += 2;
         }
 
-        SortPawns();
+        RefreshPawns();
     }
-
 
     public override void WorldComponentTick()
     {
         base.WorldComponentTick();
-        if (Find.TickManager.TicksGame % 60000 == 2500)
-        {
-            TitleHolders.RemoveAll(pawn => pawn.Dead);
-            FillTitles();
-        }
+        if (Find.TickManager.TicksGame % 60000 == 2500) RefreshPawns();
     }
 
     private void FillTitles()
@@ -68,15 +63,14 @@ public class WorldComponent_Hierarchy : WorldComponent
 
             count += 2;
         }
-
-
-        SortPawns();
     }
 
-    public void SortPawns()
+    public void RefreshPawns()
     {
+        TitleHolders.RemoveAll(pawn => pawn?.royalty?.GetCurrentTitle(Faction.OfEmpire) == null || pawn.Dead);
         TitleHolders.RemoveAll(pawn => pawn.IsColonist);
         TitleHolders.AddRange(EmpireUtility.AllColonistsWithTitle());
+        FillTitles();
         var empire = Faction.OfEmpire;
         TitleHolders.SortBy(p => p.royalty.GetCurrentTitle(empire).seniority, p => p.royalty.GetFavor(empire), p => p.Name.ToStringFull);
     }
@@ -86,7 +80,11 @@ public class WorldComponent_Hierarchy : WorldComponent
         var empire = Faction.OfEmpire;
         var kind = title.GetModExtension<RoyalTitleDefExtension>().kindForHierarchy;
         var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(kind, empire, forceGenerateNewPawn: true, fixedTitle: title));
+        pawn.health.hediffSet.hediffs.RemoveAll(hediff =>
+            !hediff.def.AlwaysAllowMothball && !hediff.IsPermanent() && hediff is not Hediff_MissingPart or Hediff_MissingPart { Bleeding: true }
+         && !hediff.def.allowMothballIfLowPriorityWorldPawn);
         Find.WorldPawns.PassToWorld(pawn, PawnDiscardDecideMode.KeepForever);
+        if (!pawn.TryMothball()) Log.Warning($"[VFEE] Failed to mothball {pawn}. This may cause performance issues.");
         if (pawn.royalty.GetCurrentTitle(empire) != title)
         {
             Log.Warning($"[VFEE] Created {pawn} from title {title} but has title {pawn.royalty.GetCurrentTitle(empire)}");
