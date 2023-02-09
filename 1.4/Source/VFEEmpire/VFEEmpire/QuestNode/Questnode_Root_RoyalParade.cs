@@ -113,7 +113,7 @@ public class QuestNode_Root_RoyalParade : QuestNode
             {
                 faction = deserters,
                 groupKind = PawnGroupKindDefOf.Combat,
-                points = points,
+                points = points > 80 ? points : 80,
                 tile = map.Tile
             }).ToList();
             foreach (var raider in raiders)

@@ -17,7 +17,7 @@ namespace VFEEmpire
 
             if (ShipLandingBeaconUtility.GetLandingZones(mapParent.Map).Count ==0)
             {
-                return "VFEE.LandingAreaUnmet.Unmet".Translate();
+                return "VFEE.Parade.LandingAreaUnmet".Translate();
             }
             return true;
         }
