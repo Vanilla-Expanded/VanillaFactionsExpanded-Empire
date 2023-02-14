@@ -9,6 +9,7 @@ namespace VFEEmpire;
 [StaticConstructorOnStartup]
 public class WorldComponent_Hierarchy : WorldComponent
 {
+    private const int PER_RANK = 1;
     public static WorldComponent_Hierarchy Instance;
     public static List<RoyalTitleDef> Titles;
     public List<Pawn> TitleHolders = new();
@@ -38,7 +39,7 @@ public class WorldComponent_Hierarchy : WorldComponent
         foreach (var title in Enumerable.Reverse(Titles))
         {
             for (var i = 0; i < count; i++) MakePawnFor(title);
-            count += 2;
+            count += PER_RANK;
         }
     }
 
@@ -65,7 +66,7 @@ public class WorldComponent_Hierarchy : WorldComponent
                 else
                     MakePawnFor(title);
 
-            count += 2;
+            count += PER_RANK;
         }
     }
 
