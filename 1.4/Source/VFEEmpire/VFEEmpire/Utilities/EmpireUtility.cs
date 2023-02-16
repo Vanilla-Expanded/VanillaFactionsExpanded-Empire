@@ -38,7 +38,7 @@ public static class EmpireUtility
 
     public static IEnumerable<Pawn> AllColonistsWithTitle(Faction faction = null) =>
         PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists.Where(p =>
-            p.royalty != null && p.royalty.HasAnyTitleIn(faction ?? Faction.OfEmpire));
+            p.royalty != null && p.royalty.HasAnyTitleIn(faction ?? Faction.OfEmpire) && !p.IsQuestLodger());
 
     public static TerrorismLord Terrorism(this Lord lord) => lord.lordManager.map.GetComponent<MapComponent_Terrorism>().GetTerrorismFor(lord);
 
