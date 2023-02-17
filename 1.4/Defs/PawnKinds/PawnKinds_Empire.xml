@@ -524,6 +524,12 @@
     <requiredWorkTags>
       <li>Intellectual</li>
     </requiredWorkTags>
+    <skills>
+      <li>
+        <skill>Intellectual</skill>
+        <range>8~18</range>
+      </li>
+    </skills>
     <techHediffsRequired>
       <li>DeathAcidifier</li>
     </techHediffsRequired>
