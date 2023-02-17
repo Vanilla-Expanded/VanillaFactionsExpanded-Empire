@@ -9,18 +9,15 @@
                    <li>VFEE_Apparel_JanissaryCuirass</li>
 				   <li>Apparel_FlakPants</li>
 				   <li>Apparel_ShirtRuffle</li>
-				   <li>Apparel_VestRoyal</li>
+				   <li>Apparel_FlakVest</li>
                 </apparelRequired>
             </value>
     </Operation>
 	
-    <Operation Class="PatchOperationReplace">
+    <Operation Class="PatchOperationAdd">
         <xpath>/Defs/PawnKindDef[@Name="JanissaryBase"]/weaponTags</xpath>
             <value>
-                <weaponTags>
-                   <li>SpacerGun</li>
-                   <li>VFEE_SpacerGunBreach</li>
-                </weaponTags>
+                <li>VFEE_SpacerGunBreach</li>
             </value>
     </Operation>
 	
