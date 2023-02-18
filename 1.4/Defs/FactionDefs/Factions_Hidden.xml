@@ -8,7 +8,7 @@
     <pawnSingular>deserter</pawnSingular>
     <pawnsPlural>deserters</pawnsPlural>
     <requiredCountAtGameStart>1</requiredCountAtGameStart>
-    <factionNameMaker>NamerFactionEmpire</factionNameMaker>
+    <fixedName>Deserters</fixedName>
     <factionIconPath>UI/Deserters</factionIconPath>
 	<allowedCultures><li>Sophian</li></allowedCultures>
     <backstoryFilters>
