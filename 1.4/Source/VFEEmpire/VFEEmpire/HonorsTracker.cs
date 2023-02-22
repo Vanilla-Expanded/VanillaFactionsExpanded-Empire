@@ -129,6 +129,10 @@ public class HonorsTracker : IExposable
                 disabledReason = canStart.CapitalizeFirst(),
                 action = delegate { ritual.ShowRitualBeginWindow(target, null, pawn, assignments); }
             };
+
+            if (DebugSettings.godMode)
+                yield return new Command_Action
+                    { defaultLabel = "DEV: Grant Honors Now", action = delegate { pawn.Honors().BestowAllHonors(); } };
         }
     }
 }

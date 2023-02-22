@@ -89,4 +89,11 @@ public static class HonorUtility
                .SelectMany(c => c.rewards)
                .OfType<Reward_Honor>()
                .Select(r => r.Honor));
+
+    [DebugAction("Pawns", allowedGameStates = AllowedGameStates.PlayingOnMap, actionType = DebugActionType.ToolMapForPawns)]
+    public static void GrantRandomHonor(Pawn pawn)
+    {
+        var points = 1000f;
+        pawn.AddHonor(Generate(ref points));
+    }
 }

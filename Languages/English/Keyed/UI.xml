@@ -39,7 +39,7 @@
     <VFEE.MustBeLordOf>Must be lord of {0}</VFEE.MustBeLordOf>
     <VFEE.MustWield>Must wield {0}</VFEE.MustWield>
     <VFEE.MustHaveParent>Must have a parent</VFEE.MustHaveParent>
-    <VFEE.Honor.Pending>This must be bestowed in a ceramony before it will become active.</VFEE.Honor.Pending>
+    <VFEE.Honor.Pending>This must be bestowed in a ceremony before it will become active.</VFEE.Honor.Pending>
     <VFEE.Honor.Bestow>Bestow Honor</VFEE.Honor.Bestow>
     <VFEE.Honor.BestowPlural>Bestow Honors</VFEE.Honor.BestowPlural>
     <VFEE.Honor.Bestow.Desc>Bestow pending honors for this noble. Will give the following honors:\n{0}</VFEE.Honor.Bestow.Desc>

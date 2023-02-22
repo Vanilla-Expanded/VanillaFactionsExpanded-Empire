@@ -89,7 +89,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
                 var size = Text.CalcSize(text);
                 Widgets.Label(new Rect(new Vector2(x + 5f, 5f), size), text.Colorize(ColoredText.SubtleGrayColor));
                 Widgets.InfoCardButton(x + 10f + size.x, 5f, title);
-                GUI.DrawTexture(new Rect(x + 5f, 10f + size.y, 100f, 75f), titleExt.GreyIcon);
+                GUI.DrawTexture(new Rect(x + 5f, 10f + size.y, 75f, 75f), titleExt.GreyIcon);
                 titlePos[title] = x;
                 curTitle = title;
             }
@@ -118,6 +118,13 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
             using (new TextBlock(TextAnchor.MiddleCenter)) Widgets.Label(rect.TakeBottomPart(20f), pawn.NameFullColored);
             Widgets.DrawWindowBackground(rect);
             GUI.DrawTexture(rect, PortraitsCache.Get(pawn, rect.size, Rot4.South));
+            if (pawn.Faction is { IsPlayer: true })
+            {
+                GUI.color = pawn.Faction.Color;
+                GUI.DrawTexture(rect.BottomPartPixels(75f).RightPartPixels(75f), pawn.Faction.def.FactionIcon);
+                GUI.color = Color.white;
+            }
+
             if (!pawn.Faction.IsPlayerSafe() && title.CanInvite() &&
                 pawn.IsWorldPawn() && Find.WorldPawns.GetSituation(pawn) != WorldPawnSituation.ReservedByQuest &&
                 Widgets.ButtonText(buttonRect, "VFEE.Invite".Translate()))
