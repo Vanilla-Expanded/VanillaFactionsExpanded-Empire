@@ -80,7 +80,7 @@ public static class HonorUtility
 
     public static IEnumerable<Honor> All() =>
         Available()
-           .Concat(EmpireUtility.AllColonistsWithTitle().SelectMany(p => p.Honors()?.Honors ?? Enumerable.Empty<Honor>()))
+           .Concat(EmpireUtility.AllColonistsWithTitle().SelectMany(p => p.Honors()?.AllHonors ?? Enumerable.Empty<Honor>()))
            .Concat(Find.QuestManager.questsInDisplayOrder
                .Where(q => q.State is QuestState.NotYetAccepted or QuestState.Ongoing)
                .SelectMany(q => q.PartsListForReading)

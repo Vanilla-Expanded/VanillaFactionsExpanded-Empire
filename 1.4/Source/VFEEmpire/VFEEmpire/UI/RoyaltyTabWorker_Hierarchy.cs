@@ -103,7 +103,9 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
 
             if (highlight.Any() && !highlight.Contains(pawn)) GUI.color = Command.LowLightLabelColor;
 
-            var rect = new Rect(x, 0f, 150f, 250f).CenteredOnYIn(viewRect);
+            var rect = new Rect(x, 0f, 150f, 230f).CenteredOnYIn(viewRect);
+            float nameHeight;
+            rect.height += nameHeight = Text.CalcHeight(pawn.NameFullColored, rect.width);
             var buttonRect = new Rect(rect.x, rect.yMax + 3f, rect.width, 25f);
             var honorRect = rect.TakeTopPart(20f);
             if (curTitle != VFEE_DefOf.Emperor)
@@ -115,7 +117,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
             var titleRect = new Rect(0f, rect.yMax - 20f, Text.CalcSize(title.LabelCap).x + 20f, 20f).CenteredOnXIn(rect.TakeBottomPart(20f));
             GUI.DrawTexture(titleRect.TakeLeftPart(20f), titleExt.Icon);
             Widgets.Label(titleRect, title.LabelCap);
-            using (new TextBlock(TextAnchor.MiddleCenter)) Widgets.Label(rect.TakeBottomPart(20f), pawn.NameFullColored);
+            using (new TextBlock(TextAnchor.MiddleCenter)) Widgets.Label(rect.TakeBottomPart(nameHeight), pawn.NameFullColored);
             Widgets.DrawWindowBackground(rect);
             GUI.DrawTexture(rect, PortraitsCache.Get(pawn, rect.size, Rot4.South));
             if (pawn.Faction is { IsPlayer: true })
