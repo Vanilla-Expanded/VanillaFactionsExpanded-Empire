@@ -16,7 +16,7 @@ public class CompAbilityEffect_StartBestowing : CompAbilityEffect_StartRitualOnP
 			return true;
 		}
 		var pawn = parent.pawn;
-        if (pawn.royalty.GetUnmetThroneroomRequirements(true).Any())
+        if (pawn.royalty.GetUnmetThroneroomRequirements(false).Any())
         {
 			reason = "VFEE.StartBestower.NoThrone".Translate(pawn.NameFullColored);
 			return true;
@@ -47,14 +47,27 @@ public class CompAbilityEffect_StartBestowing : CompAbilityEffect_StartRitualOnP
     public override bool Valid(LocalTargetInfo target, bool throwMessages = false)
     {
 		var pawn = target.Pawn;
+		var ritual = RitualForTarget(pawn);
 		if (pawn != null && pawn.royalty != null)
         {
 			var title = pawn.royalty.MostSeniorTitle;
-			if (title == null) return true;
-			if (title.def.seniority < Props.titleDef.seniority)
+			if (title != null && title.def.seniority > Props.titleDef.seniority)
             {
-				return true;
+				if (throwMessages)
+                {
+					Messages.Message("VFEE.StartBestower.HigherTitle".Translate(), MessageTypeDefOf.RejectInput, false);
+				}
+				return false;
             }
+        }
+		var targetInfo = ritual.targetFilter.BestTarget(parent.pawn, target.ToTargetInfo(parent.pawn.MapHeld));
+		if (!targetInfo.IsValid)
+        {
+			if (throwMessages)
+			{
+				Messages.Message("VFEE.StartBestower.NoTarget".Translate(), MessageTypeDefOf.RejectInput, false);
+			}
+			return false;
         }
 		return AbilityUtility.ValidateNoMentalState(pawn, throwMessages,null) && AbilityUtility.ValidateCanWalk(pawn, throwMessages,null);        
     }
