@@ -19,6 +19,7 @@ public class RoyalTitlePermitWorker_DropBuildings : RoyalTitlePermitWorker_Call
 
                 var pod = (DropPodIncoming_Building)SkyfallerMaker.MakeSkyfaller(VFEE_DefOf.VFEE_DropPodIncoming_Building);
                 pod.Def = countClass.thingDef;
+                pod.SpawnFaction = caller.Faction;
                 GenSpawn.Spawn(pod, dropCell, map);
             }
     }
