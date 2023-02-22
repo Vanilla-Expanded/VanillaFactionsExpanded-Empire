@@ -42,7 +42,7 @@
         <defaultProjectile>VFEE_Bullet_FletcherDart</defaultProjectile>
         <warmupTime>5</warmupTime>
         <range>500</range>
-        <soundCast>ChargeLance_Fire</soundCast>
+        <soundCast>VFEE_Shot_Fletcher</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
         <muzzleFlashScale>9</muzzleFlashScale>
       </li>
@@ -134,7 +134,7 @@
         <targetParams>
           <canTargetLocations>true</canTargetLocations>
         </targetParams>
-        <soundCast>ThumpCannon_Fire</soundCast>
+        <soundCast>VFEE_Shot_ChargeThumper</soundCast>
         <soundCastTail>GunTail_Heavy</soundCastTail>
         <muzzleFlashScale>9</muzzleFlashScale>
         <noiseRadius>4</noiseRadius>
