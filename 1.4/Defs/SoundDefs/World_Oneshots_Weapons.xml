@@ -17,7 +17,7 @@
   </SoundDef>
 
   <SoundDef>
-    <defName>Shot_Revolver</defName>  
+    <defName>VFEE_Shot_ChargeThumper</defName>  
     <context>MapOnly</context>  
     <maxSimultaneous>1</maxSimultaneous>  
     <subSounds>
