@@ -7,10 +7,17 @@ namespace VFEEmpire;
 
 public static class VassalUtility
 {
-    public static int VassalagePointsAvailable(this Pawn_RoyaltyTracker royalty)
+    public static int VassalagePointsAvailable(this Pawn_RoyaltyTracker royalty, Faction faction)
     {
-        return royalty.AllTitlesForReading.Where(title => title.faction == Faction.OfEmpire)
-           .Sum(title => title.def.Ext()?.vassalagePointsAwarded ?? 0) - WorldComponent_Vassals.Instance.AllVassalsOf(royalty.pawn).Count();
+        var points = 0;
+        var title = royalty.GetCurrentTitle(faction);
+        while (title != null)
+        {
+            points += title.Ext()?.vassalagePointsAwarded ?? 0;
+            title = title.GetPreviousTitle_IncludeNonRewardable(faction);
+        }
+
+        return points - WorldComponent_Vassals.Instance.AllVassalsOf(royalty.pawn).Count();
     }
 
     public static float Commonality(this TitheSpeed speed) =>

@@ -29,7 +29,7 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
         base.DoLeftBottom(inRect);
         var pawn = parent.CurCharacter;
         Text.Font = GameFont.Medium;
-        Widgets.Label(inRect.TakeTopPart(40f), "VFEE.VassalPoints".Translate(pawn.royalty.VassalagePointsAvailable()));
+        Widgets.Label(inRect.TakeTopPart(40f), "VFEE.VassalPoints".Translate(pawn.royalty.VassalagePointsAvailable(Faction.OfEmpire)));
         Text.Font = GameFont.Small;
         inRect.yMax -= 25f;
         if (Widgets.ButtonText(inRect.TakeBottomPart(60f).ContractedBy(7f, 0f), "VFEE.ReleaseAllVassals".Translate()))
@@ -74,7 +74,7 @@ public class RoyaltyTabWorker_Vassals : RoyaltyTabWorker
                           WorldComponent_Vassals.Instance.AllPossibleVassals
                              .Where(v => v.Lord?.Faction is { IsPlayer: true })
                              .Any(v => Find.WorldGrid.ApproxDistanceInTiles(v.Settlement.Tile, vassal.Settlement.Tile) <= 100);
-            var canVassalize = parent.CurCharacter.royalty.VassalagePointsAvailable() >= 1 && inRange;
+            var canVassalize = parent.CurCharacter.royalty.VassalagePointsAvailable(Faction.OfEmpire) >= 1 && inRange;
             string reason = inRange ? "" : "VFEE.NoVassalize".Translate();
             if (left)
             {

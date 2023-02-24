@@ -7,9 +7,13 @@ namespace VFEEmpire;
 
 public class TitheWorker_Honor : TitheWorker
 {
-    public override void Deliver(TitheInfo info)
+    protected override bool DeliverInt(TitheInfo info, out string description, out LookTargets lookTargets)
     {
-        info.Lord.royalty.GainFavor(info.Settlement.Faction, AmountProduced(info));
+        var amount = AmountProduced(info);
+        description = amount + " " + info.Settlement.Faction.def.royalFavorLabel;
+        lookTargets = info.Lord;
+        info.Lord.royalty.GainFavor(info.Settlement.Faction, amount);
+        return true;
     }
 }
 
