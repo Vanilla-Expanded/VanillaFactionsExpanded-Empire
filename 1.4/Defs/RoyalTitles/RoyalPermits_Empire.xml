@@ -358,7 +358,7 @@
     <prerequisite>CallLaborerGang</prerequisite>
     <uiPosition>(2,2)</uiPosition>
     <royalAid>
-      <favorCost>8</favorCost>
+      <favorCost>14</favorCost>
       <pawnKindDef>Empire_Common_Laborer</pawnKindDef>
       <pawnCount>12</pawnCount>
       <aidDurationDays>4</aidDurationDays>
