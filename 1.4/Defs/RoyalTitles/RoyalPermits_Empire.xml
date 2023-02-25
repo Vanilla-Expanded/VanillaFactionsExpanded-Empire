@@ -360,7 +360,7 @@
     <royalAid>
       <favorCost>8</favorCost>
       <pawnKindDef>Empire_Common_Laborer</pawnKindDef>
-      <pawnCount>8</pawnCount>
+      <pawnCount>12</pawnCount>
       <aidDurationDays>4</aidDurationDays>
     </royalAid>
     <cooldownDays>60</cooldownDays>
