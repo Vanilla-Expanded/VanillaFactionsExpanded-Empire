@@ -6,7 +6,12 @@
     <li>1.4</li>
   </supportedVersions>
   <packageId>OskarPotocki.VFE.Empire</packageId>
-  <description>Vanilla Factions Expanded - Empire is a mod in development, expanding on the Empire faction of Royalty DLC.
+  <description>One thing I always wanted to do but never could bring myself to do is overhaul the Empire faction in the Royalty DLC. For such a mysterious, powerful entity in the political sphere of RimWorld, there is surprisingly little content around them. When I wanted to make a Royalty focused playthrough, I quickly realized it’s just a ‘normal playthrough’ with ‘royalty sprinkles’ - so not really what I wanted.
+
+So I did what I do best and sat down with my trusty google docs to design a complete overhaul to the Empire faction that will finally allow you to feel like a proper imperial nobility. From intrigues and art exhibitions, to hunting down deserters and protecting from the acts of terrorism, with this mod you can really make an Empire-centric playthrough and make a play for the Imperial throne.
+
+With new permits, structures, apparel, vassalage system, royal honors, Great Hierarchy and titles, this mod is a powerhouse for those wanting to roleplay as the Imperial family, but it will also work just as well for people who only want one or two nobles in their colony.
+
 For obvious reasons this mod requires Royalty DLC.</description>
   <modDependencies>
     <li>
