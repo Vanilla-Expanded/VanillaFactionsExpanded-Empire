@@ -7,7 +7,7 @@ namespace VFEEmpire;
 public class HonorWorker_Weapon : HonorWorker
 {
     public override bool Available() => base.Available() && GetWeapon() != null;
-    private Thing GetWeapon() => PossibleWeapons().RandomElementWithFallback();
+    private Thing GetWeapon() => PossibleWeapons().ToList().RandomElementWithFallback();
 
     public override Honor Generate()
     {

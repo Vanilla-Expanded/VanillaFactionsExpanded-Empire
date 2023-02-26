@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using RimWorld;
+using System.Linq;
 using Verse;
 
 namespace VFEEmpire
@@ -10,7 +11,7 @@ namespace VFEEmpire
         {
             if (Find.TickManager.TicksGame > 5f) return;
 
-            var pawn = map.mapPawns.FreeColonists[0];
+            var pawn = map.mapPawns.FreeColonists.FirstOrDefault();
             if (pawn == null || !pawn.RaceProps.IsFlesh || pawn.relations == null)
             {
                 Log.Error("Invalid starting pawn");
@@ -18,8 +19,12 @@ namespace VFEEmpire
             }
 
             var relations = pawn.relations.DirectRelations;
-            for (int i = 0; i < relations.Count; i++)
-                pawn.relations.RemoveDirectRelation(relations[i]);
+            if (!relations.NullOrEmpty())
+            {
+                for (int i = 0; i < relations.Count; i++)
+                    pawn.relations.RemoveDirectRelation(relations[i]);
+            }
+
 
             var center = map.Center;
             var faction = Faction.OfEmpire;

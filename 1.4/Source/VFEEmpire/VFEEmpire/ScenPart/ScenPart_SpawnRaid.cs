@@ -13,6 +13,11 @@ namespace VFEEmpire
 
             var center = map.Center;
             var faction = Find.FactionManager.FirstFactionOfDef(VFEE_DefOf.VFEE_Deserters);
+            if(faction == null)
+            {
+                Log.Error("Missing Deserter faction, can not generate");
+                return;
+            }
             var deserters = new List<Pawn>();
 
             for (int i = 0; i < 10; i++)
