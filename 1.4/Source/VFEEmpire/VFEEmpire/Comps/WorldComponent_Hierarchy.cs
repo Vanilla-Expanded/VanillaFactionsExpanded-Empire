@@ -56,7 +56,18 @@ public class WorldComponent_Hierarchy : WorldComponent
         for (var i = Titles.Count - 1; i >= 0; i--)
         {
             var title = Titles[i];
+            var n = 0;
             while (TitleHolders.Count(p => p.royalty.GetCurrentTitle(empire) == title) < count)
+            {
+                n++;
+                if (n > count * 2)
+                {
+                    var actual = TitleHolders.Count(p => p.royalty.GetCurrentTitle(empire) == title);
+                    Log.Error($"[VFEE] FillTitles exceeded iteration limit. title={title}, expected={count}, actual={actual}");
+                    for (var j = 0; j < count - actual; j++) MakePawnFor(title);
+                    break;
+                }
+
                 if (i > 0 && Titles[i - 1] is { } lowerTitle &&
                     TitleHolders.Find(p => p.royalty.GetCurrentTitle(empire) == lowerTitle && p.Faction == empire) is { } lower)
                 {
@@ -65,6 +76,7 @@ public class WorldComponent_Hierarchy : WorldComponent
                 }
                 else
                     MakePawnFor(title);
+            }
 
             count += PER_RANK;
         }
@@ -109,6 +121,8 @@ public class WorldComponent_Hierarchy : WorldComponent
     [DebugAction("General", "Regenerate Hierarchy", allowedGameStates = AllowedGameStates.Playing)]
     public static void Regen()
     {
+        Instance.TitleHolders.RemoveAll(pawn => pawn?.royalty?.GetCurrentTitle(Faction.OfEmpire) == null || pawn.Dead);
+        Instance.TitleHolders.RemoveAll(pawn => pawn.IsColonist);
         foreach (var pawn in Instance.TitleHolders) Find.WorldPawns.RemoveAndDiscardPawnViaGC(pawn);
         Instance.TitleHolders.Clear();
         Instance.InitializeTitles();

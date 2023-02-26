@@ -14,8 +14,8 @@ public class StorytellerComp_WealthSteps : StorytellerComp
 
     public override IEnumerable<FiringIncident> MakeIntervalIncidents(IIncidentTarget target)
     {
-        Log.Message($"Interval! Target: {target}, Wealth: {target.PlayerWealthForStoryteller}\n"
-                  + $"TickNextIncident: {TickNextIncident.TryGetValue(target, -1)}, LastWealth: {LastWealth.TryGetValue(target, -1f)}");
+//        Log.Message($"Interval! Target: {target}, Wealth: {target.PlayerWealthForStoryteller}\n"
+//                  + $"TickNextIncident: {TickNextIncident.TryGetValue(target, -1)}, LastWealth: {LastWealth.TryGetValue(target, -1f)}");
         if (target is Map map) map.wealthWatcher.ForceRecount();
         if (TickNextIncident.TryGetValue(target, out var tick) && tick <= Find.TickManager.TicksGame)
         {
