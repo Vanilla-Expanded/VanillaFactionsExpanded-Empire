@@ -129,6 +129,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
 
             if (!pawn.Faction.IsPlayerSafe() && title.CanInvite() &&
                 pawn.IsWorldPawn() && Find.WorldPawns.GetSituation(pawn) != WorldPawnSituation.ReservedByQuest &&
+                VFEE_DefOf.VFEE_NobleVisit.CanRun(35f) &&
                 Widgets.ButtonText(buttonRect, "VFEE.Invite".Translate()))
                 Find.WindowStack.Add(new FloatMenu(EmpireUtility.AllColonistsWithTitle()
                    .Select(p =>
@@ -144,7 +145,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
                             if (parent.DevMode || p.royalty.TryRemoveFavor(Faction.OfEmpire, honorCost))
                             {
                                 var slate = new Slate();
-                                slate.Set("noble", pawn);
+                                slate.Set("noble", pawn);                                
                                 var quest = QuestUtility.GenerateQuestAndMakeAvailable(VFEE_DefOf.VFEE_NobleVisit, slate);
                                 QuestUtility.SendLetterQuestAvailable(quest);
                             }

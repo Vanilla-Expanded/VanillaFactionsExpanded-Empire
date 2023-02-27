@@ -26,10 +26,8 @@ public class QuestNode_Root_NobleVisit : QuestNode
 
     protected override bool TestRunInt(Slate slate)
     {
-        var map = QuestGen_Get.GetMap();
-        map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle)
-           .TryRandomElementByWeight(x => x?.def?.seniority ?? 0f,out var leadTitle); //Title of highest colony member            
-        return leadTitle != null && !Faction.OfPlayer.HostileTo(Faction.OfEmpire);
+        var map = QuestGen_Get.GetMap();      
+        return map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle).Any(x=>x != null) && !Faction.OfPlayer.HostileTo(Faction.OfEmpire);
     }
 
     protected override void RunInt()
@@ -43,9 +41,10 @@ public class QuestNode_Root_NobleVisit : QuestNode
         var durationTicks = Mathf.RoundToInt(QuestDayDurationCurve.Evaluate(points) * 60000);
         var empire = Find.FactionManager.OfEmpire;
         var colonyTitle = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle)
-           .RandomElementByWeight(x => x?.def?.seniority ?? 0f)
-           .def; //Title of highest colony member
-        var leadTitle = DefDatabase<RoyalTitleDef>.AllDefs.Where(x => x.seniority <= colonyTitle.seniority).RandomElementByWeight(x => x.seniority); //
+           .Where(x=> x != null)
+           .RandomElement()
+           .def; 
+        var leadTitle = DefDatabase<RoyalTitleDef>.AllDefs.Where(x => x.seniority <= (colonyTitle.seniority + 100)).RandomElementByWeight(x => x.seniority); //
 
         //Generate Nobles
         var givenNoble = slate.Get<Pawn>("noble");
