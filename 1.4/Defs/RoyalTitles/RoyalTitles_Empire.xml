@@ -2394,7 +2394,7 @@
         <area>340</area>
       </li>
       <li Class="RoomRequirement_Impressiveness">
-        <impressiveness>360</impressiveness>
+        <impressiveness>240</impressiveness>
       </li>
       <li Class="RoomRequirement_TerrainWithTags">
         <labelKey>RoomRequirementAllFineFloored</labelKey>
