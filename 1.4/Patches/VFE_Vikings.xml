@@ -1,0 +1,44 @@
+<Patch>
+  <!-- Royalty need patches-->
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Factions Expanded - Vikings</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName="VFEE_Archduke" or defName="VFEE_Magister" or defName="VFEE_Despot" or @Name="VFEE_HighStellarch"]/throneRoomRequirements/li[@Class="RoomRequirement_ThingAnyOfCount"][things/li="Column"]/things</xpath>
+          <value>
+            <li>VFEV_RunedColumn</li>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName="VFEE_Archduke" or defName="VFEE_Magister" or defName="VFEE_Despot" or @Name="VFEE_HighStellarch"]/throneRoomRequirements/li[@Class="RoomRequirement_ThingAnyOfCount"][things/li="Brazier"]/things</xpath>
+          <value>
+            <li>VFEV_Hearth</li>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName="VFEE_Archduke" or defName="VFEE_Magister" or defName="VFEE_Despot" or @Name="VFEE_HighStellarch"]/throneRoomRequirements/li[@Class="RoomRequirement_AllThingsAnyOfAreGlowing"][labelKey="RoomRequirementAllBraziersMustBeLit"]/things</xpath>
+          <value>
+            <li>VFEV_Hearth</li>
+          </value>
+        </li>
+  </Operation>
+  <!-- Toggable -->
+  <Operation Class="VFECore.PatchOperationToggableSequence">
+    <enabled>False</enabled>
+    <label>Allow royals to use double fur bed:</label>
+    <mods>
+      <li>Vanilla Factions Expanded - Vikings</li>
+    </mods>
+    <operations>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName="VFEE_Archduke" or defName="VFEE_Magister" or defName="VFEE_Despot" or @Name="VFEE_HighStellarch"]/bedroomRequirements/li[@Class="RoomRequirement_ThingAnyOf"][disablingPrecepts/li="SlabBed_Preferred"]/things</xpath>
+        <value>
+          <li>VFEV_DoubleFurBed</li>
+        </value>
+      </li>
+    </operations>
+  </Operation>
+</Patch>
