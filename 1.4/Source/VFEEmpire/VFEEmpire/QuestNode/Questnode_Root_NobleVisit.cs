@@ -227,7 +227,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
 
 
         //honor = range of 2 - 24 based on how long their stay is
-        var honor = Mathf.Max(2, Mathf.RoundToInt(24 * (QuestDayDurationCurve.Evaluate(points) / 10)));
+        var honor = givenNoble is null ? Mathf.Max(2, Mathf.RoundToInt(24 * (QuestDayDurationCurve.Evaluate(points) / 10))) : 0;
         FailResults(quest, questPart_LodgerLeave.outSignalArrested_LeaveColony, "[lodgerArrestedLeaveMapLetterLabel]", "[lodgerArrestedLeaveMapLetterText]",
             nobles, -honor);
         FailResults(quest, questPart_LodgerLeave.outSignalDestroyed_LeaveColony, "[lodgerDiedLeaveMapLetterLabel]", "[lodgerDiedLeaveMapLetterText]", nobles,

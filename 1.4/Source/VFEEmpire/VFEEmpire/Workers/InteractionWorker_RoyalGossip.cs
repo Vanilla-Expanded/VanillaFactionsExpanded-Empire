@@ -21,7 +21,7 @@ public class InteractionWorker_RoyalGossip : InteractionWorker
         if (initiator.royalty == null || recipient.royalty == null || !initiator.royalty.HasAnyTitleIn(Faction.OfEmpire) ||
             !recipient.royalty.HasAnyTitleIn(Faction.OfEmpire)) return 0f;
         if (GameComponent_Empire.Instance.LastRoyalGossipTick.TryGetValue(initiator, out var tick))
-            if (Find.TickManager.TicksGame - tick <= 6 * 2500)
+            if (Find.TickManager.TicksGame - tick <= 24 * 2500)
                 return 0f;
         var factor = 1f;
         if (!recipient.questTags.NullOrEmpty() && (recipient.GetLord() != null || recipient.HostFaction == Faction.OfPlayer)) factor = 2f;
