@@ -15,6 +15,7 @@ public class InteractionWorker_RoyalGossip : InteractionWorker
         new CurvePoint(50f, .90f),
         new CurvePoint(90f, 1f)
     };
+
     public override float RandomSelectionWeight(Pawn initiator, Pawn recipient)
     {
         if (initiator.royalty == null || recipient.royalty == null || !initiator.royalty.HasAnyTitleIn(Faction.OfEmpire) ||
@@ -23,13 +24,10 @@ public class InteractionWorker_RoyalGossip : InteractionWorker
             if (Find.TickManager.TicksGame - tick <= 6 * 2500)
                 return 0f;
         var factor = 1f;
-        if(!recipient.questTags.NullOrEmpty() && (recipient.GetLord() != null || recipient.HostFaction == Faction.OfPlayer))
-        {
-            factor = 2f;
-        }
+        if (!recipient.questTags.NullOrEmpty() && (recipient.GetLord() != null || recipient.HostFaction == Faction.OfPlayer)) factor = 2f;
         return 0.086f * factor;
     }
-    
+
     public override void Interacted(Pawn initiator, Pawn recipient, List<RulePackDef> extraSentencePacks, out string letterText, out string letterLabel,
         out LetterDef letterDef,
         out LookTargets lookTargets)
@@ -47,8 +45,8 @@ public class InteractionWorker_RoyalGossip : InteractionWorker
         }
         else
         {
-            initiator.royalty.GainFavor(Faction.OfEmpire, -1);
-            recipient.royalty.GainFavor(Faction.OfEmpire, -1);
+            initiator.royalty.RemoveFavor(Faction.OfEmpire, 1);
+            recipient.royalty.RemoveFavor(Faction.OfEmpire, 1);
         }
     }
 }

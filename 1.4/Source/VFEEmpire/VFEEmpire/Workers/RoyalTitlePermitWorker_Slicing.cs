@@ -23,7 +23,7 @@ public class RoyalTitlePermitWorker_Slicing : RoyalTitlePermitWorker_Targeted
             OrbitalSlicer.DoSlice(origin.Cell, target.Cell, map, caller);
             origin = LocalTargetInfo.Invalid;
             caller.royalty.GetPermit(def, faction).Notify_Used();
-            if (!free) caller.royalty.TryRemoveFavor(faction, def.royalAid.favorCost);
+            if (!free) caller.royalty.RemoveFavor(faction, def.royalAid.favorCost);
         }
     }
 

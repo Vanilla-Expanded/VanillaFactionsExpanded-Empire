@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using HarmonyLib;
 using RimWorld;
 using Verse;
 
@@ -9,6 +10,9 @@ namespace VFEEmpire;
 public static class EmpireTitleUtility
 {
     private static readonly Dictionary<(RoyalTitleDef, Faction), int> FavorCache = new();
+
+    private static readonly AccessTools.FieldRef<Pawn_RoyaltyTracker, Dictionary<Faction, int>> favorRef =
+        AccessTools.FieldRefAccess<Pawn_RoyaltyTracker, Dictionary<Faction, int>>("favor");
 
     public static RoyalTitle HighestTitleWithBallroomRequirements(this Pawn_RoyaltyTracker royalty)
     {
@@ -87,5 +91,36 @@ public static class EmpireTitleUtility
         faction ??= Faction.OfEmpire;
         return pawn.royalty.HasPermit(permit, faction) ||
                pawn.royalty.AllFactionPermits.Any(t => t.Permit.prerequisite == permit && t.Faction == faction);
+    }
+
+    public static void RemoveFavor(this Pawn_RoyaltyTracker royalty, Faction faction, int amount)
+    {
+        if (!ModLister.CheckRoyalty("Honor")) return;
+        var oldAmount = royalty.GetFavor(faction);
+        var favor = favorRef(royalty);
+        if (!favor.TryGetValue(faction, out var num))
+        {
+            num = 0;
+            favor.Add(faction, num);
+        }
+
+        num -= amount;
+        favor[faction] = num;
+        favorRef(royalty) = favor;
+        var oldTitleAwardedWhenUpdating = royalty.GetTitleAwardedWhenUpdating(faction, oldAmount);
+        var newTitleAwardedWhenUpdating = royalty.GetTitleAwardedWhenUpdating(faction, num);
+        if (oldTitleAwardedWhenUpdating == null) return;
+        if (oldTitleAwardedWhenUpdating == newTitleAwardedWhenUpdating) return;
+        if (newTitleAwardedWhenUpdating.seniority < oldTitleAwardedWhenUpdating.seniority)
+        {
+            RoyalTitleUtility.EndExistingBestowingCeremonyQuest(royalty.pawn, faction);
+            RoyalTitleUtility.GenerateBestowingCeremonyQuest(royalty.pawn, faction);
+        }
+    }
+
+    public static void ChangeFavor(this Pawn_RoyaltyTracker royalty, Faction faction, int amount)
+    {
+        if (amount < 0) royalty.RemoveFavor(faction, -amount);
+        else royalty.GainFavor(faction, amount);
     }
 }

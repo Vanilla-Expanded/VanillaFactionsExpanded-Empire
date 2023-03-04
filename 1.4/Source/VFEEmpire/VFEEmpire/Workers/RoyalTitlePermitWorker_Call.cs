@@ -38,7 +38,7 @@ public abstract class RoyalTitlePermitWorker_Call : RoyalTitlePermitWorker_Targe
         base.OrderForceTarget(target);
         Call(target.Cell);
         caller.royalty.GetPermit(def, faction).Notify_Used();
-        if (!free) caller.royalty.TryRemoveFavor(faction, def.royalAid.favorCost);
+        if (!free) caller.royalty.RemoveFavor(faction, def.royalAid.favorCost);
     }
 
     public abstract void Call(IntVec3 cell);

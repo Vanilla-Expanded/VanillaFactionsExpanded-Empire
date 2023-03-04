@@ -42,9 +42,6 @@
     <label>poison</label>
     <description>text_todo</description>
     <thingClass>Thing</thingClass>
-    <thingCategories>
-      <li>Foods</li>
-    </thingCategories>
   </ThingDef>
   <RaidStrategyDef>
     <defName>VFEE_Deserters</defName>
