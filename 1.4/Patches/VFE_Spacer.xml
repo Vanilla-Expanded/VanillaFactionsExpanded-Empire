@@ -7,20 +7,48 @@
     </mods>
     <match Class="PatchOperationSequence">
       <operations>
+        <!-- EndTable :: Replace the RoomRequirement_Thing with RoomRequirement_ThingAnyOf if it's -->
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName = "Duke" or defName="VFEE_Archduke" or defName = "Consul" or defName="VFEE_Magister" or defName="VFEE_Despot" or defName = "Stellarch" or @Name="VFEE_HighStellarch"]/bedroomRequirements//li[@Class="RoomRequirement_Thing"][thingDef="EndTable"]</xpath>
+          <match Class="PatchOperationReplace">
+            <xpath>Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName = "Duke" or defName="VFEE_Archduke" or defName = "Consul" or defName="VFEE_Magister" or defName="VFEE_Despot" or defName = "Stellarch" or @Name="VFEE_HighStellarch"]/bedroomRequirements//li[@Class="RoomRequirement_Thing"][thingDef="EndTable"]</xpath>
+            <value>
+              <li Class="RoomRequirement_ThingAnyOf">
+                <things>
+                  <li>EndTable</li>
+                </things>
+              </li>
+            </value>
+          </match>
+        </li>
+        <!-- Dresser :: Replace the RoomRequirement_Thing with RoomRequirement_ThingAnyOf -->
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName = "Duke" or defName="VFEE_Archduke" or defName = "Consul" or defName="VFEE_Magister" or defName="VFEE_Despot" or defName = "Stellarch" or @Name="VFEE_HighStellarch"]/bedroomRequirements//li[@Class="RoomRequirement_Thing"][thingDef="Dresser"]</xpath>
+          <match Class="PatchOperationReplace">
+            <xpath>Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName = "Duke" or defName="VFEE_Archduke" or defName = "Consul" or defName="VFEE_Magister" or defName="VFEE_Despot" or defName = "Stellarch" or @Name="VFEE_HighStellarch"]/bedroomRequirements//li[@Class="RoomRequirement_Thing"][thingDef="Dresser"]</xpath>
+            <value>
+              <li Class="RoomRequirement_ThingAnyOf">
+                <things>
+                  <li>Dresser</li>
+                </things>
+              </li>
+            </value>
+          </match>
+        </li>
         <li Class="PatchOperationAdd">
-          <xpath>/Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName="VFEE_Archduke" or defName="VFEE_Magister" or defName="VFEE_Despot" or @Name="VFEE_HighStellarch"]/bedroomRequirements/li[@Class="RoomRequirement_ThingAnyOf"][disablingPrecepts/li="SlabBed_Preferred"]/things</xpath>
+          <xpath>/Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName = "Duke" or defName="VFEE_Archduke" or defName = "Consul" or defName="VFEE_Magister" or defName="VFEE_Despot" or defName = "Stellarch" or @Name="VFEE_HighStellarch"]/bedroomRequirements/li[@Class="RoomRequirement_ThingAnyOf"][disablingPrecepts/li="SlabBed_Preferred"]/things</xpath>
           <value>
             <li>Bed_AdvDoubleBed</li>
           </value>
         </li>
         <li Class="PatchOperationAdd">
-          <xpath>/Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName="VFEE_Archduke" or defName="VFEE_Magister" or defName="VFEE_Despot" or @Name="VFEE_HighStellarch"]/bedroomRequirements/li[@Class="RoomRequirement_ThingAnyOf"][things/li="EndTable"]/things</xpath>
+          <xpath>/Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName = "Duke" or defName="VFEE_Archduke" or defName = "Consul" or defName="VFEE_Magister" or defName="VFEE_Despot" or defName = "Stellarch" or @Name="VFEE_HighStellarch"]/bedroomRequirements/li[@Class="RoomRequirement_ThingAnyOf"][things/li="EndTable"]/things</xpath>
           <value>
             <li>Table_IlluminatedEndTable</li>
           </value>
         </li>
         <li Class="PatchOperationAdd">
-          <xpath>/Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName="VFEE_Archduke" or defName="VFEE_Magister" or defName="VFEE_Despot" or @Name="VFEE_HighStellarch"]/bedroomRequirements/li[@Class="RoomRequirement_ThingAnyOf"][things/li="Dresser"]/things</xpath>
+          <xpath>/Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName = "Duke" or defName="VFEE_Archduke" or defName = "Consul" or defName="VFEE_Magister" or defName="VFEE_Despot" or defName = "Stellarch" or @Name="VFEE_HighStellarch"]/bedroomRequirements/li[@Class="RoomRequirement_ThingAnyOf"][things/li="Dresser"]/things</xpath>
           <value>
             <li>Table_IlluminatedDresser</li>
           </value>
@@ -33,13 +61,13 @@
           <match Class="PatchOperationSequence">
             <operations>
               <li Class="PatchOperationAdd">
-                <xpath>/Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName="VFEE_Archduke" or defName="VFEE_Magister" or defName="VFEE_Despot" or @Name="VFEE_HighStellarch"]/bedroomRequirements/li[@Class="RoomRequirement_ThingAnyOf"][things/li="EndTable"]/things</xpath>
+                <xpath>/Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName = "Duke" or defName="VFEE_Archduke" or defName = "Consul" or defName="VFEE_Magister" or defName="VFEE_Despot" or defName = "Stellarch" or @Name="VFEE_HighStellarch"]/bedroomRequirements/li[@Class="RoomRequirement_ThingAnyOf"][things/li="EndTable"]/things</xpath>
                 <value>
                   <li>Table_DarkIlluminatedEndTable</li>
                 </value>
               </li>
               <li Class="PatchOperationAdd">
-                <xpath>/Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName="VFEE_Archduke" or defName="VFEE_Magister" or defName="VFEE_Despot" or @Name="VFEE_HighStellarch"]/bedroomRequirements/li[@Class="RoomRequirement_ThingAnyOf"][things/li="Dresser"]/things</xpath>
+                <xpath>/Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName = "Duke" or defName="VFEE_Archduke" or defName = "Consul" or defName="VFEE_Magister" or defName="VFEE_Despot" or defName = "Stellarch" or @Name="VFEE_HighStellarch"]/bedroomRequirements/li[@Class="RoomRequirement_ThingAnyOf"][things/li="Dresser"]/things</xpath>
                 <value>
                   <li>Table_DarkIlluminatedDresser</li>
                 </value>
