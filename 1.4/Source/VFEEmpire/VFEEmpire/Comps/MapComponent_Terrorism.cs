@@ -78,7 +78,9 @@ public class TerrorismWorker
     public virtual bool AppliesTo(Lord parent)
     {
         if (parent.faction.HostileTo(Faction.OfPlayer)) return false;
-        if (!parent.lordManager.map.mapPawns.FreeColonistsSpawned.Any(p => p.royalty.HasAnyTitleIn(Faction.OfEmpire))) return false;
+        if (!parent.lordManager.map.mapPawns.FreeColonistsSpawned.Any(p =>
+                p.royalty.HasAnyTitleIn(Faction.OfEmpire)
+             && p.royalty.GetCurrentTitle(Faction.OfEmpire).seniority > RoyalTitleDefOf.Knight.seniority)) return false;
         // Lord must have at least one deserter, but also must not be entirely deserters
         var flag1 = false;
         var flag2 = false;
