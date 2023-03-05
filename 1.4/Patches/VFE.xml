@@ -22,7 +22,7 @@
         </li>
         <!-- Dresser :: Replace the RoomRequirement_Thing with RoomRequirement_ThingAnyOf -->
         <li Class="PatchOperationConditional">
-          <xpath>Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="dVFEE_Marquess" or defName="VFEE_Archduke" or defName="VFEE_Magister" or defName="VFEE_Despot" or @Name="VFEE_HighStellarch"]/bedroomRequirements//li[@Class="RoomRequirement_Thing"][thingDef="Dresser"]</xpath>
+          <xpath>Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName="VFEE_Archduke" or defName="VFEE_Magister" or defName="VFEE_Despot" or @Name="VFEE_HighStellarch"]/bedroomRequirements//li[@Class="RoomRequirement_Thing"][thingDef="Dresser"]</xpath>
           <match Class="PatchOperationReplace">
             <xpath>Defs/RoyalTitleDef[defName="VFEE_Archcount" or defName="VFEE_Marquess" or defName = "Duke" or defName="VFEE_Archduke" or defName = "Consul" or defName="VFEE_Magister" or defName="VFEE_Despot" or defName = "Stellarch" or @Name="VFEE_HighStellarch"]/bedroomRequirements//li[@Class="RoomRequirement_Thing"][thingDef="Dresser"]</xpath>
             <value>
