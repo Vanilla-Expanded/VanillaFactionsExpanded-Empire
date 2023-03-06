@@ -48,7 +48,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
 
         //Generate Nobles
         var givenNoble = slate.Get<Pawn>("noble");
-        var nobleCount = givenNoble is null
+        var nobleCount = givenNoble is not null
             ? 1
             : new IntRange(1, (int)Math.Floor(QuestNoblesCurve.Evaluate(points)))
                .RandomInRange; //Max # increased with difficulty but still random how many you can get
