@@ -9,6 +9,7 @@ namespace VFEEmpire;
 
 public static class EmpireUtility
 {
+    private static readonly List<Pawn> colonistsWithTitle = new();
     public static Faction Deserters => Find.FactionManager.FirstFactionOfDef(VFEE_DefOf.VFEE_Deserters);
     public static RoyalTitleDefExtension Ext(this RoyalTitleDef def) => def.GetModExtension<RoyalTitleDefExtension>();
 
@@ -36,9 +37,23 @@ public static class EmpireUtility
         return pawn;
     }
 
-    public static IEnumerable<Pawn> AllColonistsWithTitle(Faction faction = null) =>
-        PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists.Where(p =>
-            p.royalty != null && p.royalty.HasAnyTitleIn(faction ?? Faction.OfEmpire) && !p.IsQuestLodger());
+    public static IEnumerable<Pawn> AllColonistsWithTitle() => colonistsWithTitle;
+
+    public static void Notify_TitlesChanged(Pawn p)
+    {
+        colonistsWithTitle.Remove(p);
+        if (p.IsColonistWithTitle())
+            colonistsWithTitle.Add(p);
+    }
+
+    public static void Notify_ColonistsChanged()
+    {
+        colonistsWithTitle.Clear();
+        colonistsWithTitle.AddRange(PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonists.Where(IsColonistWithTitle));
+    }
+
+    private static bool IsColonistWithTitle(this Pawn p) =>
+        p.royalty != null && p.royalty.HasAnyTitleIn(Faction.OfEmpire) && p.IsColonist && !p.Dead && !p.IsPrisoner && !p.IsSlave && !p.IsQuestLodger();
 
     public static TerrorismLord Terrorism(this Lord lord) => lord.lordManager.map.GetComponent<MapComponent_Terrorism>().GetTerrorismFor(lord);
 

@@ -93,6 +93,7 @@
     <Compile Include="Comps\MapComponent_Terrorism.cs" />
     <Compile Include="Comps\StorytellerComp_WealthSteps.cs" />
     <Compile Include="DefOf\HonorDefOf.cs" />
+    <Compile Include="HarmonyPatches\ColonistTitleCache.cs" />
     <Compile Include="HarmonyPatches\Patch_HonorsMisc.cs" />
     <Compile Include="HarmonyPatches\Patch_StripTitles.cs" />
     <Compile Include="HarmonyPatches\Patch_TradeablePrice.cs" />

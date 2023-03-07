@@ -21,6 +21,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
     public override void Notify_Open()
     {
         base.Notify_Open();
+        EmpireUtility.Notify_ColonistsChanged();
         WorldComponent_Hierarchy.Instance.RefreshPawns();
     }
 
@@ -145,7 +146,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
                             if (parent.DevMode || p.royalty.TryRemoveFavor(Faction.OfEmpire, honorCost))
                             {
                                 var slate = new Slate();
-                                slate.Set("noble", pawn);                                
+                                slate.Set("noble", pawn);
                                 var quest = QuestUtility.GenerateQuestAndMakeAvailable(VFEE_DefOf.VFEE_NobleVisit, slate);
                                 QuestUtility.SendLetterQuestAvailable(quest);
                             }
