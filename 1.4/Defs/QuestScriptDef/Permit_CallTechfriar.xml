@@ -1,70 +1,79 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-<QuestScriptDef>
-    <defName>VFEE_Permit_CallAbsolver</defName>
+
+  <QuestScriptDef>
+    <defName>VFEE_Permit_CallTechfriar</defName>
     <isRootSpecial>true</isRootSpecial>
     <autoAccept>true</autoAccept>
     <defaultHidden>true</defaultHidden>
     <questDescriptionAndNameRules>
       <rulesStrings>
-        <li>questName->Absolver</li>
+        <li>questName->Techfriar</li>
         <li>questDescription-></li>
       </rulesStrings>
     </questDescriptionAndNameRules>
     <root Class="QuestNode_Sequence">
       <nodes>
-        <!-- Generate absolver -->
-          <li Class="QuestNode_GeneratePawn">
-            <kindDef>VFEE_Empire_Fighter_Absolver</kindDef>
-            <faction>$permitFaction</faction>
-            <addToList>absolver</addToList>
-            <allowAddictions>false</allowAddictions>
-            <biocodeWeaponChance>1</biocodeWeaponChance>
-            <biocodeApparelChance>1</biocodeApparelChance>
-            <allowPregnant>false</allowPregnant>
-          </li>
-
+        <!-- Generate techfriar -->
+        <li Class="QuestNode_GeneratePawn">
+          <kindDef>VFEE_Empire_Royal_Techfriar</kindDef>
+          <faction>$permitFaction</faction>
+          <addToList>techfriar</addToList>
+          <allowAddictions>false</allowAddictions>
+          <biocodeWeaponChance>1</biocodeWeaponChance>
+          <biocodeApparelChance>1</biocodeApparelChance>
+          <allowPregnant>false</allowPregnant>
+        </li>
         <!-- Lock their apparel -->
         <li Class="QuestNode_SetAllApparelLocked">
-          <pawns>$absolver</pawns>
+          <pawns>$techfriar</pawns>
         </li>
         <!-- Disable all work except labor -->
         <li Class="QuestNode_WorkDisabled">
-          <pawns>$absolver</pawns>
-          <disabledWorkTags>            
-            <li>AllWork</li>
+          <pawns>$techfriar</pawns>
+          <disabledWorkTags>
+            <li>ManualDumb</li>
+            <li>ManualSkilled</li>
+            <li>Violent</li>
+            <li>Social</li>
+            <li>Animals</li>
           </disabledWorkTags>
+        </li>
+        <!-- Give on duty thought -->
+        <li Class="QuestNode_AddMemoryThought">
+          <pawns>$techfriar</pawns>
+          <def>OnDuty</def>
         </li>
         
         <li Class="QuestNode_ExtraFaction">
           <faction>$permitFaction</faction>
-          <pawns>$absolver</pawns>
+          <pawns>$techfriar</pawns>
           <factionType>HomeFaction</factionType>
-          <inSignalRemovePawn>absolver.RanWild</inSignalRemovePawn>
+          <inSignalRemovePawn>techfriar.RanWild</inSignalRemovePawn>
         </li>
         <li Class="QuestNode_JoinPlayer">
-          <pawns>$absolver</pawns>
+          <pawns>$techfriar</pawns>
           <joinPlayer>True</joinPlayer>
           <makePrisoners>False</makePrisoners>
         </li>
         <li Class="QuestNode_LeaveOnCleanup">
-          <pawns>$absolver</pawns>
+          <pawns>$techfriar</pawns>
           <sendStandardLetter>false</sendStandardLetter>
-          <inSignalRemovePawn>absolver.RanWild</inSignalRemovePawn>
+          <inSignalRemovePawn>techfriar.RanWild</inSignalRemovePawn>
         </li>
 
-        <!-- absolver arrive by shuttle -->
+        <!-- techfriar arrive by shuttle -->
         <li Class="QuestNode_SubScript">
           <def>Util_TransportShip_DropOff</def>
           <parms>
-            <contents>$absolver</contents>
+            <contents>$techfriar</contents>
             <owningFaction>$permitFaction</owningFaction>
           </parms>
         </li>
         <li Class="QuestNode_Letter">
-          <label TKey="VFEE.LetterLabelAbsolverArrived">Absolver arrived</label>
-          <text TKey="VFEE.LetterTextAbsolverArrived">The absolver from [permitFaction_name] have arrived. A shuttle will come to collect them in [absolverDurationDays] days.</text>
-          <lookTargets>$absolver</lookTargets>
+          <label TKey="VFEE.LetterLabelTechfriarArrived">Techfriar arrived</label>
+          <text TKey="VFEE.LetterTextTechfriarArrived">The techfriar from [permitFaction_name] have arrived. A shuttle will come to collect them in [techfriarDurationDays] days.</text>
+          <lookTargets>$techfriar</lookTargets>
           <filterDeadPawnsFromLookTargets>True</filterDeadPawnsFromLookTargets>
         </li>
         <!-- Arrival shuttle is destroyed -->
@@ -79,60 +88,65 @@
 
         <!-- Departure shuttle -->
         <li Class="QuestNode_ShuttleDelay">
-          <delayTicks>$absolverDurationTicks</delayTicks>
-          <lodgers>$absolver</lodgers>
+          <delayTicks>$($techfriarDurationDays * 60000)</delayTicks>
+          <lodgers>$techfriar</lodgers>
           <node Class="QuestNode_Sequence">
             <nodes>
               <li Class="QuestNode_SubScript">
                 <def>Util_TransportShip_Pickup</def>
                 <parms>
                   <leaveDelayTicks>$(1*60000)</leaveDelayTicks>
-                  <requiredPawns>$absolver</requiredPawns>
+                  <requiredPawns>$techfriar</requiredPawns>
                 </parms>
               </li>
               <li Class="QuestNode_InspectString">
-                <targets>$absolver</targets>
+                <targets>$techfriar</targets>
                 <inspectString TKey="InspectStringDepartShuttle">Should depart on shuttle</inspectString>
               </li>
               <li Class="QuestNode_Letter">
                 <label TKey="LetterLabelShuttleArrived">Shuttle arrived</label>
-                <text TKey="LetterTextShuttleArrivedForabsolver">A shuttle has arrived to collect the absolver from [permitFaction_name].</text>
+                <text TKey="VFEE.LetterTextShuttleArrivedForTechfriar">A shuttle has arrived to collect the techfriar from [permitFaction_name].</text>
                 <lookTargets>$pickupShipThing</lookTargets>
               </li>
             </nodes>
           </node>
         </li>
 
-
+        <!-- Goodwill penalty for laborer killed or not on shuttle -->
+        <li Class="QuestNode_Set">
+          <name>goodwillPenaltyPawn</name>
+          <value>-12</value>
+        </li>
         <!-- Goodwill penalty for shuttle destruction -->
         <li Class="QuestNode_Set">
           <name>goodwillChangeOnShuttleDestroyed</name>
           <value>-25</value>
         </li>
 
-        <!-- Absolver killed: End quest, create new quest to generate new absolver -->
+        <!-- Laborer killed: Goodwill impact. Don't end quest. -->
         <li Class="QuestNode_Signal">
-          <inSignal>absolver.Destroyed</inSignal>
+          <inSignal>techfriar.Destroyed</inSignal>
           <node Class="QuestNode_Sequence">
             <nodes>
               <li Class="QuestNode_Letter">
-                <label TKey="LetterLabelLaborerDied">Absolver died: {SUBJECT_definite}</label>
-                <text TKey="LetterTextLaborerDied">An absolver sent to you by [permitFaction_name] has died. A replacement has been issued</text>
+                <label TKey="LetterLabelLaborerDied">Laborer died: {SUBJECT_definite}</label>
+                <text TKey="LetterTextLaborerDied">A laborer sent to you by [permitFaction_name] has died. Your goodwill with [permitFaction_name] has fallen by [goodwillPenaltyPawn].</text>
               </li>
-			  <li Class="VFEEmpire.QuestNode_AbsolverRespawn">
-				<inSignal>absolver.Destroyed</inSignal>
-			  </li>			  
-			  <li Class="QuestNode_End" />
+              <li Class="QuestNode_ChangeFactionGoodwill">
+                <faction>$permitFaction</faction>
+                <change>$goodwillPenalty</change>
+                <reason>QuestPawnLost</reason>
+              </li>
             </nodes>
           </node>
         </li>
 
-        <!-- Missing absolver on departure shuttle. Goodwill impact -->
+        <!-- Missing techfriar on departure shuttle. Goodwill impact -->
         <li Class="QuestNode_ChangeGoodwillForAlivePawnsMissingFromShuttle">
           <inSignal>pickupShipThing.SentUnsatisfied</inSignal>
-          <pawns>$absolver</pawns>
+          <pawns>$techfriar</pawns>
           <faction>$permitFaction</faction>
-          <goodwillChange>$goodwillPenaltyPawn</goodwillChange>
+          <goodwillChange>$goodwillPenaltyPawn</goodwillChange> <!-- Per missing laborer -->
           <reason>LaborersMissedShuttle</reason>
         </li>
 
@@ -174,4 +188,5 @@
       </nodes>
     </root>
   </QuestScriptDef>
+
 </Defs>

@@ -419,13 +419,13 @@
     <apparelRequired>
       <li>VFEE_Apparel_AbsolverHelmet</li>
       <li>VFEE_Apparel_ArmorAbsolver</li>
-	  <li>Apparel_Cape</li>
+	    <li>Apparel_Cape</li>
     </apparelRequired>
     <specificApparelRequirements Inherit="False">
       <li>
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>Shell</apparelLayer>
-		<stuff>Synthread</stuff>
+		    <stuff>Synthread</stuff>
         <color>(10, 10, 10)</color>
       </li>
     </specificApparelRequirements>
@@ -445,13 +445,13 @@
     <apparelTags Inherit="False">
       <li>IndustrialBasic</li>
       <li>IndustrialAdvanced</li>
-	  <li>VFEE_Absolver</li>
+	    <li>VFEE_Absolver</li>
     </apparelTags>
     <disallowedTraits>
       <li>Brawler</li>
-	  <li>Nudist</li>
-	  <li>BodyPurist</li>
-	  <li>Wimp</li>
+	    <li>Nudist</li>
+	    <li>BodyPurist</li>
+	    <li>Wimp</li>
     </disallowedTraits>
     <initialWillRange>4~6</initialWillRange>
     <initialResistanceRange>36~46</initialResistanceRange>

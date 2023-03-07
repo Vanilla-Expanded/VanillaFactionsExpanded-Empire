@@ -11,8 +11,8 @@ public abstract class RoyalTitlePermitWorker_Call : RoyalTitlePermitWorker_Targe
     public override IEnumerable<FloatMenuOption> GetRoyalAidOptions(Map map, Pawn pawn, Faction faction)
     {
         string label = def.LabelCap + ": ";
-        if (faction.HostileTo(Faction.OfPlayer))
-            yield return new FloatMenuOption("CommandCallRoyalAidFactionHostile".Translate(faction.Named("FACTION")), null);
+        if (AidDisabled(map, pawn, faction, out var reason))
+            yield return new FloatMenuOption(def.LabelCap + ": " + reason, null);
         else if (FillAidOption(pawn, faction, ref label, out var free))
             yield return new FloatMenuOption(label, delegate
             {

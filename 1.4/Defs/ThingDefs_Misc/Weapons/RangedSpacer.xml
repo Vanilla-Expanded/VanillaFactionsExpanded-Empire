@@ -58,6 +58,9 @@
         <cooldownTime>2</cooldownTime>
       </li>
     </tools>
+    <comps>
+      <li Class="CompProperties_Biocodable" />
+    </comps>
   </ThingDef>
   
   <ThingDef ParentName="BaseBullet">

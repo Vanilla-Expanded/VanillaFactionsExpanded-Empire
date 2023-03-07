@@ -50,6 +50,7 @@ public static class InternalDefOf
     public static QuestScriptDef VFEE_DelayedGrandBallOutcome;
     public static QuestScriptDef VFEE_DelayedArtExhibitOutcome;
     public static QuestScriptDef VFEE_Permit_CallAbsolver;
+    public static QuestScriptDef VFEE_Permit_CallTechfriar;
     public static RoyalTitlePermitDef VFEI_CallAbsolver;
     public static HistoryEventDef VFEE_ChoseEmpire;
 

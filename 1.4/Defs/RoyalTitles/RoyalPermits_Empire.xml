@@ -333,15 +333,13 @@
     <defName>VFEI_CallTechfriar</defName>
     <label>call techfriar</label>
     <description>Call a techfriar to assist you for 4 days. This guildmember can only do research-related tasks. You can control him as though he is your own colonists. You are required to keep him safe.</description>
-    <workerClass>RoyalTitlePermitWorker_CallLaborers</workerClass>
+    <workerClass>VFEEmpire.RoyalTitlePermitWorker_CallTechfriar</workerClass>
     <minTitle>Duke</minTitle>
     <faction>Empire</faction>
     <permitPointCost>1</permitPointCost>
     <uiPosition>(4,3)</uiPosition>
     <royalAid>
       <favorCost>14</favorCost>
-      <pawnKindDef>VFEE_Empire_Royal_Techfriar</pawnKindDef>
-      <pawnCount>1</pawnCount>
       <aidDurationDays>4</aidDurationDays>
     </royalAid>
     <cooldownDays>60</cooldownDays>
