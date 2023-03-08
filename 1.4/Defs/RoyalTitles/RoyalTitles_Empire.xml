@@ -583,19 +583,6 @@
           <li>Psychic</li>
         </allowedTags>
       </li>
-      <li>
-        <bodyPartGroupsMatchAny>
-          <li>UpperHead</li>
-          <li>FullHead</li>
-        </bodyPartGroupsMatchAny>
-        <requiredTags>
-          <li>RoyalTier5</li>
-        </requiredTags>
-        <allowedTags>
-          <li>PrestigeCombatGear</li>
-          <li>Psychic</li>
-        </allowedTags>
-      </li>
     </requiredApparel>
     <throneRoomRequirements>
       <li Class="RoomRequirement_HasAssignedThroneAnyOf">
@@ -1133,19 +1120,6 @@
         </requiredTags>
         <allowedTags>
           <li>Cape</li>
-          <li>PrestigeCombatGear</li>
-          <li>Psychic</li>
-        </allowedTags>
-      </li>
-      <li>
-        <bodyPartGroupsMatchAny>
-          <li>UpperHead</li>
-          <li>FullHead</li>
-        </bodyPartGroupsMatchAny>
-        <requiredTags>
-          <li>RoyalTier5</li>
-        </requiredTags>
-        <allowedTags>
           <li>PrestigeCombatGear</li>
           <li>Psychic</li>
         </allowedTags>
@@ -2034,19 +2008,6 @@
         </requiredTags>
         <allowedTags>
           <li>Cape</li>
-          <li>PrestigeCombatGear</li>
-          <li>Psychic</li>
-        </allowedTags>
-      </li>
-      <li>
-        <bodyPartGroupsMatchAny>
-          <li>UpperHead</li>
-          <li>FullHead</li>
-        </bodyPartGroupsMatchAny>
-        <requiredTags>
-          <li>RoyalTier7</li>
-        </requiredTags>
-        <allowedTags>
           <li>PrestigeCombatGear</li>
           <li>Psychic</li>
         </allowedTags>
