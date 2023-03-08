@@ -95,6 +95,7 @@
     <Compile Include="DefOf\HonorDefOf.cs" />
     <Compile Include="HarmonyPatches\ColonistTitleCache.cs" />
     <Compile Include="HarmonyPatches\Patch_HonorsMisc.cs" />
+    <Compile Include="HarmonyPatches\Patch_SpawnPawns.cs" />
     <Compile Include="HarmonyPatches\Patch_StripTitles.cs" />
     <Compile Include="HarmonyPatches\Patch_TradeablePrice.cs" />
     <Compile Include="HarmonyPatches\Patch_DoLeftSection.cs" />

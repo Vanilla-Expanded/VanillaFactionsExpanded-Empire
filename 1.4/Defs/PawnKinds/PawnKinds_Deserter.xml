@@ -49,7 +49,7 @@
   <PawnKindDef ParentName="VFEE_DeserterBase">
     <defName>VFEE_Deserter</defName>
     <label>deserter</label>
-    <combatPower>80</combatPower>
+    <combatPower>150</combatPower>
     <weaponTags>
       <li>AssaultRifle</li>
       <li>SpacerGun</li>

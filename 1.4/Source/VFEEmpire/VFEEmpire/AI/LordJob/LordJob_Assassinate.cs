@@ -42,6 +42,11 @@ public class LordJob_Assassinate : LordJob
         leave.AddSource(defendSelf);
         leave.AddTrigger(new Trigger_Memo("TargetDead"));
         leave.AddPreAction(new TransitionAction_Message("VFEE.AssassinationSuccess".Translate()));
+        leave.AddPostAction(new TransitionAction_Custom(() =>
+        {
+            exit.UpdateAllDuties();
+            foreach (var pawn in lord.ownedPawns) pawn.jobs.StopAll();
+        }));
         var attacked = new Transition(attackSpecific, defendSelf);
         attacked.AddTrigger(new Trigger_PawnHarmed(0.8f));
         attacked.AddTrigger(new Trigger_PawnKilled());

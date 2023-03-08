@@ -22,6 +22,6 @@ public class LordToil_AttackSpecific : LordToil
     public override void LordToilTick()
     {
         base.LordToilTick();
-        if (Data.Target.Dead) lord.ReceiveMemo("TargetDead");
+        if (Data.Target.Dead || Data.Target.Downed) lord.ReceiveMemo("TargetDead");
     }
 }

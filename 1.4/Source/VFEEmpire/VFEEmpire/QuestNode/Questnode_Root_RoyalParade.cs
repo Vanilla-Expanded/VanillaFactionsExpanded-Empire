@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using RimWorld.QuestGen;
-using UnityEngine;
 using Verse;
 
 namespace VFEEmpire;
 
 public class QuestNode_Root_RoyalParade : QuestNode
 {
-
     protected override bool TestRunInt(Slate slate)
     {
         var map = QuestGen_Get.GetMap();
         var leadTitle = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle)
-           .OrderByDescending(x => x?.def?.seniority ?? 0f).FirstOrDefault(); //Title of highest colony member            
+           .OrderByDescending(x => x?.def?.seniority ?? 0f)
+           .FirstOrDefault(); //Title of highest colony member            
         return leadTitle != null && leadTitle.def.defName == "Stellarch" && !Faction.OfPlayer.HostileTo(Faction.OfEmpire);
     }
 
@@ -27,18 +26,23 @@ public class QuestNode_Root_RoyalParade : QuestNode
         //Getting Initial requirement
         var map = QuestGen_Get.GetMap();
         var points = slate.Get<float>("points");
-        
+
         var empire = Find.FactionManager.OfEmpire;
-        var stellarch = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.GetCurrentTitleInFaction(empire)).First(x=>x?.def.defName == "Stellarch").pawn;        
+        var stellarch = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.GetCurrentTitleInFaction(empire))
+           .First(x => x?.def.defName == "Stellarch")
+           .pawn;
 
         //Generate Nobles
         var nobleCount = 20;
         var emperor = WorldComponent_Hierarchy.Instance.TitleHolders.Where(x => x.royalty.MostSeniorTitle.def.defName == "Emperor").First();
-        var nobles = WorldComponent_Hierarchy.Instance.TitleHolders.Where(x=>x.Faction != Faction.OfPlayer).Except(emperor).
-            OrderByDescending(x=>x.royalty.MostSeniorTitle.def.seniority).Take(20).ToList();
+        var nobles = WorldComponent_Hierarchy.Instance.TitleHolders.Where(x => x.Faction != Faction.OfPlayer)
+           .Except(emperor)
+           .OrderByDescending(x => x.royalty.MostSeniorTitle.def.seniority)
+           .Take(20)
+           .ToList();
         var bestNoble = nobles.First();
-        string questTag = QuestGenUtility.HardcodedTargetQuestTagWithQuestID("Parade");
-        string raidSignal = QuestGenUtility.HardcodedSignalWithQuestID("Parade.SpawnRaid");
+        var questTag = QuestGenUtility.HardcodedTargetQuestTagWithQuestID("Parade");
+        var raidSignal = QuestGenUtility.HardcodedSignalWithQuestID("Parade.SpawnRaid");
         foreach (var noble in nobles)
             QuestUtility.AddQuestTag(ref noble.questTags, questTag);
         QuestUtility.AddQuestTag(stellarch, QuestGenUtility.HardcodedTargetQuestTagWithQuestID("Parade.Stellarch"));
@@ -50,45 +54,45 @@ public class QuestNode_Root_RoyalParade : QuestNode
         slate.Set("emperor", emperor);
         slate.Set("faction", empire);
         //int prepareTicks = 60000 * 5;
-        int prepareTicks = 25; //test remove
+        var prepareTicks = 25; //test remove
         slate.Set("prepareTicks", prepareTicks);
         var shuttle = QuestGen_Shuttle.GenerateShuttle(empire, nobles);
         QuestUtility.AddQuestTag(ref shuttle.questTags, questTag);
         slate.Set("shuttle", shuttle);
-        string pickupSuccess = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.SentSatisfied");
+        var pickupSuccess = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.SentSatisfied");
         //Because if this annoyed me in testing, in actual endgame it'd be infurating
         var questPart_DisableBreaks = new QuestPart_DisableRandomMoodCausedMentalBreaks();
         questPart_DisableBreaks.pawns = nobles;
-        questPart_DisableBreaks.inSignalEnable = QuestGen.slate.Get<string>("inSignal", null, false);
+        questPart_DisableBreaks.inSignalEnable = QuestGen.slate.Get<string>("inSignal");
         quest.AddPart(questPart_DisableBreaks);
-            //nobles arrive after 5 days
-            /*        quest.Delay(prepareTicks, () =>
-                    {*/
-            //shuttle
-            var lodgers = new List<Pawn>();
-            lodgers.AddRange(nobles);
-            slate.Set("lodgers", lodgers);
-            shuttle.TryGetComp<CompShuttle>().requiredPawns = lodgers;
-            var transport = quest.GenerateTransportShip(TransportShipDefOf.Ship_Shuttle, lodgers, shuttle).transportShip;
-            quest.AddShipJob_Arrive(transport, map.Parent, factionForArrival: Faction.OfEmpire, startMode: ShipJobStartMode.Instant);
-            quest.AddShipJob_Unload(transport);
-            quest.AddShipJob_WaitForever(transport, true, true, nobles.Cast<Thing>().ToList());
+        //nobles arrive after 5 days
+        /*        quest.Delay(prepareTicks, () =>
+                {*/
+        //shuttle
+        var lodgers = new List<Pawn>();
+        lodgers.AddRange(nobles);
+        slate.Set("lodgers", lodgers);
+        shuttle.TryGetComp<CompShuttle>().requiredPawns = lodgers;
+        var transport = quest.GenerateTransportShip(TransportShipDefOf.Ship_Shuttle, lodgers, shuttle).transportShip;
+        quest.AddShipJob_Arrive(transport, map.Parent, factionForArrival: Faction.OfEmpire, startMode: ShipJobStartMode.Instant);
+        quest.AddShipJob_Unload(transport);
+        quest.AddShipJob_WaitForever(transport, true, true, nobles.Cast<Thing>().ToList());
         QuestUtility.AddQuestTag(ref transport.questTags, questTag);
-            //lord
-            var questPart_Parade = new QuestPart_Parade()
-            {
-                stellarch = stellarch,
-                leadPawn = bestNoble,
-                inSignal = QuestGen.slate.Get<string>("inSignal"),
-                pawns = lodgers,
-                questTag = questTag,
-                raidTag = raidSignal,
-                shuttle = shuttle,
-                mapOfPawn = stellarch,
-                mapParent = map.Parent,
-                faction = empire
-            };
-            quest.AddPart(questPart_Parade);
+        //lord
+        var questPart_Parade = new QuestPart_Parade
+        {
+            stellarch = stellarch,
+            leadPawn = bestNoble,
+            inSignal = QuestGen.slate.Get<string>("inSignal"),
+            pawns = lodgers,
+            questTag = questTag,
+            raidTag = raidSignal,
+            shuttle = shuttle,
+            mapOfPawn = stellarch,
+            mapParent = map.Parent,
+            faction = empire
+        };
+        quest.AddPart(questPart_Parade);
 /*        });*/
 
         //reward
@@ -106,21 +110,23 @@ public class QuestNode_Root_RoyalParade : QuestNode
         //raid
         quest.Signal(raidSignal, () =>
         {
-            IntVec3 arriveCell = IntVec3.Invalid;
-            Faction deserters = Find.FactionManager.FirstFactionOfDef(InternalDefOf.VFEE_Deserters);
+            var arriveCell = IntVec3.Invalid;
+            var deserters = Find.FactionManager.FirstFactionOfDef(InternalDefOf.VFEE_Deserters);
             RCellFinder.TryFindRandomPawnEntryCell(out arriveCell, map, CellFinder.EdgeRoadChance_Hostile);
             var raiders = PawnGroupMakerUtility.GeneratePawns(new PawnGroupMakerParms
-            {
-                faction = deserters,
-                groupKind = PawnGroupKindDefOf.Combat,
-                points = points > 80 ? points : 80,
-                tile = map.Tile
-            }).ToList();
+                {
+                    faction = deserters,
+                    groupKind = PawnGroupKindDefOf.Combat,
+                    points = points > 150 ? points : 150,
+                    tile = map.Tile
+                })
+               .ToList();
             foreach (var raider in raiders)
             {
                 Find.WorldPawns.PassToWorld(raider);
                 QuestGen.AddToGeneratedPawns(raider);
             }
+
             var raidArrives = new QuestPart_PawnsArrive
             {
                 pawns = raiders,
@@ -128,24 +134,25 @@ public class QuestNode_Root_RoyalParade : QuestNode
                 joinPlayer = false,
                 mapParent = map.Parent,
                 spawnNear = arriveCell,
-                inSignal = QuestGen.slate.Get<string>("inSignal", null, false),
+                inSignal = QuestGen.slate.Get<string>("inSignal"),
                 sendStandardLetter = false
             };
             //Targets are nobles, shuttle, and ballrooms
             quest.AddPart(raidArrives);
             quest.AssaultThings(map.Parent, raiders, deserters, Gen.YieldSingle(stellarch));
-            quest.Letter(LetterDefOf.ThreatBig, relatedFaction: deserters, lookTargets: raiders, label: "[raidArrivedLetterLabel]", text: "[raidArrivedLetterText]");
+            quest.Letter(LetterDefOf.ThreatBig, relatedFaction: deserters, lookTargets: raiders, label: "[raidArrivedLetterLabel]",
+                text: "[raidArrivedLetterText]");
         });
         //All exit fail conditions
-        string lodgerArrestedSignal = QuestGenUtility.HardcodedSignalWithQuestID("Parade.Arrested");
-        string lodgerDestroyedSignal = QuestGenUtility.HardcodedSignalWithQuestID("Parade.Destroyed");
-        string lodgerKidnapped = QuestGenUtility.HardcodedSignalWithQuestID("Parade.Kidnapped");
-        string lodgerSurgeyViolation = QuestGenUtility.HardcodedSignalWithQuestID("Parade.SurgeryViolation");
-        string lodgerLeftMap = QuestGenUtility.HardcodedSignalWithQuestID("Parade.LeftMap");
-        string lodgerBanished = QuestGenUtility.HardcodedSignalWithQuestID("Parade.Banished");
-        string shuttleDestroyed = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.Destroyed");
+        var lodgerArrestedSignal = QuestGenUtility.HardcodedSignalWithQuestID("Parade.Arrested");
+        var lodgerDestroyedSignal = QuestGenUtility.HardcodedSignalWithQuestID("Parade.Destroyed");
+        var lodgerKidnapped = QuestGenUtility.HardcodedSignalWithQuestID("Parade.Kidnapped");
+        var lodgerSurgeyViolation = QuestGenUtility.HardcodedSignalWithQuestID("Parade.SurgeryViolation");
+        var lodgerLeftMap = QuestGenUtility.HardcodedSignalWithQuestID("Parade.LeftMap");
+        var lodgerBanished = QuestGenUtility.HardcodedSignalWithQuestID("Parade.Banished");
+        var shuttleDestroyed = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.Destroyed");
         //These apply to all except dying which only applies to nobles
-        var questPart_LodgerLeave = new QuestPart_LodgerLeave()
+        var questPart_LodgerLeave = new QuestPart_LodgerLeave
         {
             pawns = nobles,
             pawnsCantDie = nobles,
@@ -167,22 +174,27 @@ public class QuestNode_Root_RoyalParade : QuestNode
             faction = empire,
             mapParent = map.Parent,
             signalListenMode = QuestPart.SignalListenMode.Always
-        };       
+        };
         quest.AddPart(questPart_LodgerLeave);
         //Fail signal recieveds
-        FailResults(quest, QuestGenUtility.HardcodedSignalWithQuestID("Parade.CeremonyFailed"), "[CeremonyFailedLetterLabel]", "[CeremonyFailedLetterText]", nobles);
-        FailResults(quest, QuestGenUtility.HardcodedSignalWithQuestID("Parade.CeremonyTimeout"), "[CeremonyTimeoutLetterLabel]", "[CeremonyTimeoutLetterText]", nobles);
-        FailResults(quest, questPart_LodgerLeave.outSignalArrested_LeaveColony, "[lodgerArrestedLeaveMapLetterLabel]", "[lodgerArrestedLeaveMapLetterText]", nobles);
+        FailResults(quest, QuestGenUtility.HardcodedSignalWithQuestID("Parade.CeremonyFailed"), "[CeremonyFailedLetterLabel]", "[CeremonyFailedLetterText]",
+            nobles);
+        FailResults(quest, QuestGenUtility.HardcodedSignalWithQuestID("Parade.CeremonyTimeout"), "[CeremonyTimeoutLetterLabel]", "[CeremonyTimeoutLetterText]",
+            nobles);
+        FailResults(quest, questPart_LodgerLeave.outSignalArrested_LeaveColony, "[lodgerArrestedLeaveMapLetterLabel]", "[lodgerArrestedLeaveMapLetterText]",
+            nobles);
         FailResults(quest, questPart_LodgerLeave.outSignalDestroyed_LeaveColony, "[lodgerDiedLeaveMapLetterLabel]", "[lodgerDiedLeaveMapLetterText]", nobles);
-        FailResults(quest, questPart_LodgerLeave.outSignalSurgeryViolation_LeaveColony, "[lodgerSurgeryVioLeaveMapLetterLabel]", "[lodgerSurgeryVioLeaveMapLetterText]", nobles);
+        FailResults(quest, questPart_LodgerLeave.outSignalSurgeryViolation_LeaveColony, "[lodgerSurgeryVioLeaveMapLetterLabel]",
+            "[lodgerSurgeryVioLeaveMapLetterText]", nobles);
         FailResults(quest, questPart_LodgerLeave.outSignalLast_Banished, "[lodgerBanishedLeaveMapLetterLabel]", "[lodgerBanishedLeaveMapLetterText]", nobles);
-        FailResults(quest, questPart_LodgerLeave.outSignalLast_Kidnapped, "[lodgerKidnappedLeaveMapLetterLabel]", "[lodgerKidnappedLeaveMapLetterText]", nobles);
+        FailResults(quest, questPart_LodgerLeave.outSignalLast_Kidnapped, "[lodgerKidnappedLeaveMapLetterLabel]", "[lodgerKidnappedLeaveMapLetterText]",
+            nobles);
         //Stellarch Fails
-        var questPart_StellarchFails = new QuestPart_StellarchFails()
+        var questPart_StellarchFails = new QuestPart_StellarchFails
         {
             stellarch = stellarch,
             outSignal = QuestGenUtility.HardcodedSignalWithQuestID("Parade.Stellarch.Invalid"),
-            failSignals = new List<string>()
+            failSignals = new List<string>
             {
                 QuestGenUtility.HardcodedTargetQuestTagWithQuestID("Parade.Stellarch.Destroyed"),
                 QuestGenUtility.HardcodedTargetQuestTagWithQuestID("Parade.Stellarch.Kidnapped"),
@@ -221,9 +233,6 @@ public class QuestNode_Root_RoyalParade : QuestNode
     private void FailResults(Quest quest, string onSignal, string letterLabel, string letterText, IEnumerable<Pawn> pawns)
     {
         quest.Letter(LetterDefOf.NegativeEvent, onSignal, text: letterText, label: letterLabel);
-        quest.SignalPass(() =>
-        {
-            quest.End(QuestEndOutcome.Fail, -5, Faction.OfEmpire, inSignal: onSignal);
-        }, onSignal);
+        quest.SignalPass(() => { quest.End(QuestEndOutcome.Fail, -5, Faction.OfEmpire, onSignal); }, onSignal);
     }
 }
