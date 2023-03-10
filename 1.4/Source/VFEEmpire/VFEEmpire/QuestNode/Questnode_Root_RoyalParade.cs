@@ -12,6 +12,7 @@ public class QuestNode_Root_RoyalParade : QuestNode
     protected override bool TestRunInt(Slate slate)
     {
         var map = QuestGen_Get.GetMap();
+        if(map == null) return false;
         var leadTitle = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle)
            .OrderByDescending(x => x?.def?.seniority ?? 0f)
            .FirstOrDefault(); //Title of highest colony member            
