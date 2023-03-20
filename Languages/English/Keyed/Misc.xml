@@ -52,4 +52,5 @@
 	<VFEE.RoyaltyDead>Deserters are leaving as they have eliminated every imperial title holder in the area.</VFEE.RoyaltyDead>
 	<VFEE.GotDrug>{0} has sent you a celebration package of aperitif!</VFEE.GotDrug>
 	<VFEE.TitheArrived>The tithe of {0} has arrived from {1}.</VFEE.TitheArrived>
+	<VFEE.HonorGainedTitle>1 Honor gained by {0} due to {1}</VFEE.HonorGainedTitle>
 </LanguageData>

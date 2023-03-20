@@ -13,6 +13,7 @@ public class GameComponent_Honors : GameComponent
 
     private static readonly GetNextId getNextId = AccessTools.Method(typeof(UniqueIDsManager), "GetNextID").CreateDelegate<GetNextId>();
     private List<Honor> honors = new();
+    private int lastHonorAward;
     private int nextHonorId;
     public GameComponent_Honors(Game game) => Instance = this;
 
@@ -36,19 +37,36 @@ public class GameComponent_Honors : GameComponent
         base.ExposeData();
         Scribe_Values.Look(ref nextHonorId, nameof(nextHonorId));
         Scribe_Collections.Look(ref honors, nameof(honors), LookMode.Deep);
+        Scribe_Values.Look(ref lastHonorAward, nameof(lastHonorAward));
     }
 
     public override void GameComponentTick()
     {
         base.GameComponentTick();
-        if (Find.TickManager.TicksGame % (GenDate.TicksPerDay * 5) == 0)
-            foreach (var honor in honors.OfType<Honor_Settlement>()
-                        .Where(h => h.def == HonorDefOf.VFEE_LordOf && h.pawn != null && h.settlement.HasMap && h.pawn.Map == h.settlement.Map))
-                honor.pawn.royalty.GainFavor(Faction.OfEmpire, 1);
+        if (Find.TickManager.TicksGame - lastHonorAward > GenDate.TicksPerDay * 5)
+        {
+            lastHonorAward = Find.TickManager.TicksGame;
+            foreach (var (pawn, honor) in from pawn in EmpireUtility.AllColonistsWithTitle()
+                     where pawn.HasHonors()
+                     from honor in pawn.Honors().Honors
+                     where honor is Honor_Settlement { def: var def, settlement: { HasMap: true, Map: var map } }
+                        && def == HonorDefOf.VFEE_LordOf && pawn.MapHeld == map
+                     select (pawn, honor as Honor_Settlement))
+            {
+                pawn.royalty.GainFavor(Faction.OfEmpire, 1);
+                Messages.Message("VFEE.HonorGainedTitle".Translate(pawn.NameFullColored, honor.Label), pawn, MessageTypeDefOf.PositiveEvent);
+            }
+        }
     }
 
     private delegate int GetNextId(ref int nextID);
 }
+/*
+ * EmpireUtility.AllColonistsWithTitle()
+                        .SelectMany(p => p.Honors()?.Honors ?? Enumerable.Empty<Honor>())
+                        .OfType<Honor_Settlement>()
+                        .Where(h => h.def == HonorDefOf.VFEE_LordOf && h.pawn != null && h.settlement.HasMap && h.pawn.MapHeld == h.settlement.Map)
+ */
 
 public class NameTripleTitle : NameTriple
 {
