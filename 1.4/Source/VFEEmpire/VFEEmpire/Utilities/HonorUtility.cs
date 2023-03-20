@@ -88,6 +88,7 @@ public static class HonorUtility
                .SelectMany(c => c.choices)
                .SelectMany(c => c.rewards)
                .OfType<Reward_Honor>()
+               .Where(r => r.Pending)
                .Select(r => r.Honor));
 
     [DebugAction("Pawns", allowedGameStates = AllowedGameStates.PlayingOnMap, actionType = DebugActionType.ToolMapForPawns)]

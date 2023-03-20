@@ -38,6 +38,7 @@ public class Reward_Honor : Reward
     private string cachedDescription;
     private string cachedLabel;
     private float cachedValue;
+    public bool Pending => !usedOrCleanedUp;
 
     public override IEnumerable<GenUI.AnonymousStackElement> StackElements =>
         Gen.YieldSingle(usedOrCleanedUp
