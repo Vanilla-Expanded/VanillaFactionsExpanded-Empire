@@ -11,7 +11,7 @@ public class TerrorismWorker_Poisoning : TerrorismWorker
 {
     public override bool AppliesTo(Lord parent) =>
         base.AppliesTo(parent) && GetMeals(parent.Map)
-           .Any(t => parent.ownedPawns.Any(p => p.kindDef == VFEE_DefOf.VFEE_Deserter && p.CanReach(t, PathEndMode.Touch, Danger.Some)));
+           .Any(t => parent.ownedPawns.Any(p => p.IsDeserter() && p.CanReach(t, PathEndMode.Touch, Danger.Some)));
 
     public static IEnumerable<Thing> GetMeals(Map map) =>
         map.listerThings.ThingsInGroup(ThingRequestGroup.HaulableAlways)

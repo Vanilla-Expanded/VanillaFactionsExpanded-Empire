@@ -85,7 +85,7 @@ public class TerrorismWorker
         var flag1 = false;
         var flag2 = false;
         foreach (var pawn in parent.ownedPawns)
-            if (pawn.kindDef == VFEE_DefOf.VFEE_Deserter) flag1 = true;
+            if (pawn.IsDeserter()) flag1 = true;
             else flag2 = true;
         return flag1 && flag2;
     }
@@ -94,7 +94,7 @@ public class TerrorismWorker
 public abstract class TerrorismLord : IExposable
 {
     public Lord Parent;
-    public List<Pawn> Deserters => Parent.ownedPawns.Where(p => p.kindDef == VFEE_DefOf.VFEE_Deserter).ToList();
+    public List<Pawn> Deserters => Parent.ownedPawns.Where(EmpireUtility.IsDeserter).ToList();
 
     public virtual void ExposeData()
     {

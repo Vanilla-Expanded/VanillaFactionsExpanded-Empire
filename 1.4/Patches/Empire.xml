@@ -8,4 +8,13 @@
             </value>
     </Operation>
 
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>/Defs/FactionDef[defName="Empire"]</xpath>
+            <value>
+                <li Class="VFEEmpire.FactionExtension_Deserters">
+                    <canSendDeserters>false</canSendDeserters>
+                </li>
+            </value>
+    </Operation>
+
 </Patch>

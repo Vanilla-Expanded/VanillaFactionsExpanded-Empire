@@ -10,7 +10,12 @@ namespace VFEEmpire;
 public static class EmpireUtility
 {
     private static readonly List<Pawn> colonistsWithTitle = new();
+    private static readonly HashSet<PawnKindDef> deserterKinds = new() { VFEE_DefOf.VFEE_Deserter };
     public static Faction Deserters => Find.FactionManager.FirstFactionOfDef(VFEE_DefOf.VFEE_Deserters);
+
+    public static bool IsDeserter(this Pawn pawn) => deserterKinds.Contains(pawn.kindDef);
+    public static void RegisterDeserter(PawnKindDef kind) => deserterKinds.Add(kind);
+
     public static RoyalTitleDefExtension Ext(this RoyalTitleDef def) => def.GetModExtension<RoyalTitleDefExtension>();
 
     public static MapComponent_RoyaltyTracker RoyaltyTracker(this Map map) => map.GetComponent<MapComponent_RoyaltyTracker>();
@@ -64,4 +69,10 @@ public static class EmpireUtility
         DropPodUtility.DropThingsNear(DropCellFinder.TradeDropSpot(map), map, new[] { stack }, forbid: false, faction: Faction.OfEmpire);
         Messages.Message("VFEE.GotDrug".Translate(Faction.OfEmpire.Name), MessageTypeDefOf.PositiveEvent);
     }
+}
+
+public class FactionExtension_Deserters : DefModExtension
+{
+    public bool canSendDeserters = true;
+    public PawnKindDef deserterKind;
 }
