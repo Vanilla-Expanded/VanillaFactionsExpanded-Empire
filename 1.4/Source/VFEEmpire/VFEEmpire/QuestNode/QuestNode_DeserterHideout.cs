@@ -59,7 +59,6 @@ namespace VFEEmpire
             int population = map.mapPawns.FreeColonists.Where(x => !x.Downed && !x.IsSlave && !x.IsQuestLodger()).Count();
             int requiredPawns = GetRequiredPawnCount(population, quest.points);
             slate.Set("requiredPawnCount", requiredPawns);
-            quest.SetAllApparelLocked(cataphracts);
             //Generate site
             TileFinder.TryFindNewSiteTile(out var tile);
 
@@ -120,8 +119,9 @@ namespace VFEEmpire
                 joinPlayer = true,
                 pawns = cataphracts,
                 mapParent = site
-            };
+            };            
             quest.AddPart(joinPlayer);
+            quest.SetAllApparelLocked(cataphracts);
             quest.AddShipJob(transportShip, ShipJobDefOf.Unload, ShipJobStartMode.Queue, null);
             quest.AddShipJob_FlyAway(transportShip, -1, null, TransportShipDropMode.None, null);
             quest.Leave(cataphracts, enemiesDefeated, false);
