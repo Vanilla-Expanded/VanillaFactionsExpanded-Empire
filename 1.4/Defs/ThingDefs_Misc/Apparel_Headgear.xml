@@ -265,6 +265,10 @@
         <li>VFEE_Janissary</li>
       </tags>
     </apparel>
+    <equippedStatOffsets>
+      <ToxicEnvironmentResistance>1</ToxicEnvironmentResistance>
+	  <ToxicResistance>1</ToxicResistance>
+    </equippedStatOffsets>
     <colorGenerator Class="ColorGenerator_Options">
       <options>
         <li>
