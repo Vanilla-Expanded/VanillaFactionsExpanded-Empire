@@ -72,6 +72,26 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
         Widgets.BeginScrollView(inRect, ref scrollPos, viewRect);
         foreach (var pawn in pawns)
         {
+            const float pawnOffset = 25f;
+            const float finalOffset = 175f;
+
+            RoyalTitleDef title;
+
+            if (scrollPos.x - (pawnOffset + finalOffset) > x || scrollPos.x + viewWidth < x)
+            {
+                pawnPos[pawn] = x + pawnOffset;
+                title = pawn.royalty.GetCurrentTitle(Faction.OfEmpire);
+                if (curTitle != title)
+                {
+                    titlePos[title] = x;
+                    curTitle = title;
+                }
+
+                x += pawnOffset + finalOffset;
+
+                continue;
+            }
+
             if (curTitle != VFEE_DefOf.Freeholder)
             {
                 GUI.color = ColoredText.SubtleGrayColor;
@@ -79,7 +99,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
                 GUI.color = Color.white;
             }
 
-            var title = pawn.royalty.GetCurrentTitle(Faction.OfEmpire);
+            title = pawn.royalty.GetCurrentTitle(Faction.OfEmpire);
             var titleExt = title.GetModExtension<RoyalTitleDefExtension>();
             if (curTitle != title)
             {
@@ -99,7 +119,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
             Widgets.DrawLineHorizontal(x, viewRect.height / 2f, 25f);
             GUI.color = Color.white;
 
-            x += 25f;
+            x += pawnOffset;
             pawnPos[pawn] = x;
 
             if (highlight.Any() && !highlight.Contains(pawn)) GUI.color = Command.LowLightLabelColor;
@@ -158,7 +178,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
 
             GUI.color = Color.white;
 
-            x += 175f;
+            x += finalOffset;
         }
 
         Widgets.EndScrollView();
