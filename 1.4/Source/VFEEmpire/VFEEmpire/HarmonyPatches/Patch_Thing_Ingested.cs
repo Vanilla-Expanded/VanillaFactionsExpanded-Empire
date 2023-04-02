@@ -11,8 +11,8 @@ public static class Patch_Thing_Ingested
     [HarmonyPostfix]
     public static void Postfix(Thing __instance, Pawn ingester)
     {
-        if (__instance.TryGetComp<CompIngredients>() is { } comp)
-            if (comp.ingredients.Contains(VFEE_DefOf.VFEE_Poison))
+        if (__instance.TryGetComp<CompIngredients>() is { ingredients: { Count: > 0 } ingredients })
+            if (ingredients.Contains(VFEE_DefOf.VFEE_Poison))
             {
                 var list = ingester.health.hediffSet.GetNotMissingParts(tag: BodyPartTagDefOf.MetabolismSource).ToList();
                 var part = list.FirstOrFallback(record => record.def == BodyPartDefOf.Stomach, list.RandomElement());
