@@ -1634,7 +1634,7 @@
     <description>The Imperial title of despot maintains dominion over a small star system of strategic importance. In the Empire, despots maintain an iron grip to ensure that resources continue to flow into Imperial coffers and factories, as their major House holds important administrative positions throughout the system of governance.</description>
     <seniority>802</seniority>
     <favorCost>220</favorCost>
-    <minExpectation>Royal</minExpectation>
+    <minExpectation>VFEE_Stellar</minExpectation>
     <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
     <changeHeirQuestPoints>4700</changeHeirQuestPoints>
     <recruitmentResistanceOffset>180</recruitmentResistanceOffset>
@@ -1946,7 +1946,7 @@
 
   <RoyalTitleDef ParentName="StellarchBase">
     <favorCost>308</favorCost>
-    <minExpectation>Royal</minExpectation>
+    <minExpectation>VFEE_Stellar</minExpectation>
     <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
     <changeHeirQuestPoints>5000</changeHeirQuestPoints>
     <canBeInherited>True</canBeInherited>
@@ -2261,7 +2261,7 @@
     <commonality>1</commonality>
     <recruitmentResistanceOffset>260</recruitmentResistanceOffset>
     <favorCost>135</favorCost>
-    <minExpectation>Royal</minExpectation>
+    <minExpectation>VFEE_Stellar</minExpectation>
     <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
     <changeHeirQuestPoints>5000</changeHeirQuestPoints>
     <canBeInherited>True</canBeInherited>
