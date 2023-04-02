@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+   <Operation Class="PatchOperationInsert">
+      <xpath>Defs/ThoughtDef[defName="Expectations"]/stages/li[8]</xpath>
+      <order>Append</order>
+      <value>
+         <li>
+            <label>stellar expectations</label>
+            <description>Absolutely impossible. How can this happen. I should not allow myself any discomfort. Not now, not ever.</description>
+            <baseMoodEffect>-16</baseMoodEffect>
+         </li>
+      </value>
+   </Operation>
+</Patch>
