@@ -45,7 +45,7 @@ public static class Patch_HonorsMisc
     [HarmonyPrefix]
     public static void Set_Name_Prefix(Pawn __instance, ref Name __0)
     {
-        if (__instance.Honors().Honors.Any()) __0 = __0.WithTitles(__instance.Honors().Honors.Select(h => h.Label.Resolve()));
+        if (__instance.HasHonors()) __0 = __0.WithTitles(__instance.Honors().Honors.Select(h => h.Label.Resolve()));
     }
 
     [HarmonyPatch(typeof(Pawn), nameof(Pawn.GetGizmos))]
