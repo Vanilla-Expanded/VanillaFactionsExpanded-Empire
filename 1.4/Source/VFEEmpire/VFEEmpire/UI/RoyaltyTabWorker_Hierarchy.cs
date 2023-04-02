@@ -72,7 +72,12 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
         Widgets.BeginScrollView(inRect, ref scrollPos, viewRect);
         foreach (var pawn in pawns)
         {
-            if (curTitle != VFEE_DefOf.Freeholder)
+            const float pawnOffset = 25f;
+            const float finalOffset = 175f;
+
+            var shouldDraw = scrollPos.x - (pawnOffset + finalOffset) <= x && scrollPos.x + viewWidth >= x;
+
+            if (shouldDraw && curTitle != VFEE_DefOf.Freeholder)
             {
                 GUI.color = ColoredText.SubtleGrayColor;
                 Widgets.DrawLineHorizontal(x - 25f, viewRect.height / 2f, 25f);
@@ -83,82 +88,92 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
             var titleExt = title.GetModExtension<RoyalTitleDefExtension>();
             if (curTitle != title)
             {
-                GUI.color = ColoredText.SubtleGrayColor;
-                Widgets.DrawLineVertical(x, 5f, viewRect.height - 15f);
-                GUI.color = Color.white;
-                var text = "VFEE.OfThe".Translate(title.LabelCap, Faction.OfEmpire.Name);
-                var size = Text.CalcSize(text);
-                Widgets.Label(new Rect(new Vector2(x + 5f, 5f), size), text.Colorize(ColoredText.SubtleGrayColor));
-                Widgets.InfoCardButton(x + 10f + size.x, 5f, title);
-                GUI.DrawTexture(new Rect(x + 5f, 10f + size.y, 75f, 75f), titleExt.GreyIcon);
+                if (shouldDraw)
+                {
+                    GUI.color = ColoredText.SubtleGrayColor;
+                    Widgets.DrawLineVertical(x, 5f, viewRect.height - 15f);
+                    GUI.color = Color.white;
+                    var text = "VFEE.OfThe".Translate(title.LabelCap, Faction.OfEmpire.Name);
+                    var size = Text.CalcSize(text);
+                    Widgets.Label(new Rect(new Vector2(x + 5f, 5f), size), text.Colorize(ColoredText.SubtleGrayColor));
+                    Widgets.InfoCardButton(x + 10f + size.x, 5f, title);
+                    GUI.DrawTexture(new Rect(x + 5f, 10f + size.y, 75f, 75f), titleExt.GreyIcon);
+                }
+
                 titlePos[title] = x;
                 curTitle = title;
             }
 
-            GUI.color = ColoredText.SubtleGrayColor;
-            Widgets.DrawLineHorizontal(x, viewRect.height / 2f, 25f);
-            GUI.color = Color.white;
-
-            x += 25f;
-            pawnPos[pawn] = x;
-
-            if (highlight.Any() && !highlight.Contains(pawn)) GUI.color = Command.LowLightLabelColor;
-
-            var rect = new Rect(x, 0f, 150f, 230f).CenteredOnYIn(viewRect);
-            float nameHeight;
-            rect.height += nameHeight = Text.CalcHeight(pawn.NameFullColored, rect.width);
-            var buttonRect = new Rect(rect.x, rect.yMax + 3f, rect.width, 25f);
-            var honorRect = rect.TakeTopPart(20f);
-            if (curTitle != VFEE_DefOf.Emperor)
+            if (shouldDraw)
             {
-                GUI.DrawTexture(honorRect.TakeLeftPart(20f), Faction.OfEmpire.def.RoyalFavorIcon);
-                Widgets.Label(honorRect, pawn.TotalFavor().ToString());
-            }
-
-            var titleRect = new Rect(0f, rect.yMax - 20f, Text.CalcSize(title.LabelCap).x + 20f, 20f).CenteredOnXIn(rect.TakeBottomPart(20f));
-            GUI.DrawTexture(titleRect.TakeLeftPart(20f), titleExt.Icon);
-            Widgets.Label(titleRect, title.LabelCap);
-            using (new TextBlock(TextAnchor.MiddleCenter)) Widgets.Label(rect.TakeBottomPart(nameHeight), pawn.NameFullColored);
-            Widgets.DrawWindowBackground(rect);
-            GUI.DrawTexture(rect, PortraitsCache.Get(pawn, rect.size, Rot4.South));
-            if (pawn.Faction is { IsPlayer: true })
-            {
-                GUI.color = pawn.Faction.Color;
-                GUI.DrawTexture(rect.BottomPartPixels(75f).RightPartPixels(75f), pawn.Faction.def.FactionIcon);
+                GUI.color = ColoredText.SubtleGrayColor;
+                Widgets.DrawLineHorizontal(x, viewRect.height / 2f, 25f);
                 GUI.color = Color.white;
             }
 
-            if (!pawn.Faction.IsPlayerSafe() && title.CanInvite() &&
-                pawn.IsWorldPawn() && Find.WorldPawns.GetSituation(pawn) != WorldPawnSituation.ReservedByQuest &&
-                VFEE_DefOf.VFEE_NobleVisit.CanRun(35f) &&
-                Widgets.ButtonText(buttonRect, "VFEE.Invite".Translate()))
-                Find.WindowStack.Add(new FloatMenu(EmpireUtility.AllColonistsWithTitle()
-                   .Select(p =>
-                    {
-                        var pawnTitle = p.royalty.GetCurrentTitle(Faction.OfEmpire);
-                        var honorCost = (title.TitleIndex() - pawnTitle.TitleIndex()) switch
+            x += pawnOffset;
+            pawnPos[pawn] = x;
+
+            if (shouldDraw)
+            {
+                if (highlight.Any() && !highlight.Contains(pawn)) GUI.color = Command.LowLightLabelColor;
+
+                var rect = new Rect(x, 0f, 150f, 230f).CenteredOnYIn(viewRect);
+                float nameHeight;
+                rect.height += nameHeight = Text.CalcHeight(pawn.NameFullColored, rect.width);
+                var buttonRect = new Rect(rect.x, rect.yMax + 3f, rect.width, 25f);
+                var honorRect = rect.TakeTopPart(20f);
+                if (curTitle != VFEE_DefOf.Emperor)
+                {
+                    GUI.DrawTexture(honorRect.TakeLeftPart(20f), Faction.OfEmpire.def.RoyalFavorIcon);
+                    Widgets.Label(honorRect, pawn.TotalFavor().ToString());
+                }
+
+                var titleRect = new Rect(0f, rect.yMax - 20f, Text.CalcSize(title.LabelCap).x + 20f, 20f).CenteredOnXIn(rect.TakeBottomPart(20f));
+                GUI.DrawTexture(titleRect.TakeLeftPart(20f), titleExt.Icon);
+                Widgets.Label(titleRect, title.LabelCap);
+                using (new TextBlock(TextAnchor.MiddleCenter)) Widgets.Label(rect.TakeBottomPart(nameHeight), pawn.NameFullColored);
+                Widgets.DrawWindowBackground(rect);
+                GUI.DrawTexture(rect, PortraitsCache.Get(pawn, rect.size, Rot4.South));
+                if (pawn.Faction is { IsPlayer: true })
+                {
+                    GUI.color = pawn.Faction.Color;
+                    GUI.DrawTexture(rect.BottomPartPixels(75f).RightPartPixels(75f), pawn.Faction.def.FactionIcon);
+                    GUI.color = Color.white;
+                }
+
+                if (!pawn.Faction.IsPlayerSafe() && title.CanInvite() &&
+                    pawn.IsWorldPawn() && Find.WorldPawns.GetSituation(pawn) != WorldPawnSituation.ReservedByQuest &&
+                    VFEE_DefOf.VFEE_NobleVisit.CanRun(35f) &&
+                    Widgets.ButtonText(buttonRect, "VFEE.Invite".Translate()))
+                    Find.WindowStack.Add(new FloatMenu(EmpireUtility.AllColonistsWithTitle()
+                       .Select(p =>
                         {
-                            <= 0 => 1,
-                            var diff and > 0 => diff * 2
-                        };
-                        return new FloatMenuOption("VFEE.InviteAs".Translate(p.Name.ToStringShort, honorCost), () =>
-                        {
-                            if (parent.DevMode || p.royalty.TryRemoveFavor(Faction.OfEmpire, honorCost))
+                            var pawnTitle = p.royalty.GetCurrentTitle(Faction.OfEmpire);
+                            var honorCost = (title.TitleIndex() - pawnTitle.TitleIndex()) switch
                             {
-                                var slate = new Slate();
-                                slate.Set("noble", pawn);
-                                var quest = QuestUtility.GenerateQuestAndMakeAvailable(VFEE_DefOf.VFEE_NobleVisit, slate);
-                                QuestUtility.SendLetterQuestAvailable(quest);
-                            }
-                            else
-                                Messages.Message("CommandCallRoyalAidNotEnoughFavor".Translate(), MessageTypeDefOf.RejectInput, false);
-                        });
-                    })
-                   .ToList()));
+                                <= 0 => 1,
+                                var diff and > 0 => diff * 2
+                            };
+                            return new FloatMenuOption("VFEE.InviteAs".Translate(p.Name.ToStringShort, honorCost), () =>
+                            {
+                                if (parent.DevMode || p.royalty.TryRemoveFavor(Faction.OfEmpire, honorCost))
+                                {
+                                    var slate = new Slate();
+                                    slate.Set("noble", pawn);
+                                    var quest = QuestUtility.GenerateQuestAndMakeAvailable(VFEE_DefOf.VFEE_NobleVisit, slate);
+                                    QuestUtility.SendLetterQuestAvailable(quest);
+                                }
+                                else
+                                    Messages.Message("CommandCallRoyalAidNotEnoughFavor".Translate(), MessageTypeDefOf.RejectInput, false);
+                            });
+                        })
+                       .ToList()));
+            }
 
             GUI.color = Color.white;
 
-            x += 175f;
+            x += finalOffset;
         }
 
         Widgets.EndScrollView();
