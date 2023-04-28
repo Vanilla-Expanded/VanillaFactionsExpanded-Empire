@@ -6,18 +6,10 @@
       </mods>
       <match Class="PatchOperationSequence">
          <operations>
-            <li Class="PatchOperationReplace">
-               <xpath>/Defs/RoyalTitleDef[defName = "VFEE_Archcount" or defName = "VFEE_Marquess" or @Name = "DukeBase" or defName = "VFEE_Archduke" or @Name = "ConsulBase" or defName = "VFEE_Magister" or defName = "VFEE_Despot" or @Name = "StellarchBase" or defName = "VFEE_HighStellarch"]/bedroomRequirements/li[4]</xpath>
+            <li Class="PatchOperationAdd">
+               <xpath>/Defs/RoyalTitleDef[defName = "VFEE_Archcount" or defName = "VFEE_Marquess" or @Name = "DukeBase" or defName = "VFEE_Archduke" or @Name = "ConsulBase" or defName = "VFEE_Magister" or defName = "VFEE_Despot" or @Name = "StellarchBase" or defName = "VFEE_HighStellarch"]/bedroomRequirements/li[@Class="RoomRequirement_ThingAnyOf"]/things</xpath>
                <value>
-                  <li Class="RoomRequirement_ThingAnyOf">
-                     <disablingPrecepts>
-                        <li MayRequire="Ludeon.RimWorld.Ideology">SlabBed_Preferred</li>
-                     </disablingPrecepts>
-                     <things>
-                        <li>RoyalBed</li>
-                        <li>Bed_Kingsize</li>
-                     </things>
-                  </li>
+                  <li>Bed_Kingsize</li>
                </value>
             </li>
             <li Class="PatchOperationReplace">
