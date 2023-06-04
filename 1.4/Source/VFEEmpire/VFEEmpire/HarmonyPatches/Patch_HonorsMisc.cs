@@ -12,10 +12,39 @@ namespace VFEEmpire.HarmonyPatches;
 public static class Patch_HonorsMisc
 {
     [HarmonyPatch(typeof(SkillRecord), nameof(SkillRecord.Interval))]
+    [HarmonyPriority(Priority.First)]
     [HarmonyPrefix]
     public static bool Prefix_Interval(SkillRecord __instance)
     {
         return __instance.Pawn.Honors().Honors.All(h => h.def.removeLoss != __instance.def);
+    }
+
+    [HarmonyPatch(typeof(Pawn), nameof(Pawn.CombinedDisabledWorkTags), MethodType.Getter)]
+    [HarmonyPostfix]
+    public static void Postfix_Disabled(ref WorkTags __result, Pawn __instance)
+    {
+        Log.Message($"Before: {__result}");
+        foreach (var honor in __instance.Honors().Honors)
+            if (honor.def.removeLoss != null)
+            {
+                /*
+                 * We want to remove items from __result based on disablingWorkTags. Bitwise operations act on each bit individually, which leads to this situation:
+                 * We should always get 0 if the second input is 1, but preserve it otherwise. This leads to this truth table:
+                 * X | Y | O
+                 * 1 | 1 | 0
+                 * 1 | 0 | 1
+                 * 0 | 1 | 0
+                 * 0 | 0 | 0
+                 *
+                 * Check this table: https://en.wikipedia.org/wiki/Truth_table#Truth_table_for_all_binary_logical_operators
+                 * This leads us to an abjunction: https://en.wikipedia.org/wiki/Material_nonimplication
+                 * From that page, it states that the bitwise equivalent would be A&(~B), which is what we do.
+                 */
+                Log.Message($"Allowing {honor.def.removeLoss.GetRelatedWorkTags()} because {honor.Label}");
+                __result &= ~honor.def.removeLoss.GetRelatedWorkTags();
+            }
+
+        Log.Message($"After: {__result}");
     }
 
     [HarmonyPatch(typeof(CompBladelinkWeapon), nameof(CompBladelinkWeapon.Notify_KilledPawn))]
