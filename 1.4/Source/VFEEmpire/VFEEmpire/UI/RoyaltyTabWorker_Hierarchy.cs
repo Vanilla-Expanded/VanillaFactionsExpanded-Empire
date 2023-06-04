@@ -161,6 +161,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
                                 {
                                     var slate = new Slate();
                                     slate.Set("noble", pawn);
+                                    slate.Set("honorCost", honorCost);
                                     var quest = QuestUtility.GenerateQuestAndMakeAvailable(VFEE_DefOf.VFEE_NobleVisit, slate);
                                     QuestUtility.SendLetterQuestAvailable(quest);
                                 }

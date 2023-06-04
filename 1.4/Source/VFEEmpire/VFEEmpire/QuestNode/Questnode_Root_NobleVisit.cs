@@ -26,8 +26,8 @@ public class QuestNode_Root_NobleVisit : QuestNode
 
     protected override bool TestRunInt(Slate slate)
     {
-        var map = QuestGen_Get.GetMap();      
-        return map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle).Any(x=>x != null) && !Faction.OfPlayer.HostileTo(Faction.OfEmpire);
+        var map = QuestGen_Get.GetMap();
+        return map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle).Any(x => x != null) && !Faction.OfPlayer.HostileTo(Faction.OfEmpire);
     }
 
     protected override void RunInt()
@@ -41,10 +41,10 @@ public class QuestNode_Root_NobleVisit : QuestNode
         var durationTicks = Mathf.RoundToInt(QuestDayDurationCurve.Evaluate(points) * 60000);
         var empire = Find.FactionManager.OfEmpire;
         var colonyTitle = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle)
-           .Where(x=> x != null)
+           .Where(x => x != null)
            .RandomElement()
-           .def; 
-        var leadTitle = DefDatabase<RoyalTitleDef>.AllDefs.Where(x => x.seniority <= (colonyTitle.seniority + 100)).RandomElementByWeight(x => x.seniority); //
+           .def;
+        var leadTitle = DefDatabase<RoyalTitleDef>.AllDefs.Where(x => x.seniority <= colonyTitle.seniority + 100).RandomElementByWeight(x => x.seniority); //
 
         //Generate Nobles
         var givenNoble = slate.Get<Pawn>("noble");
@@ -105,7 +105,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
                 mustBeOfFaction = Faction.OfEmpire,
                 mustBeOfKind = mustBeOfKind,
                 mustBeWorldPawn = true,
-                mustBeCapableOfViolence = true,                
+                mustBeCapableOfViolence = true,
                 canGeneratePawn = true
             });
             if (solider != null) lodgers.Add(solider);
@@ -114,7 +114,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
         slate.Set("lodgers", lodgers);
 
         //**Apply restrictions
-        
+
         var workDisabled = new QuestPart_WorkDisabled();
         workDisabled.inSignalEnable = QuestGen.slate.Get<string>("inSignal");
         workDisabled.pawns.AddRange(lodgers);
@@ -210,16 +210,16 @@ public class QuestNode_Root_NobleVisit : QuestNode
 
         quest.Delay(durationTicks, delegate
         {
-
             var utilPickup = DefDatabase<QuestScriptDef>.GetNamed("Util_TransportShip_Pickup");
-            slate.Remove("owningFaction");//if theres an owning faction for the pickup shuttle you dont get gizmos
+            slate.Remove("owningFaction"); //if theres an owning faction for the pickup shuttle you dont get gizmos
             slate.Set("requiredPawns", lodgers);
             slate.Set("leaveDelayTicks", 60000 * 3);
             slate.Set("sendAwayIfAllDespawned", lodgers);
             slate.Set("leaveImmediatelyWhenSatisfied", true);
             utilPickup.root.Run();
             var pickupThing = slate.Get<Thing>("pickupShipThing");
-            Action outAction = () => quest.Letter(LetterDefOf.PositiveEvent, text: "[LetterLabelShuttleArrived]", label: "[LetterTextShuttleArrived]", lookTargets: Gen.YieldSingle(pickupThing));
+            Action outAction = () => quest.Letter(LetterDefOf.PositiveEvent, text: "[LetterLabelShuttleArrived]", label: "[LetterTextShuttleArrived]",
+                lookTargets: Gen.YieldSingle(pickupThing));
             quest.SignalPassWithFaction(empire, null, outAction);
             //If failed and leave
             quest.Leave(lodgers, anyLeave, wakeUp: true);
@@ -227,7 +227,8 @@ public class QuestNode_Root_NobleVisit : QuestNode
 
 
         //honor = range of 2 - 24 based on how long their stay is
-        var honor = givenNoble is null ? Mathf.Max(2, Mathf.RoundToInt(24 * (QuestDayDurationCurve.Evaluate(points) / 10))) : 0;
+        var honor = givenNoble is null ? Mathf.Max(2, Mathf.RoundToInt(24 * (QuestDayDurationCurve.Evaluate(points) / 10))) :
+            slate.TryGet<int>("honorCost", out var honorCost) ? honorCost : 0;
         FailResults(quest, questPart_LodgerLeave.outSignalArrested_LeaveColony, "[lodgerArrestedLeaveMapLetterLabel]", "[lodgerArrestedLeaveMapLetterText]",
             nobles, -honor);
         FailResults(quest, questPart_LodgerLeave.outSignalDestroyed_LeaveColony, "[lodgerDiedLeaveMapLetterLabel]", "[lodgerDiedLeaveMapLetterText]", nobles,
