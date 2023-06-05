@@ -23,10 +23,8 @@ public static class Patch_HonorsMisc
     [HarmonyPostfix]
     public static void Postfix_Disabled(ref WorkTags __result, Pawn __instance)
     {
-        Log.Message($"Before: {__result}");
         foreach (var honor in __instance.Honors().Honors)
             if (honor.def.removeLoss != null)
-            {
                 /*
                  * We want to remove items from __result based on disablingWorkTags. Bitwise operations act on each bit individually, which leads to this situation:
                  * We should always get 0 if the second input is 1, but preserve it otherwise. This leads to this truth table:
@@ -40,11 +38,7 @@ public static class Patch_HonorsMisc
                  * This leads us to an abjunction: https://en.wikipedia.org/wiki/Material_nonimplication
                  * From that page, it states that the bitwise equivalent would be A&(~B), which is what we do.
                  */
-                Log.Message($"Allowing {honor.def.removeLoss.GetRelatedWorkTags()} because {honor.Label}");
                 __result &= ~honor.def.removeLoss.GetRelatedWorkTags();
-            }
-
-        Log.Message($"After: {__result}");
     }
 
     [HarmonyPatch(typeof(CompBladelinkWeapon), nameof(CompBladelinkWeapon.Notify_KilledPawn))]
