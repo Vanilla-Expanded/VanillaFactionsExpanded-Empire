@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-  
   <TerrainDef ParentName="BurnedFloorBase">
     <defName>VFEE_ThickAsh</defName>
     <label>thick ash</label>
@@ -23,5 +22,4 @@
     </affordances>
     <fertility>0.0</fertility>
   </TerrainDef>
-
 </Defs>

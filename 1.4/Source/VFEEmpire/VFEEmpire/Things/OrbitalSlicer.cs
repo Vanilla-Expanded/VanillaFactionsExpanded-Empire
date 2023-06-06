@@ -36,17 +36,22 @@ public class OrbitalSlicer : OrbitalStrike
         slice.StartStrike();
     }
 
+
     public override void Tick()
     {
         Position = DrawPos.ToIntVec3();
         for (var i = 0; i < FiresStartedPerTick; i++) StartRandomFireAndDoFlameDamage();
+        ModifyTerrain();
         base.Tick();
     }
 
     public override void Draw()
     {
         base.Draw();
-        Graphics.DrawMesh(MeshPool.plane10, Matrix4x4.TRS(DrawPos, Quaternion.AngleAxis(0f, Vector3.up), new Vector3(0.25f, 0.25f)),
+        var pos = DrawPos;
+        pos.y = AltitudeLayer.MoteOverhead.AltitudeFor();
+        Graphics.DrawMesh(MeshPool.plane10,
+            Matrix4x4.TRS(pos, Quaternion.AngleAxis(this.HashOffsetTicks() / 0.0166666675f * 1.2f, Vector3.up), new Vector3(90f, 1f, 90f)),
             ThingDefOf.Mote_PowerBeam.graphic.MatSingle, 0);
     }
 
@@ -54,7 +59,7 @@ public class OrbitalSlicer : OrbitalStrike
     {
         var c = (from x in GenRadial.RadialCellsAround(Position, Radius, true)
             where x.InBounds(Map)
-            select x).RandomElementByWeight(x => 1f - Mathf.Min(x.DistanceTo(Position) / 15f, 1f) + 0.05f);
+            select x).RandomElementByWeight(x => 1f - Mathf.Min(x.DistanceToSquared(Position) / Radius, 1f) + 0.05f);
         FireUtility.TryStartFireIn(c, Map, Rand.Range(0.1f, 0.925f));
         tmpThings.Clear();
         tmpThings.AddRange(c.GetThingList(Map));
@@ -71,6 +76,22 @@ public class OrbitalSlicer : OrbitalStrike
             }
 
             thing.TakeDamage(new DamageInfo(DamageDefOf.Flame, num, 0f, -1f, instigator, null, weaponDef)).AssociateWithLog(entry);
+        }
+    }
+
+    private void ModifyTerrain()
+    {
+        if ((from x in GenRadial.RadialCellsAround(Position, Radius, true)
+                where x.InBounds(Map)
+                let terrain = x.GetTerrain(Map)
+                where terrain != null && terrain != VFEE_DefOf.VFEE_ThickAsh && !terrain.defName.Contains("Marsh") && !terrain.defName.Contains("Water")
+                   && !terrain.defName.Contains("Burned")
+                select x).TryRandomElementByWeight(x => 1f - Mathf.Min(x.DistanceToSquared(Position) / Radius, 1f) + 0.05f, out var c))
+        {
+            var oldTerrain = c.GetTerrain(Map);
+            Map.terrainGrid.Notify_TerrainBurned(c);
+            if (oldTerrain.defName.Contains("Ice")) Map.terrainGrid.SetTerrain(c, TerrainDefOf.WaterShallow);
+            else if (oldTerrain.burnedDef == null) Map.terrainGrid.SetTerrain(c, VFEE_DefOf.VFEE_ThickAsh);
         }
     }
 
