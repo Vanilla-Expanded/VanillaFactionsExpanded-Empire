@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-
-
-
-
-
-  
    <EffecterDef>
     <defName>VFEE_ParadeConfetti</defName>
     <children>
@@ -63,8 +57,4 @@
     <fadeOutTime>1.0</fadeOutTime>
     <growthRate>1.2</growthRate>
   </FleckDef>
-
-
-
- 
 </Defs>
