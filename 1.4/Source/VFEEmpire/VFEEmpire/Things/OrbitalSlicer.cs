@@ -41,7 +41,7 @@ public class OrbitalSlicer : OrbitalStrike
     {
         Position = DrawPos.ToIntVec3();
         for (var i = 0; i < FiresStartedPerTick; i++) StartRandomFireAndDoFlameDamage();
-        ModifyTerrain();
+        if (this.IsHashIntervalTick(5)) ModifyTerrainAndRoofs();
         base.Tick();
     }
 
@@ -79,20 +79,28 @@ public class OrbitalSlicer : OrbitalStrike
         }
     }
 
-    private void ModifyTerrain()
+    private void ModifyTerrainAndRoofs()
     {
+        IntVec3 c;
         if ((from x in GenRadial.RadialCellsAround(Position, Radius, true)
                 where x.InBounds(Map)
                 let terrain = x.GetTerrain(Map)
                 where terrain != null && terrain != VFEE_DefOf.VFEE_ThickAsh && !terrain.defName.Contains("Marsh") && !terrain.defName.Contains("Water")
                    && !terrain.defName.Contains("Burned")
-                select x).TryRandomElementByWeight(x => 1f - Mathf.Min(x.DistanceToSquared(Position) / Radius, 1f) + 0.05f, out var c))
+                select x).TryRandomElementByWeight(x => 1f - Mathf.Min(x.DistanceToSquared(Position) / Radius, 1f) + 0.05f, out c))
         {
             var oldTerrain = c.GetTerrain(Map);
             Map.terrainGrid.Notify_TerrainBurned(c);
             if (oldTerrain.defName.Contains("Ice")) Map.terrainGrid.SetTerrain(c, TerrainDefOf.WaterShallow);
             else if (oldTerrain.burnedDef == null) Map.terrainGrid.SetTerrain(c, VFEE_DefOf.VFEE_ThickAsh);
         }
+
+        if ((from x in GenRadial.RadialCellsAround(Position, Radius / 4f, true)
+                where x.InBounds(Map)
+                let roof = x.GetRoof(Map)
+                where roof != null
+                select x).TryRandomElementByWeight(x => 1f - Mathf.Min(x.DistanceToSquared(Position) / (Radius / 4f), 1f) + 0.05f, out c))
+            Map.roofGrid.SetRoof(c, null);
     }
 
     public override void ExposeData()
