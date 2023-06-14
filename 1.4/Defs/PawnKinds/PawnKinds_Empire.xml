@@ -458,11 +458,11 @@
     <useFactionXenotypes>false</useFactionXenotypes>
     <maxGenerationAge>40</maxGenerationAge>
     <apparelMoney>7000~10000</apparelMoney>
-	<weaponMoney>2750~8000</weaponMoney>
+	  <weaponMoney>2750~8000</weaponMoney>
     <techHediffsMoney>2000~6000</techHediffsMoney>
     <techHediffsMaxAmount>6</techHediffsMaxAmount>
     <allowRoyalRoomRequirements>False</allowRoyalRoomRequirements>
-	<biocodeWeaponChance>1.0</biocodeWeaponChance>
+	  <biocodeWeaponChance>1.0</biocodeWeaponChance>
     <xenotypeSet>
       <xenotypeChances>
         <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.03</Neanderthal>

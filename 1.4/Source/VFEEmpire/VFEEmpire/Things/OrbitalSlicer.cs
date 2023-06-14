@@ -36,12 +36,40 @@ public class OrbitalSlicer : OrbitalStrike
         slice.StartStrike();
     }
 
-
     public override void Tick()
     {
         Position = DrawPos.ToIntVec3();
+
+        var list = Map.listerThings.ThingsInGroup(ThingRequestGroup.ProjectileInterceptor);
+        for (var i = 0; i < list.Count; i++)
+        {
+            var shield = list[i];
+            var comp = shield.TryGetComp<CompProjectileInterceptor>();
+            if (!comp.Active) continue;
+            if (!comp.Props.interceptAirProjectiles) continue;
+            if (!Position.InHorDistOf(shield.Position, comp.Props.radius)) continue;
+            if ((instigator == null || !instigator.HostileTo(shield)) && !comp.GetDebugInterceptNonHostileProjectiles()
+                                                                      && !comp.Props.interceptNonHostileProjectiles)
+                continue;
+            comp.SetLastInterceptAngle(DrawPos.AngleToFlat(shield.TrueCenter()));
+            comp.SetLastInterceptTicks(Find.TickManager.TicksGame);
+            comp.TriggerEffecter(Position);
+            var hp = comp.GetCurrentHitPoints();
+            if (hp > 0)
+            {
+                comp.SetCurrentHitPoints(0);
+                comp.SetNextChargeTick(Find.TickManager.TicksGame);
+                comp.BreakShieldHitpoints(new DamageInfo(DamageDefOf.Vaporize, 999999, 100, comp.GetLastInterceptAngle(), instigator));
+            }
+
+            Destroy();
+
+            return;
+        }
+
         for (var i = 0; i < FiresStartedPerTick; i++) StartRandomFireAndDoFlameDamage();
         if (this.IsHashIntervalTick(5)) ModifyTerrainAndRoofs();
+
         base.Tick();
     }
 
@@ -51,7 +79,7 @@ public class OrbitalSlicer : OrbitalStrike
         var pos = DrawPos;
         pos.y = AltitudeLayer.MoteOverhead.AltitudeFor();
         Graphics.DrawMesh(MeshPool.plane10,
-            Matrix4x4.TRS(pos, Quaternion.AngleAxis(this.HashOffsetTicks() / 0.0166666675f * 1.2f, Vector3.up), new Vector3(90f, 1f, 90f)),
+            Matrix4x4.TRS(pos, Quaternion.AngleAxis(this.HashOffsetTicks() * 0.0166666675f * 1.2f, Vector3.up), new Vector3(90f, 1f, 90f)),
             ThingDefOf.Mote_PowerBeam.graphic.MatSingle, 0);
     }
 

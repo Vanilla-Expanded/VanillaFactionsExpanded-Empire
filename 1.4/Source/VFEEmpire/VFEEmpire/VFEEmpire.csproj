@@ -94,6 +94,7 @@
     <Compile Include="DefOf\HonorDefOf.cs" />
     <Compile Include="HarmonyPatches\ColonistTitleCache.cs" />
     <Compile Include="HarmonyPatches\Patch_HonorsMisc.cs" />
+    <Compile Include="HarmonyPatches\Patch_PowerBeam_StartStrike.cs" />
     <Compile Include="HarmonyPatches\Patch_SpawnPawns.cs" />
     <Compile Include="HarmonyPatches\Patch_StripTitles.cs" />
     <Compile Include="HarmonyPatches\Patch_TradeablePrice.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Utilities\EmpireTitleUtility.cs" />
     <Compile Include="Utilities\HonorUtility.cs" />
     <Compile Include="Utilities\MiscUtilities.cs" />
+    <Compile Include="Utilities\ShieldUtility.cs" />
     <Compile Include="Utilities\VassalUtility.cs" />
     <Compile Include="Utilities\WorldPawnsUtility.cs" />
     <Compile Include="Workers\HonorWorkers.cs" />
