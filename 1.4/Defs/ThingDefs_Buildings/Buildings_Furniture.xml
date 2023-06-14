@@ -32,6 +32,7 @@
 	</costList>
     <building>
       <buildingSizeCategory>Medium</buildingSizeCategory>
+	  <paintable>true</paintable>
     </building>
     <researchPrerequisites>
       <li>VFEE_NobleDecorations</li>
@@ -79,6 +80,7 @@
 	<uiIconOffset>0,0.15</uiIconOffset>
     <building>
       <isSittable>true</isSittable>
+      <paintable>true</paintable>
     </building>
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
     <researchPrerequisites>
@@ -232,6 +234,7 @@
     <building>
       <isSittable>true</isSittable>
       <buildingSizeCategory>Medium</buildingSizeCategory>
+      <paintable>true</paintable>
     </building>
     <uiIconOffset>(0, 0.04)</uiIconOffset>
     <uiIconScale>1.1</uiIconScale>
