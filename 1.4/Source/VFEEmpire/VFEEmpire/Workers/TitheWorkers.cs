@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using RimWorld;
 using Verse;
 
@@ -23,10 +22,7 @@ public class TitheWorker_Slaves : TitheWorker
     {
         for (var i = 0; i < AmountProduced(info); i++)
         {
-            var kind = (from pk in DefDatabase<PawnKindDef>.AllDefs
-                where pk.defaultFactionType is { isPlayer: false } && pk.RaceProps.Humanlike
-                select pk).RandomElement();
-            var pawn = PawnGenerator.GeneratePawn(kind, FactionUtility.DefaultFactionFrom(kind.defaultFactionType));
+            var pawn = PawnGenerator.GeneratePawn(PawnKindDefOf.Slave, Find.FactionManager.RandomNonHostileFaction());
             pawn.guest.SetGuestStatus(Faction.OfPlayer, GuestStatus.Slave);
             yield return pawn;
         }

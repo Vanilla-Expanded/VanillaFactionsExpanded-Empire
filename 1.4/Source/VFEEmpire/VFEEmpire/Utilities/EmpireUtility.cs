@@ -66,7 +66,7 @@ public static class EmpireUtility
     {
         var stack = ThingMaker.MakeThing(VFEE_DefOf.VFEE_Aperitif);
         stack.stackCount = Rand.Range(3, 12);
-        DropPodUtility.DropThingsNear(DropCellFinder.TradeDropSpot(map), map, new[] { stack }, forbid: false, faction: Faction.OfEmpire);
+        DropPodUtility.DropThingsNear(DropCellFinder.TradeDropSpot(map), map, new[] { stack }, canRoofPunch: false, forbid: false, faction: Faction.OfEmpire);
         Messages.Message("VFEE.GotDrug".Translate(Faction.OfEmpire.Name), MessageTypeDefOf.PositiveEvent);
     }
 }
