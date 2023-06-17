@@ -96,7 +96,8 @@ public class WorldComponent_Hierarchy : WorldComponent
     {
         var empire = Faction.OfEmpire;
         var kind = title.GetModExtension<RoyalTitleDefExtension>().kindForHierarchy;
-        var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(kind, empire, forceGenerateNewPawn: true, fixedTitle: title));
+        var pawn = PawnGenerator.GeneratePawn(new PawnGenerationRequest(kind, empire, forceGenerateNewPawn: true, fixedTitle: title,
+            canGeneratePawnRelations: false));
         pawn.health.hediffSet.hediffs.RemoveAll(hediff =>
             !hediff.def.AlwaysAllowMothball && !hediff.IsPermanent() && hediff is not Hediff_MissingPart or Hediff_MissingPart { Bleeding: true }
          && !hediff.def.allowMothballIfLowPriorityWorldPawn);
