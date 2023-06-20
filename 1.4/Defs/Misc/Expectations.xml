@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-  
   <ExpectationDef>
     <defName>VFEE_Stellar</defName>
     <label>stellar</label>
     <order>10</order>
-    <thoughtStage>8</thoughtStage>
+    <thoughtStage>10</thoughtStage>
     <joyKindsNeeded>6</joyKindsNeeded>
     <joyToleranceDropPerDay>0.06</joyToleranceDropPerDay>
   </ExpectationDef>
-
 </Defs>

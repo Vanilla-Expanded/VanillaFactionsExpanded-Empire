@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Patch>
-   <Operation Class="PatchOperationInsert">
-      <xpath>Defs/ThoughtDef[defName="Expectations"]/stages/li[8]</xpath>
+   <Operation Class="PatchOperationAdd">
+      <xpath>Defs/ThoughtDef[defName="Expectations"]/stages</xpath>
       <order>Append</order>
       <value>
          <li>
