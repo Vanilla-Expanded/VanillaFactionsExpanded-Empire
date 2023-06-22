@@ -85,7 +85,7 @@ public class WorldComponent_Hierarchy : WorldComponent
     public void RefreshPawns()
     {
         TitleHolders.RemoveAll(pawn => pawn?.royalty?.GetCurrentTitle(Faction.OfEmpire) == null || pawn.Dead);
-        TitleHolders.RemoveAll(pawn => pawn.IsColonist);
+        TitleHolders.RemoveAll(pawn => pawn.IsColonist && !pawn.HasEmpireHome());
         FillTitles();
         TitleHolders.AddRange(EmpireUtility.AllColonistsWithTitle().Where(p => p.royalty.GetCurrentTitle(Faction.OfEmpire).seniority > 0));
         var empire = Faction.OfEmpire;

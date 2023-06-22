@@ -11,6 +11,8 @@ public static class EmpireUtility
 {
     private static readonly List<Pawn> colonistsWithTitle = new();
     private static readonly HashSet<PawnKindDef> deserterKinds = new() { VFEE_DefOf.VFEE_Deserter };
+
+    private static readonly List<ExtraFaction> tempExtraFactions = new();
     public static Faction Deserters => Find.FactionManager.FirstFactionOfDef(VFEE_DefOf.VFEE_Deserters);
 
     public static bool IsDeserter(this Pawn pawn) => deserterKinds.Contains(pawn.kindDef);
@@ -68,6 +70,12 @@ public static class EmpireUtility
         stack.stackCount = Rand.Range(3, 12);
         DropPodUtility.DropThingsNear(DropCellFinder.TradeDropSpot(map), map, new[] { stack }, canRoofPunch: false, forbid: false, faction: Faction.OfEmpire);
         Messages.Message("VFEE.GotDrug".Translate(Faction.OfEmpire.Name), MessageTypeDefOf.PositiveEvent);
+    }
+
+    public static bool HasEmpireHome(this Pawn pawn)
+    {
+        QuestUtility.GetExtraFactionsFromQuestParts(pawn, tempExtraFactions);
+        return tempExtraFactions.Any(f => f.factionType == ExtraFactionType.HomeFaction && f.faction == Faction.OfEmpire);
     }
 }
 
