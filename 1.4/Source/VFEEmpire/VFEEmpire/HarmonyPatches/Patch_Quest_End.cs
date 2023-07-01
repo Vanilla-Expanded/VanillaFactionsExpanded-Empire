@@ -11,7 +11,7 @@ public static class Patch_Quest_End
     [HarmonyPostfix]
     public static void Postfix(QuestEndOutcome outcome, Quest __instance)
     {
-        if (__instance.InvolvedFactions.Any(f => f?.def == FactionDefOf.Empire) && outcome == QuestEndOutcome.Success)
+        if (__instance.InvolvedFactions.Any(f => f?.def == FactionDefOf.Empire && !f.HostileTo(Faction.OfPlayer)) && outcome == QuestEndOutcome.Success)
             (__instance.AccepterPawn?.MapHeld ?? Find.Maps.FirstOrDefault(m => m.IsPlayerHome))?.SendApertif();
     }
 }
