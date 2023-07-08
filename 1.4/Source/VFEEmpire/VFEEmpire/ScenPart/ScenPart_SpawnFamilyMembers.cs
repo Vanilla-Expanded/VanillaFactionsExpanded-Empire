@@ -157,6 +157,12 @@ namespace VFEEmpire
 
         internal static void DamageUntilDead(Pawn pawn, List<ThingDef> weapons)
         {
+            var shield = pawn.apparel.WornApparel.FindAll(a => a.TryGetComp<CompShield>() != null);
+            for (int i = 0; i < shield.Count; i++)
+            {
+                pawn.apparel.Remove(shield[i]);
+            }
+
             while (!pawn.Dead)
             {
                 var weapon = weapons.RandomElement();
