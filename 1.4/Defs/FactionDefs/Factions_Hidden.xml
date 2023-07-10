@@ -28,9 +28,9 @@
     </allowedMemes>
     <xenotypeSet>
       <xenotypeChances>
-        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.05</Neanderthal>
-        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.15</Hussar>
-        <Genie MayRequire="Ludeon.RimWorld.Biotech">0.10</Genie>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.05</Hussar>
+        <Dirtmole MayRequire="Ludeon.RimWorld.Biotech">0.05</Dirtmole>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.025</Neanderthal>
       </xenotypeChances>
     </xenotypeSet>
     <structureMemeWeights>
