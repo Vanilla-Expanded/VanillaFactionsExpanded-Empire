@@ -87,8 +87,9 @@ public class Honor : IExposable, ILoadReferenceable
     public virtual IEnumerable<NamedArgument> GetArguments()
     {
         yield return Pawn.Named("PAWN");
-        if (Pawn?.royalty?.GetCurrentTitle(Faction.OfEmpire) is { } title)
-            yield return title.GetLabelCapFor(Pawn).Named("RANK");
+        if (Pawn?.royalty?.GetCurrentTitle(Faction.OfEmpire) is not { } title)
+            title = RoyalTitleDefOf.Knight;
+        yield return title.GetLabelCapFor(Pawn).Named("RANK");
     }
 
     public virtual void PostMake()
