@@ -3,7 +3,7 @@
     <VFEEmpire.TerrorismTypeDef>
         <defName>VFEE_Bomb</defName>
         <lordClass>VFEEmpire.TerrorismLord_Bomb</lordClass>
-    </VFEEmpire.TerrorismTypeDef> -->
+    </VFEEmpire.TerrorismTypeDef>
     <VFEEmpire.TerrorismTypeDef>
         <defName>VFEE_Assassination</defName>
         <lordClass>VFEEmpire.TerrorismLord_Assassination</lordClass>
