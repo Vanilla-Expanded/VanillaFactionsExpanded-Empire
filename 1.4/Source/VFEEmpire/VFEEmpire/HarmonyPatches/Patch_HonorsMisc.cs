@@ -45,9 +45,10 @@ public static class Patch_HonorsMisc
     [HarmonyPostfix]
     public static void Postfix_KilledPawn(CompBladelinkWeapon __instance)
     {
-        if (__instance.CodedPawn.Honors().Honors.OfType<Honor_Weapon>().Any(h => h.def == HonorDefOf.VFEE_WieldOfWeapon && h.weapon == __instance.parent))
-            if (Rand.Chance(0.5f))
-                __instance.CodedPawn.royalty.GainFavor(Faction.OfEmpire, 1);
+        if (__instance.Biocoded && __instance.CodedPawn.Honors()
+               .Honors.OfType<Honor_Weapon>()
+               .Any(h => h.def == HonorDefOf.VFEE_WieldOfWeapon && h.weapon == __instance.parent) && Rand.Chance(0.5f))
+            __instance.CodedPawn.royalty.GainFavor(Faction.OfEmpire, 1);
     }
 
     [HarmonyPatch(typeof(Pawn), nameof(Pawn.Discard))]
@@ -103,13 +104,13 @@ public static class Patch_HonorsMisc
                 if (instruction.LoadsField(info))
                 {
                     var label = generator.DefineLabel();
-                    yield return new CodeInstruction(OpCodes.Ldarg_0);
+                    yield return new(OpCodes.Ldarg_0);
                     yield return CodeInstruction.LoadField(typeof(Pawn_RelationsTracker), "pawn");
-                    yield return new CodeInstruction(OpCodes.Ldarg_1);
+                    yield return new(OpCodes.Ldarg_1);
                     yield return CodeInstruction.Call(typeof(RelationsPatches), nameof(EitherHasRight));
-                    yield return new CodeInstruction(OpCodes.Brfalse, label);
-                    yield return new CodeInstruction(OpCodes.Pop);
-                    yield return new CodeInstruction(OpCodes.Ldc_I4, 1000);
+                    yield return new(OpCodes.Brfalse, label);
+                    yield return new(OpCodes.Pop);
+                    yield return new(OpCodes.Ldc_I4, 1000);
                     yield return new CodeInstruction(OpCodes.Nop).WithLabels(label);
                 }
             }
