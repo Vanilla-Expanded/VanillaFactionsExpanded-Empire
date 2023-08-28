@@ -16,6 +16,7 @@ public static class EmpireUtility
     public static Faction Deserters => Find.FactionManager.FirstFactionOfDef(VFEE_DefOf.VFEE_Deserters);
 
     public static bool IsDeserter(this Pawn pawn) => deserterKinds.Contains(pawn.kindDef);
+    public static bool IsDeserter(this PawnKindDef pawnKind) => deserterKinds.Contains(pawnKind);
     public static void RegisterDeserter(PawnKindDef kind) => deserterKinds.Add(kind);
 
     public static RoyalTitleDefExtension Ext(this RoyalTitleDef def) => def.GetModExtension<RoyalTitleDefExtension>();
@@ -26,12 +27,12 @@ public static class EmpireUtility
     {
         var empire = Faction.OfEmpire;
         //See if theres an existing pawn to grab instead of creating new one
-        var existing = QuestGen_Pawns.ExistingUsablePawns(new QuestGen_Pawns.GetPawnParms
+        var existing = QuestGen_Pawns.ExistingUsablePawns(new()
         {
             mustBeOfFaction = Faction.OfEmpire,
             mustBeWorldPawn = true,
             mustHaveRoyalTitleInCurrentFaction = true,
-            seniorityRange = new FloatRange(titleDef.seniority, titleDef.seniority)
+            seniorityRange = new(titleDef.seniority, titleDef.seniority)
         });
         if (!existing.EnumerableNullOrEmpty() && Rand.Bool) return existing.RandomElement();
         var pawnKind = DefDatabase<PawnKindDef>.AllDefsListForReading.FirstOrDefault(x => x.titleRequired == titleDef);
