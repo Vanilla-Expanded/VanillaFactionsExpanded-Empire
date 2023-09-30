@@ -1,416 +1,410 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-
-  <ThingDef ParentName="TableGatherSpotBase">
-    <defName>VFEE_GrandTable</defName>
-    <label>grand table</label>
-	<description>A luxurious, beautiful gold-inlaid table fit for the highborn, it is a work of art in itself. People eat off tables when chairs are placed facing them.</description>
-    <graphicData>
-      <texPath>Furniture/TableGrand3x6</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(5, 8)</drawSize>
-      <damageData>
-        <cornerTL>Damage/Corner</cornerTL>
-        <cornerTR>Damage/Corner</cornerTR>
-        <cornerBL>Damage/Corner</cornerBL>
-        <cornerBR>Damage/Corner</cornerBR>
-      </damageData>
-	  <shaderType>CutoutComplex</shaderType>
-    </graphicData>
-    <uiIconScale>0.9</uiIconScale>
-    <statBases>
-      <MaxHitPoints>200</MaxHitPoints>
-      <WorkToBuild>50000</WorkToBuild>
-      <Mass>25</Mass>
-      <Flammability>1.0</Flammability>
-      <Beauty>100</Beauty>
-    </statBases>
-    <size>(3,6)</size>
-    <costStuffCount>200</costStuffCount>
-	<costList>
-	    <Gold>10</Gold>
-	</costList>
-    <building>
-      <buildingSizeCategory>Medium</buildingSizeCategory>
-	  <paintable>true</paintable>
-    </building>
-    <researchPrerequisites>
-      <li>VFEE_NobleDecorations</li>
-    </researchPrerequisites>
-  </ThingDef>
- 
-  <ThingDef ParentName="ArtableFurnitureBase">
-    <defName>VFEE_GrandChair</defName>
-    <label>grand chair</label>
-    <description>A comfortable and elegant chair, it is a work of art in itself. Can be used at tables, work stations, and elsewhere.</description>
-    <graphicData>
-      <texPath>Furniture/GrandChair</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(3,3)</drawSize>
-      <damageData>
-        <rectN>(0.25,0.234375,0.5,0.28125)</rectN>
-        <rectS>(0.25,0.234375,0.5,0.28125)</rectS>
-        <rectE>(0.28125,0.25,0.453125,0.25)</rectE>
-        <rectW>(0.28125,0.25,0.453125,0.25)</rectW>
-      </damageData>
-      <shadowData>
-        <volume>(0.23, 0.26, 0.23)</volume>
-      </shadowData>
-    </graphicData>
-    <altitudeLayer>Building</altitudeLayer>
-	<uiIconScale>0.7</uiIconScale>
-    <statBases>
-      <MaxHitPoints>100</MaxHitPoints>
-      <WorkToBuild>10000</WorkToBuild>
-      <Mass>8</Mass>
-      <Flammability>1.0</Flammability>
-      <Beauty>80</Beauty>
-      <Comfort>0.70</Comfort>
-    </statBases>
-    <socialPropernessMatters>true</socialPropernessMatters>
-    <stuffCategories>
-      <li>Metallic</li>
-      <li>Woody</li>
-	  <li>Stony</li>
-    </stuffCategories>
-    <costStuffCount>100</costStuffCount>
-    <pathCost>30</pathCost>
-    <fillPercent>0.35</fillPercent>
-    <defaultPlacingRot>South</defaultPlacingRot>
-	<uiIconOffset>0,0.15</uiIconOffset>
-    <building>
-      <isSittable>true</isSittable>
-      <paintable>true</paintable>
-    </building>
-    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
-    <researchPrerequisites>
-      <li>VFEE_NobleDecorations</li>
-    </researchPrerequisites>
-  </ThingDef>
-  
-  <ThingDef ParentName="FurnitureBase">
-    <defName>VFEE_ImperialBanner</defName>
-    <label>imperial banner</label>
-    <description>A decorative strip of cloth hanging from a vertical wooden frame. Appropriate for royal rooms.</description>
-    <designationCategory>Misc</designationCategory>
-    <altitudeLayer>BuildingOnTop</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <fillPercent>0.35</fillPercent>
-    <statBases>
-      <MaxHitPoints>100</MaxHitPoints>
-      <WorkToBuild>1000</WorkToBuild>
-      <Mass>15</Mass>
-      <Flammability>1.0</Flammability>
-      <Beauty>5</Beauty>
-    </statBases>
-    <stuffCategories>
-      <li>Fabric</li>
-      <li>Leathery</li>
-    </stuffCategories>
-    <costStuffCount>75</costStuffCount>
-    <costList>
-      <WoodLog>25</WoodLog>
-    </costList>
-    <canOverlapZones>true</canOverlapZones>
-    <pathCost>14</pathCost>
-    <rotatable>false</rotatable>
-    <size>(1,1)</size>
-    <uiIconOffset>(0, 0)</uiIconOffset>
-	<uiIconScale>0.6</uiIconScale>
-    <filthLeaving>Filth_Trash</filthLeaving>
-    <building>
-      <destroySound>BuildingDestroyed_Soft_Medium</destroySound>
-      <destroyShakeAmount>0</destroyShakeAmount>
-    </building>
-    <researchPrerequisites>
-      <li>VFEE_NobleDecorations</li>
-    </researchPrerequisites>
-    <graphicData>
-      <drawSize>(2,2)</drawSize>
-      <texPath>Furniture/VFE_ImperialBanner</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
-      <shadowData>
-        <volume>(1,0.6,0.3)</volume>
-        <offset>(0,0,0</offset>
-      </shadowData>
-      <damageData>
-        <rectN>(0.1, 0.1, 0.8, 0.5)</rectN>
-        <rectS>(0.1, 0.1, 0.8, 0.5)</rectS>
-        <rectE>(0.25, 0.5, 0.5, 0.5)</rectE>
-        <rectW>(0.25, 0.5, 0.5, 0.5)</rectW>
-      </damageData>
-    </graphicData>
-  </ThingDef>
-  
-  <ThingDef ParentName="ArtableFurnitureBase">
-    <defName>VFEE_RoyalStool</defName>
-    <label>royal stool</label>
-    <description>A luxurious gold-inlaid stool fit for the nobility. Can be used at tables, work stations, and elsewhere.</description>
-    <graphicData>
-      <texPath>Furniture/RoyalStool</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-	  <shaderType>CutoutComplex</shaderType>
-      <drawSize>(1,1)</drawSize>
-      <damageData>
-        <rectN>(0.125,0.296875,0.734375,0.421875)</rectN>
-        <rectS>(0.125,0.296875,0.734375,0.421875)</rectS>
-        <rectE>(0.234375,0.296875,0.5,0.546875)</rectE>
-        <rectW>(0.234375,0.296875,0.5,0.546875)</rectW>
-        <cornerTL>Damage/Corner</cornerTL>
-        <cornerTR>Damage/Corner</cornerTR>
-        <cornerBL>Damage/Corner</cornerBL>
-        <cornerBR>Damage/Corner</cornerBR>
-      </damageData>
-      <shadowData>
-        <volume>(0.18, 0.23, 0.18)</volume>
-      </shadowData>
-    </graphicData>
-    <altitudeLayer>Building</altitudeLayer>
-    <statBases>
-      <MaxHitPoints>75</MaxHitPoints>
-      <WorkToBuild>550</WorkToBuild>
-      <Mass>3</Mass>
-      <Flammability>1.0</Flammability>
-      <Beauty>3</Beauty>
-      <Comfort>0.7</Comfort>
-    </statBases>
-    <socialPropernessMatters>true</socialPropernessMatters>
-    <stuffCategories>
-      <li>Leathery</li>
-      <li>Fabric</li>
-    </stuffCategories>
-    <costStuffCount>30</costStuffCount>
-	<costList>
-	    <Gold>20</Gold>
-	</costList>
-    <pathCost>30</pathCost>
-    <fillPercent>0.20</fillPercent>
-    <building>
-      <isSittable>true</isSittable>
-    </building>
-    <uiIconOffset>(0, -0.05)</uiIconOffset>
-    <researchPrerequisites>
-      <li>VFEE_NobleDecorations</li>
-    </researchPrerequisites>
-  </ThingDef>
-  
-  <ThingDef ParentName="FurnitureWithQualityBase">
-    <defName>VFEE_StellicThrone</defName>
-    <label>stellic meditation throne</label>
-	<description>A titanic, ornate chair, designed for a dignity-focused psycaster to sit and meditate. Reigning on a throne is a form of meditation that builds up psyfocus. For dignity psycasters, more impressive meditation thrones and thronerooms increase the rate of psyfocus gain.</description>
-    <drawGUIOverlay>true</drawGUIOverlay>
-    <drawGUIOverlayQuality>false</drawGUIOverlayQuality>
-    <defaultPlacingRot>South</defaultPlacingRot>
-    <castEdgeShadows>True</castEdgeShadows>
-    <altitudeLayer>Building</altitudeLayer>
-    <category>Building</category>
-    <size>(5,3)</size>
-    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
-    <interactionCellOffset>(0,0,1)</interactionCellOffset>
-    <hasInteractionCell>true</hasInteractionCell>
-    <statBases>
-      <MaxHitPoints>350</MaxHitPoints>
-      <WorkToBuild>90000</WorkToBuild>
-      <Mass>150</Mass>
-      <Flammability>1.0</Flammability>
-      <Beauty>24</Beauty>
-      <Comfort>0.9</Comfort>
-      <MeditationFocusStrength>0.3</MeditationFocusStrength>
-    </statBases>
-    <thingClass>Building_Throne</thingClass>
-    <socialPropernessMatters>true</socialPropernessMatters>
-    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
-    <stuffCategories>
-      <li>Metallic</li>
-      <li>Stony</li>
-    </stuffCategories>
-    <costStuffCount>600</costStuffCount>
-    <costList>
-      <Gold>180</Gold>
-    </costList>
-    <pathCost>30</pathCost>
-    <fillPercent>0.4</fillPercent>
-    <building>
-      <isSittable>true</isSittable>
-      <buildingSizeCategory>Medium</buildingSizeCategory>
-      <paintable>true</paintable>
-    </building>
-    <uiIconOffset>(0, 0.04)</uiIconOffset>
-    <uiIconScale>1.1</uiIconScale>
-    <comps>
-      <li Class="CompProperties_AssignableToPawn">
-        <drawAssignmentOverlay>true</drawAssignmentOverlay>
-        <compClass>CompAssignableToPawn_Throne</compClass>
-      </li>
-      <li Class="CompProperties_MeditationFocus">
-        <statDef>MeditationFocusStrength</statDef>
-        <focusTypes>
-          <li>Dignified</li>
-        </focusTypes>
-        <offsets>
-          <li Class="FocusStrengthOffset_ThroneSatisfiesRequirements">
-            <offset>0.08</offset>
-          </li>
-          <li Class="FocusStrengthOffset_RoomImpressiveness">
-            <curve>
-              <points>
-                <li>(0,   -0.05)</li>
-                <li>(30,   0.00)</li>
-                <li>(60,   0.04)</li>
-                <li>(100,  0.08)</li>
-                <li>(170,  0.10)</li>
-              </points>
-            </curve>
-          </li>
-        </offsets>
-      </li>
-    </comps>
-    <researchPrerequisites>
-      <li>VFEE_StellicThrone</li>
-    </researchPrerequisites>
-    <graphicData>
-      <drawSize>(7,5)</drawSize>
-      <texPath>Furniture/ThroneStellic</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <shaderType>CutoutComplex</shaderType>
-      <shadowData>
-        <volume>(2.1,0.5,3.5)</volume>
-      </shadowData>
-      <damageData>
-        <rect>(0.1,0.1,3.8,3.8)</rect>
-      </damageData>
-    </graphicData>
-    <ritualFocus>
-      <spectateDistance>2</spectateDistance>
-      <allowedSpectateSides>Up</allowedSpectateSides>
-    </ritualFocus>
-    <placeWorkers>
-      <li>PlaceWorker_RitualFocus</li>
-    </placeWorkers>
-    <drawPlaceWorkersWhileSelected>True</drawPlaceWorkersWhileSelected>
-  </ThingDef>
-  
-  <ThingDef ParentName="BuildingBase">
-    <defName>VFEE_Candelabra</defName>
-    <label>candelabra</label>
-    <description>An elaborate, artistic electrical standing lamp that lights an area. People need light to move and work at full speed.</description>
-    <thingClass>Building</thingClass>
-    <category>Building</category>
-    <minifiedDef>MinifiedThing</minifiedDef>
-    <altitudeLayer>Building</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <selectable>true</selectable>
-	<uiIconScale>0.8</uiIconScale>
-    <fillPercent>0.20</fillPercent>
-    <pathCost>14</pathCost>
-    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
-    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
-    <designationCategory>Furniture</designationCategory>
-    <rotatable>false</rotatable>
-    <uiIconOffset>(0, 0.03)</uiIconOffset>
-    <thingCategories>
-      <li>BuildingsFurniture</li>
-    </thingCategories>
-    <graphicData>
-      <texPath>Furniture/Candelabra</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-	  <shaderType>CutoutComplex</shaderType>
-      <shadowData>
-        <volume>(0.3, 0.6, 0.3)</volume>
-        <offset>(0,0,-0.1)</offset>
-      </shadowData>
-      <damageData>
-        <rect>(0.2,0.2,0.6,0.6)</rect>
-      </damageData>
-	  <drawSize>1</drawSize>
-    </graphicData>
-    <comps>
-      <li Class="CompProperties_Flickable"/>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>40</basePowerConsumption>
-      </li>
-      <li Class="CompProperties_Glower">
-        <glowRadius>7.9</glowRadius>
-        <glowColor>(217,217,208,0)</glowColor>
-      </li>
-    </comps>
-    <statBases>
-      <MaxHitPoints>50</MaxHitPoints>
-      <WorkToBuild>1000</WorkToBuild>
-      <Flammability>1.0</Flammability>
-	  <Mass>3</Mass>
-	  <Beauty>5</Beauty>
-    </statBases>
-	<costList>
-      <Steel>20</Steel>
-    </costList>
-	<costStuffCount>30</costStuffCount>
-    <stuffCategories>
-      <li>Woody</li>
-      <li>Metallic</li>
-    </stuffCategories>
-    <researchPrerequisites>
-      <li>VFEE_NobleDecorations</li>
-    </researchPrerequisites>
-  </ThingDef>
-  
-  <ThingDef ParentName="ArtableFurnitureBase">
-    <defName>VFEE_RoyalMirror</defName>
-    <label>royal mirror</label>
-    <description>A beautiful and elegant mirror. Gives a small comfort bonus to all nearby beds. Placing more than one mirror near the same bed has no effect.</description>
-    <graphicData>
-      <texPath>Furniture/RoyalMirror</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(3,3)</drawSize>
-	  <shaderType>CutoutComplex</shaderType>
-      <damageData>
-        <cornerTL>Damage/Corner</cornerTL>
-        <cornerTR>Damage/Corner</cornerTR>
-        <cornerBL>Damage/Corner</cornerBL>
-        <cornerBR>Damage/Corner</cornerBR>
-      </damageData>
-    </graphicData>
-    <altitudeLayer>Building</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <fillPercent>0.4</fillPercent>
-    <castEdgeShadows>true</castEdgeShadows>
-    <pathCost>42</pathCost>
-	<uiIconScale>0.55</uiIconScale>
-	<uiIconOffset>0,0.2</uiIconOffset>
-    <stuffCategories>
-      <li>Metallic</li>
-      <li>Woody</li>
-    </stuffCategories>
-    <defaultPlacingRot>South</defaultPlacingRot>
-    <costStuffCount>60</costStuffCount>
-    <statBases>
-      <MaxHitPoints>120</MaxHitPoints>
-      <Mass>15</Mass>
-      <WorkToBuild>5000</WorkToBuild>
-      <Flammability>1.0</Flammability>
-      <Beauty>25</Beauty>
-    </statBases>
-    <size>(1,1)</size>
-    <staticSunShadowHeight>0.5</staticSunShadowHeight>
-    <surfaceType>Item</surfaceType>
-    <canOverlapZones>false</canOverlapZones>
-    <placeWorkers>
-      <li>PlaceWorker_ShowFacilitiesConnections</li>
-    </placeWorkers>
-    <researchPrerequisites>
-      <li>VFEE_NobleDecorations</li>
-    </researchPrerequisites>
-    <comps>
-      <li Class="CompProperties_Facility">
-        <statOffsets>
-          <Comfort>0.05</Comfort>
-        </statOffsets>
-        <maxSimultaneous>1</maxSimultaneous>
-        <maxDistance>6</maxDistance>
-      </li>
-    </comps>
-  </ThingDef>
-
+	<ThingDef ParentName="TableGatherSpotBase">
+		<defName>VFEE_GrandTable</defName>
+		<label>grand table</label>
+		<description>A luxurious, beautiful gold-inlaid table fit for the highborn, it is a work of art in itself. People eat off tables when chairs are placed facing them.</description>
+		<graphicData>
+			<texPath>Furniture/TableGrand3x6</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(5, 8)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+			<shaderType>CutoutComplex</shaderType>
+		</graphicData>
+		<uiIconScale>0.9</uiIconScale>
+		<statBases>
+			<MaxHitPoints>200</MaxHitPoints>
+			<WorkToBuild>50000</WorkToBuild>
+			<Mass>25</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>100</Beauty>
+		</statBases>
+		<size>(3,6)</size>
+		<costStuffCount>200</costStuffCount>
+		<costList>
+			<Gold>10</Gold>
+		</costList>
+		<building>
+			<buildingSizeCategory>Medium</buildingSizeCategory>
+			<paintable>true</paintable>
+		</building>
+		<researchPrerequisites>
+			<li>VFEE_NobleDecorations</li>
+		</researchPrerequisites>
+	</ThingDef>
+	<ThingDef ParentName="ArtableFurnitureBase">
+		<defName>VFEE_GrandChair</defName>
+		<label>grand chair</label>
+		<description>A comfortable and elegant chair, it is a work of art in itself. Can be used at tables, work stations, and elsewhere.</description>
+		<graphicData>
+			<texPath>Furniture/GrandChair</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(2.5,2.5)</drawSize>
+			<damageData>
+				<rectN>(0,0,1,0.703125)</rectN>
+				<rectS>(0.09375,0,0.84375,1)</rectS>
+				<rectE>(0,0,0.84375,0.625)</rectE>
+				<rectW>(0.15625,0,0.84375,0.625)</rectW>
+			</damageData>
+			<shadowData>
+				<volume>(0.25, 0.28, 0.25)</volume>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<uiIconScale>0.85</uiIconScale>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>10000</WorkToBuild>
+			<Mass>8</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>80</Beauty>
+			<Comfort>0.70</Comfort>
+		</statBases>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>100</costStuffCount>
+		<pathCost>30</pathCost>
+		<fillPercent>0.35</fillPercent>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<uiIconOffset>0,0.15</uiIconOffset>
+		<building>
+			<isSittable>true</isSittable>
+			<paintable>true</paintable>
+		</building>
+		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+		<researchPrerequisites>
+			<li>VFEE_NobleDecorations</li>
+		</researchPrerequisites>
+	</ThingDef>
+	<ThingDef ParentName="FurnitureBase">
+		<defName>VFEE_ImperialBanner</defName>
+		<label>imperial banner</label>
+		<description>A decorative strip of cloth hanging from a vertical wooden frame. Appropriate for royal rooms.</description>
+		<designationCategory>Misc</designationCategory>
+		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.35</fillPercent>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>1000</WorkToBuild>
+			<Mass>15</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>5</Beauty>
+		</statBases>
+		<stuffCategories>
+			<li>Fabric</li>
+			<li>Leathery</li>
+		</stuffCategories>
+		<costStuffCount>75</costStuffCount>
+		<costList>
+			<WoodLog>25</WoodLog>
+		</costList>
+		<canOverlapZones>true</canOverlapZones>
+		<pathCost>14</pathCost>
+		<rotatable>false</rotatable>
+		<size>(1,1)</size>
+		<uiIconOffset>(0, 0)</uiIconOffset>
+		<uiIconScale>0.6</uiIconScale>
+		<filthLeaving>Filth_Trash</filthLeaving>
+		<building>
+			<destroySound>BuildingDestroyed_Soft_Medium</destroySound>
+			<destroyShakeAmount>0</destroyShakeAmount>
+		</building>
+		<researchPrerequisites>
+			<li>VFEE_NobleDecorations</li>
+		</researchPrerequisites>
+		<graphicData>
+			<drawSize>(2,2)</drawSize>
+			<texPath>Furniture/VFE_ImperialBanner</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<shadowData>
+				<volume>(1,0.6,0.3)</volume>
+				<offset>(0,0,0</offset>
+			</shadowData>
+			<damageData>
+				<rectN>(0.1, 0.1, 0.8, 0.5)</rectN>
+				<rectS>(0.1, 0.1, 0.8, 0.5)</rectS>
+				<rectE>(0.25, 0.5, 0.5, 0.5)</rectE>
+				<rectW>(0.25, 0.5, 0.5, 0.5)</rectW>
+			</damageData>
+		</graphicData>
+	</ThingDef>
+	<ThingDef ParentName="ArtableFurnitureBase">
+		<defName>VFEE_RoyalStool</defName>
+		<label>royal stool</label>
+		<description>A luxurious gold-inlaid stool fit for the nobility. Can be used at tables, work stations, and elsewhere.</description>
+		<graphicData>
+			<texPath>Furniture/RoyalStool</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<drawSize>(1,1)</drawSize>
+			<damageData>
+				<rectN>(0.125,0.296875,0.734375,0.421875)</rectN>
+				<rectS>(0.125,0.296875,0.734375,0.421875)</rectS>
+				<rectE>(0.234375,0.296875,0.5,0.546875)</rectE>
+				<rectW>(0.234375,0.296875,0.5,0.546875)</rectW>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+			<shadowData>
+				<volume>(0.18, 0.23, 0.18)</volume>
+			</shadowData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<statBases>
+			<MaxHitPoints>75</MaxHitPoints>
+			<WorkToBuild>550</WorkToBuild>
+			<Mass>3</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>3</Beauty>
+			<Comfort>0.7</Comfort>
+		</statBases>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<stuffCategories>
+			<li>Leathery</li>
+			<li>Fabric</li>
+		</stuffCategories>
+		<costStuffCount>30</costStuffCount>
+		<costList>
+			<Gold>20</Gold>
+		</costList>
+		<pathCost>30</pathCost>
+		<fillPercent>0.20</fillPercent>
+		<building>
+			<isSittable>true</isSittable>
+		</building>
+		<uiIconOffset>(0, -0.05)</uiIconOffset>
+		<researchPrerequisites>
+			<li>VFEE_NobleDecorations</li>
+		</researchPrerequisites>
+	</ThingDef>
+	<ThingDef ParentName="FurnitureWithQualityBase">
+		<defName>VFEE_StellicThrone</defName>
+		<label>stellic meditation throne</label>
+		<description>A titanic, ornate chair, designed for a dignity-focused psycaster to sit and meditate. Reigning on a throne is a form of meditation that builds up psyfocus. For dignity psycasters, more impressive meditation thrones and thronerooms increase the rate of psyfocus gain.</description>
+		<drawGUIOverlay>true</drawGUIOverlay>
+		<drawGUIOverlayQuality>false</drawGUIOverlayQuality>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<castEdgeShadows>True</castEdgeShadows>
+		<altitudeLayer>Building</altitudeLayer>
+		<category>Building</category>
+		<size>(5,3)</size>
+		<thingSetMakerTags>
+			<li>RewardStandardQualitySuper</li>
+		</thingSetMakerTags>
+		<interactionCellOffset>(0,0,1)</interactionCellOffset>
+		<hasInteractionCell>true</hasInteractionCell>
+		<statBases>
+			<MaxHitPoints>350</MaxHitPoints>
+			<WorkToBuild>90000</WorkToBuild>
+			<Mass>150</Mass>
+			<Flammability>1.0</Flammability>
+			<Beauty>24</Beauty>
+			<Comfort>0.9</Comfort>
+			<MeditationFocusStrength>0.3</MeditationFocusStrength>
+		</statBases>
+		<thingClass>Building_Throne</thingClass>
+		<socialPropernessMatters>true</socialPropernessMatters>
+		<constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Stony</li>
+		</stuffCategories>
+		<costStuffCount>600</costStuffCount>
+		<costList>
+			<Gold>180</Gold>
+		</costList>
+		<pathCost>30</pathCost>
+		<fillPercent>0.4</fillPercent>
+		<building>
+			<isSittable>true</isSittable>
+			<buildingSizeCategory>Medium</buildingSizeCategory>
+			<paintable>true</paintable>
+		</building>
+		<uiIconOffset>(0, 0.04)</uiIconOffset>
+		<uiIconScale>1.1</uiIconScale>
+		<comps>
+			<li Class="CompProperties_AssignableToPawn">
+				<drawAssignmentOverlay>true</drawAssignmentOverlay>
+				<compClass>CompAssignableToPawn_Throne</compClass>
+			</li>
+			<li Class="CompProperties_MeditationFocus">
+				<statDef>MeditationFocusStrength</statDef>
+				<focusTypes>
+					<li>Dignified</li>
+				</focusTypes>
+				<offsets>
+					<li Class="FocusStrengthOffset_ThroneSatisfiesRequirements">
+						<offset>0.08</offset>
+					</li>
+					<li Class="FocusStrengthOffset_RoomImpressiveness">
+						<curve>
+							<points>
+								<li>(0,   -0.05)</li>
+								<li>(30,   0.00)</li>
+								<li>(60,   0.04)</li>
+								<li>(100,  0.08)</li>
+								<li>(170,  0.10)</li>
+							</points>
+						</curve>
+					</li>
+				</offsets>
+			</li>
+		</comps>
+		<researchPrerequisites>
+			<li>VFEE_StellicThrone</li>
+		</researchPrerequisites>
+		<graphicData>
+			<drawSize>(7,5)</drawSize>
+			<texPath>Furniture/ThroneStellic</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<shadowData>
+				<volume>(2.1,0.5,3.5)</volume>
+			</shadowData>
+			<damageData>
+				<rect>(0.1,0.1,3.8,3.8)</rect>
+			</damageData>
+		</graphicData>
+		<ritualFocus>
+			<spectateDistance>2</spectateDistance>
+			<allowedSpectateSides>Up</allowedSpectateSides>
+		</ritualFocus>
+		<placeWorkers>
+			<li>PlaceWorker_RitualFocus</li>
+		</placeWorkers>
+		<drawPlaceWorkersWhileSelected>True</drawPlaceWorkersWhileSelected>
+	</ThingDef>
+	<ThingDef ParentName="BuildingBase">
+		<defName>VFEE_Candelabra</defName>
+		<label>candelabra</label>
+		<description>An elaborate, artistic electrical standing lamp that lights an area. People need light to move and work at full speed.</description>
+		<thingClass>Building</thingClass>
+		<category>Building</category>
+		<minifiedDef>MinifiedThing</minifiedDef>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<selectable>true</selectable>
+		<uiIconScale>0.8</uiIconScale>
+		<fillPercent>0.20</fillPercent>
+		<pathCost>14</pathCost>
+		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+		<soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+		<designationCategory>Furniture</designationCategory>
+		<rotatable>false</rotatable>
+		<uiIconOffset>(0, 0.03)</uiIconOffset>
+		<thingCategories>
+			<li>BuildingsFurniture</li>
+		</thingCategories>
+		<graphicData>
+			<texPath>Furniture/Candelabra</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<shaderType>CutoutComplex</shaderType>
+			<shadowData>
+				<volume>(0.3, 0.6, 0.3)</volume>
+				<offset>(0,0,-0.1)</offset>
+			</shadowData>
+			<damageData>
+				<rect>(0.2,0.2,0.6,0.6)</rect>
+			</damageData>
+			<drawSize>1</drawSize>
+		</graphicData>
+		<comps>
+			<li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Power">
+				<compClass>CompPowerTrader</compClass>
+				<basePowerConsumption>40</basePowerConsumption>
+			</li>
+			<li Class="CompProperties_Glower">
+				<glowRadius>7.9</glowRadius>
+				<glowColor>(217,217,208,0)</glowColor>
+			</li>
+		</comps>
+		<statBases>
+			<MaxHitPoints>50</MaxHitPoints>
+			<WorkToBuild>1000</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Mass>3</Mass>
+			<Beauty>5</Beauty>
+		</statBases>
+		<costList>
+			<Steel>20</Steel>
+		</costList>
+		<costStuffCount>30</costStuffCount>
+		<stuffCategories>
+			<li>Woody</li>
+			<li>Metallic</li>
+		</stuffCategories>
+		<researchPrerequisites>
+			<li>VFEE_NobleDecorations</li>
+		</researchPrerequisites>
+	</ThingDef>
+	<ThingDef ParentName="ArtableFurnitureBase">
+		<defName>VFEE_RoyalMirror</defName>
+		<label>royal mirror</label>
+		<description>A beautiful and elegant mirror. Gives a small comfort bonus to all nearby beds. Placing more than one mirror near the same bed has no effect.</description>
+		<graphicData>
+			<texPath>Furniture/RoyalMirror</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(3,3)</drawSize>
+			<shaderType>CutoutComplex</shaderType>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<fillPercent>0.4</fillPercent>
+		<castEdgeShadows>true</castEdgeShadows>
+		<pathCost>42</pathCost>
+		<uiIconScale>0.55</uiIconScale>
+		<uiIconOffset>0,0.2</uiIconOffset>
+		<stuffCategories>
+			<li>Metallic</li>
+			<li>Woody</li>
+		</stuffCategories>
+		<defaultPlacingRot>South</defaultPlacingRot>
+		<costStuffCount>60</costStuffCount>
+		<statBases>
+			<MaxHitPoints>120</MaxHitPoints>
+			<Mass>15</Mass>
+			<WorkToBuild>5000</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Beauty>25</Beauty>
+		</statBases>
+		<size>(1,1)</size>
+		<staticSunShadowHeight>0.5</staticSunShadowHeight>
+		<surfaceType>Item</surfaceType>
+		<canOverlapZones>false</canOverlapZones>
+		<placeWorkers>
+			<li>PlaceWorker_ShowFacilitiesConnections</li>
+		</placeWorkers>
+		<researchPrerequisites>
+			<li>VFEE_NobleDecorations</li>
+		</researchPrerequisites>
+		<comps>
+			<li Class="CompProperties_Facility">
+				<statOffsets>
+					<Comfort>0.05</Comfort>
+				</statOffsets>
+				<maxSimultaneous>1</maxSimultaneous>
+				<maxDistance>6</maxDistance>
+			</li>
+		</comps>
+	</ThingDef>
 </Defs>
