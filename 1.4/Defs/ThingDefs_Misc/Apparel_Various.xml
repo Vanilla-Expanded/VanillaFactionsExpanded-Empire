@@ -16,7 +16,7 @@
       <PsychicEntropyRecoveryRate>0.066</PsychicEntropyRecoveryRate>
     </equippedStatOffsets>
     <techLevel>Spacer</techLevel>
-    <uiIconScale>1.25</uiIconScale>
+    <uiIconScale>1</uiIconScale>
     <generateCommonality>2</generateCommonality>
     <statBases>
       <MaxHitPoints>400</MaxHitPoints>
@@ -216,6 +216,7 @@
         <li>VFEE_Janissary</li>
       </tags>
       <useDeflectMetalEffect>true</useDeflectMetalEffect>
+      <countsAsClothingForNudity>false</countsAsClothingForNudity>
     </apparel>
     <colorGenerator Class="ColorGenerator_Options">
       <options>
