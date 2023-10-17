@@ -7,7 +7,7 @@
     <description>An exceedingly complex facemask fitted with advanced technology that is only known to high-ranking Sophian techpriests. Designed to be worn by designated researchers so that they can advance the empire’s needs without rest.\n\nThe inlaid techprint will synchronize and stimulate the wearer’s brain when they are performing research, effectively doubling research speed as well as restoring their needs for rest and recreation.</description>
     <techLevel>Spacer</techLevel>
     <graphicData>
-      <texPath>TechfriarCrown/TechfriarCrown</texPath>
+      <texPath>FixedTechfriarCrown/TechfriarCrown</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(0.9, 0.9)</drawSize>
 	  <shaderType>CutoutComplex</shaderType>
@@ -37,7 +37,7 @@
       <bodyPartGroups>
         <li>FullHead</li>
       </bodyPartGroups>
-      <wornGraphicPath>TechfriarCrown/TechfriarCrown</wornGraphicPath>
+      <wornGraphicPath>FixedTechfriarCrown/TechfriarCrown</wornGraphicPath>
       <layers>
         <li>Overhead</li>
       </layers>
