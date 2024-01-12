@@ -27,7 +27,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
     protected override bool TestRunInt(Slate slate)
     {
         var map = QuestGen_Get.GetMap();
-        return map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle).Any(x => x != null) && !Faction.OfPlayer.HostileTo(Faction.OfEmpire);
+        return map != null && map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle).Any(x => x != null) && !Faction.OfPlayer.HostileTo(Faction.OfEmpire);
     }
 
     protected override void RunInt()
