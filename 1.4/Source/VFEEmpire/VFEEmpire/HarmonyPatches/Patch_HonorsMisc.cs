@@ -118,7 +118,9 @@ public static class Patch_HonorsMisc
 
         public static bool EitherHasRight(Pawn one, Pawn two)
         {
-            return one.Honors().Honors.Any(h => h.def == HonorDefOf.VFEE_ChildOf) || two.Honors().Honors.Any(h => h.def == HonorDefOf.VFEE_ChildOf);
+            return (one.Honors().Honors.Any(h => h.def == HonorDefOf.VFEE_ChildOf) || two.Honors().Honors.Any(h => h.def == HonorDefOf.VFEE_ChildOf))
+                && (one.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Parent) == two
+                 || two.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Parent) == one);
         }
     }
 }
