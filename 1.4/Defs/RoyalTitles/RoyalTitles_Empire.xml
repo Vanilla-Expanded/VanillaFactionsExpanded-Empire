@@ -116,8 +116,11 @@
         </things>
         <count>4</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>Column</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
         <count>8</count>
       </li>
       <li Class="RoomRequirement_ThingCount">
@@ -153,6 +156,10 @@
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -173,13 +180,26 @@
         </disablingPrecepts>
         <things>
           <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
         </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>EndTable</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>Dresser</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
       </li>
       <li Class="RoomRequirement_ThingCount">
         <thingDef>Drape</thingDef>
@@ -190,6 +210,10 @@
         <buildingTags>
           <li>Production</li>
         </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -368,8 +392,11 @@
         </things>
         <count>6</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>Column</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
         <count>10</count>
       </li>
       <li Class="RoomRequirement_ThingCount">
@@ -409,6 +436,10 @@
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -429,13 +460,26 @@
         </disablingPrecepts>
         <things>
           <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
         </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>EndTable</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>Dresser</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
       </li>
       <li Class="RoomRequirement_ThingCount">
         <thingDef>Drape</thingDef>
@@ -449,6 +493,10 @@
         <buildingTags>
           <li>Production</li>
         </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -610,8 +658,11 @@
         </things>
         <count>8</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>Column</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
         <count>12</count>
       </li>
       <li Class="RoomRequirement_ThingCount">
@@ -655,6 +706,10 @@
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -675,20 +730,36 @@
         </disablingPrecepts>
         <things>
           <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
         </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>EndTable</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>Dresser</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
       </li>
       <li Class="RoomRequirement_ThingCount">
         <thingDef>Drape</thingDef>
         <count>2</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>PlantPot</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>PlantPot</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
+        </things>
         <count>6</count>
       </li>
       <li Class="RoomRequirement_Thing">
@@ -699,6 +770,10 @@
         <buildingTags>
           <li>Production</li>
         </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -880,8 +955,11 @@
         </things>
         <count>10</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>Column</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
         <count>14</count>
       </li>
       <li Class="RoomRequirement_ThingCount">
@@ -925,6 +1003,10 @@
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -945,24 +1027,43 @@
         </disablingPrecepts>
         <things>
           <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
         </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>EndTable</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>Dresser</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
       </li>
       <li Class="RoomRequirement_ThingCount">
         <thingDef>Drape</thingDef>
         <count>2</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>PlantPot</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>PlantPot</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
+        </things>
         <count>6</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>VFEE_LargeRoyalRug</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_LargeRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+        </things>
         <count>1</count>
       </li>
       <li Class="RoomRequirement_Thing">
@@ -973,6 +1074,10 @@
         <buildingTags>
           <li>Production</li>
         </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -1151,8 +1256,11 @@
         </things>
         <count>10</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>Column</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
         <count>14</count>
       </li>
       <li Class="RoomRequirement_ThingCount">
@@ -1196,6 +1304,10 @@
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -1216,28 +1328,50 @@
         </disablingPrecepts>
         <things>
           <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
         </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>EndTable</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>Dresser</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
       </li>
       <li Class="RoomRequirement_ThingCount">
         <thingDef>Drape</thingDef>
         <count>4</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>PlantPot</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>PlantPot</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
+        </things>
         <count>6</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>VFEE_LargeRoyalRug</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_LargeRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+        </things>
         <count>1</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>VFEE_GrandRoyalRug</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_GrandRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugGrand</li>
+        </things>
         <count>1</count>
       </li>
       <li Class="RoomRequirement_Thing">
@@ -1248,6 +1382,10 @@
         <buildingTags>
           <li>Production</li>
         </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -1448,8 +1586,11 @@
         <thingDef>VFEE_Candelabra</thingDef>
         <count>2</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>Column</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
         <count>16</count>
       </li>
       <li Class="RoomRequirement_ThingCount">
@@ -1493,6 +1634,10 @@
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -1513,28 +1658,50 @@
         </disablingPrecepts>
         <things>
           <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
         </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>EndTable</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>Dresser</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
       </li>
       <li Class="RoomRequirement_ThingCount">
         <thingDef>Drape</thingDef>
         <count>4</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>PlantPot</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>PlantPot</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
+        </things>
         <count>6</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>VFEE_LargeRoyalRug</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_LargeRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+        </things>
         <count>1</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>VFEE_GrandRoyalRug</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_GrandRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugGrand</li>
+        </things>
         <count>1</count>
       </li>
       <li Class="RoomRequirement_Thing">
@@ -1545,6 +1712,10 @@
         <buildingTags>
           <li>Production</li>
         </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -1745,8 +1916,11 @@
         <thingDef>VFEE_Candelabra</thingDef>
         <count>4</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>Column</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
         <count>18</count>
       </li>
       <li Class="RoomRequirement_ThingCount">
@@ -1798,6 +1972,10 @@
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -1818,32 +1996,57 @@
         </disablingPrecepts>
         <things>
           <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
         </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>EndTable</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>Dresser</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
       </li>
       <li Class="RoomRequirement_ThingCount">
         <thingDef>Drape</thingDef>
         <count>4</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>PlantPot</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>PlantPot</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
+        </things>
         <count>6</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>Armchair</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Armchair</li>
+          <li MayRequire="VanillaExpanded.VFECore">Seat_RoyalArmchair</li>
+        </things>
         <count>2</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>VFEE_LargeRoyalRug</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_LargeRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+        </things>
         <count>1</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>VFEE_GrandRoyalRug</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_GrandRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugGrand</li>
+        </things>
         <count>2</count>
       </li>
       <li Class="RoomRequirement_ThingCount">
@@ -1862,6 +2065,10 @@
         <buildingTags>
           <li>Production</li>
         </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -2046,8 +2253,11 @@
         <thingDef>VFEE_Candelabra</thingDef>
         <count>8</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>Column</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
         <count>24</count>
       </li>
       <li Class="RoomRequirement_ThingCount">
@@ -2070,8 +2280,11 @@
         <thingDef>VFEE_GrandChair</thingDef>
         <count>12</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>VFEE_RoyalStool</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_RoyalStool</li>
+          <li MayRequire="VanillaExpanded.VFECore">Seat_RoyalChair</li>
+        </things>
         <count>12</count>
       </li>
       <li Class="RoomRequirement_Thing">
@@ -2107,6 +2320,10 @@
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -2127,32 +2344,57 @@
         </disablingPrecepts>
         <things>
           <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
         </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>EndTable</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>Dresser</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
       </li>
       <li Class="RoomRequirement_ThingCount">
         <thingDef>Drape</thingDef>
         <count>6</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>PlantPot</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>PlantPot</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
+        </things>
         <count>8</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>Armchair</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Armchair</li>
+          <li MayRequire="VanillaExpanded.VFECore">Seat_RoyalArmchair</li>
+        </things>
         <count>2</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>VFEE_LargeRoyalRug</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_LargeRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+        </things>
         <count>2</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>VFEE_GrandRoyalRug</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_GrandRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugGrand</li>
+        </things>
         <count>2</count>
       </li>
       <li Class="RoomRequirement_ThingCount">
@@ -2171,6 +2413,10 @@
         <buildingTags>
           <li>Production</li>
         </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -2374,8 +2620,11 @@
         <thingDef>VFEE_Candelabra</thingDef>
         <count>10</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>Column</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
         <count>30</count>
       </li>
       <li Class="RoomRequirement_ThingCount">
@@ -2398,8 +2647,11 @@
         <thingDef>VFEE_GrandChair</thingDef>
         <count>12</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>VFEE_RoyalStool</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_RoyalStool</li>
+          <li MayRequire="VanillaExpanded.VFECore">Seat_RoyalChair</li>
+        </things>
         <count>18</count>
       </li>
       <li Class="RoomRequirement_Thing">
@@ -2442,6 +2694,10 @@
       <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
         <labelKey>RoomRequirementNoAltars</labelKey>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -2462,32 +2718,57 @@
         </disablingPrecepts>
         <things>
           <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
         </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>EndTable</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
       </li>
-      <li Class="RoomRequirement_Thing">
-        <thingDef>Dresser</thingDef>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
       </li>
       <li Class="RoomRequirement_ThingCount">
         <thingDef>Drape</thingDef>
         <count>6</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>PlantPot</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>PlantPot</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
+        </things>
         <count>8</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>Armchair</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Armchair</li>
+          <li MayRequire="VanillaExpanded.VFECore">Seat_RoyalArmchair</li>
+        </things>
         <count>2</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>VFEE_LargeRoyalRug</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_LargeRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+        </things>
         <count>2</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>VFEE_GrandRoyalRug</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_GrandRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugGrand</li>
+        </things>
         <count>2</count>
       </li>
       <li Class="RoomRequirement_ThingCount">
@@ -2506,6 +2787,10 @@
         <buildingTags>
           <li>Production</li>
         </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
