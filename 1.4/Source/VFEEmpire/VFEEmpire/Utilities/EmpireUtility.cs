@@ -63,7 +63,7 @@ public static class EmpireUtility
     private static bool IsColonistWithTitle(this Pawn p) =>
         p.royalty != null && p.royalty.HasAnyTitleIn(Faction.OfEmpire) && p.IsColonist && !p.Dead && !p.IsPrisoner && !p.IsSlave && !p.IsQuestLodger();
 
-    public static TerrorismLord Terrorism(this Lord lord) => lord.lordManager.map.GetComponent<MapComponent_Terrorism>().GetTerrorismFor(lord);
+    public static TerrorismLord Terrorism(this Lord lord) => lord.lordManager?.map?.GetComponent<MapComponent_Terrorism>().GetTerrorismFor(lord);
 
     public static void SendApertif(this Map map)
     {
