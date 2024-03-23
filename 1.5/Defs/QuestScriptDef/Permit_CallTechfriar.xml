@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <QuestScriptDef>
+    <defName>VFEE_Permit_CallTechfriar</defName>
+    <isRootSpecial>true</isRootSpecial>
+    <autoAccept>true</autoAccept>
+    <defaultHidden>true</defaultHidden>
+    <questDescriptionAndNameRules>
+      <rulesStrings>
+        <li>questName->Techfriar</li>
+        <li>questDescription-></li>
+      </rulesStrings>
+    </questDescriptionAndNameRules>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        <!-- Generate techfriar -->
+        <li Class="QuestNode_GeneratePawn">
+          <kindDef>VFEE_Empire_Royal_Techfriar</kindDef>
+          <faction>$permitFaction</faction>
+          <addToList>techfriar</addToList>
+          <allowAddictions>false</allowAddictions>
+          <biocodeWeaponChance>1</biocodeWeaponChance>
+          <biocodeApparelChance>1</biocodeApparelChance>
+          <allowPregnant>false</allowPregnant>
+        </li>
+        <!-- Lock their apparel -->
+        <li Class="QuestNode_SetAllApparelLocked">
+          <pawns>$techfriar</pawns>
+        </li>
+        <!-- Disable all work except labor -->
+        <li Class="QuestNode_WorkDisabled">
+          <pawns>$techfriar</pawns>
+          <disabledWorkTags>
+            <li>ManualDumb</li>
+            <li>ManualSkilled</li>
+            <li>Violent</li>
+            <li>Social</li>
+            <li>Animals</li>
+          </disabledWorkTags>
+        </li>
+        <!-- Give on duty thought -->
+        <li Class="QuestNode_AddMemoryThought">
+          <pawns>$techfriar</pawns>
+          <def>OnDuty</def>
+        </li>
+        
+        <li Class="QuestNode_ExtraFaction">
+          <faction>$permitFaction</faction>
+          <pawns>$techfriar</pawns>
+          <factionType>HomeFaction</factionType>
+          <inSignalRemovePawn>techfriar.RanWild</inSignalRemovePawn>
+        </li>
+        <li Class="QuestNode_JoinPlayer">
+          <pawns>$techfriar</pawns>
+          <joinPlayer>True</joinPlayer>
+          <makePrisoners>False</makePrisoners>
+        </li>
+        <li Class="QuestNode_LeaveOnCleanup">
+          <pawns>$techfriar</pawns>
+          <sendStandardLetter>false</sendStandardLetter>
+          <inSignalRemovePawn>techfriar.RanWild</inSignalRemovePawn>
+        </li>
+
+        <!-- techfriar arrive by shuttle -->
+        <li Class="QuestNode_SubScript">
+          <def>Util_TransportShip_DropOff</def>
+          <parms>
+            <contents>$techfriar</contents>
+            <owningFaction>$permitFaction</owningFaction>
+          </parms>
+        </li>
+        <li Class="QuestNode_Letter">
+          <label TKey="VFEE.LetterLabelTechfriarArrived">Techfriar arrived</label>
+          <text TKey="VFEE.LetterTextTechfriarArrived">The techfriar from [permitFaction_name] have arrived. A shuttle will come to collect them in [techfriarDurationDays] days.</text>
+          <lookTargets>$techfriar</lookTargets>
+          <filterDeadPawnsFromLookTargets>True</filterDeadPawnsFromLookTargets>
+        </li>
+        <!-- Arrival shuttle is destroyed -->
+        <li Class="QuestNode_Signal">
+          <inSignal>dropoffShipThing.Destroyed</inSignal>
+          <node Class="QuestNode_ChangeFactionGoodwill">
+            <faction>$permitFaction</faction>
+            <change>$goodwillChangeOnShuttleDestroyed</change>
+            <reason>ShuttleDestroyed</reason>
+          </node>
+        </li>
+
+        <!-- Departure shuttle -->
+        <li Class="QuestNode_ShuttleDelay">
+          <delayTicks>$($techfriarDurationDays * 60000)</delayTicks>
+          <lodgers>$techfriar</lodgers>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_SubScript">
+                <def>Util_TransportShip_Pickup</def>
+                <parms>
+                  <leaveDelayTicks>$(1*60000)</leaveDelayTicks>
+                  <requiredPawns>$techfriar</requiredPawns>
+                </parms>
+              </li>
+              <li Class="QuestNode_InspectString">
+                <targets>$techfriar</targets>
+                <inspectString TKey="InspectStringDepartShuttle">Should depart on shuttle</inspectString>
+              </li>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelShuttleArrived">Shuttle arrived</label>
+                <text TKey="VFEE.LetterTextShuttleArrivedForTechfriar">A shuttle has arrived to collect the techfriar from [permitFaction_name].</text>
+                <lookTargets>$pickupShipThing</lookTargets>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <!-- Goodwill penalty for laborer killed or not on shuttle -->
+        <li Class="QuestNode_Set">
+          <name>goodwillPenaltyPawn</name>
+          <value>-12</value>
+        </li>
+        <!-- Goodwill penalty for shuttle destruction -->
+        <li Class="QuestNode_Set">
+          <name>goodwillChangeOnShuttleDestroyed</name>
+          <value>-25</value>
+        </li>
+
+        <!-- Laborer killed: Goodwill impact. Don't end quest. -->
+        <li Class="QuestNode_Signal">
+          <inSignal>techfriar.Destroyed</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_Letter">
+                <label TKey="LetterLabelLaborerDied">Laborer died: {SUBJECT_definite}</label>
+                <text TKey="LetterTextLaborerDied">A laborer sent to you by [permitFaction_name] has died. Your goodwill with [permitFaction_name] has fallen by [goodwillPenaltyPawn].</text>
+              </li>
+              <li Class="QuestNode_ChangeFactionGoodwill">
+                <faction>$permitFaction</faction>
+                <change>$goodwillPenalty</change>
+                <reason>QuestPawnLost</reason>
+              </li>
+            </nodes>
+          </node>
+        </li>
+
+        <!-- Missing techfriar on departure shuttle. Goodwill impact -->
+        <li Class="QuestNode_ChangeGoodwillForAlivePawnsMissingFromShuttle">
+          <inSignal>pickupShipThing.SentUnsatisfied</inSignal>
+          <pawns>$techfriar</pawns>
+          <faction>$permitFaction</faction>
+          <goodwillChange>$goodwillPenaltyPawn</goodwillChange> <!-- Per missing laborer -->
+          <reason>LaborersMissedShuttle</reason>
+        </li>
+
+        <!-- - - - - - - -  -->
+        <!--      End       -->
+        <!-- - - - - - - -  -->
+
+        <!-- Departure shuttle is destroyed -->
+        <li Class="QuestNode_Signal">
+          <inSignal>pickupShipThing.Destroyed</inSignal>
+          <node Class="QuestNode_Sequence">
+            <nodes>
+              <li Class="QuestNode_ChangeFactionGoodwill">
+                <faction>$permitFaction</faction>
+                <change>$goodwillChangeOnShuttleDestroyed</change>
+                <reason>ShuttleDestroyed</reason>
+              </li>
+              <li Class="QuestNode_End" />
+            </nodes>
+          </node>
+        </li>
+
+        <!-- Shuttle sent -->
+        <li Class="QuestNode_Signal">
+          <inSignal>pickupShipThing.SentUnsatisfied</inSignal>
+          <node Class="QuestNode_End" />
+        </li>
+        <li Class="QuestNode_Signal">
+          <inSignal>pickupShipThing.SentSatisfied</inSignal>
+          <node Class="QuestNode_End" />
+        </li>
+
+        <!-- End if the permit's faction becomes hostile -->
+        <li Class="QuestNode_Signal">
+          <inSignal>permitFaction.BecameHostileToPlayer</inSignal>
+          <node Class="QuestNode_End" />
+        </li>
+
+      </nodes>
+    </root>
+  </QuestScriptDef>
+
+</Defs>

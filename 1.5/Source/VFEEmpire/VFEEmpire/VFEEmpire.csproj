@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3F1404A7-FC72-4BA6-94D3-80D242E76B2B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VFEEmpire</RootNamespace>
+    <AssemblyName>VFEEmpire</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Assemblies\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\Assemblies\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="VFECore">
+      <HintPath>..\..\..\..\..\VanillaExpandedFramework\1.3\Assemblies\VFECore.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AI\JobDriver\JobDriver_ParadeGuardGotoWait.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_GiveHonor.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_ArtPresent.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_ArtSpectate.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_DefuseBomb.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_DiscardMeal.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_PlaceBomb.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_PoisonMeal.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_WaltzDipped.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_ArtPresenterStandBy.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_WaltzWait.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_WaltzGotoStart.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_WaltzGoto.cs" />
+    <Compile Include="AI\JobDriver\JobDriver_WaltzDip.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_AcceptHonor.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_GiveHonor.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_AIFightEnemySpecific.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_AIFightRoyalty.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_ArtExhibitStandBy.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_ArtExhibitSpectate.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_ArtExhibitPresent.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_AcceptTitle.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_ParadeGuard.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_ParadeFollow.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_ParadeLeadStartPos.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_ParadeLead.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_SpectateClose.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_PlayInstrument.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_GoToStartPositions.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_DanceSpectate.cs" />
+    <Compile Include="AI\JobGiver\JobGiver_Waltz.cs" />
+    <Compile Include="AI\LordJob\LordJob_Assassinate.cs" />
+    <Compile Include="AI\LordJob\LordJob_KillRoyalty.cs" />
+    <Compile Include="AI\LordToil\LordToil_AttackSpecific.cs" />
+    <Compile Include="AI\LordToil\LordToil_KillRoyalty.cs" />
+    <Compile Include="AI\LordToil\LordToil_TravelTo.cs" />
+    <Compile Include="AI\TerrorismLords.cs" />
+    <Compile Include="Comps\CompAbilityEffect_StartBestowing.cs" />
+    <Compile Include="Comps\CompProperties_AbilityStartBestower.cs" />
+    <Compile Include="Comps\CompResearchRefresh.cs" />
+    <Compile Include="Comps\GameComponent_Honors.cs" />
+    <Compile Include="Comps\GameComponent_WealthIncreaseTracker.cs" />
+    <Compile Include="Comps\HediffComp_MakeThoughtsStackable.cs" />
+    <Compile Include="Comps\HediffComp_RemoveOnAdd.cs" />
+    <Compile Include="Comps\MapComponent_Terrorism.cs" />
+    <Compile Include="Comps\StorytellerComp_WealthSteps.cs" />
+    <Compile Include="DefOf\HonorDefOf.cs" />
+    <Compile Include="HarmonyPatches\ColonistTitleCache.cs" />
+    <Compile Include="HarmonyPatches\Patch_HonorsMisc.cs" />
+    <Compile Include="HarmonyPatches\Patch_PawnGenerator.cs" />
+    <Compile Include="HarmonyPatches\Patch_PowerBeam_StartStrike.cs" />
+    <Compile Include="HarmonyPatches\Patch_SpawnPawns.cs" />
+    <Compile Include="HarmonyPatches\Patch_StripTitles.cs" />
+    <Compile Include="HarmonyPatches\Patch_TradeablePrice.cs" />
+    <Compile Include="HarmonyPatches\Patch_DoLeftSection.cs" />
+    <Compile Include="HarmonyPatches\Patch_GenerateRewards.cs" />
+    <Compile Include="HarmonyPatches\Patch_StateChange.cs" />
+    <Compile Include="HarmonyPatches\Patch_ThoughtStacking.cs" />
+    <Compile Include="Comps\WorldComponent_Hierarchy.cs" />
+    <Compile Include="DefOf\InternalDefOf.cs" />
+    <Compile Include="Comps\HediffComp_RandomDamage.cs" />
+    <Compile Include="HarmonyPatches\CompArt_JustCreatedBy.cs" />
+    <Compile Include="HarmonyPatches\Patch_AddHumanlikeOrders.cs" />
+    <Compile Include="HarmonyPatches\Patch_Bestowing.cs" />
+    <Compile Include="HarmonyPatches\Patch_GetLetterText.cs" />
+    <Compile Include="HarmonyPatches\Patch_Lords.cs" />
+    <Compile Include="HarmonyPatches\Patch_Thing_Ingested.cs" />
+    <Compile Include="HarmonyPatches\PawnRenderer_BodyAngle.cs" />
+    <Compile Include="HarmonyPatches\Patch_Conceit.cs" />
+    <Compile Include="HarmonyPatches\Patch_RoyalTitleIcons.cs" />
+    <Compile Include="HonorDef.cs" />
+    <Compile Include="HonorsTracker.cs" />
+    <Compile Include="QuestNode\QuestNode_AbsolverRespawn.cs" />
+    <Compile Include="QuestNode\QuestNode_DeserterGoodWill.cs" />
+    <Compile Include="QuestNode\QuestNode_DeserterHideout.cs" />
+    <Compile Include="QuestNode\QuestNode_DelayedRitualReward.cs" />
+    <Compile Include="QuestNode\Questnode_Root_ArtExhibit.cs" />
+    <Compile Include="QuestNode\Questnode_Root_GrandBall.cs" />
+    <Compile Include="QuestNode\Questnode_Root_NobleVisit.cs" />
+    <Compile Include="QuestNode\Questnode_Root_RoyalParade.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_RequirementsToShuttleLandingArea.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_StellarchFails.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_Parade.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_ArtExhibit.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_GrandBall.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_RequirementsToAcceptGallery.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_Absolver.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_RitualOutcomeEffects.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_RequirementsToAcceptBallroom.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_ThoughtAccepterOther.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_LoseHonor.cs" />
+    <Compile Include="QuestNode\QuestPart\QuestPart_LodgerLeave.cs" />
+    <Compile Include="QuestNode\Reward\Reward_ParadeEndGame.cs" />
+    <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_Parade.cs" />
+    <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_BestowHonor.cs" />
+    <Compile Include="Rituals\Commands\Command_ArtExhibit.cs" />
+    <Compile Include="Rituals\Commands\Command_Parade.cs" />
+    <Compile Include="Rituals\Commands\Command_GrandBall.cs" />
+    <Compile Include="Rituals\LordJob\LordJob_Parade.cs" />
+    <Compile Include="Rituals\LordJob\LordJob_ArtExhibit.cs" />
+    <Compile Include="Rituals\LordJob\LordJob_GrandBall.cs" />
+    <Compile Include="Rituals\LordJob\LordToil\LordToil_Parade_Wait.cs" />
+    <Compile Include="Rituals\LordJob\LordToil\LordToil_Parade_Start.cs" />
+    <Compile Include="Rituals\LordJob\LordToil\LordToil_ArtExhibit_Show.cs" />
+    <Compile Include="Rituals\LordJob\LordToil\LordToil_GrandBall_Dance.cs" />
+    <Compile Include="Rituals\LordJob\LordToil\LordToil_ArtExhibit_Wait.cs" />
+    <Compile Include="Rituals\LordJob\LordToil\LordToil_GrandBall_Wait.cs" />
+    <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_Parade.cs" />
+    <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_ArtExhibit.cs" />
+    <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_BestowHonor.cs" />
+    <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_GrandBall.cs" />
+    <Compile Include="Rituals\RitualRole\RitualRoleParadeGuard.cs" />
+    <Compile Include="Rituals\RitualRole\RitualRoleHonored.cs" />
+    <Compile Include="Rituals\RitualRole\RitualSpectatorFilter_Titled.cs" />
+    <Compile Include="ScenPart\ScenPart_SpawnFamilyMembers.cs" />
+    <Compile Include="ScenPart\ScenPart_SpawnRaid.cs" />
+    <Compile Include="Things\Building_Bomb.cs" />
+    <Compile Include="Things\DropPodIncoming_Building.cs" />
+    <Compile Include="Comps\GameComponent_Empire.cs" />
+    <Compile Include="HarmonyPatches\Patch_CompRefuelable_ConsumeFuel.cs" />
+    <Compile Include="HarmonyPatches\Patch_Pawn_InteractionsTracker_TryInteractWith.cs" />
+    <Compile Include="HarmonyPatches\Patch_RoyalTitleDef_SpecialDisplayStats.cs" />
+    <Compile Include="Things\OrbitalSlicer.cs" />
+    <Compile Include="UI\RoyaltyTabWorker_Honors.cs" />
+    <Compile Include="Utilities\EmpireTitleUtility.cs" />
+    <Compile Include="Utilities\HonorUtility.cs" />
+    <Compile Include="Utilities\MiscUtilities.cs" />
+    <Compile Include="Utilities\ShieldUtility.cs" />
+    <Compile Include="Utilities\VassalUtility.cs" />
+    <Compile Include="Utilities\WorldPawnsUtility.cs" />
+    <Compile Include="Workers\HonorWorkers.cs" />
+    <Compile Include="Workers\HonorWorker_Weapon.cs" />
+    <Compile Include="Workers\HonorWorker_Faction.cs" />
+    <Compile Include="Workers\HonorWorker_Settlement.cs" />
+    <Compile Include="Workers\IngestionOutcomeDoer_Vomit.cs" />
+    <Compile Include="HarmonyPatches\Patch_Quest_End.cs" />
+    <Compile Include="Workers\PlayLogEntry_Interaction_RoyalGossip.cs" />
+    <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_BestowTitle.cs" />
+    <Compile Include="Rituals\LordJob\LordToil\LordToil_BestowTitle.cs" />
+    <Compile Include="Rituals\LordJob\LordJob_BestowTitle.cs" />
+    <Compile Include="Rituals\Outcomes\OutcomeComp\RitualOutcomeComp_ThroneForRole.cs" />
+    <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_BestowTitle.cs" />
+    <Compile Include="Rituals\Positions\RItualPosition_InFrontThrone.cs" />
+    <Compile Include="Workers\RoyalTitlePermitWorker_CallTechfriar.cs" />
+    <Compile Include="Workers\ThoughtWorker_BadVisit.cs" />
+    <Compile Include="TitheTypeDef.cs" />
+    <Compile Include="UI\RoyaltyTabDef.cs" />
+    <Compile Include="UI\RoyaltyTabWorker_Hierarchy.cs" />
+    <Compile Include="UI\RoyaltyTabWorker_Permits.cs" />
+    <Compile Include="UI\RoyaltyTabWorker_Vassals.cs" />
+    <Compile Include="Workers\InteractionWorker_RoyalGossip.cs" />
+    <Compile Include="Comps\MapComponent_RoyaltyTracker.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_RoyalAddress.cs" />
+    <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_RoyalAddress.cs" />
+    <Compile Include="Rituals\RitualRole\RitualRoleTitled.cs" />
+    <Compile Include="UI\MainTabWindow_Royalty.cs" />
+    <Compile Include="Workers\MainButtonWorker_Royalty.cs" />
+    <Compile Include="Workers\PermitWorkers.cs" />
+    <Compile Include="Workers\Placeworker_DanceFloorArea.cs" />
+    <Compile Include="Workers\RaidStrategyWorker_Deserters.cs" />
+    <Compile Include="Workers\RoomRequirement_InstrumentSpace.cs" />
+    <Compile Include="Workers\RoomRoleWorkers.cs" />
+    <Compile Include="RoyalTitleDefExtension.cs" />
+    <Compile Include="Utilities\EmpireUtility.cs" />
+    <Compile Include="Workers\RoyalTitlePermitWorker_Call.cs" />
+    <Compile Include="Workers\RoyalTitlePermitWorker_CallAbsolver.cs" />
+    <Compile Include="Workers\RoyalTitlePermitWorker_CallArmoredShuttle.cs" />
+    <Compile Include="Workers\RoyalTitlePermitWorker_Slicing.cs" />
+    <Compile Include="Workers\TerrorismWorker_Poisoning.cs" />
+    <Compile Include="Workers\ThoughtWorkers.cs" />
+    <Compile Include="VFEEmpireMod.cs" />
+    <Compile Include="VFEE_DefOf.cs" />
+    <Compile Include="Comps\WorldComponent_Vassals.cs" />
+    <Compile Include="Workers\ThoughtWorker_Honor.cs" />
+    <Compile Include="Workers\TitheWorkers.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Abilities\" />
+    <Folder Include="Rituals\TargetFilters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Krafs.Rimworld.Ref">
+      <Version>1.5.4042-beta</Version>
+    </PackageReference>
+    <PackageReference Include="Lib.Harmony">
+      <Version>2.3.1.1</Version>
+      <ExcludeAssets>runtime</ExcludeAssets>
+      <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

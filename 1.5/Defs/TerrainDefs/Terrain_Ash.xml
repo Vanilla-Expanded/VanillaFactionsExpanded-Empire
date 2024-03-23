@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <TerrainDef ParentName="BurnedFloorBase">
+    <defName>VFEE_ThickAsh</defName>
+    <label>thick ash</label>
+    <description>Burned-out thick layer of ash and glass shards.</description>
+    <texturePath>Terrain/Surfaces/Ash</texturePath>
+    <layerable>true</layerable>
+    <edgeType>FadeRough</edgeType>
+    <renderPrecedence>380</renderPrecedence>
+    <pathCost>1</pathCost>
+    <resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
+    <statBases>
+      <Beauty>-2</Beauty>
+      <Cleanliness>-4</Cleanliness>
+    </statBases>
+    <scatterType>Rocky</scatterType>
+    <affordances>
+      <li>Light</li>
+      <li>Medium</li>
+      <li>Heavy</li>
+    </affordances>
+    <fertility>0.0</fertility>
+  </TerrainDef>
+</Defs>

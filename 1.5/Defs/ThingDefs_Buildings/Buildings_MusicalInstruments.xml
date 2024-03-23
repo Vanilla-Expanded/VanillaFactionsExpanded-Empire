@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="UnfinishedBase">
+    <defName>VFEE_UnfinishedOrgan</defName>
+    <label>unfinished organ</label>
+    <description>An unfinished organ.</description>
+    <graphicData>
+      <texPath>Things/Item/Unfinished/UnfinishedMusicalInstrument</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stuffCategories Inherit="False"/>
+  </ThingDef>
+  
+  <ThingDef ParentName="MusicalInstrumentBase">
+    <defName>VFEE_PipeOrgan</defName>
+    <label>organ</label>
+    <description>An exceedingly complex stationary musical instrument crafted at a smithy. A series of tuned pipes are played from the keyboard which releases pressurized air to produce the desired pitch, which lasts as long as the key is pressed. The complex and intricate design, along with the unique sound it produces, make it an ideal apparatus for instigating concerts of the nobility as its music reaches far and wide.</description>
+    <descriptionHyperlinks>
+      <ThingDef>Harp</ThingDef>
+      <ThingDef>Harpsichord</ThingDef>
+	  <ThingDef>Piano</ThingDef>
+    </descriptionHyperlinks>
+    <size>(5,3)</size>
+    <minTechLevelToBuild>Industrial</minTechLevelToBuild>
+    <interactionCellOffset>(0,0,2)</interactionCellOffset>
+    <soundPlayInstrument>VFEE_Organ_Play</soundPlayInstrument>
+    <defaultPlacingRot>West</defaultPlacingRot>
+    <researchPrerequisites><li>VFEE_PipeOrgans</li></researchPrerequisites>
+    <thingSetMakerTags><li>RewardStandardQualitySuper</li></thingSetMakerTags>
+    <statBases>
+      <MaxHitPoints>280</MaxHitPoints>
+      <WorkToMake>100000</WorkToMake>
+      <Mass>160</Mass>
+      <JoyGainFactor>1</JoyGainFactor>
+      <Beauty>28</Beauty>
+    </statBases>
+    <recipeMaker>
+      <skillRequirements>
+        <Crafting>8</Crafting>
+      </skillRequirements>
+      <researchPrerequisite>VFEE_PipeOrgans</researchPrerequisite>
+      <recipeUsers>
+        <li>FueledSmithy</li>
+        <li>ElectricSmithy</li>
+      </recipeUsers>
+      <unfinishedThingDef>VFEE_UnfinishedOrgan</unfinishedThingDef>
+    </recipeMaker>
+    <costList>
+      <WoodLog>460</WoodLog>
+      <Steel>140</Steel>
+	  <Gold>12</Gold>
+    </costList>
+    <building>
+      <instrumentRange>20</instrumentRange>
+	  <watchBuildingStandDistanceRange>1~11</watchBuildingStandDistanceRange>
+	  <watchBuildingStandRectWidth>11</watchBuildingStandRectWidth>
+    </building>
+    <uiIconScale>0.9</uiIconScale>
+    <graphicData>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <texPath>Furniture/PipeOrgans/PipeOrgans</texPath>
+      <drawSize>(6,4)</drawSize>
+      <shadowData>
+        <volume>(2.2, 0.4, 0.8)</volume>
+        <offset>(0, 0, 0.1)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.6,0.3,2,1.2)</rect>
+      </damageData>
+    </graphicData>
+  </ThingDef>
+   <SoundDef>
+    <defName>VFEE_Organ_Play</defName>
+    <context>MapOnly</context>
+    <sustain>True</sustain>
+    <sustainFadeoutTime>0.25</sustainFadeoutTime>
+    <priorityMode>PrioritizeNearest</priorityMode>
+    <subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Organs/Music_Organs_Sustainer_01a</clipPath>
+          </li>
+        </grains>
+        <volumeRange>25</volumeRange>
+        <distRange>5~25</distRange>
+        <muteWhenPaused>True</muteWhenPaused>
+      </li>
+    </subSounds>
+  </SoundDef>
+</Defs>

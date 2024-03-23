@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    <DutyDef>
+        <defName>VFEE_MoveTo</defName>
+        <thinkNode Class="ThinkNode_Priority">
+            <subNodes>
+                <li Class="JobGiver_AIFollowEscortee" />
+                <li Class="JobGiver_WanderNearDutyLocation" />
+            </subNodes>
+        </thinkNode>
+    </DutyDef>
+    <DutyDef>
+        <defName>VFEE_AttackEnemySpecifc</defName>
+        <thinkNode Class="ThinkNode_Priority">
+            <subNodes>
+                <li Class="JobGiver_TakeCombatEnhancingDrug" />
+                <li Class="ThinkNode_Subtree" MayRequire="Ludeon.RimWorld.Biotech">
+                    <treeDef>Abilities_Aggressive</treeDef>
+                </li>
+                <li Class="VFEEmpire.JobGiver_AIFightEnemySpecific" />
+            </subNodes>
+        </thinkNode>
+    </DutyDef>
+    <DutyDef>
+        <defName>VFEE_KillRoyalty</defName>
+        <alwaysShowWeapon>true</alwaysShowWeapon>
+        <thinkNode Class="ThinkNode_Priority">
+            <subNodes>
+                <li Class="JobGiver_TakeCombatEnhancingDrug" />
+                <li Class="VFEEmpire.JobGiver_AIFightRoyalty" />
+            </subNodes>
+        </thinkNode>
+        <constantThinkNode Class="ThinkNode_ConditionalCanPickupOpportunisticWeapon">
+            <subNodes>
+                <!-- Try to pick up nearby weapons -->
+                <li Class="JobGiver_PickUpOpportunisticWeapon" />
+            </subNodes>
+        </constantThinkNode>
+    </DutyDef>
+</Defs>

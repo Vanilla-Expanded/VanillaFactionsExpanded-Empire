@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/QuestScriptDef[defName="Intro_Wimp"]/root/nodes</xpath>
+            <value>
+                <li Class ="VFEEmpire.QuestNode_DeserterGoodWill">
+					<makeHostile>true</makeHostile>
+				</li>
+            </value>
+    </Operation>
+	 <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/QuestScriptDef[defName="Intro_Deserter"]/root/nodes</xpath>
+            <value>
+                <li Class ="VFEEmpire.QuestNode_DeserterGoodWill">
+					<makeHostile>false</makeHostile>
+				</li>
+            </value>
+    </Operation>
+
+</Patch>

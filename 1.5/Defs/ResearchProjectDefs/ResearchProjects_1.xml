@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ResearchProjectDef>
+    <defName>VFEE_PipeOrgans</defName>
+    <label>pipe organs</label>
+    <description>Craft the pipe organs, an incredibly advanced and intricate stationary musical instrument.</description>
+    <baseCost>2000</baseCost>
+    <techLevel>Industrial</techLevel>
+    <researchViewX>5.00</researchViewX>
+    <researchViewY>4.90</researchViewY>
+    <prerequisites>
+      <li>Piano</li>
+    </prerequisites>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef>
+    <defName>VFEE_NobleDecorations</defName>
+    <label>noble decorations</label>
+    <description>Build noble decorations like royal rugs, mirrors, grand chairs, imperial slabs, candelabras, and more.</description>
+    <baseCost>500</baseCost>
+    <techLevel>Medieval</techLevel>
+    <researchViewX>0</researchViewX>
+    <researchViewY>4.90</researchViewY>
+    <prerequisites>
+      <li>ComplexFurniture</li>
+    </prerequisites>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef>
+    <defName>VFEE_StellicThrone</defName>
+    <label>stellic throne</label>
+    <description>Construct the most grand, most beautiful stellic throne for your high ranking nobility.</description>
+    <baseCost>1000</baseCost>
+    <techLevel>Industrial</techLevel>
+    <researchViewX>1.00</researchViewX>
+    <researchViewY>4.90</researchViewY>
+    <prerequisites>
+      <li>VFEE_NobleDecorations</li>
+    </prerequisites>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef>
+    <defName>VFEE_JanissaryGear</defName>
+    <label>janissary gear</label>
+    <description>Craft janissary armor, light powered armor that’s commonly used by imperial recon troops. Note that these also require advanced components.</description>
+    <baseCost>3000</baseCost>
+    <techLevel>Spacer</techLevel>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>ReconArmor</li>
+    </prerequisites>
+    <researchViewX>15.00</researchViewX>
+    <researchViewY>0.80</researchViewY>
+  </ResearchProjectDef>
+
+</Defs>

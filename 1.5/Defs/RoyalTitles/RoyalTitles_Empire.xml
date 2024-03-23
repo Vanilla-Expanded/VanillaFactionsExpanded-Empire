@@ -1,0 +1,2876 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <RoyalTitleDef ParentName="BaseEmpireTitle">
+    <defName>VFEE_Archcount</defName>
+    <label>archcount</label>
+    <labelFemale>archcountess</labelFemale>
+    <description>The Imperial title of archcount is bestowed upon those counts who have established impressive holdings, which are capable of supporting and entertaining important guests.</description>
+    <seniority>601</seniority>
+    <favorCost>28</favorCost>
+    <minExpectation>Royal</minExpectation>
+    <requiredMinimumApparelQuality>Good</requiredMinimumApparelQuality>
+    <changeHeirQuestPoints>3700</changeHeirQuestPoints>
+    <recruitmentResistanceOffset>90</recruitmentResistanceOffset>
+    <commonality>1</commonality>
+    <canBeInherited>True</canBeInherited>
+    <suppressIdleAlert>true</suppressIdleAlert>
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
+    <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
+    <permitPointsAwarded>1</permitPointsAwarded>
+    <decreeTags>
+      <li>All</li>
+    </decreeTags>
+    <disabledJoyKinds>
+      <li>Gaming_Dexterity</li>
+    </disabledJoyKinds>
+    <disabledWorkTags>
+      <li>ManualDumb</li>
+      <li>ManualSkilled</li>
+      <li>PlantWork</li>
+      <li>Mining</li>
+      <li>Animals</li>
+    </disabledWorkTags>
+    <permits>
+      <li>TradeSettlement</li>
+      <li>TradeCaravan</li>
+      <li>TradeOrbital</li>
+    </permits>
+    <requiredApparel>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier2</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier5</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier6</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>UpperHead</li>
+          <li>FullHead</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier5</li>
+        </requiredTags>
+        <allowedTags>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+    </requiredApparel>
+    <throneRoomRequirements>
+      <li Class="RoomRequirement_HasAssignedThroneAnyOf">
+        <things>
+          <li>GrandThrone</li>
+		  <li>VFEE_StellicThrone</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_Area">
+        <area>100</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>160</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+        <count>4</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
+        <count>8</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>4</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_SteleSmall</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_GrandTable</thingDef>
+      </li>
+      <li Class="RoomRequirement_AllThingsAnyOfAreGlowing">
+        <labelKey>RoomRequirementAllBraziersMustBeLit</labelKey>
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoBeds</labelKey>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
+        <labelKey>RoomRequirementNoAltars</labelKey>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </throneRoomRequirements>
+    <bedroomRequirements>
+      <li Class="RoomRequirement_Area">
+        <area>40</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>100</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <disablingPrecepts>
+          <li MayRequire="Ludeon.RimWorld.Ideology">SlabBed_Preferred</li>
+        </disablingPrecepts>
+        <things>
+          <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>1</count>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </bedroomRequirements>
+    <foodRequirement>
+      <minQuality>MealLavish</minQuality>
+      <allowedTypes>Processed, Liquor</allowedTypes>
+      <allowedDefs>
+        <li>Ambrosia</li>
+        <li>Milk</li>
+        <li>RawBerries</li>
+        <li>InsectJelly</li>
+      </allowedDefs>
+    </foodRequirement>
+    <grantedAbilities>
+      <li>Speech</li>
+    </grantedAbilities>
+    <speechCooldown>360000</speechCooldown>
+    <maxPsylinkLevel>6</maxPsylinkLevel>
+    <modExtensions>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <ballroomRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>60</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>100</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+          <li Class="RoomRequirement_ThingAnyOf">
+            <things>
+              <li>Piano</li>
+              <li>Harp</li>
+            </things>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
+          </li>
+        </ballroomRequirements>
+        <galleryRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>30</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>130</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+        </galleryRequirements>
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Archcount</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Archcount</greyIconPath>
+        <kindForHierarchy>VFEE_Empire_Royal_Archcount</kindForHierarchy>
+      </li>
+    </modExtensions>
+  </RoyalTitleDef>
+
+  <RoyalTitleDef ParentName="BaseEmpireTitle">
+    <defName>VFEE_Marquess</defName>
+    <label>marquess</label>
+    <labelFemale>marchioness</labelFemale>
+    <description>The Imperial title of marquess is the second highest of the middle nobility. In the Empire, they control colonies that border the edge of Imperial space. During wartime, they can field fleets that either prevent the enemy from penetrating the borders or be the anvil to the hammer of supporting friendlies.</description>
+    <seniority>602</seniority>
+    <favorCost>40</favorCost>
+    <minExpectation>Royal</minExpectation>
+    <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
+    <changeHeirQuestPoints>3850</changeHeirQuestPoints>
+    <recruitmentResistanceOffset>100</recruitmentResistanceOffset>
+    <commonality>1</commonality>
+    <canBeInherited>True</canBeInherited>
+    <suppressIdleAlert>true</suppressIdleAlert>
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
+    <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
+    <permitPointsAwarded>1</permitPointsAwarded>
+    <decreeTags>
+      <li>All</li>
+    </decreeTags>
+    <disabledJoyKinds>
+      <li>Gaming_Dexterity</li>
+    </disabledJoyKinds>
+    <disabledWorkTags>
+      <li>ManualDumb</li>
+      <li>ManualSkilled</li>
+      <li>PlantWork</li>
+      <li>Mining</li>
+      <li>Animals</li>
+    </disabledWorkTags>
+    <permits>
+      <li>TradeSettlement</li>
+      <li>TradeCaravan</li>
+      <li>TradeOrbital</li>
+    </permits>
+    <requiredApparel>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier2</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier5</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier6</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>UpperHead</li>
+          <li>FullHead</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier5</li>
+        </requiredTags>
+        <allowedTags>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+    </requiredApparel>
+    <throneRoomRequirements>
+      <li Class="RoomRequirement_HasAssignedThroneAnyOf">
+        <things>
+          <li>GrandThrone</li>
+		  <li>VFEE_StellicThrone</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_Area">
+        <area>120</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>200</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+        <count>6</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
+        <count>10</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>6</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_SteleSmall</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_ImperialSlab</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_GrandTable</thingDef>
+      </li>
+      <li Class="RoomRequirement_AllThingsAnyOfAreGlowing">
+        <labelKey>RoomRequirementAllBraziersMustBeLit</labelKey>
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoBeds</labelKey>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
+        <labelKey>RoomRequirementNoAltars</labelKey>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </throneRoomRequirements>
+    <bedroomRequirements>
+      <li Class="RoomRequirement_Area">
+        <area>40</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>120</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <disablingPrecepts>
+          <li MayRequire="Ludeon.RimWorld.Ideology">SlabBed_Preferred</li>
+        </disablingPrecepts>
+        <things>
+          <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_RoyalMirror</thingDef>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </bedroomRequirements>
+    <foodRequirement>
+      <minQuality>MealLavish</minQuality>
+      <allowedTypes>Processed, Liquor</allowedTypes>
+      <allowedDefs>
+        <li>Ambrosia</li>
+        <li>Milk</li>
+        <li>RawBerries</li>
+        <li>InsectJelly</li>
+      </allowedDefs>
+    </foodRequirement>
+    <grantedAbilities>
+      <li>Speech</li>
+      <li>VFEE_RoyalAddress</li>
+      <li>VFEE_BestowFreeholder</li>
+    </grantedAbilities>
+    <speechCooldown>360000</speechCooldown>
+    <maxPsylinkLevel>6</maxPsylinkLevel>
+    <modExtensions>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <ballroomRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>80</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>120</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+          <li Class="RoomRequirement_ThingAnyOf">
+            <things>
+              <li>Piano</li>
+              <li>Harp</li>
+            </things>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
+          </li>
+        </ballroomRequirements>
+        <galleryRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>50</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>140</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+        </galleryRequirements>
+        <vassalagePointsAwarded>1</vassalagePointsAwarded>
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Marquess</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Marquess</greyIconPath>
+        <kindForHierarchy>VFEE_Empire_Royal_Marquess</kindForHierarchy>
+      </li>
+    </modExtensions>
+  </RoyalTitleDef>
+
+  <RoyalTitleDef ParentName="DukeBase">
+    <favorCost>56</favorCost>
+    <minExpectation>Royal</minExpectation>
+    <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
+    <changeHeirQuestPoints>4000</changeHeirQuestPoints>
+    <canBeInherited>True</canBeInherited>
+    <suppressIdleAlert>true</suppressIdleAlert>
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
+    <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
+    <permitPointsAwarded>1</permitPointsAwarded>
+    <decreeTags>
+      <li>All</li>
+    </decreeTags>
+    <disabledJoyKinds>
+      <li>Gaming_Dexterity</li>
+    </disabledJoyKinds>
+    <disabledWorkTags>
+      <li>ManualDumb</li>
+      <li>ManualSkilled</li>
+      <li>PlantWork</li>
+      <li>Mining</li>
+      <li>Animals</li>
+    </disabledWorkTags>
+    <permits>
+      <li>TradeSettlement</li>
+      <li>TradeCaravan</li>
+      <li>TradeOrbital</li>
+    </permits>
+    <requiredApparel>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier2</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier5</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier6</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+    </requiredApparel>
+    <throneRoomRequirements>
+      <li Class="RoomRequirement_HasAssignedThroneAnyOf">
+        <things>
+          <li>GrandThrone</li>
+		  <li>VFEE_StellicThrone</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_Area">
+        <area>140</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>200</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+        <count>8</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
+        <count>12</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>6</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_SteleSmall</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_ImperialSlab</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_GrandChair</thingDef>
+        <count>1</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_GrandTable</thingDef>
+      </li>
+      <li Class="RoomRequirement_AllThingsAnyOfAreGlowing">
+        <labelKey>RoomRequirementAllBraziersMustBeLit</labelKey>
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoBeds</labelKey>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
+        <labelKey>RoomRequirementNoAltars</labelKey>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </throneRoomRequirements>
+    <bedroomRequirements>
+      <li Class="RoomRequirement_Area">
+        <area>50</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>130</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <disablingPrecepts>
+          <li MayRequire="Ludeon.RimWorld.Ideology">SlabBed_Preferred</li>
+        </disablingPrecepts>
+        <things>
+          <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>PlantPot</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
+        </things>
+        <count>6</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_RoyalMirror</thingDef>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </bedroomRequirements>
+    <foodRequirement>
+      <minQuality>MealLavish</minQuality>
+      <allowedTypes>Processed, Liquor</allowedTypes>
+      <allowedDefs>
+        <li>Ambrosia</li>
+        <li>Milk</li>
+        <li>RawBerries</li>
+        <li>InsectJelly</li>
+      </allowedDefs>
+    </foodRequirement>
+    <grantedAbilities>
+      <li>Speech</li>
+      <li>VFEE_RoyalAddress</li>
+      <li>VFEE_BestowYeoman</li>
+    </grantedAbilities>
+    <speechCooldown>360000</speechCooldown>
+    <maxPsylinkLevel>6</maxPsylinkLevel>
+    <modExtensions>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <ballroomRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>100</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>140</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Piano</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Harp</thingDef>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
+          </li>
+        </ballroomRequirements>
+        <galleryRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>60</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>160</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+        </galleryRequirements>
+        <vassalagePointsAwarded>1</vassalagePointsAwarded>
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Duke</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Duke</greyIconPath>
+        <kindForHierarchy>Empire_Royal_Duke</kindForHierarchy>
+      </li>
+    </modExtensions>
+  </RoyalTitleDef>
+
+  <RoyalTitleDef ParentName="BaseEmpireTitle">
+    <defName>VFEE_Archduke</defName>
+    <label>archduke</label>
+    <labelFemale>archduchess</labelFemale>
+    <description>The Imperial title of archduke is bestowed upon dukes whose territory requires a competent retinue to maintain order. They are expected to host their own divisions as well as their training, and in peacetime can establish a minor House.</description>
+    <seniority>701</seniority>
+    <favorCost>80</favorCost>
+    <minExpectation>Royal</minExpectation>
+    <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
+    <changeHeirQuestPoints>4200</changeHeirQuestPoints>
+    <recruitmentResistanceOffset>100</recruitmentResistanceOffset>
+    <commonality>1</commonality>
+    <canBeInherited>True</canBeInherited>
+    <suppressIdleAlert>true</suppressIdleAlert>
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
+    <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
+    <permitPointsAwarded>1</permitPointsAwarded>
+    <decreeTags>
+      <li>All</li>
+    </decreeTags>
+    <disabledJoyKinds>
+      <li>Gaming_Dexterity</li>
+    </disabledJoyKinds>
+    <disabledWorkTags>
+      <li>ManualDumb</li>
+      <li>ManualSkilled</li>
+      <li>PlantWork</li>
+      <li>Mining</li>
+      <li>Animals</li>
+    </disabledWorkTags>
+    <permits>
+      <li>TradeSettlement</li>
+      <li>TradeCaravan</li>
+      <li>TradeOrbital</li>
+    </permits>
+    <requiredApparel>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier2</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier5</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier6</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>UpperHead</li>
+          <li>FullHead</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier5</li>
+        </requiredTags>
+        <allowedTags>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+    </requiredApparel>
+    <throneRoomRequirements>
+      <li Class="RoomRequirement_HasAssignedThroneAnyOf">
+        <things>
+          <li>GrandThrone</li>
+		  <li>VFEE_StellicThrone</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_Area">
+        <area>150</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>200</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+        <count>10</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
+        <count>14</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>8</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_SteleSmall</thingDef>
+        <count>4</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_ImperialSlab</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_GrandChair</thingDef>
+        <count>4</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_GrandTable</thingDef>
+      </li>
+      <li Class="RoomRequirement_AllThingsAnyOfAreGlowing">
+        <labelKey>RoomRequirementAllBraziersMustBeLit</labelKey>
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoBeds</labelKey>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
+        <labelKey>RoomRequirementNoAltars</labelKey>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </throneRoomRequirements>
+    <bedroomRequirements>
+      <li Class="RoomRequirement_Area">
+        <area>60</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>130</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <disablingPrecepts>
+          <li MayRequire="Ludeon.RimWorld.Ideology">SlabBed_Preferred</li>
+        </disablingPrecepts>
+        <things>
+          <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>PlantPot</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
+        </things>
+        <count>6</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_LargeRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+        </things>
+        <count>1</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_RoyalMirror</thingDef>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </bedroomRequirements>
+    <foodRequirement>
+      <minQuality>MealLavish</minQuality>
+      <allowedTypes>Processed, Liquor</allowedTypes>
+      <allowedDefs>
+        <li>Ambrosia</li>
+        <li>Milk</li>
+        <li>RawBerries</li>
+        <li>InsectJelly</li>
+      </allowedDefs>
+    </foodRequirement>
+    <grantedAbilities>
+      <li>Speech</li>
+      <li>VFEE_RoyalAddress</li>
+      <li>VFEE_BestowAcolyte</li>
+    </grantedAbilities>
+    <speechCooldown>360000</speechCooldown>
+    <maxPsylinkLevel>6</maxPsylinkLevel>
+    <modExtensions>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <ballroomRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>110</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>160</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Piano</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Harp</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>VFEE_PipeOrgan</thingDef>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
+          </li>
+        </ballroomRequirements>
+        <galleryRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>80</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>180</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+        </galleryRequirements>
+        <courtRequirments>
+          <li>
+            <minTitle>Acolyte</minTitle>
+            <maxTitle>Acolyte</maxTitle>
+            <count>2</count>
+          </li>
+          <li>
+            <minTitle>Knight</minTitle>
+            <maxTitle>Duke</maxTitle>
+            <count>1</count>
+          </li>
+        </courtRequirments>
+        <vassalagePointsAwarded>1</vassalagePointsAwarded>
+        <expectationsAlways>true</expectationsAlways>
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Archduke</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Archduke</greyIconPath>
+        <kindForHierarchy>VFEE_Empire_Royal_Archduke</kindForHierarchy>
+      </li>
+    </modExtensions>
+  </RoyalTitleDef>
+
+  <RoyalTitleDef ParentName="ConsulBase">
+    <favorCost>112</favorCost>
+    <minExpectation>Royal</minExpectation>
+    <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
+    <changeHeirQuestPoints>4400</changeHeirQuestPoints>
+    <commonality>1</commonality>
+    <canBeInherited>True</canBeInherited>
+    <suppressIdleAlert>true</suppressIdleAlert>
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
+    <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
+    <permitPointsAwarded>1</permitPointsAwarded>
+    <decreeTags>
+      <li>All</li>
+    </decreeTags>
+    <disabledJoyKinds>
+      <li>Gaming_Dexterity</li>
+    </disabledJoyKinds>
+    <disabledWorkTags>
+      <li>ManualDumb</li>
+      <li>ManualSkilled</li>
+      <li>PlantWork</li>
+      <li>Mining</li>
+      <li>Animals</li>
+    </disabledWorkTags>
+    <permits>
+      <li>TradeSettlement</li>
+      <li>TradeCaravan</li>
+      <li>TradeOrbital</li>
+    </permits>
+    <requiredApparel>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier2</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier5</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier6</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+    </requiredApparel>
+    <throneRoomRequirements>
+      <li Class="RoomRequirement_HasAssignedThroneAnyOf">
+        <things>
+          <li>GrandThrone</li>
+		  <li>VFEE_StellicThrone</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_Area">
+        <area>180</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>210</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+        <count>10</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
+        <count>14</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>8</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_SteleSmall</thingDef>
+        <count>4</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_ImperialSlab</thingDef>
+        <count>4</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_GrandChair</thingDef>
+        <count>6</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_GrandTable</thingDef>
+      </li>
+      <li Class="RoomRequirement_AllThingsAnyOfAreGlowing">
+        <labelKey>RoomRequirementAllBraziersMustBeLit</labelKey>
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoBeds</labelKey>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
+        <labelKey>RoomRequirementNoAltars</labelKey>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </throneRoomRequirements>
+    <bedroomRequirements>
+      <li Class="RoomRequirement_Area">
+        <area>80</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>150</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <disablingPrecepts>
+          <li MayRequire="Ludeon.RimWorld.Ideology">SlabBed_Preferred</li>
+        </disablingPrecepts>
+        <things>
+          <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>4</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>PlantPot</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
+        </things>
+        <count>6</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_LargeRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+        </things>
+        <count>1</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_GrandRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugGrand</li>
+        </things>
+        <count>1</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_RoyalMirror</thingDef>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </bedroomRequirements>
+    <foodRequirement>
+      <minQuality>MealLavish</minQuality>
+      <allowedTypes>Processed, Liquor</allowedTypes>
+      <allowedDefs>
+        <li>Ambrosia</li>
+        <li>Milk</li>
+        <li>RawBerries</li>
+        <li>InsectJelly</li>
+      </allowedDefs>
+    </foodRequirement>
+    <grantedAbilities>
+      <li>Speech</li>
+      <li>VFEE_RoyalAddress</li>
+      <li>VFEE_BestowKnight</li>
+    </grantedAbilities>
+    <speechCooldown>360000</speechCooldown>
+    <maxPsylinkLevel>6</maxPsylinkLevel>
+    <modExtensions>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <ballroomRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>120</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>180</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Piano</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Harp</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>VFEE_PipeOrgan</thingDef>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
+          </li>
+        </ballroomRequirements>
+        <galleryRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>100</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>200</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+        </galleryRequirements>
+        <courtRequirments>
+          <li>
+            <minTitle>Knight</minTitle>
+            <maxTitle>Knight</maxTitle>
+            <count>2</count>
+          </li>
+          <li>
+            <minTitle>Praetor</minTitle>
+            <maxTitle>VFEE_Archduke</maxTitle>
+            <count>1</count>
+          </li>
+        </courtRequirments>
+        <vassalagePointsAwarded>1</vassalagePointsAwarded>
+        <expectationsAlways>true</expectationsAlways>
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Consul</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Consul</greyIconPath>
+        <kindForHierarchy>Empire_Royal_Consul</kindForHierarchy>
+      </li>
+    </modExtensions>
+  </RoyalTitleDef>
+
+  <RoyalTitleDef ParentName="BaseEmpireTitle">
+    <defName>VFEE_Magister</defName>
+    <label>magister</label>
+    <labelFemale>magister</labelFemale>
+    <description>The Imperial title of magister is the middle rank of high nobility. In the Empire, a magister is expected to coordinate the vast military capabilities of the Empire, in both peace and wartime, commanding in the presence of the Emperor.</description>
+    <seniority>801</seniority>
+    <favorCost>156</favorCost>
+    <minExpectation>Royal</minExpectation>
+    <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
+    <changeHeirQuestPoints>4500</changeHeirQuestPoints>
+    <recruitmentResistanceOffset>100</recruitmentResistanceOffset>
+    <commonality>1</commonality>
+    <canBeInherited>True</canBeInherited>
+    <suppressIdleAlert>true</suppressIdleAlert>
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
+    <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
+    <permitPointsAwarded>1</permitPointsAwarded>
+    <decreeTags>
+      <li>All</li>
+    </decreeTags>
+    <disabledJoyKinds>
+      <li>Gaming_Dexterity</li>
+    </disabledJoyKinds>
+    <disabledWorkTags>
+      <li>ManualDumb</li>
+      <li>ManualSkilled</li>
+      <li>PlantWork</li>
+      <li>Mining</li>
+      <li>Animals</li>
+    </disabledWorkTags>
+    <permits>
+      <li>TradeSettlement</li>
+      <li>TradeCaravan</li>
+      <li>TradeOrbital</li>
+    </permits>
+    <requiredApparel>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier2</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier5</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier6</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>UpperHead</li>
+          <li>FullHead</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier5</li>
+        </requiredTags>
+        <allowedTags>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+    </requiredApparel>
+    <throneRoomRequirements>
+      <li Class="RoomRequirement_HasAssignedThroneAnyOf">
+        <things>
+          <li>VFEE_StellicThrone</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_Area">
+        <area>220</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>210</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+        <count>10</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_Candelabra</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
+        <count>16</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>8</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_SteleSmall</thingDef>
+        <count>4</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_ImperialSlab</thingDef>
+        <count>4</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_GrandChair</thingDef>
+        <count>8</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_GrandTable</thingDef>
+      </li>
+      <li Class="RoomRequirement_AllThingsAnyOfAreGlowing">
+        <labelKey>RoomRequirementAllBraziersMustBeLit</labelKey>
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoBeds</labelKey>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
+        <labelKey>RoomRequirementNoAltars</labelKey>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </throneRoomRequirements>
+    <bedroomRequirements>
+      <li Class="RoomRequirement_Area">
+        <area>100</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>160</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <disablingPrecepts>
+          <li MayRequire="Ludeon.RimWorld.Ideology">SlabBed_Preferred</li>
+        </disablingPrecepts>
+        <things>
+          <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>4</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>PlantPot</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
+        </things>
+        <count>6</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_LargeRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+        </things>
+        <count>1</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_GrandRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugGrand</li>
+        </things>
+        <count>1</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_RoyalMirror</thingDef>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </bedroomRequirements>
+    <foodRequirement>
+      <minQuality>MealLavish</minQuality>
+      <allowedTypes>Processed, Liquor</allowedTypes>
+      <allowedDefs>
+        <li>Ambrosia</li>
+        <li>Milk</li>
+        <li>RawBerries</li>
+        <li>InsectJelly</li>
+      </allowedDefs>
+    </foodRequirement>
+    <grantedAbilities>
+      <li>Speech</li>
+      <li>VFEE_RoyalAddress</li>
+      <li>VFEE_BestowPraetor</li>
+    </grantedAbilities>
+    <speechCooldown>360000</speechCooldown>
+    <maxPsylinkLevel>6</maxPsylinkLevel>
+    <modExtensions>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <ballroomRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>130</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>200</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Piano</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Harp</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>VFEE_PipeOrgan</thingDef>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
+          </li>
+        </ballroomRequirements>
+        <galleryRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>120</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>220</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+        </galleryRequirements>
+        <courtRequirments>
+          <li>
+            <minTitle>Knight</minTitle>
+            <maxTitle>Knight</maxTitle>
+            <count>2</count>
+          </li>
+          <li>
+            <minTitle>Praetor</minTitle>
+            <maxTitle>VFEE_Archduke</maxTitle>
+            <count>1</count>
+          </li>
+        </courtRequirments>
+        <vassalagePointsAwarded>1</vassalagePointsAwarded>
+        <expectationsAlways>true</expectationsAlways>
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Magister</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Magister</greyIconPath>
+        <kindForHierarchy>VFEE_Empire_Royal_Magister</kindForHierarchy>
+      </li>
+    </modExtensions>
+  </RoyalTitleDef>
+
+  <RoyalTitleDef ParentName="BaseEmpireTitle">
+    <defName>VFEE_Despot</defName>
+    <label>despot</label>
+    <labelFemale>despot</labelFemale>
+    <description>The Imperial title of despot maintains dominion over a small star system of strategic importance. In the Empire, despots maintain an iron grip to ensure that resources continue to flow into Imperial coffers and factories, as their major House holds important administrative positions throughout the system of governance.</description>
+    <seniority>802</seniority>
+    <favorCost>220</favorCost>
+    <minExpectation>VFEE_Stellar</minExpectation>
+    <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
+    <changeHeirQuestPoints>4700</changeHeirQuestPoints>
+    <recruitmentResistanceOffset>180</recruitmentResistanceOffset>
+    <commonality>1</commonality>
+    <canBeInherited>True</canBeInherited>
+    <suppressIdleAlert>true</suppressIdleAlert>
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
+    <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
+    <permitPointsAwarded>1</permitPointsAwarded>
+    <decreeTags>
+      <li>All</li>
+    </decreeTags>
+    <disabledJoyKinds>
+      <li>Gaming_Dexterity</li>
+    </disabledJoyKinds>
+    <disabledWorkTags>
+      <li>ManualDumb</li>
+      <li>ManualSkilled</li>
+      <li>PlantWork</li>
+      <li>Mining</li>
+      <li>Animals</li>
+    </disabledWorkTags>
+    <permits>
+      <li>TradeSettlement</li>
+      <li>TradeCaravan</li>
+      <li>TradeOrbital</li>
+    </permits>
+    <requiredApparel>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier2</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier5</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier7</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>UpperHead</li>
+          <li>FullHead</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier7</li>
+        </requiredTags>
+        <allowedTags>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+    </requiredApparel>
+    <throneRoomRequirements>
+      <li Class="RoomRequirement_HasAssignedThroneAnyOf">
+        <things>
+          <li>VFEE_StellicThrone</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_Area">
+        <area>280</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>220</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+        <count>10</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_Candelabra</thingDef>
+        <count>4</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
+        <count>18</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>8</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_ImperialBanner</thingDef>
+        <count>6</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_SteleSmall</thingDef>
+        <count>6</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_ImperialSlab</thingDef>
+        <count>6</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_GrandChair</thingDef>
+        <count>10</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_GrandTable</thingDef>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_RoyalSculptureSmall</thingDef>
+        <count>4</count>
+      </li>
+      <li Class="RoomRequirement_AllThingsAnyOfAreGlowing">
+        <labelKey>RoomRequirementAllBraziersMustBeLit</labelKey>
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoBeds</labelKey>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
+        <labelKey>RoomRequirementNoAltars</labelKey>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </throneRoomRequirements>
+    <bedroomRequirements>
+      <li Class="RoomRequirement_Area">
+        <area>120</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>180</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <disablingPrecepts>
+          <li MayRequire="Ludeon.RimWorld.Ideology">SlabBed_Preferred</li>
+        </disablingPrecepts>
+        <things>
+          <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>4</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>PlantPot</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
+        </things>
+        <count>6</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Armchair</li>
+          <li MayRequire="VanillaExpanded.VFECore">Seat_RoyalArmchair</li>
+        </things>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_LargeRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+        </things>
+        <count>1</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_GrandRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugGrand</li>
+        </things>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_Candelabra</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_RoyalSculptureSmall</thingDef>
+        <count>1</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_RoyalMirror</thingDef>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </bedroomRequirements>
+    <foodRequirement>
+      <minQuality>MealLavish</minQuality>
+      <allowedTypes>Processed, Liquor</allowedTypes>
+      <allowedDefs>
+        <li>Ambrosia</li>
+        <li>Milk</li>
+        <li>RawBerries</li>
+        <li>InsectJelly</li>
+      </allowedDefs>
+    </foodRequirement>
+    <grantedAbilities>
+      <li>Speech</li>
+      <li>VFEE_RoyalAddress</li>
+      <li>VFEE_BestowBaron</li>
+    </grantedAbilities>
+    <speechCooldown>360000</speechCooldown>
+    <maxPsylinkLevel>6</maxPsylinkLevel>
+    <modExtensions>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <ballroomRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>140</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>220</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Piano</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Harp</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>VFEE_PipeOrgan</thingDef>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
+          </li>
+        </ballroomRequirements>
+        <galleryRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>140</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>230</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+        </galleryRequirements>
+        <courtRequirments>
+          <li>
+            <minTitle>Baron</minTitle>
+            <maxTitle>Baron</maxTitle>
+            <count>4</count>
+          </li>
+          <li>
+            <minTitle>Count</minTitle>
+            <maxTitle>VFEE_Magister</maxTitle>
+            <count>2</count>
+          </li>
+        </courtRequirments>
+        <vassalagePointsAwarded>1</vassalagePointsAwarded>
+        <expectationsAlways>true</expectationsAlways>
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Despot</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Despot</greyIconPath>
+        <kindForHierarchy>VFEE_Empire_Royal_Despot</kindForHierarchy>
+      </li>
+    </modExtensions>
+  </RoyalTitleDef>
+
+  <RoyalTitleDef ParentName="StellarchBase">
+    <favorCost>308</favorCost>
+    <minExpectation>VFEE_Stellar</minExpectation>
+    <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
+    <changeHeirQuestPoints>5000</changeHeirQuestPoints>
+    <canBeInherited>True</canBeInherited>
+    <suppressIdleAlert>true</suppressIdleAlert>
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
+    <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
+    <permitPointsAwarded>1</permitPointsAwarded>
+    <decreeTags>
+      <li>All</li>
+    </decreeTags>
+    <disabledJoyKinds>
+      <li>Gaming_Dexterity</li>
+    </disabledJoyKinds>
+    <disabledWorkTags>
+      <li>ManualDumb</li>
+      <li>ManualSkilled</li>
+      <li>PlantWork</li>
+      <li>Mining</li>
+      <li>Animals</li>
+    </disabledWorkTags>
+    <permits>
+      <li>TradeSettlement</li>
+      <li>TradeCaravan</li>
+      <li>TradeOrbital</li>
+    </permits>
+    <requiredApparel>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier7</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier7</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier7</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+    </requiredApparel>
+    <throneRoomRequirements>
+      <li Class="RoomRequirement_HasAssignedThroneAnyOf">
+        <things>
+          <li>VFEE_StellicThrone</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Throne</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_Area">
+        <area>340</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>220</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+        <count>10</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_Candelabra</thingDef>
+        <count>8</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
+        <count>24</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>8</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_ImperialBanner</thingDef>
+        <count>8</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_SteleSmall</thingDef>
+        <count>8</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_ImperialSlab</thingDef>
+        <count>8</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_GrandChair</thingDef>
+        <count>12</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_RoyalStool</li>
+          <li MayRequire="VanillaExpanded.VFECore">Seat_RoyalChair</li>
+        </things>
+        <count>12</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_GrandTable</thingDef>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_RoyalSculptureSmall</thingDef>
+        <count>4</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_RoyalSculptureLarge</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_AllThingsAnyOfAreGlowing">
+        <labelKey>RoomRequirementAllBraziersMustBeLit</labelKey>
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoBeds</labelKey>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
+        <labelKey>RoomRequirementNoAltars</labelKey>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </throneRoomRequirements>
+    <bedroomRequirements>
+      <li Class="RoomRequirement_Area">
+        <area>140</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>200</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <disablingPrecepts>
+          <li MayRequire="Ludeon.RimWorld.Ideology">SlabBed_Preferred</li>
+        </disablingPrecepts>
+        <things>
+          <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>6</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>PlantPot</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
+        </things>
+        <count>8</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Armchair</li>
+          <li MayRequire="VanillaExpanded.VFECore">Seat_RoyalArmchair</li>
+        </things>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_LargeRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+        </things>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_GrandRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugGrand</li>
+        </things>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_Candelabra</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_RoyalSculptureSmall</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_RoyalMirror</thingDef>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </bedroomRequirements>
+    <foodRequirement>
+      <minQuality>MealLavish</minQuality>
+      <allowedTypes>Processed, Liquor</allowedTypes>
+      <allowedDefs>
+        <li>Ambrosia</li>
+        <li>Milk</li>
+        <li>RawBerries</li>
+        <li>InsectJelly</li>
+      </allowedDefs>
+    </foodRequirement>
+    <grantedAbilities>
+      <li>Speech</li>
+      <li>VFEE_RoyalAddress</li>
+      <li>VFEE_BestowCount</li>
+    </grantedAbilities>
+    <speechCooldown>360000</speechCooldown>
+    <maxPsylinkLevel>6</maxPsylinkLevel>
+    <modExtensions>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <ballroomRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>150</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>240</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Piano</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Harp</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>VFEE_PipeOrgan</thingDef>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
+          </li>
+        </ballroomRequirements>
+        <galleryRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>160</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>240</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+        </galleryRequirements>
+        <courtRequirments>
+          <li>
+            <minTitle>Count</minTitle>
+            <maxTitle>Count</maxTitle>
+            <count>4</count>
+          </li>
+          <li>
+            <minTitle>VFEE_Archcount</minTitle>
+            <maxTitle>VFEE_Despot</maxTitle>
+            <count>2</count>
+          </li>
+        </courtRequirments>
+        <vassalagePointsAwarded>1</vassalagePointsAwarded>
+        <expectationsAlways>true</expectationsAlways>
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Stellarch</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Stellarch</greyIconPath>
+        <kindForHierarchy>Empire_Royal_Stellarch</kindForHierarchy>
+      </li>
+    </modExtensions>
+  </RoyalTitleDef>
+
+  <RoyalTitleDef ParentName="StellarchBase">
+    <defName>VFEE_HighStellarch</defName>
+    <label>high stellarch</label>
+    <description>The Imperial title of high stellarch represents dominion over multiple star systems, and control of one of the powerful Houses in the Empire. They answer to no one except the emperor and are expected to not only maintain but also expand their influence across space. Very few are capable of receiving this title, even fewer wish to take on the responsibilities.</description>
+    <seniority>901</seniority>
+    <commonality>1</commonality>
+    <recruitmentResistanceOffset>260</recruitmentResistanceOffset>
+    <favorCost>135</favorCost>
+    <minExpectation>VFEE_Stellar</minExpectation>
+    <requiredMinimumApparelQuality>Excellent</requiredMinimumApparelQuality>
+    <changeHeirQuestPoints>5000</changeHeirQuestPoints>
+    <canBeInherited>True</canBeInherited>
+    <suppressIdleAlert>true</suppressIdleAlert>
+    <decreeMtbDays>-1</decreeMtbDays>    <!-- disabled -->
+    <decreeMentalBreakCommonality>12</decreeMentalBreakCommonality>
+    <permitPointsAwarded>0</permitPointsAwarded>
+    <decreeTags>
+      <li>All</li>
+    </decreeTags>
+    <disabledJoyKinds>
+      <li>Gaming_Dexterity</li>
+    </disabledJoyKinds>
+    <disabledWorkTags>
+      <li>ManualDumb</li>
+      <li>ManualSkilled</li>
+      <li>PlantWork</li>
+      <li>Mining</li>
+      <li>Animals</li>
+    </disabledWorkTags>
+    <permits>
+      <li>TradeSettlement</li>
+      <li>TradeCaravan</li>
+      <li>TradeOrbital</li>
+    </permits>
+    <requiredApparel>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier7</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier7</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>Torso</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier7</li>
+        </requiredTags>
+        <allowedTags>
+          <li>Cape</li>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+      <li>
+        <bodyPartGroupsMatchAny>
+          <li>UpperHead</li>
+          <li>FullHead</li>
+        </bodyPartGroupsMatchAny>
+        <requiredTags>
+          <li>RoyalTier7</li>
+        </requiredTags>
+        <allowedTags>
+          <li>PrestigeCombatGear</li>
+          <li>Psychic</li>
+        </allowedTags>
+      </li>
+    </requiredApparel>
+    <throneRoomRequirements>
+      <li Class="RoomRequirement_HasAssignedThroneAnyOf">
+        <things>
+          <li>VFEE_StellicThrone</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Throne</thingDef>
+        <count>4</count>
+      </li>
+      <li Class="RoomRequirement_Area">
+        <area>340</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>240</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+        <count>12</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_Candelabra</thingDef>
+        <count>10</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Column</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_Pillar</li>
+        </things>
+        <count>30</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>10</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_ImperialBanner</thingDef>
+        <count>10</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_SteleSmall</thingDef>
+        <count>10</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_ImperialSlab</thingDef>
+        <count>8</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_GrandChair</thingDef>
+        <count>12</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_RoyalStool</li>
+          <li MayRequire="VanillaExpanded.VFECore">Seat_RoyalChair</li>
+        </things>
+        <count>18</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_GrandTable</thingDef>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_RoyalSculptureSmall</thingDef>
+        <count>4</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_RoyalSculptureLarge</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_RoyalSculptureGrand</thingDef>
+        <count>1</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_PipeOrgan</thingDef>
+      </li>
+      <li Class="RoomRequirement_AllThingsAnyOfAreGlowing">
+        <labelKey>RoomRequirementAllBraziersMustBeLit</labelKey>
+        <things>
+          <li>Brazier</li>
+          <li MayRequire="Ludeon.RimWorld.Royalty,Ludeon.RimWorld.Ideology">DarklightBrazier</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoBeds</labelKey>
+        <buildingTags>
+          <li>Bed</li>
+        </buildingTags>
+      </li>
+      <li MayRequire="Ludeon.RimWorld.Ideology" Class="RoomRequirement_ForbidAltars">
+        <labelKey>RoomRequirementNoAltars</labelKey>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </throneRoomRequirements>
+    <bedroomRequirements>
+      <li Class="RoomRequirement_Area">
+        <area>140</area>
+      </li>
+      <li Class="RoomRequirement_Impressiveness">
+        <impressiveness>200</impressiveness>
+      </li>
+      <li Class="RoomRequirement_TerrainWithTags">
+        <labelKey>RoomRequirementAllFineFloored</labelKey>
+        <tags>
+          <li>FineFloor</li>
+        </tags>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <disablingPrecepts>
+          <li MayRequire="Ludeon.RimWorld.Ideology">SlabBed_Preferred</li>
+        </disablingPrecepts>
+        <things>
+          <li>RoyalBed</li>
+          <li MayRequire="Ludeon.RimWorld.Biotech">DeathrestCasket</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_Kingsize</li>
+          <li MayRequire="VanillaExpanded.VFECore">Bed_DoubleErgonomic</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Bed_AdvDoubleBed</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>EndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_LightEndTable</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalEndTable</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedEndTable</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOf">
+        <things>
+          <li>Dresser</li>
+          <li MayRequire="VanillaExpanded.VFECore">Table_RoyalDresser</li>
+          <li MayRequire="VanillaExpanded.VFESpacer">Table_IlluminatedDresser</li>
+        </things>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>Drape</thingDef>
+        <count>6</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>PlantPot</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
+        </things>
+        <count>8</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Armchair</li>
+          <li MayRequire="VanillaExpanded.VFECore">Seat_RoyalArmchair</li>
+        </things>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_LargeRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+        </things>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_GrandRoyalRug</li>
+          <li MayRequire="VanillaExpanded.VFEArt">VFE_RugGrand</li>
+        </things>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_Candelabra</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_ThingCount">
+        <thingDef>VFEE_RoyalSculptureSmall</thingDef>
+        <count>2</count>
+      </li>
+      <li Class="RoomRequirement_Thing">
+        <thingDef>VFEE_RoyalMirror</thingDef>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings">
+        <labelKey>RoomRequirementNoProductionFacilities</labelKey>
+        <buildingTags>
+          <li>Production</li>
+        </buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
+        <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
+        <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+    </bedroomRequirements>
+    <foodRequirement>
+      <minQuality>MealLavish</minQuality>
+      <allowedTypes>Processed, Liquor</allowedTypes>
+      <allowedDefs>
+        <li>Ambrosia</li>
+        <li>Milk</li>
+        <li>RawBerries</li>
+        <li>InsectJelly</li>
+      </allowedDefs>
+    </foodRequirement>
+    <grantedAbilities>
+      <li>Speech</li>
+      <li>VFEE_RoyalAddress</li>
+      <li>VFEE_BestowCount</li>
+    </grantedAbilities>
+    <speechCooldown>360000</speechCooldown>
+    <maxPsylinkLevel>6</maxPsylinkLevel>
+    <modExtensions>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <ballroomRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>150</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>240</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Piano</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>Harp</thingDef>
+          </li>
+          <li Class="RoomRequirement_Thing">
+            <thingDef>VFEE_PipeOrgan</thingDef>
+          </li>
+          <li Class="VFEEmpire.RoomRequirement_InstrumentSpace">
+            <labelKey>VFEE.RoomRequirementInstrumentSpace</labelKey>
+          </li>
+        </ballroomRequirements>
+        <galleryRequirements>
+          <li Class="RoomRequirement_Area">
+            <area>160</area>
+          </li>
+          <li Class="RoomRequirement_Impressiveness">
+            <impressiveness>240</impressiveness>
+          </li>
+          <li Class="RoomRequirement_TerrainWithTags">
+            <labelKey>RoomRequirementAllFineFloored</labelKey>
+            <tags>
+              <li>FineFloor</li>
+            </tags>
+          </li>
+        </galleryRequirements>
+        <courtRequirments>
+          <li>
+            <minTitle>VFEE_Archcount</minTitle>
+            <maxTitle>VFEE_Archcount</maxTitle>
+            <count>4</count>
+          </li>
+          <li>
+            <minTitle>VFEE_Marquess</minTitle>
+            <maxTitle>Stellarch</maxTitle>
+            <count>2</count>
+          </li>
+        </courtRequirments>
+        <vassalagePointsAwarded>0</vassalagePointsAwarded>
+        <expectationsAlways>true</expectationsAlways>
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_HighStellarch</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_HighStellarch</greyIconPath>
+        <kindForHierarchy>VFEE_Empire_Royal_HighStellarch</kindForHierarchy>
+      </li>
+    </modExtensions>
+  </RoyalTitleDef>
+
+</Defs>

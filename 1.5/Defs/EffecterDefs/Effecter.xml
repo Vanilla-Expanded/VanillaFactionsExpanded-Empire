@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+   <EffecterDef>
+    <defName>VFEE_ParadeConfetti</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <fleckDef>VFEE_ParadeConfettiFleck</fleckDef>
+        <chancePerTick>0.05</chancePerTick>
+        <scale>0.5~1</scale>
+        <rotationRate>-30~30</rotationRate>
+        <speed>0.6~1.8</speed>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <fleckDef>VFEE_ParadeConfettiFleckSecondary</fleckDef>
+        <chancePerTick>0.1</chancePerTick>
+        <scale>1.1~1.8</scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <moteDef>Mote_SparkThrownFastBright</moteDef>
+        <chancePerTick>0.7</chancePerTick>
+        <scale>0.12~0.24</scale>
+        <airTime>0.08~0.16</airTime>
+        <rotationRate>-240~240</rotationRate>
+        <speed>7.2~12</speed>
+        <angle>-30~30</angle>
+        <positionRadius>0.01</positionRadius>
+      </li>
+    </children>
+  </EffecterDef>
+  
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VFEE_ParadeConfettiFleck</defName>
+    <graphicData>
+      <texPath>Mote/VIE_FairConfettiA</texPath>
+	  
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.3</fadeInTime>
+    <solidTime>1</solidTime>
+    <fadeOutTime>1.0</fadeOutTime>
+    <growthRate>1.2</growthRate>
+  </FleckDef>
+  <FleckDef ParentName="FleckBase_Thrown">
+    <defName>VFEE_ParadeConfettiFleckSecondary</defName>
+    <graphicData>
+      <texPath>Mote/VIE_FairConfettiB</texPath>
+	   
+      <renderInstanced>true</renderInstanced>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.3</fadeInTime>
+    <solidTime>1</solidTime>
+    <fadeOutTime>1.0</fadeOutTime>
+    <growthRate>1.2</growthRate>
+  </FleckDef>
+</Defs>

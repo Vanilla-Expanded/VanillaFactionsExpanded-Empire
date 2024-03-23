@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+
+   <Operation Class="PatchOperationAdd">
+      <xpath>/Defs/TraderKindDef[defName="Base_Empire_Standard"]/stockGenerators</xpath>
+      <value>
+         <li Class="StockGenerator_SingleDef">
+            <thingDef>VFEE_Aperitif</thingDef>
+            <countRange>5~25</countRange>
+         </li>
+      </value>
+   </Operation>
+   
+   <Operation Class="PatchOperationAdd">
+      <xpath>/Defs/TraderKindDef[defName="Empire_Caravan_TraderGeneral"]/stockGenerators</xpath>
+      <value>
+         <li Class="StockGenerator_SingleDef">
+            <thingDef>VFEE_Aperitif</thingDef>
+            <countRange>2~8</countRange>
+         </li>
+      </value>
+   </Operation>
+   
+</Patch>

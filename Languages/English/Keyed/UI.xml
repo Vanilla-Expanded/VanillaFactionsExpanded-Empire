@@ -46,4 +46,6 @@
     <VFEE.Successful>Successful</VFEE.Successful>
     <VFEE.Honor.Bestow.Success>{0} has been bestowed with their pending honors. They have gained:\n{0}</VFEE.Honor.Bestow.Success>
     <VFEE.Honor.NoHonors>Must have pending honors to bestow.</VFEE.Honor.NoHonors>
+    <VFEEmpire.RitualRoleTitled.NotTitled>Must be title holder.</VFEEmpire.RitualRoleTitled.NotTitled>
+    <VFEEmpire.RitualRoleTitled.NotColonist>Must be colonist.</VFEEmpire.RitualRoleTitled.NotColonist>
 </LanguageData>
