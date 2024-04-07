@@ -11,7 +11,7 @@ public class RaidStrategyWorker_Deserters : RaidStrategyWorker
 {
     static RaidStrategyWorker_Deserters()
     {
-        VFEE_DefOf.VFEE_Deserters.disallowedRaidStrategies ??= new List<RaidStrategyDef>();
+        VFEE_DefOf.VFEE_Deserters.disallowedRaidStrategies ??= new();
         VFEE_DefOf.VFEE_Deserters.disallowedRaidStrategies.AddRange(DefDatabase<RaidStrategyDef>.AllDefs.Except(VFEE_DefOf.DesertersStrat));
     }
 
@@ -19,7 +19,7 @@ public class RaidStrategyWorker_Deserters : RaidStrategyWorker
 
     public override bool CanUseWith(IncidentParms parms, PawnGroupKindDef groupKind)
     {
-        return base.CanUseWith(parms, groupKind) && parms.faction.def == VFEE_DefOf.VFEE_Deserters && parms.target is Map map
+        return parms.faction != null && parms.faction.def == VFEE_DefOf.VFEE_Deserters && base.CanUseWith(parms, groupKind) && parms.target is Map map
             && map.mapPawns.AllPawnsSpawned.Any(p =>
                    p.royalty != null && p.royalty.HasAnyTitleIn(Faction.OfEmpire));
     }
