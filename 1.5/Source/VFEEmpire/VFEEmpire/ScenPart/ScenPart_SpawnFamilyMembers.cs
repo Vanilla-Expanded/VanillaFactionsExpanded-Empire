@@ -2,6 +2,7 @@
 using RimWorld;
 using System.Linq;
 using Verse;
+using HarmonyLib;
 
 namespace VFEEmpire
 {
@@ -108,6 +109,8 @@ namespace VFEEmpire
                 ScenarioUtils.DamageUntilDead(cataphract, weapons);
                 ScenarioUtils.SpawnNear(cataphract.Corpse, map, center);
             }
+
+            PawnComponentsUtility.AddAndRemoveDynamicComponents(pawn);
         }
     }
 
@@ -151,7 +154,6 @@ namespace VFEEmpire
             otherPawn.SetFactionDirect(Faction.OfPlayer);
 
             related = otherPawn;
-
             return redressed;
         }
 
@@ -179,6 +181,10 @@ namespace VFEEmpire
         {
             RCellFinder.TryFindRandomCellNearWith(center, c => c.Standable(map) && !c.Fogged(map), map, out IntVec3 catSpawn, Rand.Range(10, 25), Rand.Range(25, 45));
             GenSpawn.Spawn(thing, catSpawn, map);
+            if (thing is Corpse corpse)
+            {
+                PawnComponentsUtility.AddAndRemoveDynamicComponents(corpse.InnerPawn);
+            }
         }
     }
 }
