@@ -8,9 +8,16 @@
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationAdd">
-		<xpath>/Defs/ThingDef[@Name="MusicalInstrumentBase"]/building</xpath>
+		<xpath>/Defs/ThingDef[defName="Harp"]/building</xpath>
 		<value>
-			<watchBuildingStandDistanceRange>1~7</watchBuildingStandDistanceRange>
+		    <watchBuildingStandDistanceRange>1~7</watchBuildingStandDistanceRange>
+			<watchBuildingStandRectWidth>7</watchBuildingStandRectWidth>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="Harpsichord"]/building</xpath>
+		<value>
+		    <watchBuildingStandDistanceRange>1~7</watchBuildingStandDistanceRange>
 			<watchBuildingStandRectWidth>7</watchBuildingStandRectWidth>
 		</value>
 	</Operation>
