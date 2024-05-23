@@ -193,10 +193,11 @@ namespace VFEEmpire
         }
         protected override bool TestRunInt(Slate slate)
         {
+            var map = QuestGen_Get.GetMap();
+            if (map == null) return false;
             var points = slate.Get<float>("points",0f);
             points = pointAdjust.Evaluate(points);
             var deserter = Find.FactionManager.FirstFactionOfDef(InternalDefOf.VFEE_Deserters);
-            var map = QuestGen_Get.GetMap();
             int pawnCount = GetRequiredPawnCount(map.mapPawns.FreeColonists.Count, points);
             return pawnCount != -1 && TileFinder.TryFindNewSiteTile(out var tile) && deserter != null && deserter.HostileTo(Faction.OfPlayer); 
         }
