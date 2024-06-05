@@ -78,7 +78,7 @@
       <li>ReconArmor</li>
     </prerequisites>
     <researchViewX>15.00</researchViewX>
-    <researchViewY>0.80</researchViewY>
+    <researchViewY>1.1</researchViewY>
 	<generalRules>
   <rulesStrings>
     <li>subject->elite warfare engineering</li>
