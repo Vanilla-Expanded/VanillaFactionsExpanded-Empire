@@ -9,7 +9,7 @@ public class HonorWorker_Gallery : HonorWorker
 {
     public override bool Available() =>
         base.Available() && Find.Maps.Where(m => m.IsPlayerHome)
-           .SelectMany(m => m.GetComponent<MapComponent_RoyaltyTracker>().Galleries)
+           .SelectMany(m => m.GetComponent<MapComponent_RoyaltyTracker>().Galleries.ToList())
            .Any(room => room.GetStat(RoomStatDefOf.Impressiveness) > 200);
 }
 

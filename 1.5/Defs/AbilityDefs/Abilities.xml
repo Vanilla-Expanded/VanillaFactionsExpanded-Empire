@@ -21,6 +21,7 @@
 		<gizmoClass>Command_Ability</gizmoClass>
 		<hasExternallyHandledCooldown>true</hasExternallyHandledCooldown>
 		<targetRequired>true</targetRequired>
+		<casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
 		<verbProperties>
 		  <verbClass>Verb_CastAbility</verbClass>
 		  <range>-1</range>
