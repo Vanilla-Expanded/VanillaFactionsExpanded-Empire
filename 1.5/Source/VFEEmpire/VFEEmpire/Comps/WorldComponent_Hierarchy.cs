@@ -10,7 +10,7 @@ namespace VFEEmpire;
 [StaticConstructorOnStartup]
 public class WorldComponent_Hierarchy : WorldComponent
 {
-    private const int PER_RANK = 1;
+    public float PER_RANK => VFEEmpireMod.Settings.noblesPerTitle;
     public static WorldComponent_Hierarchy Instance;
     public static List<RoyalTitleDef> Titles;
     public List<Pawn> TitleHolders = new();
@@ -37,7 +37,7 @@ public class WorldComponent_Hierarchy : WorldComponent
 
     private void InitializeTitles()
     {
-        var count = 1;
+        float count = 1f;
         foreach (var title in Enumerable.Reverse(Titles))
         {
             for (var i = 0; i < count; i++) MakePawnFor(title);
@@ -53,7 +53,7 @@ public class WorldComponent_Hierarchy : WorldComponent
 
     private void FillTitles()
     {
-        var count = 1;
+        float count = 1f;
         var empire = Faction.OfEmpire;
         for (var i = Titles.Count - 1; i >= 0; i--)
         {
