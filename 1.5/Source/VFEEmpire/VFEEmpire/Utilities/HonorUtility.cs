@@ -55,9 +55,12 @@ public static class HonorUtility
         if (DefDatabase<HonorDef>.AllDefs.Where(def => def.Worker.Available() && def.value <= pointsLocal).TryRandomElement(out var def))
         {
             var honor = def.Worker.Generate();
-            honor.PostMake();
-            points -= def.value;
-            return honor;
+            if (honor != null)
+            {
+                honor.PostMake();
+                points -= def.value;
+                return honor;
+            }
         }
 
         return null;
@@ -96,6 +99,10 @@ public static class HonorUtility
     public static void GrantRandomHonor(Pawn pawn)
     {
         var points = 1000f;
-        pawn.AddHonor(Generate(ref points));
+        var honor = Generate(ref points);
+        if (honor != null)
+            pawn.AddHonor(honor);
+        else
+            Log.Error($"Failed to generate a random honor with {points} points.");
     }
 }

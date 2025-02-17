@@ -10,7 +10,12 @@ public class HonorWorker_Faction : HonorWorker
     public override Honor Generate()
     {
         var honor = base.Generate();
-        if (honor is Honor_Faction honorFaction) honorFaction.faction = GetFaction();
+        if (honor is Honor_Faction honorFaction)
+        {
+            honorFaction.faction = GetFaction();
+            if (honorFaction.faction == null)
+                return null;
+        }
         return honor;
     }
 
@@ -19,11 +24,16 @@ public class HonorWorker_Faction : HonorWorker
     private Faction GetFaction() => Find.FactionManager.AllFactionsListForReading.Where(FactionValid).RandomElementWithFallback();
 
     protected virtual bool FactionValid(Faction f) =>
-        def.hostileFactions
+        !f.temporary &&
+        !f.def.hidden &&
+        f.def.humanlikeFaction &&
+        !f.IsPlayer &&
+        // Parenthesis required
+        (def.hostileFactions
             ? f.HostileTo(Faction.OfPlayer)
             : !f.HostileTo(Faction.OfPlayer) && HonorUtility.All()
                .OfType<Honor_Faction>()
-               .All(h => h.def != def || h.faction != f);
+               .All(h => h.def != def || h.faction != f));
 }
 
 public class Honor_Faction : Honor
