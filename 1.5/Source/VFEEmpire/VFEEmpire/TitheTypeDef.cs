@@ -33,11 +33,11 @@ public class TitheTypeDef : Def
 public class TitheWorker
 {
     public virtual int AmountProduced(TitheInfo info) =>
-        Mathf.RoundToInt(info.Type.count * info.Speed.Mult() * (info.Lord?.Honors()
+        Mathf.Max(1, Mathf.RoundToInt(info.Type.count * info.Speed.Mult() * (info.Lord?.Honors()
            .Honors
            .OfType<Honor_Settlement>()
            .Where(h => h.settlement == info.Settlement)
-           .Aggregate(1f, (f, h) => f * h.def.titheSpeedFactor) ?? 1f));
+           .Aggregate(1f, (f, h) => f * h.def.titheSpeedFactor) ?? 1f)));
 
     protected virtual Thing MakeThing(TitheInfo info)
     {
