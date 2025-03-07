@@ -34,44 +34,45 @@ public class PlayLogEntry_Interaction_RoyalGossip : PlayLogEntry_Interaction
             return "[" + intDef.label + " error: null pawn reference]";
         }
 
-        Rand.PushState(logID);
-        var request = base.GenerateGrammarRequest();
-        string text;
-        if (pov == initiator)
+        using (new RandBlock(logID))
         {
-            request.IncludesBare.Add(intDef.logRulesInitiator);
-            request.Rules.AddRange(GrammarUtility.RulesForPawn("INITIATOR", initiator, request.Constants));
-            request.Rules.AddRange(GrammarUtility.RulesForPawn("RECIPIENT", recipient, request.Constants));
-            request.Rules.AddRange(GrammarUtility.RulesForPawn("THIRDPARTY", thirdParty, request.Constants));
-            text = GrammarResolver.Resolve("r_logentry", request, "interaction from initiator", forceLog);
-        }
-        else if (pov == recipient)
-        {
-            request.IncludesBare.Add(intDef.logRulesRecipient ?? intDef.logRulesInitiator);
-            request.Rules.AddRange(GrammarUtility.RulesForPawn("INITIATOR", initiator, request.Constants));
-            request.Rules.AddRange(GrammarUtility.RulesForPawn("RECIPIENT", recipient, request.Constants));
-            request.Rules.AddRange(GrammarUtility.RulesForPawn("THIRDPARTY", thirdParty, request.Constants));
-            text = GrammarResolver.Resolve("r_logentry", request, "interaction from recipient", forceLog);
-        }
-        else
-        {
-            Log.ErrorOnce("Cannot display PlayLogEntry_Interaction from POV who isn't initiator or recipient.", 51251);
-            text = ToString();
-        }
-
-        if (extraSentencePacks != null)
-            foreach (var rulePack in extraSentencePacks)
+            var request = base.GenerateGrammarRequest();
+            string text;
+            if (pov == initiator)
             {
-                request.Clear();
-                request.Includes.Add(rulePack);
+                request.IncludesBare.Add(intDef.logRulesInitiator);
                 request.Rules.AddRange(GrammarUtility.RulesForPawn("INITIATOR", initiator, request.Constants));
                 request.Rules.AddRange(GrammarUtility.RulesForPawn("RECIPIENT", recipient, request.Constants));
                 request.Rules.AddRange(GrammarUtility.RulesForPawn("THIRDPARTY", thirdParty, request.Constants));
-                text += " " + GrammarResolver.Resolve(rulePack.FirstRuleKeyword, request, "extraSentencePack", forceLog,
-                    rulePack.FirstUntranslatedRuleKeyword);
+                text = GrammarResolver.Resolve("r_logentry", request, "interaction from initiator", forceLog);
+            }
+            else if (pov == recipient)
+            {
+                request.IncludesBare.Add(intDef.logRulesRecipient ?? intDef.logRulesInitiator);
+                request.Rules.AddRange(GrammarUtility.RulesForPawn("INITIATOR", initiator, request.Constants));
+                request.Rules.AddRange(GrammarUtility.RulesForPawn("RECIPIENT", recipient, request.Constants));
+                request.Rules.AddRange(GrammarUtility.RulesForPawn("THIRDPARTY", thirdParty, request.Constants));
+                text = GrammarResolver.Resolve("r_logentry", request, "interaction from recipient", forceLog);
+            }
+            else
+            {
+                Log.ErrorOnce("Cannot display PlayLogEntry_Interaction from POV who isn't initiator or recipient.", 51251);
+                text = ToString();
             }
 
-        Rand.PopState();
-        return text;
+            if (extraSentencePacks != null)
+                foreach (var rulePack in extraSentencePacks)
+                {
+                    request.Clear();
+                    request.Includes.Add(rulePack);
+                    request.Rules.AddRange(GrammarUtility.RulesForPawn("INITIATOR", initiator, request.Constants));
+                    request.Rules.AddRange(GrammarUtility.RulesForPawn("RECIPIENT", recipient, request.Constants));
+                    request.Rules.AddRange(GrammarUtility.RulesForPawn("THIRDPARTY", thirdParty, request.Constants));
+                    text += " " + GrammarResolver.Resolve(rulePack.FirstRuleKeyword, request, "extraSentencePack", forceLog,
+                        rulePack.FirstUntranslatedRuleKeyword);
+                }
+
+            return text;
+        }
     }
 }
