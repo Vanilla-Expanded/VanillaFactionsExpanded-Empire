@@ -10,7 +10,7 @@ public class CompAbilityEffect_StartBestowing : CompAbilityEffect_StartRitualOnP
     public new CompProperties_AbilityStartBestower Props => props as CompProperties_AbilityStartBestower;
 	public override bool GizmoDisabled(out string reason)
 	{
-		if (GatheringsUtility.AnyLordJobPreventsNewRituals(this.parent.pawn.Map))
+		if (parent.pawn.Spawned && GatheringsUtility.AnyLordJobPreventsNewRituals(this.parent.pawn.Map))
 		{
 			reason = "VFEE.StartBestower.DisabledExistingRitual".Translate();
 			return true;
