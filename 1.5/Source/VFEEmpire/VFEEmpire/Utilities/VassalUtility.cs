@@ -49,9 +49,13 @@ public static class VassalUtility
             TitheSetting.EveryQuadrum => 15,
             TitheSetting.EveryYear => 60,
             TitheSetting.Special => info?.Type?.deliveryDays ?? 0,
-            TitheSetting.Never => 0,
+            TitheSetting.Never or TitheSetting.SpecialNever => 0,
             _ => throw new ArgumentOutOfRangeException(nameof(setting), setting, null)
         };
+
+    public static bool IsSpecial(this TitheSetting setting) => setting is TitheSetting.Special or TitheSetting.SpecialNever;
+
+    public static bool IsDisabled(this TitheSetting setting) => setting is TitheSetting.Never or TitheSetting.SpecialNever;
 
     public static TitheInfo Tithe(this Settlement settlement) => WorldComponent_Vassals.Instance.GetTitheInfo(settlement);
 }

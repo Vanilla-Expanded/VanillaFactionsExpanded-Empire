@@ -15,6 +15,7 @@
     <VFEE.Deliver.EveryWeek>Every 7 days</VFEE.Deliver.EveryWeek>
     <VFEE.Deliver.EveryQuadrum>Every 15 days</VFEE.Deliver.EveryQuadrum>
     <VFEE.Deliver.EveryYear>Once a year</VFEE.Deliver.EveryYear>
+    <VFEE.Deliver.DaysSpecific>Every {0} days</VFEE.Deliver.DaysSpecific>
     <VFEE.Deliver.Never>Never (pause)</VFEE.Deliver.Never>
     <VFEE.Created>{0} {1} created every day.</VFEE.Created>
     <VFEE.CreatedSpecial>{0} {1} created every {2} days.</VFEE.CreatedSpecial>

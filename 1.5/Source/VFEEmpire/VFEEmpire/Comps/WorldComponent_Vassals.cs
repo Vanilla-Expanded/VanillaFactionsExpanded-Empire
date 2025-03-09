@@ -46,7 +46,9 @@ public class WorldComponent_Vassals : WorldComponent
             {
                 info.Lord = null;
                 info.DaysSinceDelivery = 0;
-                if (info.Setting != TitheSetting.Special)
+                if (info.Setting.IsSpecial())
+                    info.Setting = TitheSetting.Special;
+                else
                     info.Setting = TitheSetting.Never;
             }
     }
@@ -69,11 +71,15 @@ public class WorldComponent_Vassals : WorldComponent
         {
             if (info.Lord == null) continue;
             info.DaysSinceDelivery++;
-            if (info.Setting == TitheSetting.Never) continue;
+            if (info.Setting.IsDisabled()) continue;
             if (info.DaysSinceDelivery >= info.Setting.DeliveryDays(info))
             {
-                info.Type.Worker.Deliver(info);
-                info.DaysSinceDelivery = 0;
+                // Only reset the days to 0 if successfully delivered.
+                // Setting it to 0 would reset stockpiles (since those
+                // are based on the days since last delivery), as well
+                // as reset the timer on delivery of special tithes.
+                if (info.Type.Worker.Deliver(info))
+                    info.DaysSinceDelivery = 0;
             }
         }
     }
