@@ -136,6 +136,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
         var lodgerSurgeyViolation = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.SurgeryViolation");
         var lodgerLeftMap = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.LeftMap");
         var lodgerBanished = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Banished");
+        var lodgerPsychicRitualTarget = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.PsychicRitualTarget");
         var shuttleDestroyed = QuestGenUtility.HardcodedSignalWithQuestID("pickupShipThing.Destroyed");
         var nobleMoodTreshhold = QuestGenUtility.HardcodedSignalWithQuestID("nobles.BadMood");
         //**Failure Quest Parts
@@ -164,6 +165,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
             inSignalBanished = lodgerBanished,
             inSignalKidnapped = lodgerKidnapped,
             inSignalLeftMap = lodgerLeftMap,
+            inSignalPsychicRitualTarget = lodgerPsychicRitualTarget,
             inSignalShuttleDestroyed = shuttleDestroyed,
             inSignalSurgeryViolation = lodgerSurgeyViolation,
             outSignalArrested_LeaveColony = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Arrested_LeaveColony"),
@@ -173,6 +175,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
             outSignalLast_Banished = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Banished_LeaveColony"),
             outSignalLast_LeftMapAllHealthy = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.LeftmapAllHealthy"),
             outSignalLast_Kidnapped = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.Kidnapped_LeaveColony"),
+            outSignalPsychicRitualTarget = QuestGenUtility.HardcodedSignalWithQuestID("lodgers.PsychicRitual_LeaveColony"),
             outSignalShuttleDestroyed = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.Destroyed"),
             faction = empire,
             mapParent = map.Parent,
@@ -205,7 +208,8 @@ public class QuestNode_Root_NobleVisit : QuestNode
             questPart_LodgerLeave.outSignalSurgeryViolation_LeaveColony,
             questPart_LodgerLeave.outSignalLast_Banished,
             questPart_LodgerLeave.outSignalShuttleDestroyed,
-            questPart_LodgerLeave.outSignalLast_Kidnapped
+            questPart_LodgerLeave.outSignalLast_Kidnapped,
+            questPart_LodgerLeave.outSignalPsychicRitualTarget,
         }, null, new List<string> { anyLeave });
 
         quest.Delay(durationTicks, delegate
@@ -242,6 +246,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
         FailResults(quest, questPart_LodgerLeave.outSignalLast_LeftMapAllNotHealthy, "[lodgerLeftNotAllHealthyLetterLabel]",
             "[lodgerLeftNotAllHealthyLetterText]", nobles, -honor);
         FailResults(quest, nobleMoodTreshhold, "[nobleUnhappyLetterLabel]", "[nobleUnhappyLetterText]", nobles, -honor);
+        FailResults(quest, questPart_LodgerLeave.outSignalPsychicRitualTarget, "[lodgerPsychicRitualTargetLabel]", "[lodgerPsychicRitualTargetText]", nobles, -honor);
         quest.SignalPass(() =>
         {
             Action outAction = () => quest.Letter(LetterDefOf.NegativeEvent, questPart_LodgerLeave.outSignalShuttleDestroyed, label: "[ShuttleDestroyedLabel]",

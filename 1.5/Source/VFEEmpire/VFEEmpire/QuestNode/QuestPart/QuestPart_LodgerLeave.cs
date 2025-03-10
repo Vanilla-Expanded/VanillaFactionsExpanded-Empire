@@ -19,7 +19,7 @@ namespace VFEEmpire
             //Thing
             if (signal.tag == inSignalShuttleDestroyed)
             {
-                Find.SignalManager.SendSignal(new Signal(outSignalShuttleDestroyed, signal.args));
+                Find.SignalManager.SendSignal(new Signal(outSignalShuttleDestroyed, GetArgs()));
             }
             //Pawn signals
             if (!signal.args.TryGetArg<Pawn>("SUBJECT", out var pawn) || !pawns.Contains(pawn))
@@ -27,15 +27,20 @@ namespace VFEEmpire
                 return;
             }
 
-            if (signal.tag == inSignalDestroyed && pawnsCantDie.Contains(pawn))
+            if (signal.tag == inSignalDestroyed)
             {
-                pawnsCantDie.Remove(pawn);
-                Find.SignalManager.SendSignal(new Signal(outSignalDestroyed_LeaveColony, signal.args));
+                pawns.Remove(pawn);
+
+                if (pawnsCantDie.Contains(pawn))
+                {
+                    pawnsCantDie.Remove(pawn);
+                    Find.SignalManager.SendSignal(new Signal(outSignalDestroyed_LeaveColony, GetArgs()));
+                }
             }
             if (signal.tag == inSignalArrested)
             {
                 pawns.Remove(pawn);
-                Find.SignalManager.SendSignal(new Signal(outSignalArrested_LeaveColony, signal.args));
+                Find.SignalManager.SendSignal(new Signal(outSignalArrested_LeaveColony, GetArgs()));
             }
             if (signal.tag == inSignalLeftMap)
             {
@@ -51,30 +56,41 @@ namespace VFEEmpire
                     {
                         pawns.Clear();
                         pawnsLeftUnhealthy += downed;
-                        Find.SignalManager.SendSignal(new Signal(this.outSignalLast_LeftMapAllNotHealthy, signal.args));
+                        Find.SignalManager.SendSignal(new Signal(this.outSignalLast_LeftMapAllNotHealthy, GetArgs()));
                     }
                     else
                     {
-                        Find.SignalManager.SendSignal(new Signal(this.outSignalLast_LeftMapAllHealthy, signal.args));
+                        Find.SignalManager.SendSignal(new Signal(this.outSignalLast_LeftMapAllHealthy, GetArgs()));
                     }
                 }
             }
             if (signal.tag == inSignalKidnapped)
             {
                 pawns.Remove(pawn);
-                Find.SignalManager.SendSignal(new Signal(outSignalLast_Kidnapped, signal.args));
+                Find.SignalManager.SendSignal(new Signal(outSignalLast_Kidnapped, GetArgs()));
             }
             if (signal.tag == inSignalBanished)
             {
                 pawns.Remove(pawn);
-                Find.SignalManager.SendSignal(new Signal(outSignalLast_Banished, signal.args));
+                Find.SignalManager.SendSignal(new Signal(outSignalLast_Banished, GetArgs()));
             }
             if (signal.tag == inSignalSurgeryViolation)
             {
-                pawns.Remove(pawn);
-                Find.SignalManager.SendSignal(new Signal(outSignalSurgeryViolation_LeaveColony, signal.args));
+                Find.SignalManager.SendSignal(new Signal(outSignalSurgeryViolation_LeaveColony, GetArgs()));
+            }
+            if (signal.tag == inSignalPsychicRitualTarget)
+            {
+                Find.SignalManager.SendSignal(new Signal(outSignalPsychicRitualTarget, GetArgs()));
+            }
+
+            SignalArgs GetArgs()
+            {
+                var args = signal.args;
+                args.Add(pawns.Count.Named(SignalArgsNames.PawnsAliveCount));
+                return args;
             }
         }
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -84,6 +100,7 @@ namespace VFEEmpire
             Scribe_Values.Look(ref inSignalLeftMap, "inSignalLeftMap");
             Scribe_Values.Look(ref inSignalKidnapped, "inSignalKidnapped");
             Scribe_Values.Look(ref inSignalBanished, "inSignalBanished");
+            Scribe_Values.Look(ref inSignalPsychicRitualTarget, "inSignalPsychicRitualTarget");
             Scribe_Values.Look(ref inSignalShuttleDestroyed, "inSignalShuttleDestroyed");
 
             Scribe_Values.Look(ref outSignalDestroyed_LeaveColony, "outSignalDestroyed_LeaveColony");
@@ -93,6 +110,7 @@ namespace VFEEmpire
             Scribe_Values.Look(ref outSignalLast_Banished, "outSignalLast_Banished");
             Scribe_Values.Look(ref outSignalLast_LeftMapAllHealthy, "outSignalLast_LeftMapAllHealthy");
             Scribe_Values.Look(ref outSignalLast_Kidnapped, "outSignalLast_Kidnapped");
+            Scribe_Values.Look(ref outSignalPsychicRitualTarget, "outSignalPsychicRitualTarget");
             Scribe_Values.Look(ref outSignalShuttleDestroyed, "outSignalShuttleDestroyed");
             Scribe_Values.Look(ref pawnsLeftUnhealthy, "pawnsLeftUnhealthy");
 
@@ -101,6 +119,7 @@ namespace VFEEmpire
             Scribe_Collections.Look(ref pawns, "pawns", LookMode.Reference);            
             Scribe_Collections.Look(ref pawnsCantDie, "pawnsCantDie", LookMode.Reference);
         }
+
         public List<Pawn> pawns;
         public List<Pawn> pawnsCantDie;
         public string inSignalDestroyed;
@@ -109,6 +128,7 @@ namespace VFEEmpire
         public string inSignalLeftMap;
         public string inSignalKidnapped;
         public string inSignalBanished;
+        public string inSignalPsychicRitualTarget;
         public string inSignalShuttleDestroyed;
 
         public string outSignalDestroyed_LeaveColony;
@@ -118,6 +138,7 @@ namespace VFEEmpire
         public string outSignalLast_Banished;
         public string outSignalLast_LeftMapAllHealthy;
         public string outSignalLast_Kidnapped;
+        public string outSignalPsychicRitualTarget;
         public string outSignalShuttleDestroyed;
         public int pawnsLeftUnhealthy;
 
