@@ -12,10 +12,12 @@ public class QuestNode_Root_RoyalParade : QuestNode
     protected override bool TestRunInt(Slate slate)
     {
         var map = QuestGen_Get.GetMap();
-        if(map == null) return false;
-        var leadTitle = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle)
-           .OrderByDescending(x => x?.def?.seniority ?? 0f)
-           .FirstOrDefault(); //Title of highest colony member            
+        if (map == null) return false;
+        var leadTitle = map.mapPawns.FreeColonistsSpawned
+            .Where(x => x.IsFreeNonSlaveColonist && !x.IsQuestLodger())
+            .Select(x => x.royalty.MostSeniorTitle)
+            .OrderByDescending(x => x?.def?.seniority ?? 0f)
+            .FirstOrDefault(); //Title of highest colony member            
         return leadTitle != null && leadTitle.def.defName == "Stellarch" && !Faction.OfPlayer.HostileTo(Faction.OfEmpire);
     }
 
@@ -29,13 +31,15 @@ public class QuestNode_Root_RoyalParade : QuestNode
         var points = slate.Get<float>("points");
 
         var empire = Find.FactionManager.OfEmpire;
-        var stellarch = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.GetCurrentTitleInFaction(empire))
-           .First(x => x?.def.defName == "Stellarch")
-           .pawn;
+        var stellarch = map.mapPawns.FreeColonistsSpawned
+            .Where(x => x.IsFreeNonSlaveColonist && !x.IsQuestLodger())
+            .Select(x => x.royalty.GetCurrentTitleInFaction(empire))
+            .First(x => x?.def.defName == "Stellarch")
+            .pawn;
 
         //Generate Nobles
         var nobleCount = 20;
-        var emperor = WorldComponent_Hierarchy.Instance.TitleHolders.Where(x => x.royalty.MostSeniorTitle.def.defName == "Emperor").First();
+        var emperor = WorldComponent_Hierarchy.Instance.TitleHolders.First(x => x.royalty.MostSeniorTitle.def.defName == "Emperor");
         var nobles = WorldComponent_Hierarchy.Instance.TitleHolders.Where(x => x.Faction != Faction.OfPlayer)
            .Except(emperor)
            .OrderByDescending(x => x.royalty.MostSeniorTitle.def.seniority)
