@@ -32,7 +32,7 @@ namespace VFEEmpire
             int durationTicks = 2 * 60000;             
             var empire = Find.FactionManager.OfEmpire;
             var colonyHost = map.mapPawns.FreeColonistsSpawned.OrderByDescending(x => x.royalty.MostSeniorTitle?.def.seniority ?? 0)
-                .Where(x=>x.royalty.MostSeniorTitle.def.Ext()!=null && !x.royalty.MostSeniorTitle.def.Ext().galleryRequirements.NullOrEmpty()).First();
+                .First(x=>x.royalty.MostSeniorTitle.def.Ext()!=null && !x.royalty.MostSeniorTitle.def.Ext().galleryRequirements.NullOrEmpty());
             var colonyTitle = colonyHost.royalty.MostSeniorTitle.def;//Title of highest colony member
             var leadTitle = DefDatabase<RoyalTitleDef>.AllDefs.Where(x => x.Ext() != null && !x.Ext().galleryRequirements.NullOrEmpty() && x.seniority <= colonyTitle.seniority).RandomElement();
             //Generate Nobles
@@ -172,6 +172,7 @@ namespace VFEEmpire
             string lodgerSurgeyViolation = QuestGenUtility.HardcodedSignalWithQuestID("ArtExhibit.SurgeryViolation");
             string lodgerLeftMap = QuestGenUtility.HardcodedSignalWithQuestID("ArtExhibit.LeftMap");
             string lodgerBanished = QuestGenUtility.HardcodedSignalWithQuestID("ArtExhibit.Banished");
+            string lodgerPsychicRitualTarget = QuestGenUtility.HardcodedSignalWithQuestID("ArtExhibit.PsychicRitualTarget");
             string shuttleDestroyed = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.Destroyed");
             //All exit fail conditions
             //These apply to all except dying which only applies to nobles
@@ -187,6 +188,7 @@ namespace VFEEmpire
                 inSignalLeftMap = lodgerLeftMap,
                 inSignalShuttleDestroyed = shuttleDestroyed,
                 inSignalSurgeryViolation = lodgerSurgeyViolation,
+                inSignalPsychicRitualTarget = lodgerPsychicRitualTarget,
                 outSignalArrested_LeaveColony = QuestGenUtility.HardcodedSignalWithQuestID("ArtExhibit.Arrested_LeaveColony"),
                 outSignalDestroyed_LeaveColony = QuestGenUtility.HardcodedSignalWithQuestID("ArtExhibit.Destroyed_LeaveColony"),
                 outSignalSurgeryViolation_LeaveColony = QuestGenUtility.HardcodedSignalWithQuestID("ArtExhibit.SurgeryViolation_LeaveColony"),
@@ -194,6 +196,7 @@ namespace VFEEmpire
                 outSignalLast_Banished = QuestGenUtility.HardcodedSignalWithQuestID("ArtExhibit.Banished_LeaveColony"),
                 outSignalLast_LeftMapAllHealthy = QuestGenUtility.HardcodedSignalWithQuestID("ArtExhibit.LeftmapAllHealthy"),
                 outSignalLast_Kidnapped = QuestGenUtility.HardcodedSignalWithQuestID("ArtExhibit.Kidnapped_LeaveColony"),
+                outSignalPsychicRitualTarget = QuestGenUtility.HardcodedSignalWithQuestID("ArtExhibit.PsychicRitualTarget_LeaveColony"),
                 outSignalShuttleDestroyed = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.Destroyed"),
                 faction = empire,
                 mapParent = map.Parent,
@@ -241,6 +244,7 @@ namespace VFEEmpire
             FailResults(quest, questPart_LodgerLeave.outSignalSurgeryViolation_LeaveColony, "[lodgerSurgeryVioLeaveMapLetterLabel]", "[lodgerSurgeryVioLeaveMapLetterText]", nobles);
             FailResults(quest, questPart_LodgerLeave.outSignalLast_Banished, "[lodgerBanishedLeaveMapLetterLabel]", "[lodgerBanishedLeaveMapLetterText]", nobles);
             FailResults(quest, questPart_LodgerLeave.outSignalLast_Kidnapped, "[lodgerKidnappedLeaveMapLetterLabel]", "[lodgerKidnappedLeaveMapLetterText]", nobles);
+            FailResults(quest, questPart_LodgerLeave.outSignalPsychicRitualTarget, "[lodgerPsychicRitualTargetLabel]", "[lodgerPsychicRitualTargetText]", nobles);
             quest.SignalPass(() =>
             {
                 Action outAction = () => quest.Letter(LetterDefOf.NegativeEvent, questPart_LodgerLeave.outSignalShuttleDestroyed, label: "[ShuttleDestroyedLabel]", text: "[ShuttleDestroyedText]");

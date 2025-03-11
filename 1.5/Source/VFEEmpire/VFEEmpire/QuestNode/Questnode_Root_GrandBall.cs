@@ -32,7 +32,7 @@ namespace VFEEmpire
             int durationTicks = 2 * 60000;             
             var empire = Find.FactionManager.OfEmpire;
             var colonyHost = map.mapPawns.FreeColonistsSpawned.OrderByDescending(x => x.royalty.MostSeniorTitle?.def.seniority ?? 0)
-                .Where(x=>x.royalty.MostSeniorTitle.def.Ext()!=null && !x.royalty.MostSeniorTitle.def.Ext().ballroomRequirements.NullOrEmpty()).First();
+                .First(x=>x.royalty.MostSeniorTitle.def.Ext()!=null && !x.royalty.MostSeniorTitle.def.Ext().ballroomRequirements.NullOrEmpty());
             var colonyTitle = colonyHost.royalty.MostSeniorTitle.def;//Title of highest colony member
             var leadTitle = DefDatabase<RoyalTitleDef>.AllDefs.Where(x => x.Ext() != null && !x.Ext().ballroomRequirements.NullOrEmpty() && x.seniority <= colonyTitle.seniority).RandomElement();
             //Generate Nobles
@@ -173,6 +173,7 @@ namespace VFEEmpire
             string lodgerSurgeyViolation = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.SurgeryViolation");
             string lodgerLeftMap = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.LeftMap");
             string lodgerBanished = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.Banished");
+            string lodgerPsychicRitualTarget = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.PsychicRitualTarget");
             string shuttleDestroyed = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.Destroyed");
             //All exit fail conditions
             //These apply to all except dying which only applies to nobles
@@ -188,6 +189,7 @@ namespace VFEEmpire
                 inSignalLeftMap = lodgerLeftMap,
                 inSignalShuttleDestroyed = shuttleDestroyed,
                 inSignalSurgeryViolation = lodgerSurgeyViolation,
+                inSignalPsychicRitualTarget = lodgerPsychicRitualTarget,
                 outSignalArrested_LeaveColony = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.Arrested_LeaveColony"),
                 outSignalDestroyed_LeaveColony = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.Destroyed_LeaveColony"),
                 outSignalSurgeryViolation_LeaveColony = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.SurgeryViolation_LeaveColony"),
@@ -195,6 +197,7 @@ namespace VFEEmpire
                 outSignalLast_Banished = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.Banished_LeaveColony"),
                 outSignalLast_LeftMapAllHealthy = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.LeftmapAllHealthy"),
                 outSignalLast_Kidnapped = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.Kidnapped_LeaveColony"),
+                outSignalPsychicRitualTarget = QuestGenUtility.HardcodedSignalWithQuestID("GrandBall.PsychicRitualTarget_LeaveColony"),
                 outSignalShuttleDestroyed = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.Destroyed"),
                 faction = empire,
                 mapParent = map.Parent,
@@ -244,6 +247,7 @@ namespace VFEEmpire
             FailResults(quest, questPart_LodgerLeave.outSignalSurgeryViolation_LeaveColony, "[lodgerSurgeryVioLeaveMapLetterLabel]", "[lodgerSurgeryVioLeaveMapLetterText]", nobles);
             FailResults(quest, questPart_LodgerLeave.outSignalLast_Banished, "[lodgerBanishedLeaveMapLetterLabel]", "[lodgerBanishedLeaveMapLetterText]", nobles);
             FailResults(quest, questPart_LodgerLeave.outSignalLast_Kidnapped, "[lodgerKidnappedLeaveMapLetterLabel]", "[lodgerKidnappedLeaveMapLetterText]", nobles);
+            FailResults(quest, questPart_LodgerLeave.outSignalPsychicRitualTarget, "[lodgerPsychicRitualTargetLabel]", "[lodgerPsychicRitualTargetText]", nobles);
             quest.SignalPass(() =>
             {
                 Action outAction = () => quest.Letter(LetterDefOf.NegativeEvent, questPart_LodgerLeave.outSignalShuttleDestroyed, label: "[ShuttleDestroyedLabel]", text: "[ShuttleDestroyedText]");
@@ -268,10 +272,10 @@ namespace VFEEmpire
                 quest.End(QuestEndOutcome.Success,inSignal: pickupSuccess);
             }, pickupSuccess);
             //Set slates for descriptions
-            slate.Set<int>("nobleCount", nobleCount, false);
-            slate.Set<int>("nobleCountLessOne", nobleCount-1, false);
-            slate.Set<int>("lodgerCount", lodgers.Count, false);           
-            slate.Set<int>("questDurationTicks", durationTicks, false);
+            slate.Set("nobleCount", nobleCount, false);
+            slate.Set("nobleCountLessOne", nobleCount-1, false);
+            slate.Set("lodgerCount", lodgers.Count, false);           
+            slate.Set("questDurationTicks", durationTicks, false);
             
 
         }

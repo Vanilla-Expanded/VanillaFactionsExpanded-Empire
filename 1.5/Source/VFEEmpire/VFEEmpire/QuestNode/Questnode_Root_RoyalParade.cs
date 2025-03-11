@@ -155,6 +155,7 @@ public class QuestNode_Root_RoyalParade : QuestNode
         var lodgerSurgeyViolation = QuestGenUtility.HardcodedSignalWithQuestID("Parade.SurgeryViolation");
         var lodgerLeftMap = QuestGenUtility.HardcodedSignalWithQuestID("Parade.LeftMap");
         var lodgerBanished = QuestGenUtility.HardcodedSignalWithQuestID("Parade.Banished");
+        var lodgerPsychicRitualTarget = QuestGenUtility.HardcodedSignalWithQuestID("Parade.PsychicRitualTarget");
         var shuttleDestroyed = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.Destroyed");
         //These apply to all except dying which only applies to nobles
         var questPart_LodgerLeave = new QuestPart_LodgerLeave
@@ -169,12 +170,14 @@ public class QuestNode_Root_RoyalParade : QuestNode
             inSignalLeftMap = lodgerLeftMap,
             inSignalShuttleDestroyed = shuttleDestroyed,
             inSignalSurgeryViolation = lodgerSurgeyViolation,
+            inSignalPsychicRitualTarget = lodgerPsychicRitualTarget,
             outSignalArrested_LeaveColony = QuestGenUtility.HardcodedSignalWithQuestID("Parade.Arrested_LeaveColony"),
             outSignalDestroyed_LeaveColony = QuestGenUtility.HardcodedSignalWithQuestID("Parade.Destroyed_LeaveColony"),
             outSignalSurgeryViolation_LeaveColony = QuestGenUtility.HardcodedSignalWithQuestID("Parade.SurgeryViolation_LeaveColony"),
             outSignalLast_Banished = QuestGenUtility.HardcodedSignalWithQuestID("Parade.Banished_LeaveColony"),
             outSignalLast_LeftMapAllHealthy = QuestGenUtility.HardcodedSignalWithQuestID("Parade.LeftmapAllHealthy"),
             outSignalLast_Kidnapped = QuestGenUtility.HardcodedSignalWithQuestID("Parade.Kidnapped_LeaveColony"),
+            outSignalPsychicRitualTarget = QuestGenUtility.HardcodedSignalWithQuestID("Parade.PsychicRitualTarget_LeaveColony"),
             outSignalShuttleDestroyed = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.Destroyed"),
             faction = empire,
             mapParent = map.Parent,
@@ -194,6 +197,7 @@ public class QuestNode_Root_RoyalParade : QuestNode
         FailResults(quest, questPart_LodgerLeave.outSignalLast_Banished, "[lodgerBanishedLeaveMapLetterLabel]", "[lodgerBanishedLeaveMapLetterText]", nobles);
         FailResults(quest, questPart_LodgerLeave.outSignalLast_Kidnapped, "[lodgerKidnappedLeaveMapLetterLabel]", "[lodgerKidnappedLeaveMapLetterText]",
             nobles);
+        FailResults(quest, questPart_LodgerLeave.outSignalPsychicRitualTarget, "[lodgerPsychicRitualTargetLabel]", "[lodgerPsychicRitualTargetText]", nobles);
         //Stellarch Fails
         var questPart_StellarchFails = new QuestPart_StellarchFails
         {
