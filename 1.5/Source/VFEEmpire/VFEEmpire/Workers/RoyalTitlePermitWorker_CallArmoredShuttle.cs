@@ -4,7 +4,7 @@ using Verse;
 
 namespace VFEEmpire;
 
-public class RoyalTitlePermitWorker_CallArmoredShuttle : RoyalTitlePermitWorker_Call
+public class RoyalTitlePermitWorker_CallArmoredShuttle : RoyalTitlePermitWorker_CallIgnoreTemperature
 {
     public override bool ValidateTarget(LocalTargetInfo target, bool showMessages = true)
     {

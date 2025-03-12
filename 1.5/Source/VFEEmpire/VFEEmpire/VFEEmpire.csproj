@@ -189,6 +189,7 @@
     <Compile Include="Rituals\Outcomes\OutcomeComp\RitualOutcomeComp_ThroneForRole.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_BestowTitle.cs" />
     <Compile Include="Rituals\Positions\RItualPosition_InFrontThrone.cs" />
+    <Compile Include="Workers\RoyalTitlePermitWorker_CallIgnoreTemperature.cs" />
     <Compile Include="Workers\RoyalTitlePermitWorker_CallTechfriar.cs" />
     <Compile Include="Workers\ThoughtWorker_BadVisit.cs" />
     <Compile Include="TitheTypeDef.cs" />

@@ -7,7 +7,7 @@ using Verse.AI.Group;
 
 namespace VFEEmpire;
 
-public class RoyalTitlePermitWorker_DropBuildings : RoyalTitlePermitWorker_Call
+public class RoyalTitlePermitWorker_DropBuildings : RoyalTitlePermitWorker_CallIgnoreTemperature
 {
     public override void Call(IntVec3 cell)
     {
@@ -25,7 +25,7 @@ public class RoyalTitlePermitWorker_DropBuildings : RoyalTitlePermitWorker_Call
     }
 }
 
-public class RoyalTitlePermitWorker_Stone : RoyalTitlePermitWorker_Call
+public class RoyalTitlePermitWorker_Stone : RoyalTitlePermitWorker_CallIgnoreTemperature
 {
     public override void Call(IntVec3 cell)
     {
