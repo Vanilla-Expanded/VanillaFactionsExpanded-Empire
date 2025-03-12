@@ -10,8 +10,11 @@ using VFECore.UItils;
 
 namespace VFEEmpire;
 
+[StaticConstructorOnStartup]
 public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
 {
+    private static readonly Texture2D prisonerIcon = ContentFinder<Texture2D>.Get("UI/Icons/Prisoner");
+
     private readonly HashSet<Pawn> highlight = new();
     private readonly Dictionary<Pawn, float> pawnPos = new();
     private readonly Dictionary<RoyalTitleDef, float> titlePos = new();
@@ -135,14 +138,32 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
                 using (new TextBlock(TextAnchor.MiddleCenter)) Widgets.Label(rect.TakeBottomPart(nameHeight), pawn.NameFullColored);
                 Widgets.DrawWindowBackground(rect);
                 GUI.DrawTexture(rect, PortraitsCache.Get(pawn, rect.size, Rot4.South));
+                Faction faction = null;
                 if (pawn.Faction is { IsPlayer: true })
+                    faction = pawn.Faction;
+                else if (pawn.HostFaction is { IsPlayer: true })
+                    faction = pawn.HostFaction;
+                if (faction != null)
                 {
-                    GUI.color = pawn.Faction.Color;
-                    GUI.DrawTexture(rect.BottomPartPixels(75f).RightPartPixels(75f), pawn.Faction.def.FactionIcon);
+                    GUI.color = faction.Color;
+
+                    GUI.DrawTexture(rect.BottomPartPixels(65f).RightPartPixels(65f), faction.def.FactionIcon);
+
+                    if (pawn.IsSlave)
+                        GUI.DrawTexture(rect.BottomPartPixels(25f).LeftPartPixels(27f).RightPartPixels(25f), GuestUtility.SlaveIcon);
+                    else if (pawn.IsPrisoner)
+                        GUI.DrawTexture(rect.BottomPartPixels(25f).LeftPartPixels(27f).RightPartPixels(25f), prisonerIcon);
+
                     GUI.color = Color.white;
+
+                    if (pawn.MapHeld == Find.CurrentMap && pawn.SpawnedParentOrMe?.Fogged() == false && Widgets.ButtonImage(rect.TopPartPixels(25f).RightPartPixels(27f).LeftPartPixels(25f), TexButton.ShowExpandingIcons))
+                    {
+                        CameraJumper.TryJumpAndSelect(pawn);
+                        Find.MainTabsRoot.EscapeCurrentTab();
+                    }
                 }
 
-                if (!pawn.Faction.IsPlayerSafe() && title.CanInvite() &&
+                if (!pawn.Faction.IsPlayerSafe() && !pawn.Downed && title.CanInvite() &&
                     pawn.IsWorldPawn() && Find.WorldPawns.GetSituation(pawn) != WorldPawnSituation.ReservedByQuest &&
                     VFEE_DefOf.VFEE_NobleVisit.CanRun(35f) &&
                     Widgets.ButtonText(buttonRect, "VFEE.Invite".Translate()))
