@@ -72,12 +72,6 @@ public static class EmpireUtility
         DropPodUtility.DropThingsNear(DropCellFinder.TradeDropSpot(map), map, new[] { stack }, canRoofPunch: false, forbid: false, faction: Faction.OfEmpire);
         Messages.Message("VFEE.GotDrug".Translate(Faction.OfEmpire.Name), MessageTypeDefOf.PositiveEvent);
     }
-
-    public static bool HasEmpireHome(this Pawn pawn)
-    {
-        QuestUtility.GetExtraFactionsFromQuestParts(pawn, tempExtraFactions);
-        return tempExtraFactions.Any(f => f.factionType == ExtraFactionType.HomeFaction && f.faction == Faction.OfEmpire);
-    }
 }
 
 public class FactionExtension_Deserters : DefModExtension

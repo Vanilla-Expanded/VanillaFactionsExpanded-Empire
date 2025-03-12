@@ -22,7 +22,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
     {
         base.Notify_Open();
         EmpireUtility.Notify_ColonistsChanged();
-        WorldComponent_Hierarchy.Instance.RefreshPawns();
+        WorldComponent_Hierarchy.Instance.RefreshPawns(false);
     }
 
     public override void DoLeftBottom(Rect inRect)
