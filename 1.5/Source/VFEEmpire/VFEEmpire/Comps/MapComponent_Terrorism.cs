@@ -23,7 +23,7 @@ public class MapComponent_Terrorism : MapComponent
     public void Notify_LordCreated(Lord lord)
     {
 //        foreach (var group in lord.ownedPawns.GroupBy(p => p.kindDef)) Log.Message($"    {group.Key}: {group.Count()}");
-        if (DefDatabase<TerrorismTypeDef>.AllDefs.Where(def => def.Worker.AppliesTo(lord)).TryRandomElement(out var type))
+        if (Faction.OfEmpire != null && DefDatabase<TerrorismTypeDef>.AllDefs.Where(def => def.Worker.AppliesTo(lord)).TryRandomElement(out var type))
             terrorism.Add(lord, type.MakeLord(lord));
     }
 

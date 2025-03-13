@@ -29,6 +29,11 @@ public class WorldComponent_Hierarchy : WorldComponent
     {
         base.FinalizeInit();
         EmpireUtility.Notify_ColonistsChanged();
+        if (Faction.OfEmpire == null)
+        {
+            Log.Error("[VFEE] Missing Empire faction, there may be bugs.");
+            return;
+        }
         if (initialized) return;
         initialized = true;
         InitializeTitles();
@@ -48,7 +53,7 @@ public class WorldComponent_Hierarchy : WorldComponent
     public override void WorldComponentTick()
     {
         base.WorldComponentTick();
-        if (Find.TickManager.TicksGame % 60000 == 2500) RefreshPawns(true);
+        if (Faction.OfEmpire != null && Find.TickManager.TicksGame % 60000 == 2500) RefreshPawns(true);
     }
 
     private void FillTitles()
@@ -192,6 +197,9 @@ public class WorldComponent_Hierarchy : WorldComponent
     [DebugAction("General", "Regenerate Hierarchy", allowedGameStates = AllowedGameStates.Playing)]
     public static void Regen()
     {
+        if (Faction.OfEmpire == null)
+            return;
+
         foreach (var pawn in Instance.TitleHolders)
         {
             if (pawn is { IsColonist: false, Dead: false, Discarded: false, SpawnedOrAnyParentSpawned: false } && Find.WorldPawns.Contains(pawn))
@@ -214,6 +222,9 @@ public class WorldComponent_Hierarchy : WorldComponent
     [DebugAction("General", "Log Hierarchy", allowedGameStates = AllowedGameStates.Playing)]
     public static void DebugLog()
     {
+        if (Faction.OfEmpire == null)
+            return;
+
         var empire = Faction.OfEmpire;
         Log.Message("-------- Hierarchy --------");
         foreach (var title in Enumerable.Reverse(Titles))
