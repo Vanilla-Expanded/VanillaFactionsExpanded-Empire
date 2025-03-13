@@ -68,6 +68,7 @@ public class MainTabWindow_Royalty : MainTabWindow
         if (curTab.hasSearch) SearchWidget.OnGUI(leftRect.TakeBottomPart(30f), DoSearch);
 
         if (Prefs.DevMode) Widgets.CheckboxLabeled(leftRect.TakeBottomPart(30f), "VFEE.DevMode".Translate(), ref DevMode);
+        else DevMode = false;
 
         if (curTab.needsCharacter) DoCharacterSelection(ref leftRect);
         curTab.Worker.DoLeftBottom(leftRect);
