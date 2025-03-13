@@ -25,6 +25,7 @@
 	<VFEE.ArtExhibit.Label>Art Exhibit</VFEE.ArtExhibit.Label>
 	<VFEE.ArtExhibit.Leave.label>Leave exhibit</VFEE.ArtExhibit.Leave.label>
 	<VFEE.ArtExhibit.Leave.Desc>This pawn will leave the exhibit, they will not be able to rejoin the festivities later</VFEE.ArtExhibit.Leave.Desc>
+	<VFEE.ArtExhibit.Leave.Disabled>host cannot leave the exhibit</VFEE.ArtExhibit.Leave.Disabled>
 	<VFEE.ArtExhibit.Cancel.Label>Cancel Exhibit</VFEE.ArtExhibit.Cancel.Label>
 	<VFEE.ArtExhibit.Cancel.Desc>Cancel the art exhibit sending everyone home and failing the quest</VFEE.ArtExhibit.Cancel.Desc>
 	<VFEE.ArtExhibit.Cancel.Confirm>There will be no opportunity to restart this ritual, your guests will go home unappy and the quest will be failed.</VFEE.ArtExhibit.Cancel.Confirm>
@@ -36,6 +37,7 @@
 	<VFEE.Parade.Label>Parade</VFEE.Parade.Label>
 	<VFEE.Parade.Leave.label>Leave Parade</VFEE.Parade.Leave.label>
 	<VFEE.Parade.Leave.Desc>This pawn will leave the Parade, they will not be able to rejoin the festivities later</VFEE.Parade.Leave.Desc>
+	<VFEE.Parade.Leave.Disabled>the stellarch cannot leave the Parade</VFEE.Parade.Leave.Disabled>
 	<VFEE.Parade.Cancel.Label>Cancel Parade</VFEE.Parade.Cancel.Label>
 	<VFEE.Parade.Cancel.Desc>Cancel the parade sending everyone home and failing the quest</VFEE.Parade.Cancel.Desc>
 	<VFEE.Parade.Cancel.Confirm>There will be no opportunity to restart this ritual, your guests will go home unhappy and the quest will be failed.</VFEE.Parade.Cancel.Confirm>
