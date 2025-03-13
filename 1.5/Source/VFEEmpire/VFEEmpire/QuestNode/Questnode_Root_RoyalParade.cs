@@ -116,7 +116,7 @@ public class QuestNode_Root_RoyalParade : QuestNode
         quest.Signal(raidSignal, () =>
         {
             var arriveCell = IntVec3.Invalid;
-            var deserters = Find.FactionManager.FirstFactionOfDef(InternalDefOf.VFEE_Deserters);
+            var deserters = GameComponent_Empire.Instance.Deserter;
             RCellFinder.TryFindRandomPawnEntryCell(out arriveCell, map, CellFinder.EdgeRoadChance_Hostile);
             var raiders = PawnGroupMakerUtility.GeneratePawns(new PawnGroupMakerParms
                 {

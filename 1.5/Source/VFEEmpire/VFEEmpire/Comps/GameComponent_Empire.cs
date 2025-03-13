@@ -21,14 +21,7 @@ public class GameComponent_Empire : GameComponent
     private List<int> valuesList;
     public GameComponent_Empire(Game game) => Instance = this;
 
-    public Faction Deserter
-    {
-        get
-        {
-            if (deserter == null) deserter = Find.FactionManager.FirstFactionOfDef(InternalDefOf.VFEE_Deserters);
-            return deserter;
-        }
-    }
+    public Faction Deserter => deserter ??= Find.FactionManager.FirstFactionOfDef(InternalDefOf.VFEE_Deserters);
 
 
     //For tracking if deserters should be hostile

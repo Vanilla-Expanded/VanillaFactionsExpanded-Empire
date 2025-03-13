@@ -349,7 +349,7 @@ public class LordJob_Parade : LordJob_Ritual
     private void SpawnBomb()
     {
         var bombsToPlace = 4;
-        var deserter = Find.FactionManager.FirstFactionOfDef(InternalDefOf.VFEE_Deserters);
+        var deserter = GameComponent_Empire.Instance.Deserter;
         for (var i = stage; i < stops.Count; i++)
         {
             if (CellFinder.TryFindRandomCellNear(stops[i], Map, 10, c => { return c.GetRoom(Map) == stops[i].GetRoom(Map) && c.GetEdifice(Map) == null; },

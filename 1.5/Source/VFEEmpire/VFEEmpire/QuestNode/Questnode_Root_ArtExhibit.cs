@@ -83,7 +83,7 @@ namespace VFEEmpire
                     return totalHonor;
                 });
             float threatChance = Mathf.Clamp((guestWeight + colonistWeight) / 1000f, 0.25f, 1f);//25% minimum chance
-            Faction deserters = Find.FactionManager.FirstFactionOfDef(InternalDefOf.VFEE_Deserters);
+            Faction deserters = GameComponent_Empire.Instance.Deserter;
             IntVec3 arriveCell = IntVec3.Invalid;
 
             bool raid = Rand.Chance(threatChance) && deserters != null && deserters.HostileTo(Faction.OfPlayer) && RCellFinder.TryFindRandomPawnEntryCell(out arriveCell,map,CellFinder.EdgeRoadChance_Hostile);

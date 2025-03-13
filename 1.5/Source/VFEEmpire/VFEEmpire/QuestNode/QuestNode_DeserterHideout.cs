@@ -70,7 +70,7 @@ public class QuestNode_Root_DeserterHideout : QuestNode
         var alliesCount = Mathf.RoundToInt(catapract.Evaluate(quest.points));
         quest.points = pointAdjust.Evaluate(quest.points);
         var points = quest.points;
-        var deserters = Find.FactionManager.FirstFactionOfDef(InternalDefOf.VFEE_Deserters);
+        var deserters = GameComponent_Empire.Instance.Deserter;
         var part_involved = new QuestPart_InvolvedFactions
         {
             factions = new() { Faction.OfEmpire, deserters }
@@ -224,7 +224,7 @@ public class QuestNode_Root_DeserterHideout : QuestNode
     {
         var points = slate.Get<float>("points");
         points = pointAdjust.Evaluate(points);
-        var deserter = Find.FactionManager.FirstFactionOfDef(InternalDefOf.VFEE_Deserters);
+        var deserter = GameComponent_Empire.Instance.Deserter;
         var map = QuestGen_Get.GetMap();
         var pawnCount = GetRequiredPawnCount(map.mapPawns.FreeColonists.Count, points);
         return pawnCount != -1 && TileFinder.TryFindNewSiteTile(out var tile) && deserter != null && deserter.HostileTo(Faction.OfPlayer);
