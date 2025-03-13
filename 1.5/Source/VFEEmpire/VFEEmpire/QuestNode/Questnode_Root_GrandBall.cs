@@ -31,8 +31,8 @@ namespace VFEEmpire
             //shuttle stays for 2 days max but ball will need to be started within 24 hours of accept
             int durationTicks = 2 * 60000;             
             var empire = Find.FactionManager.OfEmpire;
-            var colonyHost = map.mapPawns.FreeColonistsSpawned.OrderByDescending(x => x.royalty.MostSeniorTitle?.def.seniority ?? 0)
-                .First(x=>x.royalty.MostSeniorTitle.def.Ext()!=null && !x.royalty.MostSeniorTitle.def.Ext().ballroomRequirements.NullOrEmpty());
+            var colonyHost = map.mapPawns.FreeColonistsSpawned.OrderByDescending(x => x.royalty.MostSeniorTitle.def.seniority)
+                .First(x => x.royalty.MostSeniorTitle?.def.Ext() != null && !x.royalty.MostSeniorTitle.def.Ext().ballroomRequirements.NullOrEmpty());
             var colonyTitle = colonyHost.royalty.MostSeniorTitle.def;//Title of highest colony member
             var leadTitle = DefDatabase<RoyalTitleDef>.AllDefs.Where(x => x.Ext() != null && !x.Ext().ballroomRequirements.NullOrEmpty() && x.seniority <= colonyTitle.seniority).RandomElement();
             //Generate Nobles
