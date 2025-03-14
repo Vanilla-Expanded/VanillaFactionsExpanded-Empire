@@ -115,38 +115,44 @@ public class QuestNode_Root_RoyalParade : QuestNode
         //raid
         quest.Signal(raidSignal, () =>
         {
-            var arriveCell = IntVec3.Invalid;
+            static bool HostileToPlayerAndEmpire(Faction f) => f.HostileTo(Faction.OfPlayer) && f.HostileTo(Faction.OfEmpire);
             var deserters = GameComponent_Empire.Instance.Deserter;
-            RCellFinder.TryFindRandomPawnEntryCell(out arriveCell, map, CellFinder.EdgeRoadChance_Hostile);
-            var raiders = PawnGroupMakerUtility.GeneratePawns(new PawnGroupMakerParms
+            var raidFaction = deserters
+                ?? Find.FactionManager.GetFactions(allowNonHumanlike: false, minTechLevel: TechLevel.Industrial).Where(HostileToPlayerAndEmpire).RandomElementWithFallback()
+                ?? Find.FactionManager.GetFactions(allowNonHumanlike: false).Where(HostileToPlayerAndEmpire).RandomElementWithFallback();
+            if (raidFaction != null)
+            {
+                RCellFinder.TryFindRandomPawnEntryCell(out var arriveCell, map, CellFinder.EdgeRoadChance_Hostile);
+                var raiders = PawnGroupMakerUtility.GeneratePawns(new PawnGroupMakerParms
+                    {
+                        faction = raidFaction,
+                        groupKind = PawnGroupKindDefOf.Combat,
+                        points = points > 150 ? points : 150,
+                        tile = map.Tile
+                    })
+                   .ToList();
+                foreach (var raider in raiders)
                 {
-                    faction = deserters,
-                    groupKind = PawnGroupKindDefOf.Combat,
-                    points = points > 150 ? points : 150,
-                    tile = map.Tile
-                })
-               .ToList();
-            foreach (var raider in raiders)
-            {
-                Find.WorldPawns.PassToWorld(raider);
-                QuestGen.AddToGeneratedPawns(raider);
-            }
+                    Find.WorldPawns.PassToWorld(raider);
+                    QuestGen.AddToGeneratedPawns(raider);
+                }
 
-            var raidArrives = new QuestPart_PawnsArrive
-            {
-                pawns = raiders,
-                arrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn,
-                joinPlayer = false,
-                mapParent = map.Parent,
-                spawnNear = arriveCell,
-                inSignal = QuestGen.slate.Get<string>("inSignal"),
-                sendStandardLetter = false
-            };
-            //Targets are nobles, shuttle, and ballrooms
-            quest.AddPart(raidArrives);
-            quest.AssaultThings(map.Parent, raiders, deserters, Gen.YieldSingle(stellarch));
-            quest.Letter(LetterDefOf.ThreatBig, relatedFaction: deserters, lookTargets: raiders, label: "[raidArrivedLetterLabel]",
-                text: "[raidArrivedLetterText]");
+                var raidArrives = new QuestPart_PawnsArrive
+                {
+                    pawns = raiders,
+                    arrivalMode = PawnsArrivalModeDefOf.EdgeWalkIn,
+                    joinPlayer = false,
+                    mapParent = map.Parent,
+                    spawnNear = arriveCell,
+                    inSignal = QuestGen.slate.Get<string>("inSignal"),
+                    sendStandardLetter = false
+                };
+                //Targets are nobles, shuttle, and ballrooms
+                quest.AddPart(raidArrives);
+                quest.AssaultThings(map.Parent, raiders, raidFaction, Gen.YieldSingle(stellarch));
+                quest.Letter(LetterDefOf.ThreatBig, relatedFaction: deserters, lookTargets: raiders, label: "[raidArrivedLetterLabel]",
+                    text: "[raidArrivedLetterText]");
+            }
         });
         //All exit fail conditions
         var lodgerArrestedSignal = QuestGenUtility.HardcodedSignalWithQuestID("Parade.Arrested");
