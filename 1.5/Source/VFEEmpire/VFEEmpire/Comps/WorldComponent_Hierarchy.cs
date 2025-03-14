@@ -29,11 +29,12 @@ public class WorldComponent_Hierarchy : WorldComponent
     {
         base.FinalizeInit();
         EmpireUtility.Notify_ColonistsChanged();
-        if (Faction.OfEmpire == null)
-        {
-            Log.Error("[VFEE] Missing Empire faction, there may be bugs.");
+
+        // If no empire, skip the startup.
+        var empireNull = Faction.OfEmpire == null;
+        if (empireNull)
             return;
-        }
+
         if (initialized) return;
         initialized = true;
         InitializeTitles();
