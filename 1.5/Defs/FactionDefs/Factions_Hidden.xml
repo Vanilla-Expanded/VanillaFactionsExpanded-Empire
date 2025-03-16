@@ -87,6 +87,22 @@
     <allowedArrivalTemperatureRange>-40~45</allowedArrivalTemperatureRange>
     <maxConfigurableAtWorldCreation>1</maxConfigurableAtWorldCreation>
     <configurationListOrderPriority>81</configurationListOrderPriority>
+    
+    <modExtensions>
+      <li Class="VFECore.FactionDefExtension" MayRequire="OskarPotocki.VFE.Deserters">
+        <forcedFactionData>
+          <!-- World gen -->
+          <requiredFactionCountAtWorldGeneration>1</requiredFactionCountAtWorldGeneration>
+          <preventRemovalAtWorldGeneration>true</preventRemovalAtWorldGeneration>
+          <factionDisabledAtWorldGenerationMessage>VFEE.ForcedFaction.Deserters.CannotDisable</factionDisabledAtWorldGenerationMessage>
+
+          <!-- Gameplay -->
+          <requiredFactionCountDuringGameplay>1</requiredFactionCountDuringGameplay>
+          <forceAddFactionIfMissing>true</forceAddFactionIfMissing>
+          <factionDiscoverySpecialMessage>VFEE.ForcedFaction.Deserters.FactionDiscoveryMessage</factionDiscoverySpecialMessage>
+        </forcedFactionData>
+      </li>
+    </modExtensions>
   </FactionDef>
   
   <ThingSetMakerDef>

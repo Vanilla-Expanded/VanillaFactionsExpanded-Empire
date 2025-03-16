@@ -2,19 +2,45 @@
 <Patch>
 
     <Operation Class="PatchOperationAdd">
-        <xpath>/Defs/FactionDef[defName="Empire"]/permanentEnemyToEveryoneExcept</xpath>
+        <xpath>Defs/FactionDef[defName="Empire"]/permanentEnemyToEveryoneExcept</xpath>
             <value>
                 <li>VFEE_NewFamily</li>
             </value>
     </Operation>
 
     <Operation Class="PatchOperationAddModExtension">
-        <xpath>/Defs/FactionDef[defName="Empire"]</xpath>
+        <xpath>Defs/FactionDef[defName="Empire"]</xpath>
             <value>
                 <li Class="VFEEmpire.FactionExtension_Deserters">
                     <canSendDeserters>false</canSendDeserters>
                 </li>
             </value>
+    </Operation>
+
+    <!-- Add FactionDefExtension if missing. -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/FactionDef[defName="Empire"]</xpath>
+        <value>
+            <li Class="VFECore.FactionDefExtension"/>
+        </value>
+    </Operation>
+
+    <!-- Add forced faction data. Do it separately from DefModExtension in case something else is adding it to Empire. -->
+    <!-- Also assume that the other mod is not doing anything with forcedFactionData, for simplicity’s sake. -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/FactionDef[defName="Empire"]/modExtensions/li[@Class="VFECore.FactionDefExtension"]</xpath>
+        <value>
+            <forcedFactionData>
+                <!-- World gen -->
+                <requiredFactionCountAtWorldGeneration>1</requiredFactionCountAtWorldGeneration>
+                <preventRemovalAtWorldGeneration>true</preventRemovalAtWorldGeneration>
+                <factionDisabledAtWorldGenerationMessage>VFEE.ForcedFaction.CannotDisable</factionDisabledAtWorldGenerationMessage>
+
+                <!-- Gameplay -->
+                <requiredFactionCountDuringGameplay>1</requiredFactionCountDuringGameplay>
+                <forcePlayerToAddFactionIfMissing>true</forcePlayerToAddFactionIfMissing>
+            </forcedFactionData>
+        </value>
     </Operation>
 
 </Patch>
