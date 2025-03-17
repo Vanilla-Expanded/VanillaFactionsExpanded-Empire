@@ -226,6 +226,7 @@ public class QuestNode_Root_DeserterHideout : QuestNode
         points = pointAdjust.Evaluate(points);
         var deserter = GameComponent_Empire.Instance.Deserter;
         var map = QuestGen_Get.GetMap();
+        if (map == null) return false;
         var pawnCount = GetRequiredPawnCount(map.mapPawns.FreeColonists.Count, points);
         return pawnCount != -1 && TileFinder.TryFindNewSiteTile(out var tile) && deserter != null && deserter.HostileTo(Faction.OfPlayer);
     }

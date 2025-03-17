@@ -36,7 +36,7 @@ namespace VFEEmpire
         }
         protected override bool TestRunInt(Slate slate)
         {
-            return slate.Get<Pawn>("rewardGiver", null, false) != null && slate.TryGet<FloatRange>("marketValueRange", out var floatRange, false);
+            return slate.Get<Pawn>("rewardGiver", null, false) != null && slate.TryGet<FloatRange>("marketValueRange", out var floatRange, false) && QuestGen_Get.GetMap() != null;
         }
     }
 }

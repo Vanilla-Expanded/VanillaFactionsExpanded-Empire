@@ -15,6 +15,8 @@ namespace VFEEmpire
         protected override bool TestRunInt(Slate slate)
         {
             Map map = QuestGen_Get.GetMap(false, null);
+            if (map == null) return false;
+
             bool title = map.mapPawns.FreeColonistsSpawned.Select(x => x.royalty.MostSeniorTitle).Any(x => x?.def.Ext() != null && !x.def.Ext().ballroomRequirements.NullOrEmpty());
             return title && !Faction.OfEmpire.HostileTo(Faction.OfPlayer) && map.RoyaltyTracker().Ballrooms.Any(); 
         }
