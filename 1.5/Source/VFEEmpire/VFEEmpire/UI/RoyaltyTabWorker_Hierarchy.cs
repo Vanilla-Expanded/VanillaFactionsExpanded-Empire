@@ -52,7 +52,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
         var i = direction switch
         {
             ScrollDirection.Next => xs.FindIndex(x => x > scrollPos.x + 10f),
-            ScrollDirection.Previous => xs.FindIndex(x => x >= scrollPos.x) - 1,
+            ScrollDirection.Previous => xs.FindLastIndex(x => x < scrollPos.x - 10f),
             _ => throw new ArgumentOutOfRangeException(nameof(direction), direction, null)
         };
         if (i >= 0 && i < xs.Count)
