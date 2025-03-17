@@ -60,19 +60,22 @@ public class RitualOutcomeEffectWorker_RoyalAddress : RitualOutcomeEffectWorker_
 
         //Organizer honor
         var honor = jobRitual.assignments.AssignedPawns("royals").Count();
-        honor *= outcome.positivityIndex; //Index is 2, 1, -1 ,-2 so dont need anything extra
+        honor *= outcome.positivityIndex; //Index is 2, 1, -1 ,-2 so don't need anything extra
         organizer.royalty.ChangeFavor(empire, honor);
 
         var text = "VFEEmpire.RoyalAddress.Finished".Translate(organizer.Named("ORGANIZER")).CapitalizeFirst() + " " + ("Letter" + memory.defName).Translate()
                  + "\n\n" + OutcomeQualityBreakdownDesc(quality, progress, jobRitual);
-        //Adding honor gaiend teext
+        //Adding honor gained text
         if (outcome.Positive)
         {
-            text += "\n\n" + "VFEEmpire.RoyalAddress.OrganizerGained".Translate(organizer.Named("PAWN"), honor);
-            text += "\n\n" + "VFEEmpire.RoyalAddress.TitledGained".Translate();
+            text += "\n\n" + "VFEEmpire.RoyalAddress.OrganizerGained".Translate(organizer.Named("PAWN"), honor.Named(SignalArgsNames.Count));
+
+            var nextTitle = organizer.royalty.GetCurrentTitle(empire).GetNextTitle(empire);
+            if (nextTitle != null && organizer.royalty.GetFavor(empire) >= nextTitle.favorCost)
+                text += "\n\n" + "VFEEmpire.RoyalAddress.TitledGained".Translate(organizer.Named("PAWN"), nextTitle.GetLabelFor(organizer).Named("TITLE"), empire.Name.Named(SignalArgsNames.Faction));
         }
         else
-            text += "\n\n" + "VFEEmpire.RoyalAddress.OrganizerLost".Translate(organizer.Named("PAWN"), honor);
+            text += "\n\n" + "VFEEmpire.RoyalAddress.OrganizerLost".Translate(organizer.Named("PAWN"), honor.Named(SignalArgsNames.Count));
 
         //This might need to have wording changed as all from regular speech. Leaving as is for now though
         if (!conversionText.NullOrEmpty())
