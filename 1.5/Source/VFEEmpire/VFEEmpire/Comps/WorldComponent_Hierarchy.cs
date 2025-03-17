@@ -95,8 +95,8 @@ public class WorldComponent_Hierarchy : WorldComponent
         CleanupTitleHolders(isDailyCheck);
         FillTitles();
         var empire = Faction.OfEmpire;
-        TitleHolders.AddRange(EmpireUtility.AllColonistsWithTitle().Where(p => p.royalty.GetCurrentTitle(empire).seniority > 0));
-        TitleHolders.SortBy(p => p.royalty.GetCurrentTitle(empire).seniority, p => p.royalty.GetFavor(empire), p => p.Name.ToStringFull);
+        TitleHolders.AddRange(EmpireUtility.AllColonistsWithTitle().Where(p => p.royalty.GetCurrentTitleInFaction(empire).def.seniority > 0));
+        TitleHolders.SortBy(p => p.royalty.GetCurrentTitleInFaction(empire).def.seniority, p => p.royalty.GetFavor(empire), p => p.Name.ToStringFull);
     }
 
     private void MakePawnFor(RoyalTitleDef title)

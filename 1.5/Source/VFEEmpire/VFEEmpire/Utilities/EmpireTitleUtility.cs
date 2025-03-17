@@ -65,7 +65,7 @@ public static class EmpireTitleUtility
     {
         faction ??= Faction.OfEmpire;
         var totalHonor = pawn.royalty.GetFavor(faction);
-        var title = pawn.royalty.GetCurrentTitle(faction);
+        var title = pawn.royalty.GetCurrentTitleInFaction(faction).def;
         if (!FavorCache.TryGetValue((title, faction), out var favor))
         {
             favor = 0;

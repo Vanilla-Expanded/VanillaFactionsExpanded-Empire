@@ -44,7 +44,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
     {
         var xs = (mode switch
             {
-                ScrollMode.Colonist => pawnPos.Where(kv => kv.Key.Faction.IsPlayer).Select(kv => kv.Value),
+                ScrollMode.Colonist => pawnPos.Where(kv => kv.Key.Faction?.IsPlayer == true).Select(kv => kv.Value),
                 ScrollMode.Title => titlePos.Select(kv => kv.Value),
                 _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
             }).OrderBy(x => x)
@@ -87,7 +87,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
                 GUI.color = Color.white;
             }
 
-            var title = pawn.royalty.GetCurrentTitle(Faction.OfEmpire);
+            var title = pawn.royalty.GetCurrentTitleInFaction(Faction.OfEmpire).def;
             var titleExt = title.GetModExtension<RoyalTitleDefExtension>();
             if (curTitle != title)
             {
