@@ -137,7 +137,7 @@ public class WorldComponent_Hierarchy : WorldComponent
             if (removalHandling == PawnRemovalHandling.RemoveAndCleanup)
             {
                 // Get rid of the pawn titles (let someone else inherit them)
-                if (pawn.royalty.GetCurrentTitle(empire) is { } title)
+                if (!PawnUtility.EverBeenColonistOrTameAnimal(pawn) && pawn.royalty.GetCurrentTitle(empire) is { } title)
                 {
                     pawn.royalty.SetTitle(empire, null, false);
                     pawn.royalty.ResetPermitsAndPoints(empire, title);
@@ -172,15 +172,21 @@ public class WorldComponent_Hierarchy : WorldComponent
         if (pawn.royalty?.HasAnyTitleIn(Faction.OfEmpire) != true)
             return !isColonist && !pawn.SpawnedOrAnyParentSpawned ? PawnRemovalHandling.RemoveAndCleanup : PawnRemovalHandling.RemoveOnly;
         // Checks only if not spawned, not visitor (guest/slave), not reserver for quest
-        if (isDailyCheck && !isColonist && !pawn.SpawnedOrAnyParentSpawned && !QuestUtility.IsReservedByQuestOrQuestBeingGenerated(pawn))
+        if (!isColonist && !pawn.SpawnedOrAnyParentSpawned && !QuestUtility.IsReservedByQuestOrQuestBeingGenerated(pawn))
         {
-            // Remove downed pawns who can't be tended further
-            if (pawn.health is { Downed: true } && Rand.Chance(0.1f))
-                return PawnRemovalHandling.RemoveAndCleanup;
-            // Remove all pawns that are too old and will likely
-            if (pawn.ageTracker != null &&
-                pawn.ageTracker.AgeBiologicalYearsFloat / pawn.GetStatValue(StatDefOf.LifespanFactor) >= pawn.RaceProps.lifeExpectancy + Rand.RangeSeeded(-5f, 5f, pawn.thingIDNumber))
-                return PawnRemovalHandling.RemoveAndCleanup;
+            // Get rid of all pawns who ran wild
+            if (pawn.IsWildMan())
+                return PawnRemovalHandling.RemoveOnly;
+            if (isDailyCheck)
+            {
+                // Remove downed pawns who can't be tended further
+                if (pawn.health is { Downed: true } && Rand.Chance(0.1f))
+                    return PawnRemovalHandling.RemoveAndCleanup;
+                // Remove all pawns that are too old and will likely
+                if (pawn.ageTracker != null &&
+                    pawn.ageTracker.AgeBiologicalYearsFloat / pawn.GetStatValue(StatDefOf.LifespanFactor) >= pawn.RaceProps.lifeExpectancy + Rand.RangeSeeded(-5f, 5f, pawn.thingIDNumber))
+                    return PawnRemovalHandling.RemoveAndCleanup;
+            }
         }
 
         // We could also add a mutant check, but they should automatically lose their title when becoming one.
