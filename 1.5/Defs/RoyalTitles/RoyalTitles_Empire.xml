@@ -160,6 +160,10 @@
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -214,6 +218,10 @@
       <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -440,6 +448,10 @@
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -497,6 +509,10 @@
       <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -710,6 +726,10 @@
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -758,6 +778,7 @@
       <li Class="RoomRequirement_ThingAnyOfCount">
         <things>
           <li>PlantPot</li>
+          <li MayRequire="Ludeon.RimWorld.Ideology">PlantPot_Bonsai</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
         </things>
         <count>6</count>
@@ -774,6 +795,10 @@
       <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -1007,6 +1032,10 @@
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -1055,6 +1084,7 @@
       <li Class="RoomRequirement_ThingAnyOfCount">
         <things>
           <li>PlantPot</li>
+          <li MayRequire="Ludeon.RimWorld.Ideology">PlantPot_Bonsai</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
         </things>
         <count>6</count>
@@ -1063,6 +1093,7 @@
         <things>
           <li>VFEE_LargeRoyalRug</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+          <li MayRequire="OskarPotocki.VFE.Medieval2">VFEM2_HeraldicRugBroad</li>
         </things>
         <count>1</count>
       </li>
@@ -1078,6 +1109,10 @@
       <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -1308,6 +1343,10 @@
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -1356,6 +1395,7 @@
       <li Class="RoomRequirement_ThingAnyOfCount">
         <things>
           <li>PlantPot</li>
+          <li MayRequire="Ludeon.RimWorld.Ideology">PlantPot_Bonsai</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
         </things>
         <count>6</count>
@@ -1364,6 +1404,7 @@
         <things>
           <li>VFEE_LargeRoyalRug</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+          <li MayRequire="OskarPotocki.VFE.Medieval2">VFEM2_HeraldicRugBroad</li>
         </things>
         <count>1</count>
       </li>
@@ -1371,6 +1412,7 @@
         <things>
           <li>VFEE_GrandRoyalRug</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_RugGrand</li>
+          <li MayRequire="OskarPotocki.VFE.Medieval2">VFEM2_HeraldicRugGrand</li>
         </things>
         <count>1</count>
       </li>
@@ -1386,6 +1428,10 @@
       <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -1638,6 +1684,10 @@
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -1686,6 +1736,7 @@
       <li Class="RoomRequirement_ThingAnyOfCount">
         <things>
           <li>PlantPot</li>
+          <li MayRequire="Ludeon.RimWorld.Ideology">PlantPot_Bonsai</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
         </things>
         <count>6</count>
@@ -1694,6 +1745,7 @@
         <things>
           <li>VFEE_LargeRoyalRug</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+          <li MayRequire="OskarPotocki.VFE.Medieval2">VFEM2_HeraldicRugBroad</li>
         </things>
         <count>1</count>
       </li>
@@ -1701,6 +1753,7 @@
         <things>
           <li>VFEE_GrandRoyalRug</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_RugGrand</li>
+          <li MayRequire="OskarPotocki.VFE.Medieval2">VFEM2_HeraldicRugGrand</li>
         </things>
         <count>1</count>
       </li>
@@ -1716,6 +1769,10 @@
       <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -1976,6 +2033,10 @@
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -2024,6 +2085,7 @@
       <li Class="RoomRequirement_ThingAnyOfCount">
         <things>
           <li>PlantPot</li>
+          <li MayRequire="Ludeon.RimWorld.Ideology">PlantPot_Bonsai</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
         </things>
         <count>6</count>
@@ -2039,6 +2101,7 @@
         <things>
           <li>VFEE_LargeRoyalRug</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+          <li MayRequire="OskarPotocki.VFE.Medieval2">VFEM2_HeraldicRugBroad</li>
         </things>
         <count>1</count>
       </li>
@@ -2046,6 +2109,7 @@
         <things>
           <li>VFEE_GrandRoyalRug</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_RugGrand</li>
+          <li MayRequire="OskarPotocki.VFE.Medieval2">VFEM2_HeraldicRugGrand</li>
         </things>
         <count>2</count>
       </li>
@@ -2069,6 +2133,10 @@
       <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -2324,6 +2392,10 @@
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -2372,6 +2444,7 @@
       <li Class="RoomRequirement_ThingAnyOfCount">
         <things>
           <li>PlantPot</li>
+          <li MayRequire="Ludeon.RimWorld.Ideology">PlantPot_Bonsai</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
         </things>
         <count>8</count>
@@ -2387,6 +2460,7 @@
         <things>
           <li>VFEE_LargeRoyalRug</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+          <li MayRequire="OskarPotocki.VFE.Medieval2">VFEM2_HeraldicRugBroad</li>
         </things>
         <count>2</count>
       </li>
@@ -2394,6 +2468,7 @@
         <things>
           <li>VFEE_GrandRoyalRug</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_RugGrand</li>
+          <li MayRequire="OskarPotocki.VFE.Medieval2">VFEM2_HeraldicRugGrand</li>
         </things>
         <count>2</count>
       </li>
@@ -2417,6 +2492,10 @@
       <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
@@ -2698,6 +2777,10 @@
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
       </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
+      </li>
     </throneRoomRequirements>
     <bedroomRequirements>
       <li Class="RoomRequirement_Area">
@@ -2746,6 +2829,7 @@
       <li Class="RoomRequirement_ThingAnyOfCount">
         <things>
           <li>PlantPot</li>
+          <li MayRequire="Ludeon.RimWorld.Ideology">PlantPot_Bonsai</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_DecorativePlantPot</li>
         </things>
         <count>8</count>
@@ -2761,6 +2845,7 @@
         <things>
           <li>VFEE_LargeRoyalRug</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_RugLarge</li>
+          <li MayRequire="OskarPotocki.VFE.Medieval2">VFEM2_HeraldicRugBroad</li>
         </things>
         <count>2</count>
       </li>
@@ -2768,6 +2853,7 @@
         <things>
           <li>VFEE_GrandRoyalRug</li>
           <li MayRequire="VanillaExpanded.VFEArt">VFE_RugGrand</li>
+          <li MayRequire="OskarPotocki.VFE.Medieval2">VFEM2_HeraldicRugGrand</li>
         </things>
         <count>2</count>
       </li>
@@ -2791,6 +2877,10 @@
       <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Biotech">
         <labelKey>RoomRequirementNoBiotechBuildings</labelKey>
         <buildingTags><li>Biotech</li></buildingTags>
+      </li>
+      <li Class="RoomRequirement_ForbiddenBuildings" MayRequire="Ludeon.RimWorld.Anomaly">
+        <labelKey>RoomRequirementNoAnomalyBuildings</labelKey>
+        <buildingTags><li>Anomaly</li></buildingTags>
       </li>
     </bedroomRequirements>
     <foodRequirement>
