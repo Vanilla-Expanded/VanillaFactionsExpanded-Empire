@@ -127,7 +127,15 @@
       </li>
     </value>
   </Operation>
-  
+
+  <Operation Class="PatchOperationAdd">
+    <!-- Match vanilla titles that have a requirement for an instrument and add pipe organ to them. -->
+    <xpath>Defs/RoyalTitleDef[defName="Knight" or defName="Praetor" or defName="Baron" or defName="Count"]/throneRoomRequirements/li[@Class="RoomRequirement_ThingAnyOf"]/things[li="Piano"]</xpath>
+    <value>
+      <li>VFEE_PipeOrgan</li>
+    </value>
+  </Operation>
+
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/RoyalTitleDef[defName="Acolyte" or defName="Knight" or defName="Praetor" or defName="Baron" or defName="Count"]/throneRoomRequirements/li[@Class="RoomRequirement_HasAssignedThroneAnyOf"]/things</xpath>
     <value>
