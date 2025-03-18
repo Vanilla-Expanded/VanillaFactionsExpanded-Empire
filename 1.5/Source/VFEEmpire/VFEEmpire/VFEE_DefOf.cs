@@ -52,6 +52,7 @@ public static class VFEE_DefOf
     public static BodyPartDef Stomach;
     public static RoomRoleDef DiningRoom;
     public static RoomRoleDef RecRoom;
+    public static LetterDef ChoosePawnFromColonists;
 
     [DefAlias("VFEE_Deserters")] public static RaidStrategyDef DesertersStrat;
 

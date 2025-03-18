@@ -87,4 +87,8 @@ They are attacking immediately.
     <letterLabelFriendly>Friendlies</letterLabelFriendly>
     <arrivalTextFriendly>They are moving in to help you immediately.</arrivalTextFriendly>
   </RaidStrategyDef>
+  <LetterDef ParentName="CustomChoiceLetterBase">
+    <defName>ChoosePawnFromColonists</defName>
+    <letterClass>VFEEmpire.ChoiceLetter_ChoosePawnFromColonists</letterClass>
+  </LetterDef>
 </Defs>

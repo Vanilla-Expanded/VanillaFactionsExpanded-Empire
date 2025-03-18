@@ -82,6 +82,7 @@
     <Compile Include="AI\LordToil\LordToil_KillRoyalty.cs" />
     <Compile Include="AI\LordToil\LordToil_TravelTo.cs" />
     <Compile Include="AI\TerrorismLords.cs" />
+    <Compile Include="ChoiceLetter_ChoosePawnFromColonists.cs" />
     <Compile Include="Comps\CompAbilityEffect_StartBestowing.cs" />
     <Compile Include="Comps\CompProperties_AbilityStartBestower.cs" />
     <Compile Include="Comps\CompResearchRefresh.cs" />

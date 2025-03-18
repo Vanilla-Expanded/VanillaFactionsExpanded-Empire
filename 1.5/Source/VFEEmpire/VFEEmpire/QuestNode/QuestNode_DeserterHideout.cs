@@ -94,7 +94,7 @@ public class QuestNode_Root_DeserterHideout : QuestNode
 
         slate.Set("alliesCount", alliesCount);
         slate.Set("cataphracts", cataphracts);
-        var population = map.mapPawns.FreeColonists.Where(x => !x.Downed && !x.IsSlave && !x.IsQuestLodger()).Count();
+        var population = map.mapPawns.FreeColonists.Count(x => !x.Downed && !x.IsSlave && !x.IsQuestLodger());
         var requiredPawns = GetRequiredPawnCount(population, quest.points);
         slate.Set("requiredPawnCount", requiredPawns);
         //Generate site
@@ -131,12 +131,10 @@ public class QuestNode_Root_DeserterHideout : QuestNode
             chosenPawnSignal = signalChosenPawn
         }, enemiesDefeated, null, null, null, null, null, delegate
         {
-            var quest2 = quest;
-            var choosePawn = LetterDefOf.ChoosePawn;
-            string inSignal3 = null;
+            var choosePawn = VFEE_DefOf.ChoosePawnFromColonists;
             var royalFavorLabel = asker.Faction.def.royalFavorLabel;
             string text4 = "LetterTextHonorAward_BanditCamp".Translate(asker.Faction.def.royalFavorLabel);
-            quest2.Letter(choosePawn, inSignal3, signalChosenPawn, null, null, false, QuestPart.SignalListenMode.OngoingOnly, null, false, text4, null,
+            quest.Letter(choosePawn, null, signalChosenPawn, null, null, false, QuestPart.SignalListenMode.OngoingOnly, null, false, text4, null,
                 royalFavorLabel, null, signalSentSatisfied);
         }, null, true, asker);
 
