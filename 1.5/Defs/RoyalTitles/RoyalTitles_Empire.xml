@@ -1984,8 +1984,11 @@
         <thingDef>Drape</thingDef>
         <count>8</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>VFEE_ImperialBanner</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_ImperialBanner</li>
+          <li MayRequire="OskarPotocki.VFE.Medieval2">VFEM2_StandingBanner</li>
+        </things>
         <count>6</count>
       </li>
       <li Class="RoomRequirement_ThingCount">
@@ -2332,8 +2335,11 @@
         <thingDef>Drape</thingDef>
         <count>8</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>VFEE_ImperialBanner</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_ImperialBanner</li>
+          <li MayRequire="OskarPotocki.VFE.Medieval2">VFEM2_StandingBanner</li>
+        </things>
         <count>8</count>
       </li>
       <li Class="RoomRequirement_ThingCount">
@@ -2710,8 +2716,11 @@
         <thingDef>Drape</thingDef>
         <count>10</count>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>VFEE_ImperialBanner</thingDef>
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>VFEE_ImperialBanner</li>
+          <li MayRequire="OskarPotocki.VFE.Medieval2">VFEM2_StandingBanner</li>
+        </things>
         <count>10</count>
       </li>
       <li Class="RoomRequirement_ThingCount">
