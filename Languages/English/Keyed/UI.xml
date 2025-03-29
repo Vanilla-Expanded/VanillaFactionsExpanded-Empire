@@ -49,7 +49,7 @@
     <VFEE.Honor.NoHonors>Must have pending honors to bestow.</VFEE.Honor.NoHonors>
 
     <VFEE.ForcedFaction.Empire.CannotDisable>{FACTION} cannot be disabled as it's required by Vanilla Factions Expanded - Empire.</VFEE.ForcedFaction.Empire.CannotDisable>
-    <VFEE.ForcedFaction.Empire.FactionDiscoveryMessage>{FACTION} must be added to the game as it's require by Vanilla Factions Expanded - Empire.</VFEE.ForcedFaction.Empire.FactionDiscoveryMessage>
+    <VFEE.ForcedFaction.Empire.FactionDiscoveryMessage>{FACTION} must be added to the game as it's required by Vanilla Factions Expanded - Empire.</VFEE.ForcedFaction.Empire.FactionDiscoveryMessage>
     <VFEE.ForcedFaction.Deserters.CannotDisable>{FACTION} cannot be disabled as it's required by Vanilla Factions Expanded - Deserters.</VFEE.ForcedFaction.Deserters.CannotDisable>
 
     <VFEEmpire.RitualRoleTitled.NotTitled>Must be title holder.</VFEEmpire.RitualRoleTitled.NotTitled>

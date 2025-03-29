@@ -99,7 +99,6 @@
           <!-- Gameplay -->
           <requiredFactionCountDuringGameplay>1</requiredFactionCountDuringGameplay>
           <forceAddFactionIfMissing>true</forceAddFactionIfMissing>
-          <factionDiscoverySpecialMessage>VFEE.ForcedFaction.Deserters.FactionDiscoveryMessage</factionDiscoverySpecialMessage>
         </forcedFactionData>
       </li>
     </modExtensions>

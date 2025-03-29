@@ -34,11 +34,12 @@
                 <!-- World gen -->
                 <requiredFactionCountAtWorldGeneration>1</requiredFactionCountAtWorldGeneration>
                 <preventRemovalAtWorldGeneration>true</preventRemovalAtWorldGeneration>
-                <factionDisabledAtWorldGenerationMessage>VFEE.ForcedFaction.CannotDisable</factionDisabledAtWorldGenerationMessage>
+                <factionDisabledAtWorldGenerationMessage>VFEE.ForcedFaction.Empire.CannotDisable</factionDisabledAtWorldGenerationMessage>
 
                 <!-- Gameplay -->
                 <requiredFactionCountDuringGameplay>1</requiredFactionCountDuringGameplay>
                 <forcePlayerToAddFactionIfMissing>true</forcePlayerToAddFactionIfMissing>
+                <factionDiscoverySpecialMessage>VFEE.ForcedFaction.Empire.FactionDiscoveryMessage</factionDiscoverySpecialMessage>
             </forcedFactionData>
         </value>
     </Operation>
