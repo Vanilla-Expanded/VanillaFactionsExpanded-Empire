@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[@Name="MusicalInstrumentBase"]/placeWorkers</xpath>
+		<value>
+			<li>VFEEmpire.Placeworker_DanceFloorArea</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="Harp"]/building</xpath>
+		<value>
+		    <watchBuildingStandDistanceRange>1~7</watchBuildingStandDistanceRange>
+			<watchBuildingStandRectWidth>7</watchBuildingStandRectWidth>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="Harpsichord"]/building</xpath>
+		<value>
+		    <watchBuildingStandDistanceRange>1~7</watchBuildingStandDistanceRange>
+			<watchBuildingStandRectWidth>7</watchBuildingStandRectWidth>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/ThingDef[defName="Piano"]/building</xpath>
+		<value>
+			<watchBuildingStandDistanceRange>1~9</watchBuildingStandDistanceRange>
+			<watchBuildingStandRectWidth>9</watchBuildingStandRectWidth>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+		<li>Vanilla Furniture Expanded</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+        	<operations>
+				<li Class="PatchOperationFindMod">
+					<mods>
+						<li>Vanilla Expanded - Royalty Patches</li>
+					</mods>
+					<match Class="PatchOperationSequence">
+						<operations>
+						<li Class="PatchOperationReplace">
+							<xpath>/Defs/ThingDef[defName="Joy_Piano"]/building/watchBuildingStandDistanceRange</xpath>
+							<value>
+								<watchBuildingStandDistanceRange>1~9</watchBuildingStandDistanceRange>
+							</value>
+						</li>
+						<li Class="PatchOperationReplace">
+							<xpath>/Defs/ThingDef[defName="Joy_Piano"]/building/watchBuildingStandRectWidth</xpath>
+							<value>
+								<watchBuildingStandRectWidth>9</watchBuildingStandRectWidth>
+							</value>
+						</li>
+						</operations>
+					</match>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+</Patch>
+

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <SoundDef>
+	<defName>GrandBall_Sustainer_01</defName>
+    <sustain>True</sustain>
+    <context>MapOnly</context>
+    <priorityMode>PrioritizeNearest</priorityMode>
+	<subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>ClassicalBallMusic_Sustainer/ClassicalBallMusic_Sustainer_01</clipPath>
+          </li>
+        </grains>
+        <volumeRange>21</volumeRange>
+        <distRange>30~120</distRange>
+        <sustainAttack>3</sustainAttack>
+        <sustainSkipFirstAttack>False</sustainSkipFirstAttack>
+      </li>
+    </subSounds>
+    <sustainFadeoutTime>2.5</sustainFadeoutTime>
+  </SoundDef>
+  <SoundDef>
+	<defName>GrandBall_Sustainer_02</defName>
+    <sustain>True</sustain>
+    <context>MapOnly</context>
+    <priorityMode>PrioritizeNearest</priorityMode>
+	<subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>ClassicalBallMusic_Sustainer/ClassicalBallMusic_Sustainer_02</clipPath>
+          </li>
+        </grains>
+        <volumeRange>21</volumeRange>
+        <distRange>30~120</distRange>
+        <sustainAttack>3</sustainAttack>
+        <sustainSkipFirstAttack>False</sustainSkipFirstAttack>
+      </li>
+    </subSounds>
+    <sustainFadeoutTime>2.5</sustainFadeoutTime>
+  </SoundDef>
+  <SoundDef>
+	<defName>GrandBall_Sustainer_03</defName>
+    <sustain>True</sustain>
+    <context>MapOnly</context>
+    <priorityMode>PrioritizeNearest</priorityMode>
+	<subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>ClassicalBallMusic_Sustainer/ClassicalBallMusic_Sustainer_03</clipPath>
+          </li>
+        </grains>
+        <volumeRange>21</volumeRange>
+        <distRange>30~120</distRange>
+        <sustainAttack>3</sustainAttack>
+        <sustainSkipFirstAttack>False</sustainSkipFirstAttack>
+      </li>
+    </subSounds>
+    <sustainFadeoutTime>2.5</sustainFadeoutTime>
+  </SoundDef>
+   <SoundDef>
+	<defName>VFEE_Parade_Sustainer_01</defName>
+    <sustain>True</sustain>
+    <context>MapOnly</context>
+    <priorityMode>PrioritizeNearest</priorityMode>
+	<subSounds>
+      <li>
+        <grains>
+          <li Class="AudioGrain_Clip">
+            <clipPath>Parade/Music_Parade_Sustainer_01a</clipPath>
+          </li>
+        </grains>
+        <volumeRange>21</volumeRange>
+        <distRange>30~120</distRange>
+        <sustainAttack>3</sustainAttack>
+        <sustainSkipFirstAttack>False</sustainSkipFirstAttack>
+      </li>
+    </subSounds>
+    <sustainFadeoutTime>2.5</sustainFadeoutTime>
+  </SoundDef>
+</Defs>

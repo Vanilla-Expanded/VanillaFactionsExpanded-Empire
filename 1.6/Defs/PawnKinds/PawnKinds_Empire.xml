@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <PawnKindDef ParentName="RoyalUpperBase">
+    <defName>VFEE_Empire_Royal_Archcount</defName>
+    <label>archcount</label>
+    <labelFemale>archcountess</labelFemale>
+    <titleRequired>VFEE_Archcount</titleRequired>
+    <combatPower>135</combatPower>
+    <apparelMoney>9999999</apparelMoney>
+	<itemQuality>Excellent</itemQuality>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <requiredTag>RoyalTier5</requiredTag>
+        <stuff>Steel</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Middle</apparelLayer>
+        <requiredTag>RoyalTier5</requiredTag>
+        <color>(55,55,55)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <requiredTag>RoyalTier2</requiredTag>
+        <color>(104, 85, 227)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Shell</apparelLayer>
+        <requiredTag>RoyalTier6</requiredTag>
+        <color>(104, 85, 227)</color>
+        <alternateTagChoices>
+          <li>
+            <tag>Cape</tag>
+            <chance>0.5</chance>
+          </li>
+        </alternateTagChoices>
+      </li>
+    </specificApparelRequirements>
+    <techHediffsMoney>1000~2000</techHediffsMoney>
+    <initialWillRange>13~16</initialWillRange>
+    <initialResistanceRange>38~58</initialResistanceRange>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.05</Neanderthal>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.05</Hussar>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0.05</Genie>
+        <Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0.05</Sanguophage>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RoyalUpperBase">
+    <defName>VFEE_Empire_Royal_Marquess</defName>
+    <label>marquess</label>
+    <labelFemale>marchioness</labelFemale>
+    <titleRequired>VFEE_Marquess</titleRequired>
+    <combatPower>135</combatPower>
+    <apparelMoney>9999999</apparelMoney>
+	<itemQuality>Excellent</itemQuality>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <requiredTag>RoyalTier6</requiredTag>
+        <stuff>Plasteel</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Middle</apparelLayer>
+        <requiredTag>RoyalTier5</requiredTag>
+        <color>(55,55,55)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <requiredTag>RoyalTier2</requiredTag>
+        <color>(157, 145, 237)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Shell</apparelLayer>
+        <requiredTag>RoyalTier6</requiredTag>
+        <color>(157, 145, 237)</color>
+        <alternateTagChoices>
+          <li>
+            <tag>Cape</tag>
+            <chance>0.5</chance>
+          </li>
+        </alternateTagChoices>
+      </li>
+    </specificApparelRequirements>
+    <techHediffsChance>0.25</techHediffsChance>
+    <techHediffsMoney>1000~2500</techHediffsMoney>
+    <techHediffsMaxAmount>2</techHediffsMaxAmount>
+    <initialWillRange>14~17</initialWillRange>
+    <initialResistanceRange>38~58</initialResistanceRange>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.05</Neanderthal>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.05</Hussar>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0.05</Genie>
+        <Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0.15</Sanguophage>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef>
+  
+  <PawnKindDef ParentName="RoyalUpperBase">
+    <defName>VFEE_Empire_Royal_Archduke</defName>
+    <label>archduke</label>
+    <labelFemale>archduchess</labelFemale>
+    <titleRequired>VFEE_Archduke</titleRequired>
+    <combatPower>135</combatPower>
+    <apparelMoney>9999999</apparelMoney>
+	<itemQuality>Excellent</itemQuality>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <requiredTag>RoyalTier6</requiredTag>
+        <stuff>Plasteel</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Middle</apparelLayer>
+        <requiredTag>RoyalTier5</requiredTag>
+        <color>(82,82,82)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <requiredTag>RoyalTier2</requiredTag>
+        <color>(161, 154, 204)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Shell</apparelLayer>
+        <requiredTag>RoyalTier6</requiredTag>
+        <color>(161, 154, 204)</color>
+        <alternateTagChoices>
+          <li>
+            <tag>Cape</tag>
+            <chance>0.5</chance>
+          </li>
+        </alternateTagChoices>
+      </li>
+    </specificApparelRequirements>
+    <techHediffsChance>0.3</techHediffsChance>
+    <techHediffsMoney>1000~2500</techHediffsMoney>
+    <techHediffsMaxAmount>2</techHediffsMaxAmount>
+    <initialWillRange>14~17</initialWillRange>
+    <initialResistanceRange>38~58</initialResistanceRange>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.05</Neanderthal>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.05</Hussar>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0.05</Genie>
+        <Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0.15</Sanguophage>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RoyalBase">
+    <defName>VFEE_Empire_Royal_Magister</defName>
+    <label>magister</label>
+    <titleRequired>VFEE_Magister</titleRequired>
+    <combatPower>135</combatPower>
+    <apparelMoney>9999999</apparelMoney>
+	<itemQuality>Excellent</itemQuality>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <requiredTag>RoyalTier6</requiredTag>
+        <stuff>Plasteel</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Middle</apparelLayer>
+        <requiredTag>RoyalTier5</requiredTag>
+        <color>(250, 250, 250)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <requiredTag>RoyalTier2</requiredTag>
+        <color>(250, 250, 250)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Shell</apparelLayer>
+        <requiredTag>RoyalTier6</requiredTag>
+        <color>(212, 157, 157)</color>
+        <alternateTagChoices>
+          <li>
+            <tag>Cape</tag>
+            <chance>0.5</chance>
+          </li>
+        </alternateTagChoices>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <stuff>Hyperweave</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <stuff>Hyperweave</stuff>
+      </li>
+    </specificApparelRequirements>
+    <techHediffsChance>0.25</techHediffsChance>
+    <techHediffsMoney>2000~2500</techHediffsMoney>
+    <techHediffsMaxAmount>2</techHediffsMaxAmount>
+    <initialWillRange>15~18</initialWillRange>
+    <initialResistanceRange>19~30</initialResistanceRange>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.05</Neanderthal>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.05</Hussar>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0.05</Genie>
+        <Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0.15</Sanguophage>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef>
+  
+  <PawnKindDef ParentName="RoyalBase">
+    <defName>VFEE_Empire_Royal_Despot</defName>
+    <label>despot</label>
+    <titleRequired>VFEE_Despot</titleRequired>
+    <combatPower>135</combatPower>
+    <apparelMoney>9999999</apparelMoney>
+	<itemQuality>Excellent</itemQuality>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <requiredTag>RoyalTier7</requiredTag>
+        <stuff>Plasteel</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Middle</apparelLayer>
+        <requiredTag>RoyalTier5</requiredTag>
+        <color>(212, 157, 157)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <requiredTag>RoyalTier2</requiredTag>
+        <color>(212, 157, 157)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Shell</apparelLayer>
+        <requiredTag>StellicRobe</requiredTag>
+        <color>(210, 49, 49)</color>
+        <alternateTagChoices>
+          <li>
+            <tag>Cape</tag>
+            <chance>0.5</chance>
+          </li>
+        </alternateTagChoices>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <stuff>Hyperweave</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <stuff>Hyperweave</stuff>
+      </li>
+    </specificApparelRequirements>
+    <techHediffsChance>0.35</techHediffsChance>
+    <techHediffsMoney>2000~2500</techHediffsMoney>
+    <techHediffsMaxAmount>2</techHediffsMaxAmount>
+    <initialWillRange>15~18</initialWillRange>
+    <initialResistanceRange>19~30</initialResistanceRange>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.05</Neanderthal>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.05</Hussar>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0.05</Genie>
+        <Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0.15</Sanguophage>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef>
+
+  <PawnKindDef ParentName="RoyalBase">
+    <defName>VFEE_Empire_Royal_HighStellarch</defName>
+    <label>high stellarch</label>
+    <factionLeader>true</factionLeader>
+    <titleRequired>VFEE_HighStellarch</titleRequired>
+    <combatPower>135</combatPower>
+    <apparelMoney>9999999</apparelMoney>
+	<itemQuality>Excellent</itemQuality>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <requiredTag>RoyalTier7</requiredTag>
+        <stuff>Gold</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Shell</apparelLayer>
+        <requiredTag>StellicRobe</requiredTag>
+        <color>(128, 0, 32)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Middle</apparelLayer>
+        <requiredTag>RoyalTier5</requiredTag>
+        <color>(95, 20, 133)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <requiredTag>RoyalTier2</requiredTag>
+        <color>(95, 20, 133)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <stuff>Hyperweave</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <stuff>Hyperweave</stuff>
+      </li>
+    </specificApparelRequirements>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>3000~4000</techHediffsMoney>
+    <techHediffsMaxAmount>3</techHediffsMaxAmount>
+    <initialWillRange>16~19</initialWillRange>
+    <initialResistanceRange>38~58</initialResistanceRange>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.05</Neanderthal>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.05</Hussar>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0.05</Genie>
+        <Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0.25</Sanguophage>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef>
+  
+  <PawnKindDef ParentName="RoyalBase">
+    <defName>VFEE_Empire_Royal_Emperor</defName>
+    <label>emperor</label>
+    <titleRequired>Emperor</titleRequired>
+    <combatPower>135</combatPower>
+    <apparelMoney>9999999</apparelMoney>
+	<itemQuality>Excellent</itemQuality>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <requiredTag>RoyalTier7</requiredTag>
+        <stuff>Gold</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Shell</apparelLayer>
+        <requiredTag>StellicRobe</requiredTag>
+        <color>(104, 3, 28)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Middle</apparelLayer>
+        <requiredTag>RoyalTier5</requiredTag>
+        <color>(93, 0, 140)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <requiredTag>RoyalTier2</requiredTag>
+        <color>(93, 0, 140)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <stuff>Hyperweave</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <stuff>Hyperweave</stuff>
+      </li>
+    </specificApparelRequirements>
+    <techHediffsChance>1</techHediffsChance>
+    <techHediffsMoney>3000~4000</techHediffsMoney>
+    <techHediffsMaxAmount>3</techHediffsMaxAmount>
+    <initialWillRange>16~19</initialWillRange>
+    <initialResistanceRange>38~58</initialResistanceRange>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.05</Neanderthal>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.05</Hussar>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0.05</Genie>
+        <Sanguophage MayRequire="Ludeon.RimWorld.Biotech">0.25</Sanguophage>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef>
+
+<!-- Absolver -->
+
+  <PawnKindDef ParentName="ImperialFighterBase">
+    <defName>VFEE_Empire_Fighter_Absolver</defName>
+    <label>absolver</label>
+    <royalTitleChance>0.1</royalTitleChance>
+    <titleSelectOne>
+      <li>Freeholder</li>
+      <li>Yeoman</li>
+    </titleSelectOne>
+    <combatPower>300</combatPower>
+    <weaponTags>
+      <li>VFEE_Absolver</li>
+    </weaponTags>
+    <apparelColor>(250,250,250)</apparelColor>
+    <apparelRequired>
+      <li>VFEE_Apparel_AbsolverHelmet</li>
+      <li>VFEE_Apparel_ArmorAbsolver</li>
+	    <li>Apparel_Cape</li>
+    </apparelRequired>
+    <specificApparelRequirements Inherit="False">
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Shell</apparelLayer>
+		    <stuff>Synthread</stuff>
+        <color>(10, 10, 10)</color>
+      </li>
+    </specificApparelRequirements>
+    <techHediffsTags>
+      <li>Advanced</li>
+      <li>ImplantEmpireCommon</li>
+    </techHediffsTags>
+    <techHediffsRequired>
+      <li>ArchotechEye</li>
+    </techHediffsRequired>
+    <skills>
+      <li>
+        <skill>Shooting</skill>
+        <range>8~12</range>
+      </li>
+    </skills>
+    <apparelTags Inherit="False">
+      <li>IndustrialBasic</li>
+      <li>IndustrialAdvanced</li>
+	    <li>VFEE_Absolver</li>
+    </apparelTags>
+    <disallowedTraits>
+      <li>Brawler</li>
+	    <li>Nudist</li>
+	    <li>BodyPurist</li>
+	    <li>Wimp</li>
+    </disallowedTraits>
+    <initialWillRange>4~6</initialWillRange>
+    <initialResistanceRange>36~46</initialResistanceRange>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <maxGenerationAge>40</maxGenerationAge>
+    <apparelMoney>7000~10000</apparelMoney>
+	  <weaponMoney>2750~8000</weaponMoney>
+    <techHediffsMoney>2000~6000</techHediffsMoney>
+    <techHediffsMaxAmount>6</techHediffsMaxAmount>
+    <allowRoyalRoomRequirements>False</allowRoyalRoomRequirements>
+	  <biocodeWeaponChance>1.0</biocodeWeaponChance>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Neanderthal MayRequire="Ludeon.RimWorld.Biotech">0.03</Neanderthal>
+        <Hussar MayRequire="Ludeon.RimWorld.Biotech">0.6</Hussar>
+        <Genie MayRequire="Ludeon.RimWorld.Biotech">0.03</Genie>
+      </xenotypeChances>
+    </xenotypeSet>
+  </PawnKindDef>
+  
+  <PawnKindDef ParentName="RoyalBase">
+    <defName>VFEE_Empire_Royal_Techfriar</defName>
+    <label>techfriar</label>
+    <combatPower>50</combatPower>
+    <weaponMoney>0</weaponMoney>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <requiredTag>RoyalRobe</requiredTag>
+		<stuff>Hyperweave</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>FullHead</bodyPartGroup>
+        <requiredTag>VFEE_Techfriar</requiredTag>
+        <stuff>Plasteel</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <requiredTag>RoyalTier2</requiredTag>
+		<color>(255, 229, 0)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Middle</apparelLayer>
+        <requiredTag>Psychic</requiredTag>
+		<color>(57, 87, 93)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <stuff>Hyperweave</stuff>
+      </li>
+    </specificApparelRequirements>
+    <apparelRequired>
+      <li>VFEE_Apparel_TechfriarCrown</li>
+    </apparelRequired>
+    <apparelTags>
+      <li>VFEE_Techfriar</li>
+    </apparelTags>
+    <techHediffsMoney>1000~4000</techHediffsMoney>
+    <xenotypeSet>
+      <xenotypeChances>
+        <Baseliner MayRequire="Ludeon.RimWorld.Biotech">1</Baseliner>
+      </xenotypeChances>
+    </xenotypeSet>
+    <useFactionXenotypes>false</useFactionXenotypes>
+    <weaponTags Inherit="False">
+      <li>None</li>
+    </weaponTags>
+    <requiredWorkTags>
+      <li>Intellectual</li>
+    </requiredWorkTags>
+    <skills>
+      <li>
+        <skill>Intellectual</skill>
+        <range>8~18</range>
+      </li>
+    </skills>
+    <techHediffsRequired>
+      <li>DeathAcidifier</li>
+    </techHediffsRequired>
+    <minGenerationAge>50</minGenerationAge>
+    <techHediffsMaxAmount>3</techHediffsMaxAmount>
+    <initialWillRange>6~8</initialWillRange>
+    <initialResistanceRange>30~46</initialResistanceRange>
+    <humanPregnancyChance>0</humanPregnancyChance>
+  </PawnKindDef>
+  
+</Defs>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+   <Operation Class="PatchOperationFindMod">
+      <mods>
+         <li>Vanilla Furniture Expanded</li>
+      </mods>
+      <match Class="PatchOperationSequence">
+         <operations>
+            <li Class="PatchOperationAdd">
+               <xpath>Defs/ThingDef[defName = "Bed_Kingsize"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+               <value>
+                  <li>VFEE_RoyalMirror</li>
+               </value>
+            </li>
+
+            <!-- Backwards compatibility with previous versions, made for safety in case of issues during updating. -->
+            <!-- Parts of them will need removing in the future, either some time after Furniture Core updates, or in 1.6. -->
+            <!-- When updating, remove the conditional check and only include the "match" branch of every patch. -->
+
+            <li Class="PatchOperationConditional">
+               <xpath>Defs/ThingDef[@Name = "VFE_ChiseledBedBase"]</xpath>
+               <match Class="PatchOperationAdd">
+                  <xpath>Defs/ThingDef[@Name = "VFE_ChiseledBedBase"]/comps/li[@Class = "CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+                  <value>
+                     <li>VFEE_RoyalMirror</li>
+                  </value>
+               </match>
+               <!-- There was only singular slab (now chiseled) bed previously, so don't patch the double bed. -->
+               <nomatch Class="PatchOperationAdd">
+                  <xpath>Defs/ThingDef[defName = "Bed_StoneSlab"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+                  <value>
+                     <li>VFEE_RoyalMirror</li>
+                  </value>
+               </nomatch>
+            </li>
+
+            <li Class="PatchOperationConditional">
+               <xpath>Defs/ThingDef[@Name = "VFE_SimpleBedBase"]</xpath>
+               <match Class="PatchOperationAdd">
+                  <xpath>Defs/ThingDef[@Name = "VFE_SimpleBedBase"]/comps/li[@Class = "CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+                  <value>
+                     <li>VFEE_RoyalMirror</li>
+                  </value>
+               </match>
+               <!-- There was only singular simple bed previously, so don't patch the double bed. -->
+               <nomatch Class="PatchOperationAdd">
+                  <xpath>Defs/ThingDef[defName = "Bed_Simple"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+                  <value>
+                     <li>VFEE_RoyalMirror</li>
+                  </value>
+               </nomatch>
+            </li>
+
+            <li Class="PatchOperationConditional">
+               <xpath>Defs/ThingDef[@Name = "VFE_ErgonomicBedBase"]</xpath>
+               <match Class="PatchOperationAdd">
+                  <xpath>Defs/ThingDef[@Name = "VFE_ErgonomicBedBase"]/comps/li[@Class = "CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+                  <value>
+                     <li>VFEE_RoyalMirror</li>
+                  </value>
+               </match>
+               <nomatch Class="PatchOperationSequence">
+                  <operations>
+                     <li Class="PatchOperationAdd">
+                        <xpath>Defs/ThingDef[defName = "Bed_Ergonomic"]/comps/li[@Class = "CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+                        <value>
+                           <li>VFEE_RoyalMirror</li>
+                        </value>
+                     </li>
+
+                     <li Class="PatchOperationAdd">
+                        <xpath>Defs/ThingDef[defName = "Bed_DoubleErgonomic"]/comps/li[@Class = "CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+                        <value>
+                           <li>VFEE_RoyalMirror</li>
+                        </value>
+                     </li>
+                  </operations>
+               </nomatch>
+            </li>
+         </operations>
+      </match>
+   </Operation>
+   <Operation Class="PatchOperationFindMod">
+      <mods>
+         <li>Vanilla Furniture Expanded - Medical Module</li>
+      </mods>
+      <match Class="PatchOperationSequence">
+         <operations>
+            <li Class="PatchOperationAdd">
+               <xpath>Defs/ThingDef[defName = "Bed_OperatingTable"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+               <value>
+                  <li>VFEE_RoyalMirror</li>
+               </value>
+            </li>
+            <li Class="PatchOperationAdd">
+               <xpath>Defs/ThingDef[defName = "Bed_CryptoBed"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+               <value>
+                  <li>VFEE_RoyalMirror</li>
+               </value>
+            </li>
+         </operations>
+      </match>
+   </Operation>
+   <Operation Class="PatchOperationFindMod">
+      <mods>
+         <li>Vanilla Furniture Expanded - Spacer Module</li>
+      </mods>
+      <match Class="PatchOperationSequence">
+         <operations>
+            <!-- Backwards compatibility with previous versions, made for safety in case of issues during updating. -->
+            <!-- Parts of them will need removing in the future, either some time after Furniture Core updates, or in 1.6. -->
+            <!-- When updating, remove the conditional check and only include the "match" branch of every patch. -->
+            <li Class="PatchOperationConditional">
+               <xpath>Defs/ThingDef[@Name = "VFES_AdvancedBedBase"]</xpath>
+               <match Class="PatchOperationAdd">
+                  <xpath>Defs/ThingDef[@Name = "VFES_AdvancedBedBase"]/comps/li[@Class = "CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+                  <value>
+                     <li>VFEE_RoyalMirror</li>
+                  </value>
+               </match>
+               <nomatch Class="PatchOperationSequence">
+                  <operations>
+                     <li Class="PatchOperationAdd">
+                        <xpath>Defs/ThingDef[defName="Bed_AdvBed"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+                        <value>
+                           <li>VFEE_RoyalMirror</li>
+                        </value>
+                     </li>
+                     <li Class="PatchOperationAdd">
+                        <xpath>Defs/ThingDef[defName="Bed_AdvDoubleBed"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+                        <value>
+                           <li>VFEE_RoyalMirror</li>
+                        </value>
+                     </li>
+                  </operations>
+               </nomatch>
+            </li>
+         </operations>
+      </match>
+   </Operation>
+   <Operation Class="PatchOperationFindMod">
+      <mods>
+         <li>Rim-Effect: Core</li>
+      </mods>
+      <match Class="PatchOperationSequence">
+         <operations>
+            <li Class="PatchOperationAdd">
+               <xpath>Defs/ThingDef[defName = "RE_PrefabBed" or defName = "RE_PrefabDoubleBed" or defName = "RE_PrefabMedicalBed"]/comps/li[@Class = "CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+               <value>
+                  <li>VFEE_RoyalMirror</li>
+               </value>
+            </li>
+         </operations>
+      </match>
+   </Operation>
+   <Operation Class="PatchOperationFindMod">
+      <mods>
+         <li>Vanilla Factions Expanded - Medieval 2</li>
+      </mods>
+      <match Class="PatchOperationSequence">
+         <operations>
+            <li Class="PatchOperationAdd">
+               <xpath>Defs/ThingDef[defName = "VFEM2_FurBed"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+               <value>
+                  <li>VFEE_RoyalMirror</li>
+               </value>
+            </li>
+            <li Class="PatchOperationAdd">
+               <xpath>Defs/ThingDef[defName = "VFEM2_DoubleFurBed"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+               <value>
+                  <li>VFEE_RoyalMirror</li>
+               </value>
+            </li>
+         </operations>
+      </match>
+   </Operation>
+</Patch>

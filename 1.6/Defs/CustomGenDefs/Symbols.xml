@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+<KCSG.SymbolDef>
+  <defName>VFEE_ImperialSlab_BlocksMarble_North</defName>
+  <thing>VFEE_ImperialSlab</thing>
+  <stuff>BlocksMarble</stuff>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>VFEE_GrandChair_Silver_North</defName>
+  <thing>VFEE_GrandChair</thing>
+  <stuff>Silver</stuff>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>VFEE_GrandTable_WoodLog_South</defName>
+  <thing>VFEE_GrandTable</thing>
+  <stuff>WoodLog</stuff>
+  <rotation>South</rotation>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>VFEE_RoyalStool_Leather_Dog_North</defName>
+  <thing>VFEE_RoyalStool</thing>
+  <stuff>Leather_Dog</stuff>
+</KCSG.SymbolDef>
+
+<KCSG.SymbolDef>
+  <defName>VFEE_SteleSmall_BlocksSlate</defName>
+  <thing>VFEE_SteleSmall</thing>
+  <stuff>BlocksSlate</stuff>
+</KCSG.SymbolDef>
+
+</Defs>

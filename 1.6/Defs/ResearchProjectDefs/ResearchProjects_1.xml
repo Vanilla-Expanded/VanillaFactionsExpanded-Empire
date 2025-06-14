@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ResearchProjectDef>
+    <defName>VFEE_PipeOrgans</defName>
+    <label>pipe organs</label>
+    <description>Craft the pipe organs, an incredibly advanced and intricate stationary musical instrument.</description>
+    <baseCost>2000</baseCost>
+    <techLevel>Industrial</techLevel>
+    <researchViewX>5.00</researchViewX>
+    <researchViewY>4.90</researchViewY>
+    <prerequisites>
+      <li>Piano</li>
+    </prerequisites>
+	<generalRules>
+  <rulesStrings>
+    <li>subject->musical mastery</li>
+    <li>subject_story->crafted instruments that echoed through cathedrals and concert halls alike</li>
+    <li>subject_story->combined ancient lore with modern acoustics to create a symphony of sound</li>
+    <li>subject_story->invented an organ with pipes that mimicked the voice of the divine</li>
+    <li>subject_gerund->harmonizing craftsmanship and artistry</li>
+  </rulesStrings>
+</generalRules>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef>
+    <defName>VFEE_NobleDecorations</defName>
+    <label>noble decorations</label>
+    <description>Build noble decorations like royal rugs, mirrors, grand chairs, imperial slabs, candelabras, and more.</description>
+    <baseCost>500</baseCost>
+    <techLevel>Medieval</techLevel>
+    <researchViewX>0</researchViewX>
+    <researchViewY>4.90</researchViewY>
+    <prerequisites>
+      <li>ComplexFurniture</li>
+    </prerequisites>
+	<generalRules>
+  <rulesStrings>
+    <li>subject->aristocratic elegance</li>
+    <li>subject_story->designed living spaces fit for kings and queens</li>
+    <li>subject_story->brought beauty and luxury to the stark lives of the nobility</li>
+    <li>subject_story->set the standards for opulence in decor that lasted centuries</li>
+    <li>subject_gerund->elevating interiors to royal standards</li>
+  </rulesStrings>
+</generalRules>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef>
+    <defName>VFEE_StellicThrone</defName>
+    <label>stellic throne</label>
+    <description>Construct the most grand, most beautiful stellic throne for your high ranking nobility.</description>
+    <baseCost>1000</baseCost>
+    <techLevel>Industrial</techLevel>
+    <researchViewX>1.00</researchViewX>
+    <researchViewY>4.90</researchViewY>
+    <prerequisites>
+      <li>VFEE_NobleDecorations</li>
+    </prerequisites>
+	<generalRules>
+  <rulesStrings>
+    <li>subject->regal craftsmanship</li>
+    <li>subject_story->forged a throne from the heart of a fallen star, symbolizing eternal rule</li>
+    <li>subject_story->crafted not just a seat, but a legacy, ensuring the ruler's presence is felt even in absence</li>
+    <li>subject_story->merged the art of smithing with celestial materials to create a throne worthy of legends</li>
+    <li>subject_gerund->creating the pinnacle of nobility's power</li>
+  </rulesStrings>
+</generalRules>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef>
+    <defName>VFEE_JanissaryGear</defName>
+    <label>janissary gear</label>
+    <description>Craft janissary armor, light powered armor that’s commonly used by imperial recon troops. Note that these also require advanced components.</description>
+    <baseCost>3000</baseCost>
+    <techLevel>Spacer</techLevel>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>ReconArmor</li>
+    </prerequisites>
+    <researchViewX>15.00</researchViewX>
+    <researchViewY>1.1</researchViewY>
+	<generalRules>
+  <rulesStrings>
+    <li>subject->elite warfare engineering</li>
+    <li>subject_story->designed armor that blended ancient warrior traditions with the pinnacle of modern defense technology</li>
+    <li>subject_story->equipped scouts with gear that turned the tide of covert operations</li>
+    <li>subject_story->created a legacy of warriors feared for both their prowess and their unparalleled equipment</li>
+    <li>subject_gerund->forging the future of military attire</li>
+  </rulesStrings>
+</generalRules>
+  </ResearchProjectDef>
+
+</Defs>

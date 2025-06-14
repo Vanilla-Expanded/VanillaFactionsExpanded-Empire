@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HediffDef>
+    <defName>VFEE_AcidifierFletcher</defName>
+    <label>acidifier</label>
+    <description>Acidifier mixture injected into veins through a fletcher dart. Causes extreme pain and nearly instant death through internal acid burns.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>600~600</disappearsAfterTicks>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath" />
+      <li Class="VFEEmpire.HediffCompProperties_RandomDamage">
+        <intervalTicks>60</intervalTicks>
+        <amount>5~10</amount>
+        <type>VEF_SecondaryAcidBurn</type>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>VFEE_AcidifierToxblade</defName>
+    <label>acidifier</label>
+    <description>Acidifier mixture injected into veins through a fletcher dart. Causes extreme pain and nearly instant death through internal acid burns.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>180~180</disappearsAfterTicks>
+      </li>
+      <li Class="HediffCompProperties_DisappearsOnDeath" />
+      <li Class="VFEEmpire.HediffCompProperties_RandomDamage">
+        <intervalTicks>60</intervalTicks>
+        <amount>5~10</amount>
+        <type>VEF_SecondaryAcidBurn</type>
+      </li>
+    </comps>
+  </HediffDef>
+
+</Defs>

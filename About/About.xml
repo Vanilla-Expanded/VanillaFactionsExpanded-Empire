@@ -1,42 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-  <name>Vanilla Factions Expanded - Empire</name>
-  <author>Oskar Potocki, xrushha, legodude17, Allie</author>
-  <supportedVersions>
-    <li>1.4</li>
-    <li>1.5</li>
-  </supportedVersions>
-  <packageId>OskarPotocki.VFE.Empire</packageId>
-  <description>One thing I always wanted to do but never could bring myself to do is overhaul the Empire faction in the Royalty DLC. For such a mysterious, powerful entity in the political sphere of RimWorld, there is surprisingly little content around them. When I wanted to make a Royalty focused playthrough, I quickly realized it’s just a ‘normal playthrough’ with ‘royalty sprinkles’ - so not really what I wanted.
+	<name>Vanilla Factions Expanded - Empire</name>
+	<author>Oskar Potocki, xrushha, legodude17, Allie</author>
+	<supportedVersions>
+		<li>1.4</li>
+		<li>1.5</li>
+		<li>1.6</li>
+	</supportedVersions>
+	<packageId>OskarPotocki.VFE.Empire</packageId>
+	<description>One thing I always wanted to do but never could bring myself to do is overhaul the Empire faction in the Royalty DLC. For such a mysterious, powerful entity in the political sphere of RimWorld, there is surprisingly little content around them. When I wanted to make a Royalty focused playthrough, I quickly realized it’s just a ‘normal playthrough’ with ‘royalty sprinkles’ - so not really what I wanted.
 
 So I did what I do best and sat down with my trusty google docs to design a complete overhaul to the Empire faction that will finally allow you to feel like a proper imperial nobility. From intrigues and art exhibitions, to hunting down deserters and protecting from the acts of terrorism, with this mod you can really make an Empire-centric playthrough and make a play for the Imperial throne.
 
 With new permits, structures, apparel, vassalage system, royal honors, Great Hierarchy and titles, this mod is a powerhouse for those wanting to roleplay as the Imperial family, but it will also work just as well for people who only want one or two nobles in their colony.
 
 For obvious reasons this mod requires Royalty DLC.</description>
-  <modDependencies>
-    <li>
-      <packageId>brrainz.harmony</packageId>
-      <displayName>Harmony</displayName>
-      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
-      <steamWorkshopUrl>https://steamcommunity.com/workshop/filedetails/?id=2009463077</steamWorkshopUrl>
-    </li>
-    <li>
-      <packageId>OskarPotocki.VanillaFactionsExpanded.Core</packageId>
-      <displayName>Vanilla Expanded Framework</displayName>
-      <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2023507013</steamWorkshopUrl>
-    </li>
-	<li>
-		<packageId>Ludeon.RimWorld.Royalty</packageId>
-		<displayName>Royalty</displayName>
-	</li>
-  </modDependencies>
-  <loadAfter>
-    <li>Ludeon.RimWorld</li>
-    <li>Ludeon.RimWorld.Royalty</li>
-	<li>Ludeon.RimWorld.Ideology</li>
-	<li>Ludeon.RimWorld.Biotech</li>
-    <li>brrainz.harmony</li>
-    <li>OskarPotocki.VanillaFactionsExpanded.Core</li>
-  </loadAfter>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+			<steamWorkshopUrl>https://steamcommunity.com/workshop/filedetails/?id=2009463077</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>OskarPotocki.VanillaFactionsExpanded.Core</packageId>
+			<displayName>Vanilla Expanded Framework</displayName>
+			<steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2023507013</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>Ludeon.RimWorld.Royalty</packageId>
+			<displayName>Royalty</displayName>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+	</loadAfter>
 </ModMetaData>

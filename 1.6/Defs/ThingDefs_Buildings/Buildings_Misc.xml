@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="SteleBase">
+    <defName>VFEE_SteleSmall</defName>
+    <label>small stele</label>
+    <description>A slender, modest slab with limited engravings on the sides. Steles have been used since ancient times to memorialize individuals, battles, and other important events.</description>
+    <size>(1,1)</size>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>4000</WorkToBuild>
+      <Beauty>10</Beauty>
+      <MeditationFocusStrength>0.1</MeditationFocusStrength>
+    </statBases>
+    <costStuffCount>75</costStuffCount>
+    <uiIconScale>0.7</uiIconScale>
+    <uiIconOffset>(0, 0.1)</uiIconOffset>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <graphicData>
+      <graphicClass>Graphic_Random</graphicClass>
+      <texPath>Furniture/SteleSmall</texPath>
+      <drawSize>(3,3)</drawSize>
+      <drawOffset>(0,0,0.05)</drawOffset>
+      <shadowData>
+        <volume>(0.5, 0.6, 0.5)</volume>
+        <offset>(0, 0, -0.15)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.1,0.1,0.9,0.9)</rect>
+      </damageData>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_MeditationFocus">
+        <statDef>MeditationFocusStrength</statDef>
+        <focusTypes>
+          <li>Artistic</li>
+        </focusTypes>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>VFEE_NobleDecorations</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>VFEE_Bomb</defName>
+    <label>bomb</label>
+    <description>A small, makeshift bomb. Can be easily defused if found on time.</description>
+    <thingClass>VFEEmpire.Building_Bomb</thingClass>
+    <size>(1, 1)</size>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Beauty>-2</Beauty>
+    </statBases>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Bomb/DeserterBomb</texPath>
+    </graphicData>
+    <tickerType>Normal</tickerType>
+    <drawerType>RealtimeOnly</drawerType>
+    <killedLeavings>
+      <ComponentIndustrial>1</ComponentIndustrial>
+      <Shell_AntigrainWarhead>1</Shell_AntigrainWarhead>
+    </killedLeavings>
+  </ThingDef>
+
+</Defs>

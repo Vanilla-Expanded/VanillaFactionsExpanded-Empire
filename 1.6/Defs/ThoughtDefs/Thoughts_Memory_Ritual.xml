@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+
+  <ThoughtDef>
+    <defName>VFEE_TerribleBall</defName>
+    <thoughtClass>Thought_AttendedRitual</thoughtClass>
+    <durationDays>6</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>terrible ball</label>
+        <description>I'm embarrassed to be a part of that train wreck. I just hope no one gossips about this.</description>
+        <baseMoodEffect>-6</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <ThoughtDef>
+    <defName>VFEE_BoringBall</defName>
+    <thoughtClass>Thought_AttendedRitual</thoughtClass>
+    <durationDays>6</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>boring ball</label>
+        <description>I was expecting a grand time. What I got was seriously lacking.</description>
+        <baseMoodEffect>-3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <ThoughtDef>
+    <defName>VFEE_EnjoyableBall</defName>
+    <thoughtClass>Thought_AttendedRitual</thoughtClass>
+    <durationDays>6</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>enjoyable ball</label>
+        <description>I had a great time dancing in that ball!</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <ThoughtDef>
+    <defName>VFEE_AmazingBall</defName>
+    <thoughtClass>Thought_AttendedRitual</thoughtClass>
+    <durationDays>6</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>amazing ball</label>
+        <description>I had such an amazing time at that ball. It was everything I imagined and more!</description>
+        <baseMoodEffect>8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+    <ThoughtDef>
+    <defName>VFEE_TerribleExhibit</defName>
+    <thoughtClass>Thought_AttendedRitual</thoughtClass>
+    <durationDays>6</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>terrible exhibit</label>
+        <description>I'm embarrassed that we hosted such a terrible art exhibit. Our art will never be resepected in the empire now!</description>
+        <baseMoodEffect>-6</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <ThoughtDef>
+    <defName>VFEE_BoringExhibit</defName>
+    <thoughtClass>Thought_AttendedRitual</thoughtClass>
+    <durationDays>6</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>boring exhibit</label>
+        <description>I was expecting a a lot more interesting pieces, and better presentation.</description>
+        <baseMoodEffect>-3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <ThoughtDef>
+    <defName>VFEE_EnjoyableExhibit</defName>
+    <thoughtClass>Thought_AttendedRitual</thoughtClass>
+    <durationDays>6</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>enjoyable exhibit</label>
+        <description>It was really interesting seeing our collection displayed like this. Was a great time!</description>
+        <baseMoodEffect>3</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  <ThoughtDef>
+    <defName>VFEE_AmazingExhibit</defName>
+    <thoughtClass>Thought_AttendedRitual</thoughtClass>
+    <durationDays>6</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>amazing exhibit</label>
+        <description>I couldn't believe art I've seen many times could still be soo fascinating, and the royals were so interesting.</description>
+        <baseMoodEffect>8</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+</Defs>

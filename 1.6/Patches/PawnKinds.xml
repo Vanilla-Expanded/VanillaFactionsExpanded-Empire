@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/PawnKindDef[@Name="JanissaryBase"]/apparelRequired</xpath>
+            <value>
+                <apparelRequired>
+                   <li>VFEE_Apparel_JanissaryHelmet</li>
+                   <li>VFEE_Apparel_JanissaryCuirass</li>
+				   <li>Apparel_FlakPants</li>
+				   <li>Apparel_ShirtRuffle</li>
+				   <li>Apparel_FlakVest</li>
+                </apparelRequired>
+            </value>
+    </Operation>
+	
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/PawnKindDef[@Name="JanissaryBase"]/weaponTags</xpath>
+            <value>
+                <li>VFEE_SpacerGunBreach</li>
+            </value>
+    </Operation>
+	
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/PawnKindDef[defName="Empire_Royal_Stellarch"]/specificApparelRequirements</xpath>
+            <value>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <requiredTag>RoyalTier7</requiredTag>
+        <stuff>Gold</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Shell</apparelLayer>
+        <requiredTag>RoyalTier6</requiredTag>
+        <color>(200, 18, 18)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Middle</apparelLayer>
+        <requiredTag>RoyalTier5</requiredTag>
+        <color>(157, 59, 206)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <requiredTag>RoyalTier2</requiredTag>
+        <color>(157, 59, 206)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <stuff>Hyperweave</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Legs</bodyPartGroup>
+        <stuff>Hyperweave</stuff>
+      </li>
+    </specificApparelRequirements>
+            </value>
+    </Operation>
+	
+    <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/PawnKindDef[defName="Empire_Royal_Duke"]/specificApparelRequirements</xpath>
+            <value>
+    <specificApparelRequirements>
+      <li>
+        <bodyPartGroup>UpperHead</bodyPartGroup>
+        <requiredTag>RoyalTier6</requiredTag>
+        <stuff>Plasteel</stuff>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Middle</apparelLayer>
+        <requiredTag>RoyalTier5</requiredTag>
+        <color>(55,55,55)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>OnSkin</apparelLayer>
+        <requiredTag>RoyalTier2</requiredTag>
+        <color>(134, 119, 229)</color>
+      </li>
+      <li>
+        <bodyPartGroup>Torso</bodyPartGroup>
+        <apparelLayer>Shell</apparelLayer>
+        <requiredTag>RoyalTier6</requiredTag>
+        <color>(134, 119, 229)</color>
+        <alternateTagChoices>
+          <li>
+            <tag>Cape</tag>
+            <chance>0.5</chance>
+          </li>
+        </alternateTagChoices>
+      </li>
+    </specificApparelRequirements>
+            </value>
+    </Operation>
+
+</Patch>

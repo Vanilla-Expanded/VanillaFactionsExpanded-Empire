@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef Abstract="True" Name="VFEE_BuildingFloorBase" ParentName="BuildingBase">
+    <altitudeLayer>FloorCoverings</altitudeLayer>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsFurniture</li>
+    </thingCategories>
+    <designationCategory>Floors</designationCategory>
+    <selectable>true</selectable>
+    <useHitPoints>true</useHitPoints>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <blocksAltitudes>
+      <li>FloorCoverings</li>
+    </blocksAltitudes>
+    <building>
+      <isEdifice>false</isEdifice>
+    </building>
+  </ThingDef>
+
+  <ThingDef Abstract="True" Name="VFEE_BuildingFloorMediumBase" ParentName="VFEE_BuildingFloorBase">
+    <size>(3,3)</size>
+    <statBases>
+      <Beauty>20</Beauty>
+      <WorkToBuild>1000</WorkToBuild>
+      <Mass>100</Mass>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef Abstract="True" Name="VFEE_BuildingFloorBroadBase" ParentName="VFEE_BuildingFloorBase">
+    <size>(4,4)</size>
+    <statBases>
+      <Beauty>40</Beauty>
+      <WorkToBuild>4000</WorkToBuild>
+      <Mass>15</Mass>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="VFEE_BuildingFloorMediumBase">
+    <defName>VFEE_ImperialSlab</defName>
+    <label>imperial slab</label>
+    <description>A stoney bas relief of imperial imagery for decorating a floor.</description>
+    <graphicData>
+      <graphicClass>Graphic_Random</graphicClass>
+      <texPath>Furniture/SlabImperialMedium</texPath>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>100</costStuffCount>
+    <researchPrerequisites>
+      <li>VFEE_NobleDecorations</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <ThingDef ParentName="VFEE_BuildingFloorMediumBase">
+    <defName>VFEE_LargeRoyalRug</defName>
+    <label>large royal rug</label>
+    <description>An intricate rug with an imperial-style pattern, for decorating a floor.</description>
+    <statBases>
+      <Flammability>0.32</Flammability>
+	  <Beauty>18</Beauty>
+	  <WorkToBuild>2000</WorkToBuild>
+	  <Mass>10</Mass>
+    </statBases>
+    <graphicData>
+      <graphicClass>Graphic_Random</graphicClass>
+      <texPath>Furniture/RoyalRugLarge</texPath>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+    <costStuffCount>100</costStuffCount>
+    <researchPrerequisites>
+      <li>VFEE_NobleDecorations</li>
+    </researchPrerequisites>
+  </ThingDef>
+  
+  <ThingDef ParentName="VFEE_BuildingFloorBroadBase">
+    <defName>VFEE_GrandRoyalRug</defName>
+    <label>grand royal rug</label>
+    <description>A majestic rug with an imperial-style pattern, for decorating a floor.</description>
+    <statBases>
+      <Flammability>0.32</Flammability>
+    </statBases>
+    <graphicData>
+      <graphicClass>Graphic_Random</graphicClass>
+      <texPath>Furniture/RoyalRugGrand</texPath>
+      <drawSize>(4,4)</drawSize>
+    </graphicData>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <stuffCategories>
+      <li>Fabric</li>
+      <li>Leathery</li>
+    </stuffCategories>
+    <costStuffCount>150</costStuffCount>
+    <researchPrerequisites>
+      <li>VFEE_NobleDecorations</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+</Defs>
