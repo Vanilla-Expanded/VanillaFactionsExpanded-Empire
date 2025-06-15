@@ -2,6 +2,7 @@
 <ModMetaData>
 	<name>Vanilla Factions Expanded - Empire</name>
 	<author>Oskar Potocki, xrushha, legodude17, Allie</author>
+	<modIconPath IgnoreIfNoMatchingField="True">UI/VELogo</modIconPath>
 	<supportedVersions>
 		<li>1.4</li>
 		<li>1.5</li>
