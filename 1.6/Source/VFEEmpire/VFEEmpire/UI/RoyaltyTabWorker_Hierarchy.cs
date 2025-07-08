@@ -165,7 +165,7 @@ public class RoyaltyTabWorker_Hierarchy : RoyaltyTabWorker
 
                 if (!pawn.Faction.IsPlayerSafe() && !pawn.Downed && title.CanInvite() &&
                     pawn.IsWorldPawn() && Find.WorldPawns.GetSituation(pawn) != WorldPawnSituation.ReservedByQuest &&
-                    VFEE_DefOf.VFEE_NobleVisit.CanRun(35f,null) &&
+                    VFEE_DefOf.VFEE_NobleVisit.CanRun(35f, Find.World) &&
                     Widgets.ButtonText(buttonRect, "VFEE.Invite".Translate()))
                     Find.WindowStack.Add(new FloatMenu(EmpireUtility.AllColonistsWithTitle()
                        .Select(p =>
