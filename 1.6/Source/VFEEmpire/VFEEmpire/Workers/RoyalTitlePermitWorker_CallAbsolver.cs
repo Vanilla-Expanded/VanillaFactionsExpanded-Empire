@@ -12,7 +12,7 @@ public class RoyalTitlePermitWorker_CallAbsolver : RoyalTitlePermitWorker
     public override IEnumerable<FloatMenuOption> GetRoyalAidOptions(Map map, Pawn pawn, Faction faction)
     {
         string t;
-        if (AidDisabled(map, pawn, faction, out t))
+        if (AidDisabled_NewTemp(map, pawn, faction, out t))
         {
             yield return new FloatMenuOption(def.LabelCap + ": " + t, null);
             yield break;
