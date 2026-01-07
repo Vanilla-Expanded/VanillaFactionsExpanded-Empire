@@ -11,7 +11,7 @@
 			<drawSize>(0.9, 0.9)</drawSize>
 			<shaderType>CutoutComplex</shaderType>
 		</graphicData>
-		<generateCommonality>2</generateCommonality>
+		<generateCommonality>0</generateCommonality>
 		<tradeability>None</tradeability>
 		<tickerType>Normal</tickerType>
 		<statBases>
@@ -49,6 +49,9 @@
 			</tags>
 			<useDeflectMetalEffect>true</useDeflectMetalEffect>
 			<useWornGraphicMask>true</useWornGraphicMask>
+			<canBeGeneratedToSatisfyWarmth>false</canBeGeneratedToSatisfyWarmth>
+			<canBeGeneratedToSatisfyToxicEnvironmentResistance>false</canBeGeneratedToSatisfyToxicEnvironmentResistance>
+			<canBeGeneratedToSatisfyVacuumResistance>false</canBeGeneratedToSatisfyVacuumResistance>
 		</apparel>
 		<colorGenerator Class="ColorGenerator_Options">
 			<options>
@@ -72,7 +75,7 @@
 			</options>
 		</colorGenerator>
 		<comps>
-			<li Class="CompProperties_Biocodable"/>
+			<li Class="CompProperties_Biocodable" />
 			<li>
 				<compClass>VFEEmpire.CompResearchRefresh</compClass>
 			</li>
@@ -128,7 +131,7 @@
 			<useDeflectMetalEffect>true</useDeflectMetalEffect>
 		</apparel>
 		<comps>
-			<li Class="CompProperties_Biocodable"/>
+			<li Class="CompProperties_Biocodable" />
 		</comps>
 		<thingSetMakerTags>
 			<li>VFEE_None</li>
@@ -203,7 +206,7 @@
 			</options>
 		</colorGenerator>
 		<comps>
-			<li Class="CompProperties_Biocodable"/>
+			<li Class="CompProperties_Biocodable" />
 		</comps>
 		<thingSetMakerTags>
 			<li>VFEE_Deserter</li>
@@ -293,7 +296,7 @@
 			</options>
 		</colorGenerator>
 		<comps>
-			<li Class="CompProperties_Biocodable"/>
+			<li Class="CompProperties_Biocodable" />
 		</comps>
 		<thingSetMakerTags>
 			<li>RewardStandardHighFreq</li>
