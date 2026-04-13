@@ -39,10 +39,16 @@ namespace VFEEmpire
             {
                 Map.lordManager.RemoveLord(lord);
             }
+
+            lord = null;
         }
 
         public override void ExposeData()
         {
+            // If the lord was removed, don't save. Will cause warnings on load.
+            if (Scribe.mode == LoadSaveMode.Saving && lord != null && !Map.lordManager.lords.Contains(lord))
+                lord = null;
+
             base.ExposeData();
             Scribe_References.Look(ref stellarch, "stellarch");
             Scribe_References.Look(ref leadPawn, "leadPawn");

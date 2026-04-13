@@ -50,6 +50,8 @@ namespace VFEEmpire
             {
                 Map.lordManager.RemoveLord(lord);
             }
+
+            lord = null;
         }
         public static bool TryGetGrandBallSpot(Room ballroom, Map map,out LocalTargetInfo spot, out IntVec3 absoluteSpot, out List<IntVec3> danceFloor, out CellRect rect)
         {            
@@ -85,6 +87,10 @@ namespace VFEEmpire
         }
         public override void ExposeData()
         {
+            // If the lord was removed, don't save. Will cause warnings on load.
+            if (Scribe.mode == LoadSaveMode.Saving && lord != null && !Map.lordManager.lords.Contains(lord))
+                lord = null;
+
             base.ExposeData();
             Scribe_References.Look(ref leadPawn, "leadPawn");
             Scribe_References.Look(ref lord, "lord");
