@@ -171,7 +171,14 @@ namespace VFEEmpire
 			ballToil = new LordToil_GrandBall_Dance(target.Cell);
 			graph.AddToil(ballToil);
 			//Transitions
-			var removeColonists = new TransitionAction_Custom(() => lord.RemovePawns(colonistParticipants));
+			var removeColonists = new TransitionAction_Custom(() =>
+			{				
+				foreach (Pawn pawn in colonistParticipants.ToList())
+				{
+					lord.RemovePawn(pawn);
+					colonistParticipants.Remove(pawn);
+				}
+            });
 
 			var transition_Spawned = new Transition(wait_ForSpawned, moveToPlace);
 			transition_Spawned.AddTrigger(new Trigger_Custom((TriggerSignal signal) => signal.type == TriggerSignalType.Tick && lord.ownedPawns.All(x=>x.Spawned)));
@@ -208,7 +215,8 @@ namespace VFEEmpire
 			}, 60));
 			transition_BallInterupted.AddTrigger(new Trigger_PawnHarmed());
 			transition_BallInterupted.AddTrigger(new Trigger_PawnLostViolently());
-			transition_BallInterupted.AddTrigger(new Trigger_Signal(questEndedSignal));
+            transition_BallInterupted.AddTrigger(new Trigger_PawnLost(PawnLostCondition.InMentalState));
+            transition_BallInterupted.AddTrigger(new Trigger_Signal(questEndedSignal));
 			graph.transitions.Add(transition_BallInterupted);
 
 			var transition_Leave = new Transition(wait_PostBall, exitToil); //Wont leave if theres still an active threat
@@ -305,6 +313,12 @@ namespace VFEEmpire
 			}
 			foreach (KeyValuePair<IntVec3, Mote> highlightedPosition in highlightedPositions)
 				highlightedPosition.Value.Maintain();
+			if (lord.ownedPawns.Count == 0)
+			{
+				Map.lordManager.RemoveLord(lord);
+                if (music is { Ended: false })
+                    music.End();
+            }
 		}
 
         protected override bool RitualFinished(float progress, bool cancelled)
@@ -365,18 +379,26 @@ namespace VFEEmpire
             if (nobles.Contains(p) && ticksPassed < duration)
             {
 				nobles.Remove(p);
-                if (dancers.Contains(p))
-                {
-					dancers.Remove(p);
-					ToTopOfDance();
-					InterruptDancers();
-				}
             }
-			p.jobs?.CheckForJobOverride();
+            if (dancers.Contains(p))
+            {
+                dancers.Remove(p);
+                ToTopOfDance();
+                InterruptDancers();
+            }
+			if (colonistParticipants.Contains(p))
+			{
+				colonistParticipants.Remove(p);
+			}
+            p.jobs.StopAll();
 		}
-		public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason)
+        public override bool EndPawnJobOnCleanup(Pawn p)
+        {
+			return true;
+        }
+        public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason)
 		{
-			return p.Faction.IsPlayer;
+            return p.Faction.IsPlayer || reason == PawnLostCondition.ExitedMap;
 		}
 		public void StartDance()
 		{
@@ -425,7 +447,7 @@ namespace VFEEmpire
 			QuestUtility.SendQuestTargetSignals(lord.questTags, signal, lord.Named("SUBJECT"));
 			foreach (var pawn in lord.ownedPawns)
 				pawn.jobs.CheckForJobOverride();
-		}
+        }
 		public void RemoveTags(string tag)
         {
 			foreach(var kvp in perPawnTags.ToList())

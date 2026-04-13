@@ -311,7 +311,7 @@ public class LordJob_ArtExhibit : LordJob_Ritual
         p.jobs?.CheckForJobOverride();
     }
 
-    public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason) => p.Faction.IsPlayer;
+    public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason) => p.Faction.IsPlayer || reason == PawnLostCondition.ExitedMap;
 
 
     public override string GetReport(Pawn pawn) => "LordReportAttending".Translate("VFEE.ArtExhibit.Label".Translate());

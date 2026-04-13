@@ -48,7 +48,7 @@ namespace VFEEmpire
             Find.SignalManager.SendSignal(new Signal(questTag + ".QuestEnded", quest.Named("SUBJECT")));
             if (Map.lordManager.lords.Contains(lord))//The lord never gets removed due to Lord:CanExistWithoutPawns
             {
-                Map.lordManager.RemoveLord(lord);
+              Map.lordManager.RemoveLord(lord);
             }
         }
         public static bool TryGetGrandBallSpot(Room ballroom, Map map,out LocalTargetInfo spot, out IntVec3 absoluteSpot, out List<IntVec3> danceFloor, out CellRect rect)
