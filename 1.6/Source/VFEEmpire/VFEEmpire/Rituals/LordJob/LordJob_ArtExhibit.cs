@@ -307,7 +307,6 @@ public class LordJob_ArtExhibit : LordJob_Ritual
 
     public override void Notify_PawnLost(Pawn p, PawnLostCondition condition)
     {
-        base.Notify_PawnLost(p, condition);
         if (nobles.Contains(p) && ticksPassed < duration) nobles.Remove(p);
         p.jobs?.CheckForJobOverride();
     }

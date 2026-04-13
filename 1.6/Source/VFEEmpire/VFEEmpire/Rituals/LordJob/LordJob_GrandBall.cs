@@ -306,7 +306,16 @@ namespace VFEEmpire
 			foreach (KeyValuePair<IntVec3, Mote> highlightedPosition in highlightedPositions)
 				highlightedPosition.Value.Maintain();
 		}
-		public void SetPartners()
+
+        protected override bool RitualFinished(float progress, bool cancelled)
+        {
+	        if (music is { Ended: false })
+		        music.End();
+
+	        return base.RitualFinished(progress, cancelled);
+        }
+
+        public void SetPartners()
 		{
 			var pawns = nobles.InRandomOrder().ToList();
 			leadPartner.Clear();
@@ -353,7 +362,6 @@ namespace VFEEmpire
         }
         public override void Notify_PawnLost(Pawn p, PawnLostCondition condition)
         {
-            base.Notify_PawnLost(p, condition);			
             if (nobles.Contains(p) && ticksPassed < duration)
             {
 				nobles.Remove(p);

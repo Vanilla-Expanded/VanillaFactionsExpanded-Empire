@@ -424,7 +424,6 @@ public class LordJob_Parade : LordJob_Ritual
 
     public override void Notify_PawnLost(Pawn p, PawnLostCondition condition)
     {
-        base.Notify_PawnLost(p, condition);
         if (nobles.Contains(p) && ticksPassed < duration) nobles.Remove(p);
         if (guards.Contains(p)) guards.Remove(p);
         var compShuttle = shuttle.TryGetComp<CompShuttle>();
