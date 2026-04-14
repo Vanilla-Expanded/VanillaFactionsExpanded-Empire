@@ -419,7 +419,7 @@ namespace VFEEmpire
 				}
 			}
 			totalPresenceTmp.RemoveAll((tp) => tp.Value < 2500);
-			outcome.Apply(ticksPassed / duration, totalPresenceTmp, this);
+			outcome.Apply((float)ticksPassed / duration, totalPresenceTmp, this);
 			outcome.ResetCompDatas();
 			lord.ReceiveMemo("CeremonyFinished");
 			QuestUtility.SendQuestTargetSignals(lord.questTags, signal, lord.Named("SUBJECT"));
