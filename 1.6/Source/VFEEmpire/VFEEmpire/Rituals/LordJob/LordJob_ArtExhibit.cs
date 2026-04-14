@@ -304,6 +304,8 @@ public class LordJob_ArtExhibit : LordJob_Ritual
         stage++;
         if (stage >= artPieces.Count)
         {
+            if (ticksPassed < duration)
+                ticksPassed = duration;
             StopExhibit(SignalCeremonySuccess);
             return;
         }
