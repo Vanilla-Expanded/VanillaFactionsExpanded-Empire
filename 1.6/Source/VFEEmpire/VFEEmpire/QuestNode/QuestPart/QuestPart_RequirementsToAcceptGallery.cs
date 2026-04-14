@@ -9,7 +9,7 @@ using RimWorld.QuestGen;
 
 namespace VFEEmpire
 {
-    
+
     public class QuestPart_RequirementsToAcceptGallery : QuestPart_RequirementsToAccept
     {
         public override AcceptanceReport CanAccept()
@@ -30,7 +30,7 @@ namespace VFEEmpire
                 var title = pawn.royalty.AllTitlesInEffectForReading.Where(x => x.def.Ext() != null && !x.def.Ext().galleryRequirements.NullOrEmpty()).FirstOrDefault();
                 if (title != null)
                 {
-                    culprits.Add(pawn);                    
+                    culprits.Add(pawn);
                     foreach (var gallery in mapParent.Map.RoyaltyTracker().Galleries)
                     {
                         foreach (var req in title.def.Ext().galleryRequirements)
@@ -39,7 +39,7 @@ namespace VFEEmpire
                             {
                                 sb.AppendLine(req.LabelCap());
                             }
-                         }
+                        }
                         if (sb.Length == 0)
                         {
                             culprits.Remove(pawn);
@@ -56,13 +56,13 @@ namespace VFEEmpire
         {
             get
             {
-                foreach(var p in CantAccept(out var unmet))
+                foreach (var p in CantAccept(out var unmet))
                 {
-                    var title = p.royalty.AllTitlesInEffectForReading.Where(x => x.def.Ext() != null && !x.def.Ext().galleryRequirements.NullOrEmpty()).FirstOrDefault(); 
-                    if(title != null)
+                    var title = p.royalty.AllTitlesInEffectForReading.Where(x => x.def.Ext() != null && !x.def.Ext().galleryRequirements.NullOrEmpty()).FirstOrDefault();
+                    if (title != null)
                     {
                         yield return new Dialog_InfoCard.Hyperlink(title.def, title.faction, -1);
-                    }                    
+                    }
                 }
             }
         }
