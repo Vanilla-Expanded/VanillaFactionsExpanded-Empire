@@ -310,14 +310,6 @@ namespace VFEEmpire
 				highlightedPosition.Value.Maintain();
 		}
 
-        protected override bool RitualFinished(float progress, bool cancelled)
-        {
-	        if (music is { Ended: false })
-		        music.End();
-
-	        return base.RitualFinished(progress, cancelled);
-        }
-
         public void SetPartners()
 		{
 			var pawns = nobles.InRandomOrder().ToList();
@@ -404,6 +396,9 @@ namespace VFEEmpire
 		public void StopDance(string signal)
 		{
 			danceFinished = true;
+
+			if (music is { Ended: false })
+				music.End();
 
 			foreach (KeyValuePair<Pawn, int> keyValuePair in ballToil.Data.presentForTicks)
 			{
