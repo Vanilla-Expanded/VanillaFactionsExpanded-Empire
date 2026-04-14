@@ -13,8 +13,13 @@ namespace VFEEmpire;
 public class LordJob_ArtExhibit : LordJob_Ritual
 {
     //Not Exposed
-    public static readonly int duration = 25000;
-    public static readonly string MemoCeremonyStarted = "CeremonyStarted";
+    public const int duration = 25000;
+    public const string MemoCeremonyStarted = "CeremonyStarted";
+    public const string MemoCeremonyFinished = "CeremonyFinished";
+    public const string SignalCeremonySuccess = "CeremonySuccess";
+    public const string SignalCeremonyFailed = "CeremonyFailed";
+    public const string SignalCeremonyDone = "CeremonyDone";
+    public const string SignalCeremonyTimeout = "CeremonyTimeout";
     private static readonly Texture2D icon = ContentFinder<Texture2D>.Get("UI/Icons/Rituals/BestowCeremony");
     public List<Thing> artPieces = new();
     public LordToil_ArtExhibit_Show artToil;
@@ -171,21 +176,24 @@ public class LordJob_ArtExhibit : LordJob_Ritual
         transition_StartBall.AddTrigger(new Trigger_Memo(MemoCeremonyStarted));
         transition_StartBall.AddPostAction(new TransitionAction_Custom(() =>
             {
-                QuestUtility.SendQuestTargetSignals(lord.questTags, "ritualStarted", lord.Named("SUBJECT"));
+                if (EnsureHostIsValid())
+                    QuestUtility.SendQuestTargetSignals(lord.questTags, "ritualStarted", lord.Named("SUBJECT"));
+                else
+                    StopExhibit(SignalCeremonyFailed);
             }
         ));
         graph.transitions.Add(transition_StartBall);
 
         var transition_BallEnd = new Transition(artToil, wait_PostBall);
         transition_BallEnd.AddPreAction(removeColonists);
-        transition_BallEnd.AddTrigger(new Trigger_Memo("CeremonyFinished"));
+        transition_BallEnd.AddTrigger(new Trigger_Memo(MemoCeremonyFinished));
         transition_BallEnd.AddPostAction(new TransitionAction_Custom(() =>
-            QuestUtility.SendQuestTargetSignals(lord.questTags, "CeremonyDone", lord.Named("SUBJECT"))));
+            QuestUtility.SendQuestTargetSignals(lord.questTags, SignalCeremonyDone, lord.Named("SUBJECT"))));
         graph.transitions.Add(transition_BallEnd);
 
         var transition_BallInterupted = new Transition(artToil, exitToil);
         transition_BallInterupted.AddPreAction(removeColonists);
-        transition_BallInterupted.AddPreAction(new TransitionAction_Custom(() => { StopExhibit("CeremonyFailed"); }));
+        transition_BallInterupted.AddPreAction(new TransitionAction_Custom(() => { StopExhibit(SignalCeremonyFailed); }));
         transition_BallInterupted.AddTrigger(new Trigger_TickCondition(() => { return Gallery.PsychologicallyOutdoors || shuttle.Destroyed; }, 60));
         transition_BallInterupted.AddTrigger(new Trigger_PawnHarmed());
         transition_BallInterupted.AddTrigger(new Trigger_PawnLostViolently());
@@ -212,7 +220,7 @@ public class LordJob_ArtExhibit : LordJob_Ritual
         transition_DurationTimeOut.AddPreAction(removeColonists);
         transition_DurationTimeOut.AddTrigger(new Trigger_TicksPassed(60000));
         transition_DurationTimeOut.AddPostAction(new TransitionAction_Custom(() =>
-            QuestUtility.SendQuestTargetSignals(lord.questTags, "CeremonyTimeout", lord.Named("SUBJECT"))));
+            QuestUtility.SendQuestTargetSignals(lord.questTags, SignalCeremonyTimeout, lord.Named("SUBJECT"))));
         graph.transitions.Add(transition_DurationTimeOut);
         var transition_Hurt = new Transition(moveToPlace, exitToil);
         transition_Hurt.AddPreAction(removeColonists);
@@ -251,7 +259,7 @@ public class LordJob_ArtExhibit : LordJob_Ritual
         totalPresenceTmp.RemoveAll(tp => tp.Value < 2500);
         outcome.Apply(ticksPassed / (float)duration, totalPresenceTmp, this);
         outcome.ResetCompDatas();
-        lord.ReceiveMemo("CeremonyFinished");
+        lord.ReceiveMemo(MemoCeremonyFinished);
         QuestUtility.SendQuestTargetSignals(lord.questTags, signal, lord.Named("SUBJECT"));
         foreach (var pawn in lord.ownedPawns)
             pawn.jobs.CheckForJobOverride();
@@ -296,7 +304,13 @@ public class LordJob_ArtExhibit : LordJob_Ritual
         stage++;
         if (stage >= artPieces.Count)
         {
-            StopExhibit("CeremonySuccess");
+            StopExhibit(SignalCeremonySuccess);
+            return;
+        }
+
+        if (!EnsureHostIsValid())
+        {
+            StopExhibit(SignalCeremonyFailed);
             return;
         }
 
@@ -307,7 +321,11 @@ public class LordJob_ArtExhibit : LordJob_Ritual
 
     public override void Notify_PawnLost(Pawn p, PawnLostCondition condition)
     {
-        if (nobles.Contains(p) && ticksPassed < duration) nobles.Remove(p);
+        if (ticksPassed < duration)
+        {
+            nobles.Remove(p);
+            colonistParticipants.Remove(p);
+        }
         p.jobs?.CheckForJobOverride();
     }
 
@@ -344,10 +362,28 @@ public class LordJob_ArtExhibit : LordJob_Ritual
                 action = () =>
                 {
                     Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("VFEE.ArtExhibit.Cancel.Confirm".Translate(),
-                        () => { StopExhibit("CeremonyFailed"); }));
+                        () => { StopExhibit(SignalCeremonyFailed); }));
                 },
                 hotKey = KeyBindingDefOf.Misc6
             };
         }
+    }
+
+    private bool EnsureHostIsValid()
+    {
+        if (nobles.Contains(host))
+            return true;
+
+        foreach (var pawn in colonistParticipants)
+        {
+            if (nobles.Contains(pawn))
+            {
+                host = pawn;
+                host.jobs?.CheckForJobOverride();
+                return true;
+            }
+        }
+
+        return false;
     }
 }
