@@ -17,7 +17,7 @@ namespace VFEEmpire
             Slate slate = new();
             slate.Set("rewardGiver", leadNoble);
             slate.Set("marketValueRange", MarketValueRange, false);
-            var outcomeString = outcomeDef.outcomeChances[outcomeIndex].label;
+            var outcomeString = outcomeDef.outcomeChances.FirstOrDefault(x => x.positivityIndex == outcomeIndex).label;
             slate.Set("outcome", outcomeString);
             return slate;
         }
