@@ -43,15 +43,18 @@ namespace VFEEmpire
 		//Not Exposed
 		private Dictionary<Pawn, List<Pawn>> dancedWith = new(); //not exposed, kind of a hassle and not worth it for effort
 		public Dictionary<Pawn, IntVec3> startPoses = new(); //Not exposed will regenerate if loaded at brief period where its needed
-		public static readonly int duration = 9000;
+		public const int duration = 9000;
 		public LordToil exitToil;
 		public LordToil_GrandBall_Dance ballToil;
 		public RitualOutcomeEffectWorker_GrandBall outcome;
 		private List<Pawn> tmpHasPartner = new();		
 		private Dictionary<Pawn, int> totalPresenceTmp = new();
 		protected Dictionary<IntVec3, Mote> highlightedPositions = new Dictionary<IntVec3, Mote>();
-		public static readonly string MemoCeremonyStarted = "CeremonyStarted";
+		public const string MemoCeremonyStarted = "CeremonyStarted";
 		private static Texture2D icon = ContentFinder<Texture2D>.Get("UI/Rituals/Ritual_GrandBall", true);
+
+		public override int TicksLeft => Mathf.Max(duration - ticksPassed, 0);
+
 		public LordJob_GrandBall()
 		{
 		}

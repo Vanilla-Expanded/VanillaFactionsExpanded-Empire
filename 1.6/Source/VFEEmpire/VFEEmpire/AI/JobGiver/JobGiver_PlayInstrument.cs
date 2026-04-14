@@ -15,7 +15,7 @@ namespace VFEEmpire
 		protected override Job TryGiveJob(Pawn pawn)
 		{
 			var dance = pawn.GetLord()?.LordJob as LordJob_GrandBall;
-			if (dance == null) { return null; }
+			if (dance == null || dance.TicksLeft < 0) { return null; }
 			var instruments = dance.BallRoom.ContainedAndAdjacentThings.Where(x => x is Building_MusicalInstrument);
             if (!instruments.Any()) { return null; }
 			var insturment = instruments.FirstOrDefault(x => GatheringWorker_Concert.InstrumentAccessible(x as Building_MusicalInstrument, pawn)) as Building_MusicalInstrument;
@@ -25,7 +25,7 @@ namespace VFEEmpire
 			}
 			Job job = JobMaker.MakeJob(JobDefOf.Play_MusicalInstrument, insturment, insturment.InteractionCell);
 			job.doUntilGatheringEnded = true;
-			job.expiryInterval = LordJob_GrandBall.duration;
+			job.expiryInterval = dance.TicksLeft;
 			return job;
 		}
 
