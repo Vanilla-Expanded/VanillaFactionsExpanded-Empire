@@ -20,7 +20,7 @@ namespace VFEEmpire
             }
             if (!cantAccept.NullOrEmpty())
             {
-                var title = cantAccept.First().royalty.AllTitlesInEffectForReading.Where(x => x.def.Ext() != null && !x.def.Ext().ballroomRequirements.NullOrEmpty()).FirstOrDefault();
+                // var title = cantAccept.First().royalty.AllTitlesInEffectForReading.FirstOrDefault(x => x.def.Ext() != null && !x.def.Ext().ballroomRequirements.NullOrEmpty());
                 return "VFEE.BallroomRequirements.Unmet".Translate(unmet);
             }
             return true;
@@ -31,11 +31,11 @@ namespace VFEEmpire
             StringBuilder sb = new();
             foreach (var pawn in pawns)
             {
-                var title = pawn.royalty.AllTitlesInEffectForReading.Where(x => x.def.Ext() != null && !x.def.Ext().ballroomRequirements.NullOrEmpty()).FirstOrDefault();
+                var title = pawn.royalty.AllTitlesInEffectForReading.FirstOrDefault(x => x.def.Ext() != null && !x.def.Ext().ballroomRequirements.NullOrEmpty());
                 if (title != null)
                 {
                     culprits.Add(pawn);
-                    foreach (var ballroom in mapParent.Map.RoyaltyTracker().Ballrooms)
+                    foreach (var ballroom in mapParent.Map.RoyaltyTracker().Ballrooms.ToList())
                     {
                         if (!QuestPart_GrandBall.TryGetGrandBallSpot(ballroom, mapParent.Map, out var spot, out var absSpot, out var dancefloor, out var rect) || dancefloor.Count < requiredCells)
                         {
@@ -68,7 +68,7 @@ namespace VFEEmpire
             {
                 foreach (var p in CantAccept(out var unmet))
                 {
-                    var title = p.royalty.AllTitlesInEffectForReading.Where(x => x.def.Ext() != null && !x.def.Ext().ballroomRequirements.NullOrEmpty()).FirstOrDefault();
+                    var title = p.royalty.AllTitlesInEffectForReading.FirstOrDefault(x => x.def.Ext() != null && !x.def.Ext().ballroomRequirements.NullOrEmpty());
                     if (title != null)
                     {
                         yield return new Dialog_InfoCard.Hyperlink(title.def, title.faction, -1);

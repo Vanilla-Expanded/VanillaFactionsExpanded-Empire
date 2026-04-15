@@ -27,11 +27,11 @@ namespace VFEEmpire
             StringBuilder sb = new();
             foreach (var pawn in pawns)
             {
-                var title = pawn.royalty.AllTitlesInEffectForReading.Where(x => x.def.Ext() != null && !x.def.Ext().galleryRequirements.NullOrEmpty()).FirstOrDefault();
+                var title = pawn.royalty.AllTitlesInEffectForReading.FirstOrDefault(x => x.def.Ext() != null && !x.def.Ext().galleryRequirements.NullOrEmpty());
                 if (title != null)
                 {
                     culprits.Add(pawn);
-                    foreach (var gallery in mapParent.Map.RoyaltyTracker().Galleries)
+                    foreach (var gallery in mapParent.Map.RoyaltyTracker().Galleries.ToList())
                     {
                         foreach (var req in title.def.Ext().galleryRequirements)
                         {
@@ -56,9 +56,9 @@ namespace VFEEmpire
         {
             get
             {
-                foreach (var p in CantAccept(out var unmet))
+                foreach (var p in CantAccept(out _))
                 {
-                    var title = p.royalty.AllTitlesInEffectForReading.Where(x => x.def.Ext() != null && !x.def.Ext().galleryRequirements.NullOrEmpty()).FirstOrDefault();
+                    var title = p.royalty.AllTitlesInEffectForReading.FirstOrDefault(x => x.def.Ext() != null && !x.def.Ext().galleryRequirements.NullOrEmpty());
                     if (title != null)
                     {
                         yield return new Dialog_InfoCard.Hyperlink(title.def, title.faction, -1);
