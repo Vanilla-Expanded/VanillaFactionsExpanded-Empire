@@ -24,7 +24,7 @@ namespace VFEEmpire
             IntVec3 absoluteSpot = IntVec3.Invalid;
             List<IntVec3> danceFloor = new();
             CellRect cellrect = CellRect.Empty;
-            foreach(var tmpBall in Map.RoyaltyTracker().Ballrooms.OrderByDescending(x => x.GetStat(RoomStatDefOf.Impressiveness)))
+            foreach(var tmpBall in Map.RoyaltyTracker().Ballrooms.ToList().OrderByDescending(x => x.GetStat(RoomStatDefOf.Impressiveness)))
             {
                 if (TryGetGrandBallSpot(tmpBall, Map, out spot, out absoluteSpot, out danceFloor,out cellrect) && danceFloor.Count >= requiredDanceFloor)
                 {

@@ -23,7 +23,7 @@ namespace VFEEmpire
             LocalTargetInfo spot = LocalTargetInfo.Invalid;
             IntVec3 absoluteSpot = IntVec3.Invalid;
             List<IntVec3> danceFloor = new();
-            var gallery = Map.RoyaltyTracker().Galleries.OrderByDescending(x => x.GetStat(RoomStatDefOf.Impressiveness)).FirstOrDefault();
+            var gallery = Map.RoyaltyTracker().Galleries.ToList().OrderByDescending(x => x.GetStat(RoomStatDefOf.Impressiveness)).FirstOrDefault();
             if (gallery == null)
             {
                 Log.Error("Cannot find a Gallery this should've been checked");
