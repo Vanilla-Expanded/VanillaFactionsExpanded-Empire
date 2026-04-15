@@ -18,8 +18,11 @@ public class MapComponent_RoyaltyTracker : MapComponent
     {
         Ballrooms.Remove(room);
         Galleries.Remove(room);
-        if (role == VFEE_DefOf.VFEE_Ballroom) Ballrooms.Add(room);
-        if (role == VFEE_DefOf.VFEE_Gallery) Galleries.Add(room);
+        if (room.DistrictCount > 0)
+        {
+            if (role == VFEE_DefOf.VFEE_Ballroom) Ballrooms.Add(room);
+            if (role == VFEE_DefOf.VFEE_Gallery) Galleries.Add(room);
+        }
     }
 
     //Adding this as post load ballrooms and galleries is empty until something is changed in that room or you force it with opening roomstats.
@@ -39,6 +42,13 @@ public class MapComponent_RoyaltyTracker : MapComponent
     [HarmonyPostfix]
     public static void Room_UpdateRoomStatsAndRole_Postfix(Room __instance, RoomRoleDef ___role)
     {
-        __instance?.Map?.GetComponent<MapComponent_RoyaltyTracker>()?.Notify_UpdateRoomRole(__instance, ___role);
+        __instance.Map?.RoyaltyTracker()?.Notify_UpdateRoomRole(__instance, ___role);
+    }
+
+    [HarmonyPatch(typeof(RegionGrid), nameof(RegionGrid.RoomRemoved))]
+    [HarmonyPostfix]
+    public static void RegionGrid_RoomRemoved(Map ___map, Room room)
+    {
+        ___map?.RoyaltyTracker()?.Notify_UpdateRoomRole(room, null);
     }
 }
