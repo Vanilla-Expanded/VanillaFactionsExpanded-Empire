@@ -17,7 +17,7 @@ namespace VFEEmpire
         protected override void ProcessQuestSignal(Signal signal)
         {
             //Thing
-            if (signal.tag == inSignalShuttleDestroyed)
+            if (signal.tag == inSignalShuttleDestroyed && inSignalShuttleDestroyed != outSignalShuttleDestroyed)
             {
                 Find.SignalManager.SendSignal(new Signal(outSignalShuttleDestroyed, GetArgs()));
             }
@@ -34,13 +34,15 @@ namespace VFEEmpire
                 if (pawnsCantDie.Contains(pawn))
                 {
                     pawnsCantDie.Remove(pawn);
-                    Find.SignalManager.SendSignal(new Signal(outSignalDestroyed_LeaveColony, GetArgs()));
+                    if (inSignalDestroyed != outSignalDestroyed_LeaveColony)
+                        Find.SignalManager.SendSignal(new Signal(outSignalDestroyed_LeaveColony, GetArgs()));
                 }
             }
             if (signal.tag == inSignalArrested)
             {
                 pawns.Remove(pawn);
-                Find.SignalManager.SendSignal(new Signal(outSignalArrested_LeaveColony, GetArgs()));
+                if (inSignalArrested != outSignalArrested_LeaveColony)
+                    Find.SignalManager.SendSignal(new Signal(outSignalArrested_LeaveColony, GetArgs()));
             }
             if (signal.tag == inSignalLeftMap)
             {
@@ -56,31 +58,37 @@ namespace VFEEmpire
                     {
                         pawns.Clear();
                         pawnsLeftUnhealthy += downed;
-                        Find.SignalManager.SendSignal(new Signal(this.outSignalLast_LeftMapAllNotHealthy, GetArgs()));
+                        if (inSignalLeftMap != outSignalLast_LeftMapAllNotHealthy)
+                            Find.SignalManager.SendSignal(new Signal(this.outSignalLast_LeftMapAllNotHealthy, GetArgs()));
                     }
                     else
                     {
-                        Find.SignalManager.SendSignal(new Signal(this.outSignalLast_LeftMapAllHealthy, GetArgs()));
+                        if (inSignalLeftMap != outSignalLast_LeftMapAllHealthy)
+                            Find.SignalManager.SendSignal(new Signal(this.outSignalLast_LeftMapAllHealthy, GetArgs()));
                     }
                 }
             }
             if (signal.tag == inSignalKidnapped)
             {
                 pawns.Remove(pawn);
-                Find.SignalManager.SendSignal(new Signal(outSignalLast_Kidnapped, GetArgs()));
+                if (inSignalKidnapped != outSignalLast_Kidnapped)
+                    Find.SignalManager.SendSignal(new Signal(outSignalLast_Kidnapped, GetArgs()));
             }
             if (signal.tag == inSignalBanished)
             {
                 pawns.Remove(pawn);
-                Find.SignalManager.SendSignal(new Signal(outSignalLast_Banished, GetArgs()));
+                if (inSignalBanished != outSignalLast_Banished)
+                    Find.SignalManager.SendSignal(new Signal(outSignalLast_Banished, GetArgs()));
             }
             if (signal.tag == inSignalSurgeryViolation)
             {
-                Find.SignalManager.SendSignal(new Signal(outSignalSurgeryViolation_LeaveColony, GetArgs()));
+                if (inSignalSurgeryViolation != outSignalSurgeryViolation_LeaveColony)
+                    Find.SignalManager.SendSignal(new Signal(outSignalSurgeryViolation_LeaveColony, GetArgs()));
             }
             if (signal.tag == inSignalPsychicRitualTarget)
             {
-                Find.SignalManager.SendSignal(new Signal(outSignalPsychicRitualTarget, GetArgs()));
+                if (inSignalPsychicRitualTarget != outSignalPsychicRitualTarget)
+                    Find.SignalManager.SendSignal(new Signal(outSignalPsychicRitualTarget, GetArgs()));
             }
 
             SignalArgs GetArgs()
