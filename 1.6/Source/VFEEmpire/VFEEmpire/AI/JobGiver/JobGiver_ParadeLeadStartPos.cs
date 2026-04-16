@@ -12,14 +12,17 @@ namespace VFEEmpire
 
 		protected override Job TryGiveJob(Pawn pawn)
 		{
-			var parade = pawn.GetLord()?.LordJob as LordJob_Parade;			
-			if(parade.allAtStart == true)
+			if (pawn.GetLord()?.LordJob is not LordJob_Parade parade)
+			{
+				return null;
+			}
+			if(parade.allAtStart || parade.stellAtStart)
             {
 				return null;
             }
 			if(pawn.Position.DistanceTo(parade.shuttle.Position) < 6)
 			{
-				return JobMaker.MakeJob(JobDefOf.Wait);
+				return null;
             }
 			CellFinder.TryFindRandomCellNear(parade.shuttle.Position, pawn.Map, 5, (IntVec3 c) => pawn.CanReserveAndReach(c, PathEndMode.OnCell, Danger.Deadly), out var destination);
 			var job = JobMaker.MakeJob(JobDefOf.Goto, destination);
