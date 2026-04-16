@@ -211,6 +211,10 @@ public class LordJob_Parade : LordJob_Ritual
     public void StopParade(string signal)
     {
         paradeFinished = true;
+
+        if (music is { Ended: false })
+            music.End();
+
         if (signal == "CeremonySuccess") //Swap shuttle and shipjob to one where player can utilise
         {
             shuttle.SetFactionDirect(Faction.OfPlayer); //Swap faction to player at this point so players can load what they want
