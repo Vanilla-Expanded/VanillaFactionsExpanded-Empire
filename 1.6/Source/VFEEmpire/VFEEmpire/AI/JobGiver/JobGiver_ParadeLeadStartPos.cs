@@ -20,7 +20,7 @@ namespace VFEEmpire
             {
 				return null;
             }
-			if(pawn.Position.DistanceTo(parade.shuttle.Position) < 6)
+			if(parade.shuttle.DestroyedOrNull() || parade.shuttle.OccupiedRect().ExpandedBy(3).Contains(pawn.Position))
 			{
 				return null;
             }

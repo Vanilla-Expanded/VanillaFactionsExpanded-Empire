@@ -262,10 +262,12 @@ public class LordJob_Parade : LordJob_Ritual
             outcome.Tick(this);
             if (!allAtStart)
             {
-                if (stellarch.Position.DistanceTo(shuttle.Position) < 6)
+                if (shuttle.DestroyedOrNull() || shuttle.OccupiedRect().ExpandedBy(3).Contains(stellarch.Position))
                 {
                     stellAtStart = true;
                     allAtStart = true;
+                    // Doesn't seem to trigger, currently using somewhat of a workaround.
+                    // Consider looking into fixing why "Arrived" is not set for all pawns.
                     foreach (var pawn in nobles.Except(stellarch))
                         if (!PawnTagSet(pawn, "Arrived"))
                         {
