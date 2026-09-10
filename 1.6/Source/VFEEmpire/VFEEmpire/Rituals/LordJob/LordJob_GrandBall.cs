@@ -369,6 +369,14 @@ namespace VFEEmpire
             }
 			p.jobs?.CheckForJobOverride();
 		}
+		protected override bool IsInvited(Pawn p)
+		{
+			if (!base.IsInvited(p)) return false;
+			//Quest brings the nobles in directly, the player picks the colonists.
+			//Anyone else reaching this is the voluntary join node offering to add
+			//them, and there is no assignments list to say no on our behalf.
+			return colonistParticipants.Contains(p) || lord.ownedPawns.Contains(p);
+		}
 		public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason)
 		{
 			return p.Faction.IsPlayer;
