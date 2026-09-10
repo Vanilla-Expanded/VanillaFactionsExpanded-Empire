@@ -4,6 +4,7 @@ using System.Linq;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using Verse.AI;
 using Verse.Sound;
 using Verse.AI.Group;
 
@@ -561,7 +562,9 @@ namespace VFEEmpire
 				leave.icon = icon;
 				leave.action = () =>
 				{
+					pawnsForcedToLeave.Add(p);
 					lord.Notify_PawnLost(p, PawnLostCondition.ForcedByPlayerAction);
+					p.jobs?.EndCurrentJob(JobCondition.InterruptForced);
 					SoundDefOf.Tick_Low.PlayOneShotOnCamera(null);
 				};
 				leave.hotKey = KeyBindingDefOf.Misc5;
