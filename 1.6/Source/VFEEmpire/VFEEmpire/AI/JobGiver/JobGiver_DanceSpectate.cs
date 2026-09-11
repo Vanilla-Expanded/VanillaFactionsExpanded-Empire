@@ -36,11 +36,13 @@ public class JobGiver_DanceSpectate : ThinkNode_JobGiver
     {
         var dance = pawn.GetLord()?.LordJob as LordJob_GrandBall;
         if (CellFinder.TryFindRandomReachableNearbyCell(dance.Spot, dance.Map, 13f, TraverseParms.For(pawn),
-                c => !dance.danceArea.Contains(c) && c.GetRoom(dance.Map) == dance.BallRoom && pawn.CanReserveSittableOrSpot(c), null, out spot))
+                c => !dance.danceArea.Contains(c) && c.GetRoom(dance.Map) == dance.BallRoom && pawn.CanReserveSittableOrSpot(c)
+                     && !(c.GetEdifice(dance.Map) is Building_MusicalInstrument), null, out spot))
             return true;
         //Worst case they have to wait outside but I cant imagine many circumstances where there would be NO open space in the room
         if (CellFinder.TryFindRandomReachableNearbyCell(dance.Spot, dance.Map, 20f, TraverseParms.For(pawn),
-                c => !dance.danceArea.Contains(c) && pawn.CanReserveSittableOrSpot(c), null, out spot))
+                c => !dance.danceArea.Contains(c) && pawn.CanReserveSittableOrSpot(c)
+                     && !(c.GetEdifice(dance.Map) is Building_MusicalInstrument), null, out spot))
             return true;
         return false;
     }
