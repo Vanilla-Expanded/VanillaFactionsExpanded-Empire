@@ -513,9 +513,16 @@ namespace VFEEmpire
 		}
         public void InterruptDancers()
 		{
-			foreach (var pawn in nobles)
+			//Iterating a copy because CheckForJobOverride can reach Notify_PawnLost,
+			//which removes from nobles. CurJob is the same guard vanilla's own
+			//TransitionAction_CheckForJobOverride uses, and it also covers a noble
+			//the assassination attempt just killed, since death stops their job.
+			foreach (var pawn in nobles.ToList())
 			{
-				pawn.jobs.CheckForJobOverride();
+				if (pawn.CurJob != null)
+				{
+					pawn.jobs.CheckForJobOverride();
+				}
 			}
 		}
 		public virtual IntVec3 PawnOffset(Pawn pawn)
