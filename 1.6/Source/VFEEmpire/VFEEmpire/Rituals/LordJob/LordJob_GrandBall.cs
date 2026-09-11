@@ -387,6 +387,13 @@ namespace VFEEmpire
             {
                 colonistParticipants.Remove(p);
             }
+            //Same two lines LordJob_Parade.Notify_PawnLost ends with. Without them a
+            //noble who leaves on foot stays in requiredPawns, AllRequiredThingsLoaded
+            //never comes true, and since the ball's ShipJob_WaitForever has
+            //leaveImmediatelyWhenSatisfied set, that both blocks SendAway and hides the
+            //Send shuttle gizmo, so the shuttle is stranded with no way to send it.
+            var compShuttle = shuttle.TryGetComp<CompShuttle>();
+            if (compShuttle.requiredPawns.Contains(p)) compShuttle.requiredPawns.Remove(p);
             p.jobs.StopAll();
         }
 		protected override bool IsInvited(Pawn p)
