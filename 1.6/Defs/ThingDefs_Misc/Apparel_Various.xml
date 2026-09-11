@@ -94,7 +94,7 @@
 		<graphicData>
 			<texPath>AbsolverArmor/AbsolverArmor</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
-			<shaderType>CutoutComplex</shaderType>
+			
 		</graphicData>
 		<equippedStatOffsets>
 			<HuntingStealth>1</HuntingStealth>

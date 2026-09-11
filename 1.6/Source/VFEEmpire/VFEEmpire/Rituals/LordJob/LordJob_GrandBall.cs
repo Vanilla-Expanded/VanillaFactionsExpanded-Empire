@@ -174,10 +174,17 @@ namespace VFEEmpire
 			graph.AddToil(exitToil);
 			ballToil = new LordToil_GrandBall_Dance(target.Cell);
 			graph.AddToil(ballToil);
-			//Transitions
-			var removeColonists = new TransitionAction_Custom(() => lord.RemovePawns(colonistParticipants));
+            //Transitions
+            var removeColonists = new TransitionAction_Custom(() =>
+            {
+                foreach (Pawn pawn in colonistParticipants.ToList())
+                {
+                    lord.RemovePawn(pawn);
+                    colonistParticipants.Remove(pawn);
+                }
+            });
 
-			var transition_Spawned = new Transition(wait_ForSpawned, moveToPlace);
+            var transition_Spawned = new Transition(wait_ForSpawned, moveToPlace);
 			transition_Spawned.AddTrigger(new Trigger_Custom((TriggerSignal signal) => signal.type == TriggerSignalType.Tick && lord.ownedPawns.All(x=>x.Spawned)));
 			graph.transitions.Add(transition_Spawned);
 
@@ -212,8 +219,9 @@ namespace VFEEmpire
 			}, 60));
 			transition_BallInterupted.AddTrigger(new Trigger_PawnHarmed());
 			transition_BallInterupted.AddTrigger(new Trigger_PawnLostViolently());
-			transition_BallInterupted.AddTrigger(new Trigger_Signal(questEndedSignal));
-			graph.transitions.Add(transition_BallInterupted);
+            transition_BallInterupted.AddTrigger(new Trigger_PawnLost(PawnLostCondition.InMentalState));
+            transition_BallInterupted.AddTrigger(new Trigger_Signal(questEndedSignal));
+            graph.transitions.Add(transition_BallInterupted);
 
 			var transition_Leave = new Transition(wait_PostBall, exitToil); //Wont leave if theres still an active threat
 			transition_Leave.AddPreAction(removeColonists);
@@ -309,7 +317,13 @@ namespace VFEEmpire
 			}
 			foreach (KeyValuePair<IntVec3, Mote> highlightedPosition in highlightedPositions)
 				highlightedPosition.Value.Maintain();
-		}
+            if (lord.ownedPawns.Count == 0)
+            {
+                Map.lordManager.RemoveLord(lord);
+                if (music is { Ended: false })
+                    music.End();
+            }
+        }
 
         public void SetPartners()
 		{
@@ -361,15 +375,20 @@ namespace VFEEmpire
             if (nobles.Contains(p) && ticksPassed < duration)
             {
 				nobles.Remove(p);
-                if (dancers.Contains(p))
-                {
-					dancers.Remove(p);
-					ToTopOfDance();
-					InterruptDancers();
-				}
+                
             }
-			p.jobs?.CheckForJobOverride();
-		}
+            if (dancers.Contains(p))
+            {
+                dancers.Remove(p);
+                ToTopOfDance();
+                InterruptDancers();
+            }
+            if (colonistParticipants.Contains(p))
+            {
+                colonistParticipants.Remove(p);
+            }
+            p.jobs.StopAll();
+        }
 		protected override bool IsInvited(Pawn p)
 		{
 			if (!base.IsInvited(p)) return false;
@@ -378,10 +397,14 @@ namespace VFEEmpire
 			//them, and there is no assignments list to say no on our behalf.
 			return colonistParticipants.Contains(p) || lord.ownedPawns.Contains(p);
 		}
-		public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason)
-		{
-			return p.Faction.IsPlayer;
-		}
+        public override bool EndPawnJobOnCleanup(Pawn p)
+        {
+            return true;
+        }
+        public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason)
+        {
+            return p.Faction.IsPlayer || reason == PawnLostCondition.ExitedMap;
+        }
 		public void StartDance()
 		{
 			nobles = lord.ownedPawns.Where(x => x.royalty?.HasAnyTitleIn(Faction.OfEmpire) ?? false).ToList();
