@@ -387,6 +387,13 @@ namespace VFEEmpire
             {
                 colonistParticipants.Remove(p);
             }
+            //Same two lines LordJob_Parade.Notify_PawnLost ends with. Without them a
+            //noble who leaves on foot stays in requiredPawns, AllRequiredThingsLoaded
+            //never comes true, and since the ball's ShipJob_WaitForever has
+            //leaveImmediatelyWhenSatisfied set, that both blocks SendAway and hides the
+            //Send shuttle gizmo, so the shuttle is stranded with no way to send it.
+            var compShuttle = shuttle.TryGetComp<CompShuttle>();
+            if (compShuttle.requiredPawns.Contains(p)) compShuttle.requiredPawns.Remove(p);
             p.jobs.StopAll();
         }
 		protected override bool IsInvited(Pawn p)
@@ -490,7 +497,16 @@ namespace VFEEmpire
 				ToTopOfDance();
 			}
 			InterruptDancers();
-            if (Rand.Bool)
+            if (music == null)
+            {
+				//music is not scribed while danceStarted is, so a save and load
+				//during the dance arrives here with nothing playing. The branch
+				//below reads music.def, which would throw on that null, and
+				//StartDance will not run again to reassign it.
+				music = tracks.RandomElement().TrySpawnSustainer(SoundInfo.InMap(target.ToTargetInfo(Map)));
+				music?.Maintain();
+            }
+            else if (Rand.Bool)
             {
 				var newTrack = tracks.Except(music.def).RandomElement();
 				music.End();
@@ -504,9 +520,16 @@ namespace VFEEmpire
 		}
         public void InterruptDancers()
 		{
-			foreach (var pawn in nobles)
+			//Iterating a copy because CheckForJobOverride can reach Notify_PawnLost,
+			//which removes from nobles. CurJob is the same guard vanilla's own
+			//TransitionAction_CheckForJobOverride uses, and it also covers a noble
+			//the assassination attempt just killed, since death stops their job.
+			foreach (var pawn in nobles.ToList())
 			{
-				pawn.jobs.CheckForJobOverride();
+				if (pawn.CurJob != null)
+				{
+					pawn.jobs.CheckForJobOverride();
+				}
 			}
 		}
 		public virtual IntVec3 PawnOffset(Pawn pawn)
