@@ -93,8 +93,7 @@
 		<smeltable>false</smeltable>
 		<graphicData>
 			<texPath>AbsolverArmor/AbsolverArmor</texPath>
-			<graphicClass>Graphic_Single</graphicClass>
-			
+			<graphicClass>Graphic_Single</graphicClass>		
 		</graphicData>
 		<equippedStatOffsets>
 			<HuntingStealth>1</HuntingStealth>
