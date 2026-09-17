@@ -299,8 +299,8 @@ public class QuestNode_Root_NobleVisit : QuestNode
             quest.End(QuestEndOutcome.Success, inSignal: leftHealthy);
         }, leftHealthy);
         //Set slates for descriptions
-        slate.Set("nobleCount", nobleCount);
-        slate.Set("nobleCountLessOne", nobleCount - 1);
+        slate.Set("nobleCount", nobles.Count);
+        slate.Set("nobleCountLessOne", nobles.Count - 1);
         slate.Set("lodgerCount", lodgers.Count);
         slate.Set("questDurationTicks", durationTicks);
     }
