@@ -34,7 +34,6 @@
 		  <rulesStrings> <!--Copied from Script_Hospitiality_Root_Joiners -->
 			<li>lodgersLabel->noble</li>
 			<li>lodgersLabelPlural->nobles</li>
-			
 			<li>lodgersDef(nobleCount==1)->[lodgers0_nameDef]</li>
 			<li>lodgersDef(nobleCount>=2)->the [lodgersLabelPlural]</li>
 			<li>joinerEnding->You'll be able to direct [lodgersDef] the same way you direct your own colonists.[specialNeedsExplanation]</li>
