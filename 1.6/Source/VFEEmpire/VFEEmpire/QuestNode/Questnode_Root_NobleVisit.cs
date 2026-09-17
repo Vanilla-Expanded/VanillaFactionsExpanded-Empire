@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using RimWorld;
 using RimWorld.QuestGen;
 using UnityEngine;
@@ -55,6 +56,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
         var bestNoble = givenNoble ?? EmpireUtility.GenerateNoble(leadTitle);
         var nobles = new List<Pawn> { bestNoble };
         var tries = 0;
+        StringBuilder sb = new();
         while (nobles.Count < nobleCount)
         {
             var title = DefDatabase<RoyalTitleDef>.AllDefs.Where(x => x.seniority < leadTitle.seniority).RandomElementByWeight(x => x.commonality);
@@ -62,6 +64,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
             if (pawn != null)
             {
                 nobles.Add(pawn);
+                sb.AppendInNewLine(pawn.NameFullColored + ", " + pawn.royalty.HighestTitleWith(empire).Label + " of the " + empire.Name);
                 tries = 0;
             }
 
@@ -76,6 +79,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
         slate.Set("shuttleDelayTicks", durationTicks);
         slate.Set("title", bestNoble.royalty.HighestTitleWith(empire));
         slate.Set("nobles", nobles);
+        slate.Set("noblesDetailList", sb.ToString());
         slate.Set("map", map);
         slate.Set("asker", bestNoble);
         slate.Set("faction", empire);
