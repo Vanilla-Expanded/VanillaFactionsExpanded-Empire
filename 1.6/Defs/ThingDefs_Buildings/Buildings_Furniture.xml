@@ -90,7 +90,7 @@
 		<label>imperial banner</label>
 		<description>A decorative strip of cloth hanging from a vertical wooden frame. Appropriate for royal rooms.</description>
 		<designationCategory>Misc</designationCategory>
-		<altitudeLayer>BuildingOnTop</altitudeLayer>
+		<altitudeLayer>Building</altitudeLayer>
 		<passability>PassThroughOnly</passability>
 		<fillPercent>0.35</fillPercent>
 		<statBases>
