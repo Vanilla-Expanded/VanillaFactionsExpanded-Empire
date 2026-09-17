@@ -67,6 +67,10 @@ namespace VFEEmpire
                 }
             }
             slate.Set("noblesDetailList", sb.ToString());
+            //Title links, as vanilla's QuestGen_Pawns.GeneratePawn adds for any titled pawn
+            var nobleTitleLinks = new QuestPart_Hyperlinks();
+            nobleTitleLinks.pawns.AddRange(nobles);
+            quest.AddPart(nobleTitleLinks);
             var shuttle = QuestGen_Shuttle.GenerateShuttle(empire, nobles);
             QuestUtility.AddQuestTag(ref shuttle.questTags, questTag);
             QuestUtility.AddQuestTag(ref bestNoble.questTags, questTag);

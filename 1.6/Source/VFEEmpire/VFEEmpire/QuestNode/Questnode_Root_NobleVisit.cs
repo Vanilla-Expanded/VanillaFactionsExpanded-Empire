@@ -80,6 +80,10 @@ public class QuestNode_Root_NobleVisit : QuestNode
         slate.Set("title", bestNoble.royalty.HighestTitleWith(empire));
         slate.Set("nobles", nobles);
         slate.Set("noblesDetailList", sb.ToString());
+        //Title links, as vanilla's QuestGen_Pawns.GeneratePawn adds for any titled pawn
+        var nobleTitleLinks = new QuestPart_Hyperlinks();
+        nobleTitleLinks.pawns.AddRange(nobles);
+        quest.AddPart(nobleTitleLinks);
         slate.Set("map", map);
         slate.Set("asker", bestNoble);
         slate.Set("faction", empire);
