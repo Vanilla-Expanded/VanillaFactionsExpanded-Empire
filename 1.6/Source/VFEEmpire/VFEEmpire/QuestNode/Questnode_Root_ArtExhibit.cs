@@ -52,7 +52,7 @@ namespace VFEEmpire
                 if (pawn != null)
                 {
                     nobles.Add(pawn);
-                    sb.AppendInNewLine(pawn.NameFullColored + ", " + pawn.royalty.HighestTitleWith(empire).Label + " of the " + empire.Name);
+                    sb.AppendInNewLine("  - " + pawn.NameFullColored.Resolve() + ", " + pawn.royalty.HighestTitleWith(empire).Label);
                     QuestUtility.AddQuestTag(ref pawn.questTags, questTag);
                     QuestGen.AddToGeneratedPawns(pawn);
                     tries = 0;

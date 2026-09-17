@@ -64,7 +64,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
             if (pawn != null)
             {
                 nobles.Add(pawn);
-                sb.AppendInNewLine(pawn.NameFullColored + ", " + pawn.royalty.HighestTitleWith(empire).Label + " of the " + empire.Name);
+                sb.AppendInNewLine("  - " + pawn.NameFullColored.Resolve() + ", " + pawn.royalty.HighestTitleWith(empire).Label);
                 tries = 0;
             }
 
