@@ -96,7 +96,7 @@
 
 				<!--raid-->
 				<li>raidArrivedLetterLabel->Deserter assasination attempt</li>
-				<li>raidArrivedLetterText->A group of deserters have arrived to attempt to disrupt the grand ball and assasinate the royals\n\n[asker_nameFull] does not care for the threat and demands the ball continues!  [asker_possessive] wants you too keep them safe and deal with the "peasants".</li>	
+				<li>raidArrivedLetterText->A group of deserters have arrived to attempt to disrupt the grand ball and assassinate the royals\n\n[asker_nameFull] does not care for the threat and demands the ball continues!  [asker_pronoun] wants you to keep them safe and deal with the "peasants".</li>	
 				
 				<!-- Quest completed -->				
 				<li>BallSuccessLetterLetterLabel->GrandBall Success</li>
