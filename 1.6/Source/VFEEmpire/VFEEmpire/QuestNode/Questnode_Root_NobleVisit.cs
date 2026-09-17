@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using RimWorld;
 using RimWorld.QuestGen;
 using UnityEngine;
@@ -55,6 +56,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
         var bestNoble = givenNoble ?? EmpireUtility.GenerateNoble(leadTitle);
         var nobles = new List<Pawn> { bestNoble };
         var tries = 0;
+        StringBuilder sb = new();
         while (nobles.Count < nobleCount)
         {
             var title = DefDatabase<RoyalTitleDef>.AllDefs.Where(x => x.seniority < leadTitle.seniority).RandomElementByWeight(x => x.commonality);
@@ -62,6 +64,7 @@ public class QuestNode_Root_NobleVisit : QuestNode
             if (pawn != null)
             {
                 nobles.Add(pawn);
+                sb.AppendInNewLine("  - " + pawn.NameFullColored.Resolve() + ", " + pawn.royalty.HighestTitleWith(empire).Label);
                 tries = 0;
             }
 
@@ -76,6 +79,11 @@ public class QuestNode_Root_NobleVisit : QuestNode
         slate.Set("shuttleDelayTicks", durationTicks);
         slate.Set("title", bestNoble.royalty.HighestTitleWith(empire));
         slate.Set("nobles", nobles);
+        slate.Set("noblesDetailList", sb.ToString());
+        //Title links, as vanilla's QuestGen_Pawns.GeneratePawn adds for any titled pawn
+        var nobleTitleLinks = new QuestPart_Hyperlinks();
+        nobleTitleLinks.pawns.AddRange(nobles);
+        quest.AddPart(nobleTitleLinks);
         slate.Set("map", map);
         slate.Set("asker", bestNoble);
         slate.Set("faction", empire);
@@ -295,8 +303,8 @@ public class QuestNode_Root_NobleVisit : QuestNode
             quest.End(QuestEndOutcome.Success, inSignal: leftHealthy);
         }, leftHealthy);
         //Set slates for descriptions
-        slate.Set("nobleCount", nobleCount);
-        slate.Set("nobleCountLessOne", nobleCount - 1);
+        slate.Set("nobleCount", nobles.Count);
+        slate.Set("nobleCountLessOne", nobles.Count - 1);
         slate.Set("lodgerCount", lodgers.Count);
         slate.Set("questDurationTicks", durationTicks);
     }

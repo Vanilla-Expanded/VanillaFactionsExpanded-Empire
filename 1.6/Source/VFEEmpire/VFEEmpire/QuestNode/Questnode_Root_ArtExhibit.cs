@@ -52,7 +52,7 @@ namespace VFEEmpire
                 if (pawn != null)
                 {
                     nobles.Add(pawn);
-                    sb.AppendInNewLine(pawn.NameFullColored + ", " + pawn.royalty.HighestTitleWith(empire).Label + " of the " + empire.Name);
+                    sb.AppendInNewLine("  - " + pawn.NameFullColored.Resolve() + ", " + pawn.royalty.HighestTitleWith(empire).Label);
                     QuestUtility.AddQuestTag(ref pawn.questTags, questTag);
                     QuestGen.AddToGeneratedPawns(pawn);
                     tries = 0;
@@ -65,6 +65,10 @@ namespace VFEEmpire
                 }
             }
             slate.Set("noblesDetailList", sb.ToString());
+            //Title links, as vanilla's QuestGen_Pawns.GeneratePawn adds for any titled pawn
+            var nobleTitleLinks = new QuestPart_Hyperlinks();
+            nobleTitleLinks.pawns.AddRange(nobles);
+            quest.AddPart(nobleTitleLinks);
             var shuttle = QuestGen_Shuttle.GenerateShuttle(empire, nobles);
             QuestUtility.AddQuestTag(ref shuttle.questTags, questTag);
             QuestUtility.AddQuestTag(ref bestNoble.questTags, questTag);
