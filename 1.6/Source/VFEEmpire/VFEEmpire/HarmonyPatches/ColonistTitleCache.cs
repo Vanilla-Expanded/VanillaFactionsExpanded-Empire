@@ -33,6 +33,8 @@ public static class ColonistTitleCache
         public static void Postfix(Pawn_RoyaltyTracker __instance)
         {
             EmpireUtility.Notify_TitlesChanged(__instance.pawn);
+            //Honor labels resolve {RANK} from the current title, so the name has to be rebuilt when that changes
+            if (__instance.pawn.HasHonors()) __instance.pawn.Honors().UpdateTitles();
         }
     }
 

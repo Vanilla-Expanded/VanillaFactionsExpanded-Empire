@@ -42,7 +42,7 @@
 			<li>appreciateAppreciates(nobleCount==1)->appreciates</li>
 			<li>appreciateAppreciates(nobleCount>=2)->appreciate</li>
 			
-			<li>questDescription->[asker_nameFull], a [asker_royalTitleInCurrentFaction] of the [asker_faction_name] would like you to organise a grand ball. This is a great opportunity for noble gossip and to build relations with other members of the imperial nobility.\n\nYou are required to have a ballroom present in your colony. If at any point the ballroom is destroyed or the instruments in it become unusable, the grand ball will be called off.\n\n[asker_nameFull] has forwarded you a list of nobility that was invited to the ball and will arrive in the shuttle:\n\n[noblesDetailList]\n\nYou will need to make sure the guests are safe and comfortable during the ball. If anything happens to any of the guests, the grand ball will be cancelled. \n\nDeserters might use this opportunity to launch an assassination attempt.
+			<li>questDescription->[asker_nameFull], a [asker_royalTitleInCurrentFaction] of the [asker_faction_name] would like you to organise a grand ball. This is a great opportunity for noble gossip and to build relations with other members of the imperial nobility.\n\nYou are required to have a ballroom present in your colony. If at any point the ballroom is destroyed or the instruments in it become unusable, the grand ball will be called off.\n\n[asker_nameFull] has forwarded you a list of nobility that was invited to the ball and will arrive in the shuttle:\n\n[noblesDetailList]\n\nYou will need to make sure the guests are safe and comfortable during the ball. If anything happens to any of the guests, the grand ball will be cancelled.\n\nDeserters might use this opportunity to launch an assassination attempt.
 
 
 			</li>
@@ -95,7 +95,7 @@
 				<li>ShuttleDestroyedText->[ShuttleDestroyedIntro]\n\n[decidedToLeave]</li>				
 
 				<!--raid-->
-				<li>raidArrivedLetterLabel->Deserter assasination attempt</li>
+				<li>raidArrivedLetterLabel->Deserter assassination attempt</li>
 				<li>raidArrivedLetterText->A group of deserters have arrived to attempt to disrupt the grand ball and assassinate the royals\n\n[asker_nameFull] does not care for the threat and demands the ball continues!  [asker_pronoun] wants you to keep them safe and deal with the "peasants".</li>	
 				
 				<!-- Quest completed -->				

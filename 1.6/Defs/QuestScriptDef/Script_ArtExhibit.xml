@@ -91,7 +91,7 @@
 				<li>ShuttleDestroyedText->[ShuttleDestroyedIntro]\n\n[decidedToLeave]</li>				
 
 				<!--raid-->
-				<li>raidArrivedLetterLabel->Deserter assasination attempt</li>
+				<li>raidArrivedLetterLabel->Deserter assassination attempt</li>
 				<li>raidArrivedLetterText->A group of deserters have arrived to attempt to disrupt the art exhibit and assassinate the royals\n\n[asker_nameFull] does not care for the threat and demands the exhibit continues!  [asker_pronoun] wants you to keep them safe and deal with the "peasants".</li>	
 				
 				<!-- Quest completed -->				
