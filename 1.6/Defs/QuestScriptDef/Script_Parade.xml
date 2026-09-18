@@ -82,7 +82,7 @@
 				<li>ShuttleDestroyedText->[ShuttleDestroyedIntro]\n\n[decidedToLeave]</li>				
 
 				<!--raid-->
-				<li>raidArrivedLetterLabel->Deserter assasination attempt</li>
+				<li>raidArrivedLetterLabel->Deserter assassination attempt</li>
 				<li>raidArrivedLetterText->A group of deserters have arrived to attempt to disrupt the parade and assassinate the [stellarch_nameFull]\n\nThe parade must not be interrupted for any reason!</li>	
 				
 				<!-- Quest completed -->				
