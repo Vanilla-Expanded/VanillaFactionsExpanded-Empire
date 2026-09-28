@@ -54,7 +54,20 @@ namespace VFEEmpire
                 ritual.exhibitStarted = true;
                 ritual.nobles = lord.ownedPawns.Where(x => x.royalty?.HasAnyTitleIn(Faction.OfEmpire) ?? false).ToList();
             }
-            foreach (var pawn in lord.ownedPawns)
+            //Presenters first. Every pawn takes its job from CheckForJobOverride in
+            //this loop, and JobGiver_ArtExhibitSpectate accepts any cell it can
+            //reserve, so whoever is asked first wins a contested one. A presenter
+            //losing that race does not degrade gracefully: their stand cell is fixed
+            //relative to their own piece, JobGiver_ArtExhibitStandBy's fallback
+            //returns art.Position when its radius-1 search finds nothing (that is
+            //what CellFinder.RandomClosewalkCellNear does on failure, and it is the
+            //one cell the validator excludes), and the last node of this duty is
+            //JobGiver_Idle, which waits in place rather than bringing them to the
+            //gallery. The presenter then sits out their own exhibit wherever they
+            //were standing when it began.
+            //Ordering also buffers the sequence, so CheckForJobOverride can no
+            //longer mutate the list being enumerated.
+            foreach (var pawn in lord.ownedPawns.OrderByDescending(p => ritual.presenters.Contains(p)))
             {
                 if (ritual.nobles.Contains(pawn))
                 {

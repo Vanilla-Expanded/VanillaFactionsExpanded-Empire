@@ -34,7 +34,14 @@ public class LordJob_ArtExhibit : LordJob_Ritual
 
     //Exposed
     public Pawn leadNoble;
-    public List<Pawn> nobles;
+    //Initialized like its three siblings below. Notify_PawnLost calls
+    //nobles.Remove(p) behind `ticksPassed < duration`, which is wide open before
+    //the ceremony starts, and nothing fills this list until
+    //LordToil_ArtExhibit_Show.UpdateAllDuties runs for the first time. Any pawn
+    //lost during wait_ForSpawned, moveToPlace or wait_StartBall therefore threw,
+    //and because Lord.Notify_PawnLost catches and logs it, the throw also skipped
+    //the colonistParticipants.Remove(p) on the following line.
+    public List<Pawn> nobles = new();
 
     public RitualOutcomeEffectWorker_ArtExhibit outcome;
     public List<Pawn> presenters = new();
@@ -109,6 +116,12 @@ public class LordJob_ArtExhibit : LordJob_Ritual
         Scribe_Collections.Look(ref artPieces, "artPieces", LookMode.Reference);
         Scribe_Collections.Look(ref presenters, "presenters", LookMode.Reference);
         Scribe_Collections.Look(ref colonistParticipants, "colonistParticipants", LookMode.Reference);
+
+        //The field initializer alone does not survive a load. Scribe_Collections.Look
+        //assigns null whenever the node is absent or carries IsNull, and it is absent
+        //for every save written before the ceremony started, which is exactly the
+        //window Notify_PawnLost is unguarded in. Restore the invariant here.
+        if (nobles == null) nobles = new();
     }
 
     public CellRect ArtSpectateRect(Thing artPiece)
@@ -222,6 +235,33 @@ public class LordJob_ArtExhibit : LordJob_Ritual
         transition_DurationTimeOut.AddPostAction(new TransitionAction_Custom(() =>
             QuestUtility.SendQuestTargetSignals(lord.questTags, SignalCeremonyTimeout, lord.Named("SUBJECT"))));
         graph.transitions.Add(transition_DurationTimeOut);
+
+        //transition_Arrived above is the only way forward out of moveToPlace and it
+        //tests leadNoble.Position == Spot. leadNoble is set once and never re-picked,
+        //and a pawn that has left the map keeps a stale Position, so that test answers
+        //false forever. The remaining exits all want hostility, harm or the quest
+        //ending, none of which a peaceful exhibit produces, so the party sits there
+        //with the gallery reserved and the Begin option never offered. Observed in
+        //play: the lead noble walked off the map and the exhibit could not be started
+        //or abandoned.
+        var transition_LeadLost = new Transition(moveToPlace, exitToil);
+        transition_LeadLost.AddPreAction(removeColonists);
+        transition_LeadLost.AddTrigger(new Trigger_TickCondition(() => leadNoble == null || !leadNoble.Spawned, 60));
+        transition_LeadLost.AddPostAction(new TransitionAction_Custom(() =>
+            QuestUtility.SendQuestTargetSignals(lord.questTags, SignalCeremonyFailed, lord.Named("SUBJECT"))));
+        graph.transitions.Add(transition_LeadLost);
+
+        //And a backstop for a lead who is still here but never arrives, which the
+        //check above cannot see. Its own transition rather than another source on
+        //transition_DurationTimeOut, because Trigger_TicksPassed only resets when the
+        //previous toil was not also a source, so sharing one would quietly spend the
+        //walk out of the player's hour to press Begin.
+        var transition_MoveTimeOut = new Transition(moveToPlace, exitToil);
+        transition_MoveTimeOut.AddPreAction(removeColonists);
+        transition_MoveTimeOut.AddTrigger(new Trigger_TicksPassed(60000));
+        transition_MoveTimeOut.AddPostAction(new TransitionAction_Custom(() =>
+            QuestUtility.SendQuestTargetSignals(lord.questTags, SignalCeremonyTimeout, lord.Named("SUBJECT"))));
+        graph.transitions.Add(transition_MoveTimeOut);
         var transition_Hurt = new Transition(moveToPlace, exitToil);
         transition_Hurt.AddPreAction(removeColonists);
         transition_Hurt.AddSource(wait_StartBall);

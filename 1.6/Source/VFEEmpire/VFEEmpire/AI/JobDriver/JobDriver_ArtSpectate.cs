@@ -26,6 +26,14 @@ namespace VFEEmpire
 		{
 
 			this.FailOnDestroyedOrNull(TargetIndex.B);
+			//The spectating toil below is ToilCompleteMode.Never and relies on PresenterSwap
+			//interrupting it, so once the exhibit's lord is gone nothing ends this job: the
+			//pawn stands there until the tick action dereferences the missing exhibit and
+			//throws. Seen on a save where the quest had already cleaned up its lord and a
+			//colonist still held one queued VFEE_ArtSpectate per program stage, working
+			//through them for days. Global fail conditions are checked before the tick
+			//action runs, so this also keeps the exhibit non-null below.
+			this.FailOn(() => Exhibit == null);
 			yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.OnCell);
 			Toil toil = new Toil();
 			toil.initAction = () => talkToNeighborInterval = talkToRange.RandomInRange;
@@ -33,7 +41,7 @@ namespace VFEEmpire
 			{				
 				if(talkToNeighborInterval <= 0)
                 {
-					var exhibit = pawn.GetLord()?.LordJob as LordJob_ArtExhibit;
+					var exhibit = Exhibit;
 					talkToNeighborInterval = talkToRange.RandomInRange;
 					updateFace = 120;
 					pawn.skills.Learn(SkillDefOf.Artistic, 0.1f);
@@ -75,6 +83,7 @@ namespace VFEEmpire
         {
 			return this.job.GetTarget(TargetIndex.B) == j.GetTarget(TargetIndex.B);
 		}
+		private LordJob_ArtExhibit Exhibit => pawn.GetLord()?.LordJob as LordJob_ArtExhibit;
         private LocalTargetInfo cachedFace;
 		private int updateFace;
 		private int talkToNeighborInterval;

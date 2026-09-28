@@ -48,7 +48,7 @@ public class LordToil_ArtExhibit_Wait : LordToil_Wait
                 var lordJob = (LordJob_ArtExhibit)lord.LordJob;
                 string header = "VFEE.GrandBall.ChooseParticipants".Translate();
                 var label = lordJob.RitualLabel;
-                var artPieces = lordJob.Gallery.ContainedAndAdjacentThings.Where(x => x is ThingWithComps comps && comps.GetComp<CompArt>() != null).ToList();
+                var artPieces = lordJob.Gallery.ContainedAndAdjacentThings.Where(x => x is ThingWithComps comps && comps.GetComp<CompArt>()?.CanShowArt == true).ToList();
                 var colonists = lordJob.Map.mapPawns.FreeColonistsSpawned;
                 List<Pawn> pOptions = new();
                 foreach (var art in artPieces)

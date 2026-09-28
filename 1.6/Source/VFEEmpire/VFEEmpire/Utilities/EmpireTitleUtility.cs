@@ -40,17 +40,32 @@ public static class EmpireTitleUtility
 
     public static string CourtRequirementsString(this List<RoyalCourtRequirment> requirments, RoyalTitle title)
     {
+        //One line per REQUIREMENT, not one per rank. A requirement spanning
+        //minTitle..maxTitle is satisfied by that many pawns drawn from anywhere in
+        //the band, but printing a separate line for each rank, each carrying the
+        //full count, reads as "two of this exact rank". A despot's second
+        //requirement covers seven ranks, so it rendered as seven alternatives and
+        //told the player they needed 2 archcounts when 1 archcount and 1 duke
+        //already satisfied it. The OR also belongs between entries rather than
+        //trailing off the last one.
         var allTitle = title.faction.def.RoyalTitlesAwardableInSeniorityOrderForReading;
-        var builder = new StringBuilder();
+        var lines = new List<string>();
         foreach (var requirment in requirments)
             if (requirment.minTitle == requirment.maxTitle)
-                builder.AppendLine($"  - {requirment.count}x {requirment.minTitle.LabelCap} {"VFEE.OR".Translate()};");
+                lines.Add($"{requirment.count}x {requirment.minTitle.LabelCap}");
             else
             {
                 var minIdx = allTitle.IndexOf(requirment.minTitle);
                 var maxIdx = allTitle.IndexOf(requirment.maxTitle);
-                for (var i = minIdx; i <= maxIdx; i++) builder.AppendLine($"  - {requirment.count}x {allTitle[i].LabelCap} {"VFEE.OR".Translate()};");
+                var ranks = new List<string>();
+                for (var i = minIdx; i <= maxIdx; i++) ranks.Add(allTitle[i].LabelCap);
+                lines.Add($"{requirment.count}x {string.Join(" / ", ranks.ToArray())}");
             }
+
+        var builder = new StringBuilder();
+        for (var i = 0; i < lines.Count; i++)
+            builder.AppendLine($"  - {lines[i]}"
+                + (i < lines.Count - 1 ? " " + "VFEE.OR".Translate() : ""));
 
         return builder.ToString();
     }
