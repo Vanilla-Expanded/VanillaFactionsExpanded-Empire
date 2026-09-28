@@ -31,7 +31,7 @@ public class Command_ArtExhibit : Command
         string header = "VFEE.GrandBall.ChooseParticipants".Translate();
         var label = job.RitualLabel;
 
-        var artPieces = job.Gallery.ContainedAndAdjacentThings.Where(x => x is ThingWithComps comps && comps.GetComp<CompArt>() != null).ToList();
+        var artPieces = job.Gallery.ContainedAndAdjacentThings.Where(x => x is ThingWithComps comps && comps.GetComp<CompArt>()?.CanShowArt == true).ToList();
         var colonists = job.Map.mapPawns.FreeColonistsSpawned;
         List<Pawn> pOptions = new();
         foreach (var art in artPieces)

@@ -19,10 +19,20 @@ public class JobGiver_ArtExhibitPresent : ThinkNode_JobGiver
         IntVec3 standCell = art.InteractionCell;
         if (!pawn.CanReserve(standCell))
         {
-            standCell = CellFinder.RandomClosewalkCellNear(art.Position, art.Map, 1 * art.def.Size.x, (IntVec3 c) =>
+            //Same fallback trap as JobGiver_ArtExhibitStandBy, and it is the one
+            //that produced the repeating "Could not reserve" pairs in play:
+            //RandomClosewalkCellNear hands back its root, art.Position, which this
+            //validator excludes and a spectator is sitting on. The next node is
+            //JobGiver_ArtExhibitSpectate on VFEE_ArtExhibitRoyal and
+            //JobGiver_ArtExhibitStandBy on VFEE_ArtExhibitPresent, so returning
+            //null degrades to watching or standing by rather than to an error.
+            if (!CellFinder.TryRandomClosewalkCellNear(art.Position, art.Map, art.def.Size.x + 2, out standCell, (IntVec3 c) =>
             {
                 return GenSight.LineOfSight(c, centerCell, art.Map) && pawn.CanReserve(c) && c != art.Position;
-            });
+            }))
+            {
+                return null;
+            }
         }
         Job job = JobMaker.MakeJob(InternalDefOf.VFEE_ArtPresent, standCell, art, centerCell);
         job.speechSoundMale = SoundDefOf.Speech_Leader_Male;

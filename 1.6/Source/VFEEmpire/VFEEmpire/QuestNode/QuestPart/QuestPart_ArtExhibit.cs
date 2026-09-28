@@ -32,7 +32,14 @@ namespace VFEEmpire
             List<Thing> artPieces = new();
             foreach(var thing in gallery.ContainedAndAdjacentThings)
             {
-                if(thing.TryGetComp<CompArt>() != null && thing.CellsAdjacent8WayAndInside().Any(x=>x.Standable(Map)))
+                //CanShowArt, not "has the comp": vanilla hangs CompProperties_Art on ordinary
+                //furniture behind minQualityForArtistic, so a sub-Excellent DiningChair carries
+                //the comp without being art, and the whole dining room joined the program.
+                //This is the same gate CompArt_JustCreatedBy_Patch uses for artCreator, so the
+                //program and the creator map now agree. Active would be tighter but drops
+                //steles: they have CompArt with no CompQuality, so CanShowArt is always true
+                //for them while taleRef is only set if their art was ever initialized.
+                if(thing.TryGetComp<CompArt>()?.CanShowArt == true && thing.CellsAdjacent8WayAndInside().Any(x=>x.Standable(Map)))
                 {
                     artPieces.Add(thing);
                     if(absoluteSpot == IntVec3.Invalid)
