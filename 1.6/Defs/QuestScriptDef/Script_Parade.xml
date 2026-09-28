@@ -28,7 +28,7 @@
 			<li>appreciateAppreciates(nobleCount==1)->appreciates</li>
 			<li>appreciateAppreciates(nobleCount>=2)->appreciate</li>
 			
-			<li>questDescription->[stellarch_nameFull] has reached the peak of what they can achieve from a surface of the rim world. In order to progress further in the grand hierarchy and become the right hand of Emperor [emperor_nameFull], [stellarch_nameFull] needs to partake in a traditional ascension parade, after which they will depart on a shuttle and join the Emperor.\nParade of this magnitude is bound to draw the attention of deserters.\nOnce you accept this quest, you will have 5 days to prepare for the parade. Consider improving your defenses and working out contingency plans, as it is difficult to say which way the parade will move. At all times you will have to keep the parade safe from harm.\nKeep an eye on any rivals or enemies of [stellarch_nameFull], as they might decide it’s a good time to make a move and claim the power for themselves.\nThe shuttle will arrive bringing the highest ranking nobility to the parade. You will be responsible for providing the security for the event. After the parade starts, it will slowly move through the map for 12 hours, after which everyone, including [stellarch_nameFull], will board the shuttle and depart.
+			<li>questDescription->[stellarch_nameFull] has reached the peak of what they can achieve from a surface of the rim world. In order to progress further in the grand hierarchy and become the right hand of Emperor [emperor_nameFull], [stellarch_nameFull] needs to partake in a traditional ascension parade, after which they will depart on a shuttle and join the Emperor.\n\nParade of this magnitude is bound to draw the attention of deserters.\n\nOnce you accept this quest, you will have 5 days to prepare for the parade. Consider improving your defenses and working out contingency plans, as it is difficult to say which way the parade will move. At all times you will have to keep the parade safe from harm.\n\nKeep an eye on any rivals or enemies of [stellarch_nameFull], as they might decide it’s a good time to make a move and claim the power for themselves.\n\nThe shuttle will arrive bringing the highest ranking nobility to the parade. You will be responsible for providing the security for the event. After the parade starts, it will slowly move through the map for 12 hours, after which everyone, including [stellarch_nameFull], will board the shuttle and depart.
 
 
 
@@ -82,8 +82,8 @@
 				<li>ShuttleDestroyedText->[ShuttleDestroyedIntro]\n\n[decidedToLeave]</li>				
 
 				<!--raid-->
-				<li>raidArrivedLetterLabel->Deserter assasination attempt</li>
-				<li>raidArrivedLetterText->A group of deserters have arrived to attempt to disrupt the parade and assasinate the [stellarch_nameFull]\n\nThe parade must not be interrupted for any reason!</li>	
+				<li>raidArrivedLetterLabel->Deserter assassination attempt</li>
+				<li>raidArrivedLetterText->A group of deserters have arrived to attempt to disrupt the parade and assassinate the [stellarch_nameFull]\n\nThe parade must not be interrupted for any reason!</li>	
 				
 				<!-- Quest completed -->				
 				<li>ParadeSuccessLetterLetterLabel->Parade Success</li>
