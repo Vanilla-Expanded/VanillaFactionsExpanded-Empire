@@ -28,13 +28,16 @@ namespace VFEEmpire
         private List<Pawn> CantAccept(out string unmet)
         {
             culprits.Clear();
-            StringBuilder sb = new();
+            missingCells = 0;
+            List<string> unmetLabels = new();
             foreach (var pawn in pawns)
             {
                 var title = pawn.royalty.AllTitlesInEffectForReading.FirstOrDefault(x => x.def.Ext() != null && !x.def.Ext().ballroomRequirements.NullOrEmpty());
                 if (title != null)
                 {
-                    culprits.Add(pawn);
+                    //Judge each ballroom on its own and list what the closest one lacks. With no ballroom at all, that is every requirement.
+                    var requirements = title.def.Ext().ballroomRequirements;
+                    var missing = requirements.Select(req => req.LabelCap()).ToList();
                     foreach (var ballroom in mapParent.Map.RoyaltyTracker().Ballrooms.ToList())
                     {
                         if (!QuestPart_GrandBall.TryGetGrandBallSpot(ballroom, mapParent.Map, out var spot, out var absSpot, out var dancefloor, out var rect) || dancefloor.Count < requiredCells)
@@ -42,23 +45,23 @@ namespace VFEEmpire
                             missingCells = dancefloor.NullOrEmpty() ? requiredCells : requiredCells - dancefloor.Count;
                             continue;
                         }
-                        foreach (var req in title.def.Ext().ballroomRequirements)
-                        {
-                            if (!req.Met(ballroom, pawn))
-                            {
-                                sb.AppendLine(req.LabelCap());
-                            }
-                        }
-                        if (sb.Length == 0)
+                        var missingHere = requirements.Where(req => !req.Met(ballroom, pawn)).Select(req => req.LabelCap()).ToList();
+                        if (missingHere.Count < missing.Count)
+                            missing = missingHere;
+                        if (missing.Count == 0)
                         {
                             missingCells = 0;
-                            culprits.Remove(pawn);
                             break;
                         }
                     }
+                    if (missing.Count > 0)
+                    {
+                        culprits.Add(pawn);
+                        unmetLabels.AddRange(missing);
+                    }
                 }
             }
-            unmet = sb.ToString();
+            unmet = unmetLabels.Distinct().ToLineList("- ");
             return culprits;
         }
 

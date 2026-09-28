@@ -6,10 +6,10 @@
 	<VFEE.StartBestower.HigherTitle>Unable to start due to target already possesing a higher title</VFEE.StartBestower.HigherTitle>
 	<VFEE.StartBestower.DisabledExistingRitual>Unable to start while an existing ritual is ongoing.</VFEE.StartBestower.DisabledExistingRitual>
     <VFEE.GalleryRequirements>Gallery requirements</VFEE.GalleryRequirements>
-	<VFEE.GalleryRequirements.Unmet>Gallery requirements unmet: {0}</VFEE.GalleryRequirements.Unmet>
+	<VFEE.GalleryRequirements.Unmet>a gallery that meets these requirements:\n\n{0}</VFEE.GalleryRequirements.Unmet>
     <VFEE.BallroomRequirements>Ballroom requirements</VFEE.BallroomRequirements>
-	<VFEE.BallroomRequirements.Unmet>Ballroom requirements unmet for: {0}</VFEE.BallroomRequirements.Unmet>
-	<VFEE.BallroomRequirements.DanceFloorToSmall>Ballroom does not have a big enough dance floor for the guests! They would like an open floor space of {0} infront of an instrument </VFEE.BallroomRequirements.DanceFloorToSmall>
+	<VFEE.BallroomRequirements.Unmet>a ballroom that meets these requirements:\n\n{0}</VFEE.BallroomRequirements.Unmet>
+	<VFEE.BallroomRequirements.DanceFloorToSmall>a ballroom with an open dance floor of at least {0} tiles in front of an instrument</VFEE.BallroomRequirements.DanceFloorToSmall>
     <VFEE.CourtRequirements>Noble court requirements</VFEE.CourtRequirements>
 	<VFEE.GrandBall.Begin>Host grand ball</VFEE.GrandBall.Begin>
 	<VFEE.GrandBall.Label>grand ball</VFEE.GrandBall.Label>
@@ -45,7 +45,7 @@
 	<VFEE.Parade.Description>A traditional ascension parade to send off the stellarch!</VFEE.Parade.Description>
 	<VFEE.Parade.InvalidGuard>The stellarch does not trust {0} enough.</VFEE.Parade.InvalidGuard>
 	<VFEE.Parade.ChooseParticipants>Participants</VFEE.Parade.ChooseParticipants>
-	<VFEE.Parade.LandingAreaUnmet>Unable to find a suitable drop beacon for the guests to land their shuttle at</VFEE.Parade.LandingAreaUnmet>
+	<VFEE.Parade.LandingAreaUnmet>a landing pad for the guests' shuttle, marked out by four powered ship landing beacons</VFEE.Parade.LandingAreaUnmet>
 	<VFEE.Parade.Reward.Label>Stellarch Ascension</VFEE.Parade.Reward.Label>
 	<VFEE.Parade.Reward.Description>Your stellarch will achieve ascension with passage off-world to progress further in the grand hierarchy, serving directly with the Emperor</VFEE.Parade.Reward.Description>
 	<VFEE.Parade.EndGame.Intro>{STELLARCH_nameDef} has ascended!</VFEE.Parade.EndGame.Intro>

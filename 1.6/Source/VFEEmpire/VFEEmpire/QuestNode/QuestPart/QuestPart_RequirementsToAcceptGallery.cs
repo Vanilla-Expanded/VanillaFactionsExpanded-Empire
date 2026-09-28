@@ -24,31 +24,31 @@ namespace VFEEmpire
         private List<Pawn> CantAccept(out string unmet)
         {
             culprits.Clear();
-            StringBuilder sb = new();
+            List<string> unmetLabels = new();
             foreach (var pawn in pawns)
             {
                 var title = pawn.royalty.AllTitlesInEffectForReading.FirstOrDefault(x => x.def.Ext() != null && !x.def.Ext().galleryRequirements.NullOrEmpty());
                 if (title != null)
                 {
-                    culprits.Add(pawn);
+                    //Judge each gallery on its own and list what the closest one lacks. With no gallery at all, that is every requirement.
+                    var requirements = title.def.Ext().galleryRequirements;
+                    var missing = requirements.Select(req => req.LabelCap()).ToList();
                     foreach (var gallery in mapParent.Map.RoyaltyTracker().Galleries.ToList())
                     {
-                        foreach (var req in title.def.Ext().galleryRequirements)
-                        {
-                            if (!req.Met(gallery, pawn))
-                            {
-                                sb.AppendLine(req.LabelCap());
-                            }
-                        }
-                        if (sb.Length == 0)
-                        {
-                            culprits.Remove(pawn);
+                        var missingHere = requirements.Where(req => !req.Met(gallery, pawn)).Select(req => req.LabelCap()).ToList();
+                        if (missingHere.Count < missing.Count)
+                            missing = missingHere;
+                        if (missing.Count == 0)
                             break;
-                        }
+                    }
+                    if (missing.Count > 0)
+                    {
+                        culprits.Add(pawn);
+                        unmetLabels.AddRange(missing);
                     }
                 }
             }
-            unmet = sb.ToString();
+            unmet = unmetLabels.Distinct().ToLineList("- ");
             return culprits;
         }
 
