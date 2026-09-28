@@ -28,9 +28,8 @@ public class LordToil_BestowTitle : LordToil_Ritual
         //end, so one that lost a principal after this point handed out the title for
         //nothing. Init runs on GotoToil and not on load, so a reload does not reset it.
         behavior.startAbility?.StartCooldown(60000 * 3); //3 days
-        var pawnThrone = RoyalTitleUtility.FindBestUsableThrone(pawn);
-        if (pawnThrone != null && pawnThrone.GetRoom() == ritual.selectedTarget.Cell.GetRoom(ritual.Map))
-      
+        var pawnThrone = FindThroneInRitualRoom(pawn);
+        if (pawnThrone != null)
         {
             Data.spectateRect = CellRect.CenteredOn(pawnThrone.InteractionCell, 0);
             var rotation = pawnThrone.Rotation;
