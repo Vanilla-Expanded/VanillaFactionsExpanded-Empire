@@ -209,6 +209,7 @@
     <Compile Include="Rituals\Behaviors\RitualBehaviorWorker_BestowTitle.cs" />
     <Compile Include="Rituals\LordJob\LordToil\LordToil_BestowTitle.cs" />
     <Compile Include="Rituals\LordJob\LordJob_BestowTitle.cs" />
+    <Compile Include="Rituals\StageFailTrigger_RoleCannotReachTarget.cs" />
     <Compile Include="Rituals\Outcomes\OutcomeComp\RitualOutcomeComp_ThroneForRole.cs" />
     <Compile Include="Rituals\Outcomes\RitualOutcomeEffectWorker_BestowTitle.cs" />
     <Compile Include="Rituals\Positions\RItualPosition_InFrontThrone.cs" />

@@ -23,6 +23,13 @@ public class LordToil_BestowTitle : LordToil_Ritual
         //Setting title now so they can claim a throne
         var behavior = ritual.Ritual.behavior as RitualBehaviorWorker_BestowTitle;
         pawn.royalty.SetTitle(Find.FactionManager.OfEmpire, behavior.defToBestow, false);
+        //The cooldown pays for the title, so it starts where the title is granted.
+        //From the outcome worker it was charged only on a ceremony that reached its
+        //end, so one that lost a principal after this point handed out the title for
+        //nothing. Init runs on GotoToil and not on load, so a reload does not reset it.
+        behavior.startAbility?.StartCooldown(60000 * 3); //3 days
+        var pawnThrone = RoyalTitleUtility.FindBestUsableThrone(pawn);
+        if (pawnThrone != null && pawnThrone.GetRoom() == ritual.selectedTarget.Cell.GetRoom(ritual.Map))
         var pawnThrone = FindThroneInRitualRoom(pawn);
         if (pawnThrone != null)
         {

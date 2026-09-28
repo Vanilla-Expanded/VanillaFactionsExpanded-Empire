@@ -39,7 +39,6 @@ public class RitualOutcomeEffectWorker_BestowTitle : RitualOutcomeEffectWorker_F
         var title = behavior.defToBestow;
         var text = "VFEEmpire.BestowTitle.Finished".Translate(organizer.Named("ORGANIZER")).CapitalizeFirst() + " " + ("Letter" + memory.defName).Translate()
                  + "\n\n" + OutcomeQualityBreakdownDesc(quality, progress, jobRitual);
-        behavior.startAbility.StartCooldown(60000 * 3); //3 days
         //Additional honor based on outcome
         if (outcome.Positive)
         {
