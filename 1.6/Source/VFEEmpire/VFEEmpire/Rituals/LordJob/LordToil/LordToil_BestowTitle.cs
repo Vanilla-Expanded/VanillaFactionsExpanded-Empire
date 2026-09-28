@@ -30,8 +30,7 @@ public class LordToil_BestowTitle : LordToil_Ritual
         behavior.startAbility?.StartCooldown(60000 * 3); //3 days
         var pawnThrone = RoyalTitleUtility.FindBestUsableThrone(pawn);
         if (pawnThrone != null && pawnThrone.GetRoom() == ritual.selectedTarget.Cell.GetRoom(ritual.Map))
-        var pawnThrone = FindThroneInRitualRoom(pawn);
-        if (pawnThrone != null)
+      
         {
             Data.spectateRect = CellRect.CenteredOn(pawnThrone.InteractionCell, 0);
             var rotation = pawnThrone.Rotation;
