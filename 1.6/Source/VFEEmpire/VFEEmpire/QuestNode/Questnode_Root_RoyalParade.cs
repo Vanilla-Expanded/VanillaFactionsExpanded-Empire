@@ -232,12 +232,13 @@ public class QuestNode_Root_RoyalParade : QuestNode
         quest.AddPart(questPart_RequirementsToShuttleLandingArea);
 
 
+        //The success letter says the shuttle will depart on the player's command, which is
+        //true once the parade hands it over, not after it has left and the credits roll
+        quest.Letter(LetterDefOf.PositiveEvent, QuestGenUtility.HardcodedSignalWithQuestID("Parade.CeremonySuccess"),
+            label: "[ParadeSuccessLetterLetterLabel]", text: "[ParadeSuccessLetterText]");
         //**Quest End Success
         quest.SignalPass(() =>
         {
-            Action outAction = () =>
-                quest.Letter(LetterDefOf.PositiveEvent, pickupSuccess, text: "[ParadeSuccessLetterLetterLabel]", label: "[ParadeSuccessLetterText]");
-            quest.SignalPassWithFaction(empire, null, outAction);
             quest.End(QuestEndOutcome.Success, inSignal: pickupSuccess);
         }, pickupSuccess);
         //Set slates for descriptions
