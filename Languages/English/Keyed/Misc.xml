@@ -14,40 +14,40 @@
 	<VFEE.GrandBall.Begin>Host Grandball</VFEE.GrandBall.Begin>
 	<VFEE.GrandBall.Label>Grandball</VFEE.GrandBall.Label>
 	<VFEE.GrandBall.Leave.label>Leave Grandball</VFEE.GrandBall.Leave.label>
-	<VFEE.GrandBall.Leave.Desc>This pawn will leave the grandball, they will not be able to rejoin the festivities later</VFEE.GrandBall.Leave.Desc>
+	<VFEE.GrandBall.Leave.Desc>This pawn will leave the grand ball and will not be able to rejoin the festivities later.</VFEE.GrandBall.Leave.Desc>
 	<VFEE.GrandBall.Cancel.Label>Cancel Grandball</VFEE.GrandBall.Cancel.Label>
-	<VFEE.GrandBall.Cancel.Desc>Cancel the grand ball sending everyone home and failing the quest</VFEE.GrandBall.Cancel.Desc>
-	<VFEE.GrandBall.Cancel.Confirm>There will be no opportunity to restart this ritual, your guests will go home unappy and the quest will be failed.</VFEE.GrandBall.Cancel.Confirm>
-	<VFEE.GrandBall.Waiting>Your guests are waiting for you to start the grand ball. They wont wait long however</VFEE.GrandBall.Waiting>
+	<VFEE.GrandBall.Cancel.Desc>Cancel the grand ball, sending everyone home and failing the quest.</VFEE.GrandBall.Cancel.Desc>
+	<VFEE.GrandBall.Cancel.Confirm>There will be no opportunity to restart this ritual. Your guests will go home unhappy and the quest will be failed.</VFEE.GrandBall.Cancel.Confirm>
+	<VFEE.GrandBall.Waiting>Your guests are waiting for you to start the grand ball. They won't wait long, however.</VFEE.GrandBall.Waiting>
 	<VFEE.GrandBall.Description>An exclusive ball to only be attended by those with a royal title, and a few who can play instruments</VFEE.GrandBall.Description>
 	<VFEE.GrandBall.ChooseParticipants>Participants</VFEE.GrandBall.ChooseParticipants>
 	<VFEE.ArtExhibit.Begin>Host Art Exhibit</VFEE.ArtExhibit.Begin>
 	<VFEE.ArtExhibit.Label>Art Exhibit</VFEE.ArtExhibit.Label>
 	<VFEE.ArtExhibit.Leave.label>Leave exhibit</VFEE.ArtExhibit.Leave.label>
-	<VFEE.ArtExhibit.Leave.Desc>This pawn will leave the exhibit, they will not be able to rejoin the festivities later</VFEE.ArtExhibit.Leave.Desc>
-	<VFEE.ArtExhibit.Leave.Disabled>host cannot leave the exhibit</VFEE.ArtExhibit.Leave.Disabled>
+	<VFEE.ArtExhibit.Leave.Desc>This pawn will leave the exhibit and will not be able to rejoin the festivities later.</VFEE.ArtExhibit.Leave.Desc>
+	<VFEE.ArtExhibit.Leave.Disabled>the host cannot leave the exhibit</VFEE.ArtExhibit.Leave.Disabled>
 	<VFEE.ArtExhibit.Cancel.Label>Cancel Exhibit</VFEE.ArtExhibit.Cancel.Label>
-	<VFEE.ArtExhibit.Cancel.Desc>Cancel the art exhibit sending everyone home and failing the quest</VFEE.ArtExhibit.Cancel.Desc>
-	<VFEE.ArtExhibit.Cancel.Confirm>There will be no opportunity to restart this ritual, your guests will go home unappy and the quest will be failed.</VFEE.ArtExhibit.Cancel.Confirm>
-	<VFEE.ArtExhibit.Waiting>Your guests are waiting for you to start the art exhibit. They wont wait long however</VFEE.ArtExhibit.Waiting>
+	<VFEE.ArtExhibit.Cancel.Desc>Cancel the art exhibit, sending everyone home and failing the quest.</VFEE.ArtExhibit.Cancel.Desc>
+	<VFEE.ArtExhibit.Cancel.Confirm>There will be no opportunity to restart this ritual. Your guests will go home unhappy and the quest will be failed.</VFEE.ArtExhibit.Cancel.Confirm>
+	<VFEE.ArtExhibit.Waiting>Your guests are waiting for you to start the art exhibit. They won't wait long, however.</VFEE.ArtExhibit.Waiting>
 	<VFEE.ArtExhibit.Description>An art expedition to only be attended by those with a royal title, to view your galley and gossip with eachother.</VFEE.ArtExhibit.Description>
 	<VFEE.ArtExhibit.ChooseParticipants>Participants</VFEE.ArtExhibit.ChooseParticipants>
 	<VFEE.Parade.Begin>Host Parade</VFEE.Parade.Begin>
-	<VFEE.Parade.Murder>Driven by jealousy {0} is attempting to murder the stellarch!</VFEE.Parade.Murder>
+	<VFEE.Parade.Murder>Driven by jealousy, {0} is attempting to murder the stellarch!</VFEE.Parade.Murder>
 	<VFEE.Parade.Label>Parade</VFEE.Parade.Label>
 	<VFEE.Parade.Leave.label>Leave Parade</VFEE.Parade.Leave.label>
-	<VFEE.Parade.Leave.Desc>This pawn will leave the Parade, they will not be able to rejoin the festivities later</VFEE.Parade.Leave.Desc>
-	<VFEE.Parade.Leave.Disabled>the stellarch cannot leave the Parade</VFEE.Parade.Leave.Disabled>
+	<VFEE.Parade.Leave.Desc>This pawn will leave the parade and will not be able to rejoin the festivities later.</VFEE.Parade.Leave.Desc>
+	<VFEE.Parade.Leave.Disabled>the stellarch cannot leave the parade</VFEE.Parade.Leave.Disabled>
 	<VFEE.Parade.Cancel.Label>Cancel Parade</VFEE.Parade.Cancel.Label>
-	<VFEE.Parade.Cancel.Desc>Cancel the parade sending everyone home and failing the quest</VFEE.Parade.Cancel.Desc>
-	<VFEE.Parade.Cancel.Confirm>There will be no opportunity to restart this ritual, your guests will go home unhappy and the quest will be failed.</VFEE.Parade.Cancel.Confirm>
-	<VFEE.Parade.Waiting>Your guests are waiting for you to start the Parade. They wont wait long however</VFEE.Parade.Waiting>
+	<VFEE.Parade.Cancel.Desc>Cancel the parade, sending everyone home and failing the quest.</VFEE.Parade.Cancel.Desc>
+	<VFEE.Parade.Cancel.Confirm>There will be no opportunity to restart this ritual. Your guests will go home unhappy and the quest will be failed.</VFEE.Parade.Cancel.Confirm>
+	<VFEE.Parade.Waiting>Your guests are waiting for you to start the parade. They won't wait long, however.</VFEE.Parade.Waiting>
 	<VFEE.Parade.Description>A traditional ascension parade to send off the stellarch!</VFEE.Parade.Description>
 	<VFEE.Parade.InvalidGuard>The stellarch does not trust {0} enough.</VFEE.Parade.InvalidGuard>
 	<VFEE.Parade.ChooseParticipants>Participants</VFEE.Parade.ChooseParticipants>
 	<VFEE.Parade.LandingAreaUnmet>Unable to find a suitable drop beacon for the guests to land their shuttle at</VFEE.Parade.LandingAreaUnmet>
 	<VFEE.Parade.Reward.Label>Stellarch Ascension</VFEE.Parade.Reward.Label>
-	<VFEE.Parade.Reward.Description>Your Stellarch will achieve ascension with passage off world to progress further in the grand hierachy, serving directly with the emperor</VFEE.Parade.Reward.Description>
+	<VFEE.Parade.Reward.Description>Your stellarch will achieve ascension with passage off-world to progress further in the grand hierarchy, serving directly with the Emperor</VFEE.Parade.Reward.Description>
 	<VFEE.DefuseBomb>Defuse bomb</VFEE.DefuseBomb>
 	<VFEE.AssassinationSuccess>Deserters are leaving as they have eliminated their target.</VFEE.AssassinationSuccess>
 	<VFEE.Discard>Discard</VFEE.Discard>
