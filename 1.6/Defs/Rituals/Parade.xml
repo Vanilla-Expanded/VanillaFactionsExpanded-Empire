@@ -4,7 +4,7 @@
     <defName>VFEE_ParadePrecept</defName>
     <label>Parade</label>
 	<preceptClass>Precept_Ritual</preceptClass>
-    <description>Parade</description>
+    <description>A traditional ascension parade to send off the stellarch!</description>
 	<iconPath>UI/Rituals/BestowingParade</iconPath>
 	<issue>Ritual</issue>
     <ritualPatternBase>VFEE_Parade_Pattern</ritualPatternBase> 

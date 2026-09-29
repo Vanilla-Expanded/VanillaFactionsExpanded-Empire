@@ -21,10 +21,14 @@ public class RitualOutcomeEffectWorker_GrandBall : RitualOutcomeEffectWorker_Fro
         LookTargets lookTargets = dance.target.ToTargetInfo(dance.Map);
         var outcome = GetOutcome(quality, dance);
         QuestUtility.SendQuestTargetSignals(dance.lord.questTags, "OUTCOME", outcome.positivityIndex.Named("OUTCOME"));
-        string letterText = outcome.description.Formatted("VFEE.GrandBall.Label".Translate()).CapitalizeFirst();
+        //The outcomes carry no description, so putting every section behind a blank line
+        //opened the letter on two of them; only the sections that have text are joined
+        var sections = new List<string>();
+        if (!outcome.description.NullOrEmpty()) sections.Add(outcome.description.Formatted("VFEE.GrandBall.Label".Translate()).CapitalizeFirst());
         var moodText = def.OutcomeMoodBreakdown(outcome);
-        if (!moodText.NullOrEmpty()) letterText = letterText + "\n\n" + moodText;
-        letterText = letterText + "\n\n" + OutcomeQualityBreakdownDesc(quality, progress, jobRitual);
+        if (!moodText.NullOrEmpty()) sections.Add(moodText);
+        sections.Add(OutcomeQualityBreakdownDesc(quality, progress, jobRitual));
+        string letterText = string.Join("\n\n", sections);
         Find.LetterStack.ReceiveLetter("OutcomeLetterLabel".Translate(outcome.label.Named("OUTCOMELABEL"), dance.RitualLabel.Named("RITUALLABEL")), letterText,
             outcome.Positive ? LetterDefOf.RitualOutcomePositive : LetterDefOf.RitualOutcomeNegative, lookTargets);
         foreach (var pawn in dance.lord.ownedPawns)

@@ -37,11 +37,11 @@ public class LordToil_GrandBall_Wait : LordToil_Wait
     public override IEnumerable<FloatMenuOption> ExtraFloatMenuOptions(Pawn target, Pawn forPawn)
     {
         if (target == bestNoble)
-            yield return new("VFEE.GrandBall.Label".Translate().ToString(), () =>
+            yield return new("VFEE.GrandBall.Label".Translate().CapitalizeFirst().ToString(), () =>
             {
                 var lordJob = (LordJob_GrandBall)lord.LordJob;
                 string header = "VFEE.GrandBall.ChooseParticipants".Translate();
-                var label = lordJob.RitualLabel;
+                var label = lordJob.RitualLabel.CapitalizeFirst();
                 Dialog_BeginRitual.ActionCallback callBack = participants =>
                 {
                     StartRitual(participants.Participants);

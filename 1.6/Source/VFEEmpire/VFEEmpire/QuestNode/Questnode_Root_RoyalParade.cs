@@ -110,6 +110,10 @@ public class QuestNode_Root_RoyalParade : QuestNode
 
         var endGame = new QuestPart_EndGame();
         endGame.inSignal = pickupSuccess;
+        //Without these the end credits open on nothing but their "In memory of" list. The
+        //credits draw plain strings, so the name tags are resolved and stripped here
+        endGame.introText = "VFEE.Parade.EndGame.Intro".Translate(stellarch.Named("STELLARCH")).Resolve().StripTags();
+        endGame.endingText = "VFEE.Parade.EndGame.Ending".Translate(stellarch.Named("STELLARCH"), emperor.Named("EMPEROR")).Resolve().StripTags();
         endGame.signalListenMode = QuestPart.SignalListenMode.OngoingOnly;
         quest.AddPart(endGame);
         //raid
