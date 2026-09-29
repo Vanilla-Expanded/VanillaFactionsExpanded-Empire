@@ -30,7 +30,10 @@ namespace VFEEmpire
                 List<Thing> rewards = ThingSetMakerDefOf.Reward_ItemsStandard.root.Generate(parms);
                 slate.Set("listOfRewards", GenLabel.ThingsLabel(rewards, "  - "), false);
                 quest.DropPods(map.Parent, rewards, "[rewardLetterLabel]", null, "[rewardLetterText]", null, new bool?(true), true, false, false, null, null, QuestPart.SignalListenMode.OngoingOnly, null, true, false, false);
-                quest.End(QuestEndOutcome.Unknown,false);
+                //Named, so this binds to QuestGen's End and ends the quest when the delay does. A bare
+                //bool second argument picks Quest.End(outcome, sendLetter) instead, which ran here, while
+                //the quest was being generated, and ended it before the gift could arrive
+                quest.End(QuestEndOutcome.Unknown, sendStandardLetter: false);
 
             },debugLabel: "VFEE_RewardDelay", signalListenMode: QuestPart.SignalListenMode.OngoingOnly);
         }
