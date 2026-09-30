@@ -143,7 +143,15 @@ namespace VFEEmpire
             //Success signals are more then this due to the ritual complete part.
             //SingalSequenceAll i think is that i need for this. Will by leftHealthy + ritual complate to be success
             string allLeftHealthy = QuestGenUtility.HardcodedSignalWithQuestID("ArtExhibit.LeftmapAllHealthy");
-            string pickupSuccess = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.SentSatisfied");
+            //The shuttle leaving with every guest aboard only counts once the exhibit has succeeded.
+            //Guests who walk out before it starts (one of them hurt, the Empire turned hostile)
+            //board the same shuttle, and that departure fails the quest instead of paying out.
+            string shuttleLeft = QuestGenUtility.HardcodedSignalWithQuestID("shuttle.SentSatisfied");
+            string exhibitSucceeded = QuestGenUtility.HardcodedSignalWithQuestID("ArtExhibit.CeremonySuccess");
+            string pickupSuccess = QuestGen.GenerateNewSignal("LeftAfterExhibit");
+            string leftBeforeExhibit = QuestGen.GenerateNewSignal("LeftBeforeExhibit");
+            quest.SignalPassActivable(inSignalEnable: exhibitSucceeded, inSignal: shuttleLeft, outSignalCompleted: pickupSuccess);
+            quest.SignalPassActivable(inSignal: shuttleLeft, outSignalCompleted: leftBeforeExhibit, inSignalDisable: exhibitSucceeded);
             string leftHealthy = QuestGenUtility.HardcodedSignalWithQuestID("leftHealthy");
             quest.AnySignal(new List<string>
             {
@@ -243,6 +251,7 @@ namespace VFEEmpire
 
             //Fail signal recieveds
             FailResults(quest, QuestGenUtility.HardcodedSignalWithQuestID("ArtExhibit.CeremonyFailed"), "[CeremonyFailedLetterLabel]", "[CeremonyFailedLetterText]", nobles);
+            FailResults(quest, leftBeforeExhibit, "[CeremonyFailedLetterLabel]", "[CeremonyFailedLetterText]", nobles);
             FailResults(quest, QuestGenUtility.HardcodedSignalWithQuestID("ArtExhibit.CeremonyTimeout"), "[CeremonyTimeoutLetterLabel]", "[CeremonyTimeoutLetterText]", nobles);
             FailResults(quest, questPart_LodgerLeave.outSignalArrested_LeaveColony, "[lodgerArrestedLeaveMapLetterLabel]", "[lodgerArrestedLeaveMapLetterText]", nobles);
             FailResults(quest, questPart_LodgerLeave.outSignalDestroyed_LeaveColony, "[lodgerDiedLeaveMapLetterLabel]", "[lodgerDiedLeaveMapLetterText]", nobles);

@@ -19,6 +19,11 @@ namespace VFEEmpire
 
         protected override Lord MakeLord()
         {
+            //Vanilla's CompShuttle unloads anyone still aboard 60000 ticks after they last left a map and drops them from
+            //their lord. The nobles board from the world, so one who visited a map before still carries that visit's
+            //despawnedTick, and the check dropped them as the shuttle landed. Count their time aboard from now.
+            foreach (var pawn in pawns)
+                pawn.despawnedTick = Find.TickManager.TicksGame;
             IntVec3 cell = DropCellFinder.GetBestShuttleLandingSpot(Map, faction);
             var compShuttle = shuttle.TryGetComp<CompShuttle>();
             var shipJob = compShuttle.shipParent.curJob as ShipJob_Arrive;
