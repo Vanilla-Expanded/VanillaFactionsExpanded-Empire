@@ -2297,9 +2297,14 @@
           <li>VFEE_StellicThrone</li>
         </things>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>Throne</thingDef>
-        <count>2</count>
+      <!-- Any throne counts, the assigned one included, so this is two more besides hers -->
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Throne</li>
+          <li>GrandThrone</li>
+          <li>VFEE_StellicThrone</li>
+        </things>
+        <count>3</count>
       </li>
       <li Class="RoomRequirement_Area">
         <area>340</area>
@@ -2678,9 +2683,14 @@
           <li>VFEE_StellicThrone</li>
         </things>
       </li>
-      <li Class="RoomRequirement_ThingCount">
-        <thingDef>Throne</thingDef>
-        <count>4</count>
+      <!-- Any throne counts, the assigned one included, so this is four more besides hers -->
+      <li Class="RoomRequirement_ThingAnyOfCount">
+        <things>
+          <li>Throne</li>
+          <li>GrandThrone</li>
+          <li>VFEE_StellicThrone</li>
+        </things>
+        <count>5</count>
       </li>
       <li Class="RoomRequirement_Area">
         <area>340</area>
