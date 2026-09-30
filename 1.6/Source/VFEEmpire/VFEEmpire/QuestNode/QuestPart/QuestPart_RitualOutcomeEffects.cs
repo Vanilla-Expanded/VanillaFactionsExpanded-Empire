@@ -18,7 +18,8 @@ namespace VFEEmpire
             slate.Set("rewardGiver", leadNoble);
             slate.Set("marketValueRange", MarketValueRange, false);
             var outcomeString = outcomeDef.outcomeChances.FirstOrDefault(x => x.positivityIndex == outcomeIndex).label;
-            slate.Set("outcome", outcomeString);
+            //The outcome label is a title ("Enjoyable"); the gift letter uses it mid-sentence
+            slate.Set("outcome", outcomeString.UncapitalizeFirst());
             return slate;
         }
         public override QuestScriptDef QuestDef => questScript;

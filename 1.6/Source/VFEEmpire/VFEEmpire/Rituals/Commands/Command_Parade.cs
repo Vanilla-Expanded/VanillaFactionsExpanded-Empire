@@ -28,7 +28,7 @@ public class Command_Parade : Command
     {
         base.ProcessInput(ev);
         string header = "VFEE.Parade.ChooseParticipants".Translate();
-        var label = job.RitualLabel;
+        var label = job.RitualLabel.CapitalizeFirst();
         Dialog_BeginRitual.ActionCallback callBack = participants =>
         {
             action(participants);

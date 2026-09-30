@@ -29,7 +29,7 @@ public class Command_ArtExhibit : Command
     {
         base.ProcessInput(ev);
         string header = "VFEE.GrandBall.ChooseParticipants".Translate();
-        var label = job.RitualLabel;
+        var label = job.RitualLabel.CapitalizeFirst();
 
         var artPieces = job.Gallery.ContainedAndAdjacentThings.Where(x => x is ThingWithComps comps && comps.GetComp<CompArt>()?.CanShowArt == true).ToList();
         var colonists = job.Map.mapPawns.FreeColonistsSpawned;

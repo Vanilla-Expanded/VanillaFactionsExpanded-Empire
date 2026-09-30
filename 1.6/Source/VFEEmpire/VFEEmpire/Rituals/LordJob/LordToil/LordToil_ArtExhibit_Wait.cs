@@ -43,11 +43,11 @@ public class LordToil_ArtExhibit_Wait : LordToil_Wait
     public override IEnumerable<FloatMenuOption> ExtraFloatMenuOptions(Pawn target, Pawn forPawn)
     {
         if (target == bestNoble)
-            yield return new("VFEE.ArtExhibit.Label".Translate().ToString(), () =>
+            yield return new("VFEE.ArtExhibit.Label".Translate().CapitalizeFirst().ToString(), () =>
             {
                 var lordJob = (LordJob_ArtExhibit)lord.LordJob;
                 string header = "VFEE.GrandBall.ChooseParticipants".Translate();
-                var label = lordJob.RitualLabel;
+                var label = lordJob.RitualLabel.CapitalizeFirst();
                 var artPieces = lordJob.Gallery.ContainedAndAdjacentThings.Where(x => x is ThingWithComps comps && comps.GetComp<CompArt>()?.CanShowArt == true).ToList();
                 var colonists = lordJob.Map.mapPawns.FreeColonistsSpawned;
                 List<Pawn> pOptions = new();

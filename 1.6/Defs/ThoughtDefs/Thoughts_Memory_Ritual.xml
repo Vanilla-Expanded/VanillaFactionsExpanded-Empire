@@ -36,7 +36,7 @@
     <stages>
       <li>
         <label>enjoyable ball</label>
-        <description>I had a great time dancing in that ball!</description>
+        <description>I had a great time dancing at that ball!</description>
         <baseMoodEffect>3</baseMoodEffect>
       </li>
     </stages>
@@ -63,7 +63,7 @@
     <stages>
       <li>
         <label>terrible exhibit</label>
-        <description>I'm embarrassed that we hosted such a terrible art exhibit. Our art will never be resepected in the empire now!</description>
+        <description>I'm embarrassed that we hosted such a terrible art exhibit. Our art will never be respected in the Empire now!</description>
         <baseMoodEffect>-6</baseMoodEffect>
       </li>
     </stages>
@@ -76,7 +76,7 @@
     <stages>
       <li>
         <label>boring exhibit</label>
-        <description>I was expecting a a lot more interesting pieces, and better presentation.</description>
+        <description>I was expecting a lot more interesting pieces, and better presentation.</description>
         <baseMoodEffect>-3</baseMoodEffect>
       </li>
     </stages>
@@ -102,7 +102,7 @@
     <stages>
       <li>
         <label>amazing exhibit</label>
-        <description>I couldn't believe art I've seen many times could still be soo fascinating, and the royals were so interesting.</description>
+        <description>I couldn't believe art I've seen many times could still be so fascinating, and the royals were so interesting.</description>
         <baseMoodEffect>8</baseMoodEffect>
       </li>
     </stages>
