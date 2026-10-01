@@ -33,7 +33,7 @@
       <li>
         <bodyPartGroup>Torso</bodyPartGroup>
         <apparelLayer>Shell</apparelLayer>
-        <requiredTag>RoyalTier6</requiredTag>
+        <requiredTag>StellicRobe</requiredTag>
         <color>(200, 18, 18)</color>
       </li>
       <li>
