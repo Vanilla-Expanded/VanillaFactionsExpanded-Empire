@@ -39,6 +39,9 @@ public class QuestPart_Delegations : QuestPartActivable
     {
         base.Enable(receivedArgs);
         Schedule();
+        //The countdown's letter promises delegations, so say at once when no faction can send one
+        if (delegations.Count == 0 && Map != null)
+            Messages.Message("VFEE.Delegation.NoneCanCome".Translate(stellarch.Named("STELLARCH")), MessageTypeDefOf.NegativeEvent);
     }
 
     private void Schedule()
@@ -91,20 +94,59 @@ public class QuestPart_Delegations : QuestPartActivable
         foreach (var delegation in delegations)
         {
             if (delegation.arrived || ticks < delegation.arrivalTick) continue;
-            if (ticks > delegation.departureTick - MinimumStayTicks || !CanSendDelegation(delegation.faction, map))
+            //A delegation that will not come says so, and why
+            if (!CanSendDelegation(delegation.faction, map))
             {
                 delegation.arrived = true;
+                if (delegation.faction != null)
+                    Messages.Message((delegation.faction.HostileTo(Faction.OfPlayer) ? "VFEE.Delegation.Hostile" : "VFEE.Delegation.CannotCome")
+                       .Translate(delegation.faction.Named("FACTION")), MessageTypeDefOf.NegativeEvent);
                 continue;
             }
-            if (NeutralGroupIncidentUtility.AnyBlockingHostileLord(map, delegation.faction) || HeldByCondition(map) != null) continue;
+            if (ticks > delegation.departureTick - MinimumStayTicks)
+            {
+                delegation.arrived = true;
+                OutOfTime(delegation, map);
+                continue;
+            }
+            delegation.heldBy = HeldBy(map, delegation.faction);
+            delegation.heldByCondition = HeldByCondition(map);
+            delegation.noWayIn = false;
+            if (delegation.heldBy != null || delegation.heldByCondition != null) continue;
             delegation.arrived = TrySend(delegation, map);
+            delegation.noWayIn = !delegation.arrived;
         }
+    }
+
+    //A group on the map at war with the delegation's faction and not with the colony holds it off. This is vanilla's own test
+    //for neutral arrivals (NeutralGroupIncidentUtility.AnyBlockingHostileLord), here giving the group's faction for the message
+    private static Faction HeldBy(Map map, Faction faction)
+    {
+        var colony = map.ParentFaction ?? Faction.OfPlayer;
+        return map.lordManager.lords.FirstOrDefault(lord => lord.faction != null && lord.faction != faction && lord.faction != colony && lord.AnyActivePawn
+            && (lord.LordJob == null || lord.LordJob.CanBlockHostileVisitors) && lord.LordJob is not LordJob_VoluntarilyJoinable
+            && lord.faction.HostileTo(faction) && !lord.faction.HostileTo(colony))?.faction;
     }
 
     //Vanilla sends no visitors while a condition on the map keeps them away, Anomaly's blood rain and unnatural darkness
     //or Odyssey's lava flow (IncidentWorker_NeutralGroup.CanFireNowSub), and a delegation waits it out the same way
     private static GameConditionDef HeldByCondition(Map map) =>
         map.GameConditionManager.ActiveConditions.FirstOrDefault(condition => condition.def.preventNeutralVisitors)?.def;
+
+    //A delegation whose time to come ran out, with whatever held it off at its last check
+    private static void OutOfTime(Delegation delegation, Map map)
+    {
+        var faction = delegation.faction;
+        if (delegation.heldBy != null)
+            Messages.Message("VFEE.Delegation.HeldOff".Translate(faction.Named("FACTION"), delegation.heldBy.Named("BLOCKER")),
+                new LookTargets(map.mapPawns.SpawnedPawnsInFaction(delegation.heldBy)), MessageTypeDefOf.NegativeEvent);
+        else if (delegation.heldByCondition != null)
+            Messages.Message("VFEE.Delegation.HeldOffByCondition".Translate(faction.Named("FACTION"),
+                delegation.heldByCondition.label.Named("CONDITION")), MessageTypeDefOf.NegativeEvent);
+        else
+            Messages.Message((delegation.noWayIn ? "VFEE.Delegation.NoWayIn" : "VFEE.Delegation.OutOfTime").Translate(faction.Named("FACTION")),
+                MessageTypeDefOf.NegativeEvent);
+    }
 
     private bool TrySend(Delegation delegation, Map map)
     {
@@ -129,7 +171,12 @@ public class QuestPart_Delegations : QuestPartActivable
             pawns.RemoveAt(pawns.Count - 1);
         }
 
-        if (pawns.Count == 0) return true;
+        //Nobody to send is a delegation that cannot come
+        if (pawns.Count == 0)
+        {
+            Messages.Message("VFEE.Delegation.CannotCome".Translate(faction.Named("FACTION")), MessageTypeDefOf.NegativeEvent);
+            return true;
+        }
         foreach (var pawn in pawns)
         {
             GenSpawn.Spawn(pawn, CellFinder.RandomClosewalkCellNear(entry, map, 5), map);
@@ -158,6 +205,11 @@ public class QuestPart_Delegations : QuestPartActivable
         public int arrivalTick;
         public int departureTick;
         public bool arrived;
+        //What held it off at its last check, for the message if it never comes: a group at war with it, a condition that
+        //keeps visitors away, or no way in
+        public Faction heldBy;
+        public GameConditionDef heldByCondition;
+        public bool noWayIn;
 
         public void ExposeData()
         {
@@ -165,6 +217,9 @@ public class QuestPart_Delegations : QuestPartActivable
             Scribe_Values.Look(ref arrivalTick, "arrivalTick");
             Scribe_Values.Look(ref departureTick, "departureTick");
             Scribe_Values.Look(ref arrived, "arrived");
+            Scribe_References.Look(ref heldBy, "heldBy");
+            Scribe_Defs.Look(ref heldByCondition, "heldByCondition");
+            Scribe_Values.Look(ref noWayIn, "noWayIn");
         }
     }
 }

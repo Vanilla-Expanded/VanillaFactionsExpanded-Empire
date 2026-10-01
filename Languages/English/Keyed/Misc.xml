@@ -78,6 +78,13 @@
 	<VFEE.Delegation.ArrivedLabel>Delegation: {FACTION_name}</VFEE.Delegation.ArrivedLabel>
 	<VFEE.Delegation.Arrived>A delegation from {FACTION_name} has come to pay its respects to {STELLARCH_nameDef} before {STELLARCH_possessive} ascension. They will tour the colony and leave in {DURATION}.</VFEE.Delegation.Arrived>
 	<VFEE.Delegation.Leaving>The delegation from {FACTION_name} is leaving.</VFEE.Delegation.Leaving>
+	<VFEE.Delegation.NoneCanCome>No faction friendly or neutral to you can send a delegation to {STELLARCH_nameDef}'s ascension, so none will come.</VFEE.Delegation.NoneCanCome>
+	<VFEE.Delegation.Hostile>The delegation from {FACTION_name} will not come, now that they are hostile to you.</VFEE.Delegation.Hostile>
+	<VFEE.Delegation.CannotCome>The delegation from {FACTION_name} will not come, as they can no longer send one.</VFEE.Delegation.CannotCome>
+	<VFEE.Delegation.HeldOff>The delegation from {FACTION_name} will not come. A group from {BLOCKER_name}, who are at war with them, stayed on the map until their time ran out.</VFEE.Delegation.HeldOff>
+	<VFEE.Delegation.HeldOffByCondition>The delegation from {FACTION_name} will not come. The {CONDITION} kept them away until their time ran out.</VFEE.Delegation.HeldOffByCondition>
+	<VFEE.Delegation.NoWayIn>The delegation from {FACTION_name} will not come, as they found no way into the colony. Visitors walk in from an edge of the map that is neither fogged nor roofed and has a path to the colony.</VFEE.Delegation.NoWayIn>
+	<VFEE.Delegation.OutOfTime>The delegation from {FACTION_name} will not come, as their time to visit has passed.</VFEE.Delegation.OutOfTime>
 	<VFEE.DefuseBomb>Defuse bomb</VFEE.DefuseBomb>
 	<VFEE.AssassinationSuccess>Deserters are leaving as they have eliminated their target.</VFEE.AssassinationSuccess>
 	<VFEE.Discard>Discard</VFEE.Discard>
