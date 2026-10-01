@@ -85,6 +85,11 @@ namespace VFEEmpire
             Scribe_References.Look(ref mapParent, "mapParent");
             Scribe_Collections.Look(ref pawns, "pawns", LookMode.Reference);
             Scribe_Values.Look(ref missingCells, "missingCells");
+            Scribe_Values.Look(ref requiredCells, "requiredCells");
+            //Saves from before requiredCells was saved load it as 0, which lets any dance floor pass. The ball's own part
+            //has always saved the size, so take it from there.
+            if (Scribe.mode == LoadSaveMode.PostLoadInit && requiredCells <= 0)
+                requiredCells = quest?.PartsListForReading.OfType<QuestPart_GrandBall>().FirstOrDefault()?.requiredDanceFloor ?? 0;
         }
 
 

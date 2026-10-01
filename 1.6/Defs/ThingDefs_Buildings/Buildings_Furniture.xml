@@ -211,7 +211,7 @@
 			<WorkToBuild>90000</WorkToBuild>
 			<Mass>150</Mass>
 			<Flammability>1.0</Flammability>
-			<Beauty>24</Beauty>
+			<Beauty>75</Beauty>
 			<Comfort>0.9</Comfort>
 			<MeditationFocusStrength>0.3</MeditationFocusStrength>
 		</statBases>
