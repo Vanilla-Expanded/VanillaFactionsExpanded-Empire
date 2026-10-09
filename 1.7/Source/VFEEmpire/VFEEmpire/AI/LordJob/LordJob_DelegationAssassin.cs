@@ -12,11 +12,13 @@ namespace VFEEmpire;
 //one of them is at striking distance with the rest beside it: they turn deserter, and from then on they bash doors, dig
 //through walls and finish the stellarch once downed. A casket or a pod the stellarch is shut in, they force open;
 //something they cannot open, a vehicle, they attack like anything else, with heavy guns drawn to wear its armor down.
+//Denouncing one reveals them all on the spot.
 public class LordJob_DelegationAssassin : LordJob
 {
     public Pawn target;
     public Faction delegationFaction;
     public bool revealed;
+    private bool exposedByDenouncing;
     //The approach's progress (LordToil_AssassinApproach): whether they have gathered, since when they have been gathering,
     //and since when one of them has been at striking distance
     public bool gathered;
@@ -62,6 +64,14 @@ public class LordJob_DelegationAssassin : LordJob
         return graph;
     }
 
+    //Denounced while still disguised
+    public void Expose()
+    {
+        if (revealed) return;
+        exposedByDenouncing = true;
+        lord.ReceiveMemo(LordToil_AssassinApproach.StrikeMemo);
+    }
+
     private void Reveal()
     {
         if (revealed) return;
@@ -81,7 +91,9 @@ public class LordJob_DelegationAssassin : LordJob
         var assassins = lord.ownedPawns.ToList();
         if (assassins.Count == 0) return;
         //A lone deserter is named; a cell is listed
-        var key = assassins.Count > 1 ? "VFEE.Delegation.Cell" : "VFEE.Delegation.Assassin";
+        var key = assassins.Count > 1
+            ? exposedByDenouncing ? "VFEE.Delegation.CellExposed" : "VFEE.Delegation.Cell"
+            : exposedByDenouncing ? "VFEE.Delegation.AssassinExposed" : "VFEE.Delegation.Assassin";
         var names = assassins.Select(pawn => pawn.NameShortColored.Resolve()).ToCommaList(true);
         var held = holder == null
             ? ""
@@ -102,6 +114,14 @@ public class LordJob_DelegationAssassin : LordJob
     {
         base.Notify_PawnLost(p, condition);
         DelegationUtility.RemoveEnvoy(p);
+    }
+
+    public override IEnumerable<Gizmo> GetPawnGizmos(Pawn p)
+    {
+        foreach (var gizmo in base.GetPawnGizmos(p)) yield return gizmo;
+        if (revealed) yield break;
+        var denounce = DelegationUtility.DenounceCommand(p, delegationFaction, false, Expose);
+        if (denounce != null) yield return denounce;
     }
 
     public override void ExposeData()

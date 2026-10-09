@@ -85,10 +85,18 @@
 	<VFEE.Delegation.HeldOffByCondition>The delegation from {FACTION_name} will not come. The {CONDITION} kept them away until their time ran out.</VFEE.Delegation.HeldOffByCondition>
 	<VFEE.Delegation.NoWayIn>The delegation from {FACTION_name} will not come, as they found no way into the colony. Visitors walk in from an edge of the map that is neither fogged nor roofed and has a path to the colony.</VFEE.Delegation.NoWayIn>
 	<VFEE.Delegation.OutOfTime>The delegation from {FACTION_name} will not come, as their time to visit has passed.</VFEE.Delegation.OutOfTime>
+	<VFEE.Delegation.Denounce>Denounce</VFEE.Delegation.Denounce>
+	<VFEE.Delegation.DenounceDesc>Accuse {PAWN_nameDef} of being a deserter in disguise. A deserter will be exposed and attack at once, and so will any others hiding in the delegation. If {PAWN_nameDef} is innocent, {FACTION_name} will take offence: -{GOODWILL} goodwill.</VFEE.Delegation.DenounceDesc>
+	<VFEE.Delegation.DenounceConfirm>Denounce {PAWN_nameDef} as a deserter?\n\nIf {PAWN_pronoun} is innocent, relations with {FACTION_name} will worsen by {GOODWILL}.</VFEE.Delegation.DenounceConfirm>
+	<VFEE.Delegation.AlreadyDenounced>{PAWN_nameDef} has already been denounced.</VFEE.Delegation.AlreadyDenounced>
 	<VFEE.Delegation.AssassinLabel>Assassin: {PAWN_nameDef}</VFEE.Delegation.AssassinLabel>
 	<VFEE.Delegation.Assassin>{PAWN_nameFull} came with the delegation from {FACTION_name}, but is a deserter in disguise, and has drawn a smuggled weapon on {STELLARCH_nameDef}!</VFEE.Delegation.Assassin>
+	<VFEE.Delegation.AssassinExposedLabel>Deserter exposed: {PAWN_nameDef}</VFEE.Delegation.AssassinExposedLabel>
+	<VFEE.Delegation.AssassinExposed>You were right about {PAWN_nameFull}, who came with the delegation from {FACTION_name} as a deserter in disguise. Exposed, the deserter has drawn a smuggled weapon and is going for {STELLARCH_nameDef}!</VFEE.Delegation.AssassinExposed>
 	<VFEE.Delegation.CellLabel>Assassins: {COUNT} deserters</VFEE.Delegation.CellLabel>
 	<VFEE.Delegation.Cell>{NAMES} came with the delegation from {FACTION_name}, but are deserters in disguise, and have drawn smuggled weapons on {STELLARCH_nameDef} together!</VFEE.Delegation.Cell>
+	<VFEE.Delegation.CellExposedLabel>{COUNT} deserters exposed</VFEE.Delegation.CellExposedLabel>
+	<VFEE.Delegation.CellExposed>You were right, and that deserter was not alone: {NAMES} came with the delegation from {FACTION_name} in disguise. Exposed, they have drawn smuggled weapons and are all going for {STELLARCH_nameDef}!</VFEE.Delegation.CellExposed>
 	<VFEE.DefuseBomb>Defuse bomb</VFEE.DefuseBomb>
 	<VFEE.AssassinationSuccess>Deserters are leaving as they have eliminated their target.</VFEE.AssassinationSuccess>
 	<VFEE.Delegation.ForceOpen>{STELLARCH_nameDef} is in the {HOLDER}, and they mean to force it open.</VFEE.Delegation.ForceOpen>

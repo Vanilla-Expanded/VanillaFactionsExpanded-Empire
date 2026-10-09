@@ -1,12 +1,32 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace VFEEmpire;
 
+[StaticConstructorOnStartup]
 public static class DelegationUtility
 {
+    private static readonly Texture2D DenounceIcon = ContentFinder<Texture2D>.Get("UI/Deserters");
+
+    public static Command_Action DenounceCommand(Pawn pawn, Faction faction, bool alreadyDenounced, System.Action denounce)
+    {
+        if (!pawn.Spawned || pawn.Dead || faction == null || faction.HostileTo(Faction.OfPlayer)) return null;
+        var goodwill = -LordJob_Delegation.WrongDenouncementGoodwill;
+        var command = new Command_Action
+        {
+            defaultLabel = "VFEE.Delegation.Denounce".Translate(),
+            defaultDesc = "VFEE.Delegation.DenounceDesc".Translate(pawn.Named("PAWN"), faction.Named("FACTION"), goodwill.Named("GOODWILL")),
+            icon = DenounceIcon,
+            action = () => Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(
+                "VFEE.Delegation.DenounceConfirm".Translate(pawn.Named("PAWN"), faction.Named("FACTION"), goodwill.Named("GOODWILL")), denounce, true))
+        };
+        if (alreadyDenounced) command.Disable("VFEE.Delegation.AlreadyDenounced".Translate(pawn.Named("PAWN")));
+        return command;
+    }
+
     //The envoy trait keeps delegates and deserters apart while a delegation is here. It goes once a delegate is lost to its
     //group for any reason, or turns out to be a deserter; a cell leaving for the stellarch keeps it as its disguise
     public static void RemoveEnvoy(Pawn pawn)

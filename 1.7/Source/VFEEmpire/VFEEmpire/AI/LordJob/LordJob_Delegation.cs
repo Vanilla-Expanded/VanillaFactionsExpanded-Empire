@@ -9,9 +9,12 @@ namespace VFEEmpire;
 
 //A delegation paying its respects to the stellarch before the ascension (QuestPart_Delegations). The graph is
 //LordJob_VisitColony's, with a tour of the colony in place of its single chill spot. A cell of deserters may hide among
-//the delegates and wait for a chance at the stellarch.
+//the delegates and wait for a chance at the stellarch, and any delegate can be denounced.
 public class LordJob_Delegation : LordJob
 {
+    //The letter opening the countdown quotes this (Script_Parade.xml, DelegationsLetterText)
+    public const int WrongDenouncementGoodwill = -20;
+
     //The cell looks for a chance every few seconds, and takes the last one before the delegation leaves
     private const int ChanceCheckInterval = 250;
     public const int LastChanceTicks = 10000;
@@ -28,6 +31,7 @@ public class LordJob_Delegation : LordJob
     public List<Pawn> cell = new();
     public int departureTick;
     public IntVec3 firstStop;
+    public List<Pawn> denounced = new();
 
     public LordJob_Delegation() { }
 
@@ -121,7 +125,7 @@ public class LordJob_Delegation : LordJob
         base.LordJobTick();
         var lead = Lead();
         if (lead == null || !lead.IsHashIntervalTick(ChanceCheckInterval)) return;
-        if (lord.CurLordToil is LordToil_DelegationTour && SeesAChance(lead)) LeaveForTheStellarch();
+        if (lord.CurLordToil is LordToil_DelegationTour && SeesAChance(lead)) LeaveForTheStellarch(false);
     }
 
     //The deserter who watches for the cell's chance: the first of them still with the delegation and on their feet
@@ -151,17 +155,39 @@ public class LordJob_Delegation : LordJob
     //has turned on the colony
     private void LastChance()
     {
-        if (Lead() != null && StellarchHere() && !faction.HostileTo(Faction.OfPlayer)) LeaveForTheStellarch();
+        if (Lead() != null && StellarchHere() && !faction.HostileTo(Faction.OfPlayer)) LeaveForTheStellarch(false);
     }
 
-    //Leaving its group is the cell's one tell, and it leaves together
-    public void LeaveForTheStellarch()
+    //Leaving its group is the cell's one tell, and it leaves together. Exposed, it strikes at once
+    public void LeaveForTheStellarch(bool exposed)
     {
         var deserters = cell.Where(pawn => lord.ownedPawns.Contains(pawn) && pawn.Spawned).ToList();
         cell.Clear();
         if (deserters.Count == 0) return;
         lord.RemovePawns(deserters);
-        LordMaker.MakeNewLord(faction, new LordJob_DelegationAssassin(stellarch, faction), lord.Map, deserters);
+        var job = new LordJob_DelegationAssassin(stellarch, faction);
+        LordMaker.MakeNewLord(faction, job, lord.Map, deserters);
+        if (exposed) job.Expose();
+    }
+
+    //Exposing one deserter gives the whole cell away
+    public void Denounce(Pawn pawn)
+    {
+        if (cell.Contains(pawn))
+        {
+            LeaveForTheStellarch(true);
+            return;
+        }
+
+        denounced.Add(pawn);
+        faction.TryAffectGoodwillWith(Faction.OfPlayer, WrongDenouncementGoodwill, true, true, VFEE_DefOf.VFEE_DelegateDenounced, pawn);
+    }
+
+    public override IEnumerable<Gizmo> GetPawnGizmos(Pawn p)
+    {
+        foreach (var gizmo in base.GetPawnGizmos(p)) yield return gizmo;
+        var denounce = DelegationUtility.DenounceCommand(p, faction, denounced.Contains(p), () => Denounce(p));
+        if (denounce != null) yield return denounce;
     }
 
     public override void Notify_PawnLost(Pawn p, PawnLostCondition condition)
@@ -178,10 +204,13 @@ public class LordJob_Delegation : LordJob
         Scribe_Collections.Look(ref cell, "cell", LookMode.Reference);
         Scribe_Values.Look(ref departureTick, "departureTick");
         Scribe_Values.Look(ref firstStop, "firstStop");
+        Scribe_Collections.Look(ref denounced, "denounced", LookMode.Reference);
         if (Scribe.mode == LoadSaveMode.PostLoadInit)
         {
             cell ??= new();
             cell.RemoveAll(pawn => pawn == null);
+            denounced ??= new();
+            denounced.RemoveAll(pawn => pawn == null);
         }
     }
 }

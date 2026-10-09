@@ -6,4 +6,9 @@
     <label>joined empire</label>
   </HistoryEventDef>
 
+  <HistoryEventDef>
+    <defName>VFEE_DelegateDenounced</defName>
+    <label>denounced an innocent delegate</label>
+  </HistoryEventDef>
+
 </Defs>

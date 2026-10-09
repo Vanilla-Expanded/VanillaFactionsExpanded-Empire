@@ -50,6 +50,7 @@ public static class VFEE_DefOf
     public static DutyDef VFEE_KillRoyalty;
     public static DutyDef VFEE_AssassinApproach;
     public static DutyDef VFEE_AssassinStrike;
+    public static HistoryEventDef VFEE_DelegateDenounced;
     public static TraitDef VFEE_Envoy;
     public static PreceptDef VFEE_BestowHonor;
     public static TerrainDef VFEE_ThickAsh;
