@@ -9,19 +9,26 @@ using Verse.AI.Group;
 namespace VFEEmpire;
 
 //The realm pays its respects while the ascension's countdown runs: one delegation a day from the friendly factions, each
-//touring the colony for most of a day. The Empire always sends a delegation.
+//touring the colony for most of a day. Deserters hide among them, more of them in a larger delegation. The Empire always
+//sends a delegation and it always carries deserters, and the others may.
 public class QuestPart_Delegations : QuestPartActivable
 {
     //Arrivals fall early in each day of the countdown and departures before the next arrival, so the last delegation is
     //gone before the parade's nobles land
     public static readonly IntRange ArrivalTicksIntoDay = new(3000, 12000);
     public static readonly IntRange StayTicks = new(30000, 42000);
-    //At least a few visitors, or three or four soldiers. A stronger colony is sent more: a tenth of its raid points, up to
-    //a crowd of 16, since points buy far more visitors than soldiers
+    //At least a few visitors, or three or four soldiers, so the deserters always have a group to leave. A stronger colony is
+    //sent more: a tenth of its raid points, up to a crowd of 16, since points buy far more visitors than soldiers
     public static readonly FloatRange VisitorPoints = new(150f, 300f);
     public static readonly FloatRange SoldierPoints = new(300f, 450f);
     public const float RaidPointsShare = 0.1f;
     public const int MaxDelegates = 16;
+    //One deserter for every 240 points the delegation was made with, at least one and at most half of it: the same share of
+    //every delegation's strength. Counted by heads, a quarter of the Empire's soldiers was half the cell another faction's
+    //visitors hid (2 of about 11 soldiers at 945 points, against 4 of 16 visitors), while the smuggled weapons arm every
+    //deserter alike
+    public const float PointsPerDeserter = 240f;
+    public const float AssassinChance = 0.33f;
 
     //A delegation held off by a raid or the weather still comes later that day, but not for less than this
     private const int MinimumStayTicks = 10000;
@@ -31,6 +38,7 @@ public class QuestPart_Delegations : QuestPartActivable
     public MapParent mapParent;
     public Pawn stellarch;
     public int days = 5;
+    public bool assassins = true;
     public List<Delegation> delegations = new();
 
     public Map Map => mapParent?.Map;
@@ -62,7 +70,8 @@ public class QuestPart_Delegations : QuestPartActivable
             {
                 faction = chosen[i],
                 arrivalTick = arrival,
-                departureTick = arrival + StayTicks.RandomInRange
+                departureTick = arrival + StayTicks.RandomInRange,
+                assassin = assassins && (chosen[i] == empire || Rand.Chance(AssassinChance))
             });
         }
     }
@@ -179,15 +188,30 @@ public class QuestPart_Delegations : QuestPartActivable
         }
         foreach (var pawn in pawns)
         {
+            //Every delegate, the deserters among them too, so the trait gives nothing away (LordJob_Delegation drops it)
+            pawn.story?.traits.GainTrait(new Trait(VFEE_DefOf.VFEE_Envoy));
             GenSpawn.Spawn(pawn, CellFinder.RandomClosewalkCellNear(entry, map, 5), map);
         }
+        var cell = new List<Pawn>();
+        if (delegation.assassin)
+            cell.AddRange(pawns.Where(CanJoinCell)
+               .InRandomOrder().Take(Mathf.Clamp(Mathf.RoundToInt(points / PointsPerDeserter), 1, Mathf.Max(1, pawns.Count / 2))));
         if (!LordToil_DelegationTour.TryFindStop(pawns[0], IntVec3.Invalid, out var firstStop)) firstStop = entry;
-        LordMaker.MakeNewLord(faction, new LordJob_Delegation(faction, delegation.departureTick, firstStop), map, pawns);
+        LordMaker.MakeNewLord(faction, new LordJob_Delegation(faction, stellarch, cell, delegation.departureTick, firstStop), map, pawns);
         Find.LetterStack.ReceiveLetter("VFEE.Delegation.ArrivedLabel".Translate(faction.Named("FACTION")),
             "VFEE.Delegation.Arrived".Translate(faction.Named("FACTION"), stellarch.Named("STELLARCH"),
                 (delegation.departureTick - Find.TickManager.TicksGame).ToStringTicksToPeriod().Named("DURATION")), LetterDefOf.NeutralEvent, pawns, faction);
         return true;
     }
+
+    //A delegate who could fire the guns the cell smuggles in (DelegationUtility.DrawSmuggledWeapon)
+    private static bool CanJoinCell(Pawn pawn) => pawn.RaceProps.Humanlike && pawn.DevelopmentalStage.Adult()
+        && !pawn.WorkTagIsDisabled(WorkTags.Violent) && !pawn.WorkTagIsDisabled(WorkTags.Shooting)
+        && pawn.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation);
+
+    //While it runs, the deserters that ride trade caravans stay away (Patch_SpawnPawns): every assassin comes through a delegation
+    public static bool CountdownRunning(Map map) => Find.QuestManager.QuestsListForReading.Any(quest => quest.State == QuestState.Ongoing
+        && quest.PartsListForReading.Any(part => part is QuestPart_Delegations { State: QuestPartState.Enabled } delegations && delegations.Map == map));
 
     public override void ExposeData()
     {
@@ -195,6 +219,7 @@ public class QuestPart_Delegations : QuestPartActivable
         Scribe_References.Look(ref mapParent, "mapParent");
         Scribe_References.Look(ref stellarch, "stellarch");
         Scribe_Values.Look(ref days, "days", 5);
+        Scribe_Values.Look(ref assassins, "assassins", true);
         Scribe_Collections.Look(ref delegations, "delegations", LookMode.Deep);
         if (Scribe.mode == LoadSaveMode.PostLoadInit) delegations ??= new();
     }
@@ -204,6 +229,8 @@ public class QuestPart_Delegations : QuestPartActivable
         public Faction faction;
         public int arrivalTick;
         public int departureTick;
+        //Whether deserters hide among it
+        public bool assassin;
         public bool arrived;
         //What held it off at its last check, for the message if it never comes: a group at war with it, a condition that
         //keeps visitors away, or no way in
@@ -216,6 +243,7 @@ public class QuestPart_Delegations : QuestPartActivable
             Scribe_References.Look(ref faction, "faction");
             Scribe_Values.Look(ref arrivalTick, "arrivalTick");
             Scribe_Values.Look(ref departureTick, "departureTick");
+            Scribe_Values.Look(ref assassin, "assassin");
             Scribe_Values.Look(ref arrived, "arrived");
             Scribe_References.Look(ref heldBy, "heldBy");
             Scribe_Defs.Look(ref heldByCondition, "heldByCondition");

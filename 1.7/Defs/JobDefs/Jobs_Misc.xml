@@ -24,4 +24,10 @@
         <reportString>discarding TargetA</reportString>
         <casualInterruptible>false</casualInterruptible>
     </JobDef>
+    <JobDef>
+        <defName>VFEE_ForceOpen</defName>
+        <driverClass>VFEEmpire.JobDriver_ForceOpen</driverClass>
+        <reportString>forcing open TargetA.</reportString>
+        <casualInterruptible>false</casualInterruptible>
+    </JobDef>
 </Defs>

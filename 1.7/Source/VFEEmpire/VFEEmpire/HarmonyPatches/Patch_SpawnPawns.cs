@@ -19,8 +19,10 @@ public static class Patch_SpawnPawns
     [HarmonyPostfix]
     public static void Postfix(IncidentWorker_NeutralGroup __instance, IncidentParms parms, ref List<Pawn> __result)
     {
+        //While the ascension's delegations come, every deserter comes with them (QuestPart_Delegations), so none ride the caravans
         if (pawnGroupKindDef(__instance) == PawnGroupKindDefOf.Trader && parms?.faction?.def != null && parms.faction.def.techLevel >= TechLevel.Industrial
-         && parms.target is Map map && parms.faction.def.GetModExtension<FactionExtension_Deserters>() is null or { canSendDeserters: true })
+         && parms.target is Map map && parms.faction.def.GetModExtension<FactionExtension_Deserters>() is null or { canSendDeserters: true }
+         && !QuestPart_Delegations.CountdownRunning(map))
         {
             var noble = map.mapPawns.FreeColonists.OrderByDescending(p => p?.royalty?.GetCurrentTitle(Faction.OfEmpire)?.seniority ?? 0).FirstOrDefault();
             var title = noble?.royalty.GetCurrentTitle(Faction.OfEmpire);

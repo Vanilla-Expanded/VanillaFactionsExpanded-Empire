@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!-- Every delegate in the countdown, the hidden deserter included: no delegate fights another, so guarding the stellarch falls to the colony -->
+  <TraitDef>
+    <defName>VFEE_Envoy</defName>
+    <commonality>0</commonality>
+    <canBeSuppressed>false</canBeSuppressed>
+    <disableHostilityFromFaction>VFEE_Deserters</disableHostilityFromFaction>
+    <degreeDatas>
+      <li>
+        <label>envoy</label>
+        <description>{PAWN_nameDef} is here with a delegation, under the protection of diplomacy: at peace with every other delegation, whatever their factions think of each other, and out of the Empire's quarrel with its deserters.</description>
+      </li>
+    </degreeDatas>
+  </TraitDef>
+
+</Defs>
