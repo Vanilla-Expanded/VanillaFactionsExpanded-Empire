@@ -75,6 +75,9 @@
 	<VFEE.Parade.StellarchAway>The parade has stopped while {PAWN_nameDef} is away from it. If it waits {TIME} more in all, it fails.</VFEE.Parade.StellarchAway>
 	<VFEE.Parade.DraftTimeRunningOut>If the parade waits {TIME} more, it fails.</VFEE.Parade.DraftTimeRunningOut>
 	<VFEE.Parade.DraftedTooLong>The parade waited too long, and has failed.</VFEE.Parade.DraftedTooLong>
+	<VFEE.Delegation.ArrivedLabel>Delegation: {FACTION_name}</VFEE.Delegation.ArrivedLabel>
+	<VFEE.Delegation.Arrived>A delegation from {FACTION_name} has come to pay its respects to {STELLARCH_nameDef} before {STELLARCH_possessive} ascension. They will tour the colony and leave in {DURATION}.</VFEE.Delegation.Arrived>
+	<VFEE.Delegation.Leaving>The delegation from {FACTION_name} is leaving.</VFEE.Delegation.Leaving>
 	<VFEE.DefuseBomb>Defuse bomb</VFEE.DefuseBomb>
 	<VFEE.AssassinationSuccess>Deserters are leaving as they have eliminated their target.</VFEE.AssassinationSuccess>
 	<VFEE.Discard>Discard</VFEE.Discard>

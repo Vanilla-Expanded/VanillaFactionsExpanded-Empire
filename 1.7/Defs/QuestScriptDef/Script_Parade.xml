@@ -27,8 +27,9 @@
 			<li>lodgersWasWere(nobleCount>=2)->were</li>
 			<li>appreciateAppreciates(nobleCount==1)->appreciates</li>
 			<li>appreciateAppreciates(nobleCount>=2)->appreciate</li>
+			<li>delegationsParagraph->While you prepare, friendly factions will send delegations to pay their respects to [stellarch_nameDef], one a day.</li>
 			
-			<li>questDescription->[stellarch_nameFull] has reached the peak of what [stellarch_pronoun] can achieve from the surface of a rimworld. In order to progress further in the grand hierarchy and become the right hand of Emperor [emperor_nameFull], [stellarch_nameDef] needs to partake in a traditional ascension parade, after which [stellarch_pronoun] will depart on a shuttle and join the Emperor.\n\nA parade of this magnitude is bound to draw the attention of deserters.\n\nOnce you accept this quest, you will have 5 days to prepare for the parade. Consider improving your defenses and working out contingency plans, as it is difficult to say which way the parade will move. At all times you will have to keep the parade safe from harm.\n\nKeep an eye on any rivals or enemies of [stellarch_nameDef], as they might decide it’s a good time to make a move and claim the power for themselves.\n\nThe shuttle will arrive bringing the highest-ranking nobility to the parade. You will be responsible for providing the security for the event. After the parade starts, it will slowly move through the map for 12 hours, after which everyone, including [stellarch_nameDef], will board the shuttle and depart.
+			<li>questDescription->[stellarch_nameFull] has reached the peak of what [stellarch_pronoun] can achieve from the surface of a rimworld. In order to progress further in the grand hierarchy and become the right hand of Emperor [emperor_nameFull], [stellarch_nameDef] needs to partake in a traditional ascension parade, after which [stellarch_pronoun] will depart on a shuttle and join the Emperor.\n\nA parade of this magnitude is bound to draw the attention of deserters.\n\nOnce you accept this quest, you will have 5 days to prepare for the parade. Consider improving your defenses and working out contingency plans, as it is difficult to say which way the parade will move. At all times you will have to keep the parade safe from harm.\n\n[delegationsParagraph]\n\nKeep an eye on any rivals or enemies of [stellarch_nameDef], as they might decide it’s a good time to make a move and claim the power for themselves.\n\nThe shuttle will arrive bringing the highest-ranking nobility to the parade. You will be responsible for providing the security for the event. After the parade starts, it will slowly move through the map for 12 hours, after which everyone, including [stellarch_nameDef], will board the shuttle and depart.
 
 
 
@@ -63,6 +64,9 @@
 				<li>CountdownPadLetterText->[asker_nameFull] waited a day for the colony's landing pad to be fit for the nobility's shuttle, and will not land it anywhere else. [stellarch_nameDef]'s ascension parade is called off.</li>
 				<li>CountdownThreatLetterLabel->Parade called off</li>
 				<li>CountdownThreatLetterText->[asker_nameFull] waited a day for the danger at the colony to pass, and will not land the nobility into it. [stellarch_nameDef]'s ascension parade is called off.</li>
+				<!--Delegations-->
+				<li>DelegationsLetterLabel->Ascension announced</li>
+				<li>DelegationsLetterText->[stellarch_nameDef]'s ascension has been announced across the realm. Over the next five days, friendly factions will send delegations to pay their respects to [stellarch_objective], one a day, and each will tour the colony.</li>
 				<!-- Interaction response-->
 				<li>letterIntroArrested->You arrested {SUBJECT_definite}, [oneOfThe].</li>
 				<li>lodgerArrestedLeaveMapLetterLabel->[lodgersLabel] arrested: Departure</li>

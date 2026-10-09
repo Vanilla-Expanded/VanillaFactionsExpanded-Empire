@@ -112,6 +112,18 @@ public class QuestNode_Root_RoyalParade : QuestNode
         FailResults(quest, stellarchAway, "[CountdownAwayLetterLabel]", "[CountdownAwayLetterText]", nobles);
         FailResults(quest, padUnusable, "[CountdownPadLetterLabel]", "[CountdownPadLetterText]", nobles);
         FailResults(quest, colonyThreatened, "[CountdownThreatLetterLabel]", "[CountdownThreatLetterText]", nobles);
+        //Meanwhile the realm pays its respects: a delegation a day from the friendly factions. The letter opening the countdown
+        //announces them.
+        quest.AddPart(new QuestPart_Delegations
+        {
+            inSignalEnable = QuestGen.slate.Get<string>("inSignal"),
+            inSignalDisable = noblesArrive,
+            mapParent = map.Parent,
+            stellarch = stellarch,
+            days = prepareTicks / GenDate.TicksPerDay
+        });
+        quest.Letter(LetterDefOf.NeutralEvent, QuestGen.slate.Get<string>("inSignal"),
+            lookTargets: Gen.YieldSingle(stellarch), label: "[DelegationsLetterLabel]", text: "[DelegationsLetterText]");
         //shuttle
         var lodgers = new List<Pawn>();
         lodgers.AddRange(nobles);
