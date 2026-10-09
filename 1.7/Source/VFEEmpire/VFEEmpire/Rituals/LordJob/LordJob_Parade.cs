@@ -53,6 +53,19 @@ public class LordJob_Parade : LordJob_Ritual
     public Pawn visitorLead;
     private int ticksSinceConfetti;
 
+    //The stellarch and her guards stay in the parade when drafted, and the procession waits for them, for this long in all
+    //across the whole parade, however many are drafted at once. It waits on the same clock while the stellarch is away from
+    //it, off its map or inside something there, which a drafted order can send her into. The parade's clock stands still
+    //meanwhile, so a wait adds its length to the parade. A planted bomb's fuse burns on through it
+    public static readonly int haltTicksAllowed = 2 * GenDate.TicksPerHour;
+    public int haltedTicks;
+
+    //Who was drafted, whether the stellarch was away and whether the procession was halted on the last tick. Not saved: a
+    //load fills in who is drafted, and the first tick after it whether she is away, so it brings no message
+    private readonly HashSet<Pawn> draftedLastTick = new();
+    private bool? awayLastTick;
+    private bool halted;
+
     //Not saved: the nobles' court stimulant has been checked since the game loaded (Notify_PawnAdded gives it after that)
     private bool keptAwake;
 
@@ -125,8 +138,42 @@ public class LordJob_Parade : LordJob_Ritual
         Scribe_Collections.Look(ref guards, "guards", LookMode.Reference);
         Scribe_Collections.Look(ref colonistParticipants, "colonistParticipants", LookMode.Reference);
         Scribe_Collections.Look(ref stops, "stops", LookMode.Value);
+        Scribe_Values.Look(ref haltedTicks, "haltedTicks");
         Scribe_Collections.Look(ref assignedGuards, "assignedGuards", LookMode.Reference);
-        if (Scribe.mode == LoadSaveMode.PostLoadInit) assignedGuards ??= guards?.ToList() ?? new();
+        if (Scribe.mode == LoadSaveMode.PostLoadInit)
+        {
+            //A save without the guards' list loads it as null, and the parade reads it unchecked every tick
+            guards ??= new();
+            assignedGuards ??= guards.ToList();
+            draftedLastTick.UnionWith(guards.Prepend(stellarch).Where(pawn => pawn.Drafted));
+            halted = draftedLastTick.Count > 0;
+        }
+    }
+
+    //Whether the procession waits, as CountHaltedTime found it on the last tick
+    public bool Halted => halted && paradeStarted && !paradeFinished;
+
+    //Off the parade's map, or inside something on it, a casket or a shuttle: despawning takes her drafter but leaves her
+    //among the lord's pawns, and nothing else in the parade notices
+    private bool StellarchAway => stellarch.Map != Map;
+
+    //Vanilla's periods round anything over an hour to whole hours, so 1.6 hours left would read 2: over an hour this gives
+    //tenths, and under one vanilla's own tenths and seconds
+    private string HaltTimeLeft()
+    {
+        var ticksLeft = Mathf.Max(0, haltTicksAllowed - haltedTicks);
+        if (ticksLeft < GenDate.TicksPerHour) return ticksLeft.ToStringTicksToPeriod();
+        var hours = (ticksLeft / (float)GenDate.TicksPerHour).ToString("0.#");
+        return hours == "1" ? "Period1Hour".Translate() : "PeriodHours".Translate(hours);
+    }
+
+    private bool DraftableInParade(Pawn pawn) => paradeStarted && !paradeFinished && (pawn == stellarch || guards.Contains(pawn));
+
+    //Has a pawn reconsider its job at once. A drafted stellarch or guard keeps the player's orders instead, and a pawn
+    //who is not spawned, being dead, off the map or inside something, is left alone
+    private static void ReconsiderJob(Pawn pawn)
+    {
+        if (pawn.Spawned && !pawn.Drafted) pawn.jobs?.CheckForJobOverride();
     }
 
     //The spot is fixed when the nobles are sent, from the cell their shuttle is meant to land on, but the shuttle comes down
@@ -208,6 +255,7 @@ public class LordJob_Parade : LordJob_Ritual
         //transition_ParadeInterupted.AddTrigger(new Trigger_PawnHarmed()); taking out pawn harmed as instant fail as can be triggered super easily
         transition_ParadeInterupted.AddTrigger(new Trigger_ParadeLostViolently());
         transition_ParadeInterupted.AddTrigger(new Trigger_Signal(questEndedSignal));
+        transition_ParadeInterupted.AddTrigger(new Trigger_TickCondition(() => haltedTicks >= haltTicksAllowed, 60));
         graph.transitions.Add(transition_ParadeInterupted);
 
 
@@ -280,11 +328,9 @@ public class LordJob_Parade : LordJob_Ritual
         outcome.Apply(ticksPassed / (float)duration, totalPresenceTmp, this);
         lord.ReceiveMemo("CeremonyFinished");
         QuestUtility.SendQuestTargetSignals(lord.questTags, signal, lord.Named("SUBJECT"));
-        foreach (var pawn in lord.ownedPawns.ListFullCopy())
-            pawn.jobs.CheckForJobOverride();
-        //A guard killed in the parade is still listed here, and a dead pawn has no job tracker
-        foreach (var pawn in colonistParticipants)
-            pawn.jobs?.CheckForJobOverride();
+        //colonistParticipants still lists a guard killed in the parade, whom ReconsiderJob skips
+        foreach (var pawn in lord.ownedPawns.Union(colonistParticipants).ToList())
+            ReconsiderJob(pawn);
     }
 
     public override void PostCleanup()
@@ -313,6 +359,7 @@ public class LordJob_Parade : LordJob_Ritual
         if (paradeStarted && !paradeFinished)
         {
             outcome.Tick(this);
+            CountHaltedTime();
             if (!allAtStart)
             {
                 if (shuttle.DestroyedOrNull() || shuttle.OccupiedRect().ExpandedBy(3).Contains(stellarch.Position))
@@ -331,11 +378,9 @@ public class LordJob_Parade : LordJob_Ritual
 
                 if (allAtStart)
                     foreach (var pawn in lord.ownedPawns.ListFullCopy())
-                        pawn.jobs.CheckForJobOverride();
+                        ReconsiderJob(pawn);
             }
 
-            ticksPassed++;
-            ticksThisRotation++;
             ticksSinceConfetti++;
             if (music == null) music = InternalDefOf.VFEE_Parade_Sustainer_01.TrySpawnSustainer(SoundInfo.InMap(stellarch, MaintenanceType.PerTick));
             music?.Maintain();
@@ -349,17 +394,63 @@ public class LordJob_Parade : LordJob_Ritual
                 else
                     effecters.Remove(effecter);
 
-            if (duration / stops.Count - ticksThisRotation <= 0 && AtDestination)
+            if (!halted)
             {
-                RoomSwap();
-                ticksThisRotation = 0;
-            }
+                ticksPassed++;
+                ticksThisRotation++;
+                if (duration / stops.Count - ticksThisRotation <= 0 && AtDestination)
+                {
+                    RoomSwap();
+                    ticksThisRotation = 0;
+                }
 
-            //Handling all events inside the lordjob rather then mixing back and forth between quest and here. Just easier to put it in one spot.
-            if (ticksPassed == raidSpawn) SpawnRaid();
-            if (ticksPassed == bombSpawn) SpawnBomb();
-            if (ticksPassed == murders) Murderers();
+                //Handling all events inside the lordjob rather then mixing back and forth between quest and here. Just easier to put it in one spot.
+                if (ticksPassed == raidSpawn) SpawnRaid();
+                if (ticksPassed == bombSpawn) SpawnBomb();
+                if (ticksPassed == murders) Murderers();
+            }
         }
+    }
+
+    //Says who has just been drafted or that the stellarch has gone, counts each tick the procession waits once, however
+    //many it waits for, and warns as the allowance runs out. When the procession stops or sets off again, everyone
+    //reconsiders their job at once
+    private void CountHaltedTime()
+    {
+        var nowHalted = false;
+        foreach (var pawn in guards.Prepend(stellarch))
+        {
+            if (pawn.Drafted)
+            {
+                nowHalted = true;
+                if (draftedLastTick.Add(pawn))
+                    Messages.Message("VFEE.Parade.Drafted".Translate(pawn.Named("PAWN"), HaltTimeLeft().Named("TIME")), pawn,
+                        MessageTypeDefOf.CautionInput);
+            }
+            else draftedLastTick.Remove(pawn);
+        }
+
+        var away = StellarchAway;
+        if (away && awayLastTick == false)
+            Messages.Message("VFEE.Parade.StellarchAway".Translate(stellarch.Named("PAWN"), HaltTimeLeft().Named("TIME")), stellarch,
+                MessageTypeDefOf.CautionInput);
+        awayLastTick = away;
+        nowHalted |= away;
+
+        if (nowHalted)
+        {
+            haltedTicks++;
+            if (haltedTicks == haltTicksAllowed - GenDate.TicksPerHour / 2)
+                Messages.Message("VFEE.Parade.DraftTimeRunningOut".Translate(HaltTimeLeft().Named("TIME")), stellarch,
+                    MessageTypeDefOf.NegativeEvent);
+            else if (haltedTicks == haltTicksAllowed)
+                Messages.Message("VFEE.Parade.DraftedTooLong".Translate(), stellarch, MessageTypeDefOf.NegativeEvent);
+        }
+
+        if (nowHalted == halted) return;
+        halted = nowHalted;
+        foreach (var pawn in lord.ownedPawns.ListFullCopy())
+            ReconsiderJob(pawn);
     }
 
     public void CheckForEffect()
@@ -382,9 +473,12 @@ public class LordJob_Parade : LordJob_Ritual
         }
     }
 
+    //Over a noble walking with her. A noble lost once the parade has run its duration stays listed, and the parade runs past
+    //it when she is still on her way to a stop, or out of its room, as its share runs out
     public void CreateConfetti()
     {
-        var pawn = nobles.Except(stellarch).RandomElement();
+        var pawn = nobles.Where(noble => noble != stellarch && noble.Spawned && noble.Map == Map).RandomElementWithFallback();
+        if (pawn == null) return;
         var cell = pawn.Position.RandomAdjacentCell8Way();
         var effect = InternalDefOf.VFEE_ParadeConfetti.Spawn();
         var effecter = new ParadeEffecter();
@@ -457,7 +551,7 @@ public class LordJob_Parade : LordJob_Ritual
             }
 
         foreach (var pawn in guards.ListFullCopy())
-            pawn.jobs.CheckForJobOverride();
+            ReconsiderJob(pawn);
     }
 
     public void RoomSwap()
@@ -487,7 +581,7 @@ public class LordJob_Parade : LordJob_Ritual
         //could be left on the map as the shuttle was sent and the credits rolled. Her death, arrest, kidnapping or
         //banishment fails the quest instead
         if (compShuttle.requiredPawns.Contains(p) && p != stellarch) compShuttle.requiredPawns.Remove(p);
-        p.jobs?.CheckForJobOverride();
+        ReconsiderJob(p);
     }
 
     public override void Notify_InMentalState(Pawn pawn, MentalStateDef stateDef)
@@ -503,11 +597,30 @@ public class LordJob_Parade : LordJob_Ritual
 
     //Vanilla lets a ritual member leave of their own accord when a need or a wound pulls them away. The parade
     //has nobody to lead it without the stellarch, so she cannot leave it that way while it lasts. Once it is over
-    //she can, to be tended before she boards.
-    public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason) =>
-        p != stellarch || reason != PawnLostCondition.LeftVoluntarily || paradeFinished;
+    //she can, to be tended before she boards. Drafting her or a guard keeps them in it too, on the allowance
+    //CountHaltedTime keeps.
+    public override bool ShouldRemovePawn(Pawn p, PawnLostCondition reason)
+    {
+        if (p == stellarch && reason == PawnLostCondition.LeftVoluntarily && !paradeFinished) return false;
+        return reason != PawnLostCondition.Drafted || !DraftableInParade(p);
+    }
 
-    public override string GetReport(Pawn pawn) => "LordReportAttending".Translate("VFEE.Parade.Label".Translate());
+    //LordJob_Ritual refuses drafting to every member, and Pawn.GetGizmos disables the draft button and every other drafter
+    //button with it, so the stellarch and her guards need this to be drafted at all. Everyone else keeps the refusal
+    public override AcceptanceReport AllowsDrafting(Pawn pawn) => DraftableInParade(pawn) ? AcceptanceReport.WasAccepted : base.AllowsDrafting(pawn);
+
+    //And a drafted one takes orders, which the ritual's refusal of the float menu would stop too. Undrafted, nobody in the
+    //parade can be ordered out of it
+    public override AcceptanceReport AllowsFloatMenu(Pawn pawn) =>
+        DraftableInParade(pawn) && pawn.Drafted ? AcceptanceReport.WasAccepted : base.AllowsFloatMenu(pawn);
+
+    public override string GetReport(Pawn pawn)
+    {
+        var report = "LordReportAttending".Translate("VFEE.Parade.Label".Translate()).Resolve();
+        if (DraftableInParade(pawn))
+            report += " (" + "VFEE.Parade.DraftTimeLeft".Translate(HaltTimeLeft()).Resolve() + ")";
+        return report;
+    }
 
     protected override bool ShouldCallOffBecausePawnNoLongerOwned(Pawn p) => base.ShouldCallOffBecausePawnNoLongerOwned(p) && !guards.Contains(p);
 
@@ -540,7 +653,10 @@ public class LordJob_Parade : LordJob_Ritual
                     Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("VFEE.Parade.Cancel.Confirm".Translate(),
                         () => { StopParade("CeremonyFailed"); }));
                 },
-                hotKey = KeyBindingDefOf.Misc6
+                //The key is Fire at will's on a drafted pawn, so no member's button takes it while the stellarch or any guard is
+                //drafted. Keyed on some members only, the button would split in two across a selection of drafted and undrafted
+                //members, and the key would go to whichever came first
+                hotKey = stellarch.Drafted || guards.Any(guard => guard.Drafted) ? null : KeyBindingDefOf.Misc6
             };
         }
     }

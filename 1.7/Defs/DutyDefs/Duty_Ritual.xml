@@ -137,6 +137,8 @@
     <defName>VFEE_ParadeLead</defName>
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>  
+      <!-- The procession waits while the stellarch or a guard is drafted, or while she is away from it -->
+      <li Class="VFEEmpire.JobGiver_ParadeHalted"/>
 	  <li Class="VFEEmpire.JobGiver_ParadeLeadStartPos"/>	  
       <li Class="VFEEmpire.JobGiver_ParadeLead"/>
       <li Class="ThinkNode_ConditionalInGatheringArea">
@@ -181,6 +183,7 @@
     <defName>VFEE_ParadeNoble</defName>
     <thinkNode Class="ThinkNode_Priority">
       <subNodes>     
+      <li Class="VFEEmpire.JobGiver_ParadeHalted"/>
       <li Class="VFEEmpire.JobGiver_ParadeFollow"/>
       <li Class="ThinkNode_ConditionalInGatheringArea">
         <subNodes>
