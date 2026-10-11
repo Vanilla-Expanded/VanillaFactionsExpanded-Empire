@@ -85,6 +85,7 @@
 	<VFEE.Delegation.HeldOffByCondition>The delegation from {FACTION_name} will not come. The {CONDITION} kept them away until their time ran out.</VFEE.Delegation.HeldOffByCondition>
 	<VFEE.Delegation.NoWayIn>The delegation from {FACTION_name} will not come, as they found no way into the colony. Visitors walk in from an edge of the map that is neither fogged nor roofed and has a path to the colony.</VFEE.Delegation.NoWayIn>
 	<VFEE.Delegation.OutOfTime>The delegation from {FACTION_name} will not come, as their time to visit has passed.</VFEE.Delegation.OutOfTime>
+	<VFEE.Delegation.LandedFirst>The nobles landed before every delegation had come, so these will not: {FACTIONS}.</VFEE.Delegation.LandedFirst>
 	<VFEE.Delegation.Denounce>Denounce</VFEE.Delegation.Denounce>
 	<VFEE.Delegation.DenounceDesc>Accuse {PAWN_nameDef} of being a deserter in disguise. A deserter will be exposed and attack at once, and so will any others hiding in the delegation. If {PAWN_nameDef} is innocent, {FACTION_name} will take offence: -{GOODWILL} goodwill.</VFEE.Delegation.DenounceDesc>
 	<VFEE.Delegation.DenounceConfirm>Denounce {PAWN_nameDef} as a deserter?\n\nIf {PAWN_pronoun} is innocent, relations with {FACTION_name} will worsen by {GOODWILL}.</VFEE.Delegation.DenounceConfirm>

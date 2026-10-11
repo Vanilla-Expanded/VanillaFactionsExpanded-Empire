@@ -52,6 +52,18 @@ public class QuestPart_Delegations : QuestPartActivable
             Messages.Message("VFEE.Delegation.NoneCanCome".Translate(stellarch.Named("STELLARCH")), MessageTypeDefOf.NegativeEvent);
     }
 
+    //Only the nobles' landing ends the countdown, and every delegation is due to come and go before they land, so one still
+    //to come was cut short by an early landing, the console's Land the nobles now
+    protected override void Disable()
+    {
+        base.Disable();
+        var missed = delegations.Where(delegation => !delegation.arrived && delegation.faction != null).ToList();
+        if (missed.Count == 0) return;
+        foreach (var delegation in missed) delegation.arrived = true;
+        Messages.Message("VFEE.Delegation.LandedFirst".Translate(missed.Select(delegation => delegation.faction.Name).ToCommaList(true).Named("FACTIONS")),
+            MessageTypeDefOf.NegativeEvent);
+    }
+
     private void Schedule()
     {
         var map = Map;
@@ -157,6 +169,51 @@ public class QuestPart_Delegations : QuestPartActivable
                 MessageTypeDefOf.NegativeEvent);
     }
 
+    //Dev mode only: the quest's debug info opens the ascension console, which holds the dev controls (Dialog_AscensionConsole)
+    public override void DoDebugWindowContents(Rect innerRect, ref float curY)
+    {
+        var rect = new Rect(innerRect.x, curY, 250f, 25f);
+        if (Widgets.ButtonText(rect, "Open the ascension console")) Dialog_AscensionConsole.Open();
+        curY += rect.height + 4f;
+    }
+
+    //The console's Send now. Keeps the delegation's length of stay, and leaves it to the next check if it cannot come this
+    //moment
+    public void DebugSendNow(Delegation delegation)
+    {
+        var stay = delegation.departureTick - delegation.arrivalTick;
+        delegation.arrivalTick = Find.TickManager.TicksGame;
+        delegation.departureTick = delegation.arrivalTick + stay;
+        var map = Map;
+        if (map != null && CanSendDelegation(delegation.faction, map)) delegation.arrived = TrySend(delegation, map);
+    }
+
+    //The console's extra delegation, for tuning the assassins: one outside the schedule, from any faction that could send
+    //one, made as a scheduled one is
+    public void DebugSendExtra(Faction faction, bool deserters)
+    {
+        var now = Find.TickManager.TicksGame;
+        var delegation = new Delegation
+        {
+            faction = faction,
+            arrivalTick = now,
+            departureTick = now + StayTicks.RandomInRange,
+            assassin = deserters,
+            extra = true
+        };
+        delegations.Add(delegation);
+        var map = Map;
+        if (map != null) delegation.arrived = TrySend(delegation, map);
+    }
+
+    //The console's countdown restart: the schedule is drawn again from now, as when the countdown began
+    public void DebugRestart()
+    {
+        enableTick = Find.TickManager.TicksGame;
+        delegations.Clear();
+        Schedule();
+    }
+
     private bool TrySend(Delegation delegation, Map map)
     {
         var faction = delegation.faction;
@@ -232,6 +289,8 @@ public class QuestPart_Delegations : QuestPartActivable
         //Whether deserters hide among it
         public bool assassin;
         public bool arrived;
+        //Sent from the ascension console, outside the schedule
+        public bool extra;
         //What held it off at its last check, for the message if it never comes: a group at war with it, a condition that
         //keeps visitors away, or no way in
         public Faction heldBy;
@@ -245,6 +304,7 @@ public class QuestPart_Delegations : QuestPartActivable
             Scribe_Values.Look(ref departureTick, "departureTick");
             Scribe_Values.Look(ref assassin, "assassin");
             Scribe_Values.Look(ref arrived, "arrived");
+            Scribe_Values.Look(ref extra, "extra");
             Scribe_References.Look(ref heldBy, "heldBy");
             Scribe_Defs.Look(ref heldByCondition, "heldByCondition");
             Scribe_Values.Look(ref noWayIn, "noWayIn");

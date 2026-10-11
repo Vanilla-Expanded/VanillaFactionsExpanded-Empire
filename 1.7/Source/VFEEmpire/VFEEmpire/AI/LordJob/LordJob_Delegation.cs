@@ -183,6 +183,14 @@ public class LordJob_Delegation : LordJob
         faction.TryAffectGoodwillWith(Faction.OfPlayer, WrongDenouncementGoodwill, true, true, VFEE_DefOf.VFEE_DelegateDenounced, pawn);
     }
 
+    //Dev mode, from the ascension console: the delegation leaves at its next check, within a second of game time, its
+    //deserters going with it as ordinary delegates
+    public void DebugSendHome()
+    {
+        cell.Clear();
+        departureTick = Find.TickManager.TicksGame;
+    }
+
     public override IEnumerable<Gizmo> GetPawnGizmos(Pawn p)
     {
         foreach (var gizmo in base.GetPawnGizmos(p)) yield return gizmo;
