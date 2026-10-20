@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+   <DutyDef>
+    <defName>VFEE_SpectateClose</defName>
+    <hook>HighPriority</hook>
+    <socialModeMax>Off</socialModeMax>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- Goto Spot -->
+        <li Class="VFEEmpire.JobGiver_SpectateClose">
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+  <DutyDef>
+    <defName>VFEE_AcceptTitle</defName>
+    <hook>HighPriority</hook>
+    <socialModeMax>Off</socialModeMax>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- Goto my spot -->
+        <li Class="JobGiver_GotoTravelDestination">
+          <exactCell>true</exactCell>
+          <locomotionUrgency>Jog</locomotionUrgency>
+          <ritualTagOnArrival>Arrived</ritualTagOnArrival>
+        </li>
+
+        <!-- Arrived -->
+        <li Class="ThinkNode_ConditionalAtDutyLocation">
+          <subNodes>
+            <li Class="VFEEmpire.JobGiver_AcceptTitle">
+              <soundDefMale>Speech_Throne_Male</soundDefMale>
+              <soundDefFemale>Speech_Throne_Female</soundDefFemale>
+            </li>
+          </subNodes>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+  <DutyDef>
+  <defName>VFEE_AcceptHonor</defName>
+    <hook>HighPriority</hook>
+    <socialModeMax>Off</socialModeMax>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <!-- Goto my spot -->
+        <li Class="JobGiver_GotoTravelDestination">
+          <exactCell>true</exactCell>
+          <locomotionUrgency>Jog</locomotionUrgency>
+          <ritualTagOnArrival>Arrived</ritualTagOnArrival>
+        </li>
+        <!-- Arrived -->
+        <li Class="ThinkNode_ConditionalAtDutyLocation">
+          <subNodes>
+            <li Class="VFEEmpire.JobGiver_AcceptHonor">
+            </li>
+          </subNodes>
+        </li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+  <DutyDef>
+  <defName>VFEE_GiveHonor</defName>
+    <hook>HighPriority</hook>
+    <socialModeMax>Off</socialModeMax>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="VFEEmpire.JobGiver_GiveHonor">
+        </li>
+	  </subNodes>
+    </thinkNode>
+	
+  </DutyDef>
+   <DutyDef>
+    <defName>VFEE_GrandBallWait</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>     
+		<li Class="JobGiver_WanderNearDutyLocation">
+		  <wanderRadius>5</wanderRadius>
+          <locomotionUrgencyOutsideRadius>Sprint</locomotionUrgencyOutsideRadius>		  
+		</li>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+   <DutyDef>
+    <defName>VFEE_BallLead</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>     
+		<li Class="VFEEmpire.JobGiver_GoToStartPositions"/>
+        <li Class="VFEEmpire.JobGiver_Waltz"/>
+		<li Class="VFEEmpire.JobGiver_DanceSpectate"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+    <DutyDef>
+    <defName>VFEE_BallPartner</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>     
+		<li Class="VFEEmpire.JobGiver_GoToStartPositions"/>
+        <li Class="VFEEmpire.JobGiver_Waltz"/>
+		<li Class="VFEEmpire.JobGiver_DanceSpectate"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+   <DutyDef>
+    <defName>VFEE_PlayInstrument</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>     
+        <li Class="VFEEmpire.JobGiver_PlayInstrument"/>
+		<li Class="JobGiver_Idle"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+   <DutyDef>
+    <defName>VFEE_ArtExhibitRoyal</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>     
+        <li Class="VFEEmpire.JobGiver_ArtExhibitPresent"/>
+		<li Class="VFEEmpire.JobGiver_ArtExhibitSpectate"/>
+		<li Class="JobGiver_Idle"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+    <DutyDef>
+    <defName>VFEE_ArtExhibitPresent</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>     
+        <li Class="VFEEmpire.JobGiver_ArtExhibitPresent"/>
+		<li Class="VFEEmpire.JobGiver_ArtExhibitStandBy"/>
+		<li Class="JobGiver_Idle"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+  <DutyDef>
+    <defName>VFEE_ParadeLead</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>  
+	  <li Class="VFEEmpire.JobGiver_ParadeLeadStartPos"/>	  
+      <li Class="VFEEmpire.JobGiver_ParadeLead"/>
+      <li Class="ThinkNode_ConditionalInGatheringArea">
+        <subNodes>
+          <!-- Eat -->
+          <li Class="ThinkNode_ConditionalRandom">
+            <chance>0.05</chance>
+            <subNodes>
+              <li Class="JobGiver_EatInGatheringArea" />
+            </subNodes>
+          </li>
+          
+          <!-- Stand where you are and be socially active -->
+          <li Class="ThinkNode_ConditionalRandom">
+            <chance>0.35</chance>
+            <subNodes>
+              <li Class="JobGiver_StandAndBeSociallyActive">
+                <ticksRange>350~750</ticksRange>
+              </li>
+            </subNodes>
+          </li>
+          
+          <!-- Get joy -->
+          <li Class="ThinkNode_ConditionalRandom">
+            <chance>0.1</chance>
+            <subNodes>
+              <li Class="JobGiver_GetJoyInGatheringArea" />
+            </subNodes>
+          </li>
+          
+          <!-- Wander -->
+          <li Class="JobGiver_WanderInGatheringArea">
+            <ticksBetweenWandersRange>50~250</ticksBetweenWandersRange>
+          </li>
+        </subNodes>
+      </li>
+      <li Class="JobGiver_Idle"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+  <DutyDef>
+    <defName>VFEE_ParadeNoble</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>     
+      <li Class="VFEEmpire.JobGiver_ParadeFollow"/>
+      <li Class="ThinkNode_ConditionalInGatheringArea">
+        <subNodes>
+          <!-- Eat -->
+          <li Class="ThinkNode_ConditionalRandom">
+            <chance>0.05</chance>
+            <subNodes>
+              <li Class="JobGiver_EatInGatheringArea" />
+            </subNodes>
+          </li>
+          
+          <!-- Stand where you are and be socially active -->
+          <li Class="ThinkNode_ConditionalRandom">
+            <chance>0.35</chance>
+            <subNodes>
+              <li Class="JobGiver_StandAndBeSociallyActive">
+                <ticksRange>350~750</ticksRange>
+              </li>
+            </subNodes>
+          </li>
+          
+          <!-- Get joy -->
+          <li Class="ThinkNode_ConditionalRandom">
+            <chance>0.1</chance>
+            <subNodes>
+              <li Class="JobGiver_GetJoyInGatheringArea" />
+            </subNodes>
+          </li>
+          
+          <!-- Wander -->
+          <li Class="JobGiver_WanderInGatheringArea">
+            <ticksBetweenWandersRange>50~250</ticksBetweenWandersRange>
+          </li>
+        </subNodes>
+      </li>
+      <li Class="JobGiver_Idle"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+  <DutyDef>
+    <defName>VFEE_ParadeGuard</defName>
+    <thinkNode Class="ThinkNode_Priority">
+      <subNodes>     
+        <li Class="VFEEmpire.JobGiver_ParadeGuard"/>
+        <li Class="JobGiver_Idle"/>
+      </subNodes>
+    </thinkNode>
+  </DutyDef>
+</Defs>

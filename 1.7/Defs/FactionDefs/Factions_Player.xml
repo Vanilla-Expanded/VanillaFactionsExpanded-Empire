@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <FactionDef ParentName="PlayerFactionBase">
+    <defName>VFEE_NewFamily</defName>
+    <label>New Family</label>
+    <description>A colony of a royal family.</description>
+    <isPlayer>true</isPlayer>
+    <basicMemberKind>Empire_Royal_Baron</basicMemberKind>
+    <pawnSingular>imperial</pawnSingular>
+    <pawnsPlural>imperials</pawnsPlural>
+    <techLevel>Industrial</techLevel>
+    <factionNameMaker>NamerFactionOutlander</factionNameMaker>
+    <settlementNameMaker>NamerSettlementOutlander</settlementNameMaker>
+    <allowedCultures>
+      <li>Sophian</li>
+    </allowedCultures>
+    <backstoryFilters>
+      <li>
+        <categories>
+          <li>ImperialCommon</li>
+        </categories>
+      </li>
+    </backstoryFilters>
+    <factionIconPath>UI/NewFamilyBase</factionIconPath>
+    <startingResearchTags>
+      <li>ClassicStart</li>
+    </startingResearchTags>
+    <startingTechprintsResearchTags>
+      <li>ClassicStart</li>
+      <li>ClassicStartTechprints</li>
+    </startingTechprintsResearchTags>
+    <apparelStuffFilter>
+      <stuffCategoriesToAllow>
+        <li>Metallic</li>
+        <li>Fabric</li>
+      </stuffCategoriesToAllow>
+      <disallowedThingDefs>
+        <li>DevilstrandCloth</li>
+      </disallowedThingDefs>
+    </apparelStuffFilter>
+    <modExtensions>
+      <li Class="VEF.Factions.FactionDefExtension">
+        <startingGoodwillByFactionDefs>
+          <VFEE_Deserters>-100~-100</VFEE_Deserters>
+        </startingGoodwillByFactionDefs>
+      </li>
+    </modExtensions>
+  </FactionDef>
+
+</Defs>

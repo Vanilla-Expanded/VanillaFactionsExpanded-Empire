@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    <JobDef>
+        <defName>VFEE_DefuseBomb</defName>
+        <driverClass>VFEEmpire.JobDriver_DefuseBomb</driverClass>
+        <reportString>defusing TargetA.</reportString>
+        <casualInterruptible>false</casualInterruptible>
+    </JobDef>
+    <JobDef>
+        <defName>VFEE_PlaceBomb</defName>
+        <driverClass>VFEEmpire.JobDriver_PlaceBomb</driverClass>
+        <reportString>placing bomb</reportString>
+        <casualInterruptible>false</casualInterruptible>
+    </JobDef>
+    <JobDef>
+        <defName>VFEE_PoisonMeal</defName>
+        <driverClass>VFEEmpire.JobDriver_PoisonMeal</driverClass>
+        <reportString>poisoning TargetA</reportString>
+        <casualInterruptible>false</casualInterruptible>
+    </JobDef>
+    <JobDef>
+        <defName>VFEE_DiscardMeal</defName>
+        <driverClass>VFEEmpire.JobDriver_DiscardMeal</driverClass>
+        <reportString>discarding TargetA</reportString>
+        <casualInterruptible>false</casualInterruptible>
+    </JobDef>
+</Defs>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+   <Operation Class="PatchOperationFindMod">
+      <mods>
+         <li>Vanilla Weapons Expanded - Coilguns</li>
+      </mods>
+      <match Class="PatchOperationSequence">
+         <operations>
+            <li Class="PatchOperationAdd">
+               <xpath>/Defs/PawnKindDef[defName = "VFEE_Deserter"]/weaponTags</xpath>
+               <value>
+                  <li>Coilgun</li>
+               </value>
+            </li>
+         </operations>
+      </match>
+   </Operation>
+</Patch>
