@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    <ThoughtDef>
+        <defName>VFEE_FirstOfName</defName>
+        <workerClass>VFEEmpire.ThoughtWorker_Honor</workerClass>
+        <thoughtClass>Thought_SituationalSocial</thoughtClass>
+        <stages>
+            <li>
+                <label>First of {OTHERPAWN_possessive} Name</label>
+                <description>{OTHERPAWN_name} is the first of {OTHERPAWN_possessive} name.</description>
+                <baseOpinionOffset>5</baseOpinionOffset>
+            </li>
+        </stages>
+        <modExtensions>
+            <li Class="VFEEmpire.ThoughtExtension_Honor">
+                <honor>VFEE_FirstOfName</honor>
+                <noblesOnly>true</noblesOnly>
+                <onOther>true</onOther>
+            </li>
+        </modExtensions>
+    </ThoughtDef>
+    <ThoughtDef>
+        <defName>VFEE_TheGreat</defName>
+        <workerClass>VFEEmpire.ThoughtWorker_Honor</workerClass>
+        <thoughtClass>Thought_Situational</thoughtClass>
+        <stages>
+            <li>
+                <label>Great honor</label>
+                <description>I am the recipient of the Great honor.</description>
+                <baseMoodEffect>5</baseMoodEffect>
+            </li>
+        </stages>
+        <modExtensions>
+            <li Class="VFEEmpire.ThoughtExtension_Honor">
+                <honor>VFEE_TheGreat</honor>
+            </li>
+        </modExtensions>
+    </ThoughtDef>
+    <ThoughtDef>
+        <defName>VFEE_Chosen</defName>
+        <workerClass>VFEEmpire.ThoughtWorker_Honor_Chosen</workerClass>
+        <thoughtClass>Thought_SituationalSocial</thoughtClass>
+        <stages>
+            <li>
+                <label>Chosen</label>
+                <baseOpinionOffset>10</baseOpinionOffset>
+            </li>
+        </stages>
+        <modExtensions>
+            <li Class="VFEEmpire.ThoughtExtension_Honor">
+                <honor>VFEE_Chosen</honor>
+            </li>
+        </modExtensions>
+    </ThoughtDef>
+</Defs>

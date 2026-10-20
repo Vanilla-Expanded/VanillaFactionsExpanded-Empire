@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/FactionDef[defName="Empire"]/permanentEnemyToEveryoneExcept</xpath>
+            <value>
+                <li>VFEE_NewFamily</li>
+            </value>
+    </Operation>
+
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/FactionDef[defName="Empire"]</xpath>
+            <value>
+                <li Class="VFEEmpire.FactionExtension_Deserters">
+                    <canSendDeserters>false</canSendDeserters>
+                </li>
+            </value>
+    </Operation>
+
+    <!-- Add FactionDefExtension if missing. -->
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/FactionDef[defName="Empire"]</xpath>
+        <value>
+            <li Class="VEF.Factions.FactionDefExtension"/>
+        </value>
+    </Operation>
+
+    <!-- Add forced faction data. Do it separately from DefModExtension in case something else is adding it to Empire. -->
+    <!-- Also assume that the other mod is not doing anything with forcedFactionData, for simplicity’s sake. -->
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/FactionDef[defName="Empire"]/modExtensions/li[@Class="VEF.Factions.FactionDefExtension"]</xpath>
+        <value>
+            <forcedFactionData>
+                <!-- World gen -->
+                <requiredFactionCountAtWorldGeneration>1</requiredFactionCountAtWorldGeneration>
+                <preventRemovalAtWorldGeneration>true</preventRemovalAtWorldGeneration>
+                <factionDisabledAtWorldGenerationMessage>VFEE.ForcedFaction.Empire.CannotDisable</factionDisabledAtWorldGenerationMessage>
+
+                <!-- Gameplay -->
+                <requiredFactionCountDuringGameplay>1</requiredFactionCountDuringGameplay>
+                <forcePlayerToAddFactionIfMissing>true</forcePlayerToAddFactionIfMissing>
+                <factionDiscoverySpecialMessage>VFEE.ForcedFaction.Empire.FactionDiscoveryMessage</factionDiscoverySpecialMessage>
+            </forcedFactionData>
+        </value>
+    </Operation>
+
+</Patch>

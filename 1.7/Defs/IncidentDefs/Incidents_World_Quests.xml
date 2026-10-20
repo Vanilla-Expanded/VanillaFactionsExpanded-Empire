@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <IncidentDef ParentName="GiveQuestBase">
+    <defName>VFEE_GiveQuest_EndGame_Stellarch</defName>
+    <label>stellarch ascent</label>
+    <questScriptDef>VFEE_Parade</questScriptDef>
+    <baseChance>0</baseChance> <!-- given by a special storyteller comp -->
+  </IncidentDef>
+
+</Defs>

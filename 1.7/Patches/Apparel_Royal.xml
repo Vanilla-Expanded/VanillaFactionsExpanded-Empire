@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+
+   <Operation Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="Apparel_CrownStellic"]</xpath>
+      <value>
+         <recipeMaker>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <workSkill>Crafting</workSkill>
+            <effectWorking>Smith</effectWorking>
+            <soundWorking>Recipe_Smith</soundWorking>
+            <recipeUsers>
+               <li>ElectricSmithy</li>
+               <li>FueledSmithy</li>
+            </recipeUsers>
+            <defaultIngredientFilter>
+               <categories>
+                  <li>Root</li>
+               </categories>
+               <disallowedThingDefs>
+                  <li>Jade</li>
+                  <li>Uranium</li>
+               </disallowedThingDefs>
+            </defaultIngredientFilter>
+            <researchPrerequisite>RoyalApparel</researchPrerequisite>
+            <displayPriority>231</displayPriority>
+         </recipeMaker>
+      </value>
+   </Operation>
+   
+   <Operation Class="PatchOperationAdd">
+      <xpath>/Defs/ThingDef[defName="Apparel_CrownStellic"]/statBases</xpath>
+      <value>
+        <WorkToMake>14000</WorkToMake>
+      </value>
+   </Operation>
+   
+</Patch>

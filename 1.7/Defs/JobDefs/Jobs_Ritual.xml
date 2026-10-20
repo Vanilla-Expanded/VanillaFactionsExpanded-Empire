@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <JobDef>
+    <defName>VFEE_WaltzGoTo</defName>
+    <driverClass>VFEEmpire.JobDriver_WaltzGoto</driverClass>
+    <reportString>dancing with TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+   <JobDef>
+    <defName>VFEE_WaltzDip</defName>
+    <driverClass>VFEEmpire.JobDriver_WaltzDip</driverClass>
+	<alwaysShowWeapon>false</alwaysShowWeapon>
+    <reportString>dancing with TargetB.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+   <JobDef>
+    <defName>VFEE_WaltzGoToStart</defName>
+    <driverClass>VFEEmpire.JobDriver_WaltzGotoStart</driverClass>
+	<alwaysShowWeapon>false</alwaysShowWeapon>
+    <reportString>going to my position.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+   <JobDef>
+    <defName>VFEE_WaltzWait</defName>
+    <driverClass>VFEEmpire.JobDriver_WaltzWait</driverClass>
+	<alwaysShowWeapon>false</alwaysShowWeapon>
+    <reportString>dancing with TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+   <JobDef>
+    <defName>VFEE_WaltzDipped</defName>
+    <driverClass>VFEEmpire.JobDriver_WaltzDipped</driverClass>
+    <reportString>dancing with TargetA.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+   <JobDef>
+    <defName>VFEE_ArtPresent</defName>
+    <driverClass>VFEEmpire.JobDriver_ArtPresent</driverClass>
+    <reportString>Presenting TargetB.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+   <JobDef>
+    <defName>VFEE_ArtStandBy</defName>
+    <driverClass>VFEEmpire.JobDriver_ArtPresenterStandBy</driverClass>
+    <reportString>waiting.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+   <JobDef>
+    <defName>VFEE_ArtSpectate</defName>
+    <driverClass>VFEEmpire.JobDriver_ArtSpectate</driverClass>
+    <reportString>Spectating TargetB.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+   <JobDef>
+    <defName>VFEE_GiveHonor</defName>
+    <driverClass>VFEEmpire.JobDriver_GiveHonor</driverClass>
+    <reportString>Honoring TargetB.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+   <JobDef>
+    <defName>VFEE_ParadeGuardGoto</defName>
+    <driverClass>VFEEmpire.JobDriver_ParadeGuardGotoWait</driverClass>
+	<alwaysShowWeapon>True</alwaysShowWeapon>
+    <reportString>Guarding.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+</Defs>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    <SoundDef>
+        <defName>VFEE_BombBeep</defName>
+        <context>MapOnly</context>
+        <priorityMode>PrioritizeNearest</priorityMode>
+        <subSounds>
+          <li>
+            <grains>
+              <li Class="AudioGrain_Clip">
+                <clipPath>Bomb/BombBeep</clipPath>
+              </li>
+            </grains>
+            <volumeRange>10~15</volumeRange>
+            <distRange>0~80</distRange>
+          </li>
+        </subSounds>
+    </SoundDef>
+</Defs>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+
+            <Operation Class="PatchOperationReplace">
+               <xpath>/Defs/ResearchProjectDef[defName = "ReconArmor"]/researchViewY</xpath>
+               <value>
+                  <researchViewY>0.60</researchViewY>
+               </value>
+            </Operation>
+
+</Patch>

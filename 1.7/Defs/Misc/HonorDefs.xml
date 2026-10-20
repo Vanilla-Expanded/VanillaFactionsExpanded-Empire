@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_FirstOfName</defName>
+        <label>First of {PAWN_possessive} Name</label>
+        <description>Every noble person has +5 opinion of this pawn.</description>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_TheGreat</defName>
+        <label>The Great</label>
+        <description>+5 mood</description>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_Chosen</defName>
+        <label>Chosen of {FACTION_name}</label>
+        <description>+10 Opinion from every pawn of {FACTION_name}. +10 Opinion about every pawn of {FACTION_name}.</description>
+        <honorClass>VFEEmpire.Honor_Faction</honorClass>
+        <workerClass>VFEEmpire.HonorWorker_Faction</workerClass>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_Destroyer</defName>
+        <label>Destroyer of {FACTION_name}</label>
+        <description>+10% Trade Price Improvement with Enemies of {FACTION_name}.</description>
+        <honorClass>VFEEmpire.Honor_Faction</honorClass>
+        <workerClass>VFEEmpire.HonorWorker_Faction</workerClass>
+        <hostileFactions>true</hostileFactions>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_LordOf</defName>
+        <label>{RANK} of {SETTLEMENT_label}</label>
+        <description>+1 Honor every 5 days when {PAWN_pronoun} is in {SETTLEMENT_label}.</description>
+        <honorClass>VFEEmpire.Honor_Settlement</honorClass>
+        <workerClass>VFEEmpire.HonorWorker_Colony</workerClass>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_RulerOf</defName>
+        <label>Ruler of {SETTLEMENT_label}</label>
+        <description>Tithe collection speed of {SETTLEMENT_label} is doubled.</description>
+        <honorClass>VFEEmpire.Honor_Vassal</honorClass>
+        <workerClass>VFEEmpire.HonorWorker_Vassal</workerClass>
+        <titheSpeedFactor>2</titheSpeedFactor>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_WieldOfWeapon</defName>
+        <label>Wielder of the {WEAPON_label}</label>
+        <description>50% chance of +1 Honor for every kill with {WEAPON_label}.</description>
+        <honorClass>VFEEmpire.Honor_Weapon</honorClass>
+        <workerClass>VFEEmpire.HonorWorker_Weapon</workerClass>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_PatronOfArts</defName>
+        <label>Patron of Arts</label>
+        <description>+3 Honor after successful art exhibition</description>
+        <workerClass>VFEEmpire.HonorWorker_Gallery</workerClass>
+        <value>300</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_ChildOf</defName>
+        <label>{CHILD} of {PARENT_labelShort}</label>
+        <description>Opinion of {PARENT_labelShort} about {PAWN_labelShort} is locked at 100. Opinion of {PAWN_labelShort} about {PARENT_labelShort} is locked at 100.</description>
+        <honorClass>VFEEmpire.Honor_Child</honorClass>
+        <workerClass>VFEEmpire.HonorWorker_ChildOf</workerClass>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_Marksman</defName>
+        <label>The Marksman</label>
+        <description>Shooting skill never decays.</description>
+        <removeLoss>Shooting</removeLoss>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_Warrior</defName>
+        <label>The Warrior</label>
+        <description>Melee skill never decays.</description>
+        <removeLoss>Melee</removeLoss>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_Architect</defName>
+        <label>The Architect</label>
+        <description>Construction skill never decays.</description>
+        <removeLoss>Construction</removeLoss>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_Miner</defName>
+        <label>The Miner</label>
+        <description>Mining skill never decays.</description>
+        <removeLoss>Mining</removeLoss>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_Chef</defName>
+        <label>The Chef</label>
+        <description>Cooking skill never decays.</description>
+        <removeLoss>Cooking</removeLoss>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_Gardener</defName>
+        <label>The Gardener</label>
+        <description>Plants skill never decays.</description>
+        <removeLoss>Plants</removeLoss>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_Rancher</defName>
+        <label>The Rancher</label>
+        <description>Animals skill never decays.</description>
+        <removeLoss>Animals</removeLoss>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_Craftsman</defName>
+        <label>The Craftsman</label>
+        <description>Crafting skill never decays.</description>
+        <removeLoss>Crafting</removeLoss>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_Artist</defName>
+        <label>The Artist</label>
+        <description>Artistic skill never decays.</description>
+        <removeLoss>Artistic</removeLoss>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_Healer</defName>
+        <label>The Healer</label>
+        <description>Medicine skill never decays.</description>
+        <removeLoss>Medicine</removeLoss>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_Negotiator</defName>
+        <label>The Negotiator</label>
+        <description>Social skill never decays.</description>
+        <removeLoss>Social</removeLoss>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+    <VFEEmpire.HonorDef>
+        <defName>VFEE_Intellectual</defName>
+        <label>The Intellectual</label>
+        <description>Intellectual skill never decays.</description>
+        <removeLoss>Intellectual</removeLoss>
+        <value>250</value>
+    </VFEEmpire.HonorDef>
+</Defs>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <Operation Class="PatchOperationAttributeSet">
+    <xpath>/Defs/RoyalTitleDef[defName="Duke"]</xpath>
+    <attribute>ParentName</attribute>
+    <value>BaseEmpireTitle</value>
+  </Operation>
+  <Operation Class="PatchOperationAttributeSet">
+    <xpath>/Defs/RoyalTitleDef[defName="Duke"]</xpath>
+    <attribute>Name</attribute>
+    <value>DukeBase</value>
+  </Operation>
+  <Operation Class="PatchOperationAttributeSet">
+    <xpath>/Defs/RoyalTitleDef[defName="Duke"]</xpath>
+    <attribute>Abstract</attribute>
+    <value>True</value>
+  </Operation>
+  <Operation Class="PatchOperationAttributeSet">
+    <xpath>/Defs/RoyalTitleDef[defName="Consul"]</xpath>
+    <attribute>ParentName</attribute>
+    <value>BaseEmpireTitle</value>
+  </Operation>
+  <Operation Class="PatchOperationAttributeSet">
+    <xpath>/Defs/RoyalTitleDef[defName="Consul"]</xpath>
+    <attribute>Name</attribute>
+    <value>ConsulBase</value>
+  </Operation>
+  <Operation Class="PatchOperationAttributeSet">
+    <xpath>/Defs/RoyalTitleDef[defName="Consul"]</xpath>
+    <attribute>Abstract</attribute>
+    <value>True</value>
+  </Operation>
+  <Operation Class="PatchOperationAttributeSet">
+    <xpath>/Defs/RoyalTitleDef[defName="Stellarch"]</xpath>
+    <attribute>ParentName</attribute>
+    <value>BaseEmpireTitle</value>
+  </Operation>
+  <Operation Class="PatchOperationAttributeSet">
+    <xpath>/Defs/RoyalTitleDef[defName="Stellarch"]</xpath>
+    <attribute>Name</attribute>
+    <value>StellarchBase</value>
+  </Operation>
+  <Operation Class="PatchOperationAttributeSet">
+    <xpath>/Defs/RoyalTitleDef[defName="Stellarch"]</xpath>
+    <attribute>Abstract</attribute>
+    <value>True</value>
+  </Operation>
+
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/RoyalTitleDef[defName="Freeholder"]</xpath>
+    <value>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Freeholder</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Freeholder</greyIconPath>
+        <kindForHierarchy></kindForHierarchy>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/RoyalTitleDef[defName="Yeoman"]</xpath>
+    <value>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Yeoman</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Yeoman</greyIconPath>
+        <kindForHierarchy>Empire_Royal_Yeoman</kindForHierarchy>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/RoyalTitleDef[defName="Acolyte"]</xpath>
+    <value>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Acolyte</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Acolyte</greyIconPath>
+        <kindForHierarchy>Empire_Royal_Acolyte</kindForHierarchy>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/RoyalTitleDef[defName="Knight"]</xpath>
+    <value>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Knight</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Knight</greyIconPath>
+        <kindForHierarchy>Empire_Royal_Knight</kindForHierarchy>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/RoyalTitleDef[defName="Praetor"]</xpath>
+    <value>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Praetor</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Praetor</greyIconPath>
+        <kindForHierarchy>Empire_Royal_Praetor</kindForHierarchy>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/RoyalTitleDef[defName="Baron"]</xpath>
+    <value>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Baron</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Baron</greyIconPath>
+        <kindForHierarchy>Empire_Royal_Baron</kindForHierarchy>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/RoyalTitleDef[defName="Count"]</xpath>
+    <value>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Count</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Count</greyIconPath>
+        <kindForHierarchy>Empire_Royal_Count</kindForHierarchy>
+      </li>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/RoyalTitleDef[defName="Emperor"]</xpath>
+    <value>
+      <li Class="VFEEmpire.RoyalTitleDefExtension">
+        <iconPath>UI/NobleRanks/RoyalTitleIcon_Emperor</iconPath>
+        <greyIconPath>UI/GreyTitleIcons/RoyalTitleIcon_Emperor</greyIconPath>
+        <kindForHierarchy>VFEE_Empire_Royal_Emperor</kindForHierarchy>
+      </li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <!-- Match vanilla titles that have a requirement for an instrument and add pipe organ to them. -->
+    <xpath>Defs/RoyalTitleDef[defName="Knight" or defName="Praetor" or defName="Baron" or defName="Count"]/throneRoomRequirements/li[@Class="RoomRequirement_ThingAnyOf"]/things[li="Piano"]</xpath>
+    <value>
+      <li>VFEE_PipeOrgan</li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RoyalTitleDef[defName="Acolyte" or defName="Knight" or defName="Praetor" or defName="Baron" or defName="Count"]/throneRoomRequirements/li[@Class="RoomRequirement_HasAssignedThroneAnyOf"]/things</xpath>
+    <value>
+      <li>VFEE_StellicThrone</li>
+    </value>
+  </Operation>
+</Patch>
