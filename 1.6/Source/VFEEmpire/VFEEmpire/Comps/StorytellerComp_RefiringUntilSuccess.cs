@@ -49,13 +49,20 @@ public class StorytellerComp_RefiringUntilSuccess : StorytellerComp
         offer.PartsListForReading.OfType<QuestPart_Parade>().FirstOrDefault() is { } parade
         && (parade.stellarch is not { Dead: false, Destroyed: false } || parade.stellarch.Faction != Faction.OfPlayer);
 
-    //Ends an offer without a letter, and takes down the letter that made it. Returns whether there was one.
-    public static bool EndOffer(Quest offer)
+    //Ends an offer without a letter, and takes down the letter that made it. Returns whether there was one. Also ends
+    //accepted quests that can never run (Patch_GenerateBestowingCeremonyQuest.EndEmptyQuests), so keep it state-blind.
+    //With fromHistory the letter leaves the message history as well: the stack only refers to it and the history holds
+    //it, so it goes from there after it has left the stack.
+    public static bool EndOffer(Quest offer, bool fromHistory = false)
     {
+        bool ForOffer(ChoiceLetter letter) => letter.quest == offer;
         offer.End(QuestEndOutcome.InvalidPreAcceptance, false, false);
-        var letters = Find.LetterStack.LettersListForReading.OfType<ChoiceLetter>().Where(letter => letter.quest == offer).ToList();
+        var letters = Find.LetterStack.LettersListForReading.OfType<ChoiceLetter>().Where(ForOffer).ToList();
         foreach (var letter in letters)
             Find.LetterStack.RemoveLetter(letter);
+        if (fromHistory)
+            foreach (var letter in Find.Archive.ArchivablesListForReading.OfType<ChoiceLetter>().Where(ForOffer).ToList())
+                Find.Archive.Remove(letter);
         return letters.Count > 0;
     }
 }

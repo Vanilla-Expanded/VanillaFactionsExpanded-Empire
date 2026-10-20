@@ -52,6 +52,7 @@ public class GameComponent_Empire : GameComponent
         base.LoadedGame();
         EmpireUtility.Notify_ColonistsChanged();
         LongEventHandler.ExecuteWhenFinished(QuestPart_Ascension.ReplaceOldOffers);
+        LongEventHandler.ExecuteWhenFinished(HarmonyPatches.Patch_GenerateBestowingCeremonyQuest.EndEmptyQuests);
     }
 
     public override void ExposeData()
