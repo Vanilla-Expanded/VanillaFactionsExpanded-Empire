@@ -32,8 +32,11 @@ namespace VFEEmpire
             var points = slate.Get("points", 0f, false);
             int durationTicks = 2 * 60000;             
             var empire = Find.FactionManager.OfEmpire;
-            var colonyHost = map.mapPawns.FreeColonistsSpawned.OrderByDescending(x => x.royalty.MostSeniorTitle.def.seniority)
-                .First(x=> x.royalty.MostSeniorTitle?.def.Ext() != null && !x.royalty.MostSeniorTitle.def.Ext().galleryRequirements.NullOrEmpty());
+            //Filtered before sorting, as the sort key reads a title that untitled colonists don't have
+            var colonyHost = map.mapPawns.FreeColonistsSpawned
+                .Where(x=> x.royalty.MostSeniorTitle?.def.Ext() != null && !x.royalty.MostSeniorTitle.def.Ext().galleryRequirements.NullOrEmpty())
+                .OrderByDescending(x => x.royalty.MostSeniorTitle.def.seniority)
+                .First();
             var colonyTitle = colonyHost.royalty.MostSeniorTitle.def;//Title of highest colony member
             var leadTitle = DefDatabase<RoyalTitleDef>.AllDefs.Where(x => x.Ext() != null && !x.Ext().galleryRequirements.NullOrEmpty() && x.seniority <= colonyTitle.seniority).RandomElement();
             //Generate Nobles
