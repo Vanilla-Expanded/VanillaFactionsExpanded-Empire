@@ -126,10 +126,16 @@ public static class EmpireTitleUtility
         var newTitleAwardedWhenUpdating = royalty.GetTitleAwardedWhenUpdating(faction, num);
         if (oldTitleAwardedWhenUpdating == null) return;
         if (oldTitleAwardedWhenUpdating == newTitleAwardedWhenUpdating) return;
-        if (newTitleAwardedWhenUpdating.seniority < oldTitleAwardedWhenUpdating.seniority)
+        //Vanilla's own favor change tells the pawn's bestowing ceremony quests that the title due has changed, which ends an
+        //offered or accepted one with a letter (QuestPart_Bestowing_TargetChangedTitle). The favor is written directly here,
+        //so the signal is sent here too, or an accepted ceremony goes ahead for a title the pawn can no longer afford
+        QuestUtility.SendQuestTargetSignals(royalty.pawn.questTags, "TitleAwardedWhenUpdatingChanged");
+        //The new title is null when the loss leaves no title due at all: the open offer still ends, but there is nothing to
+        //offer in its place, so no new one is asked for
+        if (newTitleAwardedWhenUpdating == null || newTitleAwardedWhenUpdating.seniority < oldTitleAwardedWhenUpdating.seniority)
         {
             RoyalTitleUtility.EndExistingBestowingCeremonyQuest(royalty.pawn, faction);
-            RoyalTitleUtility.GenerateBestowingCeremonyQuest(royalty.pawn, faction);
+            if (newTitleAwardedWhenUpdating != null) RoyalTitleUtility.GenerateBestowingCeremonyQuest(royalty.pawn, faction);
         }
     }
 
