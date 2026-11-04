@@ -59,6 +59,8 @@
 				<li>CountdownHostileLetterText->The Empire will not send its nobility to a colony it is at war with. [stellarch_nameDef]'s ascension parade is called off.</li>
 				<li>CountdownAwayLetterLabel->Parade called off</li>
 				<li>CountdownAwayLetterText->[asker_nameFull] waited a day for [stellarch_nameDef] to be at the colony to receive the nobility. The ascension parade is called off.</li>
+				<li>CountdownPadLetterLabel->Parade called off</li>
+				<li>CountdownPadLetterText->[asker_nameFull] waited a day for the colony's landing pad to be fit for the nobility's shuttle, and will not land it anywhere else. [stellarch_nameDef]'s ascension parade is called off.</li>
 				<li>CountdownThreatLetterLabel->Parade called off</li>
 				<li>CountdownThreatLetterText->[asker_nameFull] waited a day for the danger at the colony to pass, and will not land the nobility into it. [stellarch_nameDef]'s ascension parade is called off.</li>
 				<!-- Interaction response-->

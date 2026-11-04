@@ -58,7 +58,18 @@ public class GameComponent_Empire : GameComponent
     public override void ExposeData()
     {
         base.ExposeData();
-        Scribe_Collections.Look(ref LastRoyalGossipTick, "lastRoyalGossipTick", LookMode.Reference, LookMode.Value, ref keysList, ref valuesList);
-        Scribe_Collections.Look(ref artCreator, "artCreator", LookMode.Reference, LookMode.Reference, ref tmpThings, ref tmpPawn);
+        //A destroyed thing is saved as a null reference, and each null key is an error on load. The Empire's
+        //soldiers, traders and lodgers gossip too, and once they leave the map the game discards them sooner
+        //or later; art gets burned, smashed or torn down. Neither entry can be used again, so drop them first.
+        if (Scribe.mode == LoadSaveMode.Saving)
+        {
+            LastRoyalGossipTick.RemoveAll(x => x.Key.Destroyed);
+            artCreator.RemoveAll(x => x.Key.Destroyed);
+        }
+
+        //Saves made before this still carry null keys. The game skips them either way, so only the error
+        //goes, as vanilla does for pregnancyApproaches.
+        Scribe_Collections.Look(ref LastRoyalGossipTick, "lastRoyalGossipTick", LookMode.Reference, LookMode.Value, ref keysList, ref valuesList, logNullErrors: false);
+        Scribe_Collections.Look(ref artCreator, "artCreator", LookMode.Reference, LookMode.Reference, ref tmpThings, ref tmpPawn, logNullErrors: false);
     }
 }

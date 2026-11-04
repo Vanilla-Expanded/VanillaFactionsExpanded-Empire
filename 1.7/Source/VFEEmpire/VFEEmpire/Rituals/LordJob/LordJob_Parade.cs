@@ -482,9 +482,11 @@ public class LordJob_Parade : LordJob_Ritual
         if (nobles.Contains(p) && ticksPassed < duration) nobles.Remove(p);
         if (guards.Contains(p)) guards.Remove(p);
         var compShuttle = shuttle.TryGetComp<CompShuttle>();
-        //After the parade the stellarch may leave to be tended, and the shuttle still waits for her
-        if (compShuttle.requiredPawns.Contains(p) && (p != stellarch || condition != PawnLostCondition.LeftVoluntarily))
-            compShuttle.requiredPawns.Remove(p);
+        //Once the parade is over the shuttle waits for the stellarch whatever takes her out of it: a need or a wound, the
+        //shuttle's Load button, which gives everyone it loads a lord of their own, or going down. Struck off its list, she
+        //could be left on the map as the shuttle was sent and the credits rolled. Her death, arrest, kidnapping or
+        //banishment fails the quest instead
+        if (compShuttle.requiredPawns.Contains(p) && p != stellarch) compShuttle.requiredPawns.Remove(p);
         p.jobs?.CheckForJobOverride();
     }
 

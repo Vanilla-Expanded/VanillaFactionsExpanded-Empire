@@ -82,18 +82,21 @@ public class QuestNode_Root_RoyalParade : QuestNode
         quest.AddPart(questPart_DisableBreaks);
         //nobles arrive after 5 days, counted down in the quest tab and as an alert. They never
         //land while the Empire is hostile to the colony, and they wait up to a day for the stellarch
-        //to be there to receive them and for any threat there to pass. Otherwise the parade is called off.
+        //to be there to receive them, for any threat there to pass, and for any landing pad the colony
+        //has built to be usable. Otherwise the parade is called off.
         var noblesArrive = QuestGen.GenerateNewSignal("NoblesArrive");
         var empireHostile = QuestGen.GenerateNewSignal("EmpireHostileAtArrival");
         var stellarchAway = QuestGen.GenerateNewSignal("StellarchAwayAtArrival");
         var colonyThreatened = QuestGen.GenerateNewSignal("ColonyThreatenedAtArrival");
+        var padUnusable = QuestGen.GenerateNewSignal("PadUnusableAtArrival");
         var awaitLanding = new QuestPart_AwaitParadeLanding
         {
             stellarch = stellarch,
             mapParent = map.Parent,
             outSignalHostile = empireHostile,
             outSignalStellarchAway = stellarchAway,
-            outSignalThreatened = colonyThreatened
+            outSignalThreatened = colonyThreatened,
+            outSignalPadUnusable = padUnusable
         };
         awaitLanding.outSignalsCompleted.Add(noblesArrive);
         var countdown = quest.Delay(prepareTicks, () =>
@@ -107,6 +110,7 @@ public class QuestNode_Root_RoyalParade : QuestNode
         countdown.ticksLeftAlertCritical = 60000;
         FailResults(quest, empireHostile, "[CountdownHostileLetterLabel]", "[CountdownHostileLetterText]", nobles);
         FailResults(quest, stellarchAway, "[CountdownAwayLetterLabel]", "[CountdownAwayLetterText]", nobles);
+        FailResults(quest, padUnusable, "[CountdownPadLetterLabel]", "[CountdownPadLetterText]", nobles);
         FailResults(quest, colonyThreatened, "[CountdownThreatLetterLabel]", "[CountdownThreatLetterText]", nobles);
         //shuttle
         var lodgers = new List<Pawn>();

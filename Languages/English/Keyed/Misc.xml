@@ -52,10 +52,22 @@
 	<VFEE.Parade.EndGame.Ending>The Imperial shuttle has carried {STELLARCH_nameDef} and everyone who ascended with {STELLARCH_objective} off this rimworld. From now on, {STELLARCH_pronoun} serves at the right hand of Emperor {EMPEROR_nameFull}.\n\nThe colony remains, and its story goes on.</VFEE.Parade.EndGame.Ending>
 	<VFEE.Parade.NoblesArriveIn>Nobles arrive in {0}</VFEE.Parade.NoblesArriveIn>
 	<VFEE.Parade.NoblesArriveOn>The nobles land on {0}.</VFEE.Parade.NoblesArriveOn>
-	<VFEE.Parade.NoblesArriveInDesc>The shuttle carrying the nobility for the ascension parade lands in {0}. Until then, the colony has time to prepare. The nobles will not land while the stellarch is away or the colony is under threat, and if that lasts a day, the parade is called off.</VFEE.Parade.NoblesArriveInDesc>
+	<VFEE.Parade.NoblesArriveInDesc>The shuttle carrying the nobility for the ascension parade lands in {0}. Until then, the colony has time to prepare. The nobles will not land while the stellarch is away, the colony is under threat or a landing pad the colony has built cannot be used, and if that lasts a day, the parade is called off.</VFEE.Parade.NoblesArriveInDesc>
 	<VFEE.Parade.NoblesWaiting>Parade nobles waiting</VFEE.Parade.NoblesWaiting>
 	<VFEE.Parade.NoblesWaitingAwayDesc>The nobles for the ascension parade will not land until {STELLARCH_nameDef} is at the colony to receive them. If {STELLARCH_pronoun} is not back within {TIME}, the parade is called off.</VFEE.Parade.NoblesWaitingAwayDesc>
 	<VFEE.Parade.NoblesWaitingThreatDesc>The nobles for the ascension parade will not land while the colony is under threat. If the danger has not passed within {TIME}, the parade is called off.</VFEE.Parade.NoblesWaitingThreatDesc>
+	<VFEE.Parade.NoblesWaitingPadDesc>The nobles for the ascension parade will not land until their shuttle can use your landing pad:\n\n{PROBLEMS}\n\nFix the pad, or deconstruct its beacons to have the nobles land near the colony instead. If the pad still cannot be used within {TIME}, the parade is called off.</VFEE.Parade.NoblesWaitingPadDesc>
+	<VFEE.Parade.NoblesWaitingPadToo>Their shuttle cannot use your landing pad either:\n\n{PROBLEMS}</VFEE.Parade.NoblesWaitingPadToo>
+	<VFEE.Parade.PadUnusableMessage>The nobles' shuttle will not land until your landing pad can be used: {0}.</VFEE.Parade.PadUnusableMessage>
+	<VFEE.Parade.PadUnformed>your ship landing beacons do not mark out a landing pad, which takes four of them at the corners of a rectangle with sides of {0} to {1} cells</VFEE.Parade.PadUnformed>
+	<VFEE.Parade.PadBeaconUnpowered>a beacon is unpowered</VFEE.Parade.PadBeaconUnpowered>
+	<VFEE.Parade.PadBeaconsUnpowered>{0} beacons are unpowered</VFEE.Parade.PadBeaconsUnpowered>
+	<VFEE.Parade.PadRoofed>a roof covers {0}</VFEE.Parade.PadRoofed>
+	<VFEE.Parade.PadBlockedBy>blocked by {0}</VFEE.Parade.PadBlockedBy>
+	<VFEE.Parade.PadGround>{0} cannot support a landing</VFEE.Parade.PadGround>
+	<VFEE.Parade.PadCellsOf>{0} of {1}</VFEE.Parade.PadCellsOf>
+	<VFEE.Parade.PadCell>cell</VFEE.Parade.PadCell>
+	<VFEE.Parade.PadUnusable>it cannot be used</VFEE.Parade.PadUnusable>
 	<VFEE.Parade.CalledOffIn>Called off in {0}</VFEE.Parade.CalledOffIn>
 	<VFEE.Parade.CalledOffOn>Unless the nobles can land first, the parade is called off on {0}.</VFEE.Parade.CalledOffOn>
 	<VFEE.DefuseBomb>Defuse bomb</VFEE.DefuseBomb>

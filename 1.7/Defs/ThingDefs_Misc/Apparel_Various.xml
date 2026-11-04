@@ -135,7 +135,6 @@
 				<li>Soldier</li>
 			</defaultOutfitTags>
 			<useDeflectMetalEffect>true</useDeflectMetalEffect>
-			<useWornGraphicMask>true</useWornGraphicMask>
 			<tags>
 				<li>VFEE_Absolver</li>
 			</tags>
