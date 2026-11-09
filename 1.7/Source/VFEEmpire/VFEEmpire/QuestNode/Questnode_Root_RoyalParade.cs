@@ -129,7 +129,8 @@ public class QuestNode_Root_RoyalParade : QuestNode
             stellarch = stellarch,
             leadPawn = bestNoble,
             inSignal = noblesArrive,
-            pawns = lodgers,
+            //Its own list: the shuttle's requiredPawns is lodgers, and the parade strikes the nobles it loses off that one
+            pawns = lodgers.ToList(),
             questTag = questTag,
             raidTag = raidSignal,
             shuttle = shuttle,
@@ -137,6 +138,8 @@ public class QuestNode_Root_RoyalParade : QuestNode
             mapParent = map.Parent,
             faction = empire
         };
+        //Before QuestPart_LodgerLeave: parts hear a signal in this order, and the parade has to hear a noble's arrest before
+        //that part fails the quest on it
         quest.AddPart(questPart_Parade);
         quest.Letter(LetterDefOf.NeutralEvent, noblesArrive, lookTargets: Gen.YieldSingle(shuttle), label: "[NoblesArriveLetterLabel]",
             text: "[NoblesArriveLetterText]");
