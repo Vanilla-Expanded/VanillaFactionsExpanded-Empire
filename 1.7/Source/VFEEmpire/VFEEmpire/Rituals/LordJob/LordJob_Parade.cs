@@ -66,7 +66,7 @@ public class LordJob_Parade : LordJob_Ritual
     private bool? awayLastTick;
     private bool halted;
 
-    //Not saved: the nobles' court stimulant has been checked since the game loaded (Notify_PawnAdded gives it after that)
+    //Not saved: the members' court stimulant has been checked since the game loaded (Notify_PawnAdded gives it after that)
     private bool keptAwake;
 
     public LordJob_Parade() { }
@@ -363,8 +363,8 @@ public class LordJob_Parade : LordJob_Ritual
         stellarch.Ideo.RemovePrecept(ritual); //clean up the added precept
     }
 
-    //The nobles can be kept waiting a day for the parade to start, and it lasts half a day more, long enough for them to
-    //collapse from exhaustion on the ground before they board. Everyone the quest brings stays awake while in the parade
+    //The nobles can be kept waiting a day for the parade to start, and it lasts half a day more, long enough for them, or a
+    //colonist woken to join it, to collapse from exhaustion on the ground. Everyone in the parade stays awake while in it
     public override void Notify_PawnAdded(Pawn p)
     {
         base.Notify_PawnAdded(p);
@@ -373,12 +373,7 @@ public class LordJob_Parade : LordJob_Ritual
 
     public override void LordJobTick()
     {
-        //A parade loaded from a save made before the court stimulant: its nobles joined without it
-        if (!keptAwake)
-        {
-            foreach (var pawn in lord.ownedPawns.ListFullCopy()) Hediff_CourtStimulant.KeepAwake(pawn);
-            keptAwake = true;
-        }
+        Hediff_CourtStimulant.KeepAwake(lord, ref keptAwake);
 
         if (paradeStarted && !paradeFinished)
         {
