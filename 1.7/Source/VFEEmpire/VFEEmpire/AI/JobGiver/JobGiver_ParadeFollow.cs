@@ -22,12 +22,27 @@ namespace VFEEmpire
 					&& pawn.CanReserveAndReach(c,PathEndMode.OnCell,Danger.Deadly),
 						out var roomSpot))
                     {
-						return JobMaker.MakeJob(JobDefOf.Goto, roomSpot);
+						return JobMaker.MakeJob(LordJob_Parade.WalkFor(pawn), roomSpot);
 					}
 					return null;
                 }
 				return null;
             }
+			//Until the stellarch reaches the shuttle the nobles gather at the parade's spot beside it, so a noble who joined from
+			//elsewhere in the colony walks there instead of waiting where they were for her to arrive
+			if (!parade.stellAtStart)
+			{
+				var spot = parade.Spot;
+				if (GatheringsUtility.InGatheringArea(pawn.Position, spot, pawn.Map)
+					|| !CellFinder.TryFindRandomCellNear(spot, pawn.Map, 5, (IntVec3 c) => GatheringsUtility.InGatheringArea(c, spot, pawn.Map)
+						&& pawn.CanReserveAndReach(c, PathEndMode.OnCell, Danger.Deadly), out var gatherCell))
+				{
+					return null;
+				}
+				var gather = JobMaker.MakeJob(LordJob_Parade.WalkFor(pawn), gatherCell);
+				gather.locomotionUrgency = LocomotionUrgency.Jog;
+				return gather;
+			}
 			if(!Orderspot(out var destination))
             {
                 if (!parade.allAtStart) //inelegant solution for weird bug at start sometimes
@@ -40,14 +55,7 @@ namespace VFEEmpire
             {
 				return null;
             }
-			if (!parade.allAtStart)
-			{
-                if (!parade.stellAtStart) //This is so everyone doesn't chase after the stellarch while moving towards shuttle at start
-                {
-					return null;
-                }
-			}
-			var job = JobMaker.MakeJob(JobDefOf.Goto, destination);
+			var job = JobMaker.MakeJob(LordJob_Parade.WalkFor(pawn), destination);
 			job.ritualTag = parade.allAtStart ? "" : "Arrived";
 			job.locomotionUrgency = pawn.Position.DistanceTo(destination) > 5f ? LocomotionUrgency.Jog : LocomotionUrgency.Walk;
 			return job;

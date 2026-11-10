@@ -111,10 +111,30 @@ public class LordJob_Parade : LordJob_Ritual
     public override bool AllowStartNewGatherings => !paradeStarted || paradeFinished;
 
     public IntVec3 Destination => stops[stage];
-    public bool AtDestination => CurrentRoom.Cells.Contains(stellarch.Position);
+    //Read from the room of her cell rather than by walking the stop room's cells: at the shuttle that room is the whole outdoors
+    public bool AtDestination => CurrentRoom is { } room && stellarch.Position.GetRoom(Map) == room;
     public override IntVec3 Spot => target.Cell;
 
     public Room CurrentRoom => Destination.GetRoom(Map);
+
+    //The cell the members' duties centre on. When the parade gives them nowhere to walk, they eat, socialise, take joy
+    //and wander only in the gathering area around it. It is the spot by the shuttle until the stellarch reaches it,
+    //then the stop the procession is at or walking to, and the spot again after the last stop
+    public IntVec3 DutyFocus => stellAtStart && stage < stops.Count ? Destination : Spot;
+
+    //Whether the duties have been pointed at DutyFocus since the lord loaded. Not saved: a parade saved before they followed the
+    //procession left them on the shuttle until its first change of room
+    private bool dutiesPointed;
+
+    //The walk a member of the procession takes. A colonist on vanilla's Goto can stop on the way for an opportunistic job, such as
+    //hauling something they pass, so the player's pawns take the parade's own walk. Only they take such jobs, and any walk but
+    //Goto ends with a tick standing still, so everyone else keeps Goto
+    public static JobDef WalkFor(Pawn pawn) => pawn.Faction == Faction.OfPlayer ? InternalDefOf.VFEE_ParadeWalk : JobDefOf.Goto;
+
+    //The order nobles keeps: each noble takes a place in the formation by their place in the list, the most senior nearest her.
+    //She leads it, so she goes last and takes none of its places
+    public List<Pawn> InFormationOrder(IEnumerable<Pawn> pawns) =>
+        pawns.OrderBy(pawn => pawn == stellarch).ThenByDescending(pawn => pawn?.royalty?.GetCurrentTitle(Faction.OfEmpire)?.seniority ?? 0).ToList();
 
     public override string RitualLabel => "VFEE.Parade.Label".Translate();
 
@@ -147,6 +167,10 @@ public class LordJob_Parade : LordJob_Ritual
             assignedGuards ??= guards.ToList();
             draftedLastTick.UnionWith(guards.Prepend(stellarch).Where(pawn => pawn.Drafted));
             halted = draftedLastTick.Count > 0;
+            //A parade saved with its titled guards among the nobles: a guard never takes "Arrived", and the procession would
+            //wait on them to the end. Saved before the nobles fell in by seniority, they fall in that way from here
+            nobles?.RemoveAll(guards.Contains);
+            if (nobles != null) nobles = InFormationOrder(nobles);
         }
     }
 
@@ -358,33 +382,37 @@ public class LordJob_Parade : LordJob_Ritual
 
         if (paradeStarted && !paradeFinished)
         {
+            if (!dutiesPointed)
+            {
+                dutiesPointed = true;
+                PointDuties();
+            }
             outcome.Tick(this);
             CountHaltedTime();
             if (!allAtStart)
             {
-                if (shuttle.DestroyedOrNull() || shuttle.OccupiedRect().ExpandedBy(3).Contains(stellarch.Position))
+                //She has reached the shuttle and sets off for the first stop, so everyone falls in behind her now rather than after
+                //whatever they were doing
+                if (!stellAtStart && (shuttle.DestroyedOrNull() || shuttle.OccupiedRect().ExpandedBy(3).Contains(stellarch.Position)))
                 {
                     stellAtStart = true;
-                    allAtStart = true;
-                    // Doesn't seem to trigger, currently using somewhat of a workaround.
-                    // Consider looking into fixing why "Arrived" is not set for all pawns.
-                    foreach (var pawn in nobles.Except(stellarch))
-                        if (!PawnTagSet(pawn, "Arrived"))
-                        {
-                            allAtStart = false;
-                            break;
-                        }
+                    RefreshDuties();
                 }
 
+                //Counted until the last noble has fallen in behind her, not only while she stands at the shuttle, so one who
+                //catches up on the way still counts
+                if (stellAtStart)
+                    allAtStart = nobles.All(pawn => pawn == stellarch || PawnTagSet(pawn, "Arrived"));
+
                 if (allAtStart)
-                    foreach (var pawn in lord.ownedPawns.ListFullCopy())
-                        ReconsiderJob(pawn);
+                    RefreshDuties();
             }
 
+            var atDestination = AtDestination;
             ticksSinceConfetti++;
             if (music == null) music = InternalDefOf.VFEE_Parade_Sustainer_01.TrySpawnSustainer(SoundInfo.InMap(stellarch, MaintenanceType.PerTick));
             music?.Maintain();
-            CheckForEffect();
+            CheckForEffect(atDestination);
             foreach (var effecter in effecters.ToList())
                 if (effecter.duration > 0)
                 {
@@ -394,11 +422,12 @@ public class LordJob_Parade : LordJob_Ritual
                 else
                     effecters.Remove(effecter);
 
-            if (!halted)
+            //The parade's twelve hours start as she walks into the first stop's room, after the walk there from the shuttle
+            if (!halted && (ticksPassed > 0 || stellAtStart && atDestination))
             {
                 ticksPassed++;
                 ticksThisRotation++;
-                if (duration / stops.Count - ticksThisRotation <= 0 && AtDestination)
+                if (duration / stops.Count - ticksThisRotation <= 0 && atDestination)
                 {
                     RoomSwap();
                     ticksThisRotation = 0;
@@ -453,9 +482,9 @@ public class LordJob_Parade : LordJob_Ritual
             ReconsiderJob(pawn);
     }
 
-    public void CheckForEffect()
+    public void CheckForEffect(bool atDestination)
     {
-        if (AtDestination)
+        if (atDestination)
         {
             if (ticksSinceConfetti > 240 || Rand.Chance(0.025f))
             {
@@ -563,11 +592,23 @@ public class LordJob_Parade : LordJob_Ritual
             return;
         }
 
-        foreach (var p in lord.ownedPawns.ListFullCopy())
-        {
-            p.mindState.duty.focus = Destination;
-            p.jobs.CheckForJobOverride();
-        }
+        RefreshDuties();
+    }
+
+    //Every member's duty looks at DutyFocus
+    private void PointDuties()
+    {
+        foreach (var pawn in lord.ownedPawns)
+            if (pawn.mindState.duty != null)
+                pawn.mindState.duty.focus = DutyFocus;
+    }
+
+    //Every member's duty looks at DutyFocus, and everyone reconsiders their job at once
+    private void RefreshDuties()
+    {
+        PointDuties();
+        foreach (var pawn in lord.ownedPawns.ListFullCopy())
+            ReconsiderJob(pawn);
     }
 
 

@@ -39,6 +39,7 @@ public static class InternalDefOf
     public static DutyDef VFEE_ParadeNoble;
     public static DutyDef VFEE_ParadeGuard;
     public static JobDef VFEE_ParadeGuardGoto;
+    public static JobDef VFEE_ParadeWalk;
     public static EffecterDef VFEE_ParadeConfetti;
     public static SoundDef VFEE_Parade_Sustainer_01;
 

@@ -18,7 +18,7 @@ namespace VFEEmpire
 				return null;
             }
 			var destination = parade.Destination;
-			var job = JobMaker.MakeJob(JobDefOf.Goto, destination);
+			var job = JobMaker.MakeJob(InternalDefOf.VFEE_ParadeWalk, destination);
 			job.locomotionUrgency = LocomotionUrgency.Amble;
 			return job;
 		}

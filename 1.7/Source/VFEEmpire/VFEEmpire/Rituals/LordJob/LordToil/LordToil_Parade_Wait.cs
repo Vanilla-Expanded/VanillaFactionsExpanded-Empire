@@ -102,7 +102,6 @@ public class LordToil_Parade_Wait : LordToil_Wait
             if (!pawn.Awake()) RestUtility.WakeUp(pawn);
         }
 
-        parade.nobles.OrderByDescending(x => x.royalty.MostSeniorTitle.def.seniority);
         lord.ReceiveMemo(LordJob_Parade.MemoCeremonyStarted);
     }
 }
