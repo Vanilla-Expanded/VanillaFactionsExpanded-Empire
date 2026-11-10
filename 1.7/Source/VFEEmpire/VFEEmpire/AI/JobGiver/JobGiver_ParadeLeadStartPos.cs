@@ -25,7 +25,7 @@ namespace VFEEmpire
 				return null;
             }
 			CellFinder.TryFindRandomCellNear(parade.shuttle.Position, pawn.Map, 5, (IntVec3 c) => pawn.CanReserveAndReach(c, PathEndMode.OnCell, Danger.Deadly), out var destination);
-			var job = JobMaker.MakeJob(JobDefOf.Goto, destination);
+			var job = JobMaker.MakeJob(InternalDefOf.VFEE_ParadeWalk, destination);
 			job.locomotionUrgency = LocomotionUrgency.Jog;
 			return job;
 		}
