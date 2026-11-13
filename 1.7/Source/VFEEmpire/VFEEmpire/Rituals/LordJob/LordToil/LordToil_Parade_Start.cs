@@ -52,7 +52,9 @@ namespace VFEEmpire
             if (!ritual.paradeStarted)
             {
                 ritual.paradeStarted = true;
-                ritual.nobles = lord.ownedPawns.Where(x => x.royalty?.HasAnyTitleIn(Faction.OfEmpire) ?? false).ToList();
+                //A titled guard keeps to their own post and never takes the "Arrived" tag the procession waits on, so the
+                //nobles who walk behind the stellarch leave the guards out
+                ritual.nobles = ritual.InFormationOrder(lord.ownedPawns.Where(x => !ritual.guards.Contains(x) && (x.royalty?.HasAnyTitleIn(Faction.OfEmpire) ?? false)));
             }
             //CheckForJobOverride can take a pawn out of the lord, so this loops over a copy
             foreach (var pawn in lord.ownedPawns.ListFullCopy())

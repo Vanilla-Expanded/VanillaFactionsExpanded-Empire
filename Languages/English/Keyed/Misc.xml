@@ -70,6 +70,11 @@
 	<VFEE.Parade.PadUnusable>it cannot be used</VFEE.Parade.PadUnusable>
 	<VFEE.Parade.CalledOffIn>Called off in {0}</VFEE.Parade.CalledOffIn>
 	<VFEE.Parade.CalledOffOn>Unless the nobles can land first, the parade is called off on {0}.</VFEE.Parade.CalledOffOn>
+	<VFEE.Parade.DraftTimeLeft>can be drafted for {0} more</VFEE.Parade.DraftTimeLeft>
+	<VFEE.Parade.Drafted>The parade has stopped for {PAWN_nameDef}, who is drafted. If it waits {TIME} more in all, it fails.</VFEE.Parade.Drafted>
+	<VFEE.Parade.StellarchAway>The parade has stopped while {PAWN_nameDef} is away from it. If it waits {TIME} more in all, it fails.</VFEE.Parade.StellarchAway>
+	<VFEE.Parade.DraftTimeRunningOut>If the parade waits {TIME} more, it fails.</VFEE.Parade.DraftTimeRunningOut>
+	<VFEE.Parade.DraftedTooLong>The parade waited too long, and has failed.</VFEE.Parade.DraftedTooLong>
 	<VFEE.DefuseBomb>Defuse bomb</VFEE.DefuseBomb>
 	<VFEE.AssassinationSuccess>Deserters are leaving as they have eliminated their target.</VFEE.AssassinationSuccess>
 	<VFEE.Discard>Discard</VFEE.Discard>

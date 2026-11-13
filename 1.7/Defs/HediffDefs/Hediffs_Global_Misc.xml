@@ -40,7 +40,7 @@
   <HediffDef>
     <defName>VFEE_CourtStimulant</defName>
     <label>court stimulant</label>
-    <description>A stimulant the Imperial nobility take to stay sharp through a long ceremony. Until they leave the ceremony, they need no sleep.</description>
+    <description>A stimulant served at Imperial ceremonies to keep the nobility and their hosts sharp through the long hours. Until they leave the ceremony, they need no sleep.</description>
     <hediffClass>VFEEmpire.Hediff_CourtStimulant</hediffClass>
     <isBad>false</isBad>
     <stages>
