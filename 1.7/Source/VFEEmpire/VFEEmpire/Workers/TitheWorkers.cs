@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using RimWorld;
 using Verse;
 
@@ -20,9 +21,13 @@ public class TitheWorker_Slaves : TitheWorker
 {
     protected override IEnumerable<Thing> CreateDeliveryThings(TitheInfo info)
     {
+        // A vassal takes its slaves from its overlord's enemies.
+        var enemies = Find.FactionManager.GetFactions(allowNonHumanlike: false)
+           .Where(f => f.HostileTo(info.Settlement.Faction))
+           .ToList();
         for (var i = 0; i < AmountProduced(info); i++)
         {
-            var pawn = PawnGenerator.GeneratePawn(PawnKindDefOf.Slave, Find.FactionManager.RandomNonHostileFaction());
+            var pawn = PawnGenerator.GeneratePawn(PawnKindDefOf.Slave, enemies.RandomElementWithFallback());
             pawn.guest.SetGuestStatus(Faction.OfPlayer, GuestStatus.Slave);
             yield return pawn;
         }
