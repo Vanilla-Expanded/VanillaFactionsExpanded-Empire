@@ -30,7 +30,9 @@ namespace VFEEmpire
             {
 				if(!Destspot(parade.Destination.GetRoom(pawn.Map), out destination))
                 {
-					//not returning null right now so guard will try a movement spot instead
+					//No free cell near the door. CellFinder then hands back the door's own cell, which nothing has checked
+					//and another guard may hold, so the guard tries a movement spot instead
+					destination = IntVec3.Invalid;
 				}				
             }
 			if (destination== IntVec3.Invalid && !Movingspot(parade.stellarch.Position, parade.guards.Except(pawn).ToList(), out destination))
