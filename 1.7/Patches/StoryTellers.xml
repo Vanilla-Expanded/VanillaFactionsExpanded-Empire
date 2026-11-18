@@ -6,7 +6,7 @@
 		<value>
 			<li Class="VFEEmpire.StorytellerCompProperties_RefiringUntilSuccess">
 				<minDaysPassed>0</minDaysPassed>
-				<refireEveryDays>22</refireEveryDays>
+				<refireEveryDays>15</refireEveryDays>
 				<incident MayRequire="Ludeon.RimWorld.Royalty">VFEE_GiveQuest_EndGame_Stellarch</incident>
 				<allowedTargetTags>
 				  <li>World</li>

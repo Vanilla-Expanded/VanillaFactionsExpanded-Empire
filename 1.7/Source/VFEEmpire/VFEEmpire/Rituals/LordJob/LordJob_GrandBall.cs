@@ -56,7 +56,7 @@ namespace VFEEmpire
 
 		public override int TicksLeft => Mathf.Max(duration - ticksPassed, 0);
 
-		//Not saved: the nobles' court stimulant has been checked since the game loaded (Notify_PawnAdded gives it after that)
+		//Not saved: the members' court stimulant has been checked since the game loaded (Notify_PawnAdded gives it after that)
 		private bool keptAwake;
 
 		public LordJob_GrandBall()
@@ -304,8 +304,8 @@ namespace VFEEmpire
 			return IntVec3.Invalid;
         }
 
-		//The nobles can be kept waiting a day for the ball to start, long enough for them to collapse from exhaustion on the
-		//ground. Everyone the quest brings stays awake while at the ball
+		//The nobles can be kept waiting a day for the ball to start, long enough for them, or a colonist woken to join it, to
+		//collapse from exhaustion on the ground. Everyone at the ball stays awake while there
 		public override void Notify_PawnAdded(Pawn p)
 		{
 			base.Notify_PawnAdded(p);
@@ -314,12 +314,7 @@ namespace VFEEmpire
 
         public override void LordJobTick()
         {
-			//A ball loaded from a save made before the court stimulant: its nobles joined without it
-			if (!keptAwake)
-			{
-				foreach (var pawn in lord.ownedPawns.ListFullCopy()) Hediff_CourtStimulant.KeepAwake(pawn);
-				keptAwake = true;
-			}
+			Hediff_CourtStimulant.KeepAwake(lord, ref keptAwake);
 
 			if (danceStarted && !danceFinished)
             {

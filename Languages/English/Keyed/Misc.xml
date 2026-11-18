@@ -70,8 +70,38 @@
 	<VFEE.Parade.PadUnusable>it cannot be used</VFEE.Parade.PadUnusable>
 	<VFEE.Parade.CalledOffIn>Called off in {0}</VFEE.Parade.CalledOffIn>
 	<VFEE.Parade.CalledOffOn>Unless the nobles can land first, the parade is called off on {0}.</VFEE.Parade.CalledOffOn>
+	<VFEE.Parade.DraftTimeLeft>can be drafted for {0} more</VFEE.Parade.DraftTimeLeft>
+	<VFEE.Parade.Drafted>The parade has stopped for {PAWN_nameDef}, who is drafted. If it waits {TIME} more in all, it fails.</VFEE.Parade.Drafted>
+	<VFEE.Parade.StellarchAway>The parade has stopped while {PAWN_nameDef} is away from it. If it waits {TIME} more in all, it fails.</VFEE.Parade.StellarchAway>
+	<VFEE.Parade.DraftTimeRunningOut>If the parade waits {TIME} more, it fails.</VFEE.Parade.DraftTimeRunningOut>
+	<VFEE.Parade.DraftedTooLong>The parade waited too long, and has failed.</VFEE.Parade.DraftedTooLong>
+	<VFEE.Delegation.ArrivedLabel>Delegation: {FACTION_name}</VFEE.Delegation.ArrivedLabel>
+	<VFEE.Delegation.Arrived>A delegation from {FACTION_name} has come to pay its respects to {STELLARCH_nameDef} before {STELLARCH_possessive} ascension. They will tour the colony and leave in {DURATION}.</VFEE.Delegation.Arrived>
+	<VFEE.Delegation.Leaving>The delegation from {FACTION_name} is leaving.</VFEE.Delegation.Leaving>
+	<VFEE.Delegation.NoneCanCome>No faction friendly or neutral to you can send a delegation to {STELLARCH_nameDef}'s ascension, so none will come.</VFEE.Delegation.NoneCanCome>
+	<VFEE.Delegation.Hostile>The delegation from {FACTION_name} will not come, now that they are hostile to you.</VFEE.Delegation.Hostile>
+	<VFEE.Delegation.CannotCome>The delegation from {FACTION_name} will not come, as they can no longer send one.</VFEE.Delegation.CannotCome>
+	<VFEE.Delegation.HeldOff>The delegation from {FACTION_name} will not come. A group from {BLOCKER_name}, who are at war with them, stayed on the map until their time ran out.</VFEE.Delegation.HeldOff>
+	<VFEE.Delegation.HeldOffByCondition>The delegation from {FACTION_name} will not come. The {CONDITION} kept them away until their time ran out.</VFEE.Delegation.HeldOffByCondition>
+	<VFEE.Delegation.NoWayIn>The delegation from {FACTION_name} will not come, as they found no way into the colony. Visitors walk in from an edge of the map that is neither fogged nor roofed and has a path to the colony.</VFEE.Delegation.NoWayIn>
+	<VFEE.Delegation.OutOfTime>The delegation from {FACTION_name} will not come, as their time to visit has passed.</VFEE.Delegation.OutOfTime>
+	<VFEE.Delegation.LandedFirst>The nobles landed before every delegation had come, so these will not: {FACTIONS}.</VFEE.Delegation.LandedFirst>
+	<VFEE.Delegation.Denounce>Denounce</VFEE.Delegation.Denounce>
+	<VFEE.Delegation.DenounceDesc>Accuse {PAWN_nameDef} of being a deserter in disguise. A deserter will be exposed and attack at once, and so will any others hiding in the delegation. If {PAWN_nameDef} is innocent, {FACTION_name} will take offence: -{GOODWILL} goodwill.</VFEE.Delegation.DenounceDesc>
+	<VFEE.Delegation.DenounceConfirm>Denounce {PAWN_nameDef} as a deserter?\n\nIf {PAWN_pronoun} is innocent, relations with {FACTION_name} will worsen by {GOODWILL}.</VFEE.Delegation.DenounceConfirm>
+	<VFEE.Delegation.AlreadyDenounced>{PAWN_nameDef} has already been denounced.</VFEE.Delegation.AlreadyDenounced>
+	<VFEE.Delegation.AssassinLabel>Assassin: {PAWN_nameDef}</VFEE.Delegation.AssassinLabel>
+	<VFEE.Delegation.Assassin>{PAWN_nameFull} came with the delegation from {FACTION_name}, but is a deserter in disguise, and has drawn a smuggled weapon on {STELLARCH_nameDef}!</VFEE.Delegation.Assassin>
+	<VFEE.Delegation.AssassinExposedLabel>Deserter exposed: {PAWN_nameDef}</VFEE.Delegation.AssassinExposedLabel>
+	<VFEE.Delegation.AssassinExposed>You were right about {PAWN_nameFull}, who came with the delegation from {FACTION_name} as a deserter in disguise. Exposed, the deserter has drawn a smuggled weapon and is going for {STELLARCH_nameDef}!</VFEE.Delegation.AssassinExposed>
+	<VFEE.Delegation.CellLabel>Assassins: {COUNT} deserters</VFEE.Delegation.CellLabel>
+	<VFEE.Delegation.Cell>{NAMES} came with the delegation from {FACTION_name}, but are deserters in disguise, and have drawn smuggled weapons on {STELLARCH_nameDef} together!</VFEE.Delegation.Cell>
+	<VFEE.Delegation.CellExposedLabel>{COUNT} deserters exposed</VFEE.Delegation.CellExposedLabel>
+	<VFEE.Delegation.CellExposed>You were right, and that deserter was not alone: {NAMES} came with the delegation from {FACTION_name} in disguise. Exposed, they have drawn smuggled weapons and are all going for {STELLARCH_nameDef}!</VFEE.Delegation.CellExposed>
 	<VFEE.DefuseBomb>Defuse bomb</VFEE.DefuseBomb>
 	<VFEE.AssassinationSuccess>Deserters are leaving as they have eliminated their target.</VFEE.AssassinationSuccess>
+	<VFEE.Delegation.ForceOpen>{STELLARCH_nameDef} is in the {HOLDER}, and they mean to force it open.</VFEE.Delegation.ForceOpen>
+	<VFEE.Delegation.HeavyGuns>{STELLARCH_nameDef} is in the {HOLDER}, so they have brought heavy guns.</VFEE.Delegation.HeavyGuns>
 	<VFEE.Discard>Discard</VFEE.Discard>
 	<VFEE.RoyaltyDead>Deserters are leaving as they have eliminated every imperial title holder in the area.</VFEE.RoyaltyDead>
 	<VFEE.GotDrug>{0} has sent you a celebration package of aperitif!</VFEE.GotDrug>

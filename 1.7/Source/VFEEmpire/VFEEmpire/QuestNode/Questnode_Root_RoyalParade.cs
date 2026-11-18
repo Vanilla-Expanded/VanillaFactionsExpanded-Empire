@@ -112,6 +112,21 @@ public class QuestNode_Root_RoyalParade : QuestNode
         FailResults(quest, stellarchAway, "[CountdownAwayLetterLabel]", "[CountdownAwayLetterText]", nobles);
         FailResults(quest, padUnusable, "[CountdownPadLetterLabel]", "[CountdownPadLetterText]", nobles);
         FailResults(quest, colonyThreatened, "[CountdownThreatLetterLabel]", "[CountdownThreatLetterText]", nobles);
+        //Meanwhile the realm pays its respects: a delegation a day from the friendly factions, with deserters hidden among them
+        //unless the storyteller allows no violent quests. The letter opening the countdown warns of them.
+        var assassinsCome = Find.Storyteller.difficulty.allowViolentQuests;
+        quest.AddPart(new QuestPart_Delegations
+        {
+            inSignalEnable = QuestGen.slate.Get<string>("inSignal"),
+            inSignalDisable = noblesArrive,
+            mapParent = map.Parent,
+            stellarch = stellarch,
+            days = prepareTicks / GenDate.TicksPerDay,
+            assassins = assassinsCome
+        });
+        slate.Set("assassinsCome", assassinsCome ? 1 : 0);
+        quest.Letter(assassinsCome ? LetterDefOf.ThreatSmall : LetterDefOf.NeutralEvent, QuestGen.slate.Get<string>("inSignal"),
+            lookTargets: Gen.YieldSingle(stellarch), label: "[DelegationsLetterLabel]", text: "[DelegationsLetterText]");
         //shuttle
         var lodgers = new List<Pawn>();
         lodgers.AddRange(nobles);
@@ -129,7 +144,8 @@ public class QuestNode_Root_RoyalParade : QuestNode
             stellarch = stellarch,
             leadPawn = bestNoble,
             inSignal = noblesArrive,
-            pawns = lodgers,
+            //Its own list: the shuttle's requiredPawns is lodgers, and the parade strikes the nobles it loses off that one
+            pawns = lodgers.ToList(),
             questTag = questTag,
             raidTag = raidSignal,
             shuttle = shuttle,
@@ -137,6 +153,8 @@ public class QuestNode_Root_RoyalParade : QuestNode
             mapParent = map.Parent,
             faction = empire
         };
+        //Before QuestPart_LodgerLeave: parts hear a signal in this order, and the parade has to hear a noble's arrest before
+        //that part fails the quest on it
         quest.AddPart(questPart_Parade);
         quest.Letter(LetterDefOf.NeutralEvent, noblesArrive, lookTargets: Gen.YieldSingle(shuttle), label: "[NoblesArriveLetterLabel]",
             text: "[NoblesArriveLetterText]");

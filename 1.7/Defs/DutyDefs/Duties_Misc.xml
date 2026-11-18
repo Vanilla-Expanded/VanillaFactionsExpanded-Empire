@@ -22,6 +22,34 @@
         </thinkNode>
     </DutyDef>
     <DutyDef>
+        <defName>VFEE_AssassinApproach</defName>
+        <thinkNode Class="ThinkNode_Priority">
+            <subNodes>
+                <li Class="VFEEmpire.JobGiver_AssassinApproach" />
+                <li Class="JobGiver_Idle">
+                    <ticks>60</ticks>
+                </li>
+            </subNodes>
+        </thinkNode>
+    </DutyDef>
+    <DutyDef>
+        <defName>VFEE_AssassinStrike</defName>
+        <alwaysShowWeapon>true</alwaysShowWeapon>
+        <thinkNode Class="ThinkNode_Priority">
+            <subNodes>
+                <li Class="JobGiver_TakeCombatEnhancingDrug" />
+                <li Class="VFEEmpire.JobGiver_AssassinStrike" />
+                <li Class="JobGiver_AISapper">
+                    <canMineMineables>true</canMineMineables>
+                    <canMineNonMineables>true</canMineNonMineables>
+                </li>
+                <li Class="JobGiver_Idle">
+                    <ticks>60</ticks>
+                </li>
+            </subNodes>
+        </thinkNode>
+    </DutyDef>
+    <DutyDef>
         <defName>VFEE_KillRoyalty</defName>
         <alwaysShowWeapon>true</alwaysShowWeapon>
         <thinkNode Class="ThinkNode_Priority">
