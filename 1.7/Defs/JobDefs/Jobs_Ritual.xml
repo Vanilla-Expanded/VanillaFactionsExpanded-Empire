@@ -64,4 +64,12 @@
     <reportString>Guarding.</reportString>
     <casualInterruptible>false</casualInterruptible>
   </JobDef>
+  <!-- Vanilla's Goto without allowOpportunisticPrefix, so the stellarch and the colonists in the parade walk it without stopping to haul -->
+  <JobDef>
+    <defName>VFEE_ParadeWalk</defName>
+    <driverClass>JobDriver_Goto</driverClass>
+    <reportString>moving.</reportString>
+    <carryThingAfterJob>true</carryThingAfterJob>
+    <dropThingBeforeJob>false</dropThingBeforeJob>
+  </JobDef>
 </Defs>
